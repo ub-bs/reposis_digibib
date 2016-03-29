@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Kontakt">
+  <div>
+    <h2>Kontakt</h2>
+    <p>
+      Für Fragen zur Publikation von elektronischen Dokumenten wenden Sie sich bitte an:<br /><br />
+      Frau Blanck / Herrn Kissler<br />
+      E-Mail: digibib@tu-braunschweig.de<br />
+      Telefon: +49 (0)531 391 5052
+    </p>
+    <p>
+      Für Fragen zu Dissertationen wenden Sie sich bitte an die Dissertationsstelle:<br /><br />
+      Frau Globisch<br />
+      E-Mail: ub-diss@tu-bs.de<br />
+      Telefon: +49 (0)531 391 5024 (Mo-Fr: 9.00-12.00 Uhr)
+    </p>
+    <p>
+      Für Fragen zur technischen Umsetzung wenden Sie sich bitte an:<br /><br />
+      Herrn Elsner<br />
+      E-Mail: carsten.elsner@tu-braunschweig.de<br />
+      Telefon: +49 (0)531 391 5066
+    </p>
+    <p>
+      Fragen an das Universitätsarchiv richten Sie bitte an:<br /><br />
+      Herrn Wrehde<br />
+      E-Mail: archiv@tu-bs.de<br />
+      Telefon: +49 (0)531 391 5033
+    </p>
+  </div>
+  </section>
+  <meta>
+    <log date="2016-03-29" time="11:14" labelPath=" » Kontakt" lastEditor="Kathleen Neumann" />
+  </meta>
+</MyCoReWebPage>

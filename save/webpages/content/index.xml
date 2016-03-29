@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyCoReWebPage>
+    <section xml:lang="de" title="Willkommen bei der Digitalen Bibliothek">
+        <div class="jumbotwo">
+            <div class="row">
+                <div class="col-md-6" lang="de">
+                    <h3>
+                        Inhalt
+                    </h3>
+                    <p>
+                        Mit einem Bestand von aktuell mehr als 14.000 Dokumenten bietet die Digitale Bibliothek
+                        Braunschweig zudem einen Zugang zu digitalisierten Volltext-Dokumenten aus wertvollen
+                        Spezialbeständen der UB und zu digitalen Bildersammlungen.
+                    </p>
+                    <p>
+                        Andere elektronische Volltexte, die ebenfalls über die Universitätsbibliothek zur Verfügung
+                        gestellt werden (E-Books, elektronische Zeitschriften, Dissertationen von anderen Universitäten),
+                        finden Sie mit Hilfe unseres Katalogs.
+                    </p>
+                </div>
+                <div class="col-md-1" lang="de">
+                    &#160;
+                </div>
+                <div class="col-md-4" lang="de">
+                    <h3>
+                        Recht
+                    </h3>
+                    <p>
+                        Beachten Sie unsere Hinweise zum Urheberrecht.
+                    </p>
+                    <p>
+                        Ein Dienst der Universitätsbibliothek der TU Braunschweig. (c) 2009-2016
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <meta>
+        <log lastEditor="administrator" date="2016-03-24" time="16:22"/>
+    </meta>
+</MyCoReWebPage>
