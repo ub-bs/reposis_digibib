@@ -1,5 +1,6 @@
 html body .jumbotron {
     color: inherit;
+    background: unset;
     background-color: #ecf0f1;
 }
 
