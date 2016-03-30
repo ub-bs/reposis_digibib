@@ -1,8 +1,12 @@
-.flatmir-footer {
-    background-color: #6b6b6b;
+html body .jumbotron {
+    color: inherit;
+    background-color: #ecf0f1;
 }
 
-.jumbotron {
-    color: inherit;
-    background-color: inherit;
+html body #powered_by {
+    background-color: white;
+}
+
+.flatmir-footer {
+    background-color: #6b6b6b;
 }
