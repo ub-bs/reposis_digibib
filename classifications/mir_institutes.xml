@@ -8,6 +8,10 @@
     <category ID="Faculty_c_">
       <label xml:lang="de" text="aktuelle Fakultäten" />
       <label xml:lang="en" text="actual Faculties" />
+      <category ID="TU_BS">
+        <label xml:lang="de" text="TU-Braunschweig"/>
+        <label xml:lang="en" text="TU Braunschweig"/>
+      </category>
       <category ID="Faculty_c_01">
         <label xml:lang="de" text="01 - Carl-Friedrich Gauß-Fakultät"/>
         <label xml:lang="en" text="01 - Carl-Friedrich Gauß Faculty"/>
