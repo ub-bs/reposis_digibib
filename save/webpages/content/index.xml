@@ -8,9 +8,9 @@
                         Inhalt
                     </h3>
                     <p>
-                        Mit einem Bestand von aktuell mehr als 14.000 Dokumenten bietet die Digitale Bibliothek
-                        Braunschweig zudem einen Zugang zu digitalisierten Volltext-Dokumenten aus wertvollen
-                        Spezialbeständen der UB und zu digitalen Bildersammlungen.
+                        Mit einem Bestand von aktuell <span id="doc_count">14.000</span> Dokumenten bietet die
+                        Digitale Bibliothek Braunschweig zudem einen Zugang zu digitalisierten Volltext-Dokumenten
+                        aus wertvollen Spezialbeständen der UB und zu digitalen Bildersammlungen.
                     </p>
                     <p>
                         Andere elektronische Volltexte, die ebenfalls über die Universitätsbibliothek zur Verfügung
@@ -34,6 +34,17 @@
                 </div>
             </div>
         </div>
+
+        <script>
+            $.ajax({
+            type: "GET",
+            url: "http://reposis-test.gbv.de/digibib/api/v1/search?q=*:*&amp;rows=0&amp;wt=json&amp;json.wrf=?",
+            dataType: "jsonp",
+            success: function (data) {
+            $('#doc_count').text(data.response.numFound);
+            },
+            });
+        </script>
     </section>
     <meta>
         <log lastEditor="administrator" date="2016-03-24" time="16:22"/>
