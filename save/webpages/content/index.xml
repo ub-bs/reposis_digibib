@@ -35,18 +35,19 @@
             </div>
         </div>
 
+        <script type="text/javascript" src="http://opensource.teamdf.com/number/jquery.number.js"></script>
         <script>
             $.ajax({
             type: "GET",
-            url: "http://reposis-test.gbv.de/digibib/api/v1/search?q=*:*&amp;rows=0&amp;wt=json&amp;json.wrf=?",
+            url: "http://reposis-test.gbv.de/digibib/api/v1/search?q=objectType:mods +state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
             dataType: "jsonp",
             success: function (data) {
-            $('#doc_count').text(data.response.numFound);
+            $('#doc_count').number(data.response.numFound,0, ',', '.');
             },
             });
         </script>
     </section>
     <meta>
-        <log lastEditor="administrator" date="2016-03-24" time="16:22"/>
+        <log lastEditor="administrator" date="2016-04-22" time="20:22"/>
     </meta>
 </MyCoReWebPage>
