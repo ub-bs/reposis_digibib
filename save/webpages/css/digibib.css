@@ -27,3 +27,9 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: bottom right;
 }
+
+#digibib_beytraege {
+  background-image:url('../images/loewe.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
