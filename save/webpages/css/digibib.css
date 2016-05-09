@@ -66,3 +66,9 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+#digibib_botanic {
+  background-image:url('../images/salamander.jpg');
+  background-repeat: no-repeat;
+  background-position: center right;
+}
