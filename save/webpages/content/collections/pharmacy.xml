@@ -45,12 +45,12 @@
         </p>
         <ul>
           <li>
-            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=19/TTL=1/CMD?ACT=SRCHA&IKT=1016&SRT=YOP&TRM=EXK+vifapharm+ERJ+%3C+1970">Zum historischen
+            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=19/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=EXK+vifapharm+ERJ+%3C+1970">Zum historischen
             Bestand der UB Braunschweig mit Schwerpunkt Pharmazie</a>
           </li>
           <li>
             Eine Gesamtübersicht von E-Publikationen im Bereich Pharmazie finden Sie
-            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCH&IKT=1016&SRT=YOP&TRM=%28BKL+44.38+oder+BKL+44.39+oder%20+BKL+44.40+oder+BKL+44.41+oder+BKL+44.42+oder+BKL+58.28+oder+EXK+vifapharm+oder+all+pharma%3F+oder+all+heilpfl%3F+oder+all+drug%3F+oder+all+arznei%3F%29+und+%28mat+o+oder+mat+p%29">hier</a>.
+            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCH&amp;IKT=1016&amp;SRT=YOP&amp;TRM=%28BKL+44.38+oder+BKL+44.39+oder%20+BKL+44.40+oder+BKL+44.41+oder+BKL+44.42+oder+BKL+58.28+oder+EXK+vifapharm+oder+all+pharma%3F+oder+all+heilpfl%3F+oder+all+drug%3F+oder+all+arznei%3F%29+und+%28mat+o+oder+mat+p%29">hier</a>.
           </li>
         </ul>
       </div>
