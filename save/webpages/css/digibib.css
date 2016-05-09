@@ -21,3 +21,9 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+#digibib_vorlesung {
+  background-image:url('../images/sigel_4.png');
+  background-repeat: no-repeat;
+  background-position: center;
+}
