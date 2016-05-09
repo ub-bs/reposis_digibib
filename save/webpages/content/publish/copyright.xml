@@ -1,20 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title=" Veröffentlichungendes Instituts für Verbrennungskraftmaschinen">
+  <section xml:lang="de" title="Hinweise zu Urheberrechtsfragen">
 
-    <h2>Veröffentlichungendes Instituts für Verbrennungskraftmaschinen</h2>
+    <h2>Hinweise zu Urheberrechtsfragen</h2>
     <div class="row">
       <div class="col-md-12">
+        <ul>
+          <li>
+            Bei der Publikation der Dokumente in der Digitalen Bibliothek Braunschweig
+            verbleiben die Urheberrechte bei Ihnen, den Autorinnen und Autoren.
+          </li>
+          <li>
+            Wir benötigen von Ihnen eine <em>schriftliche Einwilligung</em> (<a href="digi_form.pdf">PDF-Formular 1</a>: eine Publikation)
+            bzw. (<a href="digi_form_2.pdf">PDF-Formular 2</a>: mehrere Publikationen), damit
+            Ihre Publikation(en) über die Digitale Bibliothek Braunschweig veröffentlicht
+            und im Internet zur Verfügung gestellt werden kann/können.
+            <br /><br />
+            Bitte holen Sie ggf. auch das Einverständnis von Co-Autoren ein.
+          </li>
+          <li>
+            Die Einhaltung von Urheber- und Verwertungsrechten Dritter liegt in der Verantwortung der Autorinnen/Autoren der elektronischen Dokumente.
+            <br/><br />
+            Bei einer <em>Zweitveröffentlichung</em> ist zu ermitteln, ob und
+            unter welchen Bedingungen diese zulässig ist.
+            <br/><br />
+            Sehr viele Zeitschriftenverlage gestatten der Autorin/dem Autor, eigene Aufsätze
+            vorab als <em>Preprint</em> oder parallel als <em>Postprint</em>
+            auf einem Archivierungsserver der Hochschule
+            ("institutional repository") frei zugänglich zu veröffentlichen.
+            <br/><br />
+            <!--
+            Hinweise dazu, ob der Verlag dies gestattet, finden Sie für viele
+            Verlage in der
+            <a href="http://www.sherpa.ac.uk/romeo.php"><em>SHERPA</em>-Liste</a>, und
+            ansonsten in Ihren Autorenverträgen. Die Universitätsbibliothek ist
+            Ihnen bei Fragen hierzu gerne behilflich.
+            <br/><br />
+            -->
+            Um festzustellen, welche Verlage und Zeitschriften den Autorinnen/den Autoren dieses Recht einräumen, finden Sie Einzelheiten und Hilfestellung in der
+            <a href="http://www.sherpa.ac.uk/romeo.php"><em>SHERPA</em>-Liste</a>.
+            <br/><br />
+            Auch die Universitätsbibliothek Braunschweig unterstützt Sie gern dabei,
+            Ihre Veröffentlichungen anhand der <em>SHERPA</em>-Liste zu prüfen. Sind
+            dort keine Angaben zu finden, müssten Ihre Autorenverträge herangezogen
+            werden, da die Vereinbarungen zwischen Verlag und den Autorinnen/den Autoren
+            sehr unterschiedlich geregelt sein können.
+          </li>
+        </ul>
         <p>
-          Diese Seite befindet sich im Aufbau!
+          Bitte wenden Sie sich bei allen Fragen an:
         </p>
+        <address>
+          Frau Blanck <br />
+          E-Mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a><br />
+          Telefon: 0531 391-5052
+        </address>
       </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Verbrennungskraftmaschinen"
+    <log date="2016-05-09" time="18:21" labelPath=" » Urheberrecht"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>
