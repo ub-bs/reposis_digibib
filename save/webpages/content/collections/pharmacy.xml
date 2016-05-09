@@ -4,15 +4,61 @@
   <section xml:lang="de" title="Vorlage">
 
     <h2>Vorlage</h2>
-    <div class="row">
+    <div class="row" id="digibib_pharmacy">
       <div class="col-md-12">
-        xx
+        <p>
+          Das Sondersammelgebiet Pharmazie der Universitätsbibliothek Braunschweig
+          besitzt nicht nur eine einzigartige Sammlung neuerer Literatur, auch die
+          historischen Titel sind in seltener Geschlossenheit vorhanden,
+          so dass ihre Digitalisierung ein überaus lohnendes Projektziel war.
+          Bereits seit dem Jahr 2000 wurden in der UB Braunschweig dazu erste
+          Erfahrungen gesammelt.
+        </p>
+        <p>
+          Zunächst sind vor allem Arzneibücher und Arzneitaxen
+          digitalisiert worden, da hier ein besonders umfangreicher historischer
+          Bestand, auch im internationalen Maßstab, vorliegt.
+          Zugleich wurden neben der Präsentation der Bücher Strategien der
+          Langzeitarchivierung verfolgt, um die elektronischen Volltexte
+          dauerhaft verfügbar zu machen.
+        </p>
+        <p>
+          Bei dieser guten Ausgangssituation lag es nahe, einen
+          Antrag bei der Deutschen Forschungsgemeinschaft - DFG zu stellen,
+          als diese eine eigene Aktionslinie für Sondersammelgebiete im Jahr
+          2008 auflegte. Nach der Bewilligung konnte die Zahl der digitalisierten
+          Titel sehr stark ausgebaut werden: Heute stehen über 1.600 Bände der
+          Pharmazie mit ca. 800.000 Seiten zur Verfügung.
+        </p>
+        <p>
+          Bei der Zeitschriftendigitalisierung stand die
+          'Pharmazeutische Zeitung' im Mittelpunkt, ein zentrales
+          Organ des Faches in Deutschland. Dankenswerterweise hat
+          der Govi-Verlag die erforderlichen Rechte für die
+          Digitalisierung der neueren Jahrgänge eingeräumt. Damit
+          besteht die Möglichkeit, diese wichtige Fachzeitschrift
+          vom ersten Jahrgang 1856 an bis zum Jahr 1969 zur
+          Verfügung zu stellen. Eine weitere wichtige Zeitschrift,
+          die Apotheker-Zeitung, konnte durch die freundliche
+          Genehmigung des DAV - Deutscher Apotheker Verlag - von
+          1886-1950 bereitgestellt werden.
+        </p>
+        <ul>
+          <li>
+            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=19/TTL=1/CMD?ACT=SRCHA&IKT=1016&SRT=YOP&TRM=EXK+vifapharm+ERJ+%3C+1970">Zum historischen
+            Bestand der UB Braunschweig mit Schwerpunkt Pharmazie</a>
+          </li>
+          <li>
+            Eine Gesamtübersicht von E-Publikationen im Bereich Pharmazie finden Sie
+            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCH&IKT=1016&SRT=YOP&TRM=%28BKL+44.38+oder+BKL+44.39+oder%20+BKL+44.40+oder+BKL+44.41+oder+BKL+44.42+oder+BKL+58.28+oder+EXK+vifapharm+oder+all+pharma%3F+oder+all+heilpfl%3F+oder+all+drug%3F+oder+all+arznei%3F%29+und+%28mat+o+oder+mat+p%29">hier</a>.
+          </li>
+        </ul>
       </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Brunsvicensien"
+    <log date="2016-05-09" time="15:12" labelPath=" » pharmacy"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>
