@@ -54,3 +54,9 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: top right;
 }
+
+#digibib_picturebooks {
+  background-image:url('../images/kinderbuch.jpg');
+  background-repeat: no-repeat;
+  background-position: top right;
+}

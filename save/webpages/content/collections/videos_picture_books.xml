@@ -1,12 +1,96 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Vorlage">
+  <section xml:lang="de" title="Ziehbilderbücher : Videos">
 
-    <h2>Vorlage</h2>
-    <div class="row">
+    <h2>Ziehbilderbücher : Videos</h2>
+    <div class="row" id="digibib_picturebooks">
       <div class="col-md-12">
-        xx
+        <p>
+          <strong>Videos historischer Ziehbilderbücher, ein Projekt der Universitätsbibliothek Braunschweig gefördert
+          durch die <a href="http://www.allianz-kulturgut.de/kontakt-zur-allianz/">Koordinierungsstelle für die Erhaltung
+          des schriftlichen Kulturguts</a> (KEK).</strong>
+        </p>
+        <p>
+          Titelliste:
+        </p>
+        <ul>
+          <li>
+            <a href="../../receive/digibib_mods_00050725">Hurra! Hurra! Nun sind wir da! : ein neues bewegliches Bilderbuch mit hübschen Erzählungen. - [um 1920]</a>.
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00050733">Kinder Lust in lebendigen Bildern! / erfunden von F. C. Hösch. - [1863]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00050711">Lebende Bilder / von L. Meggendorfer. - [1887]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00050759">Wo ist das Bild? : ein lustiges Versteckspiel ; Bilderbuch mit Reimen / von Helene Binder. - [1898]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00050797">Hans wie er weint und wie er lacht : ein schönes Bilderbuch mit 4 beweglichen Bildern. - [1890]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00050770">Schreiber's großes Puppentheater : ein lustiges lebendiges Bilderbuch für die Jugend / nach Compositionen von C. Häberlin. - [1864]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051340">Nehmt's zu Herzen! : ein Ziehbilderbuch mit Verwandlungen für die liebe Jugend. 12 fein kolorierte Bilder mit Versen. - [um 1890]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051376">Immer lustig! : ein Ziehbilderbuch / von Lother Meggendorfer. - [1894]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051377">Twinkling pictures / with verses by L. L. Weedon. Pen and ink sketches by Popgun. - 1899</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051400">Weihnacht. - [ca. 1880]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051408">Das wunderbare Bilderbuch : ein Festgeschenk voll komischer Sachen, zum Staunen und Lachen für heitere Kinder. - [1895]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051501">Das wunderbare ABC : [Verwandlungsbilderbuch]. - [ca. 1877]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051510">Das Wunderhaus : ein Bilderbuch zum Drehen, Bewegen und Verwandeln / von Tom Seidmann-Freud. - 1927</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051511">Lustige Zoologie / von Lothar Meggendorfer. - [1901]</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00051523">Grand cirque international / Par Lothar Meggendorfer. - [1888]</a>
+          </li>
+        </ul>
+        <p>
+          Ziehbilderbücher und Kinderbücher mit beweglichen Elementen bilden eine Besonderheit der Kinder- und Jugendbuchsammlung der
+          UB. Sie wurden von der zweiten Hälfte des 19. Jahrhunderts an hergestellt. In der Sammlung finden sich auch einige sehr
+          seltene Exemplare dieser Buchgattung. Es sind wertvolle Quellen für die Buchgeschichte.
+        </p>
+        <p>
+          Einige Bücher waren dabei dringend restaurierungsbedürftig: Die Mechanik und die empfindlichen Teile hatten durch starke
+          Benutzung erheblich gelitten. Mit Hilfe einer Förderung des Landes Niedersachsen konnten von 2008 bis 2010 defekte
+          Ziehbilderbücher aufwendig restauriert und wieder gangbar gemacht werden.
+        </p>
+        <p>
+          Mit den Videos ist es jetzt erstmals möglich, die mechanischen Funktionen angemessen zu veranschaulichen. Bei den
+          restaurierten Ziehbilderbüchern ist zugleich eine Fotodokumentation des Zustandes vor der Restaurierung zu finden.
+          Damit sind die ursprünglichen Schäden deutlich sichtbar, die durch die Restaurierungsarbeiten beseitigt worden sind.
+          Mit den Videos ist auch ein wichtiger konservatorischer Schritt verbunden, denn so können die Intentionen der
+          Buchkünstler anschaulich wiedergegeben werden, ohne die filigrane Mechanik der seltenen Bücher zu belasten.
+          Die UB Braunschweig ist seit langem bemüht, die Titel der Kinder- und Jugendbuchsammlung durch Verfilmung,
+          Massenentsäuerung und Digitalisierung für die Zukunft zu sichern. Dabei ist sie - wie anderen Bibliotheken
+          auch - stark auf externe Fördermittel angewiesen. Einen Überblick zu den zahlreichen Aktivitäten der UB Braunschweig
+          gibt folgende Publikation: <br /><br />
+          <i>Nagel, Beate ; Wulle, Stefan: <a href="../../receive/digibib_mods_00050248">Die Erhaltung von Kulturgut -
+          Projekte und Maßnahmen der Universitätsbibliothek Braunschweig</a>. In: 265 Jahre Universitätsbibliothek Braunschweig -
+          65 Jahre Dietmar Brandes. - Braunschweig : Univ.-Bibl.. - 2013, S. 225-244.</i>
+        </p>
+        <p>
+          Wichtige Links:<br />
+          <a href="http://www.kek-spk.de/home/">KEK</a><br />
+          <a href="http://www.allianz-kulturgut.de/">Allianz Schriftliches Kulturgut Erhalten</a><br />
+          <a href="http://www.forum-bestandserhaltung.de/">Forum Bestandserhaltung</a>
+        </p>
       </div>
     </div>
 

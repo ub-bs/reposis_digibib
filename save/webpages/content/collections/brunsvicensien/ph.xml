@@ -24,7 +24,7 @@
           </li>
         </ul>
         <p>
-          Hier finden Sie die <a href="/vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
+          Hier finden Sie die <a href="vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
         </p>
         <!--
         <p>
@@ -35,6 +35,15 @@
           Hier finden Sie die <a href="matrikelbuecher.xml">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
         </p>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <hr />
+        <p>
+          <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
+        </p>
+        </div>
     </div>
 
   </section>
