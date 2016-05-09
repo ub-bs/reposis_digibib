@@ -5,7 +5,7 @@
 
     <h2>Institutsreihen</h2>
     <div class="row" id="digibib_institutes">
-      <div class="col-md-10">
+      <div class="col-md-10" style="background-color: rgba(255, 255, 255, 0.6);">
         <p>
           Hier finden Sie eine Übersicht über digitale Veröffentlichung von Instituten der TU Braunschweig.<br/>
           Wählen Sie einen der nachfolgenden Bereiche, um weitere Informationen zu erhalten!<br/>
@@ -16,7 +16,7 @@
             <a href="ivb.xml">Veröffentlichungen</a> des Instituts für Verbrennungskraftmaschinen <a href="http://www.tu-braunschweig.de/ivb">(ivb)</a>
           </li>
           <li>
-          <a href="../../editor_form_search-typ_videos.xml">OER Teach Your Peers (TYP) Videos</a>
+          <a href="../../search/editor_form_search-typ_videos.xml">OER Teach Your Peers (TYP) Videos</a>
           </li>
         </ul>
       </div>
