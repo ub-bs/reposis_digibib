@@ -39,7 +39,7 @@
         <script>
             $.ajax({
             type: "GET",
-            url: "http://reposis-test.gbv.de/digibib/api/v1/search?q=objectType:mods +state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
+            url: "http://reposis-test.gbv.de/digibib/api/v1/search?q=objectType:mods AND state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
             dataType: "jsonp",
             success: function (data) {
             $('#doc_count').number(data.response.numFound,0, ',', '.');
