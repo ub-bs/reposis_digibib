@@ -30,12 +30,14 @@
           nur noch in elektronischer Form zur Verfügung.
         </p>
       </div>
+    </div>
 
 
 <!-- ************************************* 1745 - 1872 ******************************************** -->
+    <div class="row">
       <div class="col-md-6">
         <p>
-          Anzeige der Vorlesungen und Übungen in dem Fürstlichen Collegio Carolino zu Braunschweig 1745 - 1872
+          <strong>Anzeige der Vorlesungen und Übungen in dem Fürstlichen Collegio Carolino zu Braunschweig 1745 - 1872</strong>
         </p>
       </div>
       <div class="col-md-6">
@@ -260,12 +262,13 @@
           <option>WiSe 1871/72, SoSe 1872</option>
         </select>
       </div>
-
+    </div>
 
 <!-- ************************************* 1872 - 1878 ******************************************** -->
+    <div class="row">
       <div class="col-md-6">
         <p>
-          Programm der Herzoglichen Polytechnischen Schule, des Collegium Carolinum zu Braunschweig 1872 - 1878
+          <strong>Programm der Herzoglichen Polytechnischen Schule, des Collegium Carolinum zu Braunschweig 1872 - 1878</strong>
         </p>
       </div>
       <div class="col-md-6">
@@ -278,12 +281,14 @@
           <option>WiSe 1877/78, SoSe 1878</option>
         </select>
       </div>
+    </div>
 
 
 <!-- ***************************************** 1878 - 1935 ***************************************** -->
+    <div class="row">
       <div class="col-md-6">
         <p>
-          Programm der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1878 - 1935
+          <strong>Programm der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1878 - 1935</strong>
         </p>
       </div>
       <div class="col-md-6">
@@ -348,12 +353,14 @@
           <option>WiSe 1934/35, SoSe 1935</option>
         </select>
       </div>
+    </div>
 
 
 <!-- ***************************************** 1935 - 2007 ***************************************** -->
+    <div class="row">
       <div class="col-md-6">
         <p>
-          Personal- und Vorlesungsverzeichnis der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1935 - 2007
+          <strong>Personal- und Vorlesungsverzeichnis der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1935 - 2007</strong>
         </p>
       </div>
       <div class="col-md-6">
@@ -472,13 +479,15 @@
           <option>SoSe 2007</option>
         </select>
       </div>
+    </div>
 
 
 
 <!-- ***************************************** 2008 - aktuell ***************************************** -->
+    <div class="row">
       <div class="col-md-6">
         <p>
-          Vorlesungsverzeichnis der Technischen Universität Braunschweig seit 2008
+          <strong>Vorlesungsverzeichnis der Technischen Universität Braunschweig seit 2008</strong>
         </p>
       </div>
       <div class="col-md-6">
@@ -498,7 +507,9 @@
           <option>SoSe 2014</option>
         </select>
       </div>
+    </div>
 
+    <div class="row">
       <div class="col-md-12">
         <p>
           Hier finden Sie die <a href="ph.xml">Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</a>.
