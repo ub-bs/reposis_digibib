@@ -1,18 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Vorlage">
+  <section xml:lang="de" title="Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)">
 
-    <h2>Vorlage</h2>
-    <div class="row">
+    <h2>Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</h2>
+    <div class="row" id="digibib_ph">
       <div class="col-md-12">
-        xx
+        <p>
+          Hier finden Sie die Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule).
+        </p>
+        <ul>
+          <li>
+            <a href="../../../receive/digibib_mods_00045184">Arbeitsplan für das Winterhalbjahr 1937 / 1938</a>
+          </li>
+          <li>
+            <a href="../../../receive/digibib_mods_00045187">Arbeitsplan für das Sommerhalbjahr 1938</a>
+          </li>
+          <li>
+            <a href="../../../receive/digibib_mods_00045190">Arbeitsplan für das Winterhalbjahr 1938 / 1939</a>
+          </li>
+          <li>
+            <a href="../../../receive/digibib_mods_00045195">Arbeitsplan für das Sommerhalbjahr 1939</a>
+          </li>
+        </ul>
+        <p>
+          Hier finden Sie die <a href="/vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
+        </p>
+        <!--
+        <p>
+          Hier finden Sie die <a href="vorlesungsverzeichnisse_2004.xml">Vorlesungsverzeichnisse der TU Braunschweig ab 2004</a>.
+        </p>
+        -->
+        <p>
+          Hier finden Sie die <a href="matrikelbuecher.xml">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
+        </p>
       </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Brunsvicensien"
+    <log date="2016-05-09" time="14:31" labelPath=" » ph"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>
