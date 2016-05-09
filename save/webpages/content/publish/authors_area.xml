@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Publizieren">
+
+    <h2>Publizieren</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          <strong>E-Publikationen:</strong>
+          <br />
+          E-Publikationen können von <em>Wissenschaftlerinnen und Wissenschaftlern
+          der TU Braunschweig</em> (auch Gastwissenschaftlern) kostenlos veröffentlicht werden.
+        </p>
+        <p>
+          Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum
+          Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des Urheberrechts veröffentlicht.
+        </p>
+
+        <!--
+        <p>
+          Sehr viele Zeitschriftenverlage bieten die Möglichkeit,
+          Aufsätze vorab als Preprint oder parallel als Postprint auf einem
+          "institutional repository"  zu veröffentlichen.  Die Digitale
+          Bibliothek Braunschweig ist die geeignete Plattform für dieses
+          "self archiving".
+        </p>
+        -->
+        <p>
+          Bitte beachten Sie unsere Hinweise ...
+        </p>
+        <ul>
+          <li><a href="guidelines.xml">zu den Leitlinien</a></li>
+          <li><a href="copyright.xml">zum Urheberrecht</a></li>
+          <li><a href="contract.xml">zu den Vertragsbedingungen</a></li>
+        </ul>
+        <p>
+          <a href="epub.xml"><em>Weiter zur E-Publikation ...</em></a>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          <strong>Dissertationen:</strong>
+          <br />
+        <!--
+        <p>
+          Die Universitätsbibliothek bietet Doktorandinnen und Doktoranden
+          der TU Braunschweig die Möglichkeit, ihre Publikationspflicht
+          durch elektronische Veröffentlichung zu erfüllen.
+        </p>
+        <p>
+          Eine Veröffentlichung von elektronischen Dissertationen geschieht nur im Rahmen der Abgabe. Die Dissertationstelle nimmt alle Pflichtablieferungen von Dissertationsschriften entgegen und stellt die Dokumente ein.
+        </p>
+        -->
+          Ausführliche Hinweise zur elektronischen Veröffentlichung
+          von Dissertationen finden Sie auf den Webseiten der
+          <a href="http://www.biblio.tu-bs.de/dissertation/diss.html">Dissertationsstelle</a>.
+        </p>
+      </div>
+    </div>
+
+  </section>
+  <meta>
+    <log date="2016-05-09" time="18:21" labelPath=" » Autorenbereich"
+      lastEditor="Kathleen Neumann" />
+  </meta>
+</MyCoReWebPage>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="E-Publikation">
+
+    <h2>E-Publikation</h2>
+    <div class="row">
+      <div class="col-md-12">
+        <p>
+          Wir benötigen von Ihnen eine <em>schriftliche Einwilligung</em>, damit
+          Ihre Publikation über die Digitale Bibliothek Braunschweig veröffentlicht
+          und im Internet zur Verfügung gestellt werden kann.
+        </p>
+        <p>
+          Bitte drucken Sie für eine Publikation folgendes <a href="digi_form.pdf">Formular 1 (PDF)</a>
+          oder für mehrere Publikationen folgendes <a href="digi_form_2.pdf">Formular 2 (PDF)</a> aus und
+          senden Sie es unterschrieben per Post oder Fax an:
+        </p>
+        <address>
+          Universitätsbibliothek <br/>
+          Digitale Bibliothek Braunschweig <br/>
+          Pockelsstraße 13 <br/> 38106 Braunschweig <br/><br/>
+          Fax: 0531 391 5836
+        </address>
+        <p>
+          Um ein Dokument an die UB zu übermitteln, geben Sie im <a href="http://www.digibib.tu-bs.de/mailform-epub.php">Web-Formular</a>
+          bitte Ihren Namen, E-Mail, Fakultät und Institut an und hängen Sie Ihre Publikation an.
+          Klicken Sie anschließend auf 'Senden'.
+        </p>
+        <p>
+          Alternativ können Sie uns Ihre Publikation, so wie Sie sie veröffentlicht haben wollen,
+          per <a href="mailto:digibib@tu-braunschweig.de">E-Mail</a> an digibib@tu-bs.de (bis 50MB) oder
+          auf einem geeigneten Datenträger (DVD, CD-ROM) zusenden. <br/>
+          Die Freischaltung der Publikation dauert ca. 1 Woche.
+        </p>
+        <p>
+          Hilfestellung bei der Publikation, zum Beispiel der Aufbereitung
+          Ihrer Dokumente im PDF-Format,
+          erhalten Sie bei:
+        </p>
+        <address>
+          Frau Blanck, Herr Kissler <br/>
+          E-Mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a><br/>
+          Telefon: 0531 391-5052
+        </address>
+      </div>
+    </div>
+
+  </section>
+  <meta>
+    <log date="2016-05-09" time="18:21" labelPath=" » epublication"
+      lastEditor="Kathleen Neumann" />
+  </meta>
+</MyCoReWebPage>

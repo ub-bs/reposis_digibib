@@ -107,15 +107,15 @@
     </item>
   </menu>
   <menu id="publish" dir="/content/publish">
-    <label xml:lang="de">Dokumente einreichen</label>
-    <label xml:lang="en">Submit Document</label>
+    <label xml:lang="de">Publizieren</label>
+    <label xml:lang="en">Publish</label>
     <item href="/servlets/MCRActionMappingServlet/mods/create" type="intern">
       <label xml:lang="de">Publizieren</label>
       <label xml:lang="en">Publish</label>
     </item>
-    <item href="/content/publish/importPPN.xml" type="intern">
-      <label xml:lang="de">Publizieren (PPN Import)</label>
-      <label xml:lang="en">Publish (PPN Import)</label>
+    <item href="/content/publish/authors_area.xml" type="intern">
+      <label xml:lang="de">für Autoren</label>
+      <label xml:lang="en">Authors area</label>
     </item>
     <item href="/content/publish/guidelines.xml" type="intern">
       <label xml:lang="de">Leitlinien</label>
@@ -124,6 +124,10 @@
     <item href="/content/publish/contract.xml" type="intern">
       <label xml:lang="de">Vertragsbedingungen</label>
       <label xml:lang="en">Terms &amp; Conditions</label>
+    </item>
+    <item href="/content/publish/copyright.xml" type="intern">
+      <label xml:lang="de">Urheberrecht</label>
+      <label xml:lang="en">Copyright</label>
     </item>
   </menu>
   <menu id="user">
