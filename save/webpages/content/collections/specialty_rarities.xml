@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Vorlage">
+  <section xml:lang="de" title="Spezialgebiete und Raritäten">
 
-    <h2>Vorlage</h2>
-    <div class="row">
+    <h2>Spezialgebiete und Raritäten</h2>
+    <div class="row" id="digibib_rarities">
       <div class="col-md-12">
-        xx
+        <p>
+          Diese Seite befindet sich im Aufbau
+        </p>
+        <ul>
+          <li>
+            <a href="https://de.wikipedia.org/wiki/Seltenheit">Hier kommen Links zu seltenen oder kuriosen Sachen rein</a>
+          </li>
+          <li>
+            <a href="https://de.wikipedia.org/wiki/Kuriosum">Hier auch!</a>
+          </li>
+        </ul>
       </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Brunsvicensien"
+    <log date="2016-05-09" time="18:21" labelPath=" » Raritäten"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>

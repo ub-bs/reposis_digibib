@@ -78,3 +78,16 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: center right;
 }
+
+#digibib_institutes {
+  background-image:url('../images/sigel.png');
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+
+#digibib_rarities {
+  background-image:url('../images/spezial.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color:rgba(255,0,0,0.5);
+}

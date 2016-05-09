@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Vorlage">
+  <section xml:lang="de" title="Institutsreihen">
 
-    <h2>Vorlage</h2>
-    <div class="row">
-      <div class="col-md-12">
-        xx
+    <h2>Institutsreihen</h2>
+    <div class="row" id="digibib_institutes">
+      <div class="col-md-10">
+        <p>
+          Hier finden Sie eine Übersicht über digitale Veröffentlichung von Instituten der TU Braunschweig.<br/>
+          Wählen Sie einen der nachfolgenden Bereiche, um weitere Informationen zu erhalten!<br/>
+          (!)...Ansonsten ist das viel Platzhaltertext und sollte bald überarbeitet werden....(!)
+        </p>
+        <ul>
+          <li>
+            <a href="ivb.xml">Veröffentlichungen</a> des Instituts für Verbrennungskraftmaschinen <a href="http://www.tu-braunschweig.de/ivb">(ivb)</a>
+          </li>
+          <li>
+          <a href="../../editor_form_search-typ_videos.xml">OER Teach Your Peers (TYP) Videos</a>
+          </li>
+        </ul>
       </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Brunsvicensien"
+    <log date="2016-05-09" time="18:21" labelPath=" » Institutsreihen"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>
