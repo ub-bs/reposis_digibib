@@ -1,18 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Vorlage">
+  <section xml:lang="de" title="Digitale Bildersammlungen der Universitätsbibliothek Braunschweig">
 
-    <h2>Vorlage</h2>
-    <div class="row">
+    <h2>Digitale Bildersammlungen der Universitätsbibliothek Braunschweig</h2>
+    <div class="row" id="digibib_imagecollection">
       <div class="col-md-12">
-        xx
+        <p>
+          Hier finden Sie die digitalen Bildersammlungen der Universitätsbibliothek Braunschweig.
+        </p>
+        <ul>
+          <li>
+            <a href="../../servlets/MCRSearchServlet?query=(keywords+=+&quot;Diasammlung&quot;and&quot;Herbert&quot;and&quot;Schulz&quot;)+and+(objectType+=+document)&amp;numPerPage=10&amp;mask=browse/type">Diasammlung Herbert Schulz</a>
+            <br />
+            Schwerpunkt Blütenpflanzen
+          </li>
+          <br />
+          <li>
+            <b>Sammlung Dietmar Brandes </b><!--<a href='/docportal/servlets/MCRSearchServlet?XSL.Style=rss-sdb&amp;query=(keywords contains "Sammlung")+and+(keywords contains "Dietmar")+and+(keywords contains "Brandes")+and+(objectType+=+document)&amp;maxResults=10&amp;created.sortField=descending&amp;mask=browse/type'>
+              <img width="14px" height="14px" align="top" src="/docportal/templates/master/template_ubbs/IMAGES/rss_32.png" border="0"/>
+            </a>-->
+            <br />
+            Bilder zur Biodiversität der Pflanzen
+            <br />
+            <ul>
+              <li>
+                <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8fbf5164-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=ser+Digitale+Pflanzenbilder+Sammlung+Dietmar+Brandes">Katalogsuche</a>
+              </li>
+              <li>
+                <a href="http://vufind.allegro-c.de/album/index.html">Galeriesuche</a>
+              </li>
+            </ul>
+          </li>
+          <br />
+          <li>
+            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/FAM?PPN=577273620">Photos von Bau- und Kunstdenkmälern</a>
+          </li>
+          <li>
+            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+ansichten+braunschweig">Ansichten von Braunschweig</a>
+          </li>
+          <li>
+            <a href="../../receive/digibib_mods_00043560">Sammlung Hermann Pfeifer: Aquarelle - Zeichnungen - verschiedene Arbeiten</a>
+          </li>
+        </ul>
       </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Brunsvicensien"
+    <log date="2016-05-09" time="18:21" labelPath=" » image collection"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>
