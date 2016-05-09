@@ -1,17 +1,23 @@
 html body .jumbotron {
-    color: inherit;
-    background: unset;
-    background-color: #ecf0f1;
+  color: inherit;
+  background: unset;
+  background-color: #ecf0f1;
 }
 
 html body #powered_by {
-    background-color: white;
+  background-color: white;
 }
 
 .flatmir-footer {
-    background-color: #6b6b6b;
+  background-color: #6b6b6b;
 }
 
 .classificationBrowser {
-    width: 800px;
+  width: 800px;
+}
+
+#digibib_brunsvicensien {
+  background-image: url("../../images/braunschweiger-land_1c.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
