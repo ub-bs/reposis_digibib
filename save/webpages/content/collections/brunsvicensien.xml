@@ -20,10 +20,10 @@
             </a>
             <ul>
               <li>
-                <a href="vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse ab 1745</a>
+                <a href="brunsvicensien/vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse ab 1745</a>
               </li>
               <li>
-                <a href="matrikelbuecher.xml">Matrikelbücher (1745 - 1942)</a>
+                <a href="brunsvicensien/matrikelbuecher.xml">Matrikelbücher (1745 - 1942)</a>
               </li>
             </ul>
           </li>
@@ -92,22 +92,22 @@
             <br />
           </li>
           <li>
-            <a href="gelehrte-beytraege.xml">Braunschweigische Anzeigen</a>
+            <a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigische Anzeigen</a>
           </li>
           <li>
-            <a href="gelehrte-beytraege.xml">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a>
+            <a href="brunsvicensien/gelehrte-beytraege.xml">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a>
           </li>
           <li>
-            <a href="gelehrte-beytraege.xml">Braunschweigisches Magazin</a>
+            <a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigisches Magazin</a>
             <br /><br />
           </li>
           <li>
-            <a href="adressbuecher.xml">Braunschweigische Adressbücher<br />
+            <a href="brunsvicensien/adressbuecher.xml">Braunschweigische Adressbücher<br />
               ab dem Jahr 1721 - ...
             </a>
           </li>
           <li>
-            <a href="publications_bwg.xml">Veröffentlichungen</a>
+            <a href="brunsvicensien/publications_bwg.xml">Veröffentlichungen</a>
             der Braunschweigischen Wissenschaftlichen Gesellschaft <a href="http://bwg-nds.de/">(BWG)</a>
           </li>
         </ul>
@@ -121,7 +121,7 @@
             <a href="http://www.braunschweig.de/kultur_tourismus/bibliotheken_archive/stadtarchiv/index.html">Stadtarchiv Braunschweig</a>
             <ul>
               <li>
-                <a href="adressbuecher.xml">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a>
+                <a href="brunsvicensien/adressbuecher.xml">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a>
               </li>
               <li>
                 <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/FAM?PPN=643784144">Urkundenbücher der Stadt Braunschweig <br />
@@ -141,7 +141,7 @@
             Brunsvicensien in Zusammenarbeit mit dem <a href="http://www.braunschweigischer-geschichtsverein.de/">Braunschweigischen Geschichtsverein</a>
             <ul>
               <li>
-                <a href="jahrbuecher.xml">Braunschweigische Jahrbücher </a> der Jahrgänge 1902 bis 2004
+                <a href="brunsvicensien/jahrbuecher.xml">Braunschweigische Jahrbücher </a> der Jahrgänge 1902 bis 2004
               </li>
             </ul>
           </li>
