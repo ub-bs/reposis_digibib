@@ -31,5 +31,11 @@ html body #powered_by {
 #digibib_beytraege {
   background-image:url('../images/loewe.jpg');
   background-repeat: no-repeat;
-  background-position: bottom right;
+  background-position: center;
+}
+
+#digibib_adressbuecher {
+  background-image:url('../images/stadtarchiv.jpg');
+  background-repeat: no-repeat;
+  background-position: top right;
 }

@@ -1,18 +1,245 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Vorlage">
+  <section xml:lang="de" title="Braunschweigische Adreßbücher">
 
-    <h2>Vorlage</h2>
-    <div class="row">
-      <div class="col-md-12">
-        xx
+    <h2>Braunschweigische Adreßbücher</h2>
+    <div id="digibib_adressbuecher">
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <strong>Adress-Calender, der Hoch-Fürstlich Braunschweig Lüneburgischen Haupt- und Residentz-Städte
+            Wolffenbüttel und Braunschweig und daselbst befindlichen Fürstlichen Hofes, auch anderer Collegien,
+            Instantien, und Expeditionen (1721)</strong>
+          </p>
+          <p>
+            Jahr(e): <a href="../../../receive/digibib_mods_00042219">1721</a>
+          </p>
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <strong>Braunschweigscher Kaufmanns-Calender (1791)</strong>
+          </p>
+          <p>
+            Jahr(e): <a href="../../../receive/digibib_mods_00042757">1791</a>
+          </p>
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <strong>Braunschweigscher Meß- und Kaufmanns-Calender (1796 - 1804)</strong>
+          </p>
+          <p>
+            Jahr(e):
+          </p>
+          <table class="table">
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042215">1796</a></td>
+              <td><a href="../../../receive/digibib_mods_00042484">1802</a></td>
+              <td><a href="../../../receive/digibib_mods_00042226">1804</a></td>
+              <td><br /></td>
+            </tr>
+          </table>
+          <hr />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <strong>Braunschweigisches Adreßbuch (1805 - ...)</strong><br />
+            Die Jahrgänge 1806, 1816, 1819, 1827, 1831, 1859 und 1862 sind nicht erschienen.
+          </p>
+          <p>
+            Jahr(e):
+          </p>
+          <table class="table">
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042429">1805</a></td>
+              <td><a href="../../../receive/digibib_mods_00042212">1807</a></td>
+              <td><a href="../../../receive/digibib_mods_00042432">1808</a></td>
+              <td><a href="../../../receive/digibib_mods_00042222">1809</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042193">1810</a></td>
+              <td><a href="../../../receive/digibib_mods_00042197">1811</a></td>
+              <td><a href="../../../receive/digibib_mods_00042200">1812</a></td>
+              <td><a href="../../../receive/digibib_mods_00042203">1813</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042206">1814</a></td>
+              <td><a href="../../../receive/digibib_mods_00042209">1815</a></td>
+              <td><a href="../../../receive/digibib_mods_00042462">1817</a></td>
+              <td><a href="../../../receive/digibib_mods_00042595">1818</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042230">1820</a></td>
+              <td><a href="../../../receive/digibib_mods_00042470">1821</a></td>
+              <td><a href="../../../receive/digibib_mods_00034274">1822</a></td>
+              <td><a href="../../../receive/digibib_mods_00041671">1823</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042439">1824</a></td>
+              <td><a href="../../../receive/digibib_mods_00042234">1825</a></td>
+              <td><a href="../../../receive/digibib_mods_00034240">1826</a></td>
+              <td><a href="../../../receive/digibib_mods_00042442">1828</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042579">1829</a></td>
+              <td><a href="../../../receive/digibib_mods_00042583">1830</a></td>
+              <td><a href="../../../receive/digibib_mods_00042680">1832</a></td>
+              <td><a href="../../../receive/digibib_mods_00034356">1833</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042653">1834</a></td>
+              <td><a href="../../../receive/digibib_mods_00034353">1835</a></td>
+              <td><a href="../../../receive/digibib_mods_00042713">1836</a></td>
+              <td><a href="../../../receive/digibib_mods_00034712">1837</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042715">1838</a></td>
+              <td><a href="../../../receive/digibib_mods_00034358">1839</a></td>
+              <td><a href="../../../receive/digibib_mods_00042801">1840</a></td>
+              <td><a href="../../../receive/digibib_mods_00042840">1841</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00034889">1842</a></td>
+              <td><a href="../../../receive/digibib_mods_00035044">1843</a></td>
+              <td><a href="../../../receive/digibib_mods_00035365">1844</a></td>
+              <td><a href="../../../receive/digibib_mods_00040888">1845</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00034665">1846</a></td>
+              <td><a href="../../../receive/digibib_mods_00034709">1847</a></td>
+              <td><a href="../../../receive/digibib_mods_00034466">1848</a></td>
+              <td><a href="../../../receive/digibib_mods_00034469">1849</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042831">1850</a></td>
+              <td><a href="../../../receive/digibib_mods_00034470">1851</a></td>
+              <td><a href="../../../receive/digibib_mods_00042776">1852</a></td>
+              <td><a href="../../../receive/digibib_mods_00042860">1853</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042815">1854</a></td>
+              <td><a href="../../../receive/digibib_mods_00042818">1855</a></td>
+              <td><a href="../../../receive/digibib_mods_00034129">1. Abt. 1856</a></td>
+              <td><a href="../../../receive/digibib_mods_00040706">1857</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00035086">1858</a></td>
+              <td><a href="../../../receive/digibib_mods_00035048">1860</a></td>
+              <td><a href="../../../receive/digibib_mods_00034803">1861</a></td>
+              <td><a href="../../../receive/digibib_mods_00042874">1863</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042781">1. Abt. 1864</a></td>
+              <td><a href="../../../receive/digibib_mods_00040878">1865</a></td>
+              <td><a href="../../../receive/digibib_mods_00035225">1866</a></td>
+              <td><a href="../../../receive/digibib_mods_00035222">1867</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042821">1868</a></td>
+              <td><a href="../../../receive/digibib_mods_00035441">1869</a></td>
+              <td><a href="../../../receive/digibib_mods_00036531">1870</a></td>
+              <td><a href="../../../receive/digibib_mods_00035438">1871</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00036126">1872</a></td>
+              <td><a href="../../../receive/digibib_mods_00035115">1. Abt. 1873</a></td>
+              <td><a href="../../../receive/digibib_mods_00035216">2. Abt. 1873</a></td>
+              <td><a href="../../../receive/digibib_mods_00035213">1. Abt. 1874</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00035220">2. Abt. 1874</a></td>
+              <td><a href="../../../receive/digibib_mods_00035120">1. Abt. 1875</a></td>
+              <td><a href="../../../receive/digibib_mods_00035218">2. Abt. 1875</a></td>
+              <td><a href="../../../receive/digibib_mods_00038305">1876</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00035557">1877</a></td>
+              <td><a href="../../../receive/digibib_mods_00035641">1878</a></td>
+              <td><a href="../../../receive/digibib_mods_00037056">1879</a></td>
+              <td><a href="../../../receive/digibib_mods_00037806">1880</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042826">1881</a></td>
+              <td><a href="../../../receive/digibib_mods_00036734">1882</a></td>
+              <td><a href="../../../receive/digibib_mods_00040230">1883</a></td>
+              <td><a href="../../../receive/digibib_mods_00037368">1884</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00037779">1885</a></td>
+              <td><a href="../../../receive/digibib_mods_00041332">1886</a></td>
+              <td><a href="../../../receive/digibib_mods_00042161">1887</a></td>
+              <td><a href="../../../receive/digibib_mods_00042020">1888</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00041879">1889</a></td>
+              <td><a href="../../../receive/digibib_mods_00042169">1890</a></td>
+              <td><a href="../../../receive/digibib_mods_00042855">1891</a></td>
+              <td><a href="../../../receive/digibib_mods_00042859">1892</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00042023">1893</a></td>
+              <td><a href="../../../receive/digibib_mods_00042870">1894</a></td>
+              <td><a href="../../../receive/digibib_mods_00043301">1895</a></td>
+              <td><a href="../../../receive/digibib_mods_00043668">1896</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00043419">1897</a></td>
+              <td><a href="../../../receive/digibib_mods_00043080">1898</a></td>
+              <td><a href="../../../receive/digibib_mods_00043400">1899</a></td>
+              <td><a href="../../../receive/digibib_mods_00043411">1900</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00043702">1901</a></td>
+              <td><a href="../../../receive/digibib_mods_00044261">1902</a></td>
+              <td><a href="../../../receive/digibib_mods_00043463">1903</a></td>
+              <td><a href="../../../receive/digibib_mods_00044767">1904</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00045422">1905</a></td>
+              <td><a href="../../../receive/digibib_mods_00044980">1906</a></td>
+              <td><a href="../../../receive/digibib_mods_00051770">1907</a></td>
+              <td><a href="../../../receive/digibib_mods_00050571">1908</a></td>
+            </tr>
+            <tr>
+              <td><a href="../../../receive/digibib_mods_00051889">1909</a></td>
+              <td><a href="../../../receive/digibib_mods_00053628">1910</a></td>
+              <td><a href="../../../receive/digibib_mods_00053499">1911</a></td>
+              <td>1912</td>
+            </tr>
+            <tr>
+              <td>1913</td>
+              <td><a href="../../../receive/digibib_mods_00053562">1914</a></td>
+              <td>1915</td>
+              <td>1916</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <hr />
+          <p>
+            <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
+          </p>
+          </div>
       </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Brunsvicensien"
+    <log date="2016-05-03" time="18:21" labelPath=" » Braunschweigische Adreßbücher"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>
