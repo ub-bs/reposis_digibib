@@ -117,6 +117,10 @@
       <label xml:lang="de">für Autoren</label>
       <label xml:lang="en">Authors area</label>
     </item>
+    <item href="/content/publish/epub.xml" type="intern">
+      <label xml:lang="de">E-Publikationen</label>
+      <label xml:lang="en">ePublication</label>
+    </item>
     <item href="/content/publish/guidelines.xml" type="intern">
       <label xml:lang="de">Leitlinien</label>
       <label xml:lang="en">Guidelines</label>
