@@ -1,18 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Vorlage">
+  <section xml:lang="de" title="Die Braunschweigische Wissenschaftlichen Gesellschaft (BWG)">
 
-    <h2>Vorlage</h2>
+    <h2>Die Braunschweigische Wissenschaftlichen Gesellschaft (BWG)</h2>
+    <div class="row" id="digibib_bwg">
+      <div class="col-md-12">
+        <p>
+          Die <a href="http://www.bwg-nds.de">Braunschweigische Wissenschaftliche Gesellschaft (BWG)</a> ist eine Körperschaft des öffentlichen Rechts des
+          Landes Niedersachsen.<br />
+          Sie hat die Aufgabe, durch eigene Tätigkeit und in Zusammenarbeit mit anderen wissenschaftlichen Institutionen des In- und Auslandes
+          die Wissenschaften, insbesondere das Zusammenwirken von Naturwissenschaften, Technischen Wissenschaften und Geisteswissenschaften, zu fördern.
+        </p>
+        <p>
+          Die BWG ist nach Struktur und Zielsetzung eine den Akademien der Wissenschaften analoge Institution, deren 145 ordentliche Mitglieder
+          ihre wissenschaftliche Heimat vorrangig in den technisch ausgerichteten Universitäten des Dreiecks Braunschweig - Hannover - Clausthal haben.
+          Damit sind auch die ingenieurwissenschaftlichen Disziplinen ein Schwerpunkt im ansonsten breit angelegten natur- und geisteswissenschaftlichen
+          Spektrum der BWG.
+        </p>
+        <p>
+          Sie verleiht in der Regel alljährlich die <a href="http://bwg-nds.de/gau%C3%9F-medaille/">Carl Friedrich Gauß-Medaille</a> an wissenschaftlich
+          besonders verdiente Gelehrte des In- und Auslandes.<br />
+          Die Ergebnisse ihrer Tätigkeit finden ihren Niederschlag in den Publikationen der Gesellschaft.<br/>
+          Durch Symposien und Vorträge wird darüber hinaus eine wichtige Verknüpfung mit der Öffentlichkeit hergestellt, um die Ergebnisse der Wissenschaft
+          in die gesellschaftliche Diskussion einzubringen.
+          </p>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12">
-        xx
+        <p><a href="../../../search/editor_form_search-bwg-publications.xml">Zur Suche in den Veröffentlichungen der BWG</a></p>
       </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <hr />
+        <p>
+          <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
+        </p>
+        </div>
     </div>
 
   </section>
   <meta>
-    <log date="2016-05-03" time="18:21" labelPath=" » Brunsvicensien"
+    <log date="2016-05-09" time="13:47" labelPath=" » BWG"
       lastEditor="Kathleen Neumann" />
   </meta>
 </MyCoReWebPage>

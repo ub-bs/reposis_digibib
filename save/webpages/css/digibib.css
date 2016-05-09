@@ -37,5 +37,11 @@ html body #powered_by {
 #digibib_adressbuecher {
   background-image:url('../images/stadtarchiv.jpg');
   background-repeat: no-repeat;
+  background-position: 100% 7%;
+}
+
+#digibib_bwg {
+  background-image:url('../images/bwg.png');
+  background-repeat: no-repeat;
   background-position: top right;
 }
