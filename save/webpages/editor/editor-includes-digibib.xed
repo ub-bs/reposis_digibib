@@ -2,10 +2,26 @@
 
 <xed:template xmlns:xed="http://www.mycore.de/xeditor" xmlns:mir="http://www.mycore.de/mir">
 
-  <xed:template id="title">
-    <mir:textarea xpath="mods:titleInfo/mods:title" rows="2" help-text="{i18n:mir.help.title}" label="mir.title" class="required" />
+  <xed:template id="ddc.repeat">
+    <xed:repeat xpath="mods:classification[@authority='ddc'][@displayLabel='ddc']" min="1" max="10" method="build">
+      <div class="form-group {$xed-validation-marker}">
+        <label class="col-md-3 control-label required">
+          <xed:output i18n="editor.search.digibib.ddc" />
+          :
+        </label>
+        <div class="col-md-6">
+          <select class="form-control form-control-inline">
+            <option value="">
+              <xed:output i18n="mir.select" />
+            </option>
+            <xed:include uri="xslStyle:items2options:classification:editor:-1:children:DDC" />
+          </select>
+        </div>
+        <mir:help-pmud help-text="{i18n:digibib.help.ddc}" pmud="true" />
+      </div>
+    </xed:repeat>
+    <xed:validate xpath="//mods:mods/mods:classification[@authority='ddc'][@displayLabel='ddc']" required="true" i18n="digibib.validation.ddc"
+      display="global" />
   </xed:template>
-
-
 
 </xed:template>

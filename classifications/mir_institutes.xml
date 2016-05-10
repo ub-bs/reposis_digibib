@@ -8,7 +8,7 @@
     <category ID="Faculty_c_">
       <label xml:lang="de" text="aktuelle Fakultäten" />
       <label xml:lang="en" text="actual Faculties" />
-      <category ID="TU_BS">
+      <category ID="TUBS">
         <label xml:lang="de" text="TU-Braunschweig"/>
         <label xml:lang="en" text="TU Braunschweig"/>
       </category>
