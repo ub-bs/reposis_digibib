@@ -56,9 +56,9 @@
       <label xml:lang="de">nach Dokumenttyp</label>
       <label xml:lang="en">Genre</label>
     </item>
-    <item href="/content/browse/sdnb.xml" type="intern">
-      <label xml:lang="de">nach Sachgruppe</label>
-      <label xml:lang="en">SNDB</label>
+    <item href="/content/browse/ddc.xml" type="intern">
+      <label xml:lang="de">nach DDC</label>
+      <label xml:lang="en">DDC</label>
     </item>
     <item href="/servlets/MCRActionMappingServlet/personindex/browse" type="extern">
       <label xml:lang="de">nach Personen</label>
