@@ -1,3 +1,18 @@
+@font-face {
+  font-family: 'NexusSansPro-Regular';
+  src: url('webfonts/NexusSansPro-Regular.eot?#iefix') format('embedded-opentype'),
+       url('webfonts/NexusSansPro-Regular.otf')  format('opentype'),
+       url('webfonts/NexusSansPro-Regular.woff') format('woff'),
+       url('webfonts/NexusSansPro-Regular.ttf')  format('truetype'),
+       url('webfonts/NexusSansPro-Regular.svg#NexusSansPro-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: 'NexusSansPro-Regular'
+}
+
 html body .jumbotron {
   color: inherit;
   background: unset;
