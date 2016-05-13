@@ -18,7 +18,7 @@
       <div id="project_logo_box">
         <a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2),$HttpSession)}"
            class="">
-          <span id="logo_mir">digibib</span>
+          <span id="logo_mir">dbbs</span>
           <span id="logo_modul">Digitale Bibliothek</span>
           <span id="logo_slogan">Braunschweig</span>
         </a>
