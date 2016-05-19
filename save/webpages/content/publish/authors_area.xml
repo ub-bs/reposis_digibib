@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MyCoReWebPage>
 <MyCoReWebPage>
-  <section xml:lang="de" title="Publizieren">
+  <section xml:lang="de" title="Hinweise für Autoren">
 
-    <h2>Publizieren</h2>
+    <h2>Hinweise für Autoren</h2>
     <div class="row">
       <div class="col-md-12">
         <p>
-          <strong>E-Publikationen:</strong>
-          <br />
           E-Publikationen können von <em>Wissenschaftlerinnen und Wissenschaftlern
           der TU Braunschweig</em> (auch Gastwissenschaftlern) kostenlos veröffentlicht werden.
         </p>
@@ -16,16 +14,6 @@
           Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum
           Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des Urheberrechts veröffentlicht.
         </p>
-
-        <!--
-        <p>
-          Sehr viele Zeitschriftenverlage bieten die Möglichkeit,
-          Aufsätze vorab als Preprint oder parallel als Postprint auf einem
-          "institutional repository"  zu veröffentlichen.  Die Digitale
-          Bibliothek Braunschweig ist die geeignete Plattform für dieses
-          "self archiving".
-        </p>
-        -->
         <p>
           Bitte beachten Sie unsere Hinweise ...
         </p>
@@ -35,8 +23,39 @@
           <li><a href="contract.xml">zu den Vertragsbedingungen</a></li>
         </ul>
         <p>
-          <a href="epub.xml"><em>Weiter zur E-Publikation ...</em></a>
+          Wir benötigen von Ihnen eine <em>schriftliche Einwilligung</em>, damit Ihre Publikation über die Digitale
+          Bibliothek Braunschweig veröffentlicht und im Internet zur Verfügung gestellt werden kann.
         </p>
+        <p>
+          Bitte drucken Sie für eine Publikation folgendes <a href="digi_form.pdf">Formular 1 (PDF)</a> oder für mehrere
+          Publikationen folgendes <a href="digi_form_2.pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:
+        </p>
+        <address>
+          Universitätsbibliothek <br/>
+          Digitale Bibliothek Braunschweig <br/>
+          Pockelsstraße 13 <br/>
+          38106 Braunschweig <br/><br/>
+          Fax: 0531 391 5836
+        </address>
+        <p>
+          Um ein Dokument an die UB zu übermitteln steht Ihnen unser <a href="http://www.digibib.tu-bs.de/mailform-epub.php">Web-Formular</a>
+          zur Verfügung.
+        </p>
+        <p>
+          Alternativ können Sie uns Ihre Publikation, so wie Sie sie veröffentlicht haben wollen,
+          per <a href="mailto:digibib@tu-braunschweig.de">E-Mail</a> an digibib@tu-bs.de (bis 50MB) oder
+          auf einem geeigneten Datenträger zusenden. <br/>
+          Die Freischaltung der Publikation dauert ca. 1 Woche.
+        </p>
+        <p>
+          Hilfestellung bei der Publikation, zum Beispiel der Aufbereitung
+          Ihrer Dokumente im PDF-Format, erhalten Sie bei:
+        </p>
+        <address>
+          Frau Blanck, Herr Kissler, Herr Peters<br/>
+          E-Mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a><br/>
+          Telefon: 0531 391-5052
+        </address>
       </div>
     </div>
     <div class="row">
@@ -44,26 +63,14 @@
         <p>
           <strong>Dissertationen:</strong>
           <br />
-        <!--
-        <p>
-          Die Universitätsbibliothek bietet Doktorandinnen und Doktoranden
-          der TU Braunschweig die Möglichkeit, ihre Publikationspflicht
-          durch elektronische Veröffentlichung zu erfüllen.
-        </p>
-        <p>
-          Eine Veröffentlichung von elektronischen Dissertationen geschieht nur im Rahmen der Abgabe. Die Dissertationstelle nimmt alle Pflichtablieferungen von Dissertationsschriften entgegen und stellt die Dokumente ein.
-        </p>
-        -->
           Ausführliche Hinweise zur elektronischen Veröffentlichung
           von Dissertationen finden Sie auf den Webseiten der
           <a href="http://www.biblio.tu-bs.de/dissertation/diss.html">Dissertationsstelle</a>.
         </p>
       </div>
     </div>
-
   </section>
   <meta>
-    <log date="2016-05-09" time="18:21" labelPath=" » Autorenbereich"
-      lastEditor="Kathleen Neumann" />
+    <log lastEditor="administrator" date="2016-05-19" time="13:07" />
   </meta>
 </MyCoReWebPage>

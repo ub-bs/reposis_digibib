@@ -118,12 +118,8 @@
       <label xml:lang="en">Submit new document (admin)</label>
     </item>
     <item href="/content/publish/authors_area.xml" type="intern">
-      <label xml:lang="de">für Autoren</label>
-      <label xml:lang="en">Authors area</label>
-    </item>
-    <item href="/content/publish/epub.xml" type="intern">
-      <label xml:lang="de">E-Publikationen</label>
-      <label xml:lang="en">ePublication</label>
+      <label xml:lang="de">Hinweise für Autoren</label>
+      <label xml:lang="en">Hints for Authors</label>
     </item>
     <item href="/content/publish/guidelines.xml" type="intern">
       <label xml:lang="de">Leitlinien</label>
