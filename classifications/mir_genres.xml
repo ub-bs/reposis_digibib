@@ -12,7 +12,7 @@
     <category ID="thesis">
       <label xml:lang="en" text="Thesis" />
       <label xml:lang="de" text="Hochschulschriften" />
-      <label xml:lang="x-editor" text="false" />
+      <label xml:lang="x-group" text="true" />
       <label xml:lang="x-hosts" text="series standalone" />
       <category ID="dissertation">
         <label xml:lang="de" text="Dissertation" />
@@ -58,11 +58,6 @@
         <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
         <label xml:lang="en" text="Research Results" />
         <label xml:lang="de" text="Forschungsergebnisse" />
-      </category>
-      <category ID="press_release">
-        <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
-        <label xml:lang="de" text="Pressemitteilung" />
-        <label xml:lang="en" text="Press release" />
       </category>
       <category ID="declaration">
         <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
@@ -139,6 +134,11 @@
       <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="en" text="In house" />
       <label xml:lang="de" text="Hausinterne Veröffentlichung" />
+      <category ID="press_release">
+        <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
+        <label xml:lang="de" text="Pressemitteilung" />
+        <label xml:lang="en" text="Press release" />
+      </category>
     </category>
   </categories>
 </mycoreclass>
