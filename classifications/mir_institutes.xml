@@ -8,6 +8,7 @@
     <category ID="Faculty_c_">
       <label xml:lang="de" text="aktuelle Fakultäten" />
       <label xml:lang="en" text="actual Faculties" />
+      <label xml:lang="x-group" text="true" />
       <category ID="TUBS">
         <label xml:lang="de" text="TU-Braunschweig"/>
         <label xml:lang="en" text="TU Braunschweig"/>
@@ -47,6 +48,7 @@
     <category ID="Faculty_b_">
       <label xml:lang="de" text="April 2006 - März 2007" />
       <label xml:lang="en" text="April 2006 - March 2007" />
+      <label xml:lang="x-group" text="true" />
 
       <category ID="Faculty_b_01">
         <label xml:lang="de" text="01 - Mathematik und Informatik" />
@@ -94,6 +96,7 @@
     <category ID="Faculty">
       <label xml:lang="de" text="bis März 2006" />
       <label xml:lang="en" text="until March 2006" />
+      <label xml:lang="x-group" text="true" />
 
       <category ID="Faculty_01">
         <label xml:lang="de" text="01 - Mathematik und Informatik" />
