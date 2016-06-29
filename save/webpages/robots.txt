@@ -1,7 +1,7 @@
-http://www.digibib.tu-bs.de/sitemap_google.xml
+Sitemap: http://www.digibib.tu-bs.de/sitemap_google.xml
 User-agent: *
+Allow: /servlets/MCRFileNodeServlet/
 Disallow: /*?
-Crawl-delay: 10
 Disallow: /servlets/
 Disallow: /browse/
 Disallow: /rsc/
