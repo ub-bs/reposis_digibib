@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage>
     <section xml:lang="de" title="Willkommen bei der Digitalen Bibliothek">
-        <div class="jumbotwo" id="bs-index-search">
+        <div class="jumbotwo" id="bs-index-search" style="margin-top:50px;">
           <div class="row">
-            <div class="col-md-6" lang="de">
-              <form action="{$WebApplicationBaseURL}servlets/solr/find?q={0}" class="navbar-form navbar-left pull-right" role="search">
-                <input name="q" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
+            <div class="col-md-6 col-md-offset-3" lang="de">
+              <h1>Publikationsserver der TU&#160;Braunschweig</h1>
+              <form action="../servlets/solr/find?q={0}" class="form-inline" role="search" style="margin-top:30px;">
+                <input name="q" placeholder="Suche in 14.000 Dokumenten" class="form-control search-query" id="bs-searchInput" type="text" style="width:80%;" />
                 <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
               </form>
-              <p>
-                Suche in <span id="doc_count">14.000</span> Dokumenten
-              </p>
             </div>
           </div>
         </div>
@@ -19,10 +17,10 @@
         <script>
             $.ajax({
             type: "GET",
-            url: "http://reposis-test.gbv.de/digibib/api/v1/search?q=objectType:mods AND state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
+            url: "../api/v1/search?q=objectType:mods AND state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
             dataType: "jsonp",
             success: function (data) {
-            $('#doc_count').number(data.response.numFound,0, ',', '.');
+            $('#bs-searchInput').attr('placeholder', 'Suche in ' + $.number(data.response.numFound,0, ',', '.') + ' Dokumenten');
             },
             });
         </script>

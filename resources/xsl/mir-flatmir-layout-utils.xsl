@@ -14,14 +14,10 @@
             <xsl:call-template name="mir.loginMenu" />
           </ul>
         </nav>
+        <span id="bs-bibliothek">Universitätsbibliothek&#160;Braunschweig</span>
       </div>
       <div id="project_logo_box">
-        <a href="{concat($WebApplicationBaseURL,substring($loaded_navigation_xml/@hrefStartingPage,2),$HttpSession)}"
-           class="">
-          <span id="logo_mir">dbbs</span>
-          <span id="logo_modul">Digitale Bibliothek</span>
-          <span id="logo_slogan">Braunschweig</span>
-        </a>
+        <a href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.jpg" alt="Technische Universität Braunschweig" /></a></div>
       </div>
     </div>
 
