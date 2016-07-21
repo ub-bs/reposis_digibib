@@ -32,7 +32,15 @@ html body #powered_by {
 }
 
 .mir-main-nav nav .navbar-nav {
-  margin: 0px 0px 0px 230px;
+  margin: 0px 0px 0px 50px;
+}
+
+.navbar {
+    position: inherit;
+}
+
+.mir-main-nav {
+    box-shadow: unset;
 }
 
 .nav > li {
