@@ -51,16 +51,10 @@
 
         <nav class="collapse navbar-collapse mir-main-nav-entries">
           <ul class="nav navbar-nav pull-left">
-            <li>
-              <a href="{$WebApplicationBaseURL}">Startseite</a>
-            </li>
+            <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='brand']/*" />
             <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='search']" />
             <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='collections']" />
             <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='publish']" />
-            <li>
-              <a href="{$WebApplicationBaseURL}content/brand/contact.xml">Kontakt</a>
-            </li>
-
             <xsl:call-template name="mir.basketMenu" />
           </ul>
         </nav>
@@ -78,7 +72,7 @@
       <div class="row">
         <div class="col-md-12">
           <ul class="internal_links nav nav navbar-nav">
-            <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='brand']/*" />
+            <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='footer']/*" />
           </ul>
         </div>
       </div>

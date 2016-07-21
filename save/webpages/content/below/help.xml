@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Hilfe">
+  <div>
+    <h2>Hilfe</h2>
+    <p>
+      Hier könnte eine Anleitung für Nutzer dieser Anwendung stehen
+    </p>
+  </div>
+  </section>
+  <meta>
+    <log lastEditor="administrator" date="2016-07-21" time="15:07" />
+  </meta>
+</MyCoReWebPage>
