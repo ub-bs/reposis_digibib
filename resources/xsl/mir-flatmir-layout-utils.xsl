@@ -17,7 +17,7 @@
         <span id="bs-bibliothek">Universitätsbibliothek&#160;Braunschweig</span>
       </div>
       <div id="project_logo_box">
-        <a href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.jpg" alt="Technische Universität Braunschweig" /></a></div>
+        <a href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.jpg" alt="Technische Universität Braunschweig" /></a>
       </div>
     </div>
 
