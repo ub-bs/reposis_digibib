@@ -8,7 +8,7 @@
     <label xml:lang="de">MIR-Menü</label>
     <label xml:lang="en">MIR menu</label>
     <item href="/content/index.xml" type="intern">
-      <label xml:lang="de">Start</label>
+      <label xml:lang="de">Startseite</label>
       <label xml:lang="en">Start</label>
     </item>
   </menu>

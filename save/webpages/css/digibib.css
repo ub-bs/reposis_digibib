@@ -10,7 +10,11 @@
 }
 
 body {
-    color: #000000;
+  color: #000000;
+}
+
+html body #page #main_content {
+  min-height: 500px;
 }
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
@@ -31,6 +35,11 @@ html body #powered_by {
   background-color: white;
 }
 
+header {
+  background-color: rgb(255, 255, 255);
+  margin-top: -20px;
+  padding-top: 20px;
+}
 .mir-main-nav nav .navbar-nav {
   margin: 0px 0px 0px 50px;
 }
