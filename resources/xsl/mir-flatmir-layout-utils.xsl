@@ -41,14 +41,17 @@
           </button>
         </div>
 
-        <div class="searchfield_box">
-          <form action="{$WebApplicationBaseURL}servlets/solr/find?qry={0}" class="navbar-form navbar-left pull-right" role="search">
-            <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-            <div class="form-group">
-              <input name="qry" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
-            </div>
-          </form>
-        </div>
+        <!-- do not show on startpage -->
+        <xsl:if test="not(//div/@class='jumbotwo')">
+          <div class="searchfield_box">
+            <form action="{$WebApplicationBaseURL}servlets/solr/find?q={0}" class="navbar-form navbar-left pull-right" role="search">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+              <div class="form-group">
+                <input name="q" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
+              </div>
+            </form>
+          </div>
+        </xsl:if>
 
         <nav class="collapse navbar-collapse mir-main-nav-entries">
           <ul class="nav navbar-nav pull-left">
@@ -71,16 +74,7 @@
   </xsl:template>
 
   <xsl:template name="mir.jumbotwo">
-    <!-- show only on startpage -->
-    <xsl:if test="//div/@class='jumbotwo'">
-      <div class="jumbotron">
-        <div class="container">
-          <h1>Hier entsteht der Auftritt der Digitalen Bibliothek der TU Braunschweig</h1>
-          <h2>Hier können Wissenschaftler der TU Braunschweig ihre Dissertationen, Artikel,
-            Lehrmaterialien, Videos etc. elektronisch publizieren.</h2>
-        </div>
-      </div>
-    </xsl:if>
+    <!-- do nothing special -->
   </xsl:template>
 
   <xsl:template name="mir.footer">

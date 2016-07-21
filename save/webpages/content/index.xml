@@ -1,38 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage>
     <section xml:lang="de" title="Willkommen bei der Digitalen Bibliothek">
-        <div class="jumbotwo">
-            <div class="row">
-                <div class="col-md-6" lang="de">
-                    <h3>
-                        Inhalt
-                    </h3>
-                    <p>
-                        Mit einem Bestand von aktuell <span id="doc_count">14.000</span> Dokumenten bietet die
-                        Digitale Bibliothek Braunschweig zudem einen Zugang zu digitalisierten Volltext-Dokumenten
-                        aus wertvollen Spezialbeständen der UB und zu digitalen Bildersammlungen.
-                    </p>
-                    <p>
-                        Andere elektronische Volltexte, die ebenfalls über die Universitätsbibliothek zur Verfügung
-                        gestellt werden (E-Books, elektronische Zeitschriften, Dissertationen von anderen Universitäten),
-                        finden Sie mit Hilfe unseres Katalogs.
-                    </p>
-                </div>
-                <div class="col-md-1" lang="de">
-                    &#160;
-                </div>
-                <div class="col-md-4" lang="de">
-                    <h3>
-                        Recht
-                    </h3>
-                    <p>
-                        Beachten Sie unsere Hinweise zum Urheberrecht.
-                    </p>
-                    <p>
-                        Ein Dienst der Universitätsbibliothek der TU Braunschweig. (c) 2009-2016
-                    </p>
-                </div>
+        <div class="jumbotwo" id="bs-index-search">
+          <div class="row">
+            <div class="col-md-6" lang="de">
+              <form action="{$WebApplicationBaseURL}servlets/solr/find?q={0}" class="navbar-form navbar-left pull-right" role="search">
+                <input name="q" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
+                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+              </form>
+              <p>
+                Suche in <span id="doc_count">14.000</span> Dokumenten
+              </p>
             </div>
+          </div>
         </div>
 
         <script type="text/javascript" src="http://opensource.teamdf.com/number/jquery.number.js"></script>
@@ -48,6 +28,6 @@
         </script>
     </section>
     <meta>
-        <log lastEditor="administrator" date="2016-04-22" time="20:22"/>
+        <log lastEditor="administrator" date="2016-07-21" time="12:46"/>
     </meta>
 </MyCoReWebPage>

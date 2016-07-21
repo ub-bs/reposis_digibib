@@ -11,7 +11,7 @@
         </p>
         <ul>
           <li>
-            <a href="../../servlets/solr/find?qry=Diasammlung+Herbert+Schulz">Diasammlung Herbert Schulz</a>
+            <a href="../../servlets/solr/find?q=Diasammlung+Herbert+Schulz">Diasammlung Herbert Schulz</a>
             <br />
             Schwerpunkt Blütenpflanzen
           </li>
