@@ -23,8 +23,20 @@ html body .jumbotron {
   background-color: #ecf0f1;
 }
 
+html body header #header_box {
+    margin: 20px auto -20px auto;
+}
+
 html body #powered_by {
   background-color: white;
+}
+
+.mir-main-nav nav .navbar-nav {
+  margin: 0px 0px 0px 230px;
+}
+
+.nav > li {
+  border-left: 1px solid #fff;
 }
 
 .flatmir-footer {
