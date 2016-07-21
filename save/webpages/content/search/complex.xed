@@ -82,7 +82,7 @@
               <!-- DNB Sachgruppe -->
                 <mir:template name="selectInput"
                   xpath="condition[@field='category.top'][2]/@value" id="inputDDC1"
-                  i18n="editor.search.mir.ddc" tooltip="editor.search.mir.ddc.tooltip"
+                  i18n="editor.search.digibib.ddc" tooltip="editor.search.mir.ddc.tooltip"
                   uri="xslStyle:items2options:classification:editorComplete:-1:children:DDC" />
               <!-- Genre -->
                 <mir:template name="selectInput"
