@@ -8,9 +8,24 @@
   font-weight: normal;
   font-style: normal;
 }
-
+html {
+  background-color: #444;
+}
 body {
   color: #000000;
+}
+
+body.mir-start_page #page {
+  background-color: transparent;
+}
+
+body.mir-start_page #page h1 {
+  color: #BE1E3C;
+}
+
+html body #page {
+  background-color: rgba(255, 255, 255, 0.9);
+  padding-top: 0;
 }
 
 html body #page #main_content {
@@ -37,23 +52,114 @@ html body #powered_by {
 
 header {
   background-color: rgb(255, 255, 255);
-  margin-top: -20px;
+  margin-top: 0px;
   padding-top: 20px;
 }
+
+html body header #header_box {
+    margin: 20px auto 20px auto;
+}
+.mir-main-nav .container {
+    position: relative;
+}
 .mir-main-nav nav .navbar-nav {
-  margin: 0px 0px 0px 50px;
+  margin: 0px 0px 0px 200px;
 }
 
+.mir-main-nav .navbar-header {
+    float: right;
+    margin: 0 0 0 0;
+}
+.searchfield_box {
+    display: none;
+}
+
+#project_logo_box {
+    position: absolute;
+    left: 0px;
+    top: -74px;
+}
+
+section {
+  padding: 2em 0;
+  background-image: url("../images/background_neubau_1600x700.jpg");
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-color: #8EAAD1;
+}
+footer {}
+.flatmir-footer {
+    margin-top: 0;
+}
+.panel-footer {
+    padding: 0;
+}
+
+html body #powered_by {
+    padding: 0;
+    background-color: #444;
+    padding: 2em 0 2em 0;
+}
+
+.internal_links {
+    width: 100%;
+}
+.internal_links li{
+    width: 16.5%;
+    text-align: center;
+}
+
+.internal_links li > a:hover,
+.internal_links li > a:focus {
+    text-decoration: none;
+    color: white;
+    background-color: #BE1E3C;
+}
+
+
 .navbar {
-    position: inherit;
+  position: inherit;
+  min-height: 30px;
 }
 
 .mir-main-nav {
     box-shadow: unset;
+
+}
+
+.mir-main-nav .navbar-nav > li > a {
+  line-height: 2em;
+}
+.mir-main-nav .nav > li > a {
+  padding: 0px 1em;
 }
 
 .nav > li {
   border-left: 1px solid #fff;
+}
+
+.mir-main-nav nav .navbar-nav > li > a:hover .caret {
+    border-top-color: #BE1E3C !important;
+}
+
+.mir-main-nav nav .navbar-nav .dropdown-menu::before {
+    border-color: transparent transparent #BE1E3C transparent;
+}
+
+.mir-main-nav nav .navbar-nav .dropdown-menu {
+  background-color: #BE1E3C;
+}
+
+.mir-main-nav nav .navbar-nav > li > a:hover {
+    color: #BE1E3C;
+    background-color: white;
+}
+
+.mir-main-nav nav .navbar-nav .dropdown-menu > li > a:hover,
+.mir-main-nav nav .navbar-nav .dropdown-menu > li > a:focus {
+    color: #BE1E3C;
+    background-color: white;
 }
 
 .flatmir-footer {

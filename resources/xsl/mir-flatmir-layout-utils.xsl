@@ -9,15 +9,25 @@
 
     <div id="header_box" class="clearfix container">
       <div id="options_nav_box" class="mir-prop-nav">
+
+        <!-- do not show on startpage -->
+        <xsl:if test="not(//div/@class='jumbotwo')">
+          <div class="searchfield_box">
+            <form action="{$WebApplicationBaseURL}servlets/solr/find?q={0}" class="navbar-form navbar-left pull-right" role="search">
+              <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+              <div class="form-group">
+                <input name="q" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
+              </div>
+            </form>
+          </div>
+        </xsl:if>
+
         <nav>
           <ul class="nav navbar-nav pull-right">
             <xsl:call-template name="mir.loginMenu" />
           </ul>
         </nav>
         <a href="http://www.biblio.tu-bs.de/" id="bs-bibliothek">Universitätsbibliothek&#160;Braunschweig</a>
-      </div>
-      <div id="project_logo_box">
-        <a href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.jpg" alt="Technische Universität Braunschweig" /></a>
       </div>
     </div>
 
@@ -35,19 +45,10 @@
             <span class="icon-bar">
             </span>
           </button>
-        </div>
-
-        <!-- do not show on startpage -->
-        <xsl:if test="not(//div/@class='jumbotwo')">
-          <div class="searchfield_box">
-            <form action="{$WebApplicationBaseURL}servlets/solr/find?q={0}" class="navbar-form navbar-left pull-right" role="search">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
-              <div class="form-group">
-                <input name="q" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
-              </div>
-            </form>
+          <div id="project_logo_box">
+            <a class="navbar-brand" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.jpg" alt="Technische Universität Braunschweig" /></a>
           </div>
-        </xsl:if>
+        </div>
 
         <nav class="collapse navbar-collapse mir-main-nav-entries">
           <ul class="nav navbar-nav pull-left">
@@ -71,7 +72,7 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <ul class="internal_links nav nav navbar-nav">
+          <ul class="internal_links nav navbar-nav">
             <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='below']/*" />
           </ul>
         </div>
