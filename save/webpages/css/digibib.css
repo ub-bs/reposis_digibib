@@ -180,6 +180,16 @@ html body #powered_by {
   width: 800px;
 }
 
+.viewer .navbar.navbar-default, .mycoreViewer .navbar {
+  background-image: unset;
+}
+
+.mycoreViewer .navbar {
+  position: relative;
+  min-height: 60px;
+  padding: 0px;
+}
+
 #digibib_brunsvicensien {
   background-image: url("../images/braunschweiger-land_1c.png");
   background-repeat: no-repeat;
