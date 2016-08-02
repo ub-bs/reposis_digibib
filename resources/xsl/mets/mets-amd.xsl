@@ -44,8 +44,6 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="ownerEntityLinkId" select="document(concat('mcrobject:', $derivateOwnerId))" />
-
     <xsl:comment>
       Start amdSec - mets-amd.xsl
     </xsl:comment>
@@ -54,7 +52,7 @@
         <mets:mdWrap MIMETYPE="text/xml" MDTYPE="OTHER" OTHERMDTYPE="DVRIGHTS">
           <mets:xmlData>
             <dv:rights xmlns:dv="http://dfg-viewer.de/">
-              <xsl:variable name="entity" select="document(concat('mcrobject:', $ownerEntityLinkId))" />
+              <xsl:variable name="entity" select="document(concat('mcrobject:', $derivateOwnerId))" />
               <!-- owner name -->
               <dv:owner>Universitätsbibliothek Braunschweig</dv:owner>
               <dv:ownerLogo>http://www.biblio.tu-bs.de/dfg/ub-logo-dfg.gif</dv:ownerLogo>
