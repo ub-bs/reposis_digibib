@@ -80,6 +80,7 @@
         <mets:xmlData>
           <mods:mods>
             <xsl:apply-templates mode="metsmeta" select="$sourcedoc/mycoreobject" />
+            <!-- TODO: add content of TU BS
             <mods:extension>
               <urmel:entities xmlns:urmel="http://www.urmel-dl.de/ns/mods-entities">
                 <urmel:entity type="operator" xlink:type="extended"
@@ -91,6 +92,7 @@
                 <xsl:apply-templates mode="entities" select="$sourcedoc/mycoreobject" />
               </urmel:entities>
             </mods:extension>
+            -->
           </mods:mods>
         </mets:xmlData>
       </mets:mdWrap>
