@@ -9,19 +9,11 @@
 
   <xsl:include href="entitylink-common.xsl" />
   <xsl:param name="WebApplicationBaseURL" />
-  <xsl:param name="MCR.OPAC.CATALOG" />
   <xsl:param name="objectID" />
   <xsl:param name="license" select="'CC-BY-NC-SA'" />
 
   <xsl:variable name="ACTUAL.OPAC.CATALOG">
-    <xsl:choose>
-      <xsl:when test="$MCR.OPAC.CATALOG = '%MCROpacCatalog%'">
-        <xsl:value-of select="'http://gso.gbv.de/DB=2.1/'" />
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="$MCR.OPAC.CATALOG" />
-      </xsl:otherwise>
-    </xsl:choose>
+    <xsl:value-of select="'http://gso.gbv.de/DB=2.1/'" />
   </xsl:variable>
 
   <xsl:template name="amdSec">
@@ -63,96 +55,31 @@
         <mets:mdWrap MIMETYPE="text/xml" MDTYPE="OTHER" OTHERMDTYPE="DVRIGHTS">
           <mets:xmlData>
             <dv:rights xmlns:dv="http://dfg-viewer.de/">
-              <xsl:choose>
-                <xsl:when test="$ownerEntityLinkId">
-                  <xsl:variable name="entity" select="document(concat('mcrobject:', $ownerEntityLinkId))" />
-                  <!-- owner name -->
-                  <dv:owner>
-                    <xsl:call-template name="printNamesCorp">
-                      <xsl:with-param name="unittitleProper" select="$entity/mycoreobject/metadata/def.unittitle/unittitle[@type='proper']" />
-                      <xsl:with-param name="unittitleFormal" select="$entity/mycoreobject/metadata/def.unittitle/unittitle[@type='formal']" />
-                      <xsl:with-param name="firstName" select="$entity/mycoreobject/metadata/def.heading/heading/firstName" />
-                      <xsl:with-param name="lastName" select="$entity/mycoreobject/metadata/def.heading/heading/lastName" />
-                      <xsl:with-param name="personalName" select="$entity/mycoreobject/metadata/def.heading/heading/personalName" />
-                      <xsl:with-param name="collocation" select="$entity/mycoreobject/metadata/def.heading/heading/collocation" />
-                      <xsl:with-param name="nameAffix" select="$entity/mycoreobject/metadata/def.heading/heading/nameAffix" />
-                      <xsl:with-param name="name" select="$entity/mycoreobject/metadata/def.heading/heading/name" />
-                      <xsl:with-param name="departments" select="$entity/mycoreobject/metadata/def.departments" />
-                    </xsl:call-template>
-                  </dv:owner>
-
-                  <!-- contact -->
-                  <xsl:choose>
-                    <xsl:when test="$entity/mycoreobject/metadata/def.contact/contact">
-                      <dv:ownerContact>
-                        <xsl:value-of select="$entity/mycoreobject/metadata/def.contact/contact" />
-                      </dv:ownerContact>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <dv:ownerContact>mailto:thulb_ims@thulb.uni-jena.de</dv:ownerContact>
-                    </xsl:otherwise>
-                  </xsl:choose>
-
-                  <!-- owner logo -->
-                  <xsl:choose>
-                    <xsl:when test="$entity/mycoreobject/metadata/def.logoURL/logoURL[@type='dfg-viewer']">
-                      <dv:ownerLogo>
-                        <xsl:value-of select="$entity/mycoreobject/metadata/def.logoURL/logoURL[@type='dfg-viewer']" />
-                      </dv:ownerLogo>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <dv:ownerLogo>
-                        <xsl:value-of select="concat($WebApplicationBaseURL,'images/logo-dfg-viewer.png')" />
-                      </dv:ownerLogo>
-                    </xsl:otherwise>
-                  </xsl:choose>
-
-                  <!-- owner site url -->
-                  <xsl:choose>
-                    <xsl:when test="$entity/mycoreobject/metadata/def.siteURL/siteURL">
-                      <dv:ownerSiteURL>
-                        <xsl:value-of select="$entity/mycoreobject/metadata/def.siteURL/siteURL" />
-                      </dv:ownerSiteURL>
-                    </xsl:when>
-                    <xsl:otherwise>
-                      <dv:ownerSiteURL>http://www.thulb.uni-jena.de/</dv:ownerSiteURL>
-                    </xsl:otherwise>
-                  </xsl:choose>
-
-                  <dv:license>
-                    <xsl:choose>
-                      <xsl:when test="$entity/mycoreobject/metadata/def.license/license">
-                        <xsl:variable name="licenseClass" select="$entity/mycoreobject/metadata/def.license/license/@classid" />
-                        <xsl:variable name="licenseId" select="$entity/mycoreobject/metadata/def.license/license/@categid" />
-                        <xsl:value-of select="mcrxml:getDisplayName($licenseClass, $licenseId)" />
-                      </xsl:when>
-                      <xsl:otherwise>
-                        <xsl:value-of select="$license" />
-                      </xsl:otherwise>
-                    </xsl:choose>
-                  </dv:license>
-
-                </xsl:when>
-                <!-- fallback behaviour -->
-                <xsl:otherwise>
-                  <dv:owner>Thüringer Universitäts- und Landesbibliothek</dv:owner>
-                  <dv:ownerContact>mailto:thulb_ims@thulb.uni-jena.de</dv:ownerContact>
-                  <dv:ownerLogo>
-                    <xsl:value-of select="concat($WebApplicationBaseURL,'images/logo-dfg-viewer.png')" />
-                  </dv:ownerLogo>
-                  <dv:ownerSiteURL>http://www.thulb.uni-jena.de/</dv:ownerSiteURL>
-                  <dv:license>
+              <xsl:variable name="entity" select="document(concat('mcrobject:', $ownerEntityLinkId))" />
+              <!-- owner name -->
+              <dv:owner>Universitätsbibliothek Braunschweig</dv:owner>
+              <dv:ownerLogo>http://www.biblio.tu-bs.de/dfg/ub-logo-dfg.gif</dv:ownerLogo>
+              <dv:ownerSiteURL>http://www.biblio.tu-bs.de</dv:ownerSiteURL>
+              <dv:ownerContact/>
+              <dv:license>
+                <xsl:choose>
+                  <xsl:when test="$entity/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:accessCondition[@type='use and reproduction']">
+                    <xsl:variable name="licenseClass" select="'mir_licenses'" />
+                    <xsl:variable name="licenseId" select="substring-after($entity/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:accessCondition[@type='use and reproduction']/@xlink-href, '#')" />
+                    <xsl:value-of select="mcrxml:getDisplayName($licenseClass, $licenseId)" />
+                  </xsl:when>
+                  <xsl:otherwise>
                     <xsl:value-of select="$license" />
-                  </dv:license>
-                </xsl:otherwise>
-              </xsl:choose>
+                  </xsl:otherwise>
+                </xsl:choose>
+              </dv:license>
             </dv:rights>
           </mets:xmlData>
         </mets:mdWrap>
       </mets:rightsMD>
       <mets:digiprovMD>
         <xsl:attribute name="ID">
-            <xsl:value-of select="concat('digiprovMD',$sectionID)" />          
+            <xsl:value-of select="concat('digiprovMD',$sectionID)" />
           </xsl:attribute>
         <mets:mdWrap MIMETYPE="text/xml" MDTYPE="OTHER" OTHERMDTYPE="DVLINKS">
           <mets:xmlData>

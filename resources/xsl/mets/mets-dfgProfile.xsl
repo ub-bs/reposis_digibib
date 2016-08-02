@@ -3,9 +3,9 @@
                 xmlns:mods="http://www.loc.gov/mods/v3" xmlns:xalan="http://xml.apache.org/xalan"
                 xmlns:mcr="xalan://org.mycore.common.xml.MCRXMLFunctions"
                 exclude-result-prefixes="mcr" version="1.0">
-  <xsl:include href="metsmeta-dfg.xsl" />
   <xsl:include href="mets-iview.xsl" />
   <xsl:include href="mets-amd.xsl" />
+  <xsl:include href="mods2mods.xsl" />
 
   <xsl:output method="xml" encoding="utf-8" />
   <xsl:param name="MCR.Module-iview2.SupportedContentTypes" />
@@ -13,43 +13,25 @@
   <xsl:param name="WebApplicationBaseURL" />
   <xsl:param name="derivateID" />
   <xsl:param name="objectID" />
-  <xsl:param name="MCR.OPAC.CATALOG" />
-
-  <xsl:variable name="logoBaseUrl" select="'http://wrackdm17.thulb.uni-jena.de/logos/'" />
-
-  <xsl:variable name="ACTUAL.OPAC.CATALOG">
-    <xsl:choose>
-      <xsl:when test="not(MCR.OPAC.CATALOG)">
-        <xsl:value-of select="'http://gso.gbv.de/DB=2.1/'" />
-      </xsl:when>
-      <xsl:otherwise>
-        <xsl:value-of select="$MCR.OPAC.CATALOG" />
-      </xsl:otherwise>
-    </xsl:choose>
-  </xsl:variable>
 
   <xsl:variable name="sourcedoc" select="document(concat('mcrobject:',$objectID))" />
 
   <xsl:template match="/mycoreobject" priority="0" mode="metsmeta" xmlns:mods="http://www.loc.gov/mods/v3">
     <mets:mdWrap MDTYPE="MODS">
       <mets:xmlData>
-        <mods:mods>
-          <xsl:comment>
-            Fallback implementation.
-            Add a template in "metsmeta-dfg.xsl" matching the desired object type.
-          </xsl:comment>
-        </mods:mods>
+        <xsl:apply-templates mode="mods2mods" />
       </mets:xmlData>
     </mets:mdWrap>
   </xsl:template>
 
   <xsl:template match="mycoreobject" priority="0" mode="fallBackEntity"
-                xmlns:urmel="http://www.urmel-dl.de/ns/mods-entities">
-    <urmel:entity type="owner" xlink:type="extended" xlink:title="Thüringer Universitäts- und Landesbibliothek Jena">
-      <urmel:site xlink:type="locator" xlink:href="http://www.thulb.uni-jena.de" />
-      <urmel:logo xlink:type="resource" xlink:href="{$logoBaseUrl}thulb.svg" />
-      <urmel:full-logo xlink:type="resource" xlink:href="{$logoBaseUrl}thulb+text.svg" />
-    </urmel:entity>
+                xmlns:tubs="http://www.urmel-dl.de/ns/mods-entities">
+                <!-- TODO: add content of TU BS
+    <urmel:entity type="owner" xlink:type="extended" xlink:title="Technische Universität Braunschweig">
+      <urmel:site xlink:type="locator" xlink:href="http://www.tu-braunschweig.de/" />
+      <urmel:logo xlink:type="resource" xlink:href="http://reposis-test.gbv.de/digibib/images/siegel_rot.jpg" />
+      <urmel:full-logo xlink:type="resource" xlink:href="http://reposis-test.gbv.de/digibib/images/siegel_rot.jpg" />
+    </urmel:entity> -->
   </xsl:template>
 
   <xsl:template match="mycoreobject" priority="0" mode="ownerEntity">

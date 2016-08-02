@@ -202,7 +202,7 @@
 
       <mets:fptr FILEID="{concat('VIEWER_',$ncName)}" />
       <mets:fptr FILEID="{concat('IDENTIFIERS_',$ncName)}" />
-      
+
       <mets:fptr FILEID="{concat('DOWNLOAD_',$ncName)}" />
 
       <mets:fptr FILEID="{concat('MIN_NO_DFG_',$ncName)}" />
