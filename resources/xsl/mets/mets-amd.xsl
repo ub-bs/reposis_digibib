@@ -44,8 +44,7 @@
       </xsl:choose>
     </xsl:variable>
 
-    <xsl:variable name="derivateOwnerObj" select="document(concat('mcrobject:', $derivateOwnerId))" />
-    <xsl:variable name="ownerEntityLinkId" select="$derivateOwnerObj/mycoreobject/metadata/def.entitylink/entitylink[@type='corporation']/@xlink:href" />
+    <xsl:variable name="ownerEntityLinkId" select="document(concat('mcrobject:', $derivateOwnerId))" />
 
     <xsl:comment>
       Start amdSec - mets-amd.xsl
