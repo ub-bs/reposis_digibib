@@ -28,9 +28,15 @@ html body #page {
   padding-top: 0;
 }
 
-html body #page #main_content {
-  min-height: 500px;
+body {
+  color: #000000;
+  background-image: url("../images/background_neubau_1600x700.jpg");
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-color: #8EAACF;
 }
+
 
 body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'NexusSansPro-Regular'
@@ -82,11 +88,6 @@ html body header #header_box {
 
 section {
   padding: 2em 0;
-  background-image: url("../images/background_neubau_1600x700.jpg");
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  background-color: #8EAAD1;
 }
 footer {}
 .flatmir-footer {
@@ -98,7 +99,7 @@ footer {}
 
 html body #powered_by {
     padding: 0;
-    background-color: #444;
+    background-color: #FFF;
     padding: 2em 0 2em 0;
 }
 
@@ -163,17 +164,18 @@ html body #powered_by {
 }
 
 .flatmir-footer {
-    background-color: #fff;
-    color: #BE1D3C;
-    border-top: 1px solid #BE1D3C;
+  background-color: #fff;
+  color: #BE1D3C;
+  border-top: 1px solid #BE1D3C;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 160px;
 }
 
 .flatmir-footer a, #bs-bibliothek {
     color: #BE1D3C;
-}
-
-html body #powered_by {
-  border-top: 0px solid #BE1D3C;
+    font-weight: bold;
 }
 
 .classificationBrowser {
