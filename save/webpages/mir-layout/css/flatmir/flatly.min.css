@@ -12,3 +12,7 @@
 #mir-dfgViewer {
   margin-bottom: 20px;
 }
+
+nav ul.pull-right > li {
+  margin-left: 15px;
+}
