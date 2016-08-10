@@ -265,8 +265,3 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: center;
 }
-
-/* Sprachumschalter */
-.pull-right > li.dropdown {
-  margin-left: 15px;
-}
