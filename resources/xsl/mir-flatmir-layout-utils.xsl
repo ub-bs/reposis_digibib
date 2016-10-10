@@ -72,22 +72,24 @@
   <xsl:template name="mir.footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
           <ul class="internal_links nav navbar-nav">
             <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='below']/*" />
           </ul>
+        </div>
+        <div class="col-md-3">
+          <xsl:variable name="mcr_version" select="concat('MyCoRe ',mcrver:getCompleteVersion())" />
+          <div id="powered_by">
+            <a href="http://www.mycore.de">
+              <img src="{$WebApplicationBaseURL}mir-layout/images/mycore_logo_small_invert.png" title="{$mcr_version}" alt="powered by MyCoRe" />
+            </a>
+          </div>
         </div>
       </div>
     </div>
   </xsl:template>
 
   <xsl:template name="mir.powered_by">
-    <xsl:variable name="mcr_version" select="concat('MyCoRe ',mcrver:getCompleteVersion())" />
-    <div id="powered_by">
-      <a href="http://www.mycore.de">
-        <img src="{$WebApplicationBaseURL}mir-layout/images/mycore_logo_small_invert.png" title="{$mcr_version}" alt="powered by MyCoRe" />
-      </a>
-    </div>
   </xsl:template>
 
 </xsl:stylesheet>

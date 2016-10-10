@@ -15,22 +15,10 @@
   <menu id="below" dir="/content/below">
     <label xml:lang="de">Footer-Menü</label>
     <label xml:lang="en">Footer menu</label>
-    <item href="/content/below/about.xml" type="intern">
+    <!-- item href="/content/below/about.xml" type="intern">
       <label xml:lang="de">Über uns</label>
       <label xml:lang="en">About</label>
-    </item>
-    <item href="http://www.biblio.tu-bs.de/" type="extern">
-      <label xml:lang="de">UB Braunschweig</label>
-      <label xml:lang="en">UB Braunschweig</label>
-    </item>
-    <item href="http://www.tu-bs.de/" type="extern">
-      <label xml:lang="de">TU Braunschweig</label>
-      <label xml:lang="en">TU Braunschweig</label>
-    </item>
-    <item href="/content/below/help.xml" type="intern">
-      <label xml:lang="de">Hilfe</label>
-      <label xml:lang="en">Help</label>
-    </item>
+    </item -->
     <item href="/content/below/impressum.xml" type="intern">
       <label xml:lang="de">Impressum</label>
       <label xml:lang="en">Impressum</label>
