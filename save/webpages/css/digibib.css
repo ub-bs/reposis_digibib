@@ -269,3 +269,7 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: center;
 }
+
+.shariff .orientation-horizontal li {
+  min-width: 80px;
+}
