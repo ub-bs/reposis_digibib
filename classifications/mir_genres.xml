@@ -65,16 +65,6 @@
         <label xml:lang="en" text="Professional declaration" />
       </category>
     </category>
-    <category ID="in_house">
-      <label xml:lang="x-hosts" text="standalone" />
-      <label xml:lang="en" text="In house" />
-      <label xml:lang="de" text="Hausinterne Veröffentlichung" />
-      <category ID="press_release">
-        <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
-        <label xml:lang="de" text="Pressemitteilung" />
-        <label xml:lang="en" text="Press release" />
-      </category>
-    </category>
     <category ID="teaching_material">
       <label xml:lang="de" text="Lehrmaterial" />
       <label xml:lang="x-hosts" text="standalone lecture" />
