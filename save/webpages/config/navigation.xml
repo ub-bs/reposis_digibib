@@ -78,7 +78,11 @@
     </item>
     <item href="/content/collections/brunsvicensien/publications_bwg.xml" type="intern">
       <label xml:lang="de">Veröffentlichungen der BWG</label>
-      <label xml:lang="en">Publications</label>
+      <label xml:lang="en">BWG Publications</label>
+    </item>
+    <item href="/content/collections/publications_ivb.xml" type="intern">
+      <label xml:lang="de">Veröffentlichungendes Instituts für Verbrennungskraftmaschinen</label>
+      <label xml:lang="en">IVB Publications</label>
     </item>
     <!-- "category.top:DDC\:398" -->
     <item href="/servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished" type="intern">
