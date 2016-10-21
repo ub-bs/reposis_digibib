@@ -110,7 +110,8 @@
       <label xml:lang="en">Specialty and Rarities</label>
     </item>
   </menu>
-  <menu id="brunsvicensien" dir="/content/collections/brunsvicensien">
+  <menu id="brunsvicensien">
+    <label xml:lang="de">Brunsvicensien</label>
     <item href="/content/collections/brunsvicensien/adressbuecher.xml" type="intern">
       <label xml:lang="de">Braunschweigische Adreßbücher</label>
     </item>
