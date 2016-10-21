@@ -110,6 +110,29 @@
       <label xml:lang="en">Specialty and Rarities</label>
     </item>
   </menu>
+  <menu id="brunsvicensien" dir="/content/collections/brunsvicensien">
+    <item href="/content/collections/brunsvicensien/adressbuecher.xml" type="intern">
+      <label xml:lang="de">Braunschweigische Adreßbücher</label>
+    </item>
+    <item href="/content/collections/brunsvicensien/gelehrte-beytraege.xml" type="intern">
+      <label xml:lang="de">Gelehrte Beyträge</label>
+    </item>
+    <item href="/content/collections/brunsvicensien/jahrbuecher.xml" type="intern">
+      <label xml:lang="de">Jahrbücher des Braunschweigischen Geschichtsvereins</label>
+    </item>
+    <item href="/content/collections/brunsvicensien/matrikelbuecher" type="intern">
+      <label xml:lang="de">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</label>
+    </item>
+    <item href="/content/collections/brunsvicensien/ph.xml" type="intern">
+      <label xml:lang="de">Vorlesungsverzeichnisse der Pädagogischen Hochschule</label>
+    </item>
+    <item href="/content/collections/brunsvicensien/publications_bwg.xml" type="intern">
+      <label xml:lang="de">Die Braunschweigische Wissenschaftlichen Gesellschaft</label>
+    </item>
+    <item href="/content/collections/brunsvicensien/vorlesungsverzeichnisse.xml" type="intern">
+      <label xml:lang="de">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</label>
+    </item>
+  </menu>
   <menu id="publish" dir="/content/publish">
     <label xml:lang="de">Publizieren</label>
     <label xml:lang="en">Publish</label>

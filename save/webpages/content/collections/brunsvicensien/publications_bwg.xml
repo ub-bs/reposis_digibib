@@ -29,7 +29,7 @@
     </div>
     <div class="row">
       <div class="col-md-12">
-        <p><a href="../../../search/editor_form_search-bwg-publications.xml">Zur Suche in den Veröffentlichungen der BWG</a></p>
+        <p><a href="../../../servlets/solr/select?q=state%3Apublished+AND+topic%3A%22Jahrbuch+der+BWG%22&amp;wt=xml">Zur Suche in den Veröffentlichungen der BWG</a></p>
       </div>
     </div>
 
