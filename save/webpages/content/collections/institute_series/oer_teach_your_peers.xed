@@ -7,6 +7,10 @@
     <div class="row" id="digibib_typ">
       <div class="col-md-12">
         <p>
+          <a href="../../../servlets/solr/select?q=mods.title:%22Teach Your Peers%22 AND state:published&amp;wt=xml"
+          >Suche nach allen "Teach Your Peers"-Videos</a>
+        </p>
+        <p>
           Die grundlegende Idee von Teach Your Peers (TYP) greift das Prinzip der MOOCs
           auf, jedoch so, dass Studierende von ihrem Lehrstoff klar umgrenzte Themenpunkte
           eigenverantwortlich ausarbeiten und diese frei zugänglich von jedem - insbesondere
