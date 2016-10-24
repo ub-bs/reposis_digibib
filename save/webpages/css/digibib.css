@@ -265,9 +265,15 @@ html body #powered_by {
 }
 
 #digibib_rarities {
-  background-image:url('../images/spezial.jpg');
+/*  background-image:url('../images/spezial.jpg');*/
   background-repeat: no-repeat;
   background-position: center;
+}
+
+#digibib_typ {
+  background-image:url('../images/logo_typ.png');
+  background-repeat: no-repeat;
+  background-position: center right;
 }
 
 .shariff .orientation-horizontal li {

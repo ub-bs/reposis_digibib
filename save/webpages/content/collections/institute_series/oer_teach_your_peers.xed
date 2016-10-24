@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Teach Your Peers (TYP)">
+
+    <h2>Teach Your Peers (TYP)</h2>
+    <div class="row" id="digibib_typ">
+      <div class="col-md-12">
+        <p>
+          Die grundlegende Idee von Teach Your Peers (TYP) greift das Prinzip der MOOCs
+          auf, jedoch so, dass Studierende von ihrem Lehrstoff klar umgrenzte Themenpunkte
+          eigenverantwortlich ausarbeiten und diese frei zugänglich von jedem - insbesondere
+          aber von ihren KommilitonInnen (peers) - in einer Online-Datenbank abgerufen
+          werden können.
+        </p>
+        <p>
+          Ziel ist die Erstellung ca. 15-minütiger Online-Beiträge, die als Wissens-Rekapitulation,
+          Wissens-Vertiefung, Fortbildung oder Themen-Motivator eingesetzt werden können. Dabei
+          sollen verschiedene Medienformate wie Video- und Audioaufnahmen sowie Texte und Abbildungen
+          verwendet werden, die von den Studierenden selber angefertigt werden. Zusätzlich sollen
+          die Studierenden zu den einzelnen Themen Lernaufgaben erstellen, die anschließend im
+          Internet gelöst werden können. Alle Materialien in dieser Datenbank sollen die Bedingungen
+          von Open Educational Resources (OERs) erfüllen, also gemeinfrei sein und ohne Einschränkungen
+          von jedem genutzt und weiterverbreitet werden dürfen.
+        </p>
+        <h3>OER Teach Your Peers Videos:</h3>
+        <ul>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061654">Anleitung zum Erstellen eines TYP Videos - Sven Wargenau</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061668">Hedgehog-Signaltransduktion - Jasmin Großer</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061724">Unfolded Protein Response und Proteinaggregation. Mit Übungsfragen - Nils Birkholz</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061712">Reactive Oxygen Species - Leo Dunoyer</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061705">Proteindegradation - Proteinabbau durch das UPS und den Endosomalen-Lysosomalen Pathway - Sven Wargenau</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061698">Organelldegradation durch Autophagie - Jasper Liedtke</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061678">Mikroglia Aktivierung : Führung von Mikroglia Migration - Charlotte Tacke</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061676">Migration von Körnerzellen im Cerebellum - Julia Meersteiner</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061666">Calcium-Homöostase in Zellen - Andreas Schäfer</a>
+          </li>
+          <li>
+            <a href="../../../receive/dbbs_mods_00061656">Funktion, Phosphorylierung und Pathogenese von Tau - Inessa Wall</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+  <meta>
+    <log date="2016-10-24" time="13:15" labelPath=" » oer_teach_your_peers"
+      lastEditor="Kathleen Neumann" />
+  </meta>
+</MyCoReWebPage>

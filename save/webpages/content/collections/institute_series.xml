@@ -9,14 +9,13 @@
         <p>
           Hier finden Sie eine Übersicht über digitale Veröffentlichung von Instituten der TU Braunschweig.<br/>
           Wählen Sie einen der nachfolgenden Bereiche, um weitere Informationen zu erhalten!<br/>
-          (!)...Ansonsten ist das viel Platzhaltertext und sollte bald überarbeitet werden....(!)
         </p>
         <ul>
           <li>
-            <a href="ivb.xml">Veröffentlichungen</a> des Instituts für Verbrennungskraftmaschinen <a href="http://www.tu-braunschweig.de/ivb">(ivb)</a>
+            <a href="institute_series/publications_ivb.xml">Veröffentlichungen</a> des Instituts für Verbrennungskraftmaschinen <a href="http://www.tu-braunschweig.de/ivb">(ivb)</a>
           </li>
           <li>
-          <a href="../../search/editor_form_search-typ_videos.xml">OER Teach Your Peers (TYP) Videos</a>
+            <a href="institute_series/oer_teach_your_peers.xed">OER Teach Your Peers (TYP) Videos</a>
           </li>
         </ul>
       </div>
