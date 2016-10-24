@@ -3,11 +3,22 @@
 <MyCoReWebPage>
   <section xml:lang="de" title=" Veröffentlichungendes Instituts für Verbrennungskraftmaschinen">
 
-    <h2>Veröffentlichungendes Instituts für Verbrennungskraftmaschinen</h2>
-    <div class="row">
-      <div class="col-md-12">
+    <h2>Das Institut für Verbrennungskraftmaschinen an der TU Braunschweig (ivb)</h2>
+    <div class="row" id="digibib_ivb">
+      <div class="col-md-10">
         <p>
-          Diese Seite befindet sich im Aufbau!
+          Die Forschungsschwerpunkte des <a href="http://www.tu-braunschweig.de/ivb">Instituts für
+          Verbrennungskraftmaschinen (ivb)</a> sind die
+          thermodynamische Entwicklung und Erforschung von Brennverfahren mit konventionellen und
+          alternativen Kraftstoffen, von Gaswechselorganen, von Aufladeaggregaten und der
+          Abgasnachbehandlung. Weiterhin werden sowohl Motor-/Fahrzeug-Gesamtsysteme zur Optimierung
+          des thermischen Fahrzeugmanagements, als auch Betriebsstrategien für Hybridfahrzeuge mit
+          dem Ziel der Emissions- und Verbrauchssenkung untersucht. Das Institut betreibt verschiedene
+          Motorenprüfstände, die zur Durchführung von Forschungsarbeiten und studentischen Arbeiten dienen.
+        </p>
+        <p>
+          <a href="../../../servlets/solr/select?q=mods.title:%22Berichte aus dem ivb%22 AND state:published&amp;wt=xml"
+          >Zur Suche in den Berichten aus dem ivb</a>
         </p>
       </div>
     </div>

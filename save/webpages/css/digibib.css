@@ -276,6 +276,12 @@ html body #powered_by {
   background-position: bottom right;
 }
 
+#digibib_ivb {
+  background-image:url('../images/ivb.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+}
+
 .shariff .orientation-horizontal li {
   min-width: 80px;
 }
