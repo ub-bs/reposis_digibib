@@ -273,7 +273,7 @@ html body #powered_by {
 #digibib_typ {
   background-image:url('../images/logo_typ.png');
   background-repeat: no-repeat;
-  background-position: center right;
+  background-position: bottom right;
 }
 
 .shariff .orientation-horizontal li {

@@ -5,7 +5,7 @@
 
     <h2>Teach Your Peers (TYP)</h2>
     <div class="row" id="digibib_typ">
-      <div class="col-md-12">
+      <div class="col-md-10">
         <p>
           <a href="../../../servlets/solr/select?q=mods.title:%22Teach Your Peers%22 AND state:published&amp;wt=xml"
           >Suche nach allen "Teach Your Peers"-Videos</a>
@@ -28,7 +28,7 @@
           von jedem genutzt und weiterverbreitet werden dürfen.
         </p>
         <h3>OER Teach Your Peers Videos:</h3>
-        <ul>
+        <ul class="col-md-10">
           <li>
             <a href="../../../receive/dbbs_mods_00061654">Anleitung zum Erstellen eines TYP Videos - Sven Wargenau</a>
           </li>
