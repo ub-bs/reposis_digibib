@@ -25,14 +25,10 @@
   </xed:template>
 
   <xed:template id="thesis.author.repeated">
-    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='aut']" />
-    <mir:person.extended.repeated>
-      <option value="aut">
-        * <xed:output i18n="mir.role.author" />
-      </option>
-    </mir:person.extended.repeated>
+    <mir:role.extended.repeated role="aut" label="mir.role.author" class="required" required="true" help-text="{i18n:mir.help.role.author}" />
   </xed:template>
 
+  <!-- copied from mir -> show two instead of one input fields -->
   <xed:template id="abstract.repeated">
     <fieldset>
       <legend class="mir-fieldset-legend">
