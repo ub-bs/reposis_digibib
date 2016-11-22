@@ -1,4 +1,4 @@
-Sitemap: http://www.digibib.tu-bs.de/sitemap_google.xml
+Sitemap: http://publikationsserver.tu-braunschweig.de/sitemap_google.xml
 User-agent: *
 Allow: /servlets/MCRFileNodeServlet/
 Disallow: /*?
