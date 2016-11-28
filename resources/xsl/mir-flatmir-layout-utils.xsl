@@ -48,7 +48,7 @@
           </button>
           <div id="project_logo_box">
             <a class="navbar-brand hidden-xs" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.jpg" alt="Technische Universität Braunschweig" /></a>
-            <a class="navbar-brand visible-xs-*" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot_small.jpg" alt="Technische Universität Braunschweig" /></a>
+            <a class="navbar-brand visible-xs-block" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot_small.jpg" alt="Technische Universität Braunschweig" /></a>
           </div>
         </div>
 
@@ -73,12 +73,12 @@
   <xsl:template name="mir.footer">
     <div class="container">
       <div class="row">
-        <div class="col-md-9">
+        <div class="col-xs-6 col-sm-9">
           <ul class="internal_links nav navbar-nav">
             <xsl:apply-templates select="$loaded_navigation_xml/menu[@id='below']/*" />
           </ul>
         </div>
-        <div class="col-md-3">
+        <div class="col-xs-6 col-sm-3">
           <xsl:variable name="mcr_version" select="concat('MyCoRe ',mcrver:getCompleteVersion())" />
           <div id="powered_by">
             <a href="http://www.mycore.de">
