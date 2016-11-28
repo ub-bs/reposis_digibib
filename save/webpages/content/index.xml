@@ -9,8 +9,10 @@
                 Der Publikationsserver der TU&#160;Braunschweig<sup>BETA</sup>
               </h1>
               <form action="../servlets/solr/find?q={0}" class="form-inline" role="search" style="margin-top:30px;">
-                <input name="q" placeholder="Suche in 14.000 Dokumenten" class="form-control search-query" id="bs-searchInput" type="text" style="width:80%;" />
-                <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                <div class="input-group" style="width: 100%;">
+                  <input name="q" placeholder="Suche in 14.000 Dokumenten" class="form-control search-query" id="bs-searchInput" type="text" />
+                  <div class="input-group-btn"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
+                </div>
               </form>
             </div>
           </div>
