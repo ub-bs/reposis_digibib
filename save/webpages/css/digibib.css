@@ -121,6 +121,13 @@ html body #powered_by {
   min-height: 30px;
 }
 
+#options_nav_box {
+  text-align: right;
+}
+#options_nav_box ul > li {
+  margin-left: 15px;
+}
+
 .mir-main-nav {
     box-shadow: unset;
 }
@@ -325,6 +332,9 @@ html body #powered_by {
 
 /* responsive grid ***************************************************/
 @media (max-width: 767px) {
+  #options_nav_box {
+    width: 200px;
+  }
   .jumbotwo h1 {
     font-size: 26px;
   }
