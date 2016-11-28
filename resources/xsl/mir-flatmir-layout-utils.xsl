@@ -62,6 +62,10 @@
           </ul>
         </nav>
 
+        <div id="digibib_feedback">
+          <a href="mailto:digibib@tu-braunschweig.de">Feedback</a>
+        </div>
+
       </div><!-- /container -->
     </div>
   </xsl:template>

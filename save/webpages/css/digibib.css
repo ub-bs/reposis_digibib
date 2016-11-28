@@ -291,6 +291,37 @@ html body #powered_by {
   min-width: 80px;
 }
 
+#digibib_feedback {
+  cursor: pointer;
+  position: fixed;
+  bottom: 20%;
+  right: -24px;
+  transform: rotate(-90deg);
+  display: block;
+  background: #a9072f;
+  padding: 8px 0px;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: solid 1px #a9072f;
+  border-left: solid 0px #a9072f;
+  border-right: solid 1px #a9072f;
+  z-index: 999;
+  width: 80px;
+  text-align: center;
+}
+#digibib_feedback:hover {
+    background: #00709b;
+    border-bottom: solid 1px #00709b;
+    border-left: solid 0px #00709b;
+    border-right: solid 1px #00709b;
+}
+#digibib_feedback a {
+  color: #fff;
+}
+
+
 
 /* responsive grid ***************************************************/
 @media (max-width: 767px) {
