@@ -97,12 +97,12 @@
 
   <xsl:template name="mir.powered_by">
     <xsl:if test="//site/@ID">
-    <div class="alert alert-warning alert-dismissible text-center"
-         role="alert"
-         style="position: fixed; bottom: 0; left: 0; width: 100%; margin-bottom: 0; border-radius: 0; z-index: 1000;">
+    <div id="digibib_alert"
+         class="alert alert-warning alert-dismissible text-center"
+         role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
       Dieses Dokument wurde migriert. Falls Sie Probleme mit der Anzeige des Dokumentes haben, können Sie das Dokument auf dem
-      <a href="http://digisrv-1.biblio.etc.tu-bs.de/?docid={//site/@ID}" class="alert-link">alten Publikationsserver der
+      <a href="http://digisrv-1.biblio.etc.tu-bs.de:8080/docportal/receive/DocPortal_document_{substring-after(//site/@ID,'dbbs_mods_')}" class="alert-link">alten Publikationsserver der
       TU Braunschweig</a> ansehen.</div>
     </xsl:if>
   </xsl:template>
