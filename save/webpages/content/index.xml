@@ -16,7 +16,7 @@
           </div>
         </div>
 
-        <script type="text/javascript" src="http://opensource.teamdf.com/number/jquery.number.js"></script>
+        <script type="text/javascript" src="../js/jquery.number.js"></script>
         <script>
             $.ajax({
             type: "GET",
