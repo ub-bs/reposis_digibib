@@ -23,12 +23,13 @@
         </xsl:if>
 
         <nav>
-          <ul class="nav navbar-nav pull-right">
+          <ul class="nav navbar-nav navbar-right">
             <xsl:call-template name="mir.loginMenu" />
             <xsl:call-template name="mir.languageMenu" />
           </ul>
         </nav>
-        <a href="http://www.biblio.tu-bs.de/" id="bs-bibliothek">Universitätsbibliothek&#160;Braunschweig</a>
+        <br />
+        <a href="http://www.biblio.tu-bs.de/" id="bs-bibliothek">Universitätsbibliothek Braunschweig</a>
       </div>
     </div>
 
