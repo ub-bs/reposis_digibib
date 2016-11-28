@@ -240,6 +240,13 @@ html body #powered_by {
   background-position: top right;
 }
 
+#digibib_childrensbooks {
+  background-image:url('../images/kinderbuch.jpg');
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  min-height: 450px;
+}
+
 #digibib_pharmacy {
   background-image:url('../images/pharmazie.png');
   background-repeat: no-repeat;
