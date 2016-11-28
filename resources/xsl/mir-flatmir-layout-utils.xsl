@@ -49,7 +49,7 @@
           </button>
           <div id="project_logo_box">
             <a class="navbar-brand hidden-xs" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.jpg" alt="Technische Universität Braunschweig" /></a>
-            <a class="navbar-brand visible-xs-block" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot_small.jpg" alt="Technische Universität Braunschweig" /></a>
+            <!-- a class="navbar-brand visible-xs-block" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot_small.jpg" alt="Technische Universität Braunschweig" /></a -->
           </div>
         </div>
 
