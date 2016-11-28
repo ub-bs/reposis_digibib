@@ -234,7 +234,7 @@ html body #powered_by {
   background-position: top right;
 }
 
-#digibib_picturebooks {
+#digibib_picturebooks, #digibib_childrensbooks {
   background-image:url('../images/kinderbuch.jpg');
   background-repeat: no-repeat;
   background-position: top right;
