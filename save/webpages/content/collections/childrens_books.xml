@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE MyCoReWebPage>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Historische Kinderbücher">
+
+    <h2>Historische Kinderbücher</h2>
+    <div class="row" id="digibib_childrensbooks">
+      <div class="col-md-12">
+        <p>
+          Die Kinder- und Jugendbuchsammlung der Universitätsbibliothek Braunschweig entstand nach dem 2. Weltkrieg an der damaligen Kant-Hochschule (seit 1947 Pädagogische Hochschule) in Braunschweig.
+          Der bedeutendste Teil der Buchsammlung, der während des Krieges aus Berlin nach Braunschweig ausgelagert war, stammt von dem westfälischen Sammler Karl Hobrecker und seiner Frau Margarete.
+          Mit der Vereinigung der Bibliotheken von Technischer Universität und Pädagogischer Hochschule im Jahr 1971 ging die Sammlung in den Besitz der Universitätsbibliothek Braunschweig über.
+          Durch Schenkungen (u.a. Margret und Rolf Rettich und Barbara Bartos-Höppner) umfasst die Sammlung heute über 20.000 Bände.
+        </p>
+        <ul>
+          <li>
+            <a href="../../servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished">Gesamtübersicht der digitalisierten historischen Kinderbücher</a>
+          </li>
+          <li>
+            <a href="http://www.allegro-c.de/db/a30/hob.htm">Katalog der Kinderbuchsammlung</a>
+          </li>
+          <li>
+            <a href="videos_picture_books.xml">Ziehbilderbücher : Videos</a>
+          </li>
+          <li>
+            <a href="http://www.biblio.tu-bs.de/kinderbuch.html">Weitere Informationen zur Kinderbuchsammlung</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </section>
+  <meta>
+    <log date="2016-11-28" time="08:41" labelPath=" » Sammlungen"
+      lastEditor="Kathleen Neumann" />
+  </meta>
+</MyCoReWebPage>

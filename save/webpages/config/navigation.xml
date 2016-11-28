@@ -80,14 +80,9 @@
       <label xml:lang="de">Veröffentlichungen der BWG</label>
       <label xml:lang="en">BWG Publications</label>
     </item>
-    <!-- "category.top:DDC\:398" -->
-    <item href="/servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished" type="intern">
+    <item href="/content/collections/childrens_books.xml" type="intern">
       <label xml:lang="de">Historische Kinderbücher</label>
       <label xml:lang="en">Historical Children's Books</label>
-    </item>
-    <item href="/content/collections/videos_picture_books.xml" type="intern">
-      <label xml:lang="de">Videos von Ziehbilderbüchern</label>
-      <label xml:lang="en">Videos of picture books</label>
     </item>
     <item href="/content/collections/pharmacy.xml" type="intern">
       <label xml:lang="de">Pharmazie</label>
@@ -108,6 +103,13 @@
     <item href="/content/collections/specialty_rarities.xml" type="intern">
       <label xml:lang="de">Spezialgebiete und Raritäten</label>
       <label xml:lang="en">Specialty and Rarities</label>
+    </item>
+  </menu>
+  <menu id="children">
+    <label xml:lang="de">Kinderbücher</label>
+    <item href="/content/collections/videos_picture_books.xml" type="intern">
+      <label xml:lang="de">Videos von Ziehbilderbüchern</label>
+      <label xml:lang="en">Videos of picture books</label>
     </item>
   </menu>
   <menu id="brunsvicensien">
