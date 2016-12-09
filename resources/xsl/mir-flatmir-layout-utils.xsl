@@ -97,13 +97,18 @@
 
   <xsl:template name="mir.powered_by">
     <xsl:if test="//site/@ID">
-    <div id="digibib_alert"
-         class="alert alert-warning alert-dismissible text-center"
-         role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-      Dieses Dokument wurde migriert. Falls Sie Probleme mit der Anzeige des Dokumentes haben, können Sie das Dokument auf dem
-      <a href="http://digisrv-1.biblio.etc.tu-bs.de:8080/docportal/receive/DocPortal_document_{substring-after(//site/@ID,'dbbs_mods_')}" class="alert-link">alten Publikationsserver der
-      TU Braunschweig</a> ansehen.</div>
+      <xsl:variable name="dateCreated" xmlns:encoder="xalan://java.net.URLEncoder"
+                  select="document(concat('solr:q=',encoder:encode(concat('id:', //site/@ID, '&amp;fl=created' ))))" />
+      <xsl:if test="substring-before($dateCreated//date[@name='created'],'T') &lt; '2016-12-08'">
+        <div id="digibib_alert"
+             class="alert alert-warning alert-dismissible text-center"
+             role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+          Dieses Dokument wurde migriert. Falls Sie Probleme mit der Anzeige des Dokumentes haben, können Sie das Dokument auf dem
+          <a href="http://digisrv-1.biblio.etc.tu-bs.de:8080/docportal/receive/DocPortal_document_{substring-after(//site/@ID,'dbbs_mods_')}" class="alert-link">alten Publikationsserver der
+          TU Braunschweig</a> ansehen.
+        </div>
+      </xsl:if>
     </xsl:if>
   </xsl:template>
 
