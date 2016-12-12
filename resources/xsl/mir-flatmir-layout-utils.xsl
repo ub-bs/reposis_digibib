@@ -5,6 +5,9 @@
     exclude-result-prefixes="mcrver">
 
   <xsl:import href="resource:xsl/layout/mir-common-layout.xsl" />
+  <xsl:param name="piwikID" select="'0'" />
+  <xsl:param name="DIGIBIB.StartDate" select="'20161101'" />
+
   <xsl:template name="mir.navigation">
 
     <div id="header_box" class="clearfix container">
@@ -98,8 +101,9 @@
   <xsl:template name="mir.powered_by">
     <xsl:if test="//site/@ID">
       <xsl:variable name="dateCreated" xmlns:encoder="xalan://java.net.URLEncoder"
-                  select="document(concat('solr:q=',encoder:encode(concat('id:', //site/@ID, '&amp;fl=created' ))))" />
-      <xsl:if test="substring-before($dateCreated//date[@name='created'],'T') &lt; '2016-12-08'">
+                  select="document(concat('solr:q=',encoder:encode(concat('id:', //site/@ID)), '&amp;fl=created'))" />
+      <xsl:variable name="dateCreatedInt" select="translate(substring-before($dateCreated//date[@name='created'],'T'), '-', '')" />
+      <xsl:if test="$dateCreatedInt &lt; $DIGIBIB.StartDate">
         <div id="digibib_alert"
              class="alert alert-warning alert-dismissible text-center"
              role="alert">
