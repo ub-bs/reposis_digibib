@@ -119,12 +119,11 @@
         </legend>
 
             <div class="form-group">
-              <label class="col-md-4 control-label required" for="title_de">
+              <label class="col-md-4 control-label" for="title_de">
                 Titel (deutsch):
               </label>
               <div class="col-md-6">
-                <input name="title_de" class="form-control input-md" type="text" required="required" />
-                <div class="help-block with-errors">Bitte geben Sie den Titel der Publikation an</div>
+                <input name="title_de" class="form-control input-md" type="text" />
               </div>
             </div>
 
