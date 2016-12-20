@@ -262,13 +262,13 @@ html body #powered_by {
 }
 
 #digibib_botanic {
-  background-image:url('../images/salamander.jpg');
+  background-image:url('../images/salamander.png');
   background-repeat: no-repeat;
   background-position: center right;
 }
 
 #digibib_imagecollection {
-  background-image:url('../images/iris.jpg');
+  background-image:url('../images/iris.png');
   background-repeat: no-repeat;
   background-position: center right;
 }
@@ -280,7 +280,7 @@ html body #powered_by {
 }
 
 #digibib_rarities {
-/*  background-image:url('../images/spezial.jpg');*/
+/*  background-image:url('../images/spezial.png');*/
   background-repeat: no-repeat;
   background-position: center;
 }
