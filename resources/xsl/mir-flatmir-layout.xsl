@@ -106,6 +106,22 @@
         <script type="text/javascript" src="{$WebApplicationBaseURL}assets/bootstrap/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="{$WebApplicationBaseURL}assets/jquery/plugins/jquery-confirm/jquery.confirm.min.js"></script>
         <script type="text/javascript" src="{$WebApplicationBaseURL}js/mir/base.js"></script>
+
+        <!-- only on startpage -->
+        <xsl:if test="//div/@class='jumbotwo'">
+        <script type="text/javascript" src="../js/jquery.number.js"></script>
+        <script>
+            $.ajax({
+            type: "GET",
+            url: "../api/v1/search?q=objectType:mods AND state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
+            dataType: "jsonp",
+            success: function (data) {
+            $('#bs-searchInput').attr('placeholder', 'Suche in ' + $.number(data.response.numFound,0, ',', '.') + ' Dokumenten');
+            },
+            });
+        </script>
+        </xsl:if>
+
         <script>
           $( document ).ready(function() {
             $('.overtext').tooltip();
