@@ -22,6 +22,10 @@ html body {
   margin-bottom: 90px; /* Margin bottom by footer height */
 }
 
+legend {
+  color: #000000;
+}
+
 body.mir-start_page #page {
   background-color: transparent;
 }
