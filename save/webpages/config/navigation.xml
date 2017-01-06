@@ -141,7 +141,7 @@
     <item href="/content/collections/institute_series/publications_ivb.xml" type="intern">
       <label xml:lang="de">Veröffentlichungen des Instituts für Verbrennungskraftmaschinen</label>
     </item>
-    <item href="/content/collections/institute_series/oer_teach_your_peers.xed" type="intern">
+    <item href="/content/collections/institute_series/oer_teach_your_peers.xml" type="intern">
       <label xml:lang="de">OER Teach Your Peers (TYP) Videos</label>
     </item>
   </menu>
