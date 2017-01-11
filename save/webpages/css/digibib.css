@@ -79,9 +79,39 @@ html body header #header_box {
     float: right;
     margin: 0 0 0 0;
 }
+
+
+/* ****************** searchfield_box ******************* */
 .searchfield_box {
-    display: none;
+  position: absolute;
+  right: 0;
+  top: 52px;
 }
+
+.searchfield_box .btn-primary {
+  color: #fff;
+  background-color: none;
+  border-width: 0px;
+  margin: 4px 0 0 5px;
+  padding:0;
+}
+
+.searchfield_box .form-control,
+.searchfield_box input {
+  border-width: 0px;
+  border-radius: 0px;
+}
+
+html body header #searchInput {
+  padding: 0px 15px;
+  margin-top: 6px;
+}
+
+#searchInput .from-control {
+  background-color: #015f83;
+}
+
+/* ***************** searchfield_box END ****************** */
 
 #project_logo_box {
     position: absolute;

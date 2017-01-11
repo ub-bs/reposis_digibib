@@ -17,10 +17,10 @@
         <xsl:if test="not(//div/@class='jumbotwo')">
           <div class="searchfield_box">
             <form action="{$WebApplicationBaseURL}servlets/solr/find?q={0}" class="navbar-form navbar-left pull-right" role="search">
-              <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
               <div class="form-group">
                 <input name="q" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
               </div>
+              <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
             </form>
           </div>
         </xsl:if>
