@@ -51,61 +51,26 @@
             <div class="col-md-6">
               <select name="faculty" class="form-control">
                 <option value=""> (bitte wählen) </option>
-                <option title="aktuelle Fakultäten" value="Faculty_c_">aktuelle Fakultäten</option>
-                <option title="TU-Braunschweig" value="TUBS">&#160;&#160;&#160;TU-Braunschweig
+                <option title="TU-Braunschweig" value="TUBS">TU-Braunschweig</option>
+                <option title="01 - Carl-Friedrich Gauß-Fakultät" value="01 - Carl-Friedrich Gauß-Fakultät">
+                    01 - Carl-Friedrich Gauß-Fakultät
                 </option>
-                <option title="01 - Carl-Friedrich Gauß-Fakultät" value="Faculty_c_01">&#160;&#160;&#160;01
-                  - Carl-Friedrich Gauß-Fakultät
+                <option title="02 - Lebenswissenschaften" value="02 - Lebenswissenschaften">
+                    02 - Lebenswissenschaften
                 </option>
-                <option title="02 - Lebenswissenschaften" value="Faculty_c_02">&#160;&#160;&#160;02
-                  - Lebenswissenschaften
+                <option title="03 - Architektur, Bauingenieurwesen und Umweltwissenschaften" value="03 - Architektur, Bauingenieurwesen und Umweltwissenschaften">
+                    03 - Architektur, Bauingenieurwesen und Umweltwissenschaften
                 </option>
-                <option title="03 - Architektur, Bauingenieurwesen und Umweltwissenschaften"
-                  value="Faculty_c_03">&#160;&#160;&#160;03
-                  - Architektur, Bauingenieurwesen und Umweltwissenschaften
+                <option title="04 - Maschinenbau" value="04 - Maschinenbau">
+                    04 - Maschinenbau
                 </option>
-                <option title="04 - Maschinenbau" value="Faculty_c_04">&#160;&#160;&#160;04
-                  - Maschinenbau
+                <option title="05 - Elektrotechnik, Informationstechnik, Physik" value="05 - Elektrotechnik, Informationstechnik, Physik">
+                    05 - Elektrotechnik, Informationstechnik, Physik
                 </option>
-                <option title="05 - Elektrotechnik, Informationstechnik, Physik"
-                  value="Faculty_c_05">&#160;&#160;&#160;05
-                  - Elektrotechnik, Informationstechnik, Physik
+                <option title="06 - Geistes- und Erziehungswissenschaften" value="06 - Geistes- und Erziehungswissenschaften">
+                    06 - Geistes- und Erziehungswissenschaften
                 </option>
-                <option title="06 - Geistes- und Erziehungswissenschaften"
-                  value="Faculty_c_06">&#160;&#160;&#160;06
-                  - Geistes- und Erziehungswissenschaften
-                </option>
-                <option title="April 2006 - März 2007" value="Faculty_b_">April 2006 - März
-                  2007</option>
-                <option title="01 - Mathematik und Informatik" value="Faculty_b_01">&#160;&#160;&#160;01
-                  - Mathematik und Informatik
-                </option>
-                <option title="02 - Lebenswissenschaften" value="Faculty_b_02">&#160;&#160;&#160;02
-                  - Lebenswissenschaften
-                </option>
-                <option title="03 - Architektur, Bauingenieurwesen, Umweltwissenschaften"
-                  value="Faculty_b_03">&#160;&#160;&#160;03
-                  - Architektur, Bauingenieurwesen, Umweltwissenschaften
-                </option>
-                <option title="04 - Maschinenbau" value="Faculty_b_04">&#160;&#160;&#160;04
-                  - Maschinenbau
-                </option>
-                <option title="05 - Elektrotechnik und Informationstechnik"
-                  value="Faculty_b_05">&#160;&#160;&#160;05
-                  - Elektrotechnik und Informationstechnik
-                </option>
-                <option title="06 - Geistes- und Erziehungswissenschaften"
-                  value="Faculty_b_06">&#160;&#160;&#160;06
-                  - Geistes- und Erziehungswissenschaften
-                </option>
-                <option title="07 - Physik und Geowissenschaften" value="Faculty_b_07">&#160;&#160;&#160;07
-                  - Physik und Geowissenschaften
-                </option>
-                <option title="08 - Wirtschafts- und Sozialwissenschaften"
-                  value="Faculty_b_08">&#160;&#160;&#160;08
-                  - Wirtschafts- und Sozialwissenschaften
-                </option>
-                <option title="Sonstige / Keine" value="Other">Sonstige / Keine</option>
+                <option title="Sonstige / Keine" value="Sonstige / Keine">Sonstige / Keine</option>
               </select>
             </div>
           </div>
