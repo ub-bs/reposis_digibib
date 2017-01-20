@@ -60,7 +60,6 @@
         <xed:output i18n="digibib.class.location" />
       </label>
       <xed:bind xpath="mods:classification[@authorityURI='http://www.digibib.tu-bs.de/locations']/@valueURIxEditor" initially="">
-        <xed:bind xpath="@displayLabel" initially="location" />
         <div class="col-md-6">
           <div class="controls">
             <select class="form-control form-control-inline">
@@ -80,7 +79,6 @@
         <xed:output i18n="digibib.class.sponsors" />
       </label>
       <xed:bind xpath="mods:classification[@authorityURI='http://www.digibib.tu-bs.de/sponsors']/@valueURIxEditor" initially="">
-        <xed:bind xpath="@displayLabel" initially="sponsors" />
         <div class="col-md-6">
           <div class="controls">
             <select class="form-control form-control-inline">
