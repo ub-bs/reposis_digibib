@@ -54,7 +54,7 @@
         <div class="col-md-12">
           <p>
             <strong>Braunschweigisches Adreßbuch (1805 - ...)</strong><br />
-            Die Jahrgänge 1806, 1816, 1819, 1827, 1831, 1859 und 1862 sind nicht erschienen.
+            Die Jahrgänge 1806, 1816, 1819, 1827, 1831, 1859, 1862 und 1943 - 1949 sind nicht erschienen.
           </p>
           <p>
             Jahr(e):
@@ -260,17 +260,12 @@
             </tr>
             <tr>
               <td><a href="../../../receive/dbbs_mods_00062974">1941</a></td>
-              <td colspan="3"><a href="../../../receive/dbbs_mods_00062906">1942</a></td>
-            </tr>
-            <tr>
-              <td colspan="4">
-                Die Jahrgänge 1943 - 1949 sind nicht erschienen.
-              </td>
-            </tr>
-            <tr>
+              <td><a href="../../../receive/dbbs_mods_00062906">1942</a></td>
               <td><a href="../../../receive/dbbs_mods_00063715">1950 (Band 129)</a></td>
               <td><a href="../../../receive/dbbs_mods_00063710">1952 (Band 130)</a></td>
-              <td colspan="2">1955/56 (Band 131)</td>
+            </tr>
+            <tr>
+              <td colspan="4">1955/56 (Band 131)</td>
             </tr>
           </table>
         </div>
