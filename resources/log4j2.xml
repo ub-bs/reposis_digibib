@@ -29,7 +29,7 @@
   <loggers>
     <root level="info">
       <appender-ref ref="RollingFile" />
-      <appender-ref ref="SMTPAppender" level="error" />
+      <!-- appender-ref ref="SMTPAppender" level="error" / -->
     </root>
     <logger name="org.hibernate" level="error" />
     <logger name="org.mycore.frontend.editor.validation" level="info" />
