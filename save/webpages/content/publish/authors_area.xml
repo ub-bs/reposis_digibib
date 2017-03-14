@@ -1,76 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Hinweise für Autoren">
+<MyCoReWebPage><section xml:lang="de" title="Hinweise für Autoren"><div>
+<h2>Hinweise für Autoren</h2>
 
-    <h2>Hinweise für Autoren</h2>
-    <div class="row">
-      <div class="col-md-12">
-        <p>
-          E-Publikationen können von <em>Wissenschaftlerinnen und Wissenschaftlern
-          der TU Braunschweig</em> (auch Gastwissenschaftlern) kostenlos veröffentlicht werden.
-        </p>
-        <p>
-          Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum
-          Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des Urheberrechts veröffentlicht.
-        </p>
-        <p>
-          Bitte beachten Sie unsere Hinweise ...
-        </p>
-        <ul>
-          <li><a href="guidelines.xml">zu den Leitlinien</a></li>
-          <li><a href="copyright.xml">zum Urheberrecht</a></li>
-          <li><a href="contract.xml">zu den Vertragsbedingungen</a></li>
-        </ul>
-        <p>
-          Wir benötigen von Ihnen eine <em>schriftliche Einwilligung</em>, damit Ihre Publikation über die Digitale
-          Bibliothek Braunschweig veröffentlicht und im Internet zur Verfügung gestellt werden kann.
-        </p>
-        <p>
-          Bitte drucken Sie für eine Publikation folgendes <a href="digi_form.pdf">Formular 1 (PDF)</a> oder für mehrere
-          Publikationen folgendes <a href="digi_form_2.pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:
-        </p>
-        <address>
-          Universitätsbibliothek <br/>
-          Digitale Bibliothek Braunschweig <br/>
-          Pockelsstraße 13 <br/>
-          38106 Braunschweig <br/><br/>
-          Fax: 0531 391 5836
-        </address>
-        <p>
-          Um ein Dokument an die UB zu übermitteln steht Ihnen unser <a href="../../editor/submit_request.xed">Web-Formular</a>
-          zur Verfügung.
-        </p>
-        <p>
-          Alternativ können Sie uns Ihre Publikation, so wie Sie sie veröffentlicht haben wollen,
-          per <a href="mailto:digibib@tu-braunschweig.de">E-Mail</a> an digibib@tu-bs.de (bis 50MB) oder
-          auf einem geeigneten Datenträger zusenden. <br/>
-          Die Freischaltung der Publikation dauert ca. 1 Woche.
-        </p>
-        <p>
-          Hilfestellung bei der Publikation, zum Beispiel der Aufbereitung
-          Ihrer Dokumente im PDF-Format, erhalten Sie bei:
-        </p>
-        <address>
-          Frau Blanck, Herr Kissler, Herr Peters<br/>
-          E-Mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a><br/>
-          Telefon: 0531 391-5052
-        </address>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <p>
-          <strong>Dissertationen:</strong>
-          <br />
-          Ausführliche Hinweise zur elektronischen Veröffentlichung
-          von Dissertationen finden Sie auf den Webseiten der
-          <a href="http://www.biblio.tu-bs.de/dissertation/diss.html">Dissertationsstelle</a>.
-        </p>
-      </div>
-    </div>
-  </section>
-  <meta>
-    <log lastEditor="administrator" date="2016-05-19" time="13:07" />
-  </meta>
-</MyCoReWebPage>
+<div class="row">
+<div class="col-md-12">
+<p>E-Publikationen können von <em>Wissenschaftlerinnen und Wissenschaftlern der TU Braunschweig</em> (auch Gastwissenschaftlern) kostenlos veröffentlicht werden.</p>
+
+<p>Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des Urheberrechts veröffentlicht.</p>
+
+<p>Bitte beachten Sie unsere Hinweise ...</p>
+
+<ul>
+	<li><a href="guidelines.xml">zu den Leitlinien</a></li>
+	<li><a href="copyright.xml">zum Urheberrecht</a></li>
+	<li><a href="contract.xml">zu den Vertragsbedingungen</a></li>
+</ul>
+
+<p>Wir benötigen von Ihnen eine <em>schriftliche Einwilligung</em>, damit Ihre Publikation über die Digitale Bibliothek Braunschweig veröffentlicht und im Internet zur Verfügung gestellt werden kann.</p>
+
+<p>Bitte beachten Sie, daß <strong>veröffentlichte Dokumente nicht mehr entfernt oder ausgetauscht werden</strong> können. Überarbeitete Versionen bekommen einen neuen Datensatz.</p>
+
+<p>Bitte drucken Sie für eine Publikation folgendes <a href="digi_form.pdf">Formular 1 (PDF)</a> oder für mehrere Publikationen folgendes <a href="digi_form_2.pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:</p>
+
+<address>Universitätsbibliothek<br />
+Digitale Bibliothek Braunschweig<br />
+Pockelsstraße 13<br />
+38106 Braunschweig<br />
+<br />
+Fax: 0531 391 5836</address>
+
+<p>Um ein Dokument an die UB zu übermitteln steht Ihnen unser <a href="../../editor/submit_request.xed">Web-Formular</a> zur Verfügung.</p>
+
+<p>Alternativ können Sie uns Ihre Publikation, so wie Sie sie veröffentlicht haben wollen, per <a href="mailto:digibib@tu-braunschweig.de">E-Mail</a> an digibib@tu-bs.de (bis 50MB) oder auf einem geeigneten Datenträger zusenden.<br />
+Die Freischaltung der Publikation dauert ca. 1 Woche.</p>
+
+<p>Hilfestellung bei der Publikation, zum Beispiel der Aufbereitung Ihrer Dokumente im PDF-Format, erhalten Sie bei:</p>
+
+<address>Frau Blanck, Herr Kissler, Herr Peters<br />
+E-Mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a><br />
+Telefon: 0531 391-5052</address>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<p><strong>Dissertationen:</strong><br />
+Ausführliche Hinweise zur elektronischen Veröffentlichung von Dissertationen finden Sie auf den Webseiten der <a href="http://www.biblio.tu-bs.de/dissertation/diss.html">Dissertationsstelle</a>.</p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2017-03-07" time="10:44" /></meta></MyCoReWebPage>

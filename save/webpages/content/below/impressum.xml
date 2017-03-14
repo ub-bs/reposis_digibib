@@ -1,47 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Impressum">
-  <div>
-    <h2>Impressum</h2>
-    <p>
-      Die nachstehenden Informationen enthalten die gesetzlich vorgesehenen Pflichtangaben zur
-      Anbieterkennzeichnung, sowie wichtige rechtliche Hinweise zur Internetpräsenz der
-      Universitätsbibliothek Braunschweig.
-    </p>
+<MyCoReWebPage><section xml:lang="de" title="Impressum"><div>
+<h2>Impressum</h2>
 
-    <h3>Anbieter</h3>
-    <p>
-      Anbieter dieser Internetpräsenz ist im Rechtssinne die Universitätsbibliothek Braunschweig.<br /><br />
+<p>Die nachstehenden Informationen enthalten die gesetzlich vorgesehenen Pflichtangaben zur Anbieterkennzeichnung, sowie wichtige rechtliche Hinweise zur Internetpräsenz der Universitätsbibliothek Braunschweig.</p>
 
-      Universitätsbibliothek Braunschweig<br />
-      Pockelsstr. 13<br />
-      38106 Braunschweig<br />
-      Tel.: +49(0)531/391-5011<br />
-      http://www.biblio.tu-bs.de<br />
-      E-Mail: ub@tu-bs.de
-    </p>
+<h3>Anbieter</h3>
 
-    <h3>Vertreter</h3>
-    <p>
-      Die Universitätsbibliothek Braunschweig wird gesetzlich vertreten durch ihre Direktorin / ihren Direktor.
-    </p>
+<p>Anbieter dieser Internetpräsenz ist im Rechtssinne die Universitätsbibliothek Braunschweig.<br />
+<br />
+Universitätsbibliothek Braunschweig<br />
+Universitätsplatz 1<br />
+38106 Braunschweig<br />
+Tel.: +49 (0)531 / 391-5011<br />
+http://www.ub.tu-braunschweig.de<br />
+E-Mail: ub@tu-bs.de</p>
 
-    <h3>Redaktionsverantwortlicher</h3>
-    <p>
-      Redaktionsverantwortlicher für die Internetpräsenz der Universitätsbibliothek Braunschweig ist:<br /><br />
+<h3>Vertreter</h3>
 
-      Dipl. Ing. Matthias Evers<br />
-      Universitätsbibliothek Braunschweig<br />
-      Pockelsstr. 13<br />
-      38106 Braunschweig<br />
-      Tel.: +49(0)531/391-5011<br />
-      E-Mail: ub@tu-bs.de
-    </p>
+<p>Die Universitätsbibliothek Braunschweig wird gesetzlich vertreten durch ihre Direktorin / ihren Direktor.</p>
 
-  </div>
-  </section>
-  <meta>
-    <log date="2016-03-29" time="11:14" labelPath=" » Kontakt" lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<h3>Redaktionsverantwortlicher</h3>
+
+<p>Redaktionsverantwortlicher für die Internetpräsenz der Universitätsbibliothek Braunschweig ist:<br />
+<br />
+Dipl. Ing. Matthias Evers<br />
+Universitätsbibliothek Braunschweig<br />
+Universitätsplatz 1<br />
+38106 Braunschweig<br />
+Tel.: +49 (0)531 / 391-5011<br />
+E-Mail: ub@tu-bs.de</p>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2017-03-13" time="16:10" /></meta></MyCoReWebPage>
