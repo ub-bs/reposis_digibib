@@ -109,30 +109,22 @@
               </label>
               <div class="col-md-6">
                 <select name="license" class="form-control" required="required">
-                  <option value=""> (bitte wählen)
-                  </option>
-                  <option title="Alle Rechte vorbehalten" value="rights_reserved">Alle Rechte
-                    vorbehalten</option>
-                  <option title="Creative Commons 4.0 International Lizenzen"
-                    value="cc_4.0">Creative Commons 4.0 International Lizenzen</option>
-                  <option title="CC BY 4.0" value="cc_by_4.0">&#160;&#160;&#160;CC
-                    BY 4.0
-                  </option>
-                  <option title="CC BY-NC 4.0" value="cc_by-nc_4.0">&#160;&#160;&#160;CC
-                    BY-NC 4.0
-                  </option>
-                  <option title="CC BY-NC-ND 4.0" value="cc_by-nc-nd_4.0">&#160;&#160;&#160;CC
-                    BY-NC-ND 4.0
-                  </option>
-                  <option title="CC BY-NC-SA 4.0" value="cc_by-nc-sa_4.0">&#160;&#160;&#160;CC
-                    BY-NC-SA 4.0
-                  </option>
-                  <option title="CC BY-ND 4.0" value="cc_by-nd_4.0">&#160;&#160;&#160;CC
-                    BY-ND 4.0
-                  </option>
-                  <option title="CC BY-SA 4.0" value="cc_by-sa_4.0">&#160;&#160;&#160;CC
-                    BY-SA 4.0
-                  </option>
+                  <option value=""> (bitte wählen) </option>
+                  <option title="Alle Rechte vorbehalten" value="rights_reserved">Alle Rechte vorbehalten</option>
+                  <optgroup label="Creative Commons 4.0 International Lizenzen" title="Creative Commons 4.0 International Lizenzen" value="cc_4.0">
+                    <option title="CC BY 4.0" value="cc_by_4.0">&#160;&#160;&#160;CC BY 4.0
+                    </option>
+                    <option title="CC BY-NC 4.0" value="cc_by-nc_4.0">&#160;&#160;&#160;CC BY-NC 4.0
+                    </option>
+                    <option title="CC BY-NC-ND 4.0" value="cc_by-nc-nd_4.0">&#160;&#160;&#160;CC BY-NC-ND 4.0
+                    </option>
+                    <option title="CC BY-NC-SA 4.0" value="cc_by-nc-sa_4.0">&#160;&#160;&#160;CC BY-NC-SA 4.0
+                    </option>
+                    <option title="CC BY-ND 4.0" value="cc_by-nd_4.0">&#160;&#160;&#160;CC BY-ND 4.0
+                    </option>
+                    <option title="CC BY-SA 4.0" value="cc_by-sa_4.0">&#160;&#160;&#160;CC BY-SA 4.0
+                    </option>
+                  </optgroup>
                   <option title="Open-Access im Zuge einer Allianz- bzw. Nationallizenz"
                     value="oa_nlz">Open-Access im Zuge einer Allianz- bzw. Nationallizenz</option>
                 </select>
