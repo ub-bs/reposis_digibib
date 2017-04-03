@@ -5,7 +5,7 @@
 <div class="row" id="digibib_brunsvicensien">
 <div class="col-md-6">
 <ul>
-	<li>Brunsvicensien der <a href="http://www.tu-bs.de">Universität Braunschweig</a><br />
+	<li>Brunsvicensien der <a href="http://www.tu-bs.de">Universitätsbibliothek Braunschweig</a><br />
 	 </li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=f13dedfd-0/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig%22">Alle Titel</a></li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+collegium+carolinum+technischen+universit%C3%A4t">Vom Collegium Carolinum bis zur Technischen Universität </a>
@@ -14,7 +14,12 @@
 		<li><a href="brunsvicensien/matrikelbuecher.xml">Matrikelbücher (1745 - 1942)</a></li>
 	</ul>
 	</li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=b3509fa5-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+universit%C3%A4tsbibliothek+braunschweig%22">Universitätsbibliothek Braunschweig </a></li>
+	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=b3509fa5-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+universit%C3%A4tsbibliothek+braunschweig%22">Universitätsbibliothek Braunschweig </a>
+	<ul>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/get/64095">Veröffentlichungen der Universitätsbibliothek und des<br />
+		Universitätsarchivs Braunschweig</a></li>
+	</ul>
+	</li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=effe92d7-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+stadt+braunschweig">Stadt Braunschweig</a></li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+braunschweiger+Land">Land Braunschweig</a> (Region, Umland ...)</li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+herzogtum+braunschweig">Herzogtum Braunschweig</a></li>
@@ -79,4 +84,4 @@
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-03-03" time="15:09" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2017-03-23" time="11:51" /></meta></MyCoReWebPage>
