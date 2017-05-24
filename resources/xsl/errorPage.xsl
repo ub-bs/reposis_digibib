@@ -24,7 +24,7 @@
               <p>Die von Ihnen angefordete Seite konnte leider nicht gefunden werden. Eventuell
               haben Sie ein altes Lesezeichen oder einen veralteten Link benutzt. Bitte versuchen
               Sie mithilfe der <a href="/index.html">Suche</a> die gewünschte Seite zu finden oder
-              schreiben Sie eine Mail an <span class="madress">dms-list [at] lists.gbv.de</span> und
+              schreiben Sie eine Mail an <span class="madress">digibib [at] tu-braunschweig.de</span> und
               schildern kurz wie es zu diesem Fehler kam.
               <br/><br/>
               Vielen Dank!</p>
@@ -34,7 +34,7 @@
               <p>Sie haben keine Berechtigung diese Seite zu sehen. Melden Sie sich bitte am System an.
               Sollten Sie trotz Anmeldung nicht die nötigen Rechte haben um diese Seite zu sehen, wenden
               Sie sich ggf. an Ihren Administrator oder
-              schreiben Sie eine Mail an <span class="madress">dms-list [at] lists.gbv.de</span>.
+              schreiben Sie eine Mail an <span class="madress">digibib [at] tu-braunschweig.de</span>.
               <br/><br/>
               Vielen Dank!</p>
           </xsl:when>
