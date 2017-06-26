@@ -32,7 +32,7 @@
           </ul>
         </nav>
         <br />
-        <a href="http://www.biblio.tu-bs.de/" id="bs-bibliothek">Universitätsbibliothek Braunschweig</a>
+        <a href="https://ub.tu-braunschweig.de/" id="bs-bibliothek">Universitätsbibliothek Braunschweig</a>
       </div>
     </div>
 

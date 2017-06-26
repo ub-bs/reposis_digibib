@@ -102,6 +102,7 @@ html body header #header_box {
   border-width: 0px;
   border-radius: 0px;
   background-color: #01597b;
+  color: white;
 }
 
 html body header #searchInput {
