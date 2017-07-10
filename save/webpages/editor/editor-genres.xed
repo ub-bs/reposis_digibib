@@ -39,6 +39,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="identifier.isbn" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="doi.handle.urn.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="shelfmark" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="embargo.datetimepicker" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
@@ -97,6 +98,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="advisor.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="date.accepted.datetimepicker" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="embargo.datetimepicker" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="comment" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="year.issued" />
@@ -152,6 +154,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="advisor.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="embargo.datetimepicker" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
 
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="comment" />
   </xed:template>
@@ -169,6 +172,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="language.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
   </xed:template>
@@ -185,6 +189,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="doi.handle.urn.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
@@ -221,6 +226,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="doi.handle.urn.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
@@ -238,6 +244,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="doi.handle.urn.repeated" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
@@ -258,6 +265,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="doi.handle.urn.repeated" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
@@ -277,6 +285,7 @@
     </xed:if>
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="comment" />
@@ -303,6 +312,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="language.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
@@ -322,10 +332,10 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="related.item.link" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="copyrightMD" />
-    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="physical.description.note" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="embargo.datetimepicker" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
   </xed:template>
 
   <xed:template id="lecture">
@@ -335,6 +345,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="language.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="comment" />
@@ -353,6 +364,7 @@
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="ddc.repeat" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="subject.simple" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="extent" />
+    <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="abstract.repeated" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
     <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />

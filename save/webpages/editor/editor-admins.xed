@@ -34,7 +34,7 @@
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="shelfmark" />
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="link.repeated" />
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="embargo.datetimepicker" />
-        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="access" />
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes-digibib.xed" ref="access" />
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="rights" />
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="copyrightMD" />
         <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
