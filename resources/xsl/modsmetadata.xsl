@@ -3,10 +3,10 @@
   xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation" xmlns:mcrmods="xalan://org.mycore.mods.classification.MCRMODSClassificationSupport"
   xmlns:acl="xalan://org.mycore.access.MCRAccessManager" xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions" xmlns:mcr="http://www.mycore.org/"
   xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:mods="http://www.loc.gov/mods/v3" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-  xmlns:ns1="http://rdfs.org/ns/void#"
-  exclude-result-prefixes="xalan xlink mcr mcrxsl i18n acl mods mcrmods rdf ns1"
+  exclude-result-prefixes="xalan xlink mcr mcrxsl i18n acl mods mcrmods rdf"
   version="1.0">
   <xsl:param name="MCR.Handle.Resolver.MasterURL" />
+  <xsl:param name="MCR.DOI.Resolver.MasterURL" />
   <xsl:param name="MCR.Mods.SherpaRomeo.ApiKey" select="''" />
   <xsl:param name="ServletsBaseURL" />
   <xsl:param name="wcms.useTargets" select="'no'" /><!-- TODO: refacture! -->
@@ -56,11 +56,22 @@
               <xsl:call-template name="lf2br">
                 <xsl:with-param name="string" select="normalize-space(.)" />
               </xsl:call-template>
+              <xsl:if test="@authority='gnd' and @valueURI">
+                <xsl:apply-templates select="." mode="gnd"/>
+              </xsl:if>
             </xsl:if>
           </xsl:for-each>
         </td>
       </tr>
     </xsl:if>
+  </xsl:template>
+
+  <xsl:template match="mods:topic[@authority='gnd']" mode="gnd">
+    <a href="{@valueURI}" title="Link zu GND"><sup>GND</sup></a>
+  </xsl:template>
+
+  <xsl:template match="mods:geographic[@authority='gnd']" mode="gnd">
+    <a href="{@valueURI}" title="Link zu GND"><sup>GND</sup></a>
   </xsl:template>
 
   <xsl:template match="mods:dateCreated|mods:dateOther|mods:dateIssued|mods:dateCaptured|mods:dateModified" mode="present">
@@ -494,7 +505,7 @@
           <xsl:variable name="classlink" select="mcrmods:getClassCategParentLink(.)" />
           <xsl:choose>
             <xsl:when test="string-length($classlink) &gt; 0">
-              <xsl:for-each select="document($classlink)/mycoreclass//category[not(label/@xml:lang='x-hide')]">
+              <xsl:for-each select="document($classlink)/mycoreclass//category[position()=1 or position()=last()][not(label/@xml:lang='x-hide')]">
                 <xsl:if test="position() > 1">
                   <xsl:value-of select="', '" />
                 </xsl:if>
@@ -698,15 +709,15 @@
       <td class="metavalue">
         <xsl:variable name="link" select="." />
         <xsl:choose>
-          <xsl:when test="contains(.,'ppn') or contains(.,'PPN')">
+          <xsl:when test="contains($link,'ppn') or contains($link,'PPN')">
             <a>
               <xsl:attribute name="href">
                 <xsl:choose>
-                  <xsl:when test="contains(., 'PPN=')">
+                  <xsl:when test="contains($link, 'PPN=')">
                     <xsl:value-of select="$link" />
                   </xsl:when>
                   <xsl:otherwise>
-                    <xsl:variable name="uriResolved" select="document(concat($link,'?format=xml'))/rdf:RDF/rdf:Description/ns1:page/@rdf:resource" />
+                    <xsl:variable xmlns:foaf="http://xmlns.com/foaf/0.1/" name="uriResolved" select="document(mcrxsl:normalizeAbsoluteURL(concat($link,'?format=xml')))//rdf:Description[@rdf:about=normalize-space($link)]/foaf:page/@rdf:resource" />
                     <xsl:choose>
                       <xsl:when test="string-length($uriResolved) &gt; 0"><xsl:value-of select="$uriResolved" /></xsl:when>
                       <xsl:otherwise><xsl:value-of select="$link" /></xsl:otherwise>
@@ -715,13 +726,13 @@
                 </xsl:choose>
               </xsl:attribute>
               <xsl:choose>
-                <xsl:when test="contains(., 'PPN=')"><xsl:value-of select="substring-after($link, 'PPN=')" /></xsl:when>
+                <xsl:when test="contains($link, 'PPN=')"><xsl:value-of select="substring-after($link, 'PPN=')" /></xsl:when>
                 <xsl:otherwise><xsl:value-of select="substring-after($link, ':ppn:')"/></xsl:otherwise>
               </xsl:choose>
             </a>
           </xsl:when>
           <xsl:when test="@type='doi' and not(contains($link,'http'))">
-            <a href="http://dx.doi.org/{$link}">
+            <a href="{$MCR.DOI.Resolver.MasterURL}{$link}">
               <xsl:value-of select="$link" />
             </a>
           </xsl:when>
@@ -890,6 +901,22 @@
         </xsl:otherwise>
       </xsl:choose>
       <xsl:text disable-output-escaping="yes">&lt;br /></xsl:text>
+      <xsl:variable name="dateIssued">
+        <xsl:choose>
+          <xsl:when test="../../mods:originInfo[@eventType='publication']/mods:dateIssued">
+            <xsl:apply-templates select="../../mods:originInfo[@eventType='publication']/mods:dateIssued" mode="formatDate"/>
+          </xsl:when>
+          <xsl:when test="../mods:originInfo[@eventType='publication']/mods:dateIssued">
+            <xsl:apply-templates select="../mods:originInfo[@eventType='publication']/mods:dateIssued" mode="formatDate"/>
+          </xsl:when>
+          <xsl:when test="mods:originInfo[@eventType='publication']/mods:dateIssued">
+            <xsl:apply-templates select="mods:originInfo[@eventType='publication']/mods:dateIssued" mode="formatDate"/>
+          </xsl:when>
+          <xsl:when test="mods:part/mods:date">
+            <xsl:apply-templates select="mods:part/mods:date" mode="formatDate"/>
+          </xsl:when>
+        </xsl:choose>
+      </xsl:variable>
       <!-- Volume -->
       <xsl:if test="mods:part/mods:detail[@type='volume']/mods:number">
         <xsl:value-of
@@ -903,18 +930,13 @@
         <xsl:value-of
           select="concat('H. ',mods:part/mods:detail[@type='issue']/mods:number)" />
       </xsl:if>
-      <xsl:if test="mods:part/mods:detail[@type='issue']/mods:number and (mods:part/mods:date or mods:originInfo[@eventType='publication']/mods:dateIssued)">
+      <xsl:if test="mods:part/mods:detail[@type='issue']/mods:number and string-length($dateIssued) &gt; 0">
         <xsl:text> </xsl:text>
       </xsl:if>
-      <xsl:if test="mods:part/mods:date or mods:originInfo[@eventType='publication']/mods:dateIssued">
-        <xsl:choose>
-          <xsl:when test="mods:part/mods:date"><xsl:value-of select="concat(' (',mods:part/mods:date,')')" /></xsl:when>
-          <xsl:otherwise>
+      <xsl:if test="string-length($dateIssued) &gt; 0">
             <xsl:text>(</xsl:text>
-            <xsl:apply-templates select="mods:originInfo[@eventType='publication']/mods:dateIssued" mode="formatDate" />
+        <xsl:value-of select="$dateIssued" />
             <xsl:text>)</xsl:text>
-          </xsl:otherwise>
-        </xsl:choose>
       </xsl:if>
       <!-- Pages -->
       <xsl:if test="mods:part/mods:extent[@unit='pages']">
