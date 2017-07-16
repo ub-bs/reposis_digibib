@@ -1,50 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Die Braunschweigische Wissenschaftlichen Gesellschaft (BWG)">
+<MyCoReWebPage><section xml:lang="de" title="Die Braunschweigische Wissenschaftlichen Gesellschaft (BWG)"><div>
+<h2>Die Braunschweigische Wissenschaftlichen Gesellschaft (BWG)</h2>
 
-    <h2>Die Braunschweigische Wissenschaftlichen Gesellschaft (BWG)</h2>
-    <div class="row" id="digibib_bwg">
-      <div class="col-md-10">
-        <p>
-          Die <a href="http://www.bwg-nds.de">Braunschweigische Wissenschaftliche Gesellschaft (BWG)</a> ist eine Körperschaft des öffentlichen Rechts des
-          Landes Niedersachsen.<br />
-          Sie hat die Aufgabe, durch eigene Tätigkeit und in Zusammenarbeit mit anderen wissenschaftlichen Institutionen des In- und Auslandes
-          die Wissenschaften, insbesondere das Zusammenwirken von Naturwissenschaften, Technischen Wissenschaften und Geisteswissenschaften, zu fördern.
-        </p>
-        <p>
-          Die BWG ist nach Struktur und Zielsetzung eine den Akademien der Wissenschaften analoge Institution, deren 145 ordentliche Mitglieder
-          ihre wissenschaftliche Heimat vorrangig in den technisch ausgerichteten Universitäten des Dreiecks Braunschweig - Hannover - Clausthal haben.
-          Damit sind auch die ingenieurwissenschaftlichen Disziplinen ein Schwerpunkt im ansonsten breit angelegten natur- und geisteswissenschaftlichen
-          Spektrum der BWG.
-        </p>
-        <p>
-          Sie verleiht in der Regel alljährlich die <a href="http://bwg-nds.de/gau%C3%9F-medaille/">Carl Friedrich Gauß-Medaille</a> an wissenschaftlich
-          besonders verdiente Gelehrte des In- und Auslandes.<br />
-          Die Ergebnisse ihrer Tätigkeit finden ihren Niederschlag in den Publikationen der Gesellschaft.<br/>
-          Durch Symposien und Vorträge wird darüber hinaus eine wichtige Verknüpfung mit der Öffentlichkeit hergestellt, um die Ergebnisse der Wissenschaft
-          in die gesellschaftliche Diskussion einzubringen.
-          </p>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-md-12">
-        <p><a href="../../../servlets/solr/select?q=state%3Apublished+AND+topic%3A%22Jahrbuch+der+BWG%22&amp;wt=xml">Zur Suche in den Veröffentlichungen der BWG</a></p>
-      </div>
-    </div>
+<div class="row" id="digibib_bwg">
+<div class="col-md-10">
+<ul>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64801">Die Jahrbücher der Braunschweigischen Wissenschaftlichen Gesellschaft ab dem Jahr 1983</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64802">Abhandlungen der Braunschweigischen Wissenschaftlichen Gesellschaft ab dem Jahr 1949</a></li>
+    <li><a href="http://publikationsserver.tu-braunschweig.de/get/64907">Akademie-Vorlesungen im Schloss</a></li>
+	<li><a href="../../../servlets/solr/select?q=state%3Apublished+AND+topic%3A%22Jahrbuch+der+BWG%22&amp;wt=xml">Zur Suche in den Veröffentlichungen der BWG</a></li>
+</ul>
 
-    <div class="row">
-      <div class="col-md-12">
-        <hr />
-        <p>
-          <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
-        </p>
-        </div>
-    </div>
+<p> </p>
 
-  </section>
-  <meta>
-    <log date="2016-05-09" time="13:47" labelPath=" » BWG"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<p>Die <a href="http://www.bwg-nds.de">Braunschweigische Wissenschaftliche Gesellschaft (BWG)</a> ist eine Körperschaft des öffentlichen Rechts des Landes Niedersachsen.<br />
+Sie hat die Aufgabe, durch eigene Tätigkeit und in Zusammenarbeit mit anderen wissenschaftlichen Institutionen des In- und Auslandes die Wissenschaften, insbesondere das Zusammenwirken von Naturwissenschaften, Technischen Wissenschaften und Geisteswissenschaften, zu fördern.</p>
+
+<p>Die BWG ist nach Struktur und Zielsetzung eine den Akademien der Wissenschaften analoge Institution, deren 145 ordentliche Mitglieder ihre wissenschaftliche Heimat vorrangig in den technisch ausgerichteten Universitäten des Dreiecks Braunschweig - Hannover - Clausthal haben. Damit sind auch die ingenieurwissenschaftlichen Disziplinen ein Schwerpunkt im ansonsten breit angelegten natur- und geisteswissenschaftlichen Spektrum der BWG.</p>
+
+<p>Sie verleiht in der Regel alljährlich die <a href="http://bwg-nds.de/gau%C3%9F-medaille/">Carl Friedrich Gauß-Medaille</a> an wissenschaftlich besonders verdiente Gelehrte des In- und Auslandes.<br />
+Die Ergebnisse ihrer Tätigkeit finden ihren Niederschlag in den Publikationen der Gesellschaft.<br />
+Durch Symposien und Vorträge wird darüber hinaus eine wichtige Verknüpfung mit der Öffentlichkeit hergestellt, um die Ergebnisse der Wissenschaft in die gesellschaftliche Diskussion einzubringen.</p>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<hr />
+<p><a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2017-07-13" time="09:59" /></meta></MyCoReWebPage>

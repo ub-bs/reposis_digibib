@@ -1,543 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig">
+<MyCoReWebPage><section xml:lang="de" title="Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig"><div>
+<h2>Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</h2>
 
-    <h2>Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</h2>
-    <div class="row" id="digibib_vorlesung">
-      <div class="col-md-12">
-        <p>
-          Die ersten Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig
-          erschienen unter dem Titel <i>Anzeige der Vorlesungen und Uebungen, welche in dem Collegio Carolino zu
-          Braunschweig zum Theil bereits ihren Anfang genommen haben, zum Theil aber und vornehmlich von Michaelis
-          1745 bis Ostern 1746 werden angestellet werden</i>.
-        </p>
-        <p>
-          Nach der Umwandlung des Collegium Carolinum zur Herzoglich Polytechnischen Schule erschienen
-          die Vorlesungsverzeichnisse vom Wintersemester 1872/73 bis zum Sommersemester 1878 unter dem Titel
-          <i>Programm der Herzogl. Polytechnischen Schule, des Collegium Carolinum zu Braunschweig</i>.
-        </p>
-        <p>
-          Anschließend wurden die Vorlesungen bis zum Sommersemester 1935 unter dem Titel
-          <i>Programm. Technische Hochschule Carolo-Wilhelmina zu Braunschweig</i> angekündigt.
-        </p>
-        <p>
-          Ab dem Wintersemester 1935/36 bis zum Sommersemester 1968 war ihr Titel
-          <i>Personal- und Vorlesungsverzeichnis. Technische Hochschule Carolo-Wilhelmina zu Braunschweig</i>.
-        </p>
-        <p>
-          Seit dem Sommersemester 2008 steht das <i>Vorlesungsverzeichnis. Technische Universität Braunschweig</i>
-          nur noch in elektronischer Form zur Verfügung.
-        </p>
-      </div>
-    </div>
+<div class="row" id="digibib_vorlesung">
+<div class="col-md-12">
+<p>Die ersten Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig erschienen unter dem Titel <i>Anzeige der Vorlesungen und Uebungen, welche in dem Collegio Carolino zu Braunschweig zum Theil bereits ihren Anfang genommen haben, zum Theil aber und vornehmlich von Michaelis 1745 bis Ostern 1746 werden angestellet werden</i>.</p>
 
+<p>Nach der Umwandlung des Collegium Carolinum zur Herzoglich Polytechnischen Schule erschienen die Vorlesungsverzeichnisse vom Wintersemester 1872/73 bis zum Sommersemester 1878 unter dem Titel <i>Programm der Herzogl. Polytechnischen Schule, des Collegium Carolinum zu Braunschweig</i>.</p>
 
-<!-- ************************************* 1745 - 1872 ******************************************** -->
-    <div class="row">
-      <div class="col-md-6">
-        <p>
-          <strong>Anzeige der Vorlesungen und Übungen in dem Fürstlichen Collegio Carolino zu Braunschweig 1745 - 1872</strong>
-        </p>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control bs_select">
-          <option value="" selected="">WiSe 1745/46 bis SoSe 1872</option>
-          <option value="../../../receive/dbbs_mods_00039152">WiSe 1745/46</option>
-          <option value="../../../receive/dbbs_mods_00039157">SoSe 1746</option>
-          <option value="../../../receive/dbbs_mods_00039163">WiSe 1746/47</option>
-          <option value="../../../receive/dbbs_mods_00039165">SoSe 1747</option>
-          <option value="../../../receive/dbbs_mods_00039169">WiSe 1747/48</option>
-          <option value="../../../receive/dbbs_mods_00039172">SoSe 1748</option>
-          <option value="../../../receive/dbbs_mods_00039177">SoSe 1749</option>
-          <option value="../../../receive/dbbs_mods_00039179">SoSe 1750</option>
-          <option value="../../../receive/dbbs_mods_00039183">WiSe 1750/51</option>
-          <option value="../../../receive/dbbs_mods_00039185">SoSe 1754</option>
-          <option value="../../../receive/dbbs_mods_00039187">SoSe 1756</option>
-          <option value="../../../receive/dbbs_mods_00039192">WiSe 1756/57</option>
-          <option value="../../../receive/dbbs_mods_00039194">SoSe 1757</option>
-          <option value="../../../receive/dbbs_mods_00039198">WiSe 1757/58</option>
-          <option value="../../../receive/dbbs_mods_00039200">SoSe 1758</option>
-          <option value="../../../receive/dbbs_mods_00039204">WiSe 1758/59</option>
-          <option value="../../../receive/dbbs_mods_00039206">SoSe 1759</option>
-          <option value="../../../receive/dbbs_mods_00039210">WiSe 1759/60</option>
-          <option value="../../../receive/dbbs_mods_00039212">SoSe 1760</option>
-          <option value="../../../receive/dbbs_mods_00039216">WiSe 1760/61</option>
-          <option value="../../../receive/dbbs_mods_00039218">SoSe 1761</option>
-          <option value="../../../receive/dbbs_mods_00039222">WiSe 1761/62</option>
-          <option value="../../../receive/dbbs_mods_00039224">SoSe 1762</option>
-          <option value="../../../receive/dbbs_mods_00039228">WiSe 1762/63</option>
-          <option value="../../../receive/dbbs_mods_00039230">SoSe 1763</option>
-          <option value="../../../receive/dbbs_mods_00039235">WiSe 1763/64</option>
-          <option value="../../../receive/dbbs_mods_00039237">SoSe 1764</option>
-          <option value="../../../receive/dbbs_mods_00039241">WiSe 1764/65</option>
-          <option value="../../../receive/dbbs_mods_00039243">SoSe 1765</option>
-          <option value="../../../receive/dbbs_mods_00039247">WiSe 1765/66</option>
-          <option value="../../../receive/dbbs_mods_00039249">SoSe 1766</option>
-          <option value="../../../receive/dbbs_mods_00039261">WiSe 1766/67</option>
-          <option value="../../../receive/dbbs_mods_00039263">SoSe 1767</option>
-          <option value="../../../receive/dbbs_mods_00039275">WiSe 1767/68</option>
-          <option value="../../../receive/dbbs_mods_00039277">SoSe 1768</option>
-          <option value="../../../receive/dbbs_mods_00039286">WiSe 1768/69</option>
-          <option value="../../../receive/dbbs_mods_00039288">SoSe 1769</option>
-          <option value="../../../receive/dbbs_mods_00039292">WiSe 1769/70</option>
-          <option value="../../../receive/dbbs_mods_00039294">SoSe 1770</option>
-          <option value="../../../receive/dbbs_mods_00039419">WiSe 1770/71</option>
-          <option value="../../../receive/dbbs_mods_00039423">SoSe 1771</option>
-          <option value="../../../receive/dbbs_mods_00039430">WiSe 1771/72</option>
-          <option value="../../../receive/dbbs_mods_00039434">SoSe 1772</option>
-          <option value="../../../receive/dbbs_mods_00039440">WiSe 1772/73</option>
-          <option value="../../../receive/dbbs_mods_00039442">SoSe 1773</option>
-          <option value="../../../receive/dbbs_mods_00039446">WiSe 1773/74</option>
-          <option value="../../../receive/dbbs_mods_00039448">SoSe 1774</option>
-          <option value="../../../receive/dbbs_mods_00039455">SoSe 1775</option>
-          <option value="../../../receive/dbbs_mods_00039456">SoSe 1776</option>
-          <option value="../../../receive/dbbs_mods_00039460">WiSe 1776/77</option>
-          <option value="../../../receive/dbbs_mods_00039466">SoSe 1777</option>
-          <option value="../../../receive/dbbs_mods_00039470">WiSe 1777/78</option>
-          <option value="../../../receive/dbbs_mods_00039472">SoSe 1778</option>
-          <option value="../../../receive/dbbs_mods_00039490">WiSe 1778/79</option>
-          <option value="../../../receive/dbbs_mods_00039492">SoSe 1779</option>
-          <option value="../../../receive/dbbs_mods_00039496">WiSe 1779/80</option>
-          <option value="../../../receive/dbbs_mods_00039498">SoSe 1780</option>
-          <option value="../../../receive/dbbs_mods_00039502">WiSe 1780/81</option>
-          <option value="../../../receive/dbbs_mods_00039504">SoSe 1781</option>
-          <option value="../../../receive/dbbs_mods_00039508">WiSe 1781/82</option>
-          <option value="../../../receive/dbbs_mods_00039510">SoSe 1782</option>
-          <option value="../../../receive/dbbs_mods_00039512">WiSe 1782/83</option>
-          <option value="../../../receive/dbbs_mods_00039514">SoSe 1783</option>
-          <option value="../../../receive/dbbs_mods_00039525">SoSe 1784</option>
-          <option value="../../../receive/dbbs_mods_00039523">WiSe 1784/85</option>
-          <option value="../../../receive/dbbs_mods_00039529">SoSe 1785</option>
-          <option value="../../../receive/dbbs_mods_00039513">WiSe 1785/86</option>
-          <option value="../../../receive/dbbs_mods_00039534">SoSe 1786</option>
-          <option value="../../../receive/dbbs_mods_00039538">WiSe 1786/87</option>
-          <option value="../../../receive/dbbs_mods_00039540">SoSe 1787</option>
-          <option value="../../../receive/dbbs_mods_00039544">WiSe 1787/88</option>
-          <option value="../../../receive/dbbs_mods_00039547">SoSe 1788</option>
-          <option value="../../../receive/dbbs_mods_00039551">WiSe 1788/89</option>
-          <option value="../../../receive/dbbs_mods_00039553">SoSe 1789</option>
-          <option value="../../../receive/dbbs_mods_00039557">WiSe 1789/90</option>
-          <option value="../../../receive/dbbs_mods_00039559">SoSe 1790</option>
-          <option value="../../../receive/dbbs_mods_00039563">WiSe 1790/91</option>
-          <option value="../../../receive/dbbs_mods_00039566">SoSe 1791</option>
-          <option value="../../../receive/dbbs_mods_00039570">WiSe 1791/92</option>
-          <option value="../../../receive/dbbs_mods_00039572">SoSe 1792</option>
-          <option value="../../../receive/dbbs_mods_00039576">WiSe 1792/93</option>
-          <option value="../../../receive/dbbs_mods_00039578">SoSe 1793</option>
-          <option value="../../../receive/dbbs_mods_00039582">WiSe 1793/94</option>
-          <option value="../../../receive/dbbs_mods_00039584">SoSe 1794</option>
-          <option value="../../../receive/dbbs_mods_00039588">WiSe 1794/95</option>
-          <option value="../../../receive/dbbs_mods_00039590">SoSe 1795</option>
-          <option value="../../../receive/dbbs_mods_00039594">WiSe 1795/96</option>
-          <option value="../../../receive/dbbs_mods_00039596">SoSe 1796</option>
-          <option value="../../../receive/dbbs_mods_00039600">WiSe 1796/97</option>
-          <option value="../../../receive/dbbs_mods_00039601">SoSe 1797</option>
-          <option value="../../../receive/dbbs_mods_00039606">WiSe 1797/98</option>
-          <option value="../../../receive/dbbs_mods_00039608">SoSe 1798</option>
-          <option value="../../../receive/dbbs_mods_00039612">WiSe 1798/99</option>
-          <option value="../../../receive/dbbs_mods_00039614">SoSe 1799</option>
-          <option value="../../../receive/dbbs_mods_00039618">WiSe 1799/1800</option>
-          <option value="../../../receive/dbbs_mods_00039620">SoSe 1800</option>
-          <option value="../../../receive/dbbs_mods_00039624">WiSe 1800/01</option>
-          <option value="../../../receive/dbbs_mods_00039626">SoSe 1801</option>
-          <option value="../../../receive/dbbs_mods_00039630">WiSe 1801/02</option>
-          <option value="../../../receive/dbbs_mods_00039632">SoSe 1802</option>
-          <option value="../../../receive/dbbs_mods_00039636">WiSe 1802/03</option>
-          <option value="../../../receive/dbbs_mods_00039638">SoSe 1803</option>
-          <option value="../../../receive/dbbs_mods_00039644">WiSe 1803/04</option>
-          <option value="../../../receive/dbbs_mods_00039646">SoSe 1804</option>
-          <option value="../../../receive/dbbs_mods_00039650">WiSe 1804/05</option>
-          <option value="../../../receive/dbbs_mods_00039653">SoSe 1805</option>
-          <option value="../../../receive/dbbs_mods_00039657">WiSe 1805/06</option>
-          <option value="../../../receive/dbbs_mods_00039659">SoSe 1806</option>
-          <option value="../../../receive/dbbs_mods_00039663">WiSe 1806/07</option>
-          <option value="../../../receive/dbbs_mods_00039665">SoSe 1807</option>
-          <option value="../../../receive/dbbs_mods_00039669">WiSe 1807/08</option>
-          <option value="../../../receive/dbbs_mods_00039672">SoSe 1808</option>
-          <option value="../../../receive/dbbs_mods_00039675">WiSe 1808/09</option>
-          <option value="http://www.tu-braunschweig.de/wirueberuns/fakten/puv/carolinum/">CC im Kgr. Westfalen geschlossen</option>
-          <option value="../../../receive/dbbs_mods_00039678">WiSe 1814/15</option>
-          <option value="../../../receive/dbbs_mods_00039679">SoSe 1815</option>
-          <option value="../../../receive/dbbs_mods_00039680">WiSe 1815/16</option>
-          <option value="../../../receive/dbbs_mods_00039681">SoSe 1816</option>
-          <option value="../../../receive/dbbs_mods_00039682">WiSe 1816/17</option>
-          <option value="../../../receive/dbbs_mods_00039683">SoSe 1817</option>
-          <option value="../../../receive/dbbs_mods_00039684">WiSe 1817/18</option>
-          <option value="../../../receive/dbbs_mods_00039685">SoSe 1818</option>
-          <option value="../../../receive/dbbs_mods_00039686">WiSe 1818/19</option>
-          <option value="../../../receive/dbbs_mods_00039687">SoSe 1819</option>
-          <option value="../../../receive/dbbs_mods_00039688">WiSe 1819/20</option>
-          <option value="../../../receive/dbbs_mods_00039689">SoSe 1820</option>
-          <option value="../../../receive/dbbs_mods_00039691">WiSe 1820/21</option>
-          <option value="../../../receive/dbbs_mods_00039692">SoSe 1821</option>
-          <option value="../../../receive/dbbs_mods_00039693">WiSe 1821/22</option>
-          <option value="../../../receive/dbbs_mods_00039694">SoSe 1822</option>
-          <option value="../../../receive/dbbs_mods_00039695">WiSe 1822/23</option>
-          <option value="../../../receive/dbbs_mods_00039696">SoSe 1823</option>
-          <option value="../../../receive/dbbs_mods_00039697">WiSe 1823/24</option>
-          <option value="../../../receive/dbbs_mods_00039698">SoSe 1824</option>
-          <option value="../../../receive/dbbs_mods_00039842">WiSe 1824/25</option>
-          <option value="../../../receive/dbbs_mods_00039700">SoSe 1825</option>
-          <option value="../../../receive/dbbs_mods_00039701">WiSe 1825/26</option>
-          <option value="../../../receive/dbbs_mods_00039702">SoSe 1826</option>
-          <option value="../../../receive/dbbs_mods_00039703">WiSe 1826/27</option>
-          <option value="../../../receive/dbbs_mods_00039705">SoSe 1827</option>
-          <option value="../../../receive/dbbs_mods_00039706" ws1827_28.pdf="">WiSe 1827/28</option>
-          <option value="../../../receive/dbbs_mods_00039707">SoSe 1828</option>
-          <option value="../../../receive/dbbs_mods_00039708">WiSe 1828/29</option>
-          <option value="../../../receive/dbbs_mods_00039710">SoSe 1829</option>
-          <option value="../../../receive/dbbs_mods_00039711">WiSe 1829/30</option>
-          <option value="../../../receive/dbbs_mods_00039713">SoSe 1830</option>
-          <option value="../../../receive/dbbs_mods_00039714">WiSe 1830/31</option>
-          <option value="../../../receive/dbbs_mods_00039715">SoSe 1831</option>
-          <option value="../../../receive/dbbs_mods_00039716">WiSe 1831/32</option>
-          <option value="../../../receive/dbbs_mods_00039717">SoSe 1832</option>
-          <option value="../../../receive/dbbs_mods_00039718">WiSe 1832/33</option>
-          <option value="../../../receive/dbbs_mods_00039719">SoSe 1833</option>
-          <option value="../../../receive/dbbs_mods_00039721">WiSe 1833/34</option>
-          <option value="../../../receive/dbbs_mods_00039723">SoSe 1834</option>
-          <option value="../../../receive/dbbs_mods_00039845">WiSe 1834/35</option>
-          <option value="../../../receive/dbbs_mods_00039724">SoSe 1835</option>
-          <option value="../../../receive/dbbs_mods_00039726">WiSe 1835/36</option>
-          <option value="../../../receive/dbbs_mods_00039728">SoSe 1836</option>
-          <option value="../../../receive/dbbs_mods_00039730">WiSe 1836/37</option>
-          <option value="../../../receive/dbbs_mods_00039731">SoSe 1837</option>
-          <option value="../../../receive/dbbs_mods_00039732">SoSe 1838</option>
-          <option value="../../../receive/dbbs_mods_00039733">WiSe 1838/39</option>
-          <option value="../../../receive/dbbs_mods_00039734">SoSe 1839</option>
-          <option value="../../../receive/dbbs_mods_00039735">WiSe 1839/40</option>
-          <option value="../../../receive/dbbs_mods_00039736">SoSe 1840</option>
-          <option value="../../../receive/dbbs_mods_00039738">WiSe 1840/41</option>
-          <option value="../../../receive/dbbs_mods_00039739">SoSe 1841</option>
-          <option value="../../../receive/dbbs_mods_00039741">WiSe 1841/42</option>
-          <option value="../../../receive/dbbs_mods_00039742">SoSe 1842</option>
-          <option value="../../../receive/dbbs_mods_00039744">WiSe 1842/43</option>
-          <option value="../../../receive/dbbs_mods_00039745">SoSe 1843</option>
-          <option value="../../../receive/dbbs_mods_00039747">WiSe 1843/44</option>
-          <option value="../../../receive/dbbs_mods_00039748">SoSe 1844</option>
-          <option value="../../../receive/dbbs_mods_00039866">WiSe 1844/45</option>
-          <option value="../../../receive/dbbs_mods_00039750">SoSe 1845</option>
-          <option value="../../../receive/dbbs_mods_00039751">WiSe 1845/46</option>
-          <option value="../../../receive/dbbs_mods_00039753">SoSe 1846</option>
-          <option value="../../../receive/dbbs_mods_00039754">WiSe 1846/47</option>
-          <option value="../../../receive/dbbs_mods_00039756">SoSe 1847</option>
-          <option value="../../../receive/dbbs_mods_00039757">WiSe 1847/48</option>
-          <option value="../../../receive/dbbs_mods_00039759">SoSe 1848</option>
-          <option value="../../../receive/dbbs_mods_00039760">WiSe 1848/49</option>
-          <option value="../../../receive/dbbs_mods_00039762">SoSe 1849</option>
-          <option value="../../../receive/dbbs_mods_00039763">WiSe 1849/50</option>
-          <option value="../../../receive/dbbs_mods_00039765">SoSe 1850</option>
-          <option value="../../../receive/dbbs_mods_00039766">WiSe 1850/51</option>
-          <option value="../../../receive/dbbs_mods_00039768">SoSe 1851</option>
-          <option value="../../../receive/dbbs_mods_00039769">WiSe 1851/52</option>
-          <option value="../../../receive/dbbs_mods_00039770">SoSe 1852</option>
-          <option value="../../../receive/dbbs_mods_00039773">WiSe 1852/53</option>
-          <option value="../../../receive/dbbs_mods_00039774">SoSe 1853</option>
-          <option value="../../../receive/dbbs_mods_00039775">WiSe 1853/54</option>
-          <option value="../../../receive/dbbs_mods_00039777">SoSe 1854</option>
-          <option value="../../../receive/dbbs_mods_00039889">WiSe 1854/55</option>
-          <option value="../../../receive/dbbs_mods_00039778">SoSe 1855</option>
-          <option value="../../../receive/dbbs_mods_00039779">WiSe 1855/56</option>
-          <option value="../../../receive/dbbs_mods_00039780">SoSe 1856</option>
-          <option value="../../../receive/dbbs_mods_00039781">WiSe 1856/57</option>
-          <option value="../../../receive/dbbs_mods_00039782">SoSe 1857</option>
-          <option value="../../../receive/dbbs_mods_00039784">WiSe 1857/58</option>
-          <option value="../../../receive/dbbs_mods_00039785">SoSe 1858</option>
-          <option value="../../../receive/dbbs_mods_00039786">WiSe 1858/59</option>
-          <option value="../../../receive/dbbs_mods_00039787">SoSe 1859</option>
-          <option value="../../../receive/dbbs_mods_00039788">WiSe 1859/60</option>
-          <option value="../../../receive/dbbs_mods_00039789">SoSe 1860</option>
-          <option value="../../../receive/dbbs_mods_00039790">WiSe 1860/61</option>
-          <option value="../../../receive/dbbs_mods_00039791">WiSe 1861/62</option>
-          <option value="../../../receive/dbbs_mods_00039796">SoSe 1862</option>
-          <option value="../../../receive/dbbs_mods_00039917">WiSe 1862/63, SoSe 1863</option>
-          <option value="../../../receive/dbbs_mods_00039797">WiSe 1863/64, SoSe 1864</option>
-          <option value="../../../receive/dbbs_mods_00039798">WiSe 1864/65, SoSe 1865</option>
-          <option value="../../../receive/dbbs_mods_00039799">WiSe 1865/66, SoSe 1866</option>
-          <option value="../../../receive/dbbs_mods_00039800">WiSe 1866/67, SoSe 1867</option>
-          <option value="../../../receive/dbbs_mods_00039801">WiSe 1867/68, SoSe 1868</option>
-          <option value="../../../receive/dbbs_mods_00039802">WiSe 1868/69, SoSe 1869</option>
-          <option value="../../../receive/dbbs_mods_00039803">WiSe 1869/70, SoSe 1870</option>
-          <option value="../../../receive/dbbs_mods_00039804">WiSe 1870/71, SoSe 1871</option>
-          <option value="../../../receive/dbbs_mods_00039805">WiSe 1871/72, SoSe 1872</option>
-        </select>
-      </div>
-    </div>
+<p>Anschließend wurden die Vorlesungen bis zum Sommersemester 1935 unter dem Titel <i>Programm. Technische Hochschule Carolo-Wilhelmina zu Braunschweig</i> angekündigt.</p>
 
-<!-- ************************************* 1872 - 1878 ******************************************** -->
-    <div class="row">
-      <div class="col-md-6">
-        <p>
-          <strong>Programm der Herzoglichen Polytechnischen Schule, des Collegium Carolinum zu Braunschweig 1872 - 1878</strong>
-        </p>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control bs_select">
-          <option value="" selected="">WiSe 1872/73 bis SoSe 1878</option>
-          <option value="../../../receive/dbbs_mods_00039930">WiSe 1872/73, SoSe 1873</option>
-          <option value="../../../receive/dbbs_mods_00039931">WiSe 1873/74, SoSe 1874</option>
-          <option value="../../../receive/dbbs_mods_00039932">WiSe 1874/75, SoSe 1875</option>
-          <option value="../../../receive/dbbs_mods_00039933">WiSe 1875/76, SoSe 1876</option>
-          <option value="../../../receive/dbbs_mods_00039934">WiSe 1876/77, SoSe 1877</option>
-          <option value="../../../receive/dbbs_mods_00039935">WiSe 1877/78, SoSe 1878</option>
-        </select>
-      </div>
-    </div>
+<p>Ab dem Wintersemester 1935/36 bis zum Sommersemester 1968 war ihr Titel <i>Personal- und Vorlesungsverzeichnis. Technische Hochschule Carolo-Wilhelmina zu Braunschweig</i>.</p>
 
+<p>Seit dem Sommersemester 2008 steht das <i>Vorlesungsverzeichnis. Technische Universität Braunschweig</i> nur noch in elektronischer Form zur Verfügung.</p>
+</div>
+</div>
 
-<!-- ***************************************** 1878 - 1935 ***************************************** -->
-    <div class="row">
-      <div class="col-md-6">
-        <p>
-          <strong>Programm der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1878 - 1935</strong>
-        </p>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control bs_select">
-          <option value="" selected="">WiSe 1878/79 bis SoSe 1935</option>
-          <option value="../../../receive/dbbs_mods_00039995">WiSe 1878/79, SoSe 1879</option>
-          <option value="../../../receive/dbbs_mods_00039996">WiSe 1879/80, SoSe 1880</option>
-          <option value="../../../receive/dbbs_mods_00039997">WiSe 1880/81, SoSe 1881</option>
-          <option value="../../../receive/dbbs_mods_00039998">WiSe 1881/82, SoSe 1882</option>
-          <option value="../../../receive/dbbs_mods_00039999">WiSe 1882/83, SoSe 1883</option>
-          <option value="../../../receive/dbbs_mods_00040000">WiSe 1883/84, SoSe 1884</option>
-          <option value="../../../receive/dbbs_mods_00040001">WiSe 1884/85, SoSe 1885</option>
-          <option value="../../../receive/dbbs_mods_00040002">WiSe 1885/86, SoSe 1886</option>
-          <option value="../../../receive/dbbs_mods_00040003">WiSe 1886/87, SoSe 1887</option>
-          <option value="../../../receive/dbbs_mods_00040004">WiSe 1887/88, SoSe 1888</option>
-          <option value="../../../receive/dbbs_mods_00039960">WiSe 1888/89, SoSe 1889</option>
-          <option value="../../../receive/dbbs_mods_00039961">WiSe 1889/90, SoSe 1890</option>
-          <option value="../../../receive/dbbs_mods_00039962">WiSe 1890/91, SoSe 1891</option>
-          <option value="../../../receive/dbbs_mods_00039963">WiSe 1891/92, SoSe 1892</option>
-          <option value="../../../receive/dbbs_mods_00039964">WiSe 1892/93, SoSe 1893</option>
-          <option value="../../../receive/dbbs_mods_00039965">WiSe 1893/94, SoSe 1894</option>
-          <option value="../../../receive/dbbs_mods_00039966">WiSe 1894/95, SoSe 1895</option>
-          <option value="../../../receive/dbbs_mods_00039967">WiSe 1895/96, SoSe 1896</option>
-          <option value="../../../receive/dbbs_mods_00039968">WiSe 1896/97, SoSe 1897</option>
-          <option value="../../../receive/dbbs_mods_00039969">WiSe 1897/98, SoSe 1898</option>
-          <option value="../../../receive/dbbs_mods_00039984">WiSe 1898/99, SoSe 1899</option>
-          <option value="../../../receive/dbbs_mods_00039985">WiSe 1899/00, SoSe 1900</option>
-          <option value="../../../receive/dbbs_mods_00039986">WiSe 1900/01, SoSe 1901</option>
-          <option value="../../../receive/dbbs_mods_00039987">WiSe 1901/02, SoSe 1902</option>
-          <option value="../../../receive/dbbs_mods_00039988">WiSe 1902/03, SoSe 1903</option>
-          <option value="../../../receive/dbbs_mods_00039989">WiSe 1903/04, SoSe 1904</option>
-          <option value="../../../receive/dbbs_mods_00039990">WiSe 1904/05, SoSe 1905</option>
-          <option value="../../../receive/dbbs_mods_00039991">WiSe 1905/06, SoSe 1906</option>
-          <option value="../../../receive/dbbs_mods_00039992">WiSe 1906/07, SoSe 1907</option>
-          <option value="../../../receive/dbbs_mods_00039993">WiSe 1907/08, SoSe 1908</option>
-          <option value="../../../receive/dbbs_mods_00040015">WiSe 1908/09, SoSe 1909</option>
-          <option value="../../../receive/dbbs_mods_00040016">WiSe 1909/10, SoSe 1910</option>
-          <option value="../../../receive/dbbs_mods_00040017">WiSe 1910/11, SoSe 1911</option>
-          <option value="../../../receive/dbbs_mods_00040018">WiSe 1911/12, SoSe 1912</option>
-          <option value="../../../receive/dbbs_mods_00040019">WiSe 1912/13, SoSe 1913</option>
-          <option value="../../../receive/dbbs_mods_00040020">WiSe 1913/14, SoSe 1914</option>
-          <option value="../../../receive/dbbs_mods_00040021">WiSe 1914/15, SoSe 1915</option>
-          <option value="../../../receive/dbbs_mods_00040022">WiSe 1915/16, SoSe 1916</option>
-          <option value="../../../receive/dbbs_mods_00040023">WiSe 1916/17, SoSe 1917</option>
-          <option value="../../../receive/dbbs_mods_00040024">WiSe 1917/18, SoSe 1918</option>
-          <option value="../../../receive/dbbs_mods_00040028">WiSe 1918/19, SoSe 1919</option>
-          <option value="../../../receive/dbbs_mods_00040030">SoSe 1919</option>
-          <option value="../../../receive/dbbs_mods_00040031">WiSe 1919/20, SoSe 1920</option>
-          <option value="../../../receive/dbbs_mods_00040032">WiSe 1920/21, SoSe 1921</option>
-          <option value="../../../receive/dbbs_mods_00040033">WiSe 1921/22, SoSe 1922</option>
-          <option value="../../../receive/dbbs_mods_00040034">WiSe 1922/23, SoSe 1923</option>
-          <option value="../../../receive/dbbs_mods_00040035">WiSe 1923/24, SoSe 1924</option>
-          <option value="../../../receive/dbbs_mods_00040036">WiSe 1924/25, SoSe 1925</option>
-          <option value="../../../receive/dbbs_mods_00040037">WiSe 1925/26, SoSe 1926</option>
-          <option value="../../../receive/dbbs_mods_00040038">WiSe 1926/27, SoSe 1927</option>
-          <option value="../../../receive/dbbs_mods_00040039">WiSe 1927/28, SoSe 1928</option>
-          <option value="../../../receive/dbbs_mods_00040174">WiSe 1928/29, SoSe 1929</option>
-          <option value="../../../receive/dbbs_mods_00040175">WiSe 1929/30, SoSe 1930</option>
-          <option value="../../../receive/dbbs_mods_00040176">WiSe 1930/31, SoSe 1931</option>
-          <option value="../../../receive/dbbs_mods_00040177">WiSe 1931/32, SoSe 1932</option>
-          <option value="../../../receive/dbbs_mods_00040178">WiSe 1932/33, SoSe 1933</option>
-          <option value="../../../receive/dbbs_mods_00040179">WiSe 1933/34, SoSe 1934</option>
-          <option value="../../../receive/dbbs_mods_00040180">WiSe 1934/35, SoSe 1935</option>
-        </select>
-      </div>
-    </div>
+<div class="row">
+<div class="col-md-6">
+<p><strong>Anzeige der Vorlesungen und Übungen in dem Fürstlichen Collegio Carolino zu Braunschweig 1745 - 1872</strong></p>
+</div>
 
+<div class="col-md-4"><select class="form-control bs_select"><option selected="selected" value="">WiSe 1745/46 bis SoSe 1872</option><option value="../../../receive/dbbs_mods_00039152">WiSe 1745/46</option><option value="../../../receive/dbbs_mods_00039157">SoSe 1746</option><option value="../../../receive/dbbs_mods_00039163">WiSe 1746/47</option><option value="../../../receive/dbbs_mods_00039165">SoSe 1747</option><option value="../../../receive/dbbs_mods_00039169">WiSe 1747/48</option><option value="../../../receive/dbbs_mods_00039172">SoSe 1748</option><option value="../../../receive/dbbs_mods_00039177">SoSe 1749</option><option value="../../../receive/dbbs_mods_00039179">SoSe 1750</option><option value="../../../receive/dbbs_mods_00039183">WiSe 1750/51</option><option value="../../../receive/dbbs_mods_00039185">SoSe 1754</option><option value="../../../receive/dbbs_mods_00039187">SoSe 1756</option><option value="../../../receive/dbbs_mods_00039192">WiSe 1756/57</option><option value="../../../receive/dbbs_mods_00039194">SoSe 1757</option><option value="../../../receive/dbbs_mods_00039198">WiSe 1757/58</option><option value="../../../receive/dbbs_mods_00039200">SoSe 1758</option><option value="../../../receive/dbbs_mods_00039204">WiSe 1758/59</option><option value="../../../receive/dbbs_mods_00039206">SoSe 1759</option><option value="../../../receive/dbbs_mods_00039210">WiSe 1759/60</option><option value="../../../receive/dbbs_mods_00039212">SoSe 1760</option><option value="../../../receive/dbbs_mods_00039216">WiSe 1760/61</option><option value="../../../receive/dbbs_mods_00039218">SoSe 1761</option><option value="../../../receive/dbbs_mods_00039222">WiSe 1761/62</option><option value="../../../receive/dbbs_mods_00039224">SoSe 1762</option><option value="../../../receive/dbbs_mods_00039228">WiSe 1762/63</option><option value="../../../receive/dbbs_mods_00039230">SoSe 1763</option><option value="../../../receive/dbbs_mods_00039235">WiSe 1763/64</option><option value="../../../receive/dbbs_mods_00039237">SoSe 1764</option><option value="../../../receive/dbbs_mods_00039241">WiSe 1764/65</option><option value="../../../receive/dbbs_mods_00039243">SoSe 1765</option><option value="../../../receive/dbbs_mods_00039247">WiSe 1765/66</option><option value="../../../receive/dbbs_mods_00039249">SoSe 1766</option><option value="../../../receive/dbbs_mods_00039261">WiSe 1766/67</option><option value="../../../receive/dbbs_mods_00039263">SoSe 1767</option><option value="../../../receive/dbbs_mods_00039275">WiSe 1767/68</option><option value="../../../receive/dbbs_mods_00039277">SoSe 1768</option><option value="../../../receive/dbbs_mods_00039286">WiSe 1768/69</option><option value="../../../receive/dbbs_mods_00039288">SoSe 1769</option><option value="../../../receive/dbbs_mods_00039292">WiSe 1769/70</option><option value="../../../receive/dbbs_mods_00039294">SoSe 1770</option><option value="../../../receive/dbbs_mods_00039419">WiSe 1770/71</option><option value="../../../receive/dbbs_mods_00039423">SoSe 1771</option><option value="../../../receive/dbbs_mods_00039430">WiSe 1771/72</option><option value="../../../receive/dbbs_mods_00039434">SoSe 1772</option><option value="../../../receive/dbbs_mods_00039440">WiSe 1772/73</option><option value="../../../receive/dbbs_mods_00039442">SoSe 1773</option><option value="../../../receive/dbbs_mods_00039446">WiSe 1773/74</option><option value="../../../receive/dbbs_mods_00039448">SoSe 1774</option><option value="../../../receive/dbbs_mods_00039455">SoSe 1775</option><option value="../../../receive/dbbs_mods_00039456">SoSe 1776</option><option value="../../../receive/dbbs_mods_00039460">WiSe 1776/77</option><option value="../../../receive/dbbs_mods_00039466">SoSe 1777</option><option value="../../../receive/dbbs_mods_00039470">WiSe 1777/78</option><option value="../../../receive/dbbs_mods_00039472">SoSe 1778</option><option value="../../../receive/dbbs_mods_00039490">WiSe 1778/79</option><option value="../../../receive/dbbs_mods_00039492">SoSe 1779</option><option value="../../../receive/dbbs_mods_00039496">WiSe 1779/80</option><option value="../../../receive/dbbs_mods_00039498">SoSe 1780</option><option value="../../../receive/dbbs_mods_00039502">WiSe 1780/81</option><option value="../../../receive/dbbs_mods_00039504">SoSe 1781</option><option value="../../../receive/dbbs_mods_00039508">WiSe 1781/82</option><option value="../../../receive/dbbs_mods_00039510">SoSe 1782</option><option value="../../../receive/dbbs_mods_00039512">WiSe 1782/83</option><option value="../../../receive/dbbs_mods_00039514">SoSe 1783</option><option value="../../../receive/dbbs_mods_00039525">SoSe 1784</option><option value="../../../receive/dbbs_mods_00039523">WiSe 1784/85</option><option value="../../../receive/dbbs_mods_00039529">SoSe 1785</option><option value="../../../receive/dbbs_mods_00039513">WiSe 1785/86</option><option value="../../../receive/dbbs_mods_00039534">SoSe 1786</option><option value="../../../receive/dbbs_mods_00039538">WiSe 1786/87</option><option value="../../../receive/dbbs_mods_00039540">SoSe 1787</option><option value="../../../receive/dbbs_mods_00039544">WiSe 1787/88</option><option value="../../../receive/dbbs_mods_00039547">SoSe 1788</option><option value="../../../receive/dbbs_mods_00039551">WiSe 1788/89</option><option value="../../../receive/dbbs_mods_00039553">SoSe 1789</option><option value="../../../receive/dbbs_mods_00039557">WiSe 1789/90</option><option value="../../../receive/dbbs_mods_00039559">SoSe 1790</option><option value="../../../receive/dbbs_mods_00039563">WiSe 1790/91</option><option value="../../../receive/dbbs_mods_00039566">SoSe 1791</option><option value="../../../receive/dbbs_mods_00039570">WiSe 1791/92</option><option value="../../../receive/dbbs_mods_00039572">SoSe 1792</option><option value="../../../receive/dbbs_mods_00039576">WiSe 1792/93</option><option value="../../../receive/dbbs_mods_00039578">SoSe 1793</option><option value="../../../receive/dbbs_mods_00039582">WiSe 1793/94</option><option value="../../../receive/dbbs_mods_00039584">SoSe 1794</option><option value="../../../receive/dbbs_mods_00039588">WiSe 1794/95</option><option value="../../../receive/dbbs_mods_00039590">SoSe 1795</option><option value="../../../receive/dbbs_mods_00039594">WiSe 1795/96</option><option value="../../../receive/dbbs_mods_00039596">SoSe 1796</option><option value="../../../receive/dbbs_mods_00039600">WiSe 1796/97</option><option value="../../../receive/dbbs_mods_00039601">SoSe 1797</option><option value="../../../receive/dbbs_mods_00039606">WiSe 1797/98</option><option value="../../../receive/dbbs_mods_00039608">SoSe 1798</option><option value="../../../receive/dbbs_mods_00039612">WiSe 1798/99</option><option value="../../../receive/dbbs_mods_00039614">SoSe 1799</option><option value="../../../receive/dbbs_mods_00039618">WiSe 1799/1800</option><option value="../../../receive/dbbs_mods_00039620">SoSe 1800</option><option value="../../../receive/dbbs_mods_00039624">WiSe 1800/01</option><option value="../../../receive/dbbs_mods_00039626">SoSe 1801</option><option value="../../../receive/dbbs_mods_00039630">WiSe 1801/02</option><option value="../../../receive/dbbs_mods_00039632">SoSe 1802</option><option value="../../../receive/dbbs_mods_00039636">WiSe 1802/03</option><option value="../../../receive/dbbs_mods_00039638">SoSe 1803</option><option value="../../../receive/dbbs_mods_00039644">WiSe 1803/04</option><option value="../../../receive/dbbs_mods_00039646">SoSe 1804</option><option value="../../../receive/dbbs_mods_00039650">WiSe 1804/05</option><option value="../../../receive/dbbs_mods_00039653">SoSe 1805</option><option value="../../../receive/dbbs_mods_00039657">WiSe 1805/06</option><option value="../../../receive/dbbs_mods_00039659">SoSe 1806</option><option value="../../../receive/dbbs_mods_00039663">WiSe 1806/07</option><option value="../../../receive/dbbs_mods_00039665">SoSe 1807</option><option value="../../../receive/dbbs_mods_00039669">WiSe 1807/08</option><option value="../../../receive/dbbs_mods_00039672">SoSe 1808</option><option value="../../../receive/dbbs_mods_00039675">WiSe 1808/09</option><option value="http://www.tu-braunschweig.de/wirueberuns/fakten/puv/carolinum/">CC im Kgr. Westfalen geschlossen</option><option value="../../../receive/dbbs_mods_00039678">WiSe 1814/15</option><option value="../../../receive/dbbs_mods_00039679">SoSe 1815</option><option value="../../../receive/dbbs_mods_00039680">WiSe 1815/16</option><option value="../../../receive/dbbs_mods_00039681">SoSe 1816</option><option value="../../../receive/dbbs_mods_00039682">WiSe 1816/17</option><option value="../../../receive/dbbs_mods_00039683">SoSe 1817</option><option value="../../../receive/dbbs_mods_00039684">WiSe 1817/18</option><option value="../../../receive/dbbs_mods_00039685">SoSe 1818</option><option value="../../../receive/dbbs_mods_00039686">WiSe 1818/19</option><option value="../../../receive/dbbs_mods_00039687">SoSe 1819</option><option value="../../../receive/dbbs_mods_00039688">WiSe 1819/20</option><option value="../../../receive/dbbs_mods_00039689">SoSe 1820</option><option value="../../../receive/dbbs_mods_00039691">WiSe 1820/21</option><option value="../../../receive/dbbs_mods_00039692">SoSe 1821</option><option value="../../../receive/dbbs_mods_00039693">WiSe 1821/22</option><option value="../../../receive/dbbs_mods_00039694">SoSe 1822</option><option value="../../../receive/dbbs_mods_00039695">WiSe 1822/23</option><option value="../../../receive/dbbs_mods_00039696">SoSe 1823</option><option value="../../../receive/dbbs_mods_00039697">WiSe 1823/24</option><option value="../../../receive/dbbs_mods_00039698">SoSe 1824</option><option value="../../../receive/dbbs_mods_00039842">WiSe 1824/25</option><option value="../../../receive/dbbs_mods_00039700">SoSe 1825</option><option value="../../../receive/dbbs_mods_00039701">WiSe 1825/26</option><option value="../../../receive/dbbs_mods_00039702">SoSe 1826</option><option value="../../../receive/dbbs_mods_00039703">WiSe 1826/27</option><option value="../../../receive/dbbs_mods_00039705">SoSe 1827</option><option value="../../../receive/dbbs_mods_00039706" ws1827_28.pdf="">WiSe 1827/28</option><option value="../../../receive/dbbs_mods_00039707">SoSe 1828</option><option value="../../../receive/dbbs_mods_00039708">WiSe 1828/29</option><option value="../../../receive/dbbs_mods_00039710">SoSe 1829</option><option value="../../../receive/dbbs_mods_00039711">WiSe 1829/30</option><option value="../../../receive/dbbs_mods_00039713">SoSe 1830</option><option value="../../../receive/dbbs_mods_00039714">WiSe 1830/31</option><option value="../../../receive/dbbs_mods_00039715">SoSe 1831</option><option value="../../../receive/dbbs_mods_00039716">WiSe 1831/32</option><option value="../../../receive/dbbs_mods_00039717">SoSe 1832</option><option value="../../../receive/dbbs_mods_00039718">WiSe 1832/33</option><option value="../../../receive/dbbs_mods_00039719">SoSe 1833</option><option value="../../../receive/dbbs_mods_00039721">WiSe 1833/34</option><option value="../../../receive/dbbs_mods_00039723">SoSe 1834</option><option value="../../../receive/dbbs_mods_00039845">WiSe 1834/35</option><option value="../../../receive/dbbs_mods_00039724">SoSe 1835</option><option value="../../../receive/dbbs_mods_00039726">WiSe 1835/36</option><option value="../../../receive/dbbs_mods_00039728">SoSe 1836</option><option value="../../../receive/dbbs_mods_00039730">WiSe 1836/37</option><option value="../../../receive/dbbs_mods_00039731">SoSe 1837</option><option value="../../../receive/dbbs_mods_00039732">SoSe 1838</option><option value="../../../receive/dbbs_mods_00039733">WiSe 1838/39</option><option value="../../../receive/dbbs_mods_00039734">SoSe 1839</option><option value="../../../receive/dbbs_mods_00039735">WiSe 1839/40</option><option value="../../../receive/dbbs_mods_00039736">SoSe 1840</option><option value="../../../receive/dbbs_mods_00039738">WiSe 1840/41</option><option value="../../../receive/dbbs_mods_00039739">SoSe 1841</option><option value="../../../receive/dbbs_mods_00039741">WiSe 1841/42</option><option value="../../../receive/dbbs_mods_00039742">SoSe 1842</option><option value="../../../receive/dbbs_mods_00039744">WiSe 1842/43</option><option value="../../../receive/dbbs_mods_00039745">SoSe 1843</option><option value="../../../receive/dbbs_mods_00039747">WiSe 1843/44</option><option value="../../../receive/dbbs_mods_00039748">SoSe 1844</option><option value="../../../receive/dbbs_mods_00039866">WiSe 1844/45</option><option value="../../../receive/dbbs_mods_00039750">SoSe 1845</option><option value="../../../receive/dbbs_mods_00039751">WiSe 1845/46</option><option value="../../../receive/dbbs_mods_00039753">SoSe 1846</option><option value="../../../receive/dbbs_mods_00039754">WiSe 1846/47</option><option value="../../../receive/dbbs_mods_00039756">SoSe 1847</option><option value="../../../receive/dbbs_mods_00039757">WiSe 1847/48</option><option value="../../../receive/dbbs_mods_00039759">SoSe 1848</option><option value="../../../receive/dbbs_mods_00039760">WiSe 1848/49</option><option value="../../../receive/dbbs_mods_00039762">SoSe 1849</option><option value="../../../receive/dbbs_mods_00039763">WiSe 1849/50</option><option value="../../../receive/dbbs_mods_00039765">SoSe 1850</option><option value="../../../receive/dbbs_mods_00039766">WiSe 1850/51</option><option value="../../../receive/dbbs_mods_00039768">SoSe 1851</option><option value="../../../receive/dbbs_mods_00039769">WiSe 1851/52</option><option value="../../../receive/dbbs_mods_00039770">SoSe 1852</option><option value="../../../receive/dbbs_mods_00039773">WiSe 1852/53</option><option value="../../../receive/dbbs_mods_00039774">SoSe 1853</option><option value="../../../receive/dbbs_mods_00039775">WiSe 1853/54</option><option value="../../../receive/dbbs_mods_00039777">SoSe 1854</option><option value="../../../receive/dbbs_mods_00039889">WiSe 1854/55</option><option value="../../../receive/dbbs_mods_00039778">SoSe 1855</option><option value="../../../receive/dbbs_mods_00039779">WiSe 1855/56</option><option value="../../../receive/dbbs_mods_00039780">SoSe 1856</option><option value="../../../receive/dbbs_mods_00039781">WiSe 1856/57</option><option value="../../../receive/dbbs_mods_00039782">SoSe 1857</option><option value="../../../receive/dbbs_mods_00039784">WiSe 1857/58</option><option value="../../../receive/dbbs_mods_00039785">SoSe 1858</option><option value="../../../receive/dbbs_mods_00039786">WiSe 1858/59</option><option value="../../../receive/dbbs_mods_00039787">SoSe 1859</option><option value="../../../receive/dbbs_mods_00039788">WiSe 1859/60</option><option value="../../../receive/dbbs_mods_00039789">SoSe 1860</option><option value="../../../receive/dbbs_mods_00039790">WiSe 1860/61</option><option value="../../../receive/dbbs_mods_00039791">WiSe 1861/62</option><option value="../../../receive/dbbs_mods_00039796">SoSe 1862</option><option value="../../../receive/dbbs_mods_00039917">WiSe 1862/63, SoSe 1863</option><option value="../../../receive/dbbs_mods_00039797">WiSe 1863/64, SoSe 1864</option><option value="../../../receive/dbbs_mods_00039798">WiSe 1864/65, SoSe 1865</option><option value="../../../receive/dbbs_mods_00039799">WiSe 1865/66, SoSe 1866</option><option value="../../../receive/dbbs_mods_00039800">WiSe 1866/67, SoSe 1867</option><option value="../../../receive/dbbs_mods_00039801">WiSe 1867/68, SoSe 1868</option><option value="../../../receive/dbbs_mods_00039802">WiSe 1868/69, SoSe 1869</option><option value="../../../receive/dbbs_mods_00039803">WiSe 1869/70, SoSe 1870</option><option value="../../../receive/dbbs_mods_00039804">WiSe 1870/71, SoSe 1871</option><option value="../../../receive/dbbs_mods_00039805">WiSe 1871/72, SoSe 1872</option> </select></div>
+</div>
 
-<!-- ***************************************** 1935 - 2007 ***************************************** -->
-    <div class="row">
-      <div class="col-md-6">
-        <p>
-          <strong>Personal- und Vorlesungsverzeichnis der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1935 - 2007</strong>
-        </p>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control bs_select">
-          <option value="" selected="">WiSe 1935/36 bis SoSe 2007</option>
-          <option value="../../../receive/dbbs_mods_00040182">WiSe 1935/36, SoSe 1936</option>
-          <option value="../../../receive/dbbs_mods_00040183">WiSe 1936/37, SoSe 1937</option>
-          <option value="../../../receive/dbbs_mods_00040184">ZwSe 1937, WiSe 1937/38</option>
-          <option value="../../../receive/dbbs_mods_00040185">SoSe 1938, WiSe 1938/39</option>
-          <option value="../../../receive/dbbs_mods_00040186">SoSe 1939</option>
-          <option value="../../../receive/dbbs_mods_00040187">WiSe 1939/40</option>
-          <option value="../../../receive/dbbs_mods_00040188">WiSe 1940/41</option>
-          <option value="../../../receive/dbbs_mods_00040189">SoSe 1941, WiSe 1941/42</option>
-          <option value="../../../receive/dbbs_mods_00040190">SoSe 1942, WiSe 1942/43</option>
-          <option value="../../../receive/dbbs_mods_00040191">SoSe 1943, WiSe 1943/44</option>
-          <option value="../../../receive/dbbs_mods_00040192">SoSe 1944, WiSe 1944/45</option>
-          <option value="../../../receive/dbbs_mods_00040193">WiSe 1945/46</option>
-          <option value="../../../receive/dbbs_mods_00045756">SoSe 1946</option>
-          <option value="../../../receive/dbbs_mods_00046640">WiSe 1946/47, SoSe 1947</option>
-          <option value="../../../receive/dbbs_mods_00046516">WiSe 1947/48, SoSe 1948</option>
-          <option value="../../../receive/dbbs_mods_00046521">WiSe 1948/49, SoSe 1949</option>
-          <option value="../../../receive/dbbs_mods_00046528">WiSe 1949/50, SoSe 1950</option>
-          <option value="../../../receive/dbbs_mods_00046532">WiSe 1950/51, SoSe 1951</option>
-          <option value="../../../receive/dbbs_mods_00046536">WiSe 1951/52, SoSe 1952</option>
-          <option value="../../../receive/dbbs_mods_00046540">WiSe 1952/53, SoSe 1953</option>
-          <option value="../../../receive/dbbs_mods_00046649">WiSe 1953/54, SoSe 1954</option>
-          <option value="../../../receive/dbbs_mods_00046652">WiSe 1954/55, SoSe 1955</option>
-          <option value="../../../receive/dbbs_mods_00046655">WiSe 1955/56, SoSe 1956</option>
-          <option value="../../../receive/dbbs_mods_00046658">WiSe 1956/57, SoSe 1957</option>
-          <option value="../../../receive/dbbs_mods_00046661">WiSe 1957/58, SoSe 1958</option>
-          <option value="../../../receive/dbbs_mods_00046664">WiSe 1958/59, SoSe 1959</option>
-          <option value="../../../receive/dbbs_mods_00046738">WiSe 1959/60, SoSe 1960</option>
-          <option value="../../../receive/dbbs_mods_00047802">WiSe 1960/61, SoSe 1961</option>
-          <option value="../../../receive/dbbs_mods_00047804">WiSe 1961/62, SoSe 1962</option>
-          <option value="../../../receive/dbbs_mods_00047806">WiSe 1962/63, SoSe 1963</option>
-          <option value="../../../receive/dbbs_mods_00047808">WiSe 1963/64, SoSe 1964</option>
-          <option value="../../../receive/dbbs_mods_00047810">WiSe 1964/65, SoSe 1965</option>
-          <option value="../../../receive/dbbs_mods_00049850">WiSe 1965/66, SoSe 1966</option>
-          <option value="../../../receive/dbbs_mods_00047813">WiSe 1966/67, SoSe 1967</option>
-          <option value="../../../receive/dbbs_mods_00047819">WiSe 1967/68, SoSe 1968</option>
-          <option value="../../../receive/dbbs_mods_00050895">WiSe 1968/69, SoSe 1969</option>
-          <option value="../../../receive/dbbs_mods_00058147">WiSe 1969/70</option>
-          <option value="../../../receive/dbbs_mods_00058154">SoSe 1970</option>
-          <option value="../../../receive/dbbs_mods_00056279">WiSe 1970/71</option>
-          <option value="../../../receive/dbbs_mods_00056730">SoSe 1971</option>
-          <option value="../../../receive/dbbs_mods_00057201">WiSe 1971/72</option>
-          <option value="../../../receive/dbbs_mods_00056724">SoSe 1972</option>
-          <option value="../../../receive/dbbs_mods_00055844">WiSe 1972/73</option>
-          <option value="../../../receive/dbbs_mods_00055965">SoSe 1973</option>
-          <option value="../../../receive/dbbs_mods_00056719">WiSe 1973/74</option>
-          <option value="../../../receive/dbbs_mods_00056855">SoSe 1974</option>
-          <option value="../../../receive/dbbs_mods_00056080">WiSe 1974/75</option>
-          <option value="../../../receive/dbbs_mods_00055827">SoSe 1975</option>
-          <option value="../../../receive/dbbs_mods_00055818">WiSe 1975/76</option>
-          <option value="../../../receive/dbbs_mods_00055830">SoSe 1976</option>
-          <option value="../../../receive/dbbs_mods_00055820">WiSe 1976/77</option>
-          <option value="../../../receive/dbbs_mods_00055932">SoSe 1977</option>
-          <option value="../../../receive/dbbs_mods_00055922">WiSe 1977/78</option>
-          <option value="../../../receive/dbbs_mods_00055822">SoSe 1978</option>
-          <option value="../../../receive/dbbs_mods_00050503">WiSe 1978/79</option>
-          <option value="../../../receive/dbbs_mods_00055406">SoSe 1979</option>
-          <option value="../../../receive/dbbs_mods_00055524">WiSe 1979/80</option>
-          <option value="../../../receive/dbbs_mods_00055655">SoSe 1980</option>
-          <option value="../../../receive/dbbs_mods_00054742">WiSe 1980/81</option>
-          <option value="../../../receive/dbbs_mods_00055595">SoSe 1981</option>
-          <option value="../../../receive/dbbs_mods_00055407">WiSe 1981/82</option>
-          <option value="../../../receive/dbbs_mods_00055383">SoSe 1982</option>
-          <option value="../../../receive/dbbs_mods_00055615">WiSe 1982/83</option>
-          <option value="../../../receive/dbbs_mods_00055649">SoSe 1983</option>
-          <option value="../../../receive/dbbs_mods_00055388">WiSe 1983/84</option>
-          <option value="../../../receive/dbbs_mods_00055396">SoSe 1984</option>
-          <option value="../../../receive/dbbs_mods_00055660">WiSe 1984/85</option>
-          <option value="../../../receive/dbbs_mods_00055727">SoSe 1985</option>
-          <option value="../../../receive/dbbs_mods_00054327">WiSe 1985/86</option>
-          <option value="../../../receive/dbbs_mods_00054503">SoSe 1986</option>
-          <option value="../../../receive/dbbs_mods_00054305">WiSe 1986/87</option>
-          <option value="../../../receive/dbbs_mods_00054455">SoSe 1987</option>
-          <option value="../../../receive/dbbs_mods_00054617">WiSe 1987/88</option>
-          <option value="../../../receive/dbbs_mods_00054501">SoSe 1988</option>
-          <option value="../../../receive/dbbs_mods_00054428">WiSe 1988/89</option>
-          <option value="../../../receive/dbbs_mods_00054391">SoSe 1989</option>
-          <option value="../../../receive/dbbs_mods_00054396">WiSe 1989/90</option>
-          <option value="../../../receive/dbbs_mods_00054423">SoSe 1990</option>
-          <option value="../../../receive/dbbs_mods_00053681">WiSe 1990/91</option>
-          <option value="../../../receive/dbbs_mods_00053164">SoSe 1991</option>
-          <option value="../../../receive/dbbs_mods_00053443">WiSe 1991/92</option>
-          <option value="../../../receive/dbbs_mods_00053145">SoSe 1992</option>
-          <option value="../../../receive/dbbs_mods_00053137">WiSe 1992/93</option>
-          <option value="../../../receive/dbbs_mods_00053156">SoSe 1993</option>
-          <option value="../../../receive/dbbs_mods_00053161">WiSe 1993/94</option>
-          <option value="../../../receive/dbbs_mods_00054401">SoSe 1994</option>
-          <option value="../../../receive/dbbs_mods_00053151">WiSe 1994/95</option>
-          <option value="../../../receive/dbbs_mods_00053691">SoSe 1995</option>
-          <option value="../../../receive/dbbs_mods_00053445">WiSe 1995/96</option>
-          <option value="../../../receive/dbbs_mods_00054290">SoSe 1996</option>
-          <option value="../../../receive/dbbs_mods_00053463">WiSe 1996/97</option>
-          <option value="../../../receive/dbbs_mods_00055732">SoSe 1997</option>
-          <option value="../../../receive/dbbs_mods_00053678">WiSe 1997/98</option>
-          <option value="../../../receive/dbbs_mods_00053212">SoSe 1998</option>
-          <option value="../../../receive/dbbs_mods_00053921">WiSe 1998/99</option>
-          <option value="../../../receive/dbbs_mods_00053403">SoSe 1999</option>
-          <option value="../../../receive/dbbs_mods_00053127">WiSe 1999/2000</option>
-          <option value="../../../receive/dbbs_mods_00051751">SoSe 2000</option>
-          <option value="../../../receive/dbbs_mods_00053468">WiSe 2000/01</option>
-          <option value="../../../receive/dbbs_mods_00051694">SoSe 2001</option>
-          <option value="../../../receive/dbbs_mods_00053269">WiSe 2001/02</option>
-          <option value="../../../receive/dbbs_mods_00051279">SoSe 2002</option>
-          <option value="../../../receive/dbbs_mods_00051368">WiSe 2002/03</option>
-          <option value="../../../receive/dbbs_mods_00050753">SoSe 2003</option>
-          <option value="../../../receive/dbbs_mods_00050536">WiSe 2003/04</option>
-          <option value="../../../receive/dbbs_mods_00050976">SoSe 2004</option>
-          <option value="../../../receive/dbbs_mods_00050888">WiSe 2004/05</option>
-          <option value="../../../receive/dbbs_mods_00051125">SoSe 2005</option>
-          <option value="../../../receive/dbbs_mods_00051251">WiSe 2005/06</option>
-          <option value="../../../receive/dbbs_mods_00053450">SoSe 2006</option>
-          <option value="../../../receive/dbbs_mods_00050533">WiSe 2006/07</option>
-          <option value="../../../receive/dbbs_mods_00050684">SoSe 2007</option>
-        </select>
-      </div>
-    </div>
+<div class="row">
+<div class="col-md-6">
+<p><strong>Programm der Herzoglichen Polytechnischen Schule, des Collegium Carolinum zu Braunschweig 1872 - 1878</strong></p>
+</div>
 
+<div class="col-md-4"><select class="form-control bs_select"><option selected="selected" value="">WiSe 1872/73 bis SoSe 1878</option><option value="../../../receive/dbbs_mods_00039930">WiSe 1872/73, SoSe 1873</option><option value="../../../receive/dbbs_mods_00039931">WiSe 1873/74, SoSe 1874</option><option value="../../../receive/dbbs_mods_00039932">WiSe 1874/75, SoSe 1875</option><option value="../../../receive/dbbs_mods_00039933">WiSe 1875/76, SoSe 1876</option><option value="../../../receive/dbbs_mods_00039934">WiSe 1876/77, SoSe 1877</option><option value="../../../receive/dbbs_mods_00039935">WiSe 1877/78, SoSe 1878</option> </select></div>
+</div>
 
+<div class="row">
+<div class="col-md-6">
+<p><strong>Programm der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1878 - 1935</strong></p>
+</div>
 
-<!-- ***************************************** 2008 - aktuell ***************************************** -->
-    <div class="row">
-      <div class="col-md-6">
-        <p>
-          <strong>Vorlesungsverzeichnis der Technischen Universität Braunschweig seit 2008</strong>
-        </p>
-      </div>
-      <div class="col-md-4">
-        <select class="form-control bs_select">
-          <option value="" selected="">WiSe 2007/08 - SoSe 2014</option>
-          <option value="../../../receive/dbbs_mods_00058450">WiSe 2007/08</option>
-          <option value="../../../receive/dbbs_mods_00050284">SoSe 2008</option>
-          <option value="../../../receive/dbbs_mods_00050289">WiSe 2008/09</option>
-          <option value="../../../receive/dbbs_mods_00050292">SoSe 2009</option>
-          <option value="../../../receive/dbbs_mods_00050294">WiSe 2009/10</option>
-          <option value="../../../receive/dbbs_mods_00050299">SoSe 2010</option>
-          <option value="../../../receive/dbbs_mods_00050304">WiSe 2010/11</option>
-          <option value="../../../receive/dbbs_mods_00050309">SoSe 2011</option>
-          <option value="../../../receive/dbbs_mods_00050315">WiSe 2011/12</option>
-          <option value="../../../receive/dbbs_mods_00050341">SoSe 2012</option>
-          <option value="../../../receive/dbbs_mods_00050346">WiSe 2012/13</option>
-          <option value="../../../receive/dbbs_mods_00054629">SoSe 2013</option>
-          <option value="../../../receive/dbbs_mods_00056509">WiSe 2013/14</option>
-          <option value="../../../receive/dbbs_mods_00058233">SoSe 2014</option>
-          <option value="../../../receive/dbbs_mods_00060063">WiSe 2014/15</option>
-        </select>
-      </div>
-    </div>
+<div class="col-md-4"><select class="form-control bs_select"><option selected="selected" value="">WiSe 1878/79 bis SoSe 1935</option><option value="../../../receive/dbbs_mods_00039995">WiSe 1878/79, SoSe 1879</option><option value="../../../receive/dbbs_mods_00039996">WiSe 1879/80, SoSe 1880</option><option value="../../../receive/dbbs_mods_00039997">WiSe 1880/81, SoSe 1881</option><option value="../../../receive/dbbs_mods_00039998">WiSe 1881/82, SoSe 1882</option><option value="../../../receive/dbbs_mods_00039999">WiSe 1882/83, SoSe 1883</option><option value="../../../receive/dbbs_mods_00040000">WiSe 1883/84, SoSe 1884</option><option value="../../../receive/dbbs_mods_00040001">WiSe 1884/85, SoSe 1885</option><option value="../../../receive/dbbs_mods_00040002">WiSe 1885/86, SoSe 1886</option><option value="../../../receive/dbbs_mods_00040003">WiSe 1886/87, SoSe 1887</option><option value="../../../receive/dbbs_mods_00040004">WiSe 1887/88, SoSe 1888</option><option value="../../../receive/dbbs_mods_00039960">WiSe 1888/89, SoSe 1889</option><option value="../../../receive/dbbs_mods_00039961">WiSe 1889/90, SoSe 1890</option><option value="../../../receive/dbbs_mods_00039962">WiSe 1890/91, SoSe 1891</option><option value="../../../receive/dbbs_mods_00039963">WiSe 1891/92, SoSe 1892</option><option value="../../../receive/dbbs_mods_00039964">WiSe 1892/93, SoSe 1893</option><option value="../../../receive/dbbs_mods_00039965">WiSe 1893/94, SoSe 1894</option><option value="../../../receive/dbbs_mods_00039966">WiSe 1894/95, SoSe 1895</option><option value="../../../receive/dbbs_mods_00039967">WiSe 1895/96, SoSe 1896</option><option value="../../../receive/dbbs_mods_00039968">WiSe 1896/97, SoSe 1897</option><option value="../../../receive/dbbs_mods_00039969">WiSe 1897/98, SoSe 1898</option><option value="../../../receive/dbbs_mods_00039984">WiSe 1898/99, SoSe 1899</option><option value="../../../receive/dbbs_mods_00039985">WiSe 1899/00, SoSe 1900</option><option value="../../../receive/dbbs_mods_00039986">WiSe 1900/01, SoSe 1901</option><option value="../../../receive/dbbs_mods_00039987">WiSe 1901/02, SoSe 1902</option><option value="../../../receive/dbbs_mods_00039988">WiSe 1902/03, SoSe 1903</option><option value="../../../receive/dbbs_mods_00039989">WiSe 1903/04, SoSe 1904</option><option value="../../../receive/dbbs_mods_00039990">WiSe 1904/05, SoSe 1905</option><option value="../../../receive/dbbs_mods_00039991">WiSe 1905/06, SoSe 1906</option><option value="../../../receive/dbbs_mods_00039992">WiSe 1906/07, SoSe 1907</option><option value="../../../receive/dbbs_mods_00039993">WiSe 1907/08, SoSe 1908</option><option value="../../../receive/dbbs_mods_00040015">WiSe 1908/09, SoSe 1909</option><option value="../../../receive/dbbs_mods_00040016">WiSe 1909/10, SoSe 1910</option><option value="../../../receive/dbbs_mods_00040017">WiSe 1910/11, SoSe 1911</option><option value="../../../receive/dbbs_mods_00040018">WiSe 1911/12, SoSe 1912</option><option value="../../../receive/dbbs_mods_00040019">WiSe 1912/13, SoSe 1913</option><option value="../../../receive/dbbs_mods_00040020">WiSe 1913/14, SoSe 1914</option><option value="../../../receive/dbbs_mods_00040021">WiSe 1914/15, SoSe 1915</option><option value="../../../receive/dbbs_mods_00040022">WiSe 1915/16, SoSe 1916</option><option value="../../../receive/dbbs_mods_00040023">WiSe 1916/17, SoSe 1917</option><option value="../../../receive/dbbs_mods_00040024">WiSe 1917/18, SoSe 1918</option><option value="../../../receive/dbbs_mods_00040028">WiSe 1918/19, SoSe 1919</option><option value="../../../receive/dbbs_mods_00040030">SoSe 1919</option><option value="../../../receive/dbbs_mods_00040031">WiSe 1919/20, SoSe 1920</option><option value="../../../receive/dbbs_mods_00040032">WiSe 1920/21, SoSe 1921</option><option value="../../../receive/dbbs_mods_00040033">WiSe 1921/22, SoSe 1922</option><option value="../../../receive/dbbs_mods_00040034">WiSe 1922/23, SoSe 1923</option><option value="../../../receive/dbbs_mods_00040035">WiSe 1923/24, SoSe 1924</option><option value="../../../receive/dbbs_mods_00040036">WiSe 1924/25, SoSe 1925</option><option value="../../../receive/dbbs_mods_00040037">WiSe 1925/26, SoSe 1926</option><option value="../../../receive/dbbs_mods_00040038">WiSe 1926/27, SoSe 1927</option><option value="../../../receive/dbbs_mods_00040039">WiSe 1927/28, SoSe 1928</option><option value="../../../receive/dbbs_mods_00040174">WiSe 1928/29, SoSe 1929</option><option value="../../../receive/dbbs_mods_00040175">WiSe 1929/30, SoSe 1930</option><option value="../../../receive/dbbs_mods_00040176">WiSe 1930/31, SoSe 1931</option><option value="../../../receive/dbbs_mods_00040177">WiSe 1931/32, SoSe 1932</option><option value="../../../receive/dbbs_mods_00040178">WiSe 1932/33, SoSe 1933</option><option value="../../../receive/dbbs_mods_00040179">WiSe 1933/34, SoSe 1934</option><option value="../../../receive/dbbs_mods_00040180">WiSe 1934/35, SoSe 1935</option> </select></div>
+</div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <hr />
-        <p>
-          Hier finden Sie die <a href="ph.xml">Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</a>.
-        </p>
-        <p>
-          Hier finden Sie die <a href="matrikelbuecher.xml">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
-        </p>
-      </div>
-    </div>
+<div class="row">
+<div class="col-md-6">
+<p><strong>Personal- und Vorlesungsverzeichnis der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig 1935 - 2007</strong></p>
+</div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <hr />
-        <p>
-          <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
-        </p>
-        </div>
-    </div>
+<div class="col-md-4"><select class="form-control bs_select"><option selected="selected" value="">WiSe 1935/36 bis SoSe 2007</option><option value="../../../receive/dbbs_mods_00040182">WiSe 1935/36, SoSe 1936</option><option value="../../../receive/dbbs_mods_00040183">WiSe 1936/37, SoSe 1937</option><option value="../../../receive/dbbs_mods_00040184">ZwSe 1937, WiSe 1937/38</option><option value="../../../receive/dbbs_mods_00040185">SoSe 1938, WiSe 1938/39</option><option value="../../../receive/dbbs_mods_00040186">SoSe 1939</option><option value="../../../receive/dbbs_mods_00040187">WiSe 1939/40</option><option value="../../../receive/dbbs_mods_00040188">WiSe 1940/41</option><option value="../../../receive/dbbs_mods_00040189">SoSe 1941, WiSe 1941/42</option><option value="../../../receive/dbbs_mods_00040190">SoSe 1942, WiSe 1942/43</option><option value="../../../receive/dbbs_mods_00040191">SoSe 1943, WiSe 1943/44</option><option value="../../../receive/dbbs_mods_00040192">SoSe 1944, WiSe 1944/45</option><option value="../../../receive/dbbs_mods_00040193">WiSe 1945/46</option><option value="../../../receive/dbbs_mods_00045756">SoSe 1946</option><option value="../../../receive/dbbs_mods_00046640">WiSe 1946/47, SoSe 1947</option><option value="../../../receive/dbbs_mods_00046516">WiSe 1947/48, SoSe 1948</option><option value="../../../receive/dbbs_mods_00046521">WiSe 1948/49, SoSe 1949</option><option value="../../../receive/dbbs_mods_00046528">WiSe 1949/50, SoSe 1950</option><option value="../../../receive/dbbs_mods_00046532">WiSe 1950/51, SoSe 1951</option><option value="../../../receive/dbbs_mods_00046536">WiSe 1951/52, SoSe 1952</option><option value="../../../receive/dbbs_mods_00046540">WiSe 1952/53, SoSe 1953</option><option value="../../../receive/dbbs_mods_00046649">WiSe 1953/54, SoSe 1954</option><option value="../../../receive/dbbs_mods_00046652">WiSe 1954/55, SoSe 1955</option><option value="../../../receive/dbbs_mods_00046655">WiSe 1955/56, SoSe 1956</option><option value="../../../receive/dbbs_mods_00046658">WiSe 1956/57, SoSe 1957</option><option value="../../../receive/dbbs_mods_00046661">WiSe 1957/58, SoSe 1958</option><option value="../../../receive/dbbs_mods_00046664">WiSe 1958/59, SoSe 1959</option><option value="../../../receive/dbbs_mods_00046738">WiSe 1959/60, SoSe 1960</option><option value="../../../receive/dbbs_mods_00047802">WiSe 1960/61, SoSe 1961</option><option value="../../../receive/dbbs_mods_00047804">WiSe 1961/62, SoSe 1962</option><option value="../../../receive/dbbs_mods_00047806">WiSe 1962/63, SoSe 1963</option><option value="../../../receive/dbbs_mods_00047808">WiSe 1963/64, SoSe 1964</option><option value="../../../receive/dbbs_mods_00047810">WiSe 1964/65, SoSe 1965</option><option value="../../../receive/dbbs_mods_00049850">WiSe 1965/66, SoSe 1966</option><option value="../../../receive/dbbs_mods_00047813">WiSe 1966/67, SoSe 1967</option><option value="../../../receive/dbbs_mods_00047819">WiSe 1967/68, SoSe 1968</option><option value="../../../receive/dbbs_mods_00050895">WiSe 1968/69, SoSe 1969</option><option value="../../../receive/dbbs_mods_00058147">WiSe 1969/70</option><option value="../../../receive/dbbs_mods_00058154">SoSe 1970</option><option value="../../../receive/dbbs_mods_00056279">WiSe 1970/71</option><option value="../../../receive/dbbs_mods_00056730">SoSe 1971</option><option value="../../../receive/dbbs_mods_00057201">WiSe 1971/72</option><option value="../../../receive/dbbs_mods_00056724">SoSe 1972</option><option value="../../../receive/dbbs_mods_00055844">WiSe 1972/73</option><option value="../../../receive/dbbs_mods_00055965">SoSe 1973</option><option value="../../../receive/dbbs_mods_00056719">WiSe 1973/74</option><option value="../../../receive/dbbs_mods_00056855">SoSe 1974</option><option value="../../../receive/dbbs_mods_00056080">WiSe 1974/75</option><option value="../../../receive/dbbs_mods_00055827">SoSe 1975</option><option value="../../../receive/dbbs_mods_00055818">WiSe 1975/76</option><option value="../../../receive/dbbs_mods_00055830">SoSe 1976</option><option value="../../../receive/dbbs_mods_00055820">WiSe 1976/77</option><option value="../../../receive/dbbs_mods_00055932">SoSe 1977</option><option value="../../../receive/dbbs_mods_00055922">WiSe 1977/78</option><option value="../../../receive/dbbs_mods_00055822">SoSe 1978</option><option value="../../../receive/dbbs_mods_00050503">WiSe 1978/79</option><option value="../../../receive/dbbs_mods_00055406">SoSe 1979</option><option value="../../../receive/dbbs_mods_00055524">WiSe 1979/80</option><option value="../../../receive/dbbs_mods_00055655">SoSe 1980</option><option value="../../../receive/dbbs_mods_00054742">WiSe 1980/81</option><option value="../../../receive/dbbs_mods_00055595">SoSe 1981</option><option value="../../../receive/dbbs_mods_00055407">WiSe 1981/82</option><option value="../../../receive/dbbs_mods_00055383">SoSe 1982</option><option value="../../../receive/dbbs_mods_00055615">WiSe 1982/83</option><option value="../../../receive/dbbs_mods_00055649">SoSe 1983</option><option value="../../../receive/dbbs_mods_00055388">WiSe 1983/84</option><option value="../../../receive/dbbs_mods_00055396">SoSe 1984</option><option value="../../../receive/dbbs_mods_00055660">WiSe 1984/85</option><option value="../../../receive/dbbs_mods_00055727">SoSe 1985</option><option value="../../../receive/dbbs_mods_00054327">WiSe 1985/86</option><option value="../../../receive/dbbs_mods_00054503">SoSe 1986</option><option value="../../../receive/dbbs_mods_00054305">WiSe 1986/87</option><option value="../../../receive/dbbs_mods_00054455">SoSe 1987</option><option value="../../../receive/dbbs_mods_00054617">WiSe 1987/88</option><option value="../../../receive/dbbs_mods_00054501">SoSe 1988</option><option value="../../../receive/dbbs_mods_00054428">WiSe 1988/89</option><option value="../../../receive/dbbs_mods_00054391">SoSe 1989</option><option value="../../../receive/dbbs_mods_00054396">WiSe 1989/90</option><option value="../../../receive/dbbs_mods_00054423">SoSe 1990</option><option value="../../../receive/dbbs_mods_00053681">WiSe 1990/91</option><option value="../../../receive/dbbs_mods_00053164">SoSe 1991</option><option value="../../../receive/dbbs_mods_00053443">WiSe 1991/92</option><option value="../../../receive/dbbs_mods_00053145">SoSe 1992</option><option value="../../../receive/dbbs_mods_00053137">WiSe 1992/93</option><option value="../../../receive/dbbs_mods_00053156">SoSe 1993</option><option value="../../../receive/dbbs_mods_00053161">WiSe 1993/94</option><option value="../../../receive/dbbs_mods_00054401">SoSe 1994</option><option value="../../../receive/dbbs_mods_00053151">WiSe 1994/95</option><option value="../../../receive/dbbs_mods_00053691">SoSe 1995</option><option value="../../../receive/dbbs_mods_00053445">WiSe 1995/96</option><option value="../../../receive/dbbs_mods_00054290">SoSe 1996</option><option value="../../../receive/dbbs_mods_00053463">WiSe 1996/97</option><option value="../../../receive/dbbs_mods_00055732">SoSe 1997</option><option value="../../../receive/dbbs_mods_00053678">WiSe 1997/98</option><option value="../../../receive/dbbs_mods_00053212">SoSe 1998</option><option value="../../../receive/dbbs_mods_00053921">WiSe 1998/99</option><option value="../../../receive/dbbs_mods_00053403">SoSe 1999</option><option value="../../../receive/dbbs_mods_00053127">WiSe 1999/2000</option><option value="../../../receive/dbbs_mods_00051751">SoSe 2000</option><option value="../../../receive/dbbs_mods_00053468">WiSe 2000/01</option><option value="../../../receive/dbbs_mods_00051694">SoSe 2001</option><option value="../../../receive/dbbs_mods_00053269">WiSe 2001/02</option><option value="../../../receive/dbbs_mods_00051279">SoSe 2002</option><option value="../../../receive/dbbs_mods_00051368">WiSe 2002/03</option><option value="../../../receive/dbbs_mods_00050753">SoSe 2003</option><option value="../../../receive/dbbs_mods_00050536">WiSe 2003/04</option><option value="../../../receive/dbbs_mods_00050976">SoSe 2004</option><option value="../../../receive/dbbs_mods_00050888">WiSe 2004/05</option><option value="../../../receive/dbbs_mods_00051125">SoSe 2005</option><option value="../../../receive/dbbs_mods_00051251">WiSe 2005/06</option><option value="../../../receive/dbbs_mods_00053450">SoSe 2006</option><option value="../../../receive/dbbs_mods_00050533">WiSe 2006/07</option><option value="../../../receive/dbbs_mods_00050684">SoSe 2007</option> </select></div>
+</div>
 
-    <script>
+<div class="row">
+<div class="col-md-6">
+<p><strong>Vorlesungsverzeichnis der Technischen Universität Braunschweig seit 2008</strong></p>
+</div>
+
+<div class="col-md-4"><select class="form-control bs_select"><option selected="selected" value="">WiSe 2007/08 - WiSe 2016/17</option><option value="../../../receive/dbbs_mods_00058450">WiSe 2007/08</option><option value="../../../receive/dbbs_mods_00050284">SoSe 2008</option><option value="../../../receive/dbbs_mods_00050289">WiSe 2008/09</option><option value="../../../receive/dbbs_mods_00050292">SoSe 2009</option><option value="../../../receive/dbbs_mods_00050294">WiSe 2009/10</option><option value="../../../receive/dbbs_mods_00050299">SoSe 2010</option><option value="../../../receive/dbbs_mods_00050304">WiSe 2010/11</option><option value="../../../receive/dbbs_mods_00050309">SoSe 2011</option><option value="../../../receive/dbbs_mods_00050315">WiSe 2011/12</option><option value="../../../receive/dbbs_mods_00050341">SoSe 2012</option><option value="../../../receive/dbbs_mods_00050346">WiSe 2012/13</option><option value="../../../receive/dbbs_mods_00054629">SoSe 2013</option><option value="../../../receive/dbbs_mods_00056509">WiSe 2013/14</option><option value="../../../receive/dbbs_mods_00058233">SoSe 2014</option><option value="../../../receive/dbbs_mods_00060063">WiSe 2014/15</option><option value="../../../receive/dbbs_mods_00061566">SoSe 2015</option><option value="../../../receive/dbbs_mods_00062780">WiSe 2015/16</option><option value="../../../receive/dbbs_mods_00064123">SoSe 2016</option><option value="../../../receive/dbbs_mods_00064773">WiSe 2016/17</option> </select></div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<hr />
+<p>Hier finden Sie die <a href="ph.xml">Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</a>.</p>
+
+<p>Hier finden Sie die <a href="matrikelbuecher.xml">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.</p>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<hr />
+<p><a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a></p>
+</div>
+</div>
+<script>
         $(function(){
           // bind change event to select
           $('.bs_select').on('change', function () {
@@ -548,11 +82,5 @@
               return false;
           });
         });
-    </script>
-
-  </section>
-  <meta>
-    <log date="2016-05-09" time="12:23" labelPath=" » Vorlesungen"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+    </script></div>
+</section><meta><log lastEditor="dbbs_admin" date="2017-04-26" time="15:49" /></meta></MyCoReWebPage>

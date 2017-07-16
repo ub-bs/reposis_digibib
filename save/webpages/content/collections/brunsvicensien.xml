@@ -5,10 +5,10 @@
 <div class="row" id="digibib_brunsvicensien">
 <div class="col-md-6">
 <ul>
-	<li>Brunsvicensien der <a href="http://www.tu-bs.de">Universitätsbibliothek Braunschweig</a><br />
+	<li>Brunsvicensien der <a href="http://www.ub.tu-braunschweig.de">Universitätsbibliothek Braunschweig</a><br />
 	 </li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=f13dedfd-0/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig%22">Alle Titel</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+collegium+carolinum+technischen+universit%C3%A4t">Vom Collegium Carolinum bis zur Technischen Universität </a>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">Vom Collegium Carolinum bis zur Technischen Universität </a>
 	<ul>
 		<li><a href="brunsvicensien/vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse ab 1745</a></li>
 		<li><a href="brunsvicensien/matrikelbuecher.xml">Matrikelbücher (1745 - 1942)</a></li>
@@ -20,7 +20,7 @@
 		Universitätsarchivs Braunschweig</a></li>
 	</ul>
 	</li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=effe92d7-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+stadt+braunschweig">Stadt Braunschweig</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Stadt+Braunschweig%22&amp;wt=xml">Stadt Braunschweig</a></li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+braunschweiger+Land">Land Braunschweig</a> (Region, Umland ...)</li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+herzogtum+braunschweig">Herzogtum Braunschweig</a></li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=b2131f47-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+kunst+kulturgeschichte">Kunst- und Kulturgeschichte</a></li>
@@ -33,25 +33,41 @@
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=601eaa14-0/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+geologie%22">Geologie</a></li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=ae7a4501-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+eisenbahngeschichte%22">Eisenbahngeschichte</a></li>
 	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+ansichten+braunschweig">Ansichten von Braunschweig</a></li>
-</ul>
-</div>
-
-<div class="col-md-6">
-<ul>
-	<li><strong>Werke...</strong>
-
+	<li>Werke...
 	<ul>
 		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=7efeee72-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+braunschweiger+pers%C3%B6nlichkeiten%22">... von Persönlichkeiten der Region </a></li>
 		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=7efeee72-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+werke+%C3%BCber+braunschweiger+pers%C3%B6nlichkeiten%22">... über Persönlichkeiten der Region </a></li>
 	</ul>
 	</li>
+</ul>
+</div>
+
+<div class="col-md-6">
+<ul>
 	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigische Anzeigen</a></li>
 	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a></li>
 	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigisches Magazin</a><br />
 	 </li>
-	<li><a href="brunsvicensien/adressbuecher.xml">Braunschweigische Adressbücher<br />
-	ab dem Jahr 1721 - ... </a></li>
-	<li><a href="brunsvicensien/publications_bwg.xml">Veröffentlichungen</a> der Braunschweigischen Wissenschaftlichen Gesellschaft <a href="http://bwg-nds.de/">(BWG)</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64262">Braunschweigische Adressbücher<br />
+	ab dem Jahr 1721 - ... </a><br />
+	 </li>
+	<li>In Zusammenarbeit mit dem <a href="http://www.braunschweig.de/kultur_tourismus/bibliotheken_archive/stadtarchiv/index.html">Stadtarchiv Braunschweig</a>
+	<ul>
+		<li><a href="brunsvicensien/adressbuecher.xml">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a></li>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064442">Urkundenbücher der Stadt Braunschweig<br />
+		Bände 1 - 8 </a></li>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441">Chroniken der Stadt Braunschweig</a><br />
+		<a href="../../../receive/dbbs_mods_00038463">Band 1</a><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441"> - </a><a href="../../../receive/dbbs_mods_00038464">Band 2</a><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441"> - </a><a href="../../../receive/dbbs_mods_00038465">Band 3, Teil 1</a><br />
+		 </li>
+	</ul>
+	</li>
+	<li><a href="brunsvicensien/publications_bwg.xml">Veröffentlichungen der Braunschweigischen Wissenschaftlichen Gesellschaft</a>  <a href="http://bwg-nds.de/">(BWG)</a><br />
+	 </li>
+	<li>In Zusammenarbeit mit dem <a href="http://www.braunschweigischer-geschichtsverein.de/">Braunschweigischen Geschichtsverein</a>
+	<ul>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/get/64800">Braunschweigische Jahrbücher</a> der Jahrgänge 1902 bis 2006</li>
+	</ul>
+	</li>
 </ul>
  
 
@@ -65,23 +81,14 @@
 <div class="row">
 <div class="col-md-12">
 <ul>
-	<li>Brunsvicensien in Zusammenarbeit mit dem <a href="http://www.braunschweig.de/kultur_tourismus/bibliotheken_archive/stadtarchiv/index.html">Stadtarchiv Braunschweig</a>
+	<li>Brunsvicensien der <a href="http://www.hab.de">Herzog August Bibliothek Wolfenbüttel</a>
 
 	<ul>
-		<li><a href="brunsvicensien/adressbuecher.xml">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a></li>
-		<li><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064442">Urkundenbücher der Stadt Braunschweig<br />
-		Bände 1 - 8 </a></li>
-		<li><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441">Chroniken der Stadt Braunschweig</a><br />
-		<a href="../../../receive/dbbs_mods_00038463">Band 1</a><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441"> - </a><a href="../../../receive/dbbs_mods_00038464">Band 2</a><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441"> - </a><a href="../../../receive/dbbs_mods_00038465">Band 3, Teil 1</a></li>
-	</ul>
-	</li>
-	<li>Brunsvicensien in Zusammenarbeit mit dem <a href="http://www.braunschweigischer-geschichtsverein.de/">Braunschweigischen Geschichtsverein</a>
-	<ul>
-		<li><a href="brunsvicensien/jahrbuecher.xml">Braunschweigische Jahrbücher</a> der Jahrgänge 1902 bis 2004</li>
+		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=rti+helmstedter+drucke%3F">Helmstedter Drucker Online</a></li>
 	</ul>
 	</li>
 </ul>
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-03-23" time="11:51" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2017-07-13" time="09:57" /></meta></MyCoReWebPage>

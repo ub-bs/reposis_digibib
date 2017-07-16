@@ -1,51 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-<section xml:lang="de" title="Vertragsbedingungen">
+<MyCoReWebPage><section xml:lang="de" title="Vertragsbedingungen"><div>
+<h2>Vertragsbedingungen</h2>
 
-  <h2>Vertragsbedingungen</h2>
-  <div class="row">
-    <div class="col-md-12">
-      <ol>
-        <li>
-          Mit der Anmeldung ist kein Anspruch auf eine elektronische Publikation verbunden. Die Universitätsbibliothek
-          Braunschweig behält sich vor, eine Veröffentlichung von der Erfüllung der technischen und inhaltlichen
-          Voraussetzungen abhängig zu machen.
-        </li>
-        <li>
-          Die urheberrechtliche Unbedenklichkeit der Publikation liegt in der Verantwortung der Autor/-innen. Die
-          Autor/-innen stehen dafür ein, dass durch die Publikation des Werkes nicht die Rechte Dritter verletzt
-          werden. Dies schließt insbesondere die ggf. im vorliegenden Werk enthaltenen Abbildungen oder
-          Multimedia-Elemente [z.B. Fotos, Grafikelemente] ein.
-        </li>
-        <li>
-          Die Autor/-innen räumen der Universitätsbibliothek Braunschweig das einfache, zeitlich unbefristete
-          Nutzungsrecht ein, die Publikation in der Digitalen Bibliothek Braunschweig zu veröffentlichen, d.h.
-          auf ihren Servern zu speichern, öffentlich zugänglich zu machen und auf Einzelabruf in Datennetzen zu
-          übertragen. Die Rechte zur Verwertung in anderer Form bleiben hiervon unberührt. Die Universitätsbibliothek
-          Braunschweig verfolgt mit der Veröffentlichung keine wirtschaftlichen Interessen. Die Autor/-innenvon der
-          Universitätsbliothek Braunschweig keine Vergütung.
-        </li>
-        <li>
-          Alle weiteren Rechte für die Verwertung der Arbeit verbleiben bei den Autor/-innen.
-        </li>
-        <li>
-          Die Verantwortung für die Vermeidung von Interessenskonflikten liegt beim Inhaber der Verwertungsrechte
-          und nicht bei der Universitätsbibliothek Braunschweig.
-        </li>
-        <li>
-          Die Universitätsbibliothek Braunschweig übernimmt keine Haftung für den Fall, dass von dritter Seite die
-          Publikation unrechtmäßig heruntergeladen, verändert oder an anderer Stelle ohne Einwilligung der Autorin/des
-          Autors aufgelegt wird.
-        </li>
-      </ol>
-      <p>
-        <em>Stand: 11.10.2016</em>
-      </p>
-    </div>
-  </div>
-</section>
-<meta>
-  <log lastEditor="administrator" date="2016-10-11" time="11:18" />
-</meta>
-</MyCoReWebPage>
+<div class="row">
+<div class="col-md-12">
+<ol>
+	<li>Mit der Anmeldung ist kein Anspruch auf eine elektronische Publikation verbunden. Die Universitätsbibliothek Braunschweig behält sich vor, eine Veröffentlichung von der Erfüllung der technischen und inhaltlichen Voraussetzungen abhängig zu machen.</li>
+	<li>Die urheberrechtliche Unbedenklichkeit der Publikation liegt in der Verantwortung der Autor/innen. Die Autor/innen stehen dafür ein, dass durch die Publikation des Werkes nicht die Rechte Dritter verletzt werden. Dies schließt insbesondere die ggf. im vorliegenden Werk enthaltenen Abbildungen oder Multimedia-Elemente [z.B. Fotos, Grafikelemente] ein.</li>
+	<li>Die Autor/innen räumen der Universitätsbibliothek Braunschweig das einfache, zeitlich unbefristete Nutzungsrecht ein, die Publikation in der Digitalen Bibliothek Braunschweig zu veröffentlichen, d.h. auf ihren Servern zu speichern, öffentlich zugänglich zu machen und auf Einzelabruf in Datennetzen zu übertragen. Die Rechte zur Verwertung in anderer Form bleiben hiervon unberührt. Die Universitätsbibliothek Braunschweig verfolgt mit der Veröffentlichung keine wirtschaftlichen Interessen. Die Autor/innen erhalten von der Universitätsbliothek Braunschweig keine Vergütung.</li>
+	<li>Alle weiteren Rechte für die Verwertung der Arbeit verbleiben bei den Autor/innen.</li>
+	<li>Die Verantwortung für die Vermeidung von Interessenskonflikten liegt beim Inhaber der Verwertungsrechte und nicht bei der Universitätsbibliothek Braunschweig.</li>
+	<li>Die Universitätsbibliothek Braunschweig übernimmt keine Haftung für den Fall, dass von dritter Seite die Publikation unrechtmäßig heruntergeladen, verändert oder an anderer Stelle ohne Einwilligung der Autorin/des Autors aufgelegt wird.</li>
+</ol>
+
+<p><em>Stand: 11.10.2016</em></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2017-07-03" time="16:46" /></meta></MyCoReWebPage>

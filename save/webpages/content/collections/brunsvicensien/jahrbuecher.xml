@@ -1,213 +1,211 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Jahrbücher des Braunschweigischen Geschichtsvereins">
+<MyCoReWebPage><section xml:lang="de" title="Jahrbücher des Braunschweigischen Geschichtsvereins"><div>
+<h2>Jahrbücher des Braunschweigischen Geschichtsvereins</h2>
 
-    <h2>Jahrbücher des Braunschweigischen Geschichtsvereins</h2>
-    <div class="row" id="digibib_jahrbuecher">
-      <div class="col-md-12">
-        <p>
-          <strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=682993077">Jahrbuch des Geschichtsvereins für das Herzogtum Braunschweig (1902 - 1916)</a></strong>
-        </p>
-        <p>
-          Jahr(e):
-        </p>
-        <table class="table">
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042052">Jg. 1. 1902</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042077">Jg. 2. 1903</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042088">Jg. 3. 1904</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042092">Jg. 4. 1905</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042096">Jg. 5. 1906</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042131">Jg. 6. 1907</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042133">Jg. 7. 1908</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042135">Jg. 8. 1909</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042137">Jg. 9. 1910</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042139">Jg. 10. 1911</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042146">Jg. 11. 1912</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042148">Jg. 12. 1913</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042150">Jg. 13. 1914</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042152">Jg. 14. 1915/16</a></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </table>
-        <hr />
-      </div>
-    </div>
+<h3 style="text-align: center;">Diese Seite wird nicht mehr gepflegt. Neuere Ausgaben finden Sie ab sofort unter<br />
+<a href="http://publikationsserver.tu-braunschweig.de/get/64800">http://publikationsserver.tu-braunschweig.de/get/64800</a></h3>
 
-    <div class="row">
-      <div class="col-md-12">
-        <p>
-          <strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=684021021">Jahrbuch des Braunschweigischen Geschichtsvereins (1927 - 1938)</a></strong>
-        </p>
-        <p>
-          Jahr(e):
-        </p>
-        <table class="table">
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042177">Jg. 16. 1927</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042179">Jg. 17. 1929</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042181">Jg. 18. 1930</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042183">Jg. 19. 1931</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042237">Jg. 20. 1933</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042239">Jg. 21. 1934</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042241">Jg. 22. 1935</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042243">Jg. 23. 1936</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042245">Jg. 24. 1937</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042248">Jg. 25. 1938</a></td>
-            <td></td>
-            <td></td>
-          </tr>
-        </table>
-        <hr />
-      </div>
-    </div>
+<h3 style="text-align: center;"><br />
+ </h3>
 
-    <div class="row">
-      <div class="col-md-12">
-        <p>
-          <strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=683957007">Braunschweigisches Jahrbuch (1922; 1940 - 1995)</a></strong>
-        </p>
-        <p>
-          Jahr(e):
-        </p>
-        <table class="table">
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042154">Jg. 15. 1922</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042366">Jg. 26. 1940</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042369">Jg. 27. 1940/41</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042371">Jg. 28. 1941/42</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042373">Jg. 29. 1943</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042412">Jg. 30. 1949</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042414">Jg. 31. 1950</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042416">Jg. 32. 1951</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042419">Jg. 33. 1952</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042421">Jg. 34. 1953</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042452">Jg. 35. 1954</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042454">Jg. 36. 1955</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042456">Jg. 37. 1956</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042458">Jg. 38. 1957</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042460">Jg. 39. 1958</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042494">Jg. 40. 1959</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042496">Jg. 41. 1960</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042498">Jg. 42. 1961</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042500">Jg. 43. 1962</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042502">Jg. 44. 1963</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042511">Jg. 45. 1964</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042513">Jg. 46. 1965</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042515">Jg. 47. 1966</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042517">Jg. 48. 1967</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042519">Jg. 49. 1968</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042527">Jg. 50. 1969</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042528">Jg. 51. 1970</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042531">Jg. 52. 1971</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042532">Jg. 53. 1972</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042534">Jg. 54. 1973</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042552">Jg. 55. 1974</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042554">Jg. 56. 1975</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042556">Jg. 57. 1976</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042566">Jg. 58. 1977</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042568">Jg. 59. 1978</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042739">Jg. 60. 1979</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042587">Jg. 61. 1980</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042589">Jg. 62. 1981</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042591">Jg. 63. 1982</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042593">Jg. 64. 1983</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042602">Jg. 65. 1984</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042604">Jg. 66. 1985</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042606">Jg. 67. 1986</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042616">Jg. 68. 1987</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042618">Jg. 69. 1988</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042620">Jg. 70. 1989</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042622">Jg. 71. 1990</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042624">Jg. 72. 1991</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042631">Jg. 73. 1992</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042633">Jg. 74. 1993</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042635">Jg. 75. 1994</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042644">Jg. 76. 1995</a></td>
-          </tr>
-        </table>
-        <hr />
-      </div>
-    </div>
+<div class="row" id="digibib_jahrbuecher">
+<div class="col-md-12">
+<p><strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=682993077">Jahrbuch des Geschichtsvereins für das Herzogtum Braunschweig (1902 - 1916)</a></strong></p>
 
-    <div class="row">
-      <div class="col-md-12">
-        <p>
-          <strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=685282139">Braunschweigisches Jahrbuch für Landesgeschichte (1996 - 2006)</a></strong>
-        </p>
-        <p>
-          Jahr(e):
-        </p>
-        <table class="table">
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042647">Jg. 77. 1996</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042650">Jg. 78. 1997</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042674">Jg. 79. 1998</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042675">Jg. 80. 1999</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042684">Jg. 81. 2000</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042687">Jg. 82. 2001</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042760">Jg. 83. 2002</a></td>
-            <td><a href="../../../receive/dbbs_mods_00042720">Jg. 84. 2003</a></td>
-          </tr>
-          <tr>
-            <td><a href="../../../receive/dbbs_mods_00042750">Jg. 85. 2004</a></td>
-            <td><a href="../../../receive/dbbs_mods_00045091">Jg. 86. 2005</a></td>
-            <td><a href="../../../receive/dbbs_mods_00045094">Jg. 87. 2006</a></td>
-            <td></td>
-          </tr>
-        </table>
-      </div>
-    </div>
+<p>Jahr(e):</p>
 
-    <div class="row">
-      <div class="col-md-12">
-        <hr />
-        <p>
-          <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
-        </p>
-      </div>
-    </div>
-  </section>
-  <meta>
-    <log date="2016-05-09" time="14:29" labelPath=" » Jahrbücher"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<table class="table">
+	<tbody>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042052">Jg. 1. 1902</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042077">Jg. 2. 1903</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042088">Jg. 3. 1904</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042092">Jg. 4. 1905</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042096">Jg. 5. 1906</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042131">Jg. 6. 1907</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042133">Jg. 7. 1908</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042135">Jg. 8. 1909</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042137">Jg. 9. 1910</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042139">Jg. 10. 1911</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042146">Jg. 11. 1912</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042148">Jg. 12. 1913</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042150">Jg. 13. 1914</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042152">Jg. 14. 1915/16</a></td>
+			<td> </td>
+			<td> </td>
+		</tr>
+	</tbody>
+</table>
+
+<hr /></div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<p><strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=684021021">Jahrbuch des Braunschweigischen Geschichtsvereins (1927 - 1938)</a></strong></p>
+
+<p>Jahr(e):</p>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042177">Jg. 16. 1927</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042179">Jg. 17. 1929</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042181">Jg. 18. 1930</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042183">Jg. 19. 1931</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042237">Jg. 20. 1933</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042239">Jg. 21. 1934</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042241">Jg. 22. 1935</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042243">Jg. 23. 1936</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042245">Jg. 24. 1937</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042248">Jg. 25. 1938</a></td>
+			<td> </td>
+			<td> </td>
+		</tr>
+	</tbody>
+</table>
+
+<hr /></div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<p><strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=683957007">Braunschweigisches Jahrbuch (1922; 1940 - 1995)</a></strong></p>
+
+<p>Jahr(e):</p>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042154">Jg. 15. 1922</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042366">Jg. 26. 1940</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042369">Jg. 27. 1940/41</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042371">Jg. 28. 1941/42</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042373">Jg. 29. 1943</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042412">Jg. 30. 1949</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042414">Jg. 31. 1950</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042416">Jg. 32. 1951</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042419">Jg. 33. 1952</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042421">Jg. 34. 1953</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042452">Jg. 35. 1954</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042454">Jg. 36. 1955</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042456">Jg. 37. 1956</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042458">Jg. 38. 1957</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042460">Jg. 39. 1958</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042494">Jg. 40. 1959</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042496">Jg. 41. 1960</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042498">Jg. 42. 1961</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042500">Jg. 43. 1962</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042502">Jg. 44. 1963</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042511">Jg. 45. 1964</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042513">Jg. 46. 1965</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042515">Jg. 47. 1966</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042517">Jg. 48. 1967</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042519">Jg. 49. 1968</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042527">Jg. 50. 1969</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042528">Jg. 51. 1970</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042531">Jg. 52. 1971</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042532">Jg. 53. 1972</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042534">Jg. 54. 1973</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042552">Jg. 55. 1974</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042554">Jg. 56. 1975</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042556">Jg. 57. 1976</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042566">Jg. 58. 1977</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042568">Jg. 59. 1978</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042739">Jg. 60. 1979</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042587">Jg. 61. 1980</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042589">Jg. 62. 1981</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042591">Jg. 63. 1982</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042593">Jg. 64. 1983</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042602">Jg. 65. 1984</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042604">Jg. 66. 1985</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042606">Jg. 67. 1986</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042616">Jg. 68. 1987</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042618">Jg. 69. 1988</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042620">Jg. 70. 1989</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042622">Jg. 71. 1990</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042624">Jg. 72. 1991</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042631">Jg. 73. 1992</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042633">Jg. 74. 1993</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042635">Jg. 75. 1994</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042644">Jg. 76. 1995</a></td>
+		</tr>
+	</tbody>
+</table>
+
+<hr /></div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<p><strong><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/TTL=1/FAM?PPN=685282139">Braunschweigisches Jahrbuch für Landesgeschichte (1996 - 2006)</a></strong></p>
+
+<p>Jahr(e):</p>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042647">Jg. 77. 1996</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042650">Jg. 78. 1997</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042674">Jg. 79. 1998</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042675">Jg. 80. 1999</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042684">Jg. 81. 2000</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042687">Jg. 82. 2001</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042760">Jg. 83. 2002</a></td>
+			<td><a href="../../../receive/dbbs_mods_00042720">Jg. 84. 2003</a></td>
+		</tr>
+		<tr>
+			<td><a href="../../../receive/dbbs_mods_00042750">Jg. 85. 2004</a></td>
+			<td><a href="../../../receive/dbbs_mods_00045091">Jg. 86. 2005</a></td>
+			<td><a href="../../../receive/dbbs_mods_00045094">Jg. 87. 2006</a></td>
+			<td> </td>
+		</tr>
+	</tbody>
+</table>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<hr />
+<p><a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2017-07-13" time="09:43" /></meta></MyCoReWebPage>

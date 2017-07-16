@@ -1,33 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage><section xml:lang="de" title="Hinweise für Autoren"><div>
-<h2>Hinweise für Autoren</h2>
+<h2>Hinweise für Autor/innen</h2>
 
 <div class="row">
 <div class="col-md-12">
-<p>E-Publikationen können von <em>Wissenschaftlerinnen und Wissenschaftlern der TU Braunschweig</em> (auch Gastwissenschaftlern) kostenlos veröffentlicht werden.</p>
+<p>E-Publikationen können von <em>Wissenschaftler/innen der TU Braunschweig</em> (auch Gastwissenschaftler/innen) kostenlos veröffentlicht werden.</p>
 
 <p>Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des Urheberrechts veröffentlicht.</p>
 
 <p>Bitte beachten Sie unsere Hinweise ...</p>
 
 <ul>
-	<li><a href="guidelines.xml">zu den Leitlinien</a></li>
 	<li><a href="copyright.xml">zum Urheberrecht</a></li>
 	<li><a href="contract.xml">zu den Vertragsbedingungen</a></li>
 </ul>
 
 <p>Wir benötigen von Ihnen eine <em>schriftliche Einwilligung</em>, damit Ihre Publikation über die Digitale Bibliothek Braunschweig veröffentlicht und im Internet zur Verfügung gestellt werden kann.</p>
 
-<p>Bitte beachten Sie, daß <strong>veröffentlichte Dokumente nicht mehr entfernt oder ausgetauscht werden</strong> können. Überarbeitete Versionen bekommen einen neuen Datensatz.</p>
+<p><strong>Bitte beachten Sie, daß veröffentlichte Dokumente nicht mehr entfernt oder ausgetauscht werden können!</strong><br />
+Überarbeitete Versionen bekommen einen neuen Datensatz.</p>
 
-<p>Bitte drucken Sie für eine Publikation folgendes <a href="digi_form.pdf">Formular 1 (PDF)</a> oder für mehrere Publikationen folgendes <a href="digi_form_2.pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:</p>
+<p>Bitte drucken Sie für eine Publikation folgendes <a href="/content/publish/publish_form-print(1).pdf">Formular 1 (PDF)</a> oder für mehrere Publikationen folgendes <a href="/content/publish/publish_form_2-print(1).pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:</p>
 
-<address>Universitätsbibliothek<br />
-Digitale Bibliothek Braunschweig<br />
+<address>Technische Universität Braunschweig<br />
+Universitätsbibliothek<br />
+Digitale Bibliothek und Publikationsservices<br />
 Universitätsplatz 1<br />
-38106 Braunschweig<br />
-<br />
-Fax: 0531 391 5836</address>
+38106 Braunschweig</address>
+
+<address>Fax: 0531 391 5836</address>
 
 <p>Um ein Dokument an die UB zu übermitteln steht Ihnen unser <a href="../../editor/submit_request.xed">Web-Formular</a> zur Verfügung.</p>
 
@@ -49,4 +50,4 @@ Ausführliche Hinweise zur elektronischen Veröffentlichung von Dissertationen f
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-03-14" time="13:12" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2017-07-03" time="16:46" /></meta></MyCoReWebPage>
