@@ -111,8 +111,8 @@
           <label xml:lang="de" text="027 Universalbibliotheken" />
         </category>
         <category ID="028">
-          <label xml:lang="x-mapping" text="SDNB:020" />
           <label xml:lang="de" text="028 Lektüre und Nutzung anderer Informationsmittel" />
+          <label xml:lang="x-mapping" text="SDNB:020" />
         </category>
       </category>
       <category ID="03">
@@ -239,8 +239,8 @@
           <label xml:lang="x-mapping" text="SDNB:060" />
         </category>
         <category ID="068">
-          <label xml:lang="x-mapping" text="SDNB:060" />
           <label xml:lang="de" text="068 Verbände und Organisationen in anderen Gebieten" />
+          <label xml:lang="x-mapping" text="SDNB:060" />
         </category>
         <category ID="069">
           <label xml:lang="x-mapping" text="SDNB:060" />
@@ -283,8 +283,8 @@
           <label xml:lang="de" text="077 Journalismus und Zeitungen in Osteuropa; in Russland" />
         </category>
         <category ID="078">
-          <label xml:lang="x-mapping" text="SDNB:070" />
           <label xml:lang="de" text="078 Journalismus und Zeitungen in Skandinavien" />
+          <label xml:lang="x-mapping" text="SDNB:070" />
         </category>
         <category ID="079">
           <label xml:lang="de" text="079 Journalismus und Zeitungen in anderen Gebieten" />
@@ -336,11 +336,11 @@
         </category>
       </category>
       <category ID="09">
-        <label xml:lang="x-mapping" text="SDNB:090" />
         <label xml:lang="de" text="090 Handschriften, seltene Bücher" />
+        <label xml:lang="x-mapping" text="SDNB:090" />
         <category ID="090">
-          <label xml:lang="x-mapping" text="SDNB:090" />
           <label xml:lang="de" text="090 Handschriften, seltene Bücher" />
+          <label xml:lang="x-mapping" text="SDNB:090" />
         </category>
         <category ID="091">
           <label xml:lang="x-mapping" text="SDNB:090" />
@@ -399,12 +399,12 @@
           <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="103">
-          <label xml:lang="x-mapping" text="SDNB:100" />
           <label xml:lang="de" text="103 Wörterbücher, Enzyklopädien" />
+          <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="105">
-          <label xml:lang="x-mapping" text="SDNB:100" />
           <label xml:lang="de" text="105 Fortlaufende Sammelwerke" />
+          <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="106">
           <label xml:lang="de" text="106 Verbände und Organisationen, Management" />
@@ -504,8 +504,8 @@
         </category>
       </category>
       <category ID="13">
-        <label xml:lang="x-mapping" text="SDNB:130" />
         <label xml:lang="de" text="130 Parapsychologie, Okkultismus" />
+        <label xml:lang="x-mapping" text="SDNB:130" />
         <category ID="130">
           <label xml:lang="x-mapping" text="SDNB:130" />
           <label xml:lang="de" text="130 Parapsychologie und Okkultismus" />
@@ -667,8 +667,8 @@
           <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="174">
-          <label xml:lang="x-mapping" text="SDNB:100" />
           <label xml:lang="de" text="174 Berufsethik" />
+          <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="175">
           <label xml:lang="de" text="175 Sport- und Freizeitethik" />
@@ -727,8 +727,8 @@
           <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="188">
-          <label xml:lang="x-mapping" text="SDNB:100" />
           <label xml:lang="de" text="188 Stoizismus" />
+          <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="189">
           <label xml:lang="de" text="189 Westliche Philosophie des Mittelalters" />
@@ -775,8 +775,8 @@
           <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
         <category ID="199">
-          <label xml:lang="x-mapping" text="SDNB:100" />
           <label xml:lang="de" text="199 Philosophie in anderen Gebieten" />
+          <label xml:lang="x-mapping" text="SDNB:100" />
         </category>
       </category>
     </category>
@@ -787,8 +787,8 @@
         <label xml:lang="de" text="200 Religion" />
         <label xml:lang="x-mapping" text="SDNB:200" />
         <category ID="200">
-          <label xml:lang="x-mapping" text="SDNB:200" />
           <label xml:lang="de" text="200 Religion" />
+          <label xml:lang="x-mapping" text="SDNB:200" />
         </category>
         <category ID="201">
           <label xml:lang="de" text="201 Religiöse Mythologie, Sozialethik" />
@@ -1504,8 +1504,8 @@
         </category>
       </category>
       <category ID="38">
-        <label xml:lang="x-mapping" text="SDNB:380" />
         <label xml:lang="de" text="380 Handel, Kommunikation, Verkehr" />
+        <label xml:lang="x-mapping" text="SDNB:380" />
         <category ID="380">
           <label xml:lang="de" text="380 Handel, Kommunikation, Verkehr" />
           <label xml:lang="x-mapping" text="SDNB:380" />
@@ -1799,16 +1799,16 @@
           <label xml:lang="x-mapping" text="SDNB:450" />
         </category>
         <category ID="455">
-          <label xml:lang="x-mapping" text="SDNB:450" />
           <label xml:lang="de" text="455 Italienische Grammatik" />
+          <label xml:lang="x-mapping" text="SDNB:450" />
         </category>
         <category ID="457">
           <label xml:lang="de" text="457 Varianten des Italienischen" />
           <label xml:lang="x-mapping" text="SDNB:450" />
         </category>
         <category ID="458">
-          <label xml:lang="x-mapping" text="SDNB:450" />
           <label xml:lang="de" text="458 Italienisch als Standardsprache" />
+          <label xml:lang="x-mapping" text="SDNB:450" />
         </category>
         <category ID="459">
           <label xml:lang="de" text="459 Rumänisch, Rätoromanisch" />
@@ -2035,8 +2035,8 @@
           <label xml:lang="x-mapping" text="SDNB:510" />
         </category>
         <category ID="513">
-          <label xml:lang="x-mapping" text="SDNB:510" />
           <label xml:lang="de" text="513 Arithmetik" />
+          <label xml:lang="x-mapping" text="SDNB:510" />
         </category>
         <category ID="514">
           <label xml:lang="x-mapping" text="SDNB:510" />
@@ -2123,8 +2123,8 @@
           <label xml:lang="x-mapping" text="SDNB:530" />
         </category>
         <category ID="535">
-          <label xml:lang="x-mapping" text="SDNB:530" />
           <label xml:lang="de" text="535 Sichtbares Licht, Infrarot- und Ultraviolettstrahlung" />
+          <label xml:lang="x-mapping" text="SDNB:530" />
         </category>
         <category ID="536">
           <label xml:lang="de" text="536 Wärme" />
@@ -2494,8 +2494,8 @@
             <label xml:lang="x-mapping" text="SDNB:610" />
           </category>
           <category ID="611.6">
-            <label xml:lang="x-mapping" text="SDNB:610" />
             <label xml:lang="de" text="611.6 Urogenitalsystem" />
+            <label xml:lang="x-mapping" text="SDNB:610" />
           </category>
           <category ID="611.7">
             <label xml:lang="x-mapping" text="SDNB:610" />
@@ -2590,8 +2590,8 @@
           <label xml:lang="x-mapping" text="SDNB:610" />
           <label xml:lang="de" text="613 Gesundheitsförderung" />
           <category ID="613.04">
-            <label xml:lang="x-mapping" text="SDNB:610" />
             <label xml:lang="de" text="613.04 Persönliche Gesundheit nach Alters- und Geschlechtsgruppen" />
+            <label xml:lang="x-mapping" text="SDNB:610" />
           </category>
           <category ID="613.1">
             <label xml:lang="x-mapping" text="SDNB:610" />
@@ -2650,8 +2650,8 @@
           <label xml:lang="de" text="615 Pharmakologie, Therapie" />
           <label xml:lang="x-mapping" text="SDNB:610" />
           <category ID="615.19">
-            <label xml:lang="x-mapping" text="SDNB:610" />
             <label xml:lang="de" text="615.19 Pharmazeutische Chemie / Pharmazeutische Technologie" />
+            <label xml:lang="x-mapping" text="SDNB:610" />
           </category>
           <category ID="615.2">
             <label xml:lang="x-mapping" text="SDNB:610" />
@@ -2810,8 +2810,8 @@
             <label xml:lang="x-mapping" text="SDNB:610" />
           </category>
           <category ID="617.5">
-            <label xml:lang="x-mapping" text="SDNB:610" />
             <label xml:lang="de" text="617.5 Medizin nach Körperregion, Chirurgie nach Körperregion" />
+            <label xml:lang="x-mapping" text="SDNB:610" />
           </category>
           <category ID="617.6">
             <label xml:lang="de" text="617.6 Zahnmedizin" />
@@ -2825,8 +2825,8 @@
               <label xml:lang="x-mapping" text="SDNB:610" />
             </category>
             <category ID="617.66">
-              <label xml:lang="x-mapping" text="SDNB:610" />
               <label xml:lang="de" text="617.66 Extraktion" />
+              <label xml:lang="x-mapping" text="SDNB:610" />
             </category>
             <category ID="617.67">
               <label xml:lang="x-mapping" text="SDNB:610" />
@@ -3031,8 +3031,8 @@
         <label xml:lang="x-mapping" text="SDNB:640" />
         <label xml:lang="de" text="640 Hauswirtschaft" />
         <category ID="640">
-          <label xml:lang="de" text="640 Hauswirtschaft" />
           <label xml:lang="x-mapping" text="SDNB:640" />
+          <label xml:lang="de" text="640 Hauswirtschaft" />
         </category>
         <category ID="641">
           <label xml:lang="de" text="641 Essen und Trinken" />
@@ -3087,8 +3087,8 @@
           <label xml:lang="x-mapping" text="SDNB:650" />
         </category>
         <category ID="653">
-          <label xml:lang="x-mapping" text="SDNB:650" />
           <label xml:lang="de" text="653 Stenografie" />
+          <label xml:lang="x-mapping" text="SDNB:650" />
         </category>
         <category ID="657">
           <label xml:lang="de" text="657 Buchhaltung" />
@@ -3183,8 +3183,8 @@
           <label xml:lang="x-mapping" text="SDNB:670" />
         </category>
         <category ID="678">
-          <label xml:lang="de" text="678 Elastomere, Elastomerprodukte" />
           <label xml:lang="x-mapping" text="SDNB:670" />
+          <label xml:lang="de" text="678 Elastomere, Elastomerprodukte" />
         </category>
         <category ID="679">
           <label xml:lang="de" text="679 Andere Produkte aus einzelnen Materialien" />
@@ -3423,8 +3423,8 @@
           <label xml:lang="x-mapping" text="SDNB:730" />
         </category>
         <category ID="733">
-          <label xml:lang="x-mapping" text="SDNB:730" />
           <label xml:lang="de" text="733 Griechische, römische und etruskische Bildhauerei" />
+          <label xml:lang="x-mapping" text="SDNB:730" />
         </category>
         <category ID="734">
           <label xml:lang="de" text="734 Bildhauerei von ca. 500 bis 1399" />
@@ -3452,8 +3452,8 @@
         </category>
       </category>
       <category ID="74">
-        <label xml:lang="de" text="740 Zeichnen, Kunsthandwerk" />
         <label xml:lang="x-mapping" text="SDNB:740" />
+        <label xml:lang="de" text="740 Zeichnen, Kunsthandwerk" />
         <category ID="740">
           <label xml:lang="de" text="740 Zeichnen, Kunsthandwerk" />
           <label xml:lang="x-mapping" text="SDNB:740" />
@@ -3683,8 +3683,8 @@
           <label xml:lang="x-mapping" text="SDNB:793" />
         </category>
         <category ID="796">
-          <label xml:lang="x-mapping" text="SDNB:796" />
           <label xml:lang="de" text="796 Athletische Sportarten u. Spiele, Freiluftsportarten u. -spiele" />
+          <label xml:lang="x-mapping" text="SDNB:796" />
         </category>
         <category ID="797">
           <label xml:lang="x-mapping" text="SDNB:796" />
@@ -3855,8 +3855,8 @@
           <label xml:lang="x-mapping" text="SDNB:830" />
         </category>
         <category ID="835">
-          <label xml:lang="x-mapping" text="SDNB:830" />
           <label xml:lang="de" text="835 Deutsche Reden" />
+          <label xml:lang="x-mapping" text="SDNB:830" />
         </category>
         <category ID="836">
           <label xml:lang="de" text="836 Deutsche Briefe" />
@@ -3907,8 +3907,8 @@
           <label xml:lang="x-mapping" text="SDNB:840" />
         </category>
         <category ID="847">
-          <label xml:lang="de" text="847 Französischer Humor, französische Satire" />
           <label xml:lang="x-mapping" text="SDNB:840" />
+          <label xml:lang="de" text="847 Französischer Humor, französische Satire" />
         </category>
         <category ID="848">
           <label xml:lang="de" text="848 Französische vermischte Schriften" />
@@ -3995,8 +3995,8 @@
           <label xml:lang="x-mapping" text="SDNB:860" />
         </category>
         <category ID="867">
-          <label xml:lang="x-mapping" text="SDNB:860" />
           <label xml:lang="de" text="867 Spanischer Humor, spanische Satire" />
+          <label xml:lang="x-mapping" text="SDNB:860" />
         </category>
         <category ID="868">
           <label xml:lang="de" text="868 Spanische vermischte Schriften" />
@@ -4008,8 +4008,8 @@
         </category>
       </category>
       <category ID="87">
-        <label xml:lang="x-mapping" text="SDNB:870" />
         <label xml:lang="de" text="870 Lateinische, italische Literatur" />
+        <label xml:lang="x-mapping" text="SDNB:870" />
         <category ID="870">
           <label xml:lang="de" text="870 Italische Literatur; Lateinische Literatur" />
           <label xml:lang="x-mapping" text="SDNB:870" />
@@ -4027,8 +4027,8 @@
           <label xml:lang="x-mapping" text="SDNB:870" />
         </category>
         <category ID="874">
-          <label xml:lang="de" text="874 Lateinische lyrische Versdichtung" />
           <label xml:lang="x-mapping" text="SDNB:870" />
+          <label xml:lang="de" text="874 Lateinische lyrische Versdichtung" />
         </category>
         <category ID="875">
           <label xml:lang="de" text="875 Lateinische Reden" />
@@ -4075,8 +4075,8 @@
           <label xml:lang="x-mapping" text="SDNB:880" />
         </category>
         <category ID="885">
-          <label xml:lang="x-mapping" text="SDNB:880" />
           <label xml:lang="de" text="885 Klassische griechische Reden" />
+          <label xml:lang="x-mapping" text="SDNB:880" />
         </category>
         <category ID="886">
           <label xml:lang="de" text="886 Klassische griechische Briefe" />
@@ -4087,8 +4087,8 @@
           <label xml:lang="x-mapping" text="SDNB:880" />
         </category>
         <category ID="888">
-          <label xml:lang="x-mapping" text="SDNB:880" />
           <label xml:lang="de" text="888 Klassische griechische vermischte Schriften" />
+          <label xml:lang="x-mapping" text="SDNB:880" />
         </category>
         <category ID="889">
           <label xml:lang="de" text="889 Neugriechische Literatur" />
@@ -4255,8 +4255,8 @@
           <label xml:lang="x-mapping" text="SDNB:920" />
         </category>
         <category ID="922">
-          <label xml:lang="de" text="922 (Optionale Notation)" />
           <label xml:lang="x-mapping" text="SDNB:920" />
+          <label xml:lang="de" text="922 (Optionale Notation)" />
         </category>
         <category ID="923">
           <label xml:lang="x-mapping" text="SDNB:920" />
@@ -4311,8 +4311,8 @@
           <label xml:lang="x-mapping" text="SDNB:930" />
         </category>
         <category ID="935">
-          <label xml:lang="de" text="935 Geschichte Mesopotamiens und des Hochlands von Iran bis 637" />
           <label xml:lang="x-mapping" text="SDNB:930" />
+          <label xml:lang="de" text="935 Geschichte Mesopotamiens und des Hochlands von Iran bis 637" />
         </category>
         <category ID="936">
           <label xml:lang="x-mapping" text="SDNB:930" />
@@ -4332,11 +4332,11 @@
         </category>
       </category>
       <category ID="94">
-        <label xml:lang="x-mapping" text="SDNB:940" />
         <label xml:lang="de" text="940 Geschichte Europas" />
+        <label xml:lang="x-mapping" text="SDNB:940" />
         <category ID="940">
-          <label xml:lang="x-mapping" text="SDNB:940" />
           <label xml:lang="de" text="940 Geschichte Europas" />
+          <label xml:lang="x-mapping" text="SDNB:940" />
         </category>
         <category ID="941">
           <label xml:lang="de" text="941 Geschichte Großbritanniens und Irlands" />
@@ -4383,12 +4383,12 @@
           <label xml:lang="de" text="950 Geschichte Asiens; des Fernen Ostens" />
         </category>
         <category ID="951">
-          <label xml:lang="x-mapping" text="SDNB:950" />
           <label xml:lang="de" text="951 Geschichte Chinas und benachbarter Gebiete" />
+          <label xml:lang="x-mapping" text="SDNB:950" />
         </category>
         <category ID="952">
-          <label xml:lang="x-mapping" text="SDNB:950" />
           <label xml:lang="de" text="952 Geschichte Japans" />
+          <label xml:lang="x-mapping" text="SDNB:950" />
         </category>
         <category ID="953">
           <label xml:lang="x-mapping" text="SDNB:950" />
