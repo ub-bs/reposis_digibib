@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage><section xml:lang="de" title="Braunschweigische Anzeigen - Gelehrte Beyträge - Braunschweigisches Magazin"><div>
-<h2>Braunschweigische Anzeigen - Gelehrte Beyträge - Braunschweigisches Magazin</h2>
+<h2>Braunschweigische Anzeigen - Gelehrte Beyträge - Baunschweigisches Magazin</h2>
 
 <div class="row" id="digibib_beytraege">
 <div class="col-md-4">
-<p><strong>Braunschweigische Anzeigen<br />
-1. 1745 - ...</strong></p>
+<p><strong><a href="http://publikationsserver.tu-braunschweig.de/get/64795">Braunschweigische Anzeigen<br />
+ab dem Jg. 1. 1745 - ...</a></strong></p>
 
 <div class="row">
 <div class="col-md-6">
@@ -23,7 +23,7 @@
 	<li><a href="../../../receive/dbbs_mods_00062129">1755</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062131">1756</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062133">1757</a></li>
-	<li><a href="../../../receive/dbbs_mods_00062217">1756</a></li>
+	<li><a href="../../../receive/dbbs_mods_00062217">1758</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062210">1759</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062174">1760</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062182">1761</a></li>
@@ -57,7 +57,7 @@
 	<li><a href="../../../receive/dbbs_mods_00062539">1789</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062866">1790</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062594">1791</a></li>
-	<li><a href="../../../receive/dbbs_mods_00062594">1792</a></li>
+	<li><a href="../../../receive/dbbs_mods_00062776">1792</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062549">1793</a></li>
 	<li><a href="../../../receive/dbbs_mods_00062730">1794</a></li>
 </ol>
@@ -94,8 +94,8 @@
 </div>
 
 <div class="col-md-4">
-<p><strong>Gelehrte Beyträge<br />
-1. 1761 - 27. 1787:</strong></p>
+<p><strong><a href="http://publikationsserver.tu-braunschweig.de/get/64930">Gelehrte Beyträge<br />
+1. 1761 - 27. 1787:</a></strong></p>
 
 <div class="row">
 <div class="col-md-12">
@@ -133,8 +133,8 @@
 </div>
 
 <div class="col-md-4">
-<p><strong>Braunschweigisches Magazin<br />
-1. 1788 - 81. 1868</strong></p>
+<p><strong><a href="http://publikationsserver.tu-braunschweig.de/get/64934">Braunschweigisches Magazin<br />
+1. 1788 - 81. 1868</a></strong></p>
 
 <div class="row">
 <div class="col-md-6">
@@ -238,4 +238,4 @@
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-05-11" time="12:49" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2017-07-21" time="15:36" /></meta></MyCoReWebPage>

@@ -114,6 +114,11 @@ html body header #searchInput {
   background-color: #015f83;
 }
 
+/* TODO: check for better solution to hide search field box on modal citation box*/
+.modal {
+	z-index: 2050;
+}
+
 /* ***************** searchfield_box END ****************** */
 
 #project_logo_box {

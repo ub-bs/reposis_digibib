@@ -21,22 +21,22 @@
 	</ul>
 	</li>
 	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Stadt+Braunschweig%22&amp;wt=xml">Stadt Braunschweig</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+braunschweiger+Land">Land Braunschweig</a> (Region, Umland ...)</li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+herzogtum+braunschweig">Herzogtum Braunschweig</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=b2131f47-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+kunst+kulturgeschichte">Kunst- und Kulturgeschichte</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+schul+bildungswesen">Schul- und Bildungswesen</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+wirtschaft+handel+justiz">Wirtschaft, Handel und Justiz</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=7eac934c-0/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+architektur%22">Architektur</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=7eac934c-0/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+pharmazie%22">Pharmazie</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=601eaa14-0/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+biologie%22">Biologie</a> (in Zusammenarbeit mit der <a href="http://niedersachsen.nabu.de/tiereundpflanzen/vogelschutz/avison/">Avifaunistischen<br />
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Braunschweiger+Land%22&amp;wt=xml">Land Braunschweig</a> (Region, Umland ...)</li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Herzogtum+Braunschweig%22&amp;wt=xml">Herzogtum Braunschweig</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Kunst-+und+Kulturgeschichte%22&amp;wt=xml">Kunst- und Kulturgeschichte</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Schul-+und+Bildungswesen%22&amp;wt=xml">Schul- und Bildungswesen</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Wirtschaft, Handel und Justiz</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Architektur%22&amp;wt=xml">Architektur</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Pharmazie%22&amp;wt=xml">Pharmazie</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Biologie%22&amp;wt=xml">Biologie</a> (in Zusammenarbeit mit der <a href="http://niedersachsen.nabu.de/tiereundpflanzen/vogelschutz/avison/">Avifaunistischen<br />
 	Arbeitsgemeinschaft Südostniedersachsen) </a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=601eaa14-0/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+geologie%22">Geologie</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=ae7a4501-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+eisenbahngeschichte%22">Eisenbahngeschichte</a></li>
-	<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8232cc11-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+brunsvicensien+ansichten+braunschweig">Ansichten von Braunschweig</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Geologie%22&amp;wt=xml">Geologie</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Eisenbahngeschichte%22&amp;wt=xml">Eisenbahngeschichte</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a></li>
 	<li>Werke...
 	<ul>
-		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=7efeee72-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+braunschweiger+pers%C3%B6nlichkeiten%22">... von Persönlichkeiten der Region </a></li>
-		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=7efeee72-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=vse+%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig+werke+%C3%BCber+braunschweiger+pers%C3%B6nlichkeiten%22">... über Persönlichkeiten der Region </a></li>
+		<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... von Persönlichkeiten der Region </a></li>
+		<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... über Persönlichkeiten der Region </a></li>
 	</ul>
 	</li>
 </ul>
@@ -53,7 +53,7 @@
 	 </li>
 	<li>In Zusammenarbeit mit dem <a href="http://www.braunschweig.de/kultur_tourismus/bibliotheken_archive/stadtarchiv/index.html">Stadtarchiv Braunschweig</a>
 	<ul>
-		<li><a href="brunsvicensien/adressbuecher.xml">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a></li>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/get/64262">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a></li>
 		<li><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064442">Urkundenbücher der Stadt Braunschweig<br />
 		Bände 1 - 8 </a></li>
 		<li><a href="http://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441">Chroniken der Stadt Braunschweig</a><br />
@@ -91,4 +91,4 @@
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-07-13" time="09:57" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2017-08-18" time="13:52" /></meta></MyCoReWebPage>

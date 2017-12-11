@@ -14,7 +14,7 @@
 	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064734" target="_blank">Apotheker-Zeitung 1886 - 1950 (1934 - 1945: Deutsche Apotheker-Zeitung) </a></li>
 	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064732" target="_blank">Pharmazeutische Zeitung 1856 -1969</a></li>
 	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064733" target="_blank">Süddeutsche Apotheker-Zeitung 1883 -1950</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64545" target="_blank">Geschichte der Pharmazie 2009 ff.</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64545" target="_blank">Geschichte der Pharmazie 1949 ff.</a></li>
 	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22(DE-601)661026310%22+OR+%22(DE-601)656501537%22+OR+%22(DE-601)631007652%22+OR+%22(DE-601)636360997%22+OR+%22(DE-601)634888684%22+OR+%22(DE-601)634608347%22+OR+%22(DE-601)631239847%22+OR+%22(DE-601)636796973%22+OR+%22(DE-601)633105546%22+OR+%22(DE-601)636591085%22+OR+%22(DE-601)534678173%22+OR+%22(DE-601)667316558%22+OR+%22(DE-601)656661216%22" target="_blank">Weitere Zeitschriften</a></li>
 </ul>
 
@@ -23,8 +23,9 @@
 <ul>
 	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneibuch%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22" target="_blank">Arzneibücher, Pharmakopöen, Arzneibuch-Kommentare</a></li>
 	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneitaxe%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields" target="_blank">Arzneitaxen</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?join=AND&amp;bool0%5B%5D=AND&amp;lookfor0%5B%5D=%28kreuter%2A+OR+kr%C3%A4uter%2A+OR+herb%2A+OR+ortus+OR+hort%2A+OR+diosc%2A+OR+diosk%2A+OR+%22medical+botany%22+OR+heilpflanz%2A+OR+medizinal-pfl%2A+OR+stirpiu%2A+OR+specer%2A%29+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type0%5B%5D=AllFields&amp;op0%5B%5D=OR&amp;sort=year+asc&amp;page=1&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22&amp;filter%5B%5D=publishDate%3A%22%5B1400+TO+1890%5D%22" target="_blank">Kräuterbücher</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-04-25" time="10:56" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2017-09-19" time="16:40" /></meta></MyCoReWebPage>
