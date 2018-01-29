@@ -167,10 +167,6 @@
             <label xml:lang="de">Urheberrecht</label>
             <label xml:lang="en">Copyright</label>
         </item>
-        <item href="/content/publish/publizieren.xml" target="_blank" replaceMenu="false" constrainPopUp="false" style="">
-            <label xml:lang="de">Publizieren an der TU Braunschweig</label>
-            <label xml:lang="en">Publishing at the TU Braunschweig</label>
-        </item>
         <item href="/content/publish/policy.xml" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Leitlinie</label>
             <label xml:lang="en">Policy</label>
