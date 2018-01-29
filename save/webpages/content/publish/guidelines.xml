@@ -5,10 +5,11 @@
 
   <h2>Leitlinien für den Betrieb des Publikationsservers</h2>
   <p>
-    Die Leitlinien befinden sich im Aufbau.
+    <script type="text/javascript">
+      window.location.href = "policy.xml"
+    </script>
+    Diese Seite ist umgezogen. Sollten Sie nicht automatisch weitergeleitet werden, nutzen Sie bitte <a href="policy.xml">diesen Link zur den Leitlinien</a>.
   </p>
-
-
 </section>
 
 <meta>
