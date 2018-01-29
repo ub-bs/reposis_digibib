@@ -25,7 +25,7 @@
   </xed:template>
 
   <xed:template id="thesis.author.repeated">
-    <mir:role.extended.repeated role="aut" label="mir.role.author" class="required" required="true" help-text="{i18n:mir.help.role.author}" />
+    <mir:role.extended.repeated role="aut" label="mir.role.author" class="required" required="true" required-i18n="mir.validation.author" help-text="{i18n:mir.help.role.author}" />
   </xed:template>
 
   <!-- copied from mir -> show two instead of one input fields -->
