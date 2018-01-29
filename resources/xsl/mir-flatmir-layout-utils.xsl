@@ -6,7 +6,6 @@
 
   <xsl:import href="resource:xsl/layout/mir-common-layout.xsl" />
   <xsl:param name="piwikID" select="'0'" />
-  <xsl:param name="DIGIBIB.StartDate" select="'20161101'" />
 
   <xsl:template name="mir.navigation">
 
@@ -19,6 +18,14 @@
             <form action="{$WebApplicationBaseURL}servlets/solr/find" class="navbar-form navbar-left pull-right" role="search">
               <div class="form-group">
                 <input name="condQuery" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
+                <xsl:choose>
+                  <xsl:when test="mcrxsl:isCurrentUserInRole('admin') or mcrxsl:isCurrentUserInRole('editor')">
+                    <input name="owner" type="hidden" value="createdby:*" />
+                  </xsl:when>
+                  <xsl:when test="not(mcrxsl:isCurrentUserGuestUser())">
+                    <input name="owner" type="hidden" value="createdby:{$CurrentUser}" />
+                  </xsl:when>
+                </xsl:choose>
               </div>
               <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
             </form>
@@ -99,21 +106,6 @@
   </xsl:template>
 
   <xsl:template name="mir.powered_by">
-    <xsl:if test="//site/@ID">
-      <xsl:variable name="dateCreated" xmlns:encoder="xalan://java.net.URLEncoder"
-                  select="document(concat('solr:q=',encoder:encode(concat('id:', //site/@ID)), '&amp;fl=created'))" />
-      <xsl:variable name="dateCreatedInt" select="translate(substring-before($dateCreated//date[@name='created'],'T'), '-', '')" />
-      <xsl:if test="$dateCreatedInt &lt; $DIGIBIB.StartDate">
-        <div id="digibib_alert"
-             class="alert alert-warning alert-dismissible text-center"
-             role="alert">
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-          Dieses Dokument wurde migriert. Falls Sie Probleme mit der Anzeige des Dokumentes haben, können Sie das Dokument auf dem
-          <a href="http://digisrv-1.biblio.etc.tu-bs.de:8080/docportal/receive/DocPortal_document_{substring-after(//site/@ID,'dbbs_mods_')}" class="alert-link">alten Publikationsserver der
-          TU Braunschweig</a> ansehen.
-        </div>
-      </xsl:if>
-    </xsl:if>
     <!-- Piwik -->
     <xsl:if test="$piwikID &gt; 0">
       <script type="text/javascript">

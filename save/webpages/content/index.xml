@@ -6,7 +6,7 @@
             <div class="col-md-9 col-md-offset-2" lang="de">
               <h1>
                 Digitale Bibliothek <br />
-                Der Publikationsserver der TU&#160;Braunschweig<sup>BETA</sup>
+                Der Publikationsserver der TU&#160;Braunschweig
               </h1>
               <form action="../servlets/solr/find" id="bs-searchMainPage" class="form-inline" role="search" style="margin-top:30px;">
                 <div class="input-group" style="width: 100%;">
