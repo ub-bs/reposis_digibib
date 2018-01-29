@@ -2,7 +2,8 @@
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:mcrver="xalan://org.mycore.common.MCRCoreVersion"
-    exclude-result-prefixes="mcrver">
+    xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
+    exclude-result-prefixes="mcrver mcrxsl">
 
   <xsl:import href="resource:xsl/layout/mir-common-layout.xsl" />
   <xsl:param name="piwikID" select="'0'" />
