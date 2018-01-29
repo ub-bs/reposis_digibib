@@ -32,11 +32,22 @@
 	Arbeitsgemeinschaft Südostniedersachsen) </a></li>
 	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Geologie%22&amp;wt=xml">Geologie</a></li>
 	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Eisenbahngeschichte%22&amp;wt=xml">Eisenbahngeschichte</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a><br />
+	 </li>
 	<li>Werke...
 	<ul>
 		<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... von Persönlichkeiten der Region </a></li>
 		<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... über Persönlichkeiten der Region </a></li>
+	</ul>
+	</li>
+</ul>
+
+<ul>
+	<li>Brunsvicensien der <a href="http://www.hab.de">Herzog August Bibliothek Wolfenbüttel</a>
+
+	<ul>
+		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=rti+helmstedter+drucke%3F">Helmstedter Drucker Online</a><br />
+		 </li>
 	</ul>
 	</li>
 </ul>
@@ -69,26 +80,26 @@
 	</ul>
 	</li>
 </ul>
- 
 
 <ul>
-	<li>In Zusammenarbeit mit dem <a href="http://www.bs-heimat.de/">Braunschweigischen Landesverein Geschichte-Heimat-Natur e.V.:</a><br />
-	<a href="http://publikationsserver.tu-braunschweig.de/get/64191">Braunschweigische Heimat - ab dem Jg. 1.1910</a></li>
-</ul>
-</div>
-</div>
-
-<div class="row">
-<div class="col-md-12">
-<ul>
-	<li>Brunsvicensien der <a href="http://www.hab.de">Herzog August Bibliothek Wolfenbüttel</a>
+	<li>In Zusammenarbeit mit dem <a href="http://www.bs-heimat.de/">Braunschweigischen Landesverein Geschichte-Heimat-Natur e.V.:</a>
 
 	<ul>
-		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=rti+helmstedter+drucke%3F">Helmstedter Drucker Online</a></li>
+		<li><a href="http://www.bs-heimat.de/">​</a><a href="http://publikationsserver.tu-braunschweig.de/get/64191">Braunschweigische Heimat - ab dem Jg. 1.1910</a></li>
+	</ul>
+	</li>
+</ul>
+
+<ul>
+	<li>In Zusammenarbeit mit dem <a href="http://www.eintracht.com">BTSV Eintracht von 1895 e.V.</a>
+
+	<ul>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/get/65164">Eintracht-Magazin: Mitteilungsblatt des BTSV Eintracht v. 1895</a> - ab dem Jahr 1908</li>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/get/65281">Eintracht-Echo</a> - ab dem Jahr 1953</li>
 	</ul>
 	</li>
 </ul>
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-08-18" time="13:52" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2017-12-20" time="13:05" /></meta></MyCoReWebPage>
