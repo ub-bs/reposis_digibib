@@ -49,7 +49,7 @@ body, h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 html body .jumbotron {
   color: inherit;
-  background: unset;
+  background: none;
   background-color: #ecf0f1;
 }
 
@@ -91,7 +91,7 @@ html body header #header_box {
 
 .searchfield_box .btn-primary {
   color: #fff;
-  background-color: none;
+  background-color: transparent;
   border-width: 0px;
   margin: 4px 0 0 5px;
   padding:0;
@@ -116,7 +116,7 @@ html body header #searchInput {
 
 /* TODO: check for better solution to hide search field box on modal citation box*/
 .modal {
-	z-index: 2050;
+  z-index: 2050;
 }
 
 /* ***************** searchfield_box END ****************** */
@@ -172,7 +172,7 @@ html body #powered_by {
 }
 
 .mir-main-nav {
-    box-shadow: unset;
+    box-shadow: none;
 }
 
 .mir-main-nav .navbar-nav > li > a {
@@ -233,7 +233,13 @@ html body #powered_by {
 }
 
 .viewer .navbar.navbar-default, .mycoreViewer .navbar {
-  background-image: unset;
+  background-image: none;
+}
+
+.mycoreViewer .altoLine {
+  text-align: left;
+  line-height: initial;
+  font-family: sans-serif;
 }
 
 .mycoreViewer .navbar {
@@ -362,10 +368,10 @@ html body #powered_by {
   text-align: center;
 }
 #digibib_feedback:hover {
-    background: #00709b;
-    border-bottom: solid 1px #00709b;
-    border-left: solid 0px #00709b;
-    border-right: solid 1px #00709b;
+  background: #00709b;
+  border-bottom: solid 1px #00709b;
+  border-left: solid 0px #00709b;
+  border-right: solid 1px #00709b;
 }
 #digibib_feedback a {
   color: #fff;
