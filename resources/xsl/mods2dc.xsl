@@ -410,7 +410,7 @@
                   select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
 
         <xsl:if test="contains ('isbn issn uri doi lccn uri urn', $type)">
-    <dc:identifier>
+      <dc:relation>
 
         <xsl:choose>
           <!-- 2.0: added identifier type attribute to output, if it is present-->
