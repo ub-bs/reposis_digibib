@@ -97,10 +97,8 @@
             <xsl:apply-templates select="mods:classification" />
             <xsl:apply-templates select="mods:subject" />
             <xsl:apply-templates select="mods:abstract" />
+            <xsl:apply-templates select="." mode="dc_date" />
             <xsl:apply-templates select="mods:originInfo" />
-            <xsl:apply-templates select="mods:dateIssued" />
-            <xsl:apply-templates select="mods:dateCreated" />
-            <xsl:apply-templates select="mods:dateCaptured" />
             <xsl:apply-templates select="mods:temporal" />
             <xsl:apply-templates select="mods:physicalDescription" />
             <xsl:apply-templates select="mods:language" />
@@ -291,20 +289,38 @@
 
   </xsl:template>
 
+  <xsl:template match="mods:mods" mode="dc_date">
+    <xsl:choose>
+      <xsl:when test="mods:originInfo/mods:dateIssued[@point='start']">
+        <xsl:apply-templates select="mods:originInfo/mods:dateIssued[@point='start']" />
+      </xsl:when>
+      <xsl:when test="mods:originInfo/mods:dateIssued">
+        <xsl:apply-templates select="mods:originInfo/mods:dateIssued[1]" />
+      </xsl:when>
+      <xsl:when test="mods:originInfo/mods:dateCreated[@point='start']">
+        <xsl:apply-templates select="mods:originInfo/mods:dateCreated[@point='start']" />
+      </xsl:when>
+      <xsl:when test="mods:originInfo/mods:dateCreated">
+        <xsl:apply-templates select="mods:originInfo/mods:dateCreated[1]" />
+      </xsl:when>
+      <xsl:when test="mods:originInfo/mods:dateCaptured[@point='start']">
+        <xsl:apply-templates select="mods:originInfo/mods:dateCaptured[@point='start']" />
+      </xsl:when>
+      <xsl:when test="mods:originInfo/mods:dateCaptured">
+        <xsl:apply-templates select="mods:originInfo/mods:dateCaptured[1]" />
+      </xsl:when>
+      <xsl:otherwise>
+        <dc:date>
+          <xsl:comment>metadata creation date</xsl:comment>
+          <xsl:value-of select="substring-before(../../../../service/servdates/servdate[@type='createdate'],'T')" />
+        </dc:date>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
   <xsl:template match="mods:dateIssued | mods:dateCreated | mods:dateCaptured">
     <dc:date>
-      <xsl:choose>
-        <xsl:when test="@point='start'">
-          <xsl:value-of select="."/>
-          <xsl:text> - </xsl:text>
-        </xsl:when>
-        <xsl:when test="@point='end'">
-          <xsl:value-of select="."/>
-        </xsl:when>
-        <xsl:otherwise>
-          <xsl:value-of select="."/>
-        </xsl:otherwise>
-      </xsl:choose>
+      <xsl:value-of select="."/>
     </dc:date>
   </xsl:template>
 
@@ -312,8 +328,8 @@
     match="mods:dateIssued[@point='start'] | mods:dateCreated[@point='start'] | mods:dateCaptured[@point='start'] | mods:dateOther[@point='start'] ">
     <xsl:variable name="dateName" select="local-name()"/>
     <dc:date>
-      <xsl:value-of select="."/>-<xsl:value-of
-      select="../*[local-name()=$dateName][@point='end']"/>
+      <!-- for ranges see: http://dublincore.org/documents/date-element/ -->
+      <xsl:value-of select="concat(., '/', ../*[local-name()=$dateName and @point='end'])" />
     </dc:date>
   </xsl:template>
 
@@ -404,6 +420,34 @@
     </dc:format>
   </xsl:template>
 -->
+
+<xsl:template match="mods:identifier[position() = 1]">
+    <xsl:variable name="type"
+      select="translate(@type,'ABCDEFGHIJKLMNOPQRSTUVWXYZ','abcdefghijklmnopqrstuvwxyz')"/>
+
+    <xsl:if test="@type and contains('isbn issn uri doi lccn uri urn', $type)">
+      <dc:identifier>
+        <xsl:choose>
+          <xsl:when test="@type='urn'">
+              <xsl:value-of select="concat($MCR.URN.Resolver.MasterURL, .)" />
+          </xsl:when>
+          <xsl:when test="@type='doi'">
+            <xsl:value-of select="concat($MCR.DOI.Resolver.MasterURL, .)" />
+          </xsl:when>
+          <xsl:when test="@type='hdl'">
+              <xsl:text>http://hdl.handle.net/</xsl:text>
+              <xsl:value-of select="." />
+          </xsl:when>
+          <xsl:when test="contains(.,':')">
+            <xsl:value-of select="."/>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="$type"/>: <xsl:value-of select="."/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </dc:identifier>
+    </xsl:if>
+  </xsl:template>
 
   <xsl:template match="mods:identifier[position() != 1]">
     <xsl:variable name="type"

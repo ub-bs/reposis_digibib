@@ -63,9 +63,7 @@
       <xsl:apply-templates select="mods:subject" />
       <xsl:apply-templates select="mods:abstract" />
       <xsl:apply-templates select="mods:originInfo" />
-      <xsl:apply-templates select="mods:dateIssued" />
-      <xsl:apply-templates select="mods:dateCreated" />
-      <xsl:apply-templates select="mods:dateCaptured" />
+      <xsl:apply-templates select="." mode="dc_date" />
       <xsl:apply-templates select="mods:temporal" />
       <xsl:apply-templates select="mods:physicalDescription" />
       <xsl:apply-templates select="mods:language" />
