@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage><section xml:lang="de" title="Hinweise zur Nutzung und zur rechtlichen Situation"><div>
-<h1>Datenschutz</h1>
+<MyCoReWebPage><section xml:lang="de" title="Hinweise zur Nutzung und zur rechtlichen Situation">
+<h2>Datenschutz</h2>
 
-<h2>Anonymisierte Nutzungsanalyse mit Matomo und dem Plugin AnonymizeIP</h2>
+    <div class="row">
+        <div class="col-md-12">
+
+<h3>Anonymisierte Nutzungsanalyse mit Matomo und dem Plugin AnonymizeIP</h3>
 
 <p>Für die Optimierung unserer Angebote liefern personenbezogene Daten keinerlei Mehrwert. Für die Webanalyse setzten wir daher die von Datenschützern empfohlene Nutzungsanalyse-Software Matomo ein. Durch eine automatische Anonymisierung der IP-Adressen mit dem Plugin AnonymizeIP können die erhobenen Daten nicht mehr bestimmten Personen zugeordnet werden. Damit ist ausgeschlossen, dass Nutzungsdaten oder Nutzungsprofile mit personenbezogenen Daten in Verbindung gebracht werden.</p>
 <iframe src="https://piwik.gbv.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;idsite=30&amp;language=de" style="border: 0; height: 250px; width: 100%;">&lt;/div&gt;</iframe></div>
+
+    </div>
 </section><meta><log lastEditor="dbbs_admin" date="2018-04-11" time="10:32" /></meta></MyCoReWebPage>

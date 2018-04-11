@@ -4,27 +4,27 @@
 
 <div class="row" id="digibib_pharmacy">
 <div class="col-md-12">
-<p>Die Universitätsbibliothek Braunschweig betreut den <a href="https://ub.tu-braunschweig.de/fid_pharmazie/" target="_blank">Fachinformationsdienst Pharmazie</a>. Nicht nur die <a href="http://www.pubpharm.de" target="_blank">aktuelle Literatur</a> sondern auch historische Werke der Pharmazie sind in seltener Geschlossenheit vorhanden.</p>
+<p>Die Universitätsbibliothek Braunschweig betreut den <a href="https://ub.tu-braunschweig.de/fid_pharmazie/">Fachinformationsdienst Pharmazie</a>. Nicht nur die <a href="http://www.pubpharm.de">aktuelle Literatur</a> sondern auch historische Werke der Pharmazie sind in seltener Geschlossenheit vorhanden.</p>
 
 <p>Durch DFG-geförderte Digitalisierungsprojekte sind ca. 1.800 Bücher und Zeitschriftenbände der Pharmazie mit über 1.000.000 Seiten digitalisiert worden und damit Open Access zugänglich. Neben wissenschaftshistorisch wertvollen Monographien, z.B. Arzneibücher und Arzneitaxen wurden Zeitschriften digitalisiert, z.B. die Pharmazeutische Zeitung vom ersten Jahrgang 1856 bis 1969.</p>
 
 <p>Zeitschriften (Auswahl)</p>
 
 <ul>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064734" target="_blank">Apotheker-Zeitung 1886 - 1950 (1934 - 1945: Deutsche Apotheker-Zeitung) </a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064732" target="_blank">Pharmazeutische Zeitung 1856 -1969</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064733" target="_blank">Süddeutsche Apotheker-Zeitung 1883 -1950</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64545" target="_blank">Geschichte der Pharmazie 1949 ff.</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_65362">Pharmaceutical Historian 1967 - 2016</a></li>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22(DE-601)661026310%22+OR+%22(DE-601)656501537%22+OR+%22(DE-601)631007652%22+OR+%22(DE-601)636360997%22+OR+%22(DE-601)634888684%22+OR+%22(DE-601)634608347%22+OR+%22(DE-601)631239847%22+OR+%22(DE-601)636796973%22+OR+%22(DE-601)633105546%22+OR+%22(DE-601)636591085%22+OR+%22(DE-601)534678173%22+OR+%22(DE-601)667316558%22+OR+%22(DE-601)656661216%22" target="_blank">Weitere Zeitschriften</a></li>
+	<li><a href="../../receive/dbbs_mods_00064734">Apotheker-Zeitung 1886 - 1950 (1934 - 1945: Deutsche Apotheker-Zeitung) </a></li>
+	<li><a href="../../receive/dbbs_mods_00064732">Pharmazeutische Zeitung 1856 -1969</a></li>
+	<li><a href="../../receive/dbbs_mods_00064733">Süddeutsche Apotheker-Zeitung 1883 -1950</a></li>
+	<li><a href="../../receive/dbbs_mods_64545">Geschichte der Pharmazie 1949 ff.</a></li>
+	<li><a href="../../receive/dbbs_mods_65362">Pharmaceutical Historian 1967 - 2016</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22(DE-601)661026310%22+OR+%22(DE-601)656501537%22+OR+%22(DE-601)631007652%22+OR+%22(DE-601)636360997%22+OR+%22(DE-601)634888684%22+OR+%22(DE-601)634608347%22+OR+%22(DE-601)631239847%22+OR+%22(DE-601)636796973%22+OR+%22(DE-601)633105546%22+OR+%22(DE-601)636591085%22+OR+%22(DE-601)534678173%22+OR+%22(DE-601)667316558%22+OR+%22(DE-601)656661216%22">Weitere Zeitschriften</a></li>
 </ul>
 
 <p>Monographien (Auswahl)  </p>
 
 <ul>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneibuch%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22" target="_blank">Arzneibücher, Pharmakopöen, Arzneibuch-Kommentare</a></li>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneitaxe%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields" target="_blank">Arzneitaxen</a></li>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?join=AND&amp;bool0%5B%5D=AND&amp;lookfor0%5B%5D=%28kreuter%2A+OR+kr%C3%A4uter%2A+OR+herb%2A+OR+ortus+OR+hort%2A+OR+diosc%2A+OR+diosk%2A+OR+%22medical+botany%22+OR+heilpflanz%2A+OR+medizinal-pfl%2A+OR+stirpiu%2A+OR+specer%2A%29+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type0%5B%5D=AllFields&amp;op0%5B%5D=OR&amp;sort=year+asc&amp;page=1&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22&amp;filter%5B%5D=publishDate%3A%22%5B1400+TO+1890%5D%22" target="_blank">Kräuterbücher</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneibuch%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22">Arzneibücher, Pharmakopöen, Arzneibuch-Kommentare</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneitaxe%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields">Arzneitaxen</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?join=AND&amp;bool0%5B%5D=AND&amp;lookfor0%5B%5D=%28kreuter%2A+OR+kr%C3%A4uter%2A+OR+herb%2A+OR+ortus+OR+hort%2A+OR+diosc%2A+OR+diosk%2A+OR+%22medical+botany%22+OR+heilpflanz%2A+OR+medizinal-pfl%2A+OR+stirpiu%2A+OR+specer%2A%29+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type0%5B%5D=AllFields&amp;op0%5B%5D=OR&amp;sort=year+asc&amp;page=1&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22&amp;filter%5B%5D=publishDate%3A%22%5B1400+TO+1890%5D%22">Kräuterbücher</a></li>
 </ul>
 </div>
 </div>
@@ -34,27 +34,27 @@
 
 <div class="row" id="digibib_pharmacy">
 <div class="col-md-12">
-<p>The Universitätsbibliothek Braunschweig is in charge of the <a href="http://ub.tu-braunschweig.de/pubpharm/" target="_blank">specialized information service for Pharmacy</a>. Not only <a href="http://www.pubpharm.de" target="_blank">current literature</a> but also historical works of Pharmacy are available in rare unity.</p>
+<p>The Universitätsbibliothek Braunschweig is in charge of the <a href="http://ub.tu-braunschweig.de/pubpharm/">specialized information service for Pharmacy</a>. Not only <a href="http://www.pubpharm.de">current literature</a> but also historical works of Pharmacy are available in rare unity.</p>
 
 <p>With the help of DFG-funded digitisation projects approximately 1,800 pharmaceutical books and journals with over 1 million pages have been digitised and are available open access. Next to valuable scientific historical monographs like pharmacopoeias and Arzneitaxen journals like the Pharmazeutische Zeitung (from 1856 with the first volume up to 1969) have been digitised.</p>
 
 <p>Journals (Selection)</p>
 
 <ul>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064734" target="_blank">Apotheker-Zeitung 1886 - 1950 (1934 - 1945: Deutsche Apotheker-Zeitung) </a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064732" target="_blank">Pharmazeutische Zeitung 1856 -1969</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064733" target="_blank">Süddeutsche Apotheker-Zeitung 1883 -1950</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64545" target="_blank">Geschichte der Pharmazie 1949 ff.</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_65362">Pharmaceutical Historian 1967 - 2016</a></li>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22(DE-601)661026310%22+OR+%22(DE-601)656501537%22+OR+%22(DE-601)631007652%22+OR+%22(DE-601)636360997%22+OR+%22(DE-601)634888684%22+OR+%22(DE-601)634608347%22+OR+%22(DE-601)631239847%22+OR+%22(DE-601)636796973%22+OR+%22(DE-601)633105546%22+OR+%22(DE-601)636591085%22+OR+%22(DE-601)534678173%22+OR+%22(DE-601)667316558%22+OR+%22(DE-601)656661216%22" target="_blank">More journals</a></li>
+	<li><a href="../../receive/dbbs_mods_00064734">Apotheker-Zeitung 1886 - 1950 (1934 - 1945: Deutsche Apotheker-Zeitung) </a></li>
+	<li><a href="../../receive/dbbs_mods_00064732">Pharmazeutische Zeitung 1856 -1969</a></li>
+	<li><a href="../../receive/dbbs_mods_00064733">Süddeutsche Apotheker-Zeitung 1883 -1950</a></li>
+	<li><a href="../../receive/dbbs_mods_64545">Geschichte der Pharmazie 1949 ff.</a></li>
+	<li><a href="../../receive/dbbs_mods_65362">Pharmaceutical Historian 1967 - 2016</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22(DE-601)661026310%22+OR+%22(DE-601)656501537%22+OR+%22(DE-601)631007652%22+OR+%22(DE-601)636360997%22+OR+%22(DE-601)634888684%22+OR+%22(DE-601)634608347%22+OR+%22(DE-601)631239847%22+OR+%22(DE-601)636796973%22+OR+%22(DE-601)633105546%22+OR+%22(DE-601)636591085%22+OR+%22(DE-601)534678173%22+OR+%22(DE-601)667316558%22+OR+%22(DE-601)656661216%22">More journals</a></li>
 </ul>
 
 <p>Monographs (Selection)</p>
 
 <ul>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneibuch%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22" target="_blank">Arzneibücher, Pharmakopöen, Arzneibuch-Kommentare</a></li>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneitaxe%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields" target="_blank">Arzneitaxen</a></li>
-	<li><a href="https://www.pubpharm.de/vufind/Search/Results?join=AND&amp;bool0%5B%5D=AND&amp;lookfor0%5B%5D=%28kreuter%2A+OR+kr%C3%A4uter%2A+OR+herb%2A+OR+ortus+OR+hort%2A+OR+diosc%2A+OR+diosk%2A+OR+%22medical+botany%22+OR+heilpflanz%2A+OR+medizinal-pfl%2A+OR+stirpiu%2A+OR+specer%2A%29+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type0%5B%5D=AllFields&amp;op0%5B%5D=OR&amp;sort=year+asc&amp;page=1&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22&amp;filter%5B%5D=publishDate%3A%22%5B1400+TO+1890%5D%22" target="_blank">Kräuterbücher</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneibuch%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22">Arzneibücher, Pharmakopöen, Arzneibuch-Kommentare</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?lookfor=%22arzneitaxe%22+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type=AllFields">Arzneitaxen</a></li>
+	<li><a href="https://www.pubpharm.de/vufind/Search/Results?join=AND&amp;bool0%5B%5D=AND&amp;lookfor0%5B%5D=%28kreuter%2A+OR+kr%C3%A4uter%2A+OR+herb%2A+OR+ortus+OR+hort%2A+OR+diosc%2A+OR+diosk%2A+OR+%22medical+botany%22+OR+heilpflanz%2A+OR+medizinal-pfl%2A+OR+stirpiu%2A+OR+specer%2A%29+AND+%22Universit%C3%A4tsbibliothek+Braunschweig%22&amp;type0%5B%5D=AllFields&amp;op0%5B%5D=OR&amp;sort=year+asc&amp;page=1&amp;filter%5B%5D=format_facet%3A%22Elektronische+B%C3%BCcher%22&amp;filter%5B%5D=publishDate%3A%22%5B1400+TO+1890%5D%22">Kräuterbücher</a></li>
 </ul>
 </div>
 </div>

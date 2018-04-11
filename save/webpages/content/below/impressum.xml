@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage><section xml:lang="de" title="Impressum"><div>
+<MyCoReWebPage><section xml:lang="de" title="Impressum">
 <h2>Impressum</h2>
 
-<h6> </h6>
+    <div class="row">
+        <div class="col-md-12">
 
 <h3>Angaben gemäß §5 TMG:</h3>
 
-<p> </p>
 
 <p>Technische Universität Braunschweig<br />
 Universitätsbibliothek Braunschweig<br />
 Universitätsplatz 1<br />
 38106 Braunschweig</p>
 
-<div wrap="">Die Technische Universität Braunschweig ist eine Körperschaft des Öffentlichen Rechts.</div>
+<p>Die Technische Universität Braunschweig ist eine Körperschaft des Öffentlichen Rechts.<br />
+Sie wird gesetzlich vertreten durch ihre Präsidentin<br />
+<a href="https://www.tu-braunschweig.de/struktur/verwaltung/praesidium/praesident">Prof. Dr.-Ing. Anke Kaysser-Pyzalla</a>.</p>
 
-<div wrap="">Sie wird gesetzlich vertreten durch ihre Präsidentin</div>
-
-<div wrap=""><a href="https://www.tu-braunschweig.de/struktur/verwaltung/praesidium/praesident">Prof. Dr.-Ing. Anke Kaysser-Pyzalla</a>.</div>
-
-<p> </p>
 
 <h3>Kontakt:</h3>
 
@@ -27,8 +24,7 @@ Universitätsplatz 1<br />
 Telefax: 0531 / 391 – 5836<br />
 E-Mail: <a href="mailto:ub@tu-braunschweig.de">ub@tu-braunschweig.de</a></p>
 
-<h3><br />
-Zuständige Aufsichtsbehörde:</h3>
+<h3>Zuständige Aufsichtsbehörde:</h3>
 
 <p>Niedersächsisches Ministerium für Wissenschaft und Kultur<br />
 Leibnizufer 9<br />
@@ -48,7 +44,6 @@ Universitätsplatz 1<br />
 Tel.: +49(0)531/391-5067<br />
 E-Mail: <a href="mailto:ub@tu-braunschweig.de">ub@tu-braunschweig.de</a></p>
 
-<h3> </h3>
 
 <h3>Haftungsausschluss:</h3>
 <strong>Haftung für Inhalte:</strong>
@@ -70,5 +65,7 @@ E-Mail: <a href="mailto:ub@tu-braunschweig.de">ub@tu-braunschweig.de</a></p>
 <p><strong>Datenschutz:</strong></p>
 
 <p>Sofern innerhalb des Internetangebotes die Möglichkeit zur Eingabe persönlicher oder geschäftlicher Daten (Emailadressen, Namen, Anschriften) besteht, so erfolgt die Preisgabe dieser Daten seitens des Nutzers auf ausdrücklich freiwilliger Basis. Die Inanspruchnahme und Bezahlung aller angebotenen Dienste ist - soweit technisch möglich und zumutbar - auch ohne Angabe solcher Daten bzw. unter Angabe anonymisierter Daten oder eines Pseudonyms gestattet. Die Nutzung der im Rahmen des Impressums oder vergleichbarer Angaben veröffentlichten Kontaktdaten wie Postanschriften, Telefon- und Faxnummern sowie Emailadressen durch Dritte zur Übersendung von nicht ausdrücklich angeforderten Informationen ist nicht gestattet. Rechtliche Schritte gegen die Versender von sogenannten Spam-Mails bei Verstössen gegen dieses Verbot sind ausdrücklich vorbehalten.</p>
-</div>
+
+      </div>
+    </div>
 </section><meta><log lastEditor="dbbs_admin" date="2018-03-09" time="21:29" /></meta></MyCoReWebPage>

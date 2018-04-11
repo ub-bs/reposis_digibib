@@ -1,4 +1,4 @@
-Sitemap: http://publikationsserver.tu-braunschweig.de/sitemap_google.xml
+Sitemap: https://publikationsserver.tu-braunschweig.de/sitemap_google.xml
 User-agent: *
 Allow: /servlets/MCRFileNodeServlet/
 Disallow: /*?

@@ -20,8 +20,8 @@
 	</ul>
 	</li>
 	<br />
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064936">Photos von Bau- und Kunstdenkmälern</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a></li>
+	<li><a href="../../receive/dbbs_mods_00064936">Photos von Bau- und Kunstdenkmälern</a></li>
+	<li><a href="../../servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a></li>
 	<li><a href="../../receive/dbbs_mods_00043560">Sammlung Hermann Pfeifer: Aquarelle - Zeichnungen - verschiedene Arbeiten</a></li>
 </ul>
 </div>
@@ -48,8 +48,8 @@
 	</ul>
 	</li>
 	<br />
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064936">Images of monuments and art heritage</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Views of Brunswick</a></li>
+	<li><a href="../../receive/dbbs_mods_00064936">Images of monuments and art heritage</a></li>
+	<li><a href="../../servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Views of Brunswick</a></li>
 	<li><a href="../../receive/dbbs_mods_00043560">Hermann Pfeifer's collection: watercolours - drawings - various works</a></li>
 </ul>
 </div>
