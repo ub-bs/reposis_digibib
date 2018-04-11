@@ -1,47 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage><section xml:lang="de" title="Leitlinie"><div>
-<h2>Leitlinie Digitale Bibliothek Braunschweig </h2>
+<h2>Leitlinie Digitale Bibliothek Braunschweig</h2>
 
 <div class="row">
 <div class="col-md-12">
-
 <p>Die Digitale Bibliothek Braunschweig ist das institutionelle Publikationsrepositorium der Technischen Universität Braunschweig und wird von der Universitätsbibliothek betrieben. Sie dient der Veröffentlichung von Forschungsergebnissen und -dokumentationen von Wissenschaftler/innen der TU Braunschweig, von Spezialsammlungen der TU Braunschweig und von regionalen Einrichtungen sowie von digitalisierten Zeugnissen des regionalen kulturellen Erbes.  </p>
 
 <p>Die Digitale Bibliothek Braunschweig bietet die organisatorischen und technischen Rahmenbedingungen, um die dauerhafte Verfügbarkeit der publizierten Objekte zu gewährleisten.</p>
 
 <p>Der technische Betrieb des Publikationsservers erfolgt durch die Universitätsbibliothek in Zusammenarbeit mit der Verbundzentrale des Gemeinsamen Bibliotheksverbundes Göttingen (<a href="https://www.gbv.de/Verbundzentrale/serviceangebote/reposis-repository-service">Reposis-Dienst</a>).</p>
 
-
-
 <h3>Erklärung zu Open Access</h3>
 
 <p>Die Technische Universität Braunschweig fördert den freien Austausch von Forschungsergebnissen (Open Access) und empfiehlt ihren Wissenschaftler/innen in einer vom Senat verabschiedeten <a href="https://ub.tu-braunschweig.de/publizieren_openaccess/open_access/leitlinie.pdf" target="_blank">Leitlinie</a>, ihre Publikationen in Open-Access-Journalen und auf Open-Access-Plattformen zu veröffentlichen bzw. auf frei zugänglichen Repositorien verfügbar zu machen.</p>
 
-
-
-<h3>Was kann veröffentlicht werden? </h3>
+<h3>Was kann veröffentlicht werden?</h3>
 
 <ul>
-  <li>Publikationen und Forschungsdaten mit wissenschaftlichem Charakter aus der Forschungstätigkeit der TU Braunschweig, insbesondere
-
-    <ul>
-      <li>Publikationen der Mitglieder und Angehörigen der TU Braunschweig,</li>
-      <li>Publikationen aus Projekten, an denen die TU Braunschweig beteiligt ist, auch wenn die Autor/innen nicht der TU Braunschweig angehören,</li>
-      <li>Publikationen, deren Veröffentlichung durch Prüfungsordnungen vorgeschrieben ist (z. B. Dissertationen),</li>
-      <li>Studentische Abschlussarbeiten an der TU Braunschweig (z. B. Master-, Diplom-, Magister- und Staatsexamensarbeiten), wenn deren Veröffentlichung durch die/den Betreuer/in bzw. ein anderes Mitglied des Lehrkörpers befürwortet wird,</li>
-      <li>Publikationen und Publikationsreihen von Organisationseinheiten der TU Braunschweig.</li>
-    </ul>
-  </li>
-
-  <li>Weitere offizielle Publikationen der TU Braunschweig</li>
-  <li>Publikationen begleitend zu Veranstaltungen sowie Präsentationen an der oder über die TU Braunschweig</li>
-  <li>Publikationen mit Bezug zur Forschungsregion Braunschweig</li>
-  <li>Dokumente mit Bezug zum Fachinformationsdienst Pharmazie</li>
-  <li>Digitalisierte Objekte aus den Beständen und Spezialsammlungen der Universitätsbibliothek und des Universitätsarchivs der TU Braunschweig sowie aus weiteren regionalen Einrichtungen</li>
-  <li>Digitalisierte Objekte des regionalen Kulturerbes</li>
+	<li>Publikationen und Forschungsdaten mit wissenschaftlichem Charakter aus der Forschungstätigkeit der TU Braunschweig, insbesondere
+	<ul>
+		<li>Publikationen der Mitglieder und Angehörigen der TU Braunschweig,</li>
+		<li>Publikationen aus Projekten, an denen die TU Braunschweig beteiligt ist, auch wenn die Autor/innen nicht der TU Braunschweig angehören,</li>
+		<li>Publikationen, deren Veröffentlichung durch Prüfungsordnungen vorgeschrieben ist (z. B. Dissertationen),</li>
+		<li>Studentische Abschlussarbeiten an der TU Braunschweig (z. B. Master-, Diplom-, Magister- und Staatsexamensarbeiten), wenn deren Veröffentlichung durch die/den Betreuer/in bzw. ein anderes Mitglied des Lehrkörpers befürwortet wird,</li>
+		<li>Publikationen und Publikationsreihen von Organisationseinheiten der TU Braunschweig.</li>
+	</ul>
+	</li>
+	<li>Weitere offizielle Publikationen der TU Braunschweig</li>
+	<li>Publikationen begleitend zu Veranstaltungen sowie Präsentationen an der oder über die TU Braunschweig</li>
+	<li>Publikationen mit Bezug zur Forschungsregion Braunschweig</li>
+	<li>Dokumente mit Bezug zum Fachinformationsdienst Pharmazie</li>
+	<li>Digitalisierte Objekte aus den Beständen und Spezialsammlungen der Universitätsbibliothek und des Universitätsarchivs der TU Braunschweig sowie aus weiteren regionalen Einrichtungen</li>
+	<li>Digitalisierte Objekte des regionalen Kulturerbes</li>
 </ul>
-
-
 
 <h3>Das elektronische Dokument</h3>
 
@@ -55,15 +46,11 @@
 
 <p>Es gibt keine Layout-Vorgaben.</p>
 
-
-
 <h3>Wie kann veröffentlicht werden?</h3>
 
 <p>Es steht ein <a href="https://publikationsserver.tu-braunschweig.de/editor/submit_request.xed">Formular zum Hochladen</a> des/der Dokument/e und der zugehörigen Metadaten zur Verfügung. Nach Absprache sind auch weitere Übermittlungsformen möglich.</p>
 
-<p>Die Dokumente werden durch die Universitätsbibliothek geprüft und nach Eingang der <a href="https://publikationsserver.tu-braunschweig.de/content/publish/publish_form-print.pdf">Einwilligung der Veröffentlichung</a> freigeschaltet und damit veröffentlicht.</p>
-
-
+<p>Die Dokumente werden durch die Universitätsbibliothek geprüft und nach Eingang der <a href="https://publikationsserver.tu-braunschweig.de/content/publish/deposit-single.pdf">Einwilligung der Veröffentlichung</a> freigeschaltet und damit veröffentlicht.</p>
 
 <h3>Rechtliche Rahmenbedingungen</h3>
 
@@ -71,7 +58,7 @@
 
 <p>Die Rechteübertragung bedarf grundsätzlich der Schriftform.</p>
 
-<p><a href="https://publikationsserver.tu-braunschweig.de/content/publish/publish_form-print.pdf">Formular: Einwilligung zur Veröffentlichung</a></p>
+<p><a href="https://publikationsserver.tu-braunschweig.de/content/publish/deposit-single.pdf">Formular: Einwilligung zur Veröffentlichung</a></p>
 
 <p><a href="https://publikationsserver.tu-braunschweig.de/content/publish/contract.xml">Vertragsbedingungen der Digitalen Bibliothek</a></p>
 
@@ -81,8 +68,6 @@
 
 <p>Die Universitätsbibliothek behält sich das Recht vor, den öffentlichen Zugriff auf eine Publikation zu sperren, sofern konkrete Anhaltspunkte für eine Rechtsverletzung bestehen. Die Universitätsbibliothek haftet nicht für aus der Verletzung von Urheber- und Verwertungsrechten resultierende Schäden, sofern kein nachweislich vorsätzliches oder grob fahrlässiges Verschulden ihrerseits vorliegt. Die Autor/innen versichern, in Zweifelsfällen oder bei Entstehen vermeintlicher oder tatsächlicher Rechtsverletzungen die Universitätsbibliothek hiervon unverzüglich in Kenntnis zu setzen.</p>
 
-
-
 <h3>Services der Universitätsbibliothek</h3>
 
 <p>Die Veröffentlichung auf der Digitalen Bibliothek ist kostenfrei. Für die Veröffentlichung notwendige Tätigkeiten (z.B. Aufbereitung der elektronischen Dokumente, Formatkonvertierung) werden von der Universitätsbibliothek nach Absprache unterstützt bzw. durchgeführt. Tätigkeiten, die einen bedeutenden Mehraufwand erfordern, können in Rechnung gestellt werden.</p>
@@ -90,9 +75,7 @@
 <p>Die Universitätsbibliothek bietet Beratung und Unterstützung bei allen Fragen zum Publizieren auf der Digitalen Bibliothek an. Sie vergibt dauerhafte persistente und zitierfähige Identifier wie URL, URN und DOI, um die Dokumente langfristig zugänglich und auffindbar zu machen. Sie übernimmt sowohl die formale als auch die inhaltliche Erschließung der Dokumente (mittels Dewey-Klassifikation) sowie die Prüfung und Pflege der Metadaten. Zusätzliche Schlagwörter können von den Autor/innen selbst vergeben werden.<br />
 Die Metadaten der Dokumente und deren Link zum Volltext werden im Katalog der Universitätsbibliothek und in anderen Katalogen öffentlich-rechtlicher Einrichtungen nachgewiesen. Im Rahmen der gesetzlich geregelten Pflichtabgabe von Netzpublikationen erfolgt die Weitergabe der Metadaten sowie der elektronischen Dokumente an die Deutsche Nationalbibliothek.<br />
 <br />
-Die Universitätsbibliothek garantiert für elektronische Publikationen einen Archivierungszeitraum von mindestens fünf Jahren. Für Dokumente, die der gesetzlich geregelten Pflichtabgabe unterliegen, werden die Anforderungen an eine Langzeitarchivierung durch Ablieferung an die Deutsche Nationalbibliothek erfüllt. Darüber hinaus verpflichtet sich die Universitätsbibliothek, nicht unter die Pflichtablieferung fallende Dokumente der Langzeitarchivierung zuzuführen. Dabei kooperiert sie mit Dienstleistern bzw. Kooperationspartnern.</p>
-
-
+Die Universitätsbibliothek garantiert für elektronische Publikationen einen Archivierungszeitraum von mindestens fünf Jahren. Für Dokumente, die der gesetzlich geregelten Pflichtabgabe unterliegen, werden die Anforderungen an eine Langzeitarchivierung durch Ablieferung an die Deutsche Nationalbibliothek erfüllt. Darüber hinaus verpflichtet sich die Universitätsbibliothek, nicht unter die Pflichtablieferung fallende Dokumente zukünftig auch der Langzeitarchivierung zuzuführen. Dabei wird sie mit Dienstleistern bzw. Kooperationspartnern kooperieren.</p>
 
 <p><strong>Ansprechpartner der Universitätsbibliothek</strong></p>
 
@@ -104,4 +87,4 @@ Die Universitätsbibliothek garantiert für elektronische Publikationen einen Ar
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2018-01-25" time="10:34" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2018-04-10" time="16:51" /></meta></MyCoReWebPage>

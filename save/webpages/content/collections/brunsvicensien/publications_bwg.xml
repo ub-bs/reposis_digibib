@@ -7,7 +7,7 @@
 <ul>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64801">Die Jahrbücher der Braunschweigischen Wissenschaftlichen Gesellschaft ab dem Jahr 1983</a></li>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64802">Abhandlungen der Braunschweigischen Wissenschaftlichen Gesellschaft ab dem Jahr 1949</a></li>
-    <li><a href="http://publikationsserver.tu-braunschweig.de/get/64907">Akademie-Vorlesungen im Schloss</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64907">Akademie-Vorlesungen im Schloss</a></li>
 	<li><a href="../../../servlets/solr/select?q=state%3Apublished+AND+topic%3A%22Jahrbuch+der+BWG%22&amp;wt=xml">Zur Suche in den Veröffentlichungen der BWG</a></li>
 </ul>
 
@@ -31,4 +31,34 @@ Durch Symposien und Vorträge wird darüber hinaus eine wichtige Verknüpfung mi
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-07-13" time="09:59" /></meta></MyCoReWebPage>
+</section><section xml:lang="en" title="The Braunschweigische Wissenschaftliche Gesellschaft"><div>
+<h2>The Braunschweigische Wissenschaftlichen Gesellschaft (BWG)</h2>
+
+<div class="row" id="digibib_bwg">
+<div class="col-md-10">
+<ul>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64801">The yearbooks of the Braunschweigische Wissenschaftliche Gesellschaft from 1983 on</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64802">Treatise of the Braunschweigische Wissenschaftliche Gesellschaft from 1949 on</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64907">Academical lectures in the Schloss</a></li>
+	<li><a href="../../../servlets/solr/select?q=state%3Apublished+AND+topic%3A%22Jahrbuch+der+BWG%22&amp;wt=xml">Search in the publications of the BWG</a></li>
+</ul>
+
+<p>The <a href="http://www.bwg-nds.de">Braunschweigische Wissenschaftliche Gesellschaft (BWG)</a> is an institution under public law of the Land of Lower Saxony.<br />
+Its task is, by own activity and in cooperation with other scientific institutions national and international, to support science and in particular encourage interaction between sciences, technical sciences and humanities.</p>
+
+<p>The BWG is an institution structured analogously to the Academies of Sciences, whose 145 full members have their scientific homes primarily at technical oriented universities in the triangle of Brunswick - Hanover - Clausthal. With that also engineering disciplines are focused on in the otherwise wide range of sciences and humanities of the BWG.</p>
+
+<p>Usually it confers the <a href="http://bwg-nds.de/gau%C3%9F-medaille/">Carl Friedrich Gauß-Medaille</a> annually to scholars of scientifically outstanding merits national and international.<br />
+Results of its activity can be found in the publications of the company.<br />
+With symposia and speeches a connection to the public is established in order to contribute scientific research results to public discussion.</p>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<hr />
+<p><a href="../brunsvicensien.xml">Back to the Brunsvicensien of the Universitätsbibliothek Braunschweig</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2018-04-10" time="17:21" /></meta></MyCoReWebPage>

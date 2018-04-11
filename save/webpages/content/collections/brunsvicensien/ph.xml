@@ -1,54 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)">
+<MyCoReWebPage><section xml:lang="de" title="Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)"><div>
+<h2>Vorlesungsverzeichnisse der Pädagogischen Hochschule</h2>
 
-    <h2>Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</h2>
-    <div class="row" id="digibib_ph">
-      <div class="col-md-12">
-        <p>
-          Hier finden Sie die Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule).
-        </p>
-        <ul>
-          <li>
-            <a href="../../../receive/dbbs_mods_00045184">Arbeitsplan für das Winterhalbjahr 1937 / 1938</a>
-          </li>
-          <li>
-            <a href="../../../receive/dbbs_mods_00045187">Arbeitsplan für das Sommerhalbjahr 1938</a>
-          </li>
-          <li>
-            <a href="../../../receive/dbbs_mods_00045190">Arbeitsplan für das Winterhalbjahr 1938 / 1939</a>
-          </li>
-          <li>
-            <a href="../../../receive/dbbs_mods_00045195">Arbeitsplan für das Sommerhalbjahr 1939</a>
-          </li>
-        </ul>
-        <p>
-          Hier finden Sie die <a href="vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
-        </p>
-        <!--
+<h2>Bernhard-Rust-Hochschule und Kant-Hochschule</h2>
+
+<div class="row" id="digibib_ph">
+<div class="col-md-12">
+<p>Vorlesungsverzeichnisse der Pädagogischen Hochschule (<strong>Kant-Hochschule</strong>)</p>
+
+<ul>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064937">Vorlesungsverzeichnisse 1948-1969</a></li>
+</ul>
+
+<p>Vorlesungsverzeichnisse der Pädagogischen Hochschule (<strong>Bernhard-Rust-Hochschule</strong>).</p>
+
+<ul>
+	<li><a href="../../../receive/dbbs_mods_00045184">Arbeitsplan für das Winterhalbjahr 1937 / 1938</a></li>
+	<li><a href="../../../receive/dbbs_mods_00045187">Arbeitsplan für das Sommerhalbjahr 1938</a></li>
+	<li><a href="../../../receive/dbbs_mods_00045190">Arbeitsplan für das Winterhalbjahr 1938 / 1939</a></li>
+	<li><a href="../../../receive/dbbs_mods_00045195">Arbeitsplan für das Sommerhalbjahr 1939</a></li>
+</ul>
+
+<p>Hier finden Sie die <a href="vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.</p>
+<!--
         <p>
           Hier finden Sie die <a href="vorlesungsverzeichnisse_2004.xml">Vorlesungsverzeichnisse der TU Braunschweig ab 2004</a>.
         </p>
         -->
-        <p>
-          Hier finden Sie die <a href="matrikelbuecher.xml">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
-        </p>
-      </div>
-    </div>
 
-    <div class="row">
-      <div class="col-md-12">
-        <hr />
-        <p>
-          <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
-        </p>
-        </div>
-    </div>
+<p>Hier finden Sie die <a href="matrikelbuecher.xml">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.</p>
+</div>
+</div>
 
-  </section>
-  <meta>
-    <log date="2016-05-09" time="14:31" labelPath=" » ph"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<div class="row">
+<div class="col-md-12">
+<hr />
+<p><a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2018-03-06" time="09:01" /></meta></MyCoReWebPage>

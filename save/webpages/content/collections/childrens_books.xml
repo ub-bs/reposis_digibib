@@ -1,37 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Historische Kinderbücher">
+<MyCoReWebPage><section xml:lang="de" title="Historische Kinderbücher"><div>
+<h2>Historische Kinderbücher</h2>
 
-    <h2>Historische Kinderbücher</h2>
-    <div class="row" id="digibib_childrensbooks">
-      <div class="col-md-12">
-        <p>
-          Die Kinder- und Jugendbuchsammlung der Universitätsbibliothek Braunschweig entstand nach dem 2. Weltkrieg an der damaligen Kant-Hochschule (seit 1947 Pädagogische Hochschule) in Braunschweig.
-          Der bedeutendste Teil der Buchsammlung, der während des Krieges aus Berlin nach Braunschweig ausgelagert war, stammt von dem westfälischen Sammler Karl Hobrecker und seiner Frau Margarete.
-          Mit der Vereinigung der Bibliotheken von Technischer Universität und Pädagogischer Hochschule im Jahr 1971 ging die Sammlung in den Besitz der Universitätsbibliothek Braunschweig über.
-          Durch Schenkungen (u.a. Margret und Rolf Rettich und Barbara Bartos-Höppner) umfasst die Sammlung heute über 20.000 Bände.
-        </p>
-        <ul>
-          <li>
-            <a href="../../servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished">Gesamtübersicht der digitalisierten historischen Kinderbücher</a>
-          </li>
-          <li>
-            <a href="http://www.allegro-c.de/db/a30/hob.htm">Katalog der Kinderbuchsammlung</a>
-          </li>
-          <li>
-            <a href="videos_picture_books.xml">Ziehbilderbücher : Videos</a>
-          </li>
-          <li>
-            <a href="http://www.biblio.tu-bs.de/kinderbuch.html">Weitere Informationen zur Kinderbuchsammlung</a>
-          </li>
-        </ul>
-      </div>
-    </div>
+<div class="row" id="digibib_childrensbooks">
+<div class="col-md-12">
+<p>Die Kinder- und Jugendbuchsammlung der Universitätsbibliothek Braunschweig entstand nach dem 2. Weltkrieg an der damaligen Kant-Hochschule (seit 1947 Pädagogische Hochschule) in Braunschweig. Der bedeutendste Teil der Buchsammlung, der während des Krieges aus Berlin nach Braunschweig ausgelagert war, stammt von dem westfälischen Sammler Karl Hobrecker und seiner Frau Margarete. Mit der Vereinigung der Bibliotheken von Technischer Universität und Pädagogischer Hochschule im Jahr 1971 ging die Sammlung in den Besitz der Universitätsbibliothek Braunschweig über. Durch Schenkungen (u.a. Margret und Rolf Rettich und Barbara Bartos-Höppner) umfasst die Sammlung heute über 20.000 Bände.</p>
 
-  </section>
-  <meta>
-    <log date="2016-11-28" time="08:41" labelPath=" » Sammlungen"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<ul>
+	<li><a href="../../servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished">Gesamtübersicht der digitalisierten historischen Kinderbücher</a></li>
+	<li><a href="http://www.allegro-c.de/db/a30/hob.htm">Katalog der Kinderbuchsammlung</a></li>
+	<li><a href="videos_picture_books.xml">Ziehbilderbücher : Videos</a></li>
+	<li><a href="https://ub.tu-braunschweig.de/recherche/kinderbuch.php">Weitere Informationen zur Kinderbuchsammlung</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><section xml:lang="en" title="Historical childrens books"><div>
+<h2>Historical children's books</h2>
+
+<div class="row" id="digibib_childrensbooks">
+<div class="col-md-12">
+<p>The collection of children's and young adults books of the Universitätsbibliothek Braunschweig has been build up after the Second World War at the former Kant-Hochschule (since 1947 Pädagogische Hochschule) in Brunswick. The most important part of the collection, which has been outsourced from Berlin to Brunswick during the war, was donated by the Westphalian collector Karl Hobrecker and his wife Margarete. With the unification of the libraries of the Technische Uiversität and the Pädagogische Hochschule in 1971 the collection passed into ownership of the Universitätsbibliothek Braunschweig. By donation (i.a. Margret and Rolf Rettich and Barbara Bartos-Höppner) the collection now contains more than 20,000 volumes.</p>
+
+<ul>
+	<li><a href="../../servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished">General overview of all digitised historical children's books</a></li>
+	<li><a href="http://www.allegro-c.de/db/a30/hob.htm">Catalogue of the children's book collection</a></li>
+	<li><a href="videos_picture_books.xml">Drawing picture books: Videos</a></li>
+	<li><a href="https://ub.tu-braunschweig.de/recherche/kinderbuch.php">More information on the children's book collection</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2018-04-10" time="17:12" /></meta></MyCoReWebPage>

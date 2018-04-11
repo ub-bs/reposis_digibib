@@ -17,7 +17,7 @@
         <label xml:lang="en">Footer menu</label>
         <item href="/content/below/impressum.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Impressum</label>
-            <label xml:lang="en">Impressum</label>
+            <label xml:lang="en">Legal Notice</label>
         </item>
         <item href="/content/below/contact.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Kontakt</label>
@@ -25,12 +25,16 @@
         </item>
         <item href="/content/below/rights.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Datenschutz</label>
-            <label xml:lang="en">Rights</label>
+            <label xml:lang="en">Privacy Notice</label>
+        </item>
+        <item href="/content/folder/terms_of_use.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Nutzungsbedingungen</label>
+            <label xml:lang="en">Terms of Use</label>
         </item>
     </menu>
     <menu id="search">
         <label xml:lang="de">Recherche</label>
-        <label xml:lang="en">Investigate</label>
+        <label xml:lang="en">Search</label>
         <item href="/content/search/simple.xed" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">einfach</label>
             <label xml:lang="en">simple</label>
@@ -53,7 +57,7 @@
         </item>
         <item href="/content/browse/institutes.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">nach Einrichtung</label>
-            <label xml:lang="en">Institutions</label>
+            <label xml:lang="en">Faculties</label>
         </item>
         <item href="/content/browse/genres.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">nach Dokumenttyp</label>

@@ -1,38 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Botanische und zoologische Bücher">
+<MyCoReWebPage><section xml:lang="de" title="Botanische und zoologische Bücher"><div>
+<h2>Botanische und zoologische Bücher</h2>
 
-    <h2>Botanische und zoologische Bücher</h2>
-    <div class="row" id="digibib_botanic">
-      <div class="col-md-12">
-        <p>
-          Hier finden Sie wertvolle Bestände der Universitätsbibliothek Braunschweig im Bereich der
-          botanischen und zoologischen Abbildungswerke.
-          <br/>
-          Die Digitalisierung befindet sich hier im Aufbau.
-        </p>
-        <ul>
-          <li>
-            Zu dem digitalisierten Bestand der Bereiche
-            <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+botanik+mat+o">Botanik und Zoologie</a>.
-          </li>
-          <li>
-            Zu dem digitalisierten Bestand des Bereichs <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+pilze+mat+o">Pilze</a>.
-          </li>
-        </ul>
-        <p>
-          Die Sammlung Pharmazie finden Sie <a href="pharmacy.xml">hier</a>.
-        </p>
-        <p>
-          Digitale Bildersammlungen finden Sie <a href="image_collections.xml">hier</a>.
-        </p>
-      </div>
-    </div>
+<div class="row" id="digibib_botanic">
+<div class="col-md-12">
+<p>Hier finden Sie wertvolle Bestände der Universitätsbibliothek Braunschweig im Bereich der botanischen und zoologischen Abbildungswerke.<br />
+Die Digitalisierung befindet sich hier im Aufbau.</p>
 
-  </section>
-  <meta>
-    <log date="2016-05-09" time="18:34" labelPath=" » Botanic"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<ul>
+	<li>Zu dem digitalisierten Bestand der Bereiche <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+botanik+mat+o">Botanik und Zoologie</a>.</li>
+	<li>Zu dem digitalisierten Bestand des Bereichs <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+pilze+mat+o">Pilze</a>.</li>
+</ul>
+
+<p>Die Sammlung Pharmazie finden Sie <a href="pharmacy.xml">hier</a>.</p>
+
+<p>Digitale Bildersammlungen finden Sie <a href="image_collections.xml">hier</a>.</p>
+</div>
+</div>
+</div>
+</section><section xml:lang="en" title="Botanical and zoological books"><div>
+<h2>Botanical and zoological books</h2>
+
+<div class="row" id="digibib_botanic">
+<div class="col-md-12">
+<p>Here you will find valuable collections of the Universitätsbibliothek Braunschweig in the field of botanical and zoological picture books.<br />
+Digitization is under construction.</p>
+
+<ul>
+	<li>Digitized collection of <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+botanik+mat+o">Botany and Zoology</a>.</li>
+	<li>Digitized collection of <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+pilze+mat+o">Mycology</a>.</li>
+</ul>
+
+<p>You will find the pharmaceutical collection <a href="pharmacy.xml">here</a>.</p>
+
+<p>You will find digitized collections of images <a href="image_collections.xml">here</a>.</p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2018-04-11" time="10:43" /></meta></MyCoReWebPage>

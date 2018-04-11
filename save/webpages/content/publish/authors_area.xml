@@ -4,23 +4,16 @@
 
 <div class="row">
 <div class="col-md-12">
-<p>E-Publikationen können von <em>Wissenschaftler/innen der TU Braunschweig</em> (auch Gastwissenschaftler/innen) kostenlos veröffentlicht werden.</p>
+<p>E-Publikationen können von <em>Wissenschaftler/innen der TU Braunschweig</em> (auch Gastwissenschaftler/innen) kostenlos veröffentlicht werden. Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des <a href="http://www.gesetze-im-internet.de/urhg/index.html">geltenden deutschen Urheberrechts</a> veröffentlicht, das bei den Autorinnen/Autoren verbleibt.</p>
 
-<p>Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des Urheberrechts veröffentlicht.</p>
+<p>Beachten Sie, gegebenenfalls das Einverständnis von Co-Autor/innen einzuholen. Die Einhaltung von Urheber- und Verwertungsrechten Dritter liegt in der Verantwortung der Autor/innen der elektronischen Dokumente.</p>
 
-<p>Bitte beachten Sie unsere Hinweise ...</p>
+<p><strong>Bitte beachten Sie unsere <a href="contract.xml">Vertrags-</a> und <a href="http://publikationsserver.tu-braunschweig.de/content/folder/terms_of_use.xml">Nutzungsbedingungen</a> sowie die <a href="policy.xml">Publikationsleitlinie</a> der Digitalen Bibliothek!</strong></p>
+Die Universitätsbibliothek behält sich das Recht vor, eine Veröffentlichung von der Erfüllung der technischen und inhaltlichen Voraussetzungen abhängig zu machen.
 
-<ul>
-	<li><a href="copyright.xml">zum Urheberrecht</a></li>
-	<li><a href="contract.xml">zu den Vertragsbedingungen</a></li>
-</ul>
+<p>Wir benötigen von Ihnen die schriftliche Einwilligung, damit Ihre Publikation über die Digitale Bibliothek Braunschweig veröffentlicht und im Internet zur Verfügung gestellt werden kann.</p>
 
-<p>Wir benötigen von Ihnen eine <em>schriftliche Einwilligung</em>, damit Ihre Publikation über die Digitale Bibliothek Braunschweig veröffentlicht und im Internet zur Verfügung gestellt werden kann.</p>
-
-<p><strong>Bitte beachten Sie, daß veröffentlichte Dokumente nicht mehr entfernt oder ausgetauscht werden können!</strong><br />
-Überarbeitete Versionen bekommen einen neuen Datensatz.</p>
-
-<p>Bitte drucken Sie für eine Publikation folgendes <a href="/content/publish/publish_form-print.pdf">Formular 1 (PDF)</a> oder für mehrere Publikationen folgendes <a href="/content/publish/publish_form_2-print.pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:</p>
+<p>Bitte drucken Sie für eine Publikation folgendes <a href="deposit-single.pdf">Formular 1 (PDF)</a> oder für mehrere Publikationen folgendes <a href="deposit-multiple.pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:</p>
 
 <address>Technische Universität Braunschweig<br />
 Universitätsbibliothek<br />
@@ -30,24 +23,36 @@ Universitätsplatz 1<br />
 
 <address>Fax: 0531 391 5836</address>
 
+<address>
 <p>Um ein Dokument an die UB zu übermitteln steht Ihnen unser <a href="../../editor/submit_request.xed">Web-Formular</a> zur Verfügung.</p>
 
-<p>Alternativ können Sie uns Ihre Publikation, so wie Sie sie veröffentlicht haben wollen, per <a href="mailto:digibib@tu-braunschweig.de">E-Mail</a> an digibib@tu-bs.de (bis 50MB) oder auf einem geeigneten Datenträger zusenden.<br />
+<p>Alternativ können Sie uns Ihre Publikation, so wie Sie sie veröffentlicht haben wollen, per <a href="mailto:digibib@tu-braunschweig.de">E-Mail</a> an digibib@tu-braunschweig.de (bis 50MB) oder auf einem geeigneten Datenträger zusenden.<br />
 Die Freischaltung der Publikation dauert ca. 1 Woche.</p>
 
-<p>Hilfestellung bei der Publikation, zum Beispiel der Aufbereitung Ihrer Dokumente im PDF-Format, erhalten Sie bei:</p>
+<hr /></address>
 
-<address>Frau Blanck, Herr Kissler, Herr Peters<br />
+<p>Bei einer Zweitveröffentlichung ist zu ermitteln, ob und unter welchen Bedingungen diese zulässig ist. Sehr viele  Zeitschriftenverlage gestatten der Autorin/dem Autor, eigene Aufsätze vorab als Preprint oder (parallel zur Erstveröffentlichung bzw. nach einer definierten Embargofrist) als Postprint auf einem Archivierungsserver der Hochschule ("institutional repository") frei zugänglich zu veröffentlichen.</p>
+
+<p>Um festzustellen, welche Verlage und Zeitschriften den Autorinnen/Autoren dieses Recht einräumen, finden Sie Einzelheiten und Hilfestellung in der <a href="http://www.sherpa.ac.uk/romeo/index.php">SHERPA/RoMEO-Liste</a>.</p>
+
+<p>Die Universitätsbibliothek unterstützt Sie gern dabei, Ihre Veröffentlichungen anhand der SHERPA/RoMEO-Liste zu prüfen. Sind dort keine Angaben zu finden, müssten Ihre Autorenverträge herangezogen werden, da die Vereinbarungen zwischen Verlag und den Autor/innen sehr unterschiedlich geregelt sein können.</p>
+ 
+
+<p>Hilfestellung bei der Publikation, zum Beispiel der Aufbereitung Ihrer Dokumente im PDF-Format, sowie zur Zweitveröffentlichung, erhalten Sie unter:</p>
+
+<address>Digitale Bibliothek und Publikationsservices<br />
 E-Mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a><br />
 Telefon: 0531 391-5052</address>
+
+<address>
+<hr /></address>
 </div>
 </div>
 
 <div class="row">
 <div class="col-md-12">
 <p><strong>Dissertationen:</strong><br />
-Ausführliche Hinweise zur elektronischen Veröffentlichung von Dissertationen finden Sie auf den Webseiten der <a href="http://www.biblio.tu-bs.de/dissertation/diss.html">Dissertationsstelle</a>.</p>
+Ausführliche Hinweise zur elektronischen Veröffentlichung von Dissertationen finden Sie auf den Webseiten der <a href="https://ub.tu-braunschweig.de/publizieren_openaccess/diss/">Dissertationsstelle</a>.</p>
 </div>
 </div>
-</div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-07-03" time="16:46" /></meta></MyCoReWebPage>
+</div></section><meta><log lastEditor="dbbs_admin" date="2018-03-15" time="10:51" /></meta></MyCoReWebPage>

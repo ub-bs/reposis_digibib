@@ -27,4 +27,32 @@
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-07-27" time="10:28" /></meta></MyCoReWebPage>
+</section><section xml:lang="en" title="Digital Image Collections"><div>
+<h2>Digital image collections of the Universitätsbibliothek Braunschweig</h2>
+
+<div class="row" id="digibib_imagecollection">
+<div class="col-md-12">
+<p>Here you will find the digital image collections of the Universitätsbibliothek Braunschweig.</p>
+
+<ul>
+	<li><a href="../../servlets/solr/find?q=Diasammlung+Herbert+Schulz">Slide collection by Herbert Schulz</a><br />
+	Main focus on flowering plants</li>
+	<br />
+	<li><b>Dietmar Brandes' collection</b><!--<a href='/docportal/servlets/MCRSearchServlet?XSL.Style=rss-sdb&amp;query=(keywords contains "Sammlung")+and+(keywords contains "Dietmar")+and+(keywords contains "Brandes")+and+(objectType+=+document)&amp;maxResults=10&amp;created.sortField=descending&amp;mask=browse/type'>
+              <img width="14px" height="14px" align="top" src="/docportal/templates/master/template_ubbs/IMAGES/rss_32.png" border="0"/>
+            </a>--><br />
+	Images of biodiversity of plants
+	<ul>
+		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8fbf5164-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=ser+Digitale+Pflanzenbilder+Sammlung+Dietmar+Brandes">Search in the catalogue</a></li>
+		<li><a href="http://vufind.allegro-c.de/album/index.html">Search in the gallery</a></li>
+	</ul>
+	</li>
+	<br />
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064936">Images of monuments and art heritage</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Views of Brunswick</a></li>
+	<li><a href="../../receive/dbbs_mods_00043560">Hermann Pfeifer's collection: watercolours - drawings - various works</a></li>
+</ul>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2018-04-11" time="10:41" /></meta></MyCoReWebPage>
