@@ -144,7 +144,7 @@ footer {}
 
 html body #powered_by {
   background-color: #FFF;
-  padding: 1em 0 0 0;
+  padding: 5px 0 0 0;
   text-align: right;
 }
 
@@ -376,6 +376,10 @@ html body #powered_by {
 #digibib_feedback a {
   color: #fff;
 }
+#dini_logo {
+  padding-right: 10px;
+}
+
 
 
 /* responsive grid ***************************************************/

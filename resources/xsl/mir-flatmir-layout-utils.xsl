@@ -97,7 +97,10 @@
         <div class="col-xs-6 col-sm-3">
           <xsl:variable name="mcr_version" select="concat('MyCoRe ',mcrver:getCompleteVersion())" />
           <div id="powered_by">
-            <a href="http://www.mycore.de">
+            <a id="dini_logo" href="http://www.dini.de/dini-zertifikat/" title="Der Publikationsserver der TU-Braunschweig ist zertifiziert nach DINI-2016">
+              <img alt="Logo DINI-Zertifikat 2016" src="{$WebApplicationBaseURL}images/dini_zertifikat_2016.svg" height="50" />
+            </a>
+            <a id="mycore_logo" href="http://www.mycore.de">
               <img src="{$WebApplicationBaseURL}mir-layout/images/mycore_logo_small_invert.png" title="{$mcr_version}" alt="powered by MyCoRe" />
             </a>
           </div>
