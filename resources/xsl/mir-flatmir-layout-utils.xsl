@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
     xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+    xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation"
     xmlns:mcrver="xalan://org.mycore.common.MCRCoreVersion"
     xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
-    exclude-result-prefixes="mcrver mcrxsl">
+    exclude-result-prefixes="i18n mcrver mcrxsl">
 
   <xsl:import href="resource:xsl/layout/mir-common-layout.xsl" />
   <xsl:param name="piwikID" select="'0'" />
@@ -18,7 +19,7 @@
           <div class="searchfield_box">
             <form action="{$WebApplicationBaseURL}servlets/solr/find" class="navbar-form navbar-left pull-right" role="search">
               <div class="form-group">
-                <input name="condQuery" placeholder="Suche" class="form-control search-query" id="searchInput" type="text" />
+                <input name="condQuery" placeholder="{i18n:translate('mir.navsearch.placeholder')}" class="form-control search-query" id="searchInput" type="text" />
                 <xsl:choose>
                   <xsl:when test="mcrxsl:isCurrentUserInRole('admin') or mcrxsl:isCurrentUserInRole('editor')">
                     <input name="owner" type="hidden" value="createdby:*" />
@@ -40,7 +41,7 @@
           </ul>
         </nav>
         <br />
-        <a href="https://ub.tu-braunschweig.de/" id="bs-bibliothek">Universitätsbibliothek Braunschweig</a>
+        <a href="https://ub.tu-braunschweig.de/" id="bs-bibliothek"><xsl:value-of select="i18n:translate('digibib.bsLibrary')" /></a>
       </div>
     </div>
 
@@ -59,7 +60,7 @@
             </span>
           </button>
           <div id="project_logo_box">
-            <a class="navbar-brand hidden-xs" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot.png" alt="Technische Universität Braunschweig" /></a>
+            <a class="navbar-brand hidden-xs" href="http://www.tu-braunschweig.de" title="{i18n:translate('digibib.goToMainSite')}"><img src="{$WebApplicationBaseURL}images/siegel_rot.png" alt="{i18n:translate('digibib.logoTUBS')}" /></a>
             <!-- a class="navbar-brand visible-xs-block" href="http://www.tu-braunschweig.de" title="zur Startseite der TU Braunschweig"><img src="{$WebApplicationBaseURL}images/siegel_rot_small.png" alt="Technische Universität Braunschweig" /></a -->
           </div>
         </div>
@@ -97,7 +98,7 @@
         <div class="col-xs-6 col-sm-3">
           <xsl:variable name="mcr_version" select="concat('MyCoRe ',mcrver:getCompleteVersion())" />
           <div id="powered_by">
-            <a id="dini_logo" href="http://www.dini.de/dini-zertifikat/" title="Der Publikationsserver der TU-Braunschweig ist zertifiziert nach DINI-2016">
+            <a id="dini_logo" href="http://www.dini.de/dini-zertifikat/" title="{i18n:translate('digibib.diniCertificate2016')}">
               <img alt="Logo DINI-Zertifikat 2016" src="{$WebApplicationBaseURL}images/dini_zertifikat_2016.svg" height="50" />
             </a>
             <a id="mycore_logo" href="http://www.mycore.de">

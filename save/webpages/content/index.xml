@@ -1,36 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage>
-    <section xml:lang="de" title="Willkommen bei der Digitalen Bibliothek">
-        <div class="jumbotwo" id="bs-index-search" style="margin-top:50px;">
-          <div class="row">
-            <div class="col-md-9 col-md-offset-2" lang="de">
-              <h1>
-                Digitale Bibliothek <br />
-                Der Publikationsserver der TU&#160;Braunschweig
-              </h1>
-              <form action="../servlets/solr/find" id="bs-searchMainPage" class="form-inline" role="search" style="margin-top:30px;">
-                <div class="input-group" style="width: 100%;">
-                  <input name="condQuery" placeholder="Suche in 14.000 Dokumenten" class="form-control search-query" id="bs-searchInput" type="text" />
-                  <div class="input-group-btn"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
-                </div>
-              </form>
+  <section xml:lang="de" title="Willkommen bei der Digitalen Bibliothek">
+    <div class="jumbotwo" id="bs-index-search" style="margin-top:50px;">
+      <div class="row">
+        <div class="col-md-9 col-md-offset-2" lang="de">
+          <h1>
+            Digitale Bibliothek <br />
+            Der Publikationsserver der TU&#160;Braunschweig
+          </h1>
+          <form action="../servlets/solr/find" id="bs-searchMainPage" class="form-inline" role="search" style="margin-top:30px;">
+            <div class="input-group" style="width: 100%;">
+              <input name="condQuery" placeholder="Suche in 16.000 Dokumenten" class="form-control search-query" id="bs-searchInput" type="text" />
+              <div class="input-group-btn"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
             </div>
-          </div>
+          </form>
         </div>
-
-        <script type="text/javascript" src="../js/jquery.number.js"></script>
-        <script>
-            $.ajax({
-            type: "GET",
-            url: "../api/v1/search?q=objectType:mods AND state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
-            dataType: "jsonp",
-            success: function (data) {
+      </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery.number.js"></script>
+    <script>
+      $( document ).ready(function() {
+        $.ajax({
+          type: "GET",
+          url: "../api/v1/search?q=objectType:mods AND state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
+          dataType: "jsonp",
+          success: function (data) {
             $('#bs-searchInput').attr('placeholder', 'Suche in ' + $.number(data.response.numFound,0, ',', '.') + ' Dokumenten');
-            },
-            });
-        </script>
-    </section>
-    <meta>
-        <log lastEditor="administrator" date="2016-07-21" time="12:46"/>
-    </meta>
+          },
+        });
+      });
+    </script>
+  </section>
+  <section xml:lang="en" title="Welcome to the Digital Library">
+    <div class="jumbotwo" id="bs-index-search" style="margin-top:50px;">
+      <div class="row">
+        <div class="col-md-9 col-md-offset-2" lang="en">
+          <h1>
+            Digital Library <br />
+            Institutional Repository of TU&#160;Braunschweig
+          </h1>
+          <form action="../servlets/solr/find" id="bs-searchMainPage" class="form-inline" role="search" style="margin-top:30px;">
+            <div class="input-group" style="width: 100%;">
+              <input name="condQuery" placeholder="Search in 16.000 documents" class="form-control search-query" id="bs-searchInput" type="text" />
+              <div class="input-group-btn"><button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery.number.js"></script>
+    <script>
+      $( document ).ready(function() {
+      $.ajax({
+      type: "GET",
+      url: "../api/v1/search?q=objectType:mods AND state:published&amp;rows=0&amp;wt=json&amp;json.wrf=?",
+      dataType: "jsonp",
+      success: function (data) {
+      $('#bs-searchInput').attr('placeholder', 'Search in ' + $.number(data.response.numFound,0, ',', '.') + ' documents');
+      },
+      });
+      });
+    </script>
+  </section>
+  <meta>
+    <log lastEditor="administrator" date="2018-04-23" time="12:46"/>
+  </meta>
 </MyCoReWebPage>
