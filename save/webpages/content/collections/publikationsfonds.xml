@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage><section xml:lang="de" title="Publikationsfonds der TU Braunschweig"><h2>Publikationsfonds der TU Braunschweig</h2>
+<MyCoReWebPage><section xml:lang="de" title="Publikationsfonds der TU Braunschweig"><div>
+  <h2>Publikationsfonds der TU Braunschweig</h2>
+  
+  <div class="row">
+    <div class="col-md-12">
 
-<p>Die Universitätsbibliothek Braunschweig hat mit Hilfe der <a href="http://www.dfg.de/foerderung/programme/infrastruktur/lis/lis_foerderangebote/open_access/index.html"> Deutschen Forschungsgemeinschaft (DFG)</a> einen Publikationsfonds eingerichtet.<br />
+<p>Die Universitätsbibliothek Braunschweig hat mit Hilfe der <a href="http://www.dfg.de/foerderung/programme/infrastruktur/lis/lis_foerderangebote/open_access/index.html">Deutschen Forschungsgemeinschaft (DFG)</a> einen Publikationsfonds eingerichtet.<br />
 Wissenschaftler/innen der TU Braunschweig können für die Veröffentlichung von Artikeln in <strong>Open-Access-Zeitschriften</strong> ab dem 01.01.2017 eine Förderung aus diesem Fonds beantragen.</p>
 
 <p>Hier finden Sie <a href="https://ub.tu-braunschweig.de/publizieren_openaccess/publikationsfonds/">genauere Informationen zum Publikationsfonds</a> und den <a href="https://ub.tu-braunschweig.de/publizieren_openaccess/publikationsfonds/formular_foerdergelder/">Antrag zur Kostenübernahme.</a></p>
@@ -9,8 +13,8 @@ Wissenschaftler/innen der TU Braunschweig können für die Veröffentlichung von
 <h3>Bereits vom Publikationsfonds geförderte Artikel</h3>
 
 
-        <ul id="digibib_titleList">
-        </ul>
+  <ul id="digibib_titleList">
+  </ul>
   <script>
     $( document ).ready(function() {
       $.ajax({
@@ -40,6 +44,7 @@ Wissenschaftler/innen der TU Braunschweig können für die Veröffentlichung von
     });
   </script>
 
-
-<p> </p>
+    </div>
+  </div>
+</div>
 </section><meta><log lastEditor="dbbs_admin" date="2018-04-19" time="11:26" /></meta></MyCoReWebPage>
