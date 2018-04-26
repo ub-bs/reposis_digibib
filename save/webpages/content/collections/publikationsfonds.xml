@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyCoReWebPage><section xml:lang="de" title="Publikationsfonds der TU Braunschweig"><h2>Publikationsfonds der TU Braunschweig</h2>
+
+<p>Die Universitätsbibliothek Braunschweig hat mit Hilfe der <a href="http://www.dfg.de/foerderung/programme/infrastruktur/lis/lis_foerderangebote/open_access/index.html"> Deutschen Forschungsgemeinschaft (DFG)</a> einen Publikationsfonds eingerichtet.<br />
+Wissenschaftler/innen der TU Braunschweig können für die Veröffentlichung von Artikeln in <strong>Open-Access-Zeitschriften</strong> ab dem 01.01.2017 eine Förderung aus diesem Fonds beantragen.</p>
+
+<p>Hier finden Sie <a href="https://ub.tu-braunschweig.de/publizieren_openaccess/publikationsfonds/">genauere Informationen zum Publikationsfonds</a> und den <a href="https://ub.tu-braunschweig.de/publizieren_openaccess/publikationsfonds/formular_foerdergelder/">Antrag zur Kostenübernahme.</a></p>
+
+<h3>Bereits vom Publikationsfonds geförderte Artikel</h3>
+
+
+        <ul id="digibib_titleList">
+        </ul>
+  <script>
+    $( document ).ready(function() {
+      $.ajax({
+        type: "GET",
+        url: "../../api/v1/search?q=allMeta:publikationsfonds&amp;rows=2000&amp;fl=id,search_result_link_text,mods.author,mods.title.main,mods.dateIssued&amp;sort=mods.dateIssued+desc&amp;wt=json&amp;json.wrf=?",
+        dataType: "jsonp",
+        success: function (data) {
+          $(data.response.docs).each(function(i, doc){
+            var authNames = '';
+            var countAuth = doc['mods.author'].length;
+            $.each(doc['mods.author'],function(key, authName){
+              if (key &lt; 3) {
+                authNames = authNames + authName;
+                if (key &lt; (countAuth - 1)) {
+                  authNames = authNames + ' / ';
+                }
+              }
+              if (key == 3) {
+                authNames = authNames + 'et.al.';
+              }
+            });
+            $('#digibib_titleList').append($('<li></li>')
+              .append(authNames + ': <a title="' + doc['mods.title.main'] + '" href="../../receive/' + doc['id'] + '">' + doc['search_result_link_text'] + '</a>'));
+          });
+        },
+      });
+    });
+  </script>
+
+
+<p> </p>
+</section><meta><log lastEditor="dbbs_admin" date="2018-04-19" time="11:26" /></meta></MyCoReWebPage>
