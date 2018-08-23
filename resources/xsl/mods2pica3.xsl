@@ -244,15 +244,15 @@
 
   <xsl:template match="mods:identifier[@type='doi']" mode="pica3">
     <line>
-      <xsl:text>4083  {$MCR.DOI.Resolver.MasterURL}</xsl:text>
-      <xsl:value-of select="." />
+      <xsl:text>4083  </xsl:text>
+      <xsl:value-of select="concat($MCR.DOI.Resolver.MasterURL, .)" />
     </line>
   </xsl:template>
 
   <xsl:template match="mods:identifier[@type='doi']" mode="relatedItem">
     <line>
-      <xsl:text>4083  {$MCR.DOI.Resolver.MasterURL}</xsl:text>
-      <xsl:value-of select="." />
+      <xsl:text>4083  </xsl:text>
+      <xsl:value-of select="concat($MCR.DOI.Resolver.MasterURL, .)" />
     </line>
   </xsl:template>
 
