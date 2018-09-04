@@ -41,6 +41,18 @@
                             <option value="mods.name">
                               <xed:output i18n="editor.search.mir.name" />
                             </option>
+                            <option value="mods.nameIdentifier">
+                              <xed:output i18n="mir.dropdown.nameIdentifier" />
+                            </option>
+                            <option value="topic">
+                              <xed:output i18n="mir.subject.topic" />
+                            </option>
+                            <option value="createdby">
+                              <xed:output i18n="metaData.createdBy" />
+                            </option>
+                            <option value="modifiedby">
+                              <xed:output i18n="metaData.modifiedBy" />
+                            </option>
                             <option value="allMeta">
                               <xed:output i18n="editor.search.mir.metadata" />
                             </option>
@@ -112,9 +124,9 @@
                     uri="xslStyle:items2options:classification:editor:-1:children:state" />
                   <!-- Datum -->
                   <div class="form-group">
-                    <xed:bind xpath="condition[@field='mods.dateIssued']">
+                    <xed:bind xpath="condition[@field='mods.yearIssued']">
                       <label for="inputDate1" class="col-md-3 control-label">
-                        <xed:output i18n="component.mods.metaData.dictionary.dateIssued" />
+                        <xed:output i18n="mir.date.issued.4" />
                       </label>
                       <div class="col-md-2">
                         <xed:bind xpath="@operator">
@@ -130,7 +142,7 @@
                       <div class="col-md-7">
                         <xed:bind xpath="@value">
                           <input type="text" class="form-control" id="inputDate1"
-                            placeholder="YYYY-MM-DD" />
+                            placeholder="YYYY" />
                         </xed:bind>
                       </div>
                     </xed:bind>
@@ -158,7 +170,7 @@
                             </option>
                           </select>
                           <span class="input-group-addon" data-toggle="tooltip" data-html="true" title="{i18n:editor.search.fulltext.tooltip}">
-                            <i class="glyphicon glyphicon-info-sign" />
+                            <i class="fa fa-info-circle" />
                           </span>
                       </xed:bind>
                     </div>
@@ -203,6 +215,12 @@
                       <select class="form-control">
                         <option value="mods.dateIssued">
                           <xed:output i18n="component.mods.metaData.dictionary.dateIssued" />
+                        </option>
+                        <option value="modified">
+                          <xed:output i18n="metaData.versions.action.M" />
+                        </option>
+                        <option value="mods.mainAuthor">
+                          <xed:output i18n="editor.search.oa.mainAuthor" />
                         </option>
                         <option value="score">
                           <xed:output i18n="editor.search.score" />
