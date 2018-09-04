@@ -4,12 +4,14 @@
 
 <div class="row" id="digibib_botanic">
 <div class="col-md-12">
-<p>Hier finden Sie wertvolle Bestände der Universitätsbibliothek Braunschweig im Bereich der botanischen und zoologischen Abbildungswerke.<br />
+<p>Hier finden Sie wertvolle Bestände der Universitätsbibliothek Braunschweig aus dem Bereich der Botanik und der Zoologie.<br />
 Die Digitalisierung befindet sich hier im Aufbau.</p>
 
 <ul>
-	<li>Zu dem digitalisierten Bestand der Bereiche <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+botanik+mat+o">Botanik und Zoologie</a>.</li>
-	<li>Zu dem digitalisierten Bestand des Bereichs <a href="http://opac.lbs-braunschweig.gbv.de/DB=1/SET=1/TTL=1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=erj+%3C+1950%3B+vse+braunschweig+pilze+mat+o">Pilze</a>.</li>
+	<li>Digitalisate der Bereiche <a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Btopic%3A%22Botanik+und+Zoologie%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Botanik und Zoologie</a>.</li>
+	<li>Ausgewählte, <a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Btopic%3AKr%C3%A4uterbuch+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">historische Kräuterbücher</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BobjectType%3A%22mods%22+%2Bmods.name%3Aarckenhausen+%2B%28state%3A%22published%22+createdby%3A%22guest%22%29&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fmain%2Fsearch%2Fsimple.xed">Johann Christian Peter Arckenhausens handgemalte Zeichnungen</a> von Pflanzen, Pilzen, Moosen und Schmetterlingen.</li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BobjectType%3A%22mods%22+%2Bmods.name%3Ajunkert%2C+%2Bmods.name%3Aorest+%2B%28state%3A%22published%22+createdby%3A%22guest%22%29&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fmain%2Fsearch%2Fsimple.xed">Orest Junkerts handgemalte Pilze aller Gattungen</a>.</li>
 </ul>
 
 <p>Die Sammlung Pharmazie finden Sie <a href="pharmacy.xml">hier</a>.</p>
@@ -36,5 +38,4 @@ Digitization is under construction.</p>
 <p>You will find digitized collections of images <a href="image_collections.xml">here</a>.</p>
 </div>
 </div>
-</div>
-</section><meta><log lastEditor="dbbs_admin" date="2018-04-11" time="10:43" /></meta></MyCoReWebPage>
+</div></section><meta><log lastEditor="dbbs_admin" date="2018-09-04" time="14:11" /></meta></MyCoReWebPage>

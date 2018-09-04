@@ -111,6 +111,14 @@
             <label xml:lang="de">Spezialgebiete und Raritäten</label>
             <label xml:lang="en">Specialty and Rarities</label>
         </item>
+        <item href="/content/collections/brunsvicensien_alpha.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Brunsvicensien alphabetisch</label>
+            <label xml:lang="en">new entry</label>
+        </item>
+        <item href="/content/collections/brunsvicensien_thema.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Brunsvicensien Thema</label>
+            <label xml:lang="en">new entry 2</label>
+        </item>
     </menu>
     <menu id="children">
         <label xml:lang="de">Kinderbücher</label>

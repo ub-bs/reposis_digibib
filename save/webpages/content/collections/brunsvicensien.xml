@@ -62,6 +62,8 @@
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64262">Braunschweigische Adressbücher<br />
 	ab dem Jahr 1721 - ... </a><br />
 	 </li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BobjectType%3A%22mods%22+%2BallMeta%3A%5C%22Best%C3%A4nde+%2BallMeta%3Ader+%2BallMeta%3AStadtbibliothek+%2BallMeta%3ABraunschweig%5C%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=search%2Fsimple_intern.xed">Bestände aus der Stadtbibliothek Braunschweig</a></li>
+	<br />
 	<li>In Zusammenarbeit mit dem <a href="http://www.braunschweig.de/kultur_tourismus/bibliotheken_archive/stadtarchiv/index.html">Stadtarchiv Braunschweig</a>
 	<ul>
 		<li><a href="http://publikationsserver.tu-braunschweig.de/get/64262">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a></li>
@@ -96,6 +98,7 @@
 	<ul>
 		<li><a href="http://publikationsserver.tu-braunschweig.de/get/65164">Eintracht-Magazin: Mitteilungsblatt des BTSV Eintracht v. 1895</a> - ab dem Jahr 1908</li>
 		<li><a href="http://publikationsserver.tu-braunschweig.de/get/65281">Eintracht-Echo</a> - ab dem Jahr 1953</li>
+		<li><a href="http://publikationsserver.tu-braunschweig.de/get/65792">Eintracht Aktuell</a> - ab dem Jahr 1976</li>
 	</ul>
 	</li>
 </ul>
@@ -197,4 +200,4 @@
 </ul>
 </div>
 </div>
-</div></section><meta><log lastEditor="dbbs_admin" date="2018-07-17" time="12:53" /></meta></MyCoReWebPage>
+</div></section><meta><log lastEditor="dbbs_admin" date="2018-09-03" time="10:17" /></meta></MyCoReWebPage>
