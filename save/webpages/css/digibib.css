@@ -22,6 +22,10 @@ html body {
   margin-bottom: 90px; /* Margin bottom by footer height */
 }
 
+p {
+  margin: 0 0 10px; /* fix abstract bug -> use 10px instead of 10.5px */
+}
+
 legend {
   color: #000000;
 }
