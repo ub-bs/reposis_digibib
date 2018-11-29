@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Spezialgebiete und Raritäten">
+<MyCoReWebPage><section xml:lang="de" title="Spezialgebiete und Raritäten"><div>
+<h2>Spezialgebiete und Raritäten</h2>
 
-    <h2>Spezialgebiete und Raritäten</h2>
-    <div class="row" id="digibib_rarities">
-      <div class="col-md-10">
-        <p>
-          Diese Seite befindet sich im Aufbau
-        </p>
-      </div>
-    </div>
+<p>Auf dieser Seite möchten wir in unregelmäßigen Abständen Spezialgebiete und Raritäten des Publikationsservers der TU Braunschweig vorstellen.</p>
 
-  </section>
-  <meta>
-    <log date="2016-05-09" time="18:21" labelPath=" » Raritäten"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<p> </p>
+
+<h3><a href="http://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BallMeta%3A&quot;revolution+1918&quot;+%2BobjectType%3A&quot;mods&quot;&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed"><u>100 Jahre Novemberrevolution in Braunschweig</u></a></h3>
+
+<p> </p>
+
+<p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt"><a href="https://de.wikipedia.org/wiki/Novemberrevolution_in_Braunschweig#/media/File:Braunschweig_Abdankung_Ernst_August_Volksfreund-Schlagzeile_8_November_1918.png"><img alt="Titelseite des Volksfreundes vom 8. November 1918: Abdankung des Herzogs Ernst August" src="Braunschweig_Abdankung_Ernst_August_Volksfreund-Schlagzeile_8_November_1918.png" style="width: 150px; height: 219px; float: left; margin: 2px 10px;" /></a>Braunschweiger Arbeiter riefen am 8.11.1918 die Revolution aus, einen Tag bevor dies in Berlin geschah. Auch sonst wich die hiesige Revolution vom reichsweiten Durchschnitt deutlich ab: Herzog Ernst August unterzeichnete als erster deutscher Fürst eine Abdankungsurkunde. Im Unterschied zum Reich spielte die MSPD keine Rolle, die Revolution war radikaler. Am 10.11. erfolgte die Proklamation der „Sozialistischen Republik Braunschweig“. Mit Minna Fasshauer wurde die erste deutsche Ministerin ernannt (Volksbildung). Die Revolution endete in Braunschweig Mitte April 1919 auf Befehl der Reichsregierung mit dem Einmarsch von Freikorpsgruppen. Insgesamt gesehen hat die Novemberrevolution jedoch bedeutende Errungenschaften hervorgebracht, die noch heute unser Leben prägen: Demokratie, Gleichberechtigung der Frau, allgemeines Wahlrecht, Anerkennung der Gewerkschaften und vieles mehr. Die TH Braunschweig reagierte mit eher minimalen Anpassungen wie z. B. der Gründung des AStAs 1919 oder Fortbildungskursen zur Hebung der allgemeinen Volksbildung auf die neuen Entwicklungen. Die Mehrheit der Studierenden und Professoren blieb antidemokratisch.<br />
+(Bildquelle: <a href="https://de.wikipedia.org/wiki/Novemberrevolution_in_Braunschweig">https://de.wikipedia.org/wiki/Novemberrevolution_in_Braunschweig</a>, 09.11.2018)</p>
+
+<p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt"> </p>
+
+<div class="row" id="digibib_rarities">
+<div class="col-md-10">
+<p><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BallMeta%3A&quot;revolution+1918&quot;+%2BobjectType%3A&quot;mods&quot;&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Unsere Dokumente zur Novemberrevolution in Braunschweig</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2018-11-09" time="13:11" /></meta></MyCoReWebPage>

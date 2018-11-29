@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyCoReWebPage><section xml:lang="de" title="Stadtbibliothek"><div>
+<h2>Bestände aus der Stadtbibliothek Braunschweig</h2>
+
+<p>Mit mehr als 650.000 Medien zählt die <a href="http://www.braunschweig.de/stadtbibliothek">Stadtbibliothek Braunschweig</a> zu den größten Kommunalbibliotheken Niedersachsens. Sie entstand 2007 aus der Zusammenlegung der Stadtbibliothek am Löwenwall (gegründet 1861) und der Öffentlichen Bücherei Hintern Brüdern (gegründet 1910).</p>
+
+<p>Das Angebot reicht im Freihandbereich von Romanen, Sachbüchern und Kinderbüchern über Spielfilme, Musik-CDs und E-Books bis zu Brett- und Konsolenspielen und Bildern aus der Artothek. Im Magazin wird der wertvolle Altbestand verwahrt (darunter mittelalterliche Handschriften, Inkunabeln und mehr als 17.000 Drucke des 16. und 17. Jahrhunderts) sowie aktuelle geisteswissenschaftliche Literatur und mehr als 700 Zeitschriften. Einen Schwerpunkt bildet die Sammlung von Brunsvicensien.</p>
+
+<p>Hier finden Sie eine <a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BobjectType%3A%22mods%22+%2BallMeta%3A%5C%22Best%C3%A4nde+%2BallMeta%3Ader+%2BallMeta%3AStadtbibliothek+%2BallMeta%3ABraunschweig%5C%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=search%2Fsimple_intern.xed">Übersicht über die Digitalisate, die in Zusammenarbeit mit der Stadtbibliothek entstanden sind.</a></p>
+
+<p> </p>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2018-11-05" time="15:31" /></meta></MyCoReWebPage>

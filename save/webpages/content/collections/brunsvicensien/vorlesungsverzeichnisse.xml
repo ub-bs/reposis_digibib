@@ -59,6 +59,8 @@
 <div class="row">
 <div class="col-md-12">
 <hr />
+<p>Alle Vorlesungsverzeichnisse in einer chronologischen Liste finden Sie <a href="../../../receive/dbbs_mods_00065812">hier</a>.</p>
+
 <p>Hier finden Sie die <a href="ph.xml">Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</a>.</p>
 
 <p>Hier finden Sie die <a href="matrikelbuecher.xml">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.</p>
@@ -83,4 +85,4 @@
           });
         });
     </script></div>
-</section><meta><log lastEditor="dbbs_admin" date="2018-06-25" time="14:57" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2018-10-08" time="10:04" /></meta></MyCoReWebPage>

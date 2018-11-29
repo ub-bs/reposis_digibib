@@ -28,8 +28,7 @@
 	<li><a href="../../servlets/solr/select?q=topic%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Wirtschaft, Handel und Justiz</a></li>
 	<li><a href="../../servlets/solr/select?q=topic%3A%22Architektur%22&amp;wt=xml">Architektur</a></li>
 	<li><a href="../../servlets/solr/select?q=topic%3A%22Pharmazie%22&amp;wt=xml">Pharmazie</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Biologie%22&amp;wt=xml">Biologie</a> (in Zusammenarbeit mit der <a href="http://niedersachsen.nabu.de/tiereundpflanzen/vogelschutz/avison/">Avifaunistischen<br />
-	Arbeitsgemeinschaft Südostniedersachsen) </a></li>
+	<li><a href="../../servlets/solr/select?q=topic%3A%22Biologie%22&amp;wt=xml">Biologie</a></li>
 	<li><a href="../../servlets/solr/select?q=topic%3A%22Geologie%22&amp;wt=xml">Geologie</a></li>
 	<li><a href="../../servlets/solr/select?q=topic%3A%22Eisenbahngeschichte%22&amp;wt=xml">Eisenbahngeschichte</a></li>
 	<li><a href="../../servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a><br />
@@ -55,25 +54,17 @@
 
 <div class="col-md-6">
 <ul>
-	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigische Anzeigen</a></li>
-	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a></li>
-	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigisches Magazin</a><br />
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064795">Braunschweigische Anzeigen</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64930">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64934">Braunschweigisches Magazin</a><br />
 	 </li>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64262">Braunschweigische Adressbücher<br />
 	ab dem Jahr 1721 - ... </a><br />
 	 </li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BobjectType%3A%22mods%22+%2BallMeta%3A%5C%22Best%C3%A4nde+%2BallMeta%3Ader+%2BallMeta%3AStadtbibliothek+%2BallMeta%3ABraunschweig%5C%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=search%2Fsimple_intern.xed">Bestände aus der Stadtbibliothek Braunschweig</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Btopic%3A%22Best%C3%A4nde+des+Stadtarchivs+Braunschweig%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Bestände des Stadtachivs Braunschweig</a>, u.a. Adreßbücher, <a href="http://publikationsserver.tu-braunschweig.de/get/64442">Urkundenbücher</a> und <a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441">Chroniken</a> der Stadt Braunschweig, <a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00041777">Verhandlungen der Stadtverordneten</a> und Werke zur Reformation</li>
 	<br />
-	<li>In Zusammenarbeit mit dem <a href="http://www.braunschweig.de/kultur_tourismus/bibliotheken_archive/stadtarchiv/index.html">Stadtarchiv Braunschweig</a>
-	<ul>
-		<li><a href="http://publikationsserver.tu-braunschweig.de/get/64262">Braunschweigische Adressbücher ab dem Jahr 1721 - ...</a></li>
-		<li><a href="../../receive/dbbs_mods_00064442">Urkundenbücher der Stadt Braunschweig<br />
-		Bände 1 - 8 </a></li>
-		<li><a href="../../receive/dbbs_mods_00064441">Chroniken der Stadt Braunschweig</a><br />
-		<a href="../../../receive/dbbs_mods_00038463">Band 1</a><a href="../../receive/dbbs_mods_00064441"> - </a><a href="../../../receive/dbbs_mods_00038464">Band 2</a><a href="../../receive/dbbs_mods_00064441"> - </a><a href="../../../receive/dbbs_mods_00038465">Band 3, Teil 1</a><br />
-		 </li>
-	</ul>
-	</li>
+	<li><a href="../../content/collections/brunsvicensien/stadtbibliothek.xml">Bestände aus der Stadtbibliothek Braunschweig</a></li>
+	<br />
 	<li><a href="brunsvicensien/publications_bwg.xml">Veröffentlichungen der Braunschweigischen Wissenschaftlichen Gesellschaft</a>  <a href="http://bwg-nds.de/">(BWG)</a><br />
 	 </li>
 	<li>In Zusammenarbeit mit dem <a href="http://www.braunschweigischer-geschichtsverein.de/">Braunschweigischen Geschichtsverein</a>
@@ -200,4 +191,4 @@
 </ul>
 </div>
 </div>
-</div></section><meta><log lastEditor="dbbs_admin" date="2018-09-03" time="10:17" /></meta></MyCoReWebPage>
+</div></section><meta><log lastEditor="dbbs_admin" date="2018-10-08" time="11:18" /></meta></MyCoReWebPage>
