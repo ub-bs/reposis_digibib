@@ -8,7 +8,7 @@
 	<li>Brunsvicensien der <a href="http://www.ub.tu-braunschweig.de">Universitätsbibliothek Braunschweig</a><br />
 	 </li>
 	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?join=AND&amp;bool0[]=AND&amp;lookfor0[]=%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig%22&amp;type0[]=AllFields&amp;op0[]=OR&amp;sort=year&amp;limit=20&amp;filter[]=format_facet%3A%22Elektronische+Ressource%22">Alle Titel</a></li>
-	<li><a href="../../servlets/solr/select?q=topic:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">Vom Collegium Carolinum bis zur Technischen Universität </a>
+	<li><a href="../../servlets/solr/select?q=mods.subject:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">Vom Collegium Carolinum bis zur Technischen Universität </a>
 	<ul>
 		<li><a href="brunsvicensien/vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse ab 1745</a></li>
 		<li><a href="brunsvicensien/matrikelbuecher.xml">Matrikelbücher (1745 - 1942)</a></li>
@@ -20,23 +20,23 @@
 		Universitätsarchivs Braunschweig</a></li>
 	</ul>
 	</li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Stadt+Braunschweig%22&amp;wt=xml">Stadt Braunschweig</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Braunschweiger+Land%22&amp;wt=xml">Land Braunschweig</a> (Region, Umland ...)</li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Herzogtum+Braunschweig%22&amp;wt=xml">Herzogtum Braunschweig</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Kunst-+und+Kulturgeschichte%22&amp;wt=xml">Kunst- und Kulturgeschichte</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Schul-+und+Bildungswesen%22&amp;wt=xml">Schul- und Bildungswesen</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Wirtschaft, Handel und Justiz</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Architektur%22&amp;wt=xml">Architektur</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Pharmazie%22&amp;wt=xml">Pharmazie</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Biologie%22&amp;wt=xml">Biologie</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Geologie%22&amp;wt=xml">Geologie</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Eisenbahngeschichte%22&amp;wt=xml">Eisenbahngeschichte</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a><br />
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Stadt+Braunschweig%22&amp;wt=xml">Stadt Braunschweig</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Braunschweiger+Land%22&amp;wt=xml">Land Braunschweig</a> (Region, Umland ...)</li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Herzogtum+Braunschweig%22&amp;wt=xml">Herzogtum Braunschweig</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Kunst-+und+Kulturgeschichte%22&amp;wt=xml">Kunst- und Kulturgeschichte</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Schul-+und+Bildungswesen%22&amp;wt=xml">Schul- und Bildungswesen</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Wirtschaft, Handel und Justiz</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Architektur%22&amp;wt=xml">Architektur</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Pharmazie%22&amp;wt=xml">Pharmazie</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Biologie%22&amp;wt=xml">Biologie</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Geologie%22&amp;wt=xml">Geologie</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Eisenbahngeschichte%22&amp;wt=xml">Eisenbahngeschichte</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a><br />
 	 </li>
 	<li>Werke...
 	<ul>
-		<li><a href="../../servlets/solr/select?q=topic%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... von Persönlichkeiten der Region </a></li>
-		<li><a href="../../servlets/solr/select?q=topic%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... über Persönlichkeiten der Region </a></li>
+		<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... von Persönlichkeiten der Region </a></li>
+		<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... über Persönlichkeiten der Region </a></li>
 	</ul>
 	</li>
 </ul>
@@ -54,14 +54,14 @@
 
 <div class="col-md-6">
 <ul>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064795">Braunschweigische Anzeigen</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64930">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a></li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_64934">Braunschweigisches Magazin</a><br />
+	<li><a href="../../receive/dbbs_mods_00064795">Braunschweigische Anzeigen</a></li>
+	<li><a href="../../receive/dbbs_mods_64930">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a></li>
+	<li><a href="../../receive/dbbs_mods_64934">Braunschweigisches Magazin</a><br />
 	 </li>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64262">Braunschweigische Adressbücher<br />
 	ab dem Jahr 1721 - ... </a><br />
 	 </li>
-	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Btopic%3A%22Best%C3%A4nde+des+Stadtarchivs+Braunschweig%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Bestände des Stadtachivs Braunschweig</a>, u.a. Adreßbücher, <a href="http://publikationsserver.tu-braunschweig.de/get/64442">Urkundenbücher</a> und <a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441">Chroniken</a> der Stadt Braunschweig, <a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00041777">Verhandlungen der Stadtverordneten</a> und Werke zur Reformation</li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Bmods.subject%3A%22Best%C3%A4nde+des+Stadtarchivs+Braunschweig%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Bestände des Stadtachivs Braunschweig</a>, u.a. Adreßbücher, <a href="http://publikationsserver.tu-braunschweig.de/get/64442">Urkundenbücher</a> und <a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00064441">Chroniken</a> der Stadt Braunschweig, <a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00041777">Verhandlungen der Stadtverordneten</a> und Werke zur Reformation</li>
 	<br />
 	<li><a href="../../content/collections/brunsvicensien/stadtbibliothek.xml">Bestände aus der Stadtbibliothek Braunschweig</a></li>
 	<br />
@@ -104,7 +104,7 @@
 <ul>
 	<li>Brunsvicensien of the <a href="http://www.ub.tu-braunschweig.de">Universitätsbibliothek Braunschweig</a></li>
 	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?join=AND&amp;bool0[]=AND&amp;lookfor0[]=%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig%22&amp;type0[]=AllFields&amp;op0[]=OR&amp;sort=year&amp;limit=20&amp;filter[]=format_facet%3A%22Elektronische+Ressource%22">All titles</a></li>
-	<li><a href="../../servlets/solr/select?q=topic:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">From Collegium Carolinum to Technische Universität</a>
+	<li><a href="../../servlets/solr/select?q=mods.subject:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">From Collegium Carolinum to Technische Universität</a>
 	<ul>
 		<li><a href="brunsvicensien/vorlesungsverzeichnisse.xml">Lecture directories from 1745</a></li>
 		<li><a href="brunsvicensien/matrikelbuecher.xml">Matriculation books (1745 - 1942)</a></li>
@@ -116,23 +116,23 @@
 		university archive of Brunswick</a></li>
 	</ul>
 	</li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Stadt+Braunschweig%22&amp;wt=xml">Brunswick city</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Braunschweiger+Land%22&amp;wt=xml">Brunswick Land</a> (region, surrounding area ...)</li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Herzogtum+Braunschweig%22&amp;wt=xml">Duchy of Brunswick</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Kunst-+und+Kulturgeschichte%22&amp;wt=xml">History of arts and civilization</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Schul-+und+Bildungswesen%22&amp;wt=xml">School system and education</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Economy, trade and justice</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Architektur%22&amp;wt=xml">Architecture</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Pharmazie%22&amp;wt=xml">Pharmacy</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Biologie%22&amp;wt=xml">Biology</a> (in cooperation with<a href="http://niedersachsen.nabu.de/tiereundpflanzen/vogelschutz/avison/">Avifaunistische<br />
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Stadt+Braunschweig%22&amp;wt=xml">Brunswick city</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Braunschweiger+Land%22&amp;wt=xml">Brunswick Land</a> (region, surrounding area ...)</li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Herzogtum+Braunschweig%22&amp;wt=xml">Duchy of Brunswick</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Kunst-+und+Kulturgeschichte%22&amp;wt=xml">History of arts and civilization</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Schul-+und+Bildungswesen%22&amp;wt=xml">School system and education</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Economy, trade and justice</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Architektur%22&amp;wt=xml">Architecture</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Pharmazie%22&amp;wt=xml">Pharmacy</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Biologie%22&amp;wt=xml">Biology</a> (in cooperation with<a href="http://niedersachsen.nabu.de/tiereundpflanzen/vogelschutz/avison/">Avifaunistische<br />
 	Arbeitsgemeinschaft Südostniedersachsen) </a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Geologie%22&amp;wt=xml">Geology</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Eisenbahngeschichte%22&amp;wt=xml">Railroad history</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Views of Brunswick</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Geologie%22&amp;wt=xml">Geology</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Eisenbahngeschichte%22&amp;wt=xml">Railroad history</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Views of Brunswick</a></li>
 	<li>Works...
 	<ul>
-		<li><a href="../../servlets/solr/select?q=topic%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... by renowned personalities of the region </a></li>
-		<li><a href="../../servlets/solr/select?q=topic%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... of renowned personalities of the region </a></li>
+		<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... by renowned personalities of the region </a></li>
+		<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... of renowned personalities of the region </a></li>
 	</ul>
 	</li>
 </ul>

@@ -12,7 +12,8 @@ Wissenschaftler/innen der TU Braunschweig können für die Veröffentlichung von
 
 <h3>Bereits vom Publikationsfonds geförderte Artikel</h3>
 
-
+  <!-- TODO: optimize javascript performance -->
+  <!-- see https://learn.jquery.com/performance/append-outside-loop/ -->
   <ul id="digibib_titleList">
   </ul>
   <script>

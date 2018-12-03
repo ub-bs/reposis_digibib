@@ -8,8 +8,8 @@
 Die Digitalisierung befindet sich hier im Aufbau.</p>
 
 <ul>
-	<li>Digitalisate der Bereiche <a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Btopic%3A%22Botanik+und+Zoologie%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Botanik und Zoologie</a>.</li>
-	<li>Ausgewählte, <a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Btopic%3AKr%C3%A4uterbuch+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">historische Kräuterbücher</a></li>
+	<li>Digitalisate der Bereiche <a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Bmods.subject%3A%22Botanik+und+Zoologie%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Botanik und Zoologie</a>.</li>
+	<li>Ausgewählte, <a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2Bmods.subject%3AKr%C3%A4uterbuch+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">historische Kräuterbücher</a></li>
 	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BobjectType%3A%22mods%22+%2Bmods.name%3Aarckenhausen+%2B%28state%3A%22published%22+createdby%3A%22guest%22%29&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fmain%2Fsearch%2Fsimple.xed">Johann Christian Peter Arckenhausens handgemalte Zeichnungen</a> von Pflanzen, Pilzen, Moosen und Schmetterlingen.</li>
 	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BobjectType%3A%22mods%22+%2Bmods.name%3Ajunkert%2C+%2Bmods.name%3Aorest+%2B%28state%3A%22published%22+createdby%3A%22guest%22%29&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fmain%2Fsearch%2Fsimple.xed">Orest Junkerts handgemalte Pilze aller Gattungen</a>.</li>
 </ul>

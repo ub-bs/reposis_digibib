@@ -11,7 +11,7 @@
 	 </li>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64095">Veröffentlichungen der Universitätsbibliothek und des<br />
 	Universitätsarchivs Braunschweig</a></li>
-	<li><a href="../../servlets/solr/select?q=topic:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">Vom Collegium Carolinum bis zur Technischen Universität </a>
+	<li><a href="../../servlets/solr/select?q=mods.subject:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">Vom Collegium Carolinum bis zur Technischen Universität </a>
 	<ul>
 		<li><a href="brunsvicensien/vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse ab 1745</a></li>
 		<li><a href="brunsvicensien/matrikelbuecher.xml">Matrikelbücher (1745 - 1942)</a></li>
@@ -20,14 +20,14 @@
 	<br />
 	<li><u>Wissenschaft und Forschung:</u></li>
 	<br />
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Architektur%22&amp;wt=xml">Architektur</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Biologie%22&amp;wt=xml">Biologie</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Eisenbahngeschichte%22&amp;wt=xml">Eisenbahngeschichte</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Geologie%22&amp;wt=xml">Geologie</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Kunst-+und+Kulturgeschichte%22&amp;wt=xml">Kunst- und Kulturgeschichte</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Pharmazie%22&amp;wt=xml">Pharmazie</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Schul-+und+Bildungswesen%22&amp;wt=xml">Schul- und Bildungswesen</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Wirtschaft, Handel und Justiz</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Architektur%22&amp;wt=xml">Architektur</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Biologie%22&amp;wt=xml">Biologie</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Eisenbahngeschichte%22&amp;wt=xml">Eisenbahngeschichte</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Geologie%22&amp;wt=xml">Geologie</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Kunst-+und+Kulturgeschichte%22&amp;wt=xml">Kunst- und Kulturgeschichte</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Pharmazie%22&amp;wt=xml">Pharmazie</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Schul-+und+Bildungswesen%22&amp;wt=xml">Schul- und Bildungswesen</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Wirtschaft,+Handel+und+Justiz%22&amp;wt=xml">Wirtschaft, Handel und Justiz</a></li>
 	<br />
 	<li><u>Heimat- und Landeskundliches:</u></li>
 	<br />
@@ -36,14 +36,14 @@
 	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigische Anzeigen</a></li>
 	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Gelehrte Beyträge zu den Braunschweigischen Anzeigen</a></li>
 	<li><a href="brunsvicensien/gelehrte-beytraege.xml">Braunschweigisches Magazin</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Herzogtum+Braunschweig%22&amp;wt=xml">Herzogtum Braunschweig</a></li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Braunschweiger+Land%22&amp;wt=xml">Land Braunschweig</a> (Region, Umland ...)</li>
-	<li><a href="../../servlets/solr/select?q=topic%3A%22Stadt+Braunschweig%22&amp;wt=xml">Stadt Braunschweig</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Ansichten+von+Braunschweig%22&amp;wt=xml">Ansichten von Braunschweig</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Herzogtum+Braunschweig%22&amp;wt=xml">Herzogtum Braunschweig</a></li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Braunschweiger+Land%22&amp;wt=xml">Land Braunschweig</a> (Region, Umland ...)</li>
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Stadt+Braunschweig%22&amp;wt=xml">Stadt Braunschweig</a></li>
 	<li>Werke...
 	<ul>
-		<li><a href="../../servlets/solr/select?q=topic%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... von Persönlichkeiten der Region </a></li>
-		<li><a href="../../servlets/solr/select?q=topic%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... über Persönlichkeiten der Region </a></li>
+		<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... von Persönlichkeiten der Region </a></li>
+		<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Werke+über+Braunschweiger+Persönlichkeiten%22&amp;wt=xml">... über Persönlichkeiten der Region </a></li>
 	</ul>
 	</li>
 </ul>

@@ -44,7 +44,7 @@
                             <option value="mods.nameIdentifier">
                               <xed:output i18n="mir.dropdown.nameIdentifier" />
                             </option>
-                            <option value="topic">
+                            <option value="mods.subject">
                               <xed:output i18n="mir.subject.topic" />
                             </option>
                             <option value="createdby">
