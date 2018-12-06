@@ -14,16 +14,12 @@ $font-size-h1: floor(($font-size-base * 2.4));
 $font-size-h2: floor(($font-size-base * 2.0));
 $font-size-h3: ceil(($font-size-base * 1.6));
 $font-size-h4: ceil(($font-size-base * 1.2));
-$headings-font-family: $font-family-base;
-$headings-font-weight: 400;
 $padding-base-vertical: 10px;
 $padding-base-horizontal: 15px;
 $padding-large-vertical: 18px;
 $padding-large-horizontal: 27px;
 $padding-small-vertical: 6px;
 $padding-small-horizontal: 9px;
-$table-bg-hover: $gray-lighter;
-$table-border-color: $gray-lighter;
 
 
 // Brand colors
@@ -96,17 +92,6 @@ $pagination-disabled-border: transparent;
 // -------------------------
 $btn-default-color: #ffffff;
 $btn-default-bg: $gray;
-$btn-default-border: $btn-default-bg;
-$btn-primary-color: $btn-default-color;
-$btn-primary-border: $btn-primary-bg;
-$btn-success-color: $btn-default-color;
-$btn-success-border: $btn-success-bg;
-$btn-info-color: $btn-default-color;
-$btn-info-border: $btn-info-bg;
-$btn-warning-color: $btn-default-color;
-$btn-warning-border: $btn-warning-bg;
-$btn-danger-color: $btn-default-color;
-$btn-danger-border: $btn-danger-bg;
 
 
 // Forms
@@ -156,4 +141,5 @@ $breadcrumb-active-color: $gray;
 $close-text-shadow: none;
 $pre-bg: $gray-lighter;
 $page-header-border-color: transparent;
-
+$table-bg-hover: $gray-lighter;
+$table-border-color: $gray-lighter;
