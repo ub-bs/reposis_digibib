@@ -33,5 +33,7 @@
     </root>
     <logger name="org.hibernate" level="error" />
     <logger name="org.mycore.frontend.editor.validation" level="info" />
+    <logger name="org.mycore.solr.index.handlers.stream" level="debug" />
+    <logger name="org.mycore.common.xml.MCRURIResolver" level="debug" />
   </loggers>
 </configuration>

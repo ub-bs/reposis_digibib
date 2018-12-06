@@ -19,12 +19,6 @@
     <xsl:param name="label" select="i18n:translate(concat('component.mods.metaData.dictionary.',local-name($nodes[1])))" />
     <xsl:param name="sep" select="''" />
     <xsl:param name="property" select="''" />
-    <xsl:message>
-      <xsl:value-of select="concat('label: ',$label)" />
-    </xsl:message>
-    <xsl:message>
-      <xsl:value-of select="concat('nodes: ',count($nodes))" />
-    </xsl:message>
     <xsl:if test="$nodes">
       <tr>
         <td valign="top" class="metaname">
@@ -75,7 +69,16 @@
   </xsl:template>
 
   <xsl:template match="mods:dateCreated|mods:dateOther|mods:dateIssued|mods:dateCaptured|mods:dateModified" mode="present">
-    <xsl:param name="label" select="i18n:translate(concat('component.mods.metaData.dictionary.',local-name()))" />
+    <xsl:param name="label">
+      <xsl:choose>
+        <xsl:when test="(@point='start' or @point='end') and i18n:exists(concat('component.mods.metaData.dictionary.',local-name(), '.range'))">
+          <xsl:value-of select="i18n:translate(concat('component.mods.metaData.dictionary.',local-name(), '.range'))"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:value-of select="i18n:translate(concat('component.mods.metaData.dictionary.',local-name()))"/>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:param>
     <xsl:if test="not(@point='end' and (preceding-sibling::*[name(current())=name()][@point='start']  or following-sibling::*[name(current())=name()][@point='start']))">
     <tr>
       <td valign="top" class="metaname">
@@ -710,24 +713,17 @@
         <xsl:variable name="link" select="." />
         <xsl:choose>
           <xsl:when test="contains($link,'ppn') or contains($link,'PPN')">
-            <a>
-              <xsl:attribute name="href">
-                <xsl:choose>
-                  <xsl:when test="contains($link, 'PPN=')">
-                    <xsl:value-of select="$link" />
-                  </xsl:when>
-                  <xsl:otherwise>
-                    <xsl:variable xmlns:foaf="http://xmlns.com/foaf/0.1/" name="uriResolved" select="document(mcrxsl:normalizeAbsoluteURL(concat($link,'?format=xml')))//rdf:Description[@rdf:about=normalize-space($link)]/foaf:page/@rdf:resource" />
-                    <xsl:choose>
-                      <xsl:when test="string-length($uriResolved) &gt; 0"><xsl:value-of select="$uriResolved" /></xsl:when>
-                      <xsl:otherwise><xsl:value-of select="$link" /></xsl:otherwise>
-                    </xsl:choose>
-                  </xsl:otherwise>
-                </xsl:choose>
-              </xsl:attribute>
+            <a class="ppn" href="{$link}">
               <xsl:choose>
-                <xsl:when test="contains($link, 'PPN=')"><xsl:value-of select="substring-after($link, 'PPN=')" /></xsl:when>
-                <xsl:otherwise><xsl:value-of select="substring-after($link, ':ppn:')"/></xsl:otherwise>
+                <xsl:when test="contains($link, 'PPN=')">
+                  <xsl:value-of select="substring-after($link, 'PPN=')" />
+                </xsl:when>
+                <xsl:when test="contains($link, ':ppn:')">
+                  <xsl:value-of select="substring-after($link, ':ppn:')"/>
+                </xsl:when>
+                <xsl:otherwise>
+                  <xsl:value-of select="$link"/>
+                </xsl:otherwise>
               </xsl:choose>
             </a>
           </xsl:when>
@@ -737,7 +733,7 @@
             </a>
           </xsl:when>
           <xsl:when test="@type='urn' and not(contains($link,'http'))">
-            <a href="http://nbn-resolving.de/{$link}">
+            <a href="https://nbn-resolving.org/{$link}">
               <xsl:value-of select="$link" />
             </a>
           </xsl:when>
@@ -782,7 +778,7 @@
         <xsl:value-of select="concat(i18n:translate('component.mods.metaData.dictionary.language'), ':')" />
       </td>
       <td class="metavalue">
-        <xsl:for-each select="mods:languageTerm[@authority='rfc4646']">
+        <xsl:for-each select="mods:languageTerm[@authority='rfc5646']">
           <xsl:if test="position()!=1">
             <xsl:choose>
               <xsl:when test="string-length($sep)&gt;0">
@@ -807,7 +803,14 @@
   <xsl:template match="mods:url" mode="present">
     <tr>
       <td valign="top" class="metaname">
-        <xsl:value-of select="concat(i18n:translate('component.mods.metaData.dictionary.url'),':')" />
+        <xsl:choose>
+          <xsl:when test="@access">
+            <xsl:value-of select="concat(i18n:translate(concat('component.mods.metaData.dictionary.url.',mcrxsl:regexp(@access,' ','_'))),':')" />
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="concat(i18n:translate('component.mods.metaData.dictionary.url'),':')" />
+          </xsl:otherwise>
+        </xsl:choose>
       </td>
       <td class="metavalue">
         <a>
@@ -855,6 +858,9 @@
               </xsl:when>
               <xsl:when test="contains($trimmed, 'oa')">
                 <xsl:apply-templates select="." mode="oa-logo" />
+              </xsl:when>
+              <xsl:when test="contains($trimmed, 'ogl')">
+                <xsl:apply-templates select="." mode="ogl-logo" />
               </xsl:when>
               <xsl:otherwise>
                 <xsl:value-of select="." />
@@ -934,9 +940,9 @@
         <xsl:text> </xsl:text>
       </xsl:if>
       <xsl:if test="string-length($dateIssued) &gt; 0">
-            <xsl:text>(</xsl:text>
+        <xsl:text>(</xsl:text>
         <xsl:value-of select="$dateIssued" />
-            <xsl:text>)</xsl:text>
+        <xsl:text>)</xsl:text>
       </xsl:if>
       <!-- Pages -->
       <xsl:if test="mods:part/mods:extent[@unit='pages']">
@@ -1716,3 +1722,4 @@
   <!-- END: view av nedia metadata -->
 
 </xsl:stylesheet>
+
