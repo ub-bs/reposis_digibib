@@ -384,6 +384,12 @@ html body #powered_by {
   padding-right: 10px;
 }
 
+.result_body .result_filter .panel.oa li[data-fq="worldReadableComplete:false"] .title,
+.result_body .result_filter .panel.oa li[data-fq="worldReadableComplete:false"] .title:hover,
+.result_body .result_filter .panel.oa li[data-fq="worldReadableComplete:true"] .title,
+.result_body .result_filter .panel.oa li[data-fq="worldReadableComplete:true"] .title:hover {
+  color: #666;
+}
 
 
 /* responsive grid ***************************************************/
