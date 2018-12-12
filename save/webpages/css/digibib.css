@@ -24,9 +24,8 @@ html body {
 body {
   font-size: 15px;
 }
-
-p {
-  margin: 0 0 10px; /* fix abstract bug -> use 10px instead of 10.5px */
+html body p {
+  line-height: 160%;
 }
 
 legend {
@@ -394,13 +393,13 @@ html body #powered_by {
   color: #666;
 }
 
+/* TODO: move to MIR layout ***************************************************/
 .hit_oa > span {
   background-color: transparent;
   background-size: contain;
   padding-bottom: 1px;
   background-repeat: no-repeat;
 }
-
 .hit_oa > span.label-success {
   background-image: url("../images/oa.png");
 }
@@ -409,6 +408,10 @@ html body #powered_by {
 }
 .hit_oa i {
   display: none;
+}
+
+.shariff .orientation-horizontal.button-style-standard li {
+  min-width: 82px;
 }
 
 
