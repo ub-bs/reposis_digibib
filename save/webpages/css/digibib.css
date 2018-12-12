@@ -349,10 +349,6 @@ html body #powered_by {
   background-size: 15%;
 }
 
-.shariff .orientation-horizontal li {
-  min-width: 80px;
-}
-
 #digibib_feedback {
   cursor: pointer;
   position: fixed;
@@ -409,7 +405,9 @@ html body #powered_by {
 .hit_oa i {
   display: none;
 }
-
+.fa {
+ font: normal normal normal 14px/1 FontAwesome;
+}
 .shariff .orientation-horizontal.button-style-standard li {
   min-width: 82px;
 }
