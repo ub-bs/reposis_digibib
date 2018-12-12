@@ -92,7 +92,7 @@ html body header #header_box {
 .searchfield_box {
   position: absolute;
   right: 0;
-  top: 52px;
+  top: 53px;
 }
 
 .searchfield_box .btn-primary {
@@ -410,6 +410,12 @@ html body #powered_by {
 }
 .shariff .orientation-horizontal.button-style-standard li {
   min-width: 82px;
+}
+.result_body .result_list #hit_list .hit_item .hit_icon_overlay {
+  position: absolute;
+  top: 20px;
+  left: -8px;
+  width: 50%;
 }
 
 
