@@ -398,6 +398,7 @@ html body #powered_by {
   background-color: transparent;
   background-size: contain;
   padding-bottom: 1px;
+  background-repeat: no-repeat;
 }
 
 .hit_oa > span.label-success {
