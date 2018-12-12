@@ -392,6 +392,24 @@ html body #powered_by {
 }
 
 
+.hit_oa > span.label-success {
+  background-image: url("../images/oa.png");
+  background-color: transparent;
+  background-size: contain;
+}
+
+.hit_oa > span.label-warning {
+  background-image: url("../images/non_oa.png");
+  background-color: transparent;
+  background-size: contain;
+}
+
+.hit_oa i {
+  color: transparent;
+}
+}
+
+
 /* responsive grid ***************************************************/
 @media (max-width: 767px) {
   #options_nav_box {
