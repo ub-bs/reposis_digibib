@@ -21,6 +21,9 @@ html body {
   background-color: #C1D0E6;
   margin-bottom: 90px; /* Margin bottom by footer height */
 }
+body {
+  font-size: 15px;
+}
 
 p {
   margin: 0 0 10px; /* fix abstract bug -> use 10px instead of 10.5px */
