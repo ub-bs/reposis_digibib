@@ -401,6 +401,7 @@ html body #powered_by {
 }
 .hit_oa > span.label-warning {
   background-image: url("../images/non_oa.png");
+  display: none;
 }
 .hit_oa i {
   display: none;
