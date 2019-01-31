@@ -710,7 +710,12 @@
         </xsl:choose>
       </td>
       <td class="metavalue">
-        <xsl:variable name="link" select="." />
+        <xsl:variable name="link">
+          <xsl:choose>
+            <xsl:when test="contains(., 'uri.gbv.de/')"><xsl:value-of select="concat(., '?format=redirect')"/></xsl:when>
+            <xsl:otherwise><xsl:value-of select="."/></xsl:otherwise>
+          </xsl:choose>
+        </xsl:variable>
         <xsl:choose>
           <xsl:when test="contains($link,'ppn') or contains($link,'PPN')">
             <a class="ppn" href="{$link}">
