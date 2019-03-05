@@ -2,10 +2,25 @@
 <MyCoReWebPage><section xml:lang="de" title="Spezialgebiete und Raritäten"><div>
 <h2>Spezialgebiete und Raritäten</h2>
 
-<p>Auf dieser Seite möchten wir in unregelmäßigen Abständen Spezialgebiete und Raritäten des Publikationsservers der TU Braunschweig vorstellen.</p>
+<p>Auf dieser Seite stellen wir in unregelmäßigen Abständen Spezialgebiete und Raritäten des Publikationsservers der TU Braunschweig vor.</p>
 
 <p> </p>
 
+<h3><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00065903"><u>Sammlungskataloge des Herzog Anton Ulrich-Museums Braunschweig</u></a></h3>
+
+<p> </p>
+
+<p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt"><img alt="Außenaufnahme des Herzog Anton Ulrich-Museum Braunschweig" src="HAUM.jpg" style="width: 240px; height: 153px; float: left; margin: 2px 10px;" />Das Herzog Anton Ulrich-Museum Braunschweig, Kunstmuseum des Landes Niedersachsen, zählt zu den ältesten Museen in Europa. Eröffnet wurde es 1754, geht aber mit seinen Beständen bereits auf die Sammlungen der Herzöge von Braunschweig und Lüneburg im 16. Jahrhundert zurück. Das Museum bewahrt ca. 190.000 international bedeutende Kunstwerke von Alt-Ägypten bis heute: Gemälde, Skulpturen, Werke der Angewandten Kunst, Münzen und Medaillen sowie Druckgraphiken und Zeichnungen als zahlenmäßig größten Bestand. Im bis 2016 neu hergerichteten Museumsgebäude sind auf 4.000 qm etwa 4.000 Kunstwerke ausgestellt. Nicht nur die Dauerausstellung, sondern viele Kataloge ermöglichen Einblicke in die Bestände, wie die als wissenschaftliche Erschließung gedachten, seit 1990 in größerer Zahl erarbeiteten Sammlungskataloge. (Foto: C. Cordes, Museum)</p>
+
+<p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt"> </p>
+
+<div class="row" id="digibib_rarities">
+<div class="col-md-10">
+<p> </p>
+</div>
+</div>
+
+<hr />
 <h3><a href="http://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BallMeta%3A&quot;revolution+1918&quot;+%2BobjectType%3A&quot;mods&quot;&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed"><u>100 Jahre Novemberrevolution in Braunschweig</u></a></h3>
 
 <p> </p>
@@ -17,8 +32,16 @@
 
 <div class="row" id="digibib_rarities">
 <div class="col-md-10">
-<p><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BallMeta%3A&quot;revolution+1918&quot;+%2BobjectType%3A&quot;mods&quot;&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Unsere Dokumente zur Novemberrevolution in Braunschweig</a></p>
+<p> </p>
 </div>
 </div>
+<!--
+<hr />
+<h3>Bisher erschienen:</h3>
+
+<ul>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00065903">Sammlungskataloge des Herzog Anton Ulrich-Museums</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BallMeta%3A&quot;revolution+1918&quot;+%2BobjectType%3A&quot;mods&quot;&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex_intern.xed">Dokumente zur Novemberrevolution in Braunschweig</a></li>
+</ul>-->
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2018-11-09" time="13:11" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2019-02-06" time="12:50" /></meta></MyCoReWebPage>

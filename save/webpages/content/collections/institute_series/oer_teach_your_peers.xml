@@ -4,7 +4,7 @@
 
 <div class="row" id="digibib_typ">
 <div class="col-md-10">
-<p><a href="../../../servlets/solr/select?q=mods.title:%22Teach Your Peers%22 AND state:published&amp;wt=xml">Suche nach allen "Teach Your Peers"-Videos</a></p>
+<p><a href="../../../receive/dbbs_mods_00064110">Übersicht über alle "Teach Your Peers"-Videos</a></p>
 
 <p>Die grundlegende Idee von Teach Your Peers (TYP) greift das Prinzip der MOOCs auf, jedoch so, dass Studierende von ihrem Lehrstoff klar umgrenzte Themenpunkte eigenverantwortlich ausarbeiten und diese frei zugänglich von jedem - insbesondere aber von ihren KommilitonInnen (peers) - in einer Online-Datenbank abgerufen werden können.</p>
 
@@ -12,27 +12,53 @@
 
 <h3>OER Teach Your Peers Videos:</h3>
 
+<p class="col-md-8">2019:</p>
+
 <ul class="col-md-8">
-	<li><a href="../../../receive/dbbs_mods_00061654">Anleitung zum Erstellen eines TYP Videos - Sven Wargenau</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061668">Hedgehog-Signaltransduktion - Jasmin Großer</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061724">Unfolded Protein Response und Proteinaggregation. Mit Übungsfragen - Nils Birkholz</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061705">Proteindegradation - Proteinabbau durch das UPS und den Endosomalen-Lysosomalen Pathway - Sven Wargenau</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061698">Organelldegradation durch Autophagie - Jasper Liedtke</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061678">Mikroglia Aktivierung : Führung von Mikroglia Migration - Charlotte Tacke</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061676">Migration von Körnerzellen im Cerebellum - Julia Meersteiner</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061666">Calcium-Homöostase in Zellen - Andreas Schäfer</a></li>
-	<li><a href="../../../receive/dbbs_mods_00061656">Funktion, Phosphorylierung und Pathogenese von Tau - Inessa Wall</a></li>
-	<li><a href="../../../receive/dbbs_mods_00064115">Das Cre/IoxP System in der konditionalen Genetik - Daniela Münch</a></li>
-	<li><a href="../../../receive/dbbs_mods_00064113">Regulation der Mikrotubuli Dynamik - Imke Grützmacher</a></li>
-	<li><a href="../../../receive/dbbs_mods_00064111">Signalweg des Insulin-ähnlichen Wachstumsfaktors (IGF) - Julia Baumann</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066405">Aktive und passive Immuntherapie neurodegenerativer Krankheiten - Leonhard Hammermann</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066403">Deskriptive Statistik - Marius Gerl</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066412">DNA Methylation and Gene Silencing - Eike Preuß</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066411">"eat-me-Signale" - Jessica Scheibel</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066408">Erzeugung von knock-in Mäusen - Linda Matz</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066404">Impfungen - Lydia Tobias</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066407">Kanonischer und nicht-kanonischer WNT-Signalweg - Dorothea Hinz</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066406">Langzeit-Potenzierung (LTP), Langzeit-Depression (LTD) - Christine Busching</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066413">Mechanistic target of rapamycin (mTOR) Signalweg - Ansgar Eickhoff</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066409">Optogenetische Schalter - Anne-Kathrin Schulze</a></li>
+	<li><a href="../../../receive/dbbs_mods_00066410">Toll-ähnliche Rezeptoren (TLRs: toll-like receptors) und deren Signaltransduktionsweg - Lena Stiefvatter</a></li>
+</ul>
+
+<p class="col-md-8">2017:</p>
+
+<ul class="col-md-8">
 	<li><a href="../../../receive/dbbs_mods_00064116">CD4+ T-Zellaktivierung durch Myelinproteine - Anna Riebisch</a></li>
-	<li><a href="../../../receive/dbbs_mods_00064112">Nekroptose oder eine Zelle begeht Selbstmord - Mareike Britta Erdmann</a></li>
-	<li><a href="../../../receive/dbbs_mods_00064114">Technische und enzymatische Stickstofffixierung - Jasper Liedtke</a></li>
+	<li><a href="../../../receive/dbbs_mods_00064115">Das Cre/IoxP System in der konditionalen Genetik - Daniela Münch</a></li>
 	<li><a href="../../../receive/dbbs_mods_00064117">Intraneuronaler Transport von Mitochondrien - Angela Wedekind</a></li>
 	<li><a href="../../../receive/dbbs_mods_00064118">miRNA Biogenese, Prozessierung und Funktionen - Dalia Winter</a></li>
+	<li><a href="../../../receive/dbbs_mods_00064112">Nekroptose oder eine Zelle begeht Selbstmord - Mareike Britta Erdmann</a></li>
+	<li><a href="../../../receive/dbbs_mods_00064113">Regulation der Mikrotubuli Dynamik - Imke Grützmacher</a></li>
+	<li><a href="../../../receive/dbbs_mods_00064111">Signalweg des Insulin-ähnlichen Wachstumsfaktors (IGF) - Julia Baumann</a></li>
+	<li><a href="../../../receive/dbbs_mods_00064114">Technische und enzymatische Stickstofffixierung - Jasper Liedtke</a></li>
 	<li><a href="../../../receive/dbbs_mods_00064119">Warum gibt es fünf Antikörperklassen? - Elena Schönlau</a></li>
 </ul>
+
+
+<p class="col-md-8">2015:</p>
+
+<ul class="col-md-8">
+	<li><a href="../../../receive/dbbs_mods_00061654">Anleitung zum Erstellen eines TYP Videos - Sven Wargenau</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061666">Calcium-Homöostase in Zellen - Andreas Schäfer</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061656">Funktion, Phosphorylierung und Pathogenese von Tau - Inessa Wall</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061668">Hedgehog-Signaltransduktion - Jasmin Großer</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061676">Migration von Körnerzellen im Cerebellum - Julia Meersteiner</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061678">Mikroglia Aktivierung : Führung von Mikroglia Migration - Charlotte Tacke</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061698">Organelldegradation durch Autophagie - Jasper Liedtke</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061705">Proteindegradation - Proteinabbau durch das UPS und den Endosomalen-Lysosomalen Pathway - Sven Wargenau</a></li>
+	<li><a href="../../../receive/dbbs_mods_00061724">Unfolded Protein Response und Proteinaggregation. Mit Übungsfragen - Nils Birkholz</a></li>
+</ul>
+
+
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2017-01-09" time="07:38" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2019-02-22" time="10:14" /></meta></MyCoReWebPage>
