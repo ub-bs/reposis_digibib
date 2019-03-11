@@ -152,7 +152,7 @@
         </item>
         <item href="/content/collections/brunsvicensien/stadtbibliothek.xml" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Stadtbibliothek Braunschweig</label>
-            <label xml:lang="en">Public library Brunswick</label>
+            <label xml:lang="en">Municipal Library Braunschweig</label>
         </item>
     </menu>
     <menu id="institute_series">
