@@ -98,7 +98,7 @@
         <div class="col-xs-6 col-sm-3">
           <xsl:variable name="mcr_version" select="concat('MyCoRe ',mcrver:getCompleteVersion())" />
           <div id="powered_by">
-            <a id="dini_logo" href="http://www.dini.de/dini-zertifikat/" title="{i18n:translate('digibib.diniCertificate2016')}">
+            <a id="dini_logo" href="https://www.dini.de/dienste-projekte/dini-zertifikat/" title="{i18n:translate('digibib.diniCertificate2016')}">
               <img alt="Logo DINI-Zertifikat 2016" src="{$WebApplicationBaseURL}images/dini_zertifikat_2016.svg" height="50" />
             </a>
             <a id="mycore_logo" href="http://www.mycore.de">
