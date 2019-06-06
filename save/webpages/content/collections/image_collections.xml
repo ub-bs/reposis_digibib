@@ -7,7 +7,7 @@
 <p>Hier finden Sie die digitalen Bildersammlungen der Universitätsbibliothek Braunschweig.</p>
 
 <ul>
-	<li><a href="../../servlets/solr/find?condQuery=Diasammlung+Herbert+Schulz">Diasammlung Herbert Schulz</a><br />
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Diasammlung+Herbert+Schulz%22&amp;wt=xml">Diasammlung Herbert Schulz</a><br />
 	Schwerpunkt Blütenpflanzen</li>
 	<br />
 	<li><b>Sammlung Dietmar Brandes </b><!--<a href='/docportal/servlets/MCRSearchServlet?XSL.Style=rss-sdb&amp;query=(keywords contains "Sammlung")+and+(keywords contains "Dietmar")+and+(keywords contains "Brandes")+and+(objectType+=+document)&amp;maxResults=10&amp;created.sortField=descending&amp;mask=browse/type'>
@@ -35,7 +35,7 @@
 <p>Here you will find the digital image collections of the Universitätsbibliothek Braunschweig.</p>
 
 <ul>
-	<li><a href="../../servlets/solr/find?q=Diasammlung+Herbert+Schulz">Slide collection by Herbert Schulz</a><br />
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Diasammlung+Herbert+Schulz%22&amp;wt=xml">Slide collection by Herbert Schulz</a><br />
 	Main focus on flowering plants</li>
 	<br />
 	<li><b>Dietmar Brandes' collection</b><!--<a href='/docportal/servlets/MCRSearchServlet?XSL.Style=rss-sdb&amp;query=(keywords contains "Sammlung")+and+(keywords contains "Dietmar")+and+(keywords contains "Brandes")+and+(objectType+=+document)&amp;maxResults=10&amp;created.sortField=descending&amp;mask=browse/type'>
@@ -55,4 +55,4 @@
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2018-04-11" time="10:41" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2019-04-17" time="13:35" /></meta></MyCoReWebPage>
