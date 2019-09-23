@@ -111,6 +111,7 @@
   </xsl:template>
 
   <xsl:template name="mir.powered_by">
+    <script type="text/javascript" src="{$WebApplicationBaseURL}js/jquery.cookiebar.js"></script>
     <!-- Piwik -->
     <xsl:if test="$piwikID &gt; 0">
       <script type="text/javascript">
