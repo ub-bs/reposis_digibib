@@ -2,7 +2,8 @@
 <MyCoReWebPage><section xml:lang="de" title="Hochschulöffentliche Bekanntmachungen"><div>
 <h2>Hochschulöffentliche Bekanntmachungen der TU Braunschweig</h2>
 
-<p><img alt="TU Braunschweig" src="TUBraunschweig_CO.gif" style="width: 240px; height: 90px; float: right; margin: 10px 45px;" /></p>
+<div class="row" id="digibib_hob">
+<div class="col-xs-9">
 
 <p>Die einzelnen Ordnungen (Bachelor-, Master-, Diplomprüfungsordnungen, Zulassungsordnungen, Promotionsordnungen, Habilitationsordnung, etc.) finden Sie auf den Internetseiten der Fakultäten (externe Links):</p>
 
@@ -15,16 +16,28 @@
 	<li><a href="https://www.tu-braunschweig.de/fk6">Fakultät für Geistes- und Erziehungswissenschaften</a></li>
 </ol>
 
-<p>Eine chronologische Übersicht aller hochschulöffentlichen Bekanntmachungen finden Sie in unserer <a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00067012">Komplettliste</a>.</p>
-
-<p><strong>Hinweis</strong>: Die Komplettliste befindet sich zurzeit im Neuaufbau (21.11.2019)</p>
+<p>Eine chronologische Übersicht aller hochschulöffentlichen Bekanntmachungen finden Sie in unserer <a href="../../receive/dbbs_mods_00067012">Komplettliste</a>.
+<br />
+<strong>Hinweis</strong>: Die Komplettliste befindet sich zurzeit im Neuaufbau (21.11.2019)
+</p>
+<form action="../../servlets/solr/find" class="form-inline" id="bs-searchMainPage" role="search" style="margin-top:30px;">
+	<div class="input-group" style="width: 100%;">
+		<input class="form-control search-query" id="bs-searchInput" name="condQuery" placeholder="Suche in Bekanntmachungen der TU Braunschweig" type="text" /><input name="fq" type="hidden" value="mods.relatedItem:dbbs_mods_00067012" />
+			<div class="input-group-btn">
+				<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+			</div>
+	</div>
+</form>
+</div>
+</div>
 </div>
 </section><section xml:lang="en" title="University Public Announcements"><div>
 <h2>University Public Announcements of TU Braunschweig</h2>
 
-<p><img alt="TU Braunschweig" src="TUBraunschweig_CO.gif" style="width: 240px; height: 90px; float: right; margin: 10px 45px;" /></p>
+<div class="row" id="digibib_hob">
+<div class="col-xs-9">
 
-<p>The individual regulations (Bachelor's, Master's, Diploma Examination Regulations, Admission Regulations, Doctoral Regulations, Habilitation Regulations, etc.) can be found on the faculty websites (external links):</p>
+	<p>The individual regulations (Bachelor's, Master's, Diploma Examination Regulations, Admission Regulations, Doctoral Regulations, Habilitation Regulations, etc.) can be found on the faculty websites (external links):</p>
 
 <ol>
 	<li><a href="https://www.tu-braunschweig.de/en/fk1/promotion">Carl-Friedrich-Gauß-Fakultät</a></li>
@@ -34,4 +47,17 @@
 	<li><a href="https://www.tu-braunschweig.de/en/organisation/faculties/faculties-from-a-to-z/fakultaet-fuer-elektrotechnik-informationstechnik-physik">Department of Electrical Engineering, Information Technology, Physics</a></li>
 	<li><a href="https://www.tu-braunschweig.de/en/fk6/promohabil">Faculty of Humanities and Studies in Education</a></li>
 </ol>
-</div></section><meta><log lastEditor="dbbs_admin" date="2019-11-21" time="09:46" /></meta></MyCoReWebPage>
+
+<p>A chronological overview of all University Public Announcements can be found in our <a href="../../receive/dbbs_mods_00067012">complete list</a>.
+<br />
+<strong>Note</strong>: The list is under construction. (21.11.2019)
+</p>
+<form action="../../servlets/solr/find" class="form-inline" id="bs-searchMainPage" role="search" style="margin-top:30px;">
+	<div class="input-group" style="width: 100%;">
+		<input class="form-control search-query" id="bs-searchInput" name="condQuery" placeholder="Search in University Public Announcements" type="text" /><input name="fq" type="hidden" value="mods.relatedItem:dbbs_mods_00067012" />
+		<div class="input-group-btn">
+			<button class="btn btn-primary" type="submit"><i class="fa fa-search"></i></button>
+		</div>
+	</div>
+</form>
+</div></div></div></section><meta><log lastEditor="dbbs_admin" date="2019-11-21" time="09:46" /></meta></MyCoReWebPage>

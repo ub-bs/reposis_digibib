@@ -349,6 +349,12 @@ html body #powered_by {
   background-size: 15%;
 }
 
+#digibib_hob {
+  background-image:url('../images/TUBraunschweig_CO.png');
+  background-repeat: no-repeat;
+  background-position: top right;
+}
+
 #digibib_feedback {
   cursor: pointer;
   position: fixed;
