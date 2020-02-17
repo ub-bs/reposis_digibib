@@ -1,14 +1,257 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage><section xml:lang="de" title="Hinweise zur Nutzung und zur rechtlichen Situation">
-<h2>Datenschutz</h2>
+<MyCoReWebPage>
+  <section xml:lang="de" title="Hinweise zur Nutzung und zur rechtlichen Situation">
+    <h2>Datenschutzerklärung</h2>
+    <div class="row datenschutz">
+      <div class="col-md-12">
+        <h3>I. Name und Anschrift der oder des Verantwortlichen</h3>
+        <p>Verantwortliche im Sinne der Datenschutz-Grundverordnung (DSGVO) und anderer nationaler
+          Datenschutzgesetze der Mitgliedstaaten sowie sonstiger datenschutzrechtlicher Bestimmungen
+          ist die:
+        </p>
+        <address>
+          <ol class="list-unstyled">
+            <li>Technische Universität Braunschweig</li>
+            <li>Universitätsplatz 2</li>
+            <li>38106 Braunschweig</li>
+            <li>Tel.: +49 (531) 391- 0</li>
+            <li>E-Mail: praesidentin(at)tu-braunschweig.de</li>
+          </ol>
+        </address>
+        vertreten durch die Präsidentin,
+        <a href="https://www.tu-braunschweig.de/struktur/leitung-verwaltung/leitung/praesidentin">Prof. Dr. Anke
+          Kaysser-Pyzalla
+        </a>
+        <br/>
+        <h3>II. Name und Anschrift des Datenschutzbeauftragten</h3>
+        <p>Der Datenschutzbeauftragte der Technischen Universität Braunschweig ist:</p>
+        <ol class="list-unstyled">
+          <li>Dr. Bernd Nörtemann</li>
+          <li>Bienroder Weg 80</li>
+          <li>38106 Braunschweig</li>
+          <li>Tel.: +49 (531) 391 - 7654</li>
+          <li>E-Mail: datenschutz(at) tu-braunschweig.de</li>
+          <li>
+            <a href="https://www.tu-braunschweig.de/datenschutz">https://www.tu-braunschweig.de/datenschutz</a>
+          </li>
+        </ol>
 
-    <div class="row">
-        <div class="col-md-12">
+        <h3>III. Allgemeines zur Datenverarbeitung</h3>
+        <p>Diese Datenschutzerklärung soll die Nutzer*innen dieses Repositoriums über die Art, den Umfang
+          und den Zweck der Erhebung und Verwendung personenbezogener Daten durch die Betreiber
+          (Universitätsbibliothek Braunschweig, Mail ub(at)tu-braunschweig.de) informieren.
+        </p>
+        <p>Die Technische Universität Braunschweig nimmt den Datenschutz sehr ernst und behandelt Ihre
+          personenbezogenen Daten vertraulich und entsprechend der gesetzlichen Vorschriften. Da durch
+          neue Technologien und die ständige Weiterentwicklung dieses Service Änderungen an dieser
+          Datenschutzerklärung vorgenommen werden können, empfehlen wir Ihnen sich die
+          Datenschutzerklärung in regelmäßigen Abständen wieder durchzulesen.
+        </p>
+        <h4>1. Umfang der Verarbeitung personenbezogener Daten</h4>
+        <p>Eine Anmeldung (Login) mit persönlichen Daten ist nur zur Veröffentlichung von Publikationen
+          durch Hochschulangehörige erforderlich, nicht für die Suche nach oder den lesenden Zugriff auf
+          Publikationen. Zur Veröffentlichung melden sich Hochschulangehörige mit ihrer TU-Kennung an.
+          Die Autorisierung erfolgt gegen den IDP (Identity Provider - DFN-AAI Shibboleth) der
+          Technischen Universität Braunschweig. Das Repositorium verarbeitet und speichert dabei
+          folgende Nutzerdaten:
+        </p>
+        <ul>
+          <li>Name</li>
+          <li>Benutzerkennung</li>
+          <li>E-Mail-Adresse</li>
+          <li>Uhrzeit und Datum des letzten Logins</li>
+          <li>Benutzerrollen (Mitarbeiter*in, Studierende)</li>
+          <li>Verknüpfung zu den in diesem Repositorium veröffentlichten Publikationen, inkl. Datum und
+            Uhrzeit der letzten Änderung
+            Die Speicherung und Verarbeitung dieser Daten geschieht zur Wahrnehmung der uns
+            übertragenen Aufgabe der Unterstützung von Lehre und Forschung gemäß Art. 6 Abs. 1 lit. e
+            DSGVO i. V. m. § 3 NDSG und ist erforderlich
+          </li>
+          <li>zum Nachweis der Berechtigung zur Veröffentlichung in unserem Repositorium</li>
+          <li>zur Kommunikation mit Autor*innen im Rahmen des Veröffentlichungsprozesses</li>
+          <li>zum Nachweis der Urheberschaft an E-Publikationen</li>
+        </ul>
+        <h4>2. Publikationsdaten</h4>
+        <p>Zweck dieses Repositoriums ist die weltweite Veröffentlichung und Bereitstellung elektronischer
+          Publikationen (E-Publikationen und E-Dissertationen) im Sinne von Open Access. Dazu speichern,
+          verarbeiten und veröffentlichen wir auch personenbezogene Daten der an Publikationen
+          beteiligten Personen:
+        </p>
+        <ul>
+          <li>Namen und Rollen (z.B. Autor*in, Herausgeber*in)</li>
+          <li>Eindeutige Autoren-Identifikatoren (z. B. ORCiD, GND)</li>
+          <li>Informationen zur organisatorischen Zugehörigkeit (z.B. Universität, Fakultät, Institut)</li>
+        </ul>
+        <p>Dies dient dem eindeutigen Nachweis und der Anerkennung der Urheberschaft, der Zitierfähigkeit
+          und der besseren Auffindbarkeit der Publikationen. Mit Veröffentlichung der Publikation
+          übertragen wir auch diese personenbezogenen Daten an Dritte und stellen sie über Schnittstellen
+          bereit:
+        </p>
+        <ul>
+          <li>an die Deutsche Nationalbibliothek im Rahmen der Meldepflichten zum Zweck der Archivierung
+            und des Nachweises in der Deutschen Nationalbibliografie
+          </li>
+          <li>an die Registrierungsagentur DataCite zur eindeutigen Vergabe von dauerhaften Publikations-
+            Identifikatoren (DOI)
+          </li>
+          <li>an wissenschaftliche und allgemeine Suchmaschinen wie Google, Google Scholar, BASE</li>
+          <li>an Dritte weltweit, über Schnittstellen wie OAI (Open Archives Initiative) und das Google Sitemap
+            Protokoll
+          </li>
+        </ul>
 
-<h3>Anonymisierte Nutzungsanalyse mit Matomo und dem Plugin AnonymizeIP</h3>
+        <p>Eine Veröffentlichung und damit die Weitergabe und weltweite Zugänglichmachung erfolgt nur
+          mit Einverständnis der Autor*innen bzw. Herausgeber*innen und erst nach Unterzeichnung des
+          Veröffentlichungsvertrages.
+        </p>
 
-<p>Für die Optimierung unserer Angebote liefern personenbezogene Daten keinerlei Mehrwert. Für die Webanalyse setzten wir daher die von Datenschützern empfohlene Nutzungsanalyse-Software Matomo ein. Durch eine automatische Anonymisierung der IP-Adressen mit dem Plugin AnonymizeIP können die erhobenen Daten nicht mehr bestimmten Personen zugeordnet werden. Damit ist ausgeschlossen, dass Nutzungsdaten oder Nutzungsprofile mit personenbezogenen Daten in Verbindung gebracht werden.</p>
-<iframe src="https://piwik.gbv.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;idsite=30&amp;language=de" style="border: 0; height: 250px; width: 100%;">&lt;/div&gt;</iframe></div>
+        <h4>3. Dauer der Speicherung personenbezogener Daten</h4>
+        <p>Die personenbezogenen Daten der betroffenen Person werden von der TU Braunschweig nur so
+          lange gespeichert, wie der Zweck der Speicherung besteht. Wenn die Verarbeitung auf einer
+          Einwilligung der betroffenen Person beruht, werden die Daten nur so lange gespeichert, bis dieEinwilligung
+          widerrufen wird, es sei denn, es besteht eine andere Rechtsgrundlage für die
+          Verarbeitung.
+        </p>
+        <h4>4. Rechte der betroffenen Person</h4>
+        <h5>4.1 Auskunftsrechte</h5>
+        <p>Sie haben als Nutzer*in das Recht, auf Antrag eine kostenlose Auskunft darüber zu erhalten,
+          welche personenbezogenen Daten über Sie gespeichert wurden. Sie haben außerdem das Recht
+          auf Berichtigung falscher Daten und auf die Verarbeitungseinschränkung oder Löschung Ihrer
+          personenbezogenen Daten. Falls zutreffend, können Sie auch Ihr Recht auf Datenportabilität
+          geltend machen. Sollten Sie annehmen, dass Ihre Daten unrechtmäßig verarbeitet wurden,
+          können Sie eine Beschwerde bei der zuständigen Aufsichtsbehörde einreichen.
+        </p>
+        <h5>4.2 Recht auf Löschung</h5>
+        <p>Sofern Ihr Wunsch nicht mit einer gesetzlichen Pflicht zur Aufbewahrung von Daten (z. B.
+          Vorratsdatenspeicherung) kollidiert, haben Sie ein Anrecht auf Löschung Ihrer Daten. Von uns
+          gespeicherte Daten werden, sollten sie für ihre Zweckbestimmung nicht mehr vonnöten sein und
+          es keine gesetzlichen Aufbewahrungsfristen geben, gelöscht. Falls eine Löschung nicht
+          durchgeführt werden kann, da die Daten für zulässige gesetzliche Zwecke erforderlich sind,
+          erfolgt eine Einschränkung der Datenverarbeitung. In diesem Fall werden die Daten gesperrt und
+          nicht für andere Zwecke verarbeitet.
+        </p>
+        <h5>4.3 Widerspruchsrechte</h5>
+        <p>Betroffene haben das Recht, ihre datenschutzrechtliche Einwilligungserklärung jederzeit zu
+          widerrufen. Durch den Widerruf der Einwilligung wird die Rechtmäßigkeit der aufgrund der
+          Einwilligung bis zum Widerruf erfolgten Verarbeitung nicht berührt.
+          Wenn Sie eine Berichtigung, Sperrung, Löschung oder Auskunft über die zu Ihrer Person
+          gespeicherten personenbezogenen Daten wünschen oder Fragen bzgl. der Erhebung,
+          Verarbeitung oder Verwendung Ihrer personenbezogenen Daten haben oder erteilte
+          Einwilligungen widerrufen möchten, wenden Sie sich bitte an folgende Kontaktadresse:
+        </p>
+        <ul>
+          <li>Team Publikationsservices der TU Braunschweig</li>
+          <li>
+            <a href="tel:053139150525067">0531 391 5052 / 5067</a>
+          </li>
+          <li>digibib(at)tu-braunschweig.de</li>
+        </ul>
+        <h5>4.4 Recht auf Beschwerde bei einer Aufsichtsbehörde</h5>
+        <p>Unbeschadet eines anderweitigen verwaltungsrechtlichen oder gerichtlichen Rechtsbehelfs steht
+          Betroffenen das Recht auf Beschwerde bei einer Aufsichtsbehörde, insbesondere in dem
+          Mitgliedstaat ihres Aufenthaltsorts, ihres Arbeitsplatzes oder des Orts des mutmaßlichen
+          Verstoßes, zu, wenn sie der Ansicht sind, dass die Verarbeitung der sie betreffenden
+          personenbezogenen Daten gegen die DSGVO verstößt.
+        </p>
+        <p>Die Aufsichtsbehörde, bei der die Beschwerde eingereicht wurde, unterrichtet den
+          Beschwerdeführenden über den Stand und die Ergebnisse der Beschwerde einschließlich der
+          Möglichkeit eines gerichtlichen Rechtsbehelfs nach Art. 78 DSGVO.
+        </p>
+
+        <h3>IV. Beschreibung der Webseite und Erstellung von Logfiles</h3>
+        <h4>1. Beschreibung und Umfang der Datenverarbeitung</h4>
+        <p>Bei jedem Aufruf einer Internetseite der TU Braunschweig erfasst das System automatisiert Daten
+          und Informationen vom Computersystem des aufrufenden Rechners.
+          Im Einzelnen werden folgende Daten erhoben:
+        </p>
+        <ul>
+          <li>Informationen über den Browsertyp und die verwendete Version</li>
+          <li>Das Betriebssystem des Nutzenden</li>
+          <li>Die IP-Adresse des Nutzenden</li>
+          <li>Datum und Uhrzeit des Zugriffs</li>
+          <li>Webseiten, die vom System des Nutzenden über die Webseite der TU Braunschweig aufgerufen
+            werden
+          </li>
+        </ul>
+        <p>Die Daten werden ebenfalls in den Logfiles des Systems gespeichert. Eine Speicherung dieser
+          Daten zusammen mit anderen personenbezogenen Daten des Nutzenden findet nicht statt.
+        </p>
+        <h4>2. Rechtsgrundlage für die Datenverarbeitung</h4>
+        <p>Rechtsgrundlage für die vorübergehende Speicherung der Daten ist Art. 6 Abs. 1 lit. f DSGVO.</p>
+        <h4>3. Zweck der Datenverarbeitung</h4>
+        <p>Die vorübergehende Speicherung der IP-Adresse durch das System ist zur Erhaltung des
+          Dienstbetriebs notwendig. Hierfür muss die IP-Adresse des Nutzenden für die Dauer der Sitzung
+          gespeichert bleiben.
+        </p>
+        <p>Die Speicherung in Logfiles erfolgt, um die Funktionsfähigkeit der Webseite sicherzustellen.
+          Zudem dienen der TU Braunschweig die Daten zur Optimierung der Webseite und zur
+          Sicherstellung der Sicherheit der informationstechnischen Systeme. Eine Auswertung der Daten zu
+          Marketingzwecken findet in diesem Zusammenhang nicht statt.
+          In diesen Zwecken liegt auch das berechtigte Interesse an der Datenverarbeitung nach Art. 6 Abs.
+          1 lit. f DSGVO.
+        </p>
+        <h4>4. Dauer der Speicherung</h4>
+        <p>Die Daten werden gelöscht, wenn die jeweilige Sitzung beendet ist. Im Falle der Speicherung der
+          Daten in Logfiles ist dies nach spätestens 24 Stunden der Fall.
+          Eine darüber hinaus gehende Speicherung ist möglich. In diesem Fall werden die IP-Adressen der
+          Nutzenden gelöscht oder verfremdet, sodass eine Zuordnung des aufrufenden Clients nicht mehr
+          möglich ist.
+        </p>
+        <h3>V. Verwendung von Cookies</h3>
+        <p>Diese Dienstleistung verwendet Cookies zur pseudonymisierten Reichweitenmessung. Bei Cookies
+          handelt es sich um kleine Dateien, welche auf Ihrem Endgerät gespeichert werden. Ihr Browser
+          greift auf diese Dateien zu. Durch den Einsatz von Cookies erhöht sich die Benutzerfreundlichkeit
+          und Sicherheit dieser Plattform. Nutzungsdaten werden nur in anonymisierter Form zu
+          Optimierungszwecken gesammelt und gespeichert.
+        </p>
+        <p>Für die Optimierung unserer Angebote liefern personenbezogene Daten keinerlei Mehrwert. Für
+          die Webanalyse setzten wir daher die von Datenschützern empfohlene Nutzungsanalyse-Software
+          Matomo ein. Durch eine automatische Anonymisierung der IP-Adressen mit dem Plugin
+          AnonymizeIP können die erhobenen Daten nicht mehr bestimmten Personen zugeordnet werden.
+          Damit ist ausgeschlossen, dass Nutzungsdaten oder Nutzungsprofile mit personenbezogenen
+          Daten in Verbindung gebracht werden.
+        </p>
+        <iframe
+            src="https://piwik.gbv.de/index.php?module=CoreAdminHome&amp;action=optOut&amp;idsite=30&amp;language=de"
+            style="border: 0; height: 100%; width: 100%;">&lt;/div&gt;
+        </iframe>
+        <p>Die Daten dienen ausschließlich der Verbesserung des Publikationsservers, den die Betreiber der
+          „Digitalen Bibliothek“ mit ihrer Dienstleistung anbieten.
+        </p>
+        <h3>VI. Kontaktaufnahme</h3>
+        <h4>1. Beschreibung und Umfang der Datenverarbeitung</h4>
+        <p>Auf den Internetseiten der TU Braunschweig ist eine Kontaktaufnahme über Formulare oder
+          jeweils bereitgestellte E-Mail-Adressen möglich. In diesem Fall werden die übermittelten
+          personenbezogenen Daten der nutzenden Person gespeichert.
+          Es erfolgt in diesem Zusammenhang keine Weitergabe der Daten an Dritte. Die Daten werden
+          ausschließlich für die Verarbeitung des genannten Zweckes verwendet.
+        </p>
+        <h4>2. Rechtsgrundlage für die Datenverarbeitung</h4>
+        <p>Rechtsgrundlage für die Verarbeitung der übermittelten Daten im Rahmen der Kontaktaufnahme
+          ist Art. 6 Abs. 1 DSGVO.
+        </p>
+        <h4>3. Zweck der Datenverarbeitung</h4>
+        <p>Die Verarbeitung der personenbezogenen Daten dient der TU Braunschweig allein zur
+          Bearbeitung der Kontaktaufnahme. Hierin liegt auch das berechtigte Interesse an der
+          Verarbeitung der Daten.
+        </p>
+        <h4>4. Dauer der Speicherung, Widerspruchs- und Beseitigungsmöglichkeit</h4>
+        <p>Die personenbezogenen Daten, die übermittelt wurden, werden gelöscht, wenn der jeweilige
+          Zweck erfüllt ist.
+        </p>
+        <p>Nimmt die nutzende Person Kontakt mit der TU Braunschweig auf, so kann er der Speicherung
+          seiner personenbezogenen Daten jederzeit widersprechen. In einem solchen Fall kann die
+          Kommunikation nicht fortgeführt oder wieder aufgenommen werden. Alle personenbezogenen
+          Daten, die im Zuge der Kontaktaufnahme gespeichert wurden, werden in diesem Fall gelöscht.
+        </p>
+
+
+      </div>
 
     </div>
-</section><meta><log lastEditor="dbbs_admin" date="2018-04-11" time="10:32" /></meta></MyCoReWebPage>
+
+  </section>
+  <meta>
+    <log lastEditor="dbbs_admin" date="2018-04-11" time="10:32"/>
+  </meta>
+</MyCoReWebPage>

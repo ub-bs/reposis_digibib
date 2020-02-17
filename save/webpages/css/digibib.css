@@ -477,3 +477,12 @@ html body #powered_by {
 
 @media (min-width: 1200px) {
 }
+
+.datenschutz h4 {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.datenschutz h5 {
+  font-weight: bold;
+}
