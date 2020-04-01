@@ -40,7 +40,7 @@
           <div class="col-md-7 col-sm-9 col-xs-6 text-right"><xsl:value-of select="i18n:translate('mir.oas.counter.fulltext')" /></div>
           <div  data-oaselementtype="OASInline"
               data-oasproviderurl="{$MIR.OAS.GraphProviderURL}"
-              data-oasidentifier="{$MIR.OAS.Prefix}:{$objID}"
+              data-oasidentifier="{$MIR.OAS.Prefix}{$objID}"
               data-oascounttype="counter"
           />
         </div>
@@ -48,7 +48,7 @@
           <div class="col-md-7 col-sm-9 col-xs-6 text-right"><xsl:value-of select="i18n:translate('mir.oas.counter.abstract')" /></div>
           <div  data-oaselementtype="OASInline"
               data-oasproviderurl="{$MIR.OAS.GraphProviderURL}"
-              data-oasidentifier="{$MIR.OAS.Prefix}:{$objID}"
+              data-oasidentifier="{$MIR.OAS.Prefix}{$objID}"
               data-oascounttype="counter_abstract"
           />
         </div>
@@ -57,7 +57,7 @@
           <div class="col-md-7 col-sm-9 col-xs-6 text-right"><xsl:value-of select="i18n:translate('mir.oas.counter.fulltext')" /></div>
           <div  data-oaselementtype="OASInline"
               data-oasproviderurl="{$MIR.OAS.GraphProviderURL}"
-              data-oasidentifier="{$MIR.OAS.Prefix}:{$objID}"
+              data-oasidentifier="{$MIR.OAS.Prefix}{$objID}"
               data-oascounttype="counter"
               data-oasfrom="{$from}" data-oasuntil="{$until}"
           />
@@ -66,7 +66,7 @@
           <div class="col-md-7 col-sm-9 col-xs-6 text-right"><xsl:value-of select="i18n:translate('mir.oas.counter.abstract')" /></div>
           <div data-oaselementtype="OASInline"
             data-oasproviderurl="{$MIR.OAS.GraphProviderURL}" 
-              data-oasidentifier="{$MIR.OAS.Prefix}:{$objID}"
+              data-oasidentifier="{$MIR.OAS.Prefix}{$objID}"
               data-oascounttype="counter_abstract"
               data-oasfrom="{$from}" data-oasuntil="{$until}"
           />
@@ -78,23 +78,31 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <div class="row">
+                  <h4 class="modal-title col-md-9" id="oasGraphTitel">
+                    <xsl:value-of select="i18n:translate('mir.oas.panelheading')" />
+                  </h4>
+                  <div class="col-md-3">
+                    <button
+                      type="button"
+                      class="close modalFrame-cancel"
+                      data-dismiss="modal"
+                      aria-label="Close">
                   <i class="fa fa-times" aria-hidden="true"></i>
                 </button>
-                <h4 class="modal-title" id="oasGraphTitel"><xsl:value-of select="i18n:translate('mir.oas.panelheading')" /></h4>
+              </div>
+                </div>
               </div>
               <div class="modal-body">
                 <div id="oasGraph" style="width:100%;height:200px;"
                     data-oaselementtype="OASGraph"
                     data-oasproviderurl="{$MIR.OAS.GraphProviderURL}"
-                    data-oasidentifier="{$MIR.OAS.Prefix}:{$objID}"
+                    data-oasidentifier="{$MIR.OAS.Prefix}{$objID}"
                     data-oasfrom="{$from}" data-oasuntil="{$until}"
                 />
               </div>
               <div class="modal-footer">
-                <a href="https://www.gbv.de/Verbundzentrale/serviceangebote/oas-service/open-access-statistik-service">
-                  <img src="{$WebApplicationBaseURL}images/open_access_statistic/oaslogo.png" />
-                </a>
+                <img src="{$WebApplicationBaseURL}images/epusta/epustalogo.png" style="height: 40px;"/>
               </div>
             </div>
           </div>

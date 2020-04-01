@@ -241,11 +241,11 @@
 # MIR OAS                                                                    #
 ##############################################################################
 # show OAS Statistics in metadata view ('show', 'hide')
-  MIR.OAS=hide
+  MIR.OAS=show
 
 # URL of the graphprovider
   MIR.OAS.GraphProviderURL=https://publikationsserver.tu-braunschweig.de/graphprovider/
-  MIR.OAS.Prefix=oai:publikationsserver.tu-braunschweig.de
+  MIR.OAS.Prefix=
 
 
 ##############################################################################
