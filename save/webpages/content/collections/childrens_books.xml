@@ -8,9 +8,9 @@
 
 <ul>
 	<li><a href="../../servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished">Gesamtübersicht der digitalisierten historischen Kinderbücher</a></li>
-	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?lookfor=SST+KIBU">Katalog der Kinderbuchsammlung</a></li>
+	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?lookfor=SST+KIBU">Die Kinderbuchsammlung im Katalog</a></li>
 	<li><a href="videos_picture_books.xml">Ziehbilderbücher : Videos</a></li>
-	<li><a href="https://ub.tu-braunschweig.de/recherche/kinderbuch.php">Weitere Informationen zur Kinderbuchsammlung</a></li>
+	<li><a href="https://www.tu-braunschweig.de/ub/recherche/sondersammlungen/kinderbuchsammlung">Weitere Informationen zur Kinderbuchsammlung</a></li>
 </ul>
 </div>
 </div>
@@ -24,11 +24,11 @@
 
 <ul>
 	<li><a href="../../servlets/solr/select?q=category.top%3ADDC\%3A398+AND+state%3Apublished">General overview of all digitised historical children's books</a></li>
-	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?lookfor=SST+KIBU">Catalogue of the children's book collection</a></li>
+	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?lookfor=SST+KIBU">The children's book collectionin our Catalogue</a></li>
 	<li><a href="videos_picture_books.xml">Drawing picture books: Videos</a></li>
-	<li><a href="https://ub.tu-braunschweig.de/recherche/kinderbuch.php">More information on the children's book collection</a></li>
+	<li><a href="https://www.tu-braunschweig.de/en/ub/search/special-collections/childrens-book-collection">More information on the children's book collection</a></li>
 </ul>
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2018-08-14" time="12:24" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2020-02-26" time="11:27" /></meta></MyCoReWebPage>

@@ -16,7 +16,7 @@
 	Bilder zur Biodiversität der Pflanzen
 	<ul>
 		<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?lookfor=Digitale+Pflanzenbilder+Sammlung+Dietmar+Brandes">Alle Pflanzenbilder</a></li>
-		<li><a href="http://vufind.allegro-c.de/album/index.html">Galeriesuche</a></li>
+		<!--		<li><a href="http://vufind.allegro-c.de/album/index.html">Galeriesuche</a></li>-->
 	</ul>
 	</li>
 	<br />
@@ -43,8 +43,8 @@
             </a>--><br />
 	Images of biodiversity of plants
 	<ul>
-		<li><a href="http://opac.lbs-braunschweig.gbv.de/DB=1/LNG=DU/SID=8fbf5164-1/CMD?ACT=SRCHA&amp;IKT=1016&amp;SRT=YOP&amp;TRM=ser+Digitale+Pflanzenbilder+Sammlung+Dietmar+Brandes">Search in the catalogue</a></li>
-		<li><a href="http://vufind.allegro-c.de/album/index.html">Search in the gallery</a></li>
+		<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?lookfor=Digitale+Pflanzenbilder+Sammlung+Dietmar+Brandes">Search in the catalogue</a></li>
+<!--		<li><a href="http://vufind.allegro-c.de/album/index.html">Search in the gallery</a></li>-->
 	</ul>
 	</li>
 	<br />
@@ -55,4 +55,4 @@
 </div>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2019-04-17" time="13:35" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2020-02-17" time="12:19" /></meta></MyCoReWebPage>

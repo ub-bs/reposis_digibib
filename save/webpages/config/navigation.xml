@@ -167,6 +167,10 @@
         <item href="/content/collections/institute_series/oer_teach_your_peers.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">OER Teach Your Peers (TYP) Videos</label>
         </item>
+        <item href="/content/collections/institute_series/publications_ina.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Schriften des Instituts für Akustik</label>
+            <label xml:lang="en">Publications of the Institute for Acoustics</label>
+        </item>
     </menu>
     <menu id="publish" dir="/content/publish">
         <label xml:lang="de">Publizieren</label>
@@ -200,7 +204,7 @@
         <label xml:lang="de">Nutzermenü</label>
         <label xml:lang="en">User menu</label>
         <group id="thisuser">
-            <item href="/authorization/change-password.xed?action=password" type="extern" replaceMenu="false" constrainPopUp="false">
+            <item href="/servlets/MCRUserServlet?action=changeMyPassword" type="extern" replaceMenu="false" constrainPopUp="false">
                 <label xml:lang="de">Passwort ändern</label>
                 <label xml:lang="en">Change Password</label>
             </item>

@@ -8,6 +8,7 @@
  </p>
 
 <ul>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/68571">Institut für Akustik - Schriften des Instituts für Akustik</a></li>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64104">Institut für Baustoffe, Massivbau und Brandschutz der Technischen Universität Braunschweig IBMB</a></li>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/65789">Institut für Computergraphik: Technical Report - Computer Graphics Lab</a></li>
 	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64989">Institut für Datentechnik und Kommunikationsnetze IDA / Institute of Computer and Network Engineering</a></li>
@@ -28,12 +29,17 @@
 <p>Here you will find an overview of digital publications of the institutes of the TU Braunschweig.</p>
 
 <ul>
-	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64104">Institute for construction materials, solid construction and fire prevention of the Technische Universität Braunschweig IBMB</a></li>
-	<li><a href="institute_series/publications_ivb.xml">Publications</a> of the institute for combustion engines<a href="https://www.tu-braunschweig.de/ivb">(ivb)</a></li>
-	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64443">Computer science report of the Technische Universität Braunschweig</a></li>
-	<li><a href="institute_series/oer_teach_your_peers.xml">OER Teach Your Peers (TYP) Videos</a></li>
-	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64989">Institute for Computer and Network Engineering IDA</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/68571">Institute for Acoustics - Schriften des Instituts für Akustik</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64104">Institute of Building Materials, Concrete Construction and Fire Safety IBMB</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/65789">Computer Graphics Lab - Technical Report</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64989">Institute of Computer and Network Engineering</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/65826">Institute for Microtechnology</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64162">Institute of Mobile Machines and Commercial Vehicles - Jahrbuch Agrartechnik</a></li>
+	<li><a href="institute_series/publications_ivb.xml">Institute of Internal Combustion Engines</a></li>
+	<li><a href="http://publikationsserver.tu-braunschweig.de/get/64443">Informatik-Berichte der Technische Universität Braunschweig</a></li>
+	<li><a href="institute_series/oer_teach_your_peers.xml">OER Teach Your Peers (TYP) Video</a></li>
 </ul>
 </div>
 </div>
-</div></section><meta><log lastEditor="dbbs_admin" date="2018-07-30" time="11:41" /></meta></MyCoReWebPage>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2020-03-04" time="11:24" /></meta></MyCoReWebPage>

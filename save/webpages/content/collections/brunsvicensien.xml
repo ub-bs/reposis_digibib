@@ -4,10 +4,9 @@
 
 <div class="row" id="digibib_brunsvicensien">
 <div class="col-md-6">
-<ul>
-	<li>Brunsvicensien der <a href="http://www.ub.tu-braunschweig.de">Universitätsbibliothek Braunschweig</a><br />
-	 </li>
-	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?join=AND&amp;bool0[]=AND&amp;lookfor0[]=%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig%22&amp;type0[]=AllFields&amp;op0[]=OR&amp;sort=year&amp;limit=20&amp;filter[]=format_facet%3A%22Elektronische+Ressource%22">Alle Titel</a></li>
+<ul><!--<li>Brunsvicensien der <a href="http://www.ub.tu-braunschweig.de">Universitätsbibliothek Braunschweig</a><br />
+	&nbsp;</li>-->
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Brunsvicensien%22&amp;wt=xml">Alle Titel</a></li>
 	<li><a href="../../servlets/solr/select?q=mods.subject:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">Vom Collegium Carolinum bis zur Technischen Universität </a>
 	<ul>
 		<li><a href="brunsvicensien/vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse ab 1745</a></li>
@@ -101,9 +100,8 @@
 
 <div class="row" id="digibib_brunsvicensien">
 <div class="col-md-6">
-<ul>
-	<li>Brunsvicensien of the <a href="http://www.ub.tu-braunschweig.de">Universitätsbibliothek Braunschweig</a></li>
-	<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?join=AND&amp;bool0[]=AND&amp;lookfor0[]=%22brunsvicensien+der+universit%C3%A4tsbibliothek+braunschweig%22&amp;type0[]=AllFields&amp;op0[]=OR&amp;sort=year&amp;limit=20&amp;filter[]=format_facet%3A%22Elektronische+Ressource%22">All titles</a></li>
+<ul><!--<li>Brunsvicensien of the <a href="http://www.ub.tu-braunschweig.de">Universitätsbibliothek Braunschweig</a></li>-->
+	<li><a href="../../servlets/solr/select?q=mods.subject%3A%22Brunsvicensien%22&amp;wt=xml">All titles</a></li>
 	<li><a href="../../servlets/solr/select?q=mods.subject:%22Vom%20Collegium%20Carolinum%20bis%20zur%20Technischen%20Universit%C3%A4t%22&amp;wt=xml">From Collegium Carolinum to Technische Universität</a>
 	<ul>
 		<li><a href="brunsvicensien/vorlesungsverzeichnisse.xml">Lecture directories from 1745</a></li>
@@ -191,4 +189,5 @@
 </ul>
 </div>
 </div>
-</div></section><meta><log lastEditor="dbbs_admin" date="2019-09-09" time="12:16" /></meta></MyCoReWebPage>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2020-02-26" time="11:52" /></meta></MyCoReWebPage>
