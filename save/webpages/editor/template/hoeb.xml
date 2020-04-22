@@ -1,0 +1,29 @@
+<mycoreobject ID="mir_mods_00000000">
+    <metadata>
+        <def.modsContainer class="MCRMetaXML" notinherit="true">
+            <modsContainer>
+                <mods:mods xmlns:mods="http://www.loc.gov/mods/v3">
+                    <mods:typeOfResource>text</mods:typeOfResource>
+                    <mods:genre type="intern" authorityURI="http://www.mycore.org/classifications/mir_genres" valueURI="http://www.mycore.org/classifications/mir_genres#in_house" />
+                    <mods:originInfo eventType="publication">
+                        <mods:place>
+                            <mods:placeTerm type="text">Braunschweig</mods:placeTerm>
+                        </mods:place>
+                    </mods:originInfo>
+                    <mods:language>
+                        <mods:languageTerm authority="rfc5646" type="code">de</mods:languageTerm>
+                    </mods:language>
+                    <mods:classification authority="sdnb" displayLabel="sdnb">370</mods:classification>
+                    <mods:accessCondition xmlns:xlink="http://www.w3.org/1999/xlink" type="restriction on access" xlink:href="http://www.mycore.org/classifications/mir_access#unlimited" />
+                    <mods:accessCondition xmlns:xlink="http://www.w3.org/1999/xlink" type="use and reproduction" xlink:href="http://www.mycore.org/classifications/mir_licenses#rights_reserved" />
+                    <mods:relatedItem xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="mir_mods_00000005" type="host" />
+                </mods:mods>
+            </modsContainer>
+        </def.modsContainer>
+    </metadata>
+    <service>
+        <servstates class="MCRMetaClassification">
+            <servstate classid="state" categid="submitted" />
+        </servstates>
+    </service>
+</mycoreobject>

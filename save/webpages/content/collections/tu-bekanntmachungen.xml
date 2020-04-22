@@ -17,8 +17,8 @@
 </ol>
 
 <p>Eine chronologische Übersicht aller hochschulöffentlichen Bekanntmachungen finden Sie in unserer <a href="../../receive/dbbs_mods_00067012">Komplettliste</a>.
-<br />
-<strong>Hinweis</strong>: Die Komplettliste befindet sich zurzeit im Neuaufbau (21.11.2019)
+<br /><br />
+<span class="label label-primary" style="vertical-align: middle; background-color: #a9072f;">Hinweis</span> Die Komplettliste befindet sich zurzeit im Neuaufbau (21.11.2019)
 </p>
 <form action="../../servlets/solr/find" class="form-inline" id="bs-searchMainPage" role="search" style="margin-top:30px;">
 	<div class="input-group" style="width: 100%;">
@@ -49,8 +49,8 @@
 </ol>
 
 <p>A chronological overview of all University Public Announcements can be found in our <a href="../../receive/dbbs_mods_00067012">complete list</a>.
-<br />
-<strong>Note</strong>: The list is under construction. (21.11.2019)
+<br /><br />
+<span class="label label-primary" style="vertical-align: middle; background-color: #a9072f;">Note</span> The list is under construction. (21.11.2019)
 </p>
 <form action="../../servlets/solr/find" class="form-inline" id="bs-searchMainPage" role="search" style="margin-top:30px;">
 	<div class="input-group" style="width: 100%;">

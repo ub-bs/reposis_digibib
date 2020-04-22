@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MyCoReWebPage>
+  <section title="Hochschulöffentliche Bekanntmachungen der Technischen Universität Braunschweig erstellen" xml:lang="de"/>
+  <section title="Create University Public Announcements of TU Braunschweig" xml:lang="en"/>
+  <section xml:lang="all">
+
+  <xed:form xmlns:xed="http://www.mycore.de/xeditor" xmlns:cmd="http://www.cdlib.org/inside/diglib/copyrightMD" method="post" role="form" class="form-horizontal">
+    <xed:source uri="xslStyle:editor/mods2xeditor:webapp:editor/template/hoeb.xml" />
+    <xed:source uri="xslStyle:mycoreobject-editor,editor/mods2xeditor:mcrobject:{$id}" />
+    <xed:cancel url="../servlets/MCRLockServlet?action=unlock&amp;id={$id}&amp;url=/receive/{$id}?XSL.Status.Message=mir.editstatus.canceled&amp;XSL.Status.Style=danger" />
+    <xed:cancel url="{$cancelUrl}?XSL.Status.Message=mir.editstatus.canceled&amp;XSL.Status.Style=danger" />
+    <xed:cancel url="../index.html?XSL.Status.Message=mir.editstatus.canceled&amp;XSL.Status.Style=danger" />
+    <xed:post-processor xsl="editor/xeditor2mods.xsl" />
+
+    <xed:bind xpath="/mycoreobject">
+      <xed:include uri="webapp:editor/editor-includes.xed" ref="mycore.common" />
+
+      <xed:bind xpath="metadata/def.modsContainer[@class='MCRMetaXML'][@notinherit='true']/modsContainer/mods:mods">
+        <xed:include uri="webapp:editor/editor-includes.xed" ref="failed-validation-messages" />
+
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="title.complex.repeated" />
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="name.extended.repeated" />
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="date.range.extended.datetimepicker" />
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="extent" />
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="institutes" />
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="comment" />
+
+        <xed:include uri="webapp:editor/editor-includes.xed" ref="cancel.submit" />
+        <xed:include uri="webapp:editor/editor-includes.xed" ref="cleanup-rules" />
+        <xed:include uri="webapp:editor/editor-includes.xed" ref="validation-rules" />
+
+        <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="javascript" />
+      </xed:bind>
+    </xed:bind>
+  </xed:form>
+
+  </section>
+</MyCoReWebPage>
