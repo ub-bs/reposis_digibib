@@ -171,6 +171,10 @@
             <label xml:lang="de">Schriften des Instituts für Akustik</label>
             <label xml:lang="en">Publications of the Institute for Acoustics</label>
         </item>
+        <item href="/content/collections/institute_series/publications_nfl.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Veröffentlichungen des Niedersächsischen Forschungszentrums für Luftfahrt</label>
+            <label xml:lang="en">Publications of the Aeronautics Research Centre Niedersachsen</label>
+        </item>
     </menu>
     <menu id="publish" dir="/content/publish">
         <label xml:lang="de">Publizieren</label>

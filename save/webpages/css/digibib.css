@@ -354,6 +354,12 @@ html body #powered_by {
   background-repeat: no-repeat;
   background-position: top right;
 }
+#digibib_nfl {
+  background-image:url('../images/NFL_Logozusatz_TU.png');
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 16%;
+}
 
 #digibib_feedback {
   cursor: pointer;
