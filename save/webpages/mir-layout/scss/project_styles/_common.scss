@@ -39,9 +39,17 @@
     z-index: 2050;
   }
 
-  // fade to white  is not working on transparent background
+  // white background to get overlay working again
+  #mir-abstract-tabs {
+    .tab-content {
+      background-color: white;
+      padding-top: 0.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
   .mir-abstract-overlay-tran {
-    background: transparent;
+    left: 0;
   }
 
   .shariff .orientation-horizontal li {
