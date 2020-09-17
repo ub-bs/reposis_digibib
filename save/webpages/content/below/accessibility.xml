@@ -32,79 +32,68 @@
         <h3> Stand der Vereinbarung mit den Anforderungen </h3>
 
         <p>Aufgrund der Überprüfung ist die Webseite mit den zuvor genannten Anforderungen
-          nicht an allen Stellen vereinbar. Die Webseite <a
-            href="https://publikationsserver.tu-braunschweig.de"
-            >https://publikationsserver.tu-braunschweig.de</a> ist aus den folgenden
-          Gründen noch nicht abschließend barrierefrei:</p>
+          nicht an allen Stellen vereinbar. Die Webseite <a href="https://publikationsserver.tu-braunschweig.de">https://publikationsserver.tu-braunschweig.de</a>
+          ist aus den folgenden Gründen noch nicht abschließend barrierefrei:</p>
 
         <dl>
           <dt>Im Webauftritt eingebundene Dokumente (.pdf, .doc, etc.)</dt>
-          <dd>
-            <ul>
-              <li>Dokumente, die vor September 2020 eingestellt wurden, sind gegebenenfalls
-                nicht barrierefrei. Aufgrund der sehr großen Anzahl der Dokumente, können
-                diese nicht in ein barrierefreies Format umgewandelt werden, da zum Teil die
-                Ausgangsformate fehlen und eine nachträgliche Bearbeitung der Dokumente
-                unverhältnismäßig arbeitsaufwendig ist.</li>
-              <li>Dokumente, die von Dritten bereitgestellt werden, liegen eventuell nicht
-                barrierefrei vor. (siehe § 9 Abs. 2 Satz 2 NBGG)</li>
-            </ul>
-            
-              Bei neu erscheinenden Dokumenten die in den Verantwortungsbereich der
-              Universitätsbibliothek fallen, streben wir an, künftig zeitnah eine
-              barrierefreie Version zur Verfügung zu stellen. Für alle weiteren Dokumente
-              halten wir unsere Datenlieferanten an, die Anforderungen zur Barrierefreiheit zu
-              beachten.
+          <dd class="ml-4">
+            Dokumente, die vor September 2020 eingestellt wurden, sind gegebenenfalls
+            nicht barrierefrei. Aufgrund der sehr großen Anzahl der Dokumente, können
+            diese nicht in ein barrierefreies Format umgewandelt werden, da zum Teil die
+            Ausgangsformate fehlen und eine nachträgliche Bearbeitung der Dokumente
+            unverhältnismäßig arbeitsaufwendig ist.<br />
+            Dokumente, die von Dritten bereitgestellt werden, liegen eventuell nicht
+            barrierefrei vor (siehe § 9 Abs. 2 Satz 2 NBGG).<br/>
+            Bei neu erscheinenden Dokumenten die in den Verantwortungsbereich der
+            Universitätsbibliothek fallen, streben wir an, künftig zeitnah eine
+            barrierefreie Version zur Verfügung zu stellen. Für alle weiteren Dokumente
+            halten wir unsere Datenlieferanten an, die Anforderungen zur Barrierefreiheit zu
+            beachten.
           </dd>
           
           <dt>Im Webauftritt enthaltene Informationen in Gebärdensprache und
             in leichter Sprache</dt>
-          <dd>
-            <ul>
-              <li>Wir streben an, eine möglichst einfache Sprache zu benutzen. Auf Grund der
-                komplexen Inhalte, die zumindest teilweise in unseren Webauftritten
-                veröffentlicht werden, ist eine einfache Sprachgestaltung (beispielsweise
-                der Verzicht auf Fachbegriffe) nicht immer möglich.</li>
-            </ul>
+          <dd class="ml-4">
+            Wir streben an, eine möglichst einfache Sprache zu benutzen. Auf Grund der
+            komplexen Inhalte, die zumindest teilweise in unseren Webauftritten
+            veröffentlicht werden, ist eine einfache Sprachgestaltung (beispielsweise
+            der Verzicht auf Fachbegriffe) nicht immer möglich.
           </dd>
 
           <dt>Im Webauftritt eingebundene Videos</dt>
-          <dd>
-            <ul>
-              <li>Die Bereitstellung der Videos mit einer Audiodeskription konnte bislang
-                nicht realisiert werden</li>
-            </ul>
-          </dd>
+          <dd class="ml-4">Die Bereitstellung der Videos mit einer Audiodeskription konnte bislang
+              nicht realisiert werden.</dd>
           
           <dt>Alternativtexte (1.1.1 a-c )</dt>
-          <dd>An einigen Stellen fehlen die Alternativtexte. Bei einem nächsten Update werden diese ergänzt werden.</dd>
+          <dd class="ml-4">An einigen Stellen fehlen die Alternativtexte. Bei einem nächsten Update werden diese ergänzt werden.</dd>
           
           <dt>HTML-Strukurelemente (1.3.1 a-f )</dt>
-          <dd>Einige HTML-Strukurelemente sind nur teilweise barrierefrei, da die entsprechenden Bootstrap-Klassen fehlen.
+          <dd class="ml-4">Einige HTML-Strukurelemente sind nur teilweise barrierefrei, da die entsprechenden Bootstrap-Klassen fehlen.
             Eine Überarbeitung ist in Arbeit.</dd>
           
           <dt>Eingabefelder zu Nutzerdaten vermitteln den Zweck (1.3.5a)</dt>
-          <dd>Formulare nutzen keine Autovervollständigung. Bei Formularen fehlen die „autocomplete“-Attribute, was das Ausfüllen der Formulare erschwert.
+          <dd class="ml-4">Formulare nutzen keine Autovervollständigung. Bei Formularen fehlen die „autocomplete“-Attribute, was das Ausfüllen der Formulare erschwert.
             Bei einem Update soll die Funktionalität künftig ergänzt werden.</dd>
           
           <dt>Kontraste von Texten ausreichend (1.4.3)</dt>
-          <dd>Da das grundsätzliche Layout der Webseite vor dem Erscheinen der Richtlinie (EU) 2016/2102 erstellt wurde, ist das Kontrastverhältnis von 4,5:1 nicht grundsätzlich sichergestellt.
+          <dd class="ml-4">Da das grundsätzliche Layout der Webseite vor dem Erscheinen der Richtlinie (EU) 2016/2102 erstellt wurde, ist das Kontrastverhältnis von 4,5:1 nicht grundsätzlich sichergestellt.
             An einer Lösung wird gearbeitet.</dd>
           
           <dt>Aktuelle Position des Fokus deutlich (2.4.7a)</dt>
-          <dd>Der Fokus ist bei der Bedienung mit der Tastatur nicht immer erkennbar.
+          <dd class="ml-4">Der Fokus ist bei der Bedienung mit der Tastatur nicht immer erkennbar.
             Die Anpassung des Fokus-Managements erfolgt bei der nächsten grundlegenden Überarbeitung der Website.</dd>
           
           <dt>Fehlererkennung (3.3.1a)</dt>
-          <dd>Angaben in Formularen werden vor dem Abschicken nicht automatisch überprüft. 
+          <dd class="ml-4">Angaben in Formularen werden vor dem Abschicken nicht automatisch überprüft. 
             Bei der nächsten grundlegenden Überarbeitung der Website soll die Funktionalität künftig ergänzt werden.</dd>
           
           <dt>Statusmeldungen programmatisch verfügbar (4.1.3a)</dt>
-          <dd>Es erfolgt weder visuell noch im Screenreader ein Hinweis das, das Dokument auf die Merkliste gesetzt wurde.
+          <dd class="ml-4">Es erfolgt weder visuell noch im Screenreader ein Hinweis das, das Dokument auf die Merkliste gesetzt wurde.
             Die entsprechende "Role" wird im Rahmen eines Updates ergänzt.</dd>
         </dl>
-        <p>Die identifizierten Defizite und Mängel befinden sich aktuell in einem kontinuierlichen Verbesserungsprozess,
-          der sukzessive abgearbeitet wird. Darüber hinaus arbeiten wir an einer neuen, barrierefreien Version unseres Webauftritts.</p>
+        <p>Die identifizierten technischen Defizite und Mängel befinden sich aktuell in einem kontinuierlichen Verbesserungsprozess,
+          der sukzessive abgearbeitet wird.</p>
       </div>
     </div>
 
