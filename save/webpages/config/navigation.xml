@@ -31,9 +31,9 @@
             <label xml:lang="de">Nutzungsbedingungen</label>
             <label xml:lang="en">Terms of Use</label>
         </item>
-        <item href="/content/below/barrierefrei.xml" replaceMenu="false" constrainPopUp="false">
+        <item href="/content/below/accessibility.xml" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Barrierefreiheit</label>
-            <label xml:lang="en">new entry</label>
+            <label xml:lang="en">Accessibility</label>
         </item>
     </menu>
     <menu id="search">
