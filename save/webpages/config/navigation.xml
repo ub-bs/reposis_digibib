@@ -31,6 +31,10 @@
             <label xml:lang="de">Nutzungsbedingungen</label>
             <label xml:lang="en">Terms of Use</label>
         </item>
+        <item href="/content/below/barrierefrei.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Barrierefreiheit</label>
+            <label xml:lang="en">new entry</label>
+        </item>
     </menu>
     <menu id="search">
         <label xml:lang="de">Recherche</label>
@@ -142,7 +146,7 @@
         <item href="/content/collections/brunsvicensien/jahrbuecher.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Jahrbücher des Braunschweigischen Geschichtsvereins</label>
         </item>
-        <item href="/content/collections/brunsvicensien/matrikelbuecher" type="intern" replaceMenu="false" constrainPopUp="false">
+        <item href="/content/collections/brunsvicensien/matrikelbuecher.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</label>
         </item>
         <item href="/content/collections/brunsvicensien/ph.xml" type="intern" replaceMenu="false" constrainPopUp="false">
@@ -150,9 +154,6 @@
         </item>
         <item href="/content/collections/brunsvicensien/publications_bwg.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Die Braunschweigische Wissenschaftlichen Gesellschaft</label>
-        </item>
-        <item href="/content/collections/brunsvicensien/vorlesungsverzeichnisse.xml" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</label>
         </item>
         <item href="/content/collections/brunsvicensien/stadtbibliothek.xml" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Stadtbibliothek Braunschweig</label>

@@ -231,7 +231,7 @@
             <mir:help-pmud help-text="{i18n:mir.help.abstract.language}" pmud="true" />
           </div>
           <mir:textfield xpath="@xlink:href" label="mir.abstract.aslink" help-text="{i18n:mir.help.abstract.aslink}" placeholder="{i18n:mir.placeholder.abstract.link}" />
-          <mir:textarea xpath="." label="mir.abstract.ortext" help-text="{i18n:mir.help.abstract.ortext}" rows="5" />
+          <mir:htmlArea xpath="." label="mir.abstract.ortext" help-text="{i18n:mir.help.abstract.ortext}" rows="5" />
         </div>
       </xed:repeat>
     </fieldset>

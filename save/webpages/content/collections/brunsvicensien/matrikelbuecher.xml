@@ -1,53 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE MyCoReWebPage>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig">
+<MyCoReWebPage><section xml:lang="de" title="Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig"><div>
+<h2>Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</h2>
 
-    <h2>Matrikelbücher der Technischen Universität Carolo-Wilhelmina zu Braunschweig</h2>
-    <div class="row" id="digibib_vorlesung">
-      <div class="col-md-12">
-        <p>
-          Hier finden Sie die digitalisierten Matrikelbuecher aus dem Bestand O I des Universitätsarchivs der TU Braunschweig.
-        </p>
-        <ul>
-          <li>
-            <a href="../../../receive/dbbs_mods_00045529">Matrikelbuch der Technischen Hochschule Carolo-Wilhelmina:</a><br/>
-            <a href="../../../receive/dbbs_mods_00045529">vom Wintersemester 1900/01 - Wintersemester 1924/25 (Altsign. O 1 : 1 : 3)</a>
-          </li>
-          <li>
-            <a href="../../../receive/dbbs_mods_00022596">Matricul des Collegii Carolini 1745 - Sommersemester 1900 (Altsign. O 1 : 1 : 1)</a>
-          </li>
-          <li>
-            <a href="../../../receive/dbbs_mods_00022583">Legitimationskartenbuch für Zuhörer 1836 - Wintersemester 1887/88 (Altsign. O 1 : 2 : 1)</a>
-          </li>
-          <li>
-            <a href="../../../receive/dbbs_mods_00045232">Matrikelbuch für Damen der Technischen Hochschule Carolo-Wilhelmina:</a><br/>
-            <a href="../../../receive/dbbs_mods_00045232">Wintersemester 1898/99 - Sommersemester 1942 (Altsign. O 1 : 2 : 2)</a>
-          </li>
-        </ul>
-        <p>
-          Hier finden Sie die <a href="vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.
-        </p>
-        <p>
-          Hier finden Sie die <a href="ph.xml">Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</a>.
-        </p>
-        <p>
-          Hier finden Sie die <a href="http://www.biblio.tu-bs.de/db/lv/detail.php">Vorlesungsverzeichnisse ab Wintersemester 2004/05</a>.
-        </p>
-      </div>
-    </div>
+<div class="row" id="digibib_vorlesung">
+<div class="col-md-12">
+<p>Hier finden Sie die digitalisierten Matrikelbuecher aus dem Bestand O I des Universitätsarchivs der TU Braunschweig.</p>
 
-    <div class="row">
-      <div class="col-md-12">
-        <hr />
-        <p>
-          <a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a>
-        </p>
-        </div>
-    </div>
-  </section>
-  <meta>
-    <log date="2016-05-09" time="12:29" labelPath=" » Matrikelbücher"
-      lastEditor="Kathleen Neumann" />
-  </meta>
-</MyCoReWebPage>
+<ul>
+	<li><a href="../../../receive/dbbs_mods_00045529">Matrikelbuch der Technischen Hochschule Carolo-Wilhelmina:</a><br />
+	<a href="../../../receive/dbbs_mods_00045529">vom Wintersemester 1900/01 - Wintersemester 1924/25 (Altsign. O 1 : 1 : 3)</a></li>
+	<li><a href="../../../receive/dbbs_mods_00022596">Matricul des Collegii Carolini 1745 - Sommersemester 1900 (Altsign. O 1 : 1 : 1)</a></li>
+	<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00022660">Die Matrikel des Collegium Carolinum und der Technischen Hochschule Carolo-Wilhelmina zu Braunschweig, 1745 - 1900 : bearb. von Peter Düsterdieck</a></li>
+	<li><a href="../../../receive/dbbs_mods_00022583">Legitimationskartenbuch für Zuhörer 1836 - Wintersemester 1887/88 (Altsign. O 1 : 2 : 1)</a></li>
+	<li><a href="../../../receive/dbbs_mods_00045232">Matrikelbuch für Damen der Technischen Hochschule Carolo-Wilhelmina:</a><br />
+	<a href="../../../receive/dbbs_mods_00045232">Wintersemester 1898/99 - Sommersemester 1942 (Altsign. O 1 : 2 : 2)</a></li>
+</ul>
+
+<p>Hier finden Sie die <a href="vorlesungsverzeichnisse.xml">Vorlesungsverzeichnisse der Technischen Universität Carolo-Wilhelmina zu Braunschweig</a>.</p>
+
+<p>Hier finden Sie die <a href="ph.xml">Vorlesungsverzeichnisse der Pädagogischen Hochschule (Bernhard-Rust-Hochschule)</a>.</p>
+
+<p>Hier finden Sie die <a href="http://www.biblio.tu-bs.de/db/lv/detail.php">Vorlesungsverzeichnisse ab Wintersemester 2004/05</a>.</p>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-12">
+<hr />
+<p><a href="../brunsvicensien.xml">Zurück zu den Brunsvicensien der Universitätsbibliothek Braunschweig</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="celsner" date="2020-09-09" time="16:15" /></meta></MyCoReWebPage>
