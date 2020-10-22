@@ -14,7 +14,6 @@
 
     <xed:bind xpath="/mycoreobject">
       <xed:include ref="mycore.common" />
-      <xed:bind xpath="servstates[@class='MCRMetaClassification']/servstate[@classid='state']/@categid" initially="submitted" />
 
       <xed:bind xpath="metadata/def.modsContainer[@class='MCRMetaXML'][@notinherit='true']/modsContainer/mods:mods">
         <xed:bind xpath="mods:typeOfResource/@mcr:categId" initially="typeOfResource:text" />
@@ -24,7 +23,13 @@
         <xed:bind xpath="mods:classification[@authority='ddc'][@displayLabel='ddc']" initially="379" />
         <xed:bind xpath="mods:accessCondition[@type='restriction on access']/@xlink:href" initially="http://www.mycore.org/classifications/mir_access#unlimited" />
         <xed:bind xpath="mods:accessCondition[@type='use and reproduction']/@xlink:href" initially="http://www.mycore.org/classifications/mir_licenses#rights_reserved" />
-        
+
+        <h1>
+          Eingabeformular für Hochschulöffentliche Bekanntmachungen
+        </h1>
+
+        <xed:include ref="failed-validation-messages" />
+
         <xed:include ref="title.original" />
         <xed:include ref="title.translated" />
         <xed:include ref="editor.repeated" />
@@ -34,12 +39,15 @@
         <xed:include ref="comment" />
         <xed:bind xpath="mods:relatedItem[@type='series']">
           <xed:bind xpath="@xlink:href" initially="dbbs_mods_00067012"> <input id="relItem-series" type="hidden" /> </xed:bind>
-          <xed:include ref="title.series.relItemsearch" />
           <xed:include ref="series.volume" />
+        </xed:bind>
+
+        <xed:include ref="cancel.submit" />
+        <xed:include ref="cleanup-rules" />
       </xed:bind>
-      </xed:bind>
+      <xed:bind xpath="service/servstates[@class='MCRMetaClassification']/servstate[@classid='state']/@categid" initially="submitted" />
     </xed:bind>
-    
+
   </xed:form>
 
   </section>
