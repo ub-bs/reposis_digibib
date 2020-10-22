@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MyCoReWebPage>
+  <section title="Hochschulöffentliche Bekanntmachungen erstellen" xml:lang="de" />
+  <section title="Create Hochschulöffentliche Bekanntmachungen" xml:lang="en" />
+  <section xml:lang="all">
+
+  <xed:form xmlns:xed="http://www.mycore.de/xeditor" xmlns:cmd="http://www.cdlib.org/inside/diglib/copyrightMD" method="post" role="form" class="form-horizontal">
+
+    <xed:preload uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" />
+    <xed:preload uri="{$MIR.EditorForms.CustomIncludes}" />
+
+    <xed:include ref="in.out" />
+
+    <xed:bind xpath="/mycoreobject">
+      <xed:include ref="mycore.common" />
+      <xed:bind xpath="servstates[@class='MCRMetaClassification']/servstate[@classid='state']/@categid" initially="submitted" />
+
+      <xed:bind xpath="metadata/def.modsContainer[@class='MCRMetaXML'][@notinherit='true']/modsContainer/mods:mods">
+        <xed:bind xpath="mods:typeOfResource/@mcr:categId" initially="typeOfResource:text" />
+        <xed:bind xpath="mods:genre[@type='intern'][@authorityURI='http://www.mycore.org/classifications/mir_genres']/@valueURIxEditor" initially="in_house" />
+        <xed:bind xpath="mods:originInfo[@eventType='publication']/mods:place/mods:placeTerm[@type='text']" initially="Braunschweig" />
+        <xed:bind xpath="mods:language/mods:languageTerm[@authority='rfc5646'][@type='code']" initially="de" />
+        <xed:bind xpath="mods:classification[@authority='ddc'][@displayLabel='ddc']" initially="379" />
+        <xed:bind xpath="mods:accessCondition[@type='restriction on access']/@xlink:href" initially="http://www.mycore.org/classifications/mir_access#unlimited" />
+        <xed:bind xpath="mods:accessCondition[@type='use and reproduction']/@xlink:href" initially="http://www.mycore.org/classifications/mir_licenses#rights_reserved" />
+        
+        <xed:include ref="title.original" />
+        <xed:include ref="title.translated" />
+        <xed:include ref="editor.repeated" />
+        <xed:include ref="date.issued.datetimepicker" />
+        <xed:include ref="extent" />
+        <xed:include ref="institutes" />
+        <xed:include ref="comment" />
+        <xed:bind xpath="mods:relatedItem[@type='series']">
+          <xed:bind xpath="@xlink:href" initially="dbbs_mods_00067012"> <input id="relItem-series" type="hidden" /> </xed:bind>
+          <xed:include ref="title.series.relItemsearch" />
+          <xed:include ref="series.volume" />
+      </xed:bind>
+      </xed:bind>
+    </xed:bind>
+    
+  </xed:form>
+
+  </section>
+</MyCoReWebPage>
