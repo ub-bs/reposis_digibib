@@ -46,6 +46,21 @@
     <xed:remove  ref="abstract.simple" />
   </xed:modify>
 
+  <xed:modify ref="genres.dissertation">
+    <xed:remove ref="thesis.advisor.reviewer.all.repeated" />
+    <xed:remove ref="year.issued" />
+    <xed:remove ref="date.submitted.datetimepicker" />
+    <xed:remove ref="shelfmark" />
+    <xed:remove ref="genres.thesis.common" />
+    <xed:include ref="digibib.thesis.advisor.repeated"   after="titles.thesis" />
+    <xed:include ref="publisher"                         after="digibib.thesis.advisor.repeated" />
+    <xed:include ref="extent"                            after="publisher" />
+    <xed:include ref="language"                          after="extent" />
+    <xed:include ref="rights"                            after="language" />
+    <xed:include ref="institutes"                        after="rights" />
+    <xed:include ref="digibib.abstract.repeated"         after="institutes" />
+  </xed:modify>
+
   <xed:modify ref="genres.thesis.common">
     <xed:include ref="digibib.ddc.repeat"                after="sdnb.repeat" />
     <xed:remove  ref="sdnb.repeat" />
@@ -309,6 +324,14 @@
       help-text="{i18n:mir.help.identifier.issn}" />
   </xed:template>
 
+<xed:template id="digibib.thesis.advisor.repeated">
+    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='aut']" />
+    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='ths']" />
+    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='ths']" />
+    <mir:person.repeated help-text="{i18n:mir.help.thesis.advisor.reviewer}">
+      <xed:include uri="xslStyle:items2options:classification:editor:-1:children:marcrelator" />
+    </mir:person.repeated>
+  </xed:template>
 
 
 <!--  TODO: remove me -->
