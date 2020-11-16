@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage><section xml:lang="de" title="neuer Eintrag"><div>
-<h2><img alt="" src="IWF_Logo(1).jpg" style="width: 300px; height: 136px; float: right;" />Das Institut für Werkzeugmaschinen und Fertigungstechnik (IWF)</h2>
+<MyCoReWebPage><section xml:lang="de" title="Institut für Werkzeugmaschinen und Fertigungstechnik (IWF)"><div>
+<h2>Das Institut für Werkzeugmaschinen und Fertigungstechnik (IWF)</h2>
 
-<div class="row">
-<div class="col-md-10">
+ <div class="row" id="digibib_iwf">
+  <div class="col-md-10">
 <p>Das Institut für Werkzeugmaschinen und Fertigungstechnik (IWF) besteht aus den beiden Professuren Fertigungstechnologien &amp; Prozessautomatisierung sowie Nachhaltige Produktion &amp; Life Cycle Engineering.</p>
 
 <p>Die Professur Fertigungstechnologien &amp; Prozessautomatisierung fokussiert technologische und automatisierungstechnische Fragestellungen entlang aktueller und zukünftiger Fertigungsprozessketten. Die Schwerpunkte zielen auf die Umsetzung zukünftiger Fertigungsstrategien, die eine stückzahl- und variantenflexible Fertigung funktionalisierter Produkte mit höchster Effizienz ermöglichen. Die Forschungsgebiete erstrecken sich von der Montage und Fertigungsautomatisierung über die Be- und Verarbeitung von metallischen Werkstoffen, Holz- und Verbundwerkstoffen bis hin zu neuen Fertigungstechnologien für die integrierte Herstellung werkstoffhybrider Funktionsstrukturen.</p>
 
 <p>Die Professur für Nachhaltige Produktion &amp; Life Cycle Engineering verfolgt einen systematischen Ansatz zur Gestaltung von Produkten und Prozessen gemäß einer nachhaltigen Entwicklung. Forschungsschwerpunkte sind Technologien sowie (digitale) Methoden und Werkzeuge zur Steigerung der Energie- und Ressourceneffizienz und zur Schließung von Stoffkreisläufen. Weiterhin zielt die Forschung auf die Minimierung von Kosten und Umweltwirkungen entlang des gesamten Produktlebenszyklus sowie auf die optimierte Gestaltung übergeordneter, komplexer Systeme der Systeme, welche durch eine intelligente Vernetzung von Produkten, Maschinen und Anlagen mit ihrer Umwelt gekennzeichnet sind.</p>
 
-<p><a href="../../../receive/dbbs_mods_">Zu den Veröffentlichungen aus dem IWF</a></p>
+   <p><a href="../../../receive/dbbs_mods_00069117">Zu den Veröffentlichungen aus dem IWF</a></p>
 </div>
 </div>
 </div>
