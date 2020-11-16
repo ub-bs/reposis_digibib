@@ -176,6 +176,10 @@
             <label xml:lang="de">Veröffentlichungen des Niedersächsischen Forschungszentrums für Luftfahrt</label>
             <label xml:lang="en">Publications of the Aeronautics Research Centre Niedersachsen</label>
         </item>
+        <item href="/content/collections/institute_series/publications_iwf.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Veröffentlichungen des Instituts für Werkzeugmaschinen und Fertigungstechnik</label>
+            <label xml:lang="en">Publications of the Institute of Machine Tools and Production Technology</label>
+        </item>
     </menu>
     <menu id="publish" dir="/content/publish">
         <label xml:lang="de">Publizieren</label>
