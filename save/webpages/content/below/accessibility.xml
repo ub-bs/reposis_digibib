@@ -1,156 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage>
-  <section xml:lang="de" title="Hinweis zur Barrierefreiheit">
-    <div class="row">
-      <div class="col-12">
+<MyCoReWebPage><section xml:lang="de" title="Hinweis zur Barrierefreiheit"><div>
+<div class="row">
+<div class="col-12">
+<h2>Erklärung zur Barrierefreiheit <small class="text-muted">(Stand der Erklärung: 17.09.2020)</small></h2>
+</div>
+</div>
 
-        <h2> Erklärung zur Barrierefreiheit <small class="text-muted">(Stand der Erklärung:
-            17.09.2020)</small>
-        </h2>
+<div class="row mt-3">
+<div class="col-12">
+<p>Die Technische Universität Braunschweig ist bemüht, ihre Website im Einklang mit dem Niedersächsischen Behindertengleichstellungsgesetz (NBGG) zur Umsetzung der Richtlinie (EU) 2016/2102 des Europäischen Parlaments und des Rates barrierefrei zugänglich zu machen.</p>
 
-      </div>
-    </div>
-    <div class="row mt-3">
-      <div class="col-12">
+<p>Diese Erklärung zur Barrierefreiheit gilt für <a href="https://publikationsserver.tu-braunschweig.de">https://publikationsserver.tu-braunschweig.de</a>.</p>
+</div>
+</div>
 
-        <p> Die Technische Universität Braunschweig ist bemüht, ihre Website im Einklang mit
-          dem Niedersächsischen Behindertengleichstellungsgesetz (NBGG) zur Umsetzung der
-          Richtlinie (EU) 2016/2102 des Europäischen Parlaments und des Rates barrierefrei
-          zugänglich zu machen. </p>
+<div class="row mt-3">
+<div class="col-12">
+<h3>Stand der Vereinbarung mit den Anforderungen</h3>
 
-        <p> Diese Erklärung zur Barrierefreiheit gilt für <a
-            href="https://publikationsserver.tu-braunschweig.de"
-            >https://publikationsserver.tu-braunschweig.de</a>. </p>
+<p>Aufgrund der Überprüfung ist die Webseite mit den zuvor genannten Anforderungen nicht an allen Stellen vereinbar. Die Webseite <a href="https://publikationsserver.tu-braunschweig.de">https://publikationsserver.tu-braunschweig.de</a> ist aus den folgenden Gründen noch nicht abschließend barrierefrei:</p>
 
-      </div>
-    </div>
+<dl>
+	<dt>Im Webauftritt eingebundene Dokumente (.pdf, .doc, etc.)</dt>
+	<dd class="ml-4">Dokumente, die vor September 2020 eingestellt wurden, sind gegebenenfalls nicht barrierefrei. Aufgrund der sehr großen Anzahl der Dokumente, können diese nicht in ein barrierefreies Format umgewandelt werden, da zum Teil die Ausgangsformate fehlen und eine nachträgliche Bearbeitung der Dokumente unverhältnismäßig arbeitsaufwendig ist.<br />
+	Dokumente, die von Dritten bereitgestellt werden, liegen eventuell nicht barrierefrei vor (siehe § 9 Abs. 2 Satz 2 NBGG).<br />
+	Bei neu erscheinenden Dokumenten die in den Verantwortungsbereich der Universitätsbibliothek fallen, streben wir an, künftig zeitnah eine barrierefreie Version zur Verfügung zu stellen. Für alle weiteren Dokumente halten wir unsere Datenlieferanten an, die Anforderungen zur Barrierefreiheit zu beachten.</dd>
+	<dt>Im Webauftritt enthaltene Informationen in Gebärdensprache und in leichter Sprache</dt>
+	<dd class="ml-4">Wir streben an, eine möglichst einfache Sprache zu benutzen. Auf Grund der komplexen Inhalte, die zumindest teilweise in unseren Webauftritten veröffentlicht werden, ist eine einfache Sprachgestaltung (beispielsweise der Verzicht auf Fachbegriffe) nicht immer möglich.</dd>
+	<dt>Im Webauftritt eingebundene Videos</dt>
+	<dd class="ml-4">Die Bereitstellung der Videos mit einer Audiodeskription konnte bislang nicht realisiert werden.</dd>
+	<dt>Alternativtexte (1.1.1 a-c )</dt>
+	<dd class="ml-4">An einigen Stellen fehlen die Alternativtexte. Bei einem nächsten Update werden diese ergänzt werden.</dd>
+	<dt>HTML-Strukurelemente (1.3.1 a-f )</dt>
+	<dd class="ml-4">Einige HTML-Strukurelemente sind nur teilweise barrierefrei, da die entsprechenden Bootstrap-Klassen fehlen. Eine Überarbeitung ist in Arbeit.</dd>
+	<dt>Eingabefelder zu Nutzerdaten vermitteln den Zweck (1.3.5a)</dt>
+	<dd class="ml-4">Formulare nutzen keine Autovervollständigung. Bei Formularen fehlen die „autocomplete“-Attribute, was das Ausfüllen der Formulare erschwert. Bei einem Update soll die Funktionalität künftig ergänzt werden.</dd>
+	<dt>Kontraste von Texten ausreichend (1.4.3)</dt>
+	<dd class="ml-4">Da das grundsätzliche Layout der Webseite vor dem Erscheinen der Richtlinie (EU) 2016/2102 erstellt wurde, ist das Kontrastverhältnis von 4,5:1 nicht grundsätzlich sichergestellt. An einer Lösung wird gearbeitet.</dd>
+	<dt>Aktuelle Position des Fokus deutlich (2.4.7a)</dt>
+	<dd class="ml-4">Der Fokus ist bei der Bedienung mit der Tastatur nicht immer erkennbar. Die Anpassung des Fokus-Managements erfolgt bei der nächsten grundlegenden Überarbeitung der Website.</dd>
+	<dt>Fehlererkennung (3.3.1a)</dt>
+	<dd class="ml-4">Angaben in Formularen werden vor dem Abschicken nicht automatisch überprüft. Bei der nächsten grundlegenden Überarbeitung der Website soll die Funktionalität künftig ergänzt werden.</dd>
+	<dt>Statusmeldungen programmatisch verfügbar (4.1.3a)</dt>
+	<dd class="ml-4">Es erfolgt weder visuell noch im Screenreader ein Hinweis, dass das Dokument auf die Merkliste gesetzt wurde. Die entsprechende "Role" wird im Rahmen eines Updates ergänzt.</dd>
+</dl>
 
+<p>Die identifizierten technischen Defizite und Mängel befinden sich aktuell in einem kontinuierlichen Verbesserungsprozess, der sukzessive abgearbeitet wird.</p>
+</div>
+</div>
 
-    <div class="row mt-3">
-      <div class="col-12">
+<div class="row mt-3">
+<div class="col-12">
+<h3>Erstellung dieser Erklärung zur Barrierefreiheit</h3>
 
-        <h3> Stand der Vereinbarung mit den Anforderungen </h3>
+<p>Diese Erklärung wurde am 31.08.2020 erstellt und am 17.09.2020 zuletzt aktualisiert. Die Einschätzung basiert auf einer Selbstbewertung.</p>
+</div>
+</div>
 
-        <p>Aufgrund der Überprüfung ist die Webseite mit den zuvor genannten Anforderungen
-          nicht an allen Stellen vereinbar. Die Webseite <a href="https://publikationsserver.tu-braunschweig.de">https://publikationsserver.tu-braunschweig.de</a>
-          ist aus den folgenden Gründen noch nicht abschließend barrierefrei:</p>
+<div class="row mt-3">
+<div class="col-12">
+<h3>Feedback und Kontaktangaben</h3>
 
-        <dl>
-          <dt>Im Webauftritt eingebundene Dokumente (.pdf, .doc, etc.)</dt>
-          <dd class="ml-4">
-            Dokumente, die vor September 2020 eingestellt wurden, sind gegebenenfalls
-            nicht barrierefrei. Aufgrund der sehr großen Anzahl der Dokumente, können
-            diese nicht in ein barrierefreies Format umgewandelt werden, da zum Teil die
-            Ausgangsformate fehlen und eine nachträgliche Bearbeitung der Dokumente
-            unverhältnismäßig arbeitsaufwendig ist.<br />
-            Dokumente, die von Dritten bereitgestellt werden, liegen eventuell nicht
-            barrierefrei vor (siehe § 9 Abs. 2 Satz 2 NBGG).<br/>
-            Bei neu erscheinenden Dokumenten die in den Verantwortungsbereich der
-            Universitätsbibliothek fallen, streben wir an, künftig zeitnah eine
-            barrierefreie Version zur Verfügung zu stellen. Für alle weiteren Dokumente
-            halten wir unsere Datenlieferanten an, die Anforderungen zur Barrierefreiheit zu
-            beachten.
-          </dd>
-          
-          <dt>Im Webauftritt enthaltene Informationen in Gebärdensprache und
-            in leichter Sprache</dt>
-          <dd class="ml-4">
-            Wir streben an, eine möglichst einfache Sprache zu benutzen. Auf Grund der
-            komplexen Inhalte, die zumindest teilweise in unseren Webauftritten
-            veröffentlicht werden, ist eine einfache Sprachgestaltung (beispielsweise
-            der Verzicht auf Fachbegriffe) nicht immer möglich.
-          </dd>
+<p>Über folgenden Kontakt können Sie Mängel in Bezug auf die Einhaltung der Barrierefreiheitsanforderungen mitteilen und Informationen zu den Inhalten anfordern, die von der Richtlinie ausgenommen sind:</p>
 
-          <dt>Im Webauftritt eingebundene Videos</dt>
-          <dd class="ml-4">Die Bereitstellung der Videos mit einer Audiodeskription konnte bislang
-              nicht realisiert werden.</dd>
-          
-          <dt>Alternativtexte (1.1.1 a-c )</dt>
-          <dd class="ml-4">An einigen Stellen fehlen die Alternativtexte. Bei einem nächsten Update werden diese ergänzt werden.</dd>
-          
-          <dt>HTML-Strukurelemente (1.3.1 a-f )</dt>
-          <dd class="ml-4">Einige HTML-Strukurelemente sind nur teilweise barrierefrei, da die entsprechenden Bootstrap-Klassen fehlen.
-            Eine Überarbeitung ist in Arbeit.</dd>
-          
-          <dt>Eingabefelder zu Nutzerdaten vermitteln den Zweck (1.3.5a)</dt>
-          <dd class="ml-4">Formulare nutzen keine Autovervollständigung. Bei Formularen fehlen die „autocomplete“-Attribute, was das Ausfüllen der Formulare erschwert.
-            Bei einem Update soll die Funktionalität künftig ergänzt werden.</dd>
-          
-          <dt>Kontraste von Texten ausreichend (1.4.3)</dt>
-          <dd class="ml-4">Da das grundsätzliche Layout der Webseite vor dem Erscheinen der Richtlinie (EU) 2016/2102 erstellt wurde, ist das Kontrastverhältnis von 4,5:1 nicht grundsätzlich sichergestellt.
-            An einer Lösung wird gearbeitet.</dd>
-          
-          <dt>Aktuelle Position des Fokus deutlich (2.4.7a)</dt>
-          <dd class="ml-4">Der Fokus ist bei der Bedienung mit der Tastatur nicht immer erkennbar.
-            Die Anpassung des Fokus-Managements erfolgt bei der nächsten grundlegenden Überarbeitung der Website.</dd>
-          
-          <dt>Fehlererkennung (3.3.1a)</dt>
-          <dd class="ml-4">Angaben in Formularen werden vor dem Abschicken nicht automatisch überprüft. 
-            Bei der nächsten grundlegenden Überarbeitung der Website soll die Funktionalität künftig ergänzt werden.</dd>
-          
-          <dt>Statusmeldungen programmatisch verfügbar (4.1.3a)</dt>
-          <dd class="ml-4">Es erfolgt weder visuell noch im Screenreader ein Hinweis das, das Dokument auf die Merkliste gesetzt wurde.
-            Die entsprechende "Role" wird im Rahmen eines Updates ergänzt.</dd>
-        </dl>
-        <p>Die identifizierten technischen Defizite und Mängel befinden sich aktuell in einem kontinuierlichen Verbesserungsprozess,
-          der sukzessive abgearbeitet wird.</p>
-      </div>
-    </div>
+<p class="border-left pl-5">Technische Universität Braunschweig<br />
+Universitätsbibliothek<br />
+Universitätsplatz 1<br />
+Telefon: 0531/391 5018<br />
+E-Mail: <a href="mailto:digibib@tu-braunschweig.de?subject=Anfrage%20zur%20Barrierefreiheit">digibib@tu-braunschweig.de</a></p>
+</div>
+</div>
 
+<div class="row mt-3">
+<div class="col-12">
+<h3>Schlichtungsverfahren</h3>
 
-    <div class="row mt-3">
-      <div class="col-12">
-        <h3> Erstellung dieser Erklärung zur Barrierefreiheit </h3>
+<p>Sollten Sie auf Mitteilungen oder Anfragen zur Barrierefreiheit innerhalb von sechs Wochen keine zufriedenstellende Antwort erhalten haben, können Sie die Landesbauftragte für Menschen mit Behinderungen in Niedersachsen einschalten.</p>
 
-        <p>
-          Diese Erklärung wurde am 31.08.2020 erstellt und am 17.09.2020 zuletzt aktualisiert.
-          Die Einschätzung basiert auf einer Selbstbewertung.</p>
-      </div>
-    </div>
-
-
-    
-    <div class="row mt-3">
-      <div class="col-12">
-        <h3> Feedback und Kontaktangaben </h3>
-
-        <p>Über folgenden Kontakt können Sie Mängel in Bezug auf die Einhaltung der
-          Barrierefreiheitsanforderungen mitteilen und Informationen zu den Inhalten
-          anfordern, die von der Richtlinie ausgenommen sind:</p>
-
-        <p class="border-left pl-5">
-          Technische Universität Braunschweig<br/>
-          Universitätsbibliothek<br/>
-          Universitätsplatz 1<br/>
-          Telefon: 0531/391 5018<br/>
-          E-Mail: <a href="mailto:digibib@tu-braunschweig.de?subject=Anfrage%20zur%20Barrierefreiheit">digibib@tu-braunschweig.de</a>
-        </p>
-      </div>
-    </div>
-
-
-    
-    <div class="row mt-3">
-      <div class="col-12">
-        <h3> Schlichtungsverfahren </h3>
-
-        <p>Sollten Sie auf Mitteilungen oder Anfragen zur Barrierefreiheit innerhalb von
-          sechs Wochen keine zufriedenstellende Antwort erhalten haben, können Sie die
-          Landesbauftragte für Menschen mit Behinderungen in Niedersachsen
-          einschalten.</p>
-
-        <p class="border-left pl-5">
-          <strong>Landesbeauftragte für Menschen mit Behinderungen</strong><br/>
-          Hannah-Arendt-Platz 2<br/>
-          30159 Hannover<br/>
-          Telefon: 0511/120-4010<br/>
-          Fax: 0511/120-99 4010<br/>
-          E-Mail: <a href="mailto:schlichtungsstelle@ms.niedersachsen.de">schlichtungsstelle@ms.niedersachsen.de</a>
-        </p>
-      </div>
-    </div>
-  </section>
-  <meta>
-    <log lastEditor="celsner" date="2020-09-03" time="11:24"/>
-  </meta>
-</MyCoReWebPage>
+<p class="border-left pl-5"><strong>Landesbeauftragte für Menschen mit Behinderungen</strong><br />
+Hannah-Arendt-Platz 2<br />
+30159 Hannover<br />
+Telefon: 0511/120-4010<br />
+Fax: 0511/120-99 4010<br />
+E-Mail: <a href="mailto:schlichtungsstelle@ms.niedersachsen.de">schlichtungsstelle@ms.niedersachsen.de</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2020-11-20" time="11:49" /></meta></MyCoReWebPage>

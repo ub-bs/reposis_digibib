@@ -205,8 +205,8 @@
             <label xml:lang="en">My submitted documents</label>
         </item>
         <item href="/content/publish/authors_area.xml" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Hinweise für Autor/-innen</label>
-            <label xml:lang="en">Hints for Authors</label>
+            <label xml:lang="de">Hinweise für Autorinnen und Autoren</label>
+            <label xml:lang="en">Notes for Authors</label>
         </item>
         <item href="/content/publish/contract.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Vertragsbedingungen</label>

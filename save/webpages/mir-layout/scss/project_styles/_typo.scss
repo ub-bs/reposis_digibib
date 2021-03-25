@@ -30,9 +30,6 @@
   .jumbotwo h1 {
     font-size: 36px;
   }
-  .fa {
-    font: normal normal normal 14px/1 FontAwesome;
-   }
 
 // Large devices (desktops) and below: <= 1200px
 @include media-breakpoint-down(lg) {

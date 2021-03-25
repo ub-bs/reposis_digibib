@@ -1,68 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage><section xml:lang="de" title="Hinweise für Autoren"><div>
-<h2>Hinweise für Autor/innen</h2>
+<h2 class="moz-quote-pre">Hinweise für Autorinnen und Autoren</h2>
 
-<div class="row">
-<div class="col-md-12">
-<p>E-Publikationen können von <em>Wissenschaftler/innen der TU Braunschweig</em> (auch Gastwissenschaftler/innen) kostenlos veröffentlicht werden. Die Speicherung, Katalogisierung und Langzeitarchivierung elektronischer Dokumente gehört zum Auftrag der Universitätsbibliothek. Die Publikationen werden unter Wahrung des <a href="http://www.gesetze-im-internet.de/urhg/index.html">geltenden deutschen Urheberrechts</a> veröffentlicht, das bei den Autorinnen/Autoren verbleibt.</p>
+<h3 class="moz-quote-pre">1. Publizieren <span style="color: rgb(255,153,0);"> </span>für Wissenschaftlerinnen und Wissenschaftler der TU Braunschweig</h3>
 
-<p>Beachten Sie, gegebenenfalls das Einverständnis von Co-Autor/innen einzuholen. Die Einhaltung von Urheber- und Verwertungsrechten Dritter liegt in der Verantwortung der Autor/innen der elektronischen Dokumente.</p>
+<p>Als Wissenschaftlerin bzw. Wissenschaftler der TU Braunschweig können Sie Ihre elektronischen Publikationen (Aufsätze aus Zeitschriften und Büchern, Tagungsbände, Forschungsberichte, Dissertationen, etc.) kostenlos und zeitlich unbegrenzt auf dem Publikationsserver der TU Braunschweig, Open Access veröffentlichen.</p>
 
-<p><strong>Bitte beachten Sie unsere <a href="contract.xml">Vertragsbedingungen</a> sowie die <a href="policy.xml">Publikationsleitlinie</a> der Digitalen Bibliothek!</strong></p>
-Die Universitätsbibliothek behält sich das Recht vor, eine Veröffentlichung von der Erfüllung der technischen und inhaltlichen Voraussetzungen abhängig zu machen.
+<p>Es gibt zwei Möglichkeiten zur Veröffentlichung:</p>
 
-<p>Wir benötigen von Ihnen die schriftliche Einwilligung, damit Ihre Publikation über die Digitale Bibliothek Braunschweig veröffentlicht und im Internet zur Verfügung gestellt werden kann.</p>
+<ul>
+	<li><strong>Erstveröffentlichung</strong>: ist die Veröffentlichung einer Publikation, die bisher nirgendwo anders erschienen ist.</li>
+	<li><strong>Zweitveröffentlichung</strong>: ist die Veröffentlichung einer bereits erschienenen Verlagspublikation. Viele Zeitschriftenverlage gestatten eine weitere Veröffentlichung auf einem institutionellen Repositorium unter bestimmen Bedingungen (z. B. nach einer definierten Embargofrist, Veröffentlichung von Preprints, Postprints). Mit Hilfe der <a class="external-link" href="http://www.sherpa.ac.uk/romeo/index.php" rel="nofollow" target="_blank">SHERPA/RoMEO-Liste</a> können Sie herausfinden, welche Bedingungen die einzelnen Zeitschriften stellen. Die Universitätsbibliothek unterstützt Sie gern dabei, Ihre Publikation auf eine mögliche Zweitveröffentlichung hin zu prüfen.</li>
+</ul>
 
-<p>Bitte drucken Sie für eine Publikation folgendes <a href="deposit-single.pdf">Formular 1 (PDF)</a> oder für mehrere Publikationen folgendes <a href="deposit-multiple.pdf">Formular 2 (PDF)</a> aus und senden Sie es unterschrieben an:</p>
+<p>Für die elektronische Veröffentlichung von <strong>Dissertationen</strong> ist die Dissertationsstelle zuständig. Ausführliche Informationen erhalten Sie auf deren <a class="external-link" href="https://www.tu-braunschweig.de/ub/publizieren-und-open-access/dissertationsstelle" rel="nofollow" target="_blank">Webseite</a>.</p>
 
-<address>Technische Universität Braunschweig<br />
-Universitätsbibliothek<br />
-Digitale Bibliothek und Publikationsservices<br />
-Universitätsplatz 1<br />
-38106 Braunschweig</address>
+<p>Ihre Publikationen werden unter Wahrung des <a class="external-link" href="http://www.gesetze-im-internet.de/urhg/index.html" rel="nofollow" target="_blank">geltenden deutschen Urheberrechts</a> veröffentlicht, d.h. das Urheberrecht verbleibt bei Ihnen. Sie übertragen lediglich der Universitätsbibliothek Braunschweig das einfache, zeitlich unbefristete Nutzungsrecht, die eingereichten Publikationen auf ihren Servern zu vervielfältigen, zu speichern, öffentlich zugänglich zu machen<span style="color: rgb(0,51,102);">.</span> Bitte beachten Sie, dass Sie ggf. das Einverständnis zur Veröffentlichung von Co-Autorinnen bzw. Co-Autoren einzuholen müssen. Die Einhaltung von Urheber- und Verwertungsrechten Dritter liegt in Ihrer Verantwortung.</p>
 
-<address>Fax: 0531 391 5836</address>
+<p>Ihre Publikation erhält einen persistenten Identifier (DOI, URN), wird langzeitarchiviert und kann mit Ihrem ORCiD-Account verknüpft werden. Die Metadaten<span style="color: rgb(0,0,0);"> werden in gängigen Bibliothekskatalogen indexiert und regelmäßig von Suchmaschinen geharvestet </span>(z.B. Deutsche Nationalbibliothek, BASE, GoogleScholar, OpenAire).<span style="color: rgb(0,0,0);"> Der Publikationsserver ist OpenAire3.0-kompatibel und erfüllt damit die Voraussetzungen für eine Horizon2020-geförderte Publikation.</span></p>
 
-<address>
-<p>Um ein Dokument an die UB zu übermitteln steht Ihnen unser <a href="../../editor/submit_request.xed">Web-Formular</a> zur Verfügung.</p>
+<h3>2. <span class="inline-comment-marker valid" data-ref="8677e5dd-d6a3-4090-bad1-9aeb63077ff3">Publizieren</span> und Archivieren von Forschungsdaten</h3>
 
-<p>Alternativ können Sie uns Ihre Publikation, so wie Sie sie veröffentlicht haben wollen, per <a href="mailto:digibib@tu-braunschweig.de">E-Mail</a> an digibib@tu-braunschweig.de (bis 50MB) oder auf einem geeigneten Datenträger zusenden.<br />
-Die Freischaltung der Publikation dauert ca. 1 Woche.</p>
+<p>Als Wissenschaftlerin bzw. Wissenschaftler der TU Braunschweig können Sie Ihre Forschungsdaten auf dem Publikationsserver der TU Braunschweig publizieren und archivieren. Beim Publizieren erhält Ihr veröffentlichter Datensatz einen persistenten Identifier (DOI, URN), wird archiviert (derzeit lediglich Bitstream Preservation) und kann mit Ihrem ORCiD-Account verknüpft werden. Veröffentlichte Datensätze können frei oder eingeschränkt zugänglich gemacht werden.</p>
 
-<hr /></address>
+<h3>3. Voraussetzungen und Empfehlungen</h3>
 
-<p>Bitte beachten Sie bei Ihrer Publikation die Anforderungen zur Barrierefreiheit gemäß Paragraph 3 Absatz 1 bis 4 und Paragraph 4 der Barrierefreien-Informationstechnik-Verordnung (BITV 2.0), die auf Grundlage von § 12d Behindertengleichstellungsgesetz (BGG) erlassen wurden.  Weiterführende Informationen stehen Ihnen unter <a href="https://www.bitvtest.de/start.html">https://www.bitvtest.de/start.html</a> (28.08.2020) zur Verfügung. </p>
+<ul>
+	<li class="moz-quote-pre"><span style="color: rgb(0,0,0);"><strong>Zugehörigkeit</strong>: Sie sind Mitglied oder Angehörige bzw. Angehöriger der TU Braunschweig oder publizieren mit Bezug zur Forschungsregion Braunschweig.</span></li>
+	<li class="moz-quote-pre"><span style="color: rgb(0,0,0);"><strong>Wahrung des Urheberrechts:</strong> Sie müssen sicher stellen, dass Sie über die Urheberrechte des Werkes verfügen bzw. bei einer Co-Autorenschaft das Einverständnis zur Veröffentlichung durch Ihre Co-Autorinnen bzw. Co-Autoren vorliegen haben. </span></li>
+	<li><strong><span style="color: rgb(0,0,0);text-decoration: none;">Zustimmung zu den Vertragsbedingu</span><span style="text-decoration: none;">ngen: </span></strong><span>Sie müssen unseren </span><a class="external-link" href="https://publikationsserver.tu-braunschweig.de/content/publish/contract.xml" rel="nofollow" target="_blank">Vertragsbedingungen</a><span> zur Veröffentlichung Ihrer Dokumente in der Digitalen Bibliothek zustimmen. Dies geschieht durch Ihre Unterschrift auf dem Antragsformular (siehe Punkt "3. Vorgehensweise", Schritt 1)   </span></li>
+	<li class="moz-quote-pre"><span style="color: rgb(0,0,0);"><span><strong>technische Formate:</strong> </span></span><span style="text-decoration: none;color: rgb(0,0,0);">Sie haben die Möglichkeit, jegliche Dokumenttypen (Text, Grafik, Audio- oder Videosequenze</span><span style="text-decoration: none;">n, Forschungsdaten, et</span><span style="color: rgb(0,0,0);text-decoration: none;"><span style="color: rgb(0,51,102);">c.</span>) zu veröffentlichen</span><span style="text-decoration: none;">. Die Dokumente dürfen nicht zugriffsbeschränkt sein. Die Digitale Bibliothek u</span><span style="color: rgb(0,0,0);text-decoration: none;">nterstützt alle Dateiformate, empfiehlt jedoch die Nutzung offener Formate (z. B. PDF/A, TeX, XML), die zur Langzeitarchivierung geeignet sind und über frei zugängliche Darstellungsprogramme angezeigt werden können. Ergänzend kann auch das Originalformat des Dokuments archiviert werden.<span style="color: rgb(255,0,0);"> </span></span></li>
+	<li class="moz-quote-pre"><span style="color: rgb(0,0,0);text-decoration: none;"><strong>Barrierefreiheit</strong>: </span><span style="color: rgb(0,0,0);text-decoration: none;">Beachten Sie bei Ihrer Publikation die Anforderungen zur Barrierefreiheit gemäß Paragraph 3 Absatz 1 bis 4 und Paragraph 4 der Barrierefreien-Informationstechnik-Verordnung (BITV 2.0), die auf Grundlage von § 12d Behindertengleichstellungsgesetz (BGG) erlassen </span><span style="color:#000000;"><span style="text-decoration: none;">wurden. </span></span></li>
+	<li class="moz-quote-pre"><span style="color:#000000;"><strong>Forschungsdaten: </strong>Achten Sie bei einer Archivierung bzw. Publikation Ihrer Forschungsdaten auf die Nachvollziehbarkeit Ihres Datensatzes<span class="inline-comment-marker valid" data-ref="07eba22e-99e0-416e-8091-27cb5553af68">.</span> Zudem sollte Ihrem Datensatz eine README-Datei mit beschreibenden Metadaten beiliegen.</span></li>
+</ul>
 
-<hr />
-<p>Bei einer Zweitveröffentlichung ist zu ermitteln, ob und unter welchen Bedingungen diese zulässig ist. Sehr viele  Zeitschriftenverlage gestatten der Autorin/dem Autor, eigene Aufsätze vorab als Preprint oder (parallel zur Erstveröffentlichung bzw. nach einer definierten Embargofrist) als Postprint auf einem Archivierungsserver der Hochschule ("institutional repository") frei zugänglich zu veröffentlichen.</p>
+<h3 class="moz-quote-pre">4. Vorgehensweise</h3>
 
-<p>Um festzustellen, welche Verlage und Zeitschriften den Autorinnen/Autoren dieses Recht einräumen, finden Sie Einzelheiten und Hilfestellung in der <a href="http://www.sherpa.ac.uk/romeo/index.php">SHERPA/RoMEO-Liste</a>.</p>
+<p><strong>Schritt 1: </strong>Bitte füllen Sie</p>
 
-<p>Die Universitätsbibliothek unterstützt Sie gern dabei, Ihre Veröffentlichungen anhand der SHERPA/RoMEO-Liste zu prüfen. Sind dort keine Angaben zu finden, müssten Ihre Autorenverträge herangezogen werden, da die Vereinbarungen zwischen Verlag und den Autor/innen sehr unterschiedlich geregelt sein können.</p>
- 
+<ul>
+	<li><span style="color:#000000;">das Antragsformular <a href="/content/publish/deposit-single.pdf"><span class="inline-comment-marker" data-ref="91ef21fd-31f3-4306-a7ec-376a1cd69d7c">"deposit_single"</span></a> aus, wenn Sie <strong>eine</strong> Publikation einreichen w</span>ollen, oder:</li>
+	<li>das Antragsformular <a href="https://publikationsserver.tu-braunschweig.de/content/publish/deposit-multiple.pdf" target="_blank">"deposit_multiple</a>" aus, wenn Sie <strong>mehrere </strong>Publikationen einreichen wollen</li>
+</ul>
 
-<p>Hilfestellung bei der Publikation, zum Beispiel der Aufbereitung Ihrer Dokumente im PDF-Format, sowie zur Zweitveröffentlichung, erhalten Sie unter:</p>
+<p>Auf dem Formular vergeben Sie eine Lizenz für die Nutzungsrechte. Wir empfehlen die Anwendung der Creative Commons-Lizenz CC-BY. Nähere Informationen zur Lizenzauswahl finden Sie <a class="external-link" href="https://creativecommons.org/choose/" rel="nofollow" target="_blank">hier</a>.</p>
 
-<address>Digitale Bibliothek und Publikationsservices<br />
-E-Mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a><br />
-Telefon: 0531 391 5052</address>
+<p>Sie akzeptieren die Vertragsbedingungen mit Ihrer Unterschrift auf der letzten Seite.</p>
 
-<p>Hilfestellung bei der Publikation und Archivierung von Forschungsdaten, z.B. bei der Dokumentation, der Verwendung von Metadaten-Standards und Datenformaten, erhalten Sie bei:</p>
+<p>Das unterschriebene Formular senden Sie bitte per <strong>E-Mail</strong> an <a class="external-link" href="mailto:digibib@tu-braunschweig.de" rel="nofollow" target="_blank">digibib@tu-braunschweig.de</a>, oder im Falle von Forschungsdaten an <a class="external-link" href="mailto:forschungsdaten@tu-braunschweig.de" rel="nofollow" target="_blank">forschungsdaten@tu-braunschweig.de</a>, per <strong>Fax: </strong>0531 391 5836, oder <strong>(Haus-)Post</strong> an die Universitätsbibliothek.</p>
 
-<address>Forschungsdaten<br />
-E-Mail: <a href="mailto:digibib@tu-braunschweig.de">forschungsdaten@tu-braunschweig.de</a><br />
-Telefon: 0531 391 5019</address>
+<p><strong>Schritt 2: </strong>Sie haben verschiedene Möglichkeiten, das einzureichende Dokument an die Universitätsbibliothek zu übermitteln:</p>
 
-<address>
-<hr /></address>
+<p><strong>Publikationen</strong></p>
+
+<ul>
+	<li>per <a href="https://publikationsserver.tu-braunschweig.de/editor/submit_request.xed" target="_blank">Webformular</a>,</li>
+	<li>per E-Mail an <a class="external-link" href="mailto:digibib@tu-braunschweig.de" rel="nofollow" target="_blank">digibib@tu-braunschweig.de</a> (Dateigröße max. 50 MB),</li>
+	<li>oder auf einem geeigneten Datenträger, den Sie uns per (Haus-)Post zusenden.</li>
+</ul>
+
+<p><strong>Forschungsdaten</strong></p>
+
+<ul>
+	<li>per E-Mail an <a class="external-link" href="mailto:forschungsdaten@tu-braunschweig.de" rel="nofollow" target="_blank">forschungsdaten@tu-braunschweig.de</a> </li>
+</ul>
+
+<p><strong>Schritt 3: </strong>Wir prüfen formal Ihr eingereichtes Dokument bzw. ihre eingereichten Daten und veröffentlichen bzw. archivieren diese auf dem Publikationsserver. Sie erhalten innerhalb einer Woche eine Rückmeldung per E-Mail.</p>
+
+<h3>5. Kontakt</h3>
+
+<p>Wir unterstützen Sie gern bei Ihren <strong>Erst- und Zweitveröffentlichungen</strong>, bei Fragen wenden Sie sich an:</p>
+
+<p><span style="color: rgb(0,0,0);">Referat </span>Digitale Bibliothek und Publikationsservices</p>
+
+<p><span style="color: rgb(0,0,0);"><span class="inline-comment-marker" data-ref="655a4f90-3824-4c47-8f7f-cff1efee22f4">Frau Blanck / Herr Kissler</span></span><br />
+E-Mail: <a class="external-link" href="mailto:digibib@tu-braunschweig.de" rel="nofollow" target="_blank">digibib@tu-braunschweig.de</a> <br />
+Telefon: +49 (0)531 391 5052</p>
+
+<p> </p>
+
+<p>Bei Fragen zum Publizieren und Archivieren von <strong>Forschungsdaten</strong>, wenden Sie sich bitte an:</p>
+
+<p><span style="color: rgb(0,0,0);">Referat Forschungsnahe Dienstleistungen</span></p>
+
+<p><span style="color: rgb(0,0,0);">Frau Dr. Grunwald-Eckhardt</span><br />
+E-Mail: <a class="external-link" href="mailto:forschungsdaten@tu-braunschweig.de" rel="nofollow" target="_blank">forschungsdaten@tu-braunschweig.de</a> <br />
+Telefon: +49 (0)531 391 5019</p>
+
+<p> </p>
+
+<p><span style="color: rgb(0,0,0);">Bei Fragen zur Veröffentlichung von <strong>Dissertationen</strong> wenden Sie sich bitte an: </span></p>
+<span style="color: rgb(0,0,0);">Dissertationstelle</span>
+
+<p><span style="color: rgb(0,0,0);">Frau Globisch</span><br />
+E-Mail: <a class="external-link" href="mailto:ub-diss@tu-braunschweig.de " rel="nofollow" target="_blank">ub-diss@tu-braunschweig.de</a><br />
+Telefon: +49 (0)531 391 5024 (Mo-Fr 9-12 Uhr)</p>
+
+<p><br />
+ </p>
 </div>
-</div>
+</section><section xml:lang="en" title="Notes for authors">You have various options for submitting the document to Braunschweig University Library:
+<div>
+<h2>Notes for authors</h2>
 
-<div class="row">
-<div class="col-md-12">
-<p><strong>Dissertationen:</strong><br />
-Ausführliche Hinweise zur elektronischen Veröffentlichung von Dissertationen finden Sie auf den Webseiten der <a href="https://www.tu-braunschweig.de/ub/publizieren-und-open-access/dissertationsstelle">Dissertationsstelle</a>.</p>
+<h3>1 Publishing for scientists of TU Braunschweig </h3>
+
+<p>As a scientist of TU Braunschweig, you can publish your electronic publications (articles from journals and books, conference proceedings, research reports, dissertations, etc.) Open Access, free of charge and for an unlimited period of time in the Digital Library, the institutional repository of TU Braunschweig.</p>
+
+<p>There are two ways to publish:</p>
+
+<ul>
+	<li><strong>Primary publication:</strong> publishing a publication that has not been published anywhere else before.</li>
+	<li><strong>Self archiving:</strong> publishing a publication that has already been published by a publisher. Many journal publishers allow a further release on an institutional repository under certain conditions (e.g. after a defined embargo period, release of preprints, postprints). You can use the <a class="external-link" href="https://v2.sherpa.ac.uk/romeo/" rel="nofollow" target="_blank">SHERPA/RoMEO list</a> to find out what conditions each journal requires. The University Libraryoffers you support in checking your publication for a possible further release.</li>
+</ul>
+
+<p>The Thesis Office is responsible for the electronic release of dissertations and habilitations. Detailed information is available on <a class="external-link" href="https://www.tu-braunschweig.de/en/ub/publishing-and-open-access/thesis-office" rel="nofollow" target="_blank">their website</a>.</p>
+
+<p>Your publications will be published in compliance with the applicable <a class="external-link" href="http://www.gesetze-im-internet.de/urhg/index.html" rel="nofollow" target="_blank">German copyright law</a>, which means that the copyright remains with you. You only transfer the simple, unlimited right of use to Braunschweig University Library to reproduce, store, make the submitted publication publicly accessible on its servers. Please note that you may need to obtain the consent of co-authors for publishing. It is your responsibility to fulfill the copyright and exploitation rights of third parties.</p>
+
+<p>Your publication will be given a persistent identifier (DOI, URN), will be long-term archived and can be linked to your ORCiD account. The metadata is indexed in common library catalogs and regularly harvested by search engines (e.g. German National Library, BASE, GoogleScholar, OpenAire). The publication server is OpenAire3.0 compatible and fulfills the requirements for a Horizon2020-funded publication.</p>
+
+<h3>2 Archiving and publishing of research data</h3>
+
+<p>As a researcher of TU Braunschweig you can archive and publish your research data on the official repository of TU Braunschweig. Your published dataset receives a persistent identifier (DOI, URN), is archived (currently only bitstream preservation) and can be linked to your ORCiD account. Published datasets can be provided open access or with restricted access.</p>
+
+<h3>3 Requirements</h3>
+
+<ul>
+	<li><strong>Affiliation:</strong> You are a member of TU Braunschweig or you publish work is related to the research region Braunschweig.</li>
+	<li><strong>Preservation of copyright:</strong> You need to have the copyright of the publication or, in case of co-authorship, you need to have the permission for publishing by your co-authors. </li>
+	<li><strong>Consent to the terms of the contract:</strong> You need to agree to our terms of contract (<a class="external-link" href="https://publikationsserver.tu-braunschweig.de/content/publish/contract.xml" rel="nofollow" target="_blank">in German only</a>) for publishing your documents in the Digital Library. This is done by signing the application form (see "3. Procedure", step 1).  </li>
+	<li><strong>Technical formats:</strong> You can publish any type of document (text, graphics, audio or video sequences, research data, etc.). The documents are not allowed to have any access restrictions. The Digital Library supports all file formats, but recommends the use of open formats (e.g. PDF/A, TeX, XML) that are suitable for long-term archiving and can be displayed by freely accessible viewing programs. In addition, the original format of the document can also be archived.</li>
+	<li><strong>Accessibility:</strong> Please note the accessibility requirements for your publication according to section 3 paragraph 1 to 4 and section 4 of the Barrier-Free Information Technology Ordinance (BITV 2.0), which were issued on the basis of section 12d of the Disability Equality Act (BGG). </li>
+	<li><strong>Research data:</strong> When archiving or publishing your research data, please make sure that the folder structure and file naming are comprehensible. In addition, your data set should include a README file with descriptive metadata.</li>
+</ul>
+
+<h3>4 Procedure of Submitting</h3>
+
+<p><strong>Step 1: </strong>Please fill in</p>
+
+<ul>
+	<li>the application form<a href="https://publikationsserver.tu-braunschweig.de/content/publish/deposit-single.pdf" target="_blank"> "deposit_single"</a> if you wish to submit <strong>one publication</strong>, or:</li>
+	<li>the application form <a href="https://publikationsserver.tu-braunschweig.de/content/publish/deposit-multiple.pdf" target="_blank">"deposit_multiple"</a> if you wish to submit <strong>several publications</strong>, or:</li>
+</ul>
+
+<p>On the form you choose a licence for the rights of use. We recommend using the Creative Commons licence CC-BY. You can find more information on the licence selection <a class="external-link" href="https://creativecommons.org/choose/" rel="nofollow" target="_blank">here</a>.</p>
+
+<p>You accept the terms of contract with your signature on the last page.</p>
+
+<p>Please send the signed form by e-mail: <a href="mailto:digibib@tu-braunschweig.de">digibib@tu-braunschweig.de</a>, fax: 0531 391 5836, or (in-house)post to the University Library.</p>
+<strong>Step 2: </strong>
+
+<ul>
+	<li>    via <a href="https://publikationsserver.tu-braunschweig.de/editor/submit_request.xed" target="_blank">web form</a>,</li>
+	<li>    by e-mail to <a class="external-link" href="mailto:digibib@tu-braunschweig.de" rel="nofollow" target="_blank">digibib@tu-braunschweig.de</a> or to <a class="external-link" href="mailto:forschungsdaten@tu-braunschweig.de" rel="nofollow" target="_blank">forschungsdaten@tu-braunschweig.de</a> for research data (file size max. 50 MB),</li>
+	<li>    or on a suitable storage medium, which you send to us by (in-house) post.</li>
+</ul>
+
+<p><strong>Step 3: </strong>We check your submitted document and upload it to the publication server. You will receive a response by e-mail within one week.</p>
+
+<h3>5 Contact</h3>
+
+<p>We support you with your <strong>primary and self archiving publications</strong>. If you have any questions, please contact:</p>
+
+<p><span style="color: rgb(0,0,0);">Referat </span>Digitale Bibliothek und Publikationsservices</p>
+
+<p>Frau Blanck / Herr Kissler<br />
+E-mail: <a class="external-link" href="mailto:digibib@tu-braunschweig.de" rel="nofollow" target="_blank">digibib@tu-braunschweig.de</a> <br />
+Phone: +49 (0)531 391 5052</p>
+
+<p><br />
+For questions about publishing and archiving<strong> research data</strong>, please contact:</p>
+
+<p><span style="color: rgb(0,0,0);">Referat Forschungsnahe Dienstleistungen</span></p>
+
+<p>Frau Dr. Grunwald-Eckhardt<br />
+E-mail: <a class="external-link" href="mailto:forschungsdaten@tu-braunschweig.de" rel="nofollow" target="_blank">forschungsdaten@tu-braunschweig.de</a> <br />
+Phone: +49 (0)531 391 5019</p>
+
+<p> </p>
+
+<p>For questions regarding the publication of <strong>dissertations</strong>, please contact<span style="color: rgb(0,0,0);">: </span></p>
+<span style="color: rgb(0,0,0);">Dissertationstelle</span>
+
+<p><span style="color: rgb(0,0,0);">Frau Globisch</span><br />
+E-Mail: <a class="external-link" href="mailto:ub-diss@tu-braunschweig.de " rel="nofollow" target="_blank">ub-diss@tu-braunschweig.de</a><br />
+Phone: +49 (0)531 391 5024 (Mo-Fr 9-12 Uhr)</p>
 </div>
-</div>
-</div>
-</section><meta><log lastEditor="celsner" date="2020-08-28" time="14:46" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="celsner" date="2021-03-22" time="09:37" /></meta></MyCoReWebPage>
