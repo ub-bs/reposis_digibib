@@ -1,6 +1,9 @@
 # MyCoRe files
 data/
 lib/h2-1.4.196.jar
+lib/dfn-display-name-converter-2018.06.0.4-SNAPSHOT.jar
+lib/fixsvn-module.jar
+lib/pi-tester.jar
 
 # eclipse
 .project
@@ -13,4 +16,6 @@ messages_en.resolved.properties
 mycore.active.properties
 mycore.properties
 mycore.resolved.properties
+MCRWebCLI-unprocessed-commands.txt
+deprecated.active.properties
 resources/META-INF/persistence.xml
