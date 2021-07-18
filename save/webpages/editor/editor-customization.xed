@@ -53,11 +53,11 @@
     <xed:remove ref="shelfmark" />
     <xed:remove ref="genres.thesis.common" />
     <xed:include ref="digibib.thesis.advisor.repeated"   after="titles.thesis" />
-    <xed:include ref="publisher"                         after="digibib.thesis.advisor.repeated" />
+    <xed:include ref="publisher"                         after="date.accepted.datetimepicker" />
     <xed:include ref="extent"                            after="publisher" />
     <xed:include ref="language"                          after="extent" />
-    <xed:include ref="rights"                            after="language" />
-    <xed:include ref="institutes"                        after="rights" />
+    <xed:include ref="digibib.rights.ccby40"             after="language" />
+    <xed:include ref="institutes"                        after="digibib.rights.ccby40" />
     <xed:include ref="digibib.abstract.repeated"         after="institutes" />
   </xed:modify>
 
@@ -232,14 +232,16 @@
       <legend class="mir-fieldset-legend">
         <xed:output i18n="mir.abstract.text" />
       </legend>
-      <xed:repeat xpath="mods:abstract" min="2" max="3">
+      <xed:bind xpath="mods:abstract[@xml:lang='de']" />
+      <xed:bind xpath="mods:abstract[@xml:lang='en']" />
+      <xed:repeat xpath="mods:abstract" min="2" max="5">
         <div class="mir-fieldset-content">
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-right">
               <xed:output i18n="mir.abstract.in" />
             </label>
             <div class="col-md-6">
-              <xed:bind xpath="@xml:lang" initially="de">
+              <xed:bind xpath="@xml:lang">
                 <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="lang.list" />
               </xed:bind>
             </div>
@@ -324,13 +326,33 @@
       help-text="{i18n:mir.help.identifier.issn}" />
   </xed:template>
 
-<xed:template id="digibib.thesis.advisor.repeated">
+  <xed:template id="digibib.thesis.advisor.repeated">
     <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='aut']" />
     <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='ths']" />
-    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='ths']" />
+    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='ths'][2]" />
     <mir:person.repeated help-text="{i18n:mir.help.thesis.advisor.reviewer}">
       <xed:include uri="xslStyle:items2options:classification:editor:-1:children:marcrelator" />
     </mir:person.repeated>
+  </xed:template>
+
+  <xed:template id="digibib.rights.ccby40">
+    <xed:bind xpath="mods:accessCondition[@type='use and reproduction']" initially="cc_by_4.0">
+      <div class="form-group row required {$xed-validation-marker}">
+        <label class="col-md-3 col-form-label text-right">
+          <xed:output i18n="mir.rights" />
+          :
+        </label>
+        <div class="col-md-6">
+          <select class="form-control form-control-inline">
+            <option value="">
+              <xed:output i18n="mir.select" />
+            </option>
+            <xed:include uri="xslStyle:items2options:classification:editor:-1:children:mir_licenses" />
+          </select>
+        </div>
+        <mir:help-pmud help-text="{i18n:mir.help.rights}" />
+      </div>
+    </xed:bind>
   </xed:template>
 
 
