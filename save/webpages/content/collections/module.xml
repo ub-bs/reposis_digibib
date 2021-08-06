@@ -23,7 +23,7 @@
                 <div class="card-body">
                   <div class="solrsearch"
                        data-classes=""
-                       data-parameters="objectType%3Amods%20AND%20mods.genre%3Ain_house%20AND%20mods.title%3AModulhandbuch%20AND%20category.top%3A%22mir_institutes%3AFaculty_c_01%22" />
+                       data-parameters="q=objectType%3Amods%20AND%20mods.genre%3Ain_house%20AND%20mods.title%3AModulhandbuch%20AND%20category.top%3A%22mir_institutes%3AFaculty_c_01%22" />
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
                 <div class="card-body">
                   <div class="solrsearch"
                        data-classes=""
-                       data-parameters="objectType%3Amods%20AND%20mods.genre%3Ain_house%20AND%20mods.title%3AModulhandbuch%20AND%20category.top%3A%22mir_institutes%3AFaculty_c_02%22" />
+                       data-parameters="q=objectType%3Amods%20AND%20mods.genre%3Ain_house%20AND%20mods.title%3AModulhandbuch%20AND%20category.top%3A%22mir_institutes%3AFaculty_c_02%22" />
                 </div>
               </div>
             </div>
@@ -55,7 +55,7 @@
                 <div class="card-body">
                   <div class="solrsearch"
                        data-classes=""
-                       data-parameters="objectType%3Amods%20AND%20mods.genre%3Ain_house%20AND%20mods.title%3AModulhandbuch%20AND%20category.top%3A%22mir_institutes%3AFaculty_c_03%22" />
+                       data-parameters="q=objectType%3Amods%20AND%20mods.genre%3Ain_house%20AND%20mods.title%3AModulhandbuch%20AND%20category.top%3A%22mir_institutes%3AFaculty_c_03%22" />
                 </div>
               </div>
             </div>
