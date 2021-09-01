@@ -330,9 +330,9 @@
     <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='aut']" />
     <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='ths']" />
     <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='ths'][2]" />
-    <mir:person.repeated help-text="{i18n:mir.help.thesis.advisor.reviewer}">
+    <mir:person.extended.repeated help-text="{i18n:mir.help.thesis.advisor.reviewer}">
       <xed:include uri="xslStyle:items2options:classification:editor:-1:children:marcrelator" />
-    </mir:person.repeated>
+    </mir:person.extended.repeated>
   </xed:template>
 
   <xed:template id="digibib.rights.ccby40">
