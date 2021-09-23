@@ -9,6 +9,9 @@ lib/pi-tester.jar
 .project
 .settings/
 
+#intellij
+*.iml
+
 # application specific files on server
 jwt.secret
 messages_de.resolved.properties
