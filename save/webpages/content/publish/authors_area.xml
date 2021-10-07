@@ -57,7 +57,7 @@
 
 <ul>
 	<li>das Antragsformular <a href="https://publikationsserver.tu-braunschweig.de/content/publish/deposit-single.pdf" target="_blank"><span class="inline-comment-marker" data-ref="91ef21fd-31f3-4306-a7ec-376a1cd69d7c">"deposit_single"</span></a> aus, wenn Sie <strong>eine</strong> Publikation einreichen wollen, oder:</li>
-	<li>das Antragsformular <a href="https://publikationsserver.tu-braunschweig.de/content/publish/deposit-multiple.pdf" target="_blank">"deposit_multiple</a>" aus, wenn Sie <strong>mehrere </strong>Publikationen einreichen wollen</li>
+	<li>das Antragsformular <a href="/content/publish/deposit-multiple.pdf">"deposit_multiple"</a> aus, wenn Sie <strong>mehrere </strong>Publikationen einreichen wollen</li>
 	<li><span class="inline-comment-marker valid active" data-ref="98650dd0-457a-4962-96b3-ad306f84dfb2">das Antragsformular<a href="/content/publish/deposit-rd.pdf"> "deposit_rd"</a> aus, wenn Sie </span><strong><span class="inline-comment-marker valid active" data-ref="98650dd0-457a-4962-96b3-ad306f84dfb2">Forschungsdaten</span></strong><span class="inline-comment-marker valid active" data-ref="98650dd0-457a-4962-96b3-ad306f84dfb2"> einreichen wollen.</span></li>
 </ul>
 
@@ -164,7 +164,7 @@ As a researcher of TU Braunschweig you can archive and publish your research dat
 <ul>
 	<li><strong>Affiliation:</strong> You are a member of TU Braunschweig or you publish work is related to the research region Braunschweig.</li>
 	<li><strong>Preservation of copyright:</strong> You need to have the copyright of the publication or, in case of co-authorship, you need to have the permission for publishing by your co-authors. </li>
-	<li><strong>Consent to the terms of the contract:</strong> You need to agree to our terms of contract (<a class="external-link" href="https://publikationsserver.tu-braunschweig.de/content/publish/contract.xml" rel="nofollow" target="_blank">in German only</a>) for publishing your documents in the Digital Library. This is done by signing the application form (see "3. Procedure", step 1).  </li>
+	<li><strong>Consent to the terms of the contract:</strong> You need to agree to our <a href="https://publikationsserver.tu-braunschweig.de/content/publish/contract.xml">terms of contract</a> for publishing your documents in the Digital Library. This is done by signing the application form (see "3. Procedure", step 1).  </li>
 	<li><strong>Technical formats:</strong> You can publish any type of document (text, graphics, audio or video sequences, research data, etc.). The documents are not allowed to have any access restrictions. The Digital Library supports all file formats, but recommends the use of open formats (e.g. PDF/A, TeX, XML) that are suitable for long-term archiving and can be displayed by freely accessible viewing programs. In addition, the original format of the document can also be archived.</li>
 	<li><strong>Accessibility:</strong> Please note the accessibility requirements for your publication according to section 3 paragraph 1 to 4 and section 4 of the Barrier-Free Information Technology Ordinance (BITV 2.0), which were issued on the basis of section 12d of the Disability Equality Act (BGG). </li>
 	<li><strong>Research data:</strong> When archiving or publishing your research data, please make sure that the folder structure and file naming are comprehensible. In addition, your data set should include a <a href="/content/publish/README_Template_TUBS.pdf">README file</a> with descriptive metadata.</li>
@@ -177,8 +177,8 @@ As a researcher of TU Braunschweig you can archive and publish your research dat
 <p>Please fill in</p>
 
 <ul>
-	<li>the application form <a href="/content/publish/deposit-single.pdf">"deposit_single"</a> if you wish to submit <strong>one publication</strong>, or:</li>
-	<li>the application form <a href="/content/publish/deposit-multiple.pdf">"deposit_multiple"</a> if you wish to submit <strong>several publications</strong>, or:</li>
+	<li>the application form <a href="/content/publish/EN_deposit-single.pdf">"deposit_single" </a>if you wish to submit <strong>one publication</strong>, or:</li>
+	<li>the application form <a href="/content/publish/EN_deposit-multiple.pdf">"deposit_multiple"</a> if you wish to submit <strong>several publications</strong>, or:</li>
 	<li>the application form <a href="/content/publish/deposit-rd.pdf">"deposit_rd"</a> if you wish to submit <strong>resarch data</strong>.</li>
 </ul>
 
@@ -240,4 +240,4 @@ For questions regarding the publication of dissertations, please contact:</p>
 <p>Phone: +49 (0)531 391 5024 (Mon - Fri: 9.00 to 12.00)</p>
 </div>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2021-05-10" time="14:51" /></meta></MyCoReWebPage>
+</section><meta><log lastEditor="dbbs_admin" date="2021-06-21" time="09:37" /></meta></MyCoReWebPage>

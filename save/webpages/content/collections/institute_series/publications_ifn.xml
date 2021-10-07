@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<MyCoReWebPage><section xml:lang="de" title="Veröffentlichungen des Instituts für Nachrichtentechnik"><div>
+<h2 style="text-align: justify;">​Das Institut für Nachrichtentechnik (IfN)</h2>
+
+<div class="row" id="digibib_ifn">
+<div class="col-md-10"><img src="IfN  Logo.png" style="font-size: 13px; width: 265px; height: 78px; float: right;" />
+<p>Das Institut für Nachrichtentechnik besteht aus den drei Abteilungen Informationstheorie und Kommunikationssysteme, Mobilfunksysteme, Signalverarbeitung und Machine Learning sowie aus der Arbeitsgruppe Elektronische Medien.</p>
+
+<p>Die Forschung in der Abteilung für Informationstheorie und Kommunikationssysteme umfasst den gesamten Ablauf von der informationstheoretischen Grundlagenforschung bis hin zum Systementwurf und der Implementierung auf Demonstrationsplattformen. Die Gruppe betreibt Forschung in den drei Hauptbereichen Zellulare Kommunikationssysteme, Drahtlose lokale Netzwerke und Body Area Networks sowie Sicherheit auf der Übertragungsschicht und informationstheoretische Sicherheit.</p>
+
+<p>In der Arbeitsgruppe Elektronische Medien liegt der Forschungsschwerpunkt aktuell auf der Erweiterung drahtloser Broadband-Netze, um darüber auch Broadcast-Dienste bereitstellen zu können. </p>
+
+<p>Die Abteilung Mobilfunksysteme befasst sich mit unterschiedlichen Facetten der Funkübertragung. Die Forschungsfelder der Abteilung sind die Planung und Optimierung von Mobilfunksystemen und Infrastrukturnetzen, die Multi-Gigabit Kommunikation bei THz-Frequenzen und die Vehicle-to-X- und Intra-Vehicle-Kommunikation. </p>
+
+<p>Signalverarbeitung und Machine Learning sind, in der gleichnamigen Abteilung, Kernelemente unserer Forschung in den Bereichen Computer Vision, Sprach- und Audioverarbeitung, Datenübertragung, autonome Systeme. Spezifische Forschungsfelder sind Funktionen zur Umfeldwahrnehmung für autonomes Fahren, Sprachverbesserung, Sprach- und Emotionserkennung, Predictive Maintenance, Produktionstechnik, Smartphones, Hörgeräte.</p>
+
+<p><a href="../../../receive/dbbs_mods_00066140">Zu den Mitteilungen aus dem IfN</a></p>
+
+<p><a href="../../../receive/dbbs_mods_00064161">Zu den Jahresberichten aus dem IfN</a></p>
+</div>
+</div>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2021-06-04" time="10:45" /></meta></MyCoReWebPage>

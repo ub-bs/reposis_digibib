@@ -44,7 +44,16 @@
 	<li>Brunsvicensien der <a href="http://www.hab.de">Herzog August Bibliothek Wolfenbüttel</a>
 
 	<ul>
-		<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?join=AND&amp;bool0%5B%5D=AND&amp;lookfor0%5B%5D=%22Helmstedter+Drucke%22&amp;type0%5B%5D=AllFields&amp;op0%5B%5D=OR&amp;sort=year&amp;filter%5B%5D=format_facet%3A%22Elektronische+Ressource%22">Helmstedter Drucker Online</a><br />
+		<li><a href="https://katalog.ub.tu-braunschweig.de/vufind/Search/Results?join=AND&amp;bool0%5B%5D=AND&amp;lookfor0%5B%5D=%22Helmstedter+Drucke%22&amp;type0%5B%5D=AllFields&amp;op0%5B%5D=OR&amp;sort=year&amp;filter%5B%5D=format_facet%3A%22Elektronische+Ressource%22">Helmstedter Drucker Online</a></li>
+	</ul>
+	</li>
+</ul>
+
+<ul>
+	<li>Brunsvicensien des <a href="https://publikationsserver.tu-braunschweig.de/content/collections/brunsvicensien/blm.xml">Braunschweigischen Landesmuseums</a>
+
+	<ul>
+		<li><a href="https://publikationsserver.tu-braunschweig.de/receive/dbbs_mods_00069575">Forschungen und Berichte</a><br />
 		 </li>
 	</ul>
 	</li>
@@ -189,5 +198,4 @@
 </ul>
 </div>
 </div>
-</div>
-</section><meta><log lastEditor="celsner" date="2020-07-31" time="11:59" /></meta></MyCoReWebPage>
+</div></section><meta><log lastEditor="dbbs_admin" date="2021-06-29" time="10:38" /></meta></MyCoReWebPage>

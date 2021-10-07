@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<MyCoReWebPage><section xml:lang="de" title="Stadtbibliothek"><h2>Stadtbibliothek Braunschweig</h2>
+<MyCoReWebPage><section xml:lang="de" title="Stadtbibliothek"><div>
+<h2>Stadtbibliothek Braunschweig</h2>
+
 <div>
 <p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt"><img alt="Stadtbibliothek Braunschweig" src="BBStabi-rot.png" style="width: 200px; height: 180px; float: right; margin: 2px 10px;" />Mit mehr als 650.000 Medien zählt die <a href="http://www.braunschweig.de/stadtbibliothek">Stadtbibliothek Braunschweig</a> zu den größten Kommunalbibliotheken Niedersachsens. Sie entstand 2007 aus der Zusammenlegung der Stadtbibliothek am Löwenwall (gegründet 1861) und der Öffentlichen Bücherei Hintern Brüdern (gegründet 1910).</p>
 
@@ -7,8 +9,9 @@
 
 <p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt"> </p>
 
-<p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt">Hier finden Sie eine <a href=" https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BallMeta%3A%22%5C%22Best%C3%A4nde+der+Stadtbibliothek+Braunschweig%5C%22%22+%2Bstate%3A%22published%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex.xed">Übersicht der in Kooperation mit der Stadtbiblothek erstellten Digitalisate.</a></p>
+<p style="margin-top:0cm;margin-right:3.75pt;margin-bottom:0cm;margin-left: 0cm;margin-bottom:.0001pt">Hier finden Sie eine <a href=" https://publikationsserver.tu-braunschweig.de/servlets/solr/select?q=%2BallMeta%3A%22%5C%22Best%C3%A4nde+der+Stadtbibliothek+Braunschweig%5C%22%22+%2Bstate%3A%22published%22+%2BobjectType%3A%22mods%22&amp;fl=*&amp;sort=mods.dateIssued+desc&amp;rows=20&amp;version=4.5&amp;mask=content%2Fsearch%2Fcomplex.xed">Übersicht der in Kooperation mit der Stadtbibliothek erstellten Digitalisate.</a></p>
 
 <p> </p>
 </div>
-</section><meta><log lastEditor="dbbs_admin" date="2019-02-08" time="13:01" /></meta></MyCoReWebPage>
+</div>
+</section><meta><log lastEditor="dbbs_admin" date="2021-06-16" time="13:53" /></meta></MyCoReWebPage>
