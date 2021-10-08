@@ -19,8 +19,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>de.vzg.reposis</groupId>
-    <artifactId>reposis_parent</artifactId>
+    <groupId>de.gbv.reposis</groupId>
+    <artifactId>reposis_mir_parent</artifactId>
     <version>2021.06-SNAPSHOT</version>
   </parent>
 
@@ -28,7 +28,6 @@
   <version>2021.06-SNAPSHOT</version>
   <properties>
     <MCR.AppName>digibib</MCR.AppName>
-    <mycore.version>2021.06.0-SNAPSHOT</mycore.version>
   </properties>
   <build>
     <plugins>
@@ -46,11 +45,31 @@
       <snapshots>
         <enabled>true</enabled>
       </snapshots>
+      <id>ossrhs01</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </repository>
+    <repository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
       <id>ossrh</id>
       <url>https://oss.sonatype.org/content/repositories/snapshots</url>
     </repository>
   </repositories>
   <pluginRepositories>
+    <pluginRepository>
+      <releases>
+        <enabled>false</enabled>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+      <id>ossrhs01</id>
+      <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+    </pluginRepository>
     <pluginRepository>
       <releases>
         <enabled>false</enabled>
