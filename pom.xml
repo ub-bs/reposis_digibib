@@ -107,6 +107,65 @@
               <workingDirectory>src/main/vue/modul_handbuecher/</workingDirectory>
             </configuration>
           </execution>
+          <execution>
+            <id>yarn-install-contact-manager</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install</arguments>
+              <workingDirectory>src/main/vue/contact-manager/</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn-install-contact-form</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>install</arguments>
+              <workingDirectory>src/main/vue/contact-form/</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn-build-contact-manager</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>build</arguments>
+              <workingDirectory>src/main/vue/contact-manager/</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn-build-contact-form</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>build</arguments>
+              <workingDirectory>src/main/vue/contact-form/</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn-copy-vue</id>
+            <goals>
+              <goal>yarn</goal>
+            </goals>
+            <phase>generate-resources</phase>
+            <configuration>
+              <arguments>copy</arguments>
+              <workingDirectory>src/main/vue/contact-form/</workingDirectory>
+            </configuration>
+          </execution>
+          <execution>
+            <id>yarn-install</id>
+            <phase>none</phase>
+          </execution>
         </executions>
       </plugin>
     </plugins>
@@ -170,6 +229,24 @@
       <artifactId>mycore-pi</artifactId>
     </dependency>-->
     <dependency>
+      <groupId>jakarta.persistence</groupId>
+      <artifactId>jakarta.persistence-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>commons-validator</groupId>
+      <artifactId>commons-validator</artifactId>
+      <version>1.7</version>
+      <scope>provided</scope> 
+    </dependency>
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-api</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.jdom</groupId>
+      <artifactId>jdom2</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.mycore</groupId>
       <artifactId>selenium-utils</artifactId>
     </dependency>
@@ -187,6 +264,18 @@
       <groupId>org.mycore</groupId>
       <artifactId>mycore-base</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mycore</groupId>
+      <artifactId>mycore-orcid</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mycore</groupId>
+      <artifactId>mycore-restapi</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.mycore</groupId>
+      <artifactId>mycore-user2</artifactId>
     </dependency>
     <dependency>
       <groupId>junit</groupId>

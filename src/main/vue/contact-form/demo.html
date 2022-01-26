@@ -1,0 +1,58 @@
+<meta charset="utf-8">
+<title>contactForm demo</title>
+<script src="//unpkg.com/vue@2"></script>
+<script src="./contactForm.umd.js"></script>
+<script src="https://unpkg.com/vue-i18n@8"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"></script>
+<link rel="stylesheet" href="./contactForm.css">
+
+<button id="contact-modal-btn">Test</button>
+<div id="app">
+  <demo></demo>
+</div>
+
+<script>
+function initialize(i18n_data) {
+  new Vue({
+    i18n: new VueI18n({
+      locale: '_',
+      messages: {
+        _: i18n_data,
+      }
+    }),
+    components: {
+      demo: contactForm
+    },
+    mounted: function() {
+      self = this;
+      openContactDialog = function() {
+        self.$bvModal.show('contact-modal');
+      }
+    }
+  }).$mount('#app')
+}
+fetch('http://134.169.20.124/mir/rsc/locale/translate/mir.accesskey*')
+  .then(response => response.json())
+  .then((data) => initialize(data))
+  .catch((error) => initialize({}));
+</script>
+
+<script>
+$(document).ready(() => {
+  $("#contact-modal-btn").click(() => {
+    if (window.openContactDialog == undefined) {
+      Object.defineProperty(window, 'openContactDialog', {
+        set(val) {
+          this._val = val;
+          val();
+        },
+        get() {
+          return this._val;
+        }
+      });
+    } else {
+      openContactDialog();
+    }
+  });
+});
+</script>
