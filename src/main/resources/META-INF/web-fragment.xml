@@ -11,5 +11,13 @@
         <servlet-name>MCRVueRootServlet</servlet-name>
         <url-pattern>/handbuecher/*</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>MCRVueRootServlet</servlet-name>
+        <servlet-class>org.mycore.vue.MCRVueRootServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MCRVueRootServlet</servlet-name>
+        <url-pattern>/contact/*</url-pattern>
+    </servlet-mapping>
 
 </web-fragment>
