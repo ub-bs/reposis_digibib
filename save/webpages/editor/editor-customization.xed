@@ -442,8 +442,8 @@
           </div>
           <mir:textarea xpath="mods:title" rows="2" label="mir.title" help-text="{i18n:mir.help.title}" />
           <mir:textarea xpath="mods:subTitle" rows="2" label="mir.title.subTitle" help-text="{i18n:mir.help.title.subTitle}" />
-          <mir:textarea xpath="mods:partName" rows="2" label="mir.title.partName" help-text="{i18n:mir.help.title.partName}" />
-          <mir:textarea xpath="mods:partNumber" rows="2" label="mir.title.partNumber" help-text="{i18n:mir.help.title.partNumber}" />
+          <mir:textfield xpath="mods:partName" rows="2" label="mir.title.partName" help-text="{i18n:mir.help.title.partName}" />
+          <mir:textfield xpath="mods:partNumber" rows="2" label="mir.title.partNumber" help-text="{i18n:mir.help.title.partNumber}" />
           
         </div>
       </xed:repeat>

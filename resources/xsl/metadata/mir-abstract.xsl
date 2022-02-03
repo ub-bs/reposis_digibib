@@ -157,10 +157,8 @@
           <xsl:with-param name="withSubtitle" select="true()" />
         </xsl:apply-templates>
       </h1>
-    </div>
-    
-    <xsl:choose>
-        <xsl:when test="$mods/mods:titleInfo/mods:partNumber or count($mods/mods:titleInfo/mods:partName) = 0">  
+      <xsl:choose>
+        <xsl:when test="$mods/mods:titleInfo/mods:partNumber or count($mods/mods:titleInfo/mods:partName) &lt; 2">  
           <h3>
             <xsl:if test="$mods/mods:titleInfo/mods:partNumber" >
               <xsl:value-of select="$mods/mods:titleInfo/mods:partNumber" />
@@ -179,9 +177,9 @@
               <xsl:value-of select="."/>
             </h3>
           </xsl:for-each>
-        </xsl:when> 
+        </xsl:when>
       </xsl:choose>
-
+    </div>
     <!-- authors, description, children -->
     <div id="mir-abstract-plus">
 
