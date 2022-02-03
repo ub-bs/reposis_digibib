@@ -4,6 +4,8 @@
 
   <!-- ========== extend editor-genres.xed ========== -->
   <xed:modify ref="admin.fields">
+    <xed:include ref="digibib.title.complex.repeated"    after="title.complex.repeated"/>
+    <xed:remove  ref="title.complex.repeated" />
     <xed:include ref="digibib.ddc.repeat"                after="sdnb.repeat" />
     <xed:remove  ref="sdnb.repeat" />
     <xed:include ref="digibib.access"                    after="access" />
@@ -440,7 +442,9 @@
           </div>
           <mir:textarea xpath="mods:title" rows="2" label="mir.title" help-text="{i18n:mir.help.title}" />
           <mir:textarea xpath="mods:subTitle" rows="2" label="mir.title.subTitle" help-text="{i18n:mir.help.title.subTitle}" />
+          <mir:textarea xpath="mods:partName" rows="2" label="mir.title.partName" help-text="{i18n:mir.help.title.partName}" />
           <mir:textarea xpath="mods:partNumber" rows="2" label="mir.title.partNumber" help-text="{i18n:mir.help.title.partNumber}" />
+          
         </div>
       </xed:repeat>
     </fieldset>
