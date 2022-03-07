@@ -33,10 +33,9 @@
 
   <xsl:template match="/">
     <xsl:message>
-      type:
-      <xsl:value-of select="$type" />
-      action:
-      <xsl:value-of select="$action" />
+      type:        <xsl:value-of select="$type" />
+      objectType:  <xsl:value-of select="$objectType" />
+      action:      <xsl:value-of select="$action" />
     </xsl:message>
     <email>
       <from><xsl:value-of select="$MCR.mir-module.MailSender" /></from>
@@ -149,7 +148,7 @@
         </xsl:when>
       </xsl:choose>
     </xsl:for-each>
-    <xsl:if test="contains('thesis dissertation habilitation diploma_thesis master_thesis', $objectType)">
+    <xsl:if test="contains('Dissertation Habilitation Diplomarbeit Abschlussarbeit Thesis Diploma thesis Master', $objectType)">
       <to>ub-diss@tu-braunschweig.de</to>
     </xsl:if>
   </xsl:template>
