@@ -9,13 +9,18 @@ lib/pi-tester.jar
 .project
 .settings/
 
+#intellij
+*.iml
+
 # application specific files on server
 jwt.secret
 messages_de.resolved.properties
 messages_en.resolved.properties
 mycore.active.properties
-mycore.properties
+./mycore.properties
 mycore.resolved.properties
 MCRWebCLI-unprocessed-commands.txt
 deprecated.active.properties
 resources/META-INF/persistence.xml
+pom.xml.bak
+target

@@ -11,16 +11,31 @@
   <xsl:param name="MCR.mir-module.EditorMail" />
   <xsl:param name="MCR.mir-module.MailSender" />
   <xsl:param name="MCR.mir-module.sendEditorMailToCurrentAuthor" />
+  
   <xsl:variable name="newline" select="'&#xA;'" />
   <xsl:variable name="categories" select="document('classification:metadata:1:children:mir_institutes')/mycoreclass/categories" />
   <xsl:variable name="institutemember" select="$categories/category[mcrxsl:isCurrentUserInRole(concat('mir_institutes:',@ID))]" />
+  <xsl:variable name="objectType">
+    <xsl:choose>
+      <xsl:when test="/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='kindof']">
+        <xsl:apply-templates select="/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='kindof']"
+          mode="printModsClassInfo" />
+      </xsl:when>
+      <xsl:when test="/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='intern']">
+        <xsl:apply-templates select="/mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='intern']"
+          mode="printModsClassInfo" />
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:value-of select="'Objekt'" />
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:variable>
 
   <xsl:template match="/">
     <xsl:message>
-      type:
-      <xsl:value-of select="$type" />
-      action:
-      <xsl:value-of select="$action" />
+      type:        <xsl:value-of select="$type" />
+      objectType:  <xsl:value-of select="$objectType" />
+      action:      <xsl:value-of select="$action" />
     </xsl:message>
     <email>
       <from><xsl:value-of select="$MCR.mir-module.MailSender" /></from>
@@ -34,21 +49,6 @@
         <!-- SEND EMAIL -->
         <xsl:apply-templates select="." mode="mailReceiver" />
         <subject>
-          <xsl:variable name="objectType">
-            <xsl:choose>
-              <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='kindof']">
-                <xsl:apply-templates select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='kindof']"
-                  mode="printModsClassInfo" />
-              </xsl:when>
-              <xsl:when test="./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='intern']">
-                <xsl:apply-templates select="./metadata/def.modsContainer/modsContainer/mods:mods/mods:genre[@type='intern']"
-                  mode="printModsClassInfo" />
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="'Objekt'" />
-              </xsl:otherwise>
-            </xsl:choose>
-          </xsl:variable>
           <xsl:value-of select="concat($objectType,' erstellt: ',@ID)" />
         </subject>
         <body>
@@ -148,6 +148,9 @@
         </xsl:when>
       </xsl:choose>
     </xsl:for-each>
+    <xsl:if test="contains('Dissertation Habilitation Diplomarbeit Abschlussarbeit Thesis Diploma thesis Master', $objectType)">
+      <to>ub-diss@tu-braunschweig.de</to>
+    </xsl:if>
   </xsl:template>
 
   <!-- Classification support -->
