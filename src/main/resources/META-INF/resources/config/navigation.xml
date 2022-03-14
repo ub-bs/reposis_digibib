@@ -163,6 +163,9 @@
             <label xml:lang="de">Braunschweigisches Landesmuseum</label>
             <label xml:lang="en">Brunswick State Museum</label>
         </item>
+        <item href="/content/collections/brunsvicensien/dst.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Deutscher Städtetag</label>
+        </item>
     </menu>
     <menu id="institute_series">
         <label xml:lang="de">Institutsreihen</label>
