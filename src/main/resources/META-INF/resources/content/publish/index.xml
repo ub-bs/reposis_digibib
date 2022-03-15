@@ -61,7 +61,7 @@
         <h2>Publikation aus Scopus, PubMed oder CrossRef importieren (für GVK bitte separaten Import nutzen)</h2>
         <div class="row form-group">
           <label class="col-sm-3 col-lg-2 control-label">
-            <select name="type">
+            <select class="form-control" name="type">
               <option value="doi">DOI</option>
               <option value="scopus">Scopus-ID</option>
               <option value="pubmed">PubMed-ID</option>
