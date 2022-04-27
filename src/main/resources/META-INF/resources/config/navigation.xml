@@ -83,17 +83,32 @@
             <label xml:lang="de">Brunsvicensien</label>
             <label xml:lang="en">Brunsvicensien</label>
         </item>
+        <item href="/content/collections/brunsvicensien_alpha.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Brunsvicensien alphabetisch</label>
+            <label xml:lang="en">new entry</label>
+        </item>
+        <item href="/content/collections/brunsvicensien_thema.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Brunsvicensien Thema</label>
+            <label xml:lang="en">new entry 2</label>
+        </item>
+        <item href="/content/collections/brunsvicensien/publications_bwg.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Veröffentlichungen der BWG</label>
+            <label xml:lang="en">BWG Publications</label>
+        </item>
+        <item href="/content/collections/dst.xml" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Deutscher Städtetag</label>
+        </item>
         <item href="/content/collections/image_collections.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Digitale Bildersammlungen</label>
             <label xml:lang="en">Digital image collections</label>
         </item>
-        <item href="/content/collections/childrens_books.xml" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Historische Kinderbücher</label>
-            <label xml:lang="en">Historical Children's Books</label>
-        </item>
         <item href="/content/collections/institute_series.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Institutsreihen</label>
             <label xml:lang="en">Institute series</label>
+        </item>
+        <item href="/content/collections/childrens_books.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Historische Kinderbücher</label>
+            <label xml:lang="en">Historical Children's Books</label>
         </item>
         <item href="/content/collections/pharmacy.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Pharmazie</label>
@@ -103,25 +118,13 @@
             <label xml:lang="de">Publikationsfonds der TU Braunschweig</label>
             <label xml:lang="en">Publication fund of TU Braunscheig</label>
         </item>
-        <item href="/content/collections/brunsvicensien/publications_bwg.xml" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Veröffentlichungen der BWG</label>
-            <label xml:lang="en">BWG Publications</label>
-        </item>
-        <item href="/content/collections/botanical_and_zoological.xml" type="intern" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Wertvolle botanische und zoologische Bücher</label>
-            <label xml:lang="en">Valuable botanical and zoological books</label>
-        </item>
         <item href="/content/collections/specialty_rarities.xml" type="intern" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Spezialgebiete und Raritäten</label>
             <label xml:lang="en">Specialty and Rarities</label>
         </item>
-        <item href="/content/collections/brunsvicensien_alpha.xml" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Brunsvicensien alphabetisch</label>
-            <label xml:lang="en">new entry</label>
-        </item>
-        <item href="/content/collections/brunsvicensien_thema.xml" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Brunsvicensien Thema</label>
-            <label xml:lang="en">new entry 2</label>
+        <item href="/content/collections/botanical_and_zoological.xml" type="intern" replaceMenu="false" constrainPopUp="false">
+            <label xml:lang="de">Wertvolle botanische und zoologische Bücher</label>
+            <label xml:lang="en">Valuable botanical and zoological books</label>
         </item>
         <item href="/content/collections/tu-bekanntmachungen.xml" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Hochschulöffentliche Bekanntmachungen der TU Braunschweig</label>
@@ -162,9 +165,6 @@
         <item href="/content/collections/brunsvicensien/blm.xml" replaceMenu="false" constrainPopUp="false">
             <label xml:lang="de">Braunschweigisches Landesmuseum</label>
             <label xml:lang="en">Brunswick State Museum</label>
-        </item>
-        <item href="/content/collections/brunsvicensien/dst.xml" replaceMenu="false" constrainPopUp="false">
-            <label xml:lang="de">Deutscher Städtetag</label>
         </item>
     </menu>
     <menu id="institute_series">
