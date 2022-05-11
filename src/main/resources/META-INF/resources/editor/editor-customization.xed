@@ -369,16 +369,9 @@
   </xed:modify>
 
   <xed:template id="research-data-extensions">
-    <xed:choose>
-      <xed:when test="mods:genre[@type='intern']/@valueURIxEditor='research_data'">
-        <xed:include ref="research-data-extension" />
-        <xed:include ref="metadata-box-script" after="research-data-extension"/>
-      </xed:when>
-      <xed:when test="mods:genre[@type='intern']/@valueURIxEditor='software'">
-        <xed:include ref="codemeta-extension" />
-        <xed:include ref="metadata-box-script" after="codemeta-extension"/>
-      </xed:when>
-    </xed:choose>
+    <xed:include ref="research-data-extension" />
+    <xed:include ref="codemeta-extension" />
+    <xed:include ref="metadata-box-script" />
   </xed:template>
 
   <xed:modify ref="genres.lecture">
