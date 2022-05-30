@@ -67,11 +67,11 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="contributer" select="mods:name[contains(mods:role/mods:roleTerm, 'ctb')]" />
-    <xsl:if test="count($contributer) &gt; 0">
-      <fn:array key="contributer">
+    <xsl:variable name="contributor" select="mods:name[contains(mods:role/mods:roleTerm, 'ctb')]" />
+    <xsl:if test="count($contributor) &gt; 0">
+      <fn:array key="contributor">
         <xsl:call-template name="parse-name">
-          <xsl:with-param name="name" select="$contributer" />
+          <xsl:with-param name="name" select="$contributor" />
         </xsl:call-template>
       </fn:array>
     </xsl:if>
@@ -235,7 +235,7 @@
       <xsl:variable name="type">
         <xsl:choose>
           <xsl:when test="@type='corporate'">
-            <xsl:value-of select="'Orgainization'" />
+            <xsl:value-of select="'Organization'" />
           </xsl:when>
           <xsl:otherwise>
             <xsl:value-of select="'Person'" />
