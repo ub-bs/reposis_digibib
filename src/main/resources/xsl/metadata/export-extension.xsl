@@ -7,7 +7,7 @@
   <xsl:template match="/">
     <xsl:if test="$mods-type='software'">
       <div id="export-extension">
-        <xsl:call-template name="printSeperator" />
+        <xsl:call-template name="printSeparator" />
         <xsl:call-template name="exportLink">
           <xsl:with-param name="transformer" select="'mods2codemeta-jsonld'"/>
           <xsl:with-param name="linkText" select="'CodeMeta'"/>
