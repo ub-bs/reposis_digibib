@@ -5,12 +5,14 @@
   <xsl:import href="xslImport:modsmeta:metadata/export-extension.xsl" />
 
   <xsl:template match="/">
+    <xsl:variable name="objectId" select="/mycoreobject/@ID" />
     <xsl:if test="$mods-type='software'">
       <div id="export-extension">
         <xsl:call-template name="printSeparator" />
         <xsl:call-template name="exportLink">
           <xsl:with-param name="transformer" select="'mods2codemeta-jsonld'"/>
           <xsl:with-param name="linkText" select="'CodeMeta'"/>
+          <xsl:with-param name="objectId" select="$objectId" />
         </xsl:call-template>
         <script>
           $(document).ready(function() {
