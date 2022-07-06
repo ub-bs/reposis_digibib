@@ -166,7 +166,7 @@
     <!-- TODO targetProduct -->
     <!-- readme -->
     <!-- developmentStatus -->
-    <!-- softwareVersion -->
+    <!-- version -->
     <!-- applicationCategory -->
     <!-- applicationSubCategory -->
     <!-- programmingLanguage -->

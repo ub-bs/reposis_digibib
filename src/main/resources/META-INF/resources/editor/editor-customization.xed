@@ -312,7 +312,7 @@
                 <xed:output i18n="digibib.researchData.codeMeta.facts" />
               </legend>
               <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="developement-status" />
-              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="version-number" />
+              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="version" />
               <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="application-category.repeated" />
               <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="application-sub-category.repeated" />
               <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="programming-language.repeated" />

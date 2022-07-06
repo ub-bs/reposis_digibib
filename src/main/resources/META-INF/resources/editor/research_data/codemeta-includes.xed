@@ -120,9 +120,9 @@
   </xed:template>
 
   <!-- version -->
-  <xed:template id="version-number">
-    <mir:textfield xpath="fn:string[@key='versionNumber']" label="digibib.researchData.codeMeta.versionNumber"
-      help-text="{i18n:digibib.researchData.codeMeta.versionNumber.help}" />
+  <xed:template id="version">
+    <mir:textfield xpath="fn:string[@key='version']" label="digibib.researchData.codeMeta.version"
+      help-text="{i18n:digibib.researchData.codeMeta.version.help}" />
   </xed:template>
 
   <!-- applicationCategory -->

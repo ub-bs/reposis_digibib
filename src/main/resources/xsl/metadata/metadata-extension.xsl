@@ -166,10 +166,10 @@
         </xsl:with-param>
       </xsl:call-template>
     </xsl:if>
-    <xsl:if test="$codemeta/fn:string[@key='versionNumber']">
+    <xsl:if test="$codemeta/fn:string[@key='version']">
       <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.versionNumber'" />
-        <xsl:with-param name="value" select="$codemeta/fn:string[@key='versionNumber']" />
+        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.version'" />
+        <xsl:with-param name="value" select="$codemeta/fn:string[@key='version']" />
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='applicationCategory']">
