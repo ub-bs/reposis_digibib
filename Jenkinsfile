@@ -10,7 +10,7 @@ pipeline {
             when {
                not {
                    anyOf {
-                        branch 'master'
+                        branch 'main'
                         branch '2021.06'
                    }
                }
@@ -25,7 +25,7 @@ pipeline {
         stage('Build, Test and Deploy') {
             when {
                anyOf {
-                    branch 'master'
+                    branch 'main'
                     branch '2021.06'
                }
             }
