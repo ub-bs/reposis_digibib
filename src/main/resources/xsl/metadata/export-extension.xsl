@@ -26,5 +26,4 @@
     </xsl:if>
     <xsl:apply-imports />
   </xsl:template>
-
 </xsl:stylesheet>

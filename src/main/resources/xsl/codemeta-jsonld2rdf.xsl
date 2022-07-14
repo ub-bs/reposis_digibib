@@ -7,5 +7,4 @@
   <xsl:template match="/">
     <xsl:copy-of select="document(concat('codemeta2rdf:',':',.))" />
   </xsl:template>
-
 </xsl:stylesheet>

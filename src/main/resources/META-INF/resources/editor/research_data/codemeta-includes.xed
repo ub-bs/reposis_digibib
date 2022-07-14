@@ -32,7 +32,7 @@
                     <option value="constituent">
                       <xed:output i18n="mir.relatedItem.constituent" />
                     </option>
-                    <option value="references">
+                    <option value="isReferencedBy">
                       <xed:output i18n="mir.relatedItem.references" />
                     </option>
                   </select>
@@ -378,5 +378,4 @@
     <xed:validate xpath="//fn:string[@key='readme']" class="de.gbv.reposis.util.ValidationHelper"
       method="validateURL" i18n="digibib.invalidURL" display="global" />
   </xed:template>
-
 </xed:template>

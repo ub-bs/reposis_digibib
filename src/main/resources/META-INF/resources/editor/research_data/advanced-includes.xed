@@ -177,5 +177,4 @@
     <mir:textarea xpath="fn:string[@key='processing']" label="digibib.researchData.advanced.processing"
       help-text="{i18n:digibib.researchData.advanced.processing.help}" rows="2" />
   </xed:template>
-
 </xed:template>

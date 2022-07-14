@@ -152,5 +152,4 @@
         test="string-length(@type) &gt; 0 and (string-length(mods:titleInfo/mods:title) &gt; 0 or string-length(@xlink:href) &gt; 0)" />
     </xed:repeat>
   </xed:template>
-
 </xed:template>
