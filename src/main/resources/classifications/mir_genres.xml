@@ -142,7 +142,7 @@
       <label xml:lang="x-mapping" text="marcgt:database diniPublType:ResearchData" />
       <category ID="software">
         <label xml:lang="en" text="Software" />
-        <label xml:lang="x-mapping" text="marcgt:database diniPublType:Software" />
+        <label xml:lang="x-mapping" text="marcgt:computer_program diniPublType:Software" />
         <label xml:lang="x-hosts" text="standalone" />
         <label xml:lang="de" text="Software" />
       </category>
