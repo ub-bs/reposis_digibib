@@ -137,7 +137,7 @@
     </category>
     <category ID="research_data">
       <label xml:lang="de" text="Forschungsdaten" />
-      <label xml:lang="x-hosts" text="series journal book collection festschrift proceedings standalone" />
+      <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="en" text="Research Data" />
       <label xml:lang="x-mapping" text="marcgt:database diniPublType:ResearchData" />
       <category ID="software">
