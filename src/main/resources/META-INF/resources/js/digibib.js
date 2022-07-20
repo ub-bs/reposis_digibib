@@ -1,7 +1,7 @@
 
 $(document).ready(function() {
 
-  if(enginesItem) {
+  if(typeof enginesItem !== "undefined") {
     enginesItem["digibib_subject"] = {
       engine: new Bloodhound({
         datumTokenizer: Bloodhound.tokenizers.whitespace,
