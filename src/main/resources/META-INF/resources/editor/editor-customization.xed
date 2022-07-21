@@ -220,18 +220,18 @@
                 help-text="{i18n:mir.help.embargo}" placeholder="{i18n:mir.placeholder.date}" />
             </div>
           </fieldset>
+          <xed:choose>
+            <xed:when test="$genre='software'">
+              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="relatedPublication.repeated" />
+            </xed:when>
+            <xed:otherwise>
+              <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/custom-includes.xed" ref="relatedPublication.repeated" />
+            </xed:otherwise>
+          </xed:choose>
           <fieldset>
             <legend class="mir-fieldset-legend mb-3">
               <xed:output i18n="digibib.researchData.other" />
             </legend>
-            <xed:choose>
-              <xed:when test="$genre='software'">
-                <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="relatedPublication.repeated" />
-              </xed:when>
-              <xed:otherwise>
-                <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/custom-includes.xed" ref="relatedPublication.repeated" />
-              </xed:otherwise>
-            </xed:choose>
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/custom-includes.xed" ref="comment" />
           </fieldset>
         </div>
@@ -417,10 +417,11 @@
   <xed:template id="related.item.search.of.all.items">
     <fieldset>
       <legend class="mir-fieldset-legend">Related Item</legend><!-- TODO: i18n -->
-      <xed:repeat xpath="mods:relatedItem[not(@type='isReferencedBy')]" min="1" max="10">
+      <!-- <xed:repeat xpath="mods:relatedItem[not(@type='isReferencedBy')]" min="1" max="10"> -->
+      <xed:repeat xpath="mods:relatedItem" min="1" max="10">
         <div class="mir-fieldset-content mir-related-item-search">
           <div class="form-group row">
-            <div class="col-md-3">
+            <div class="col-md-3 {$xed-validation-marker}">
               <xed:bind xpath="@type">
                 <select class="form-control">
                   <option value="host">
@@ -434,6 +435,9 @@
                   </option>
                   <option value="original">
                     <xed:output i18n="mir.relatedItem.original" />
+                  </option>
+                  <option value="isReferencedBy">
+                    <xed:output i18n="mir.relatedItem.isReferencedBy" />
                   </option>
                   <option value="references">
                     <xed:output i18n="mir.relatedItem.references" />
@@ -462,6 +466,9 @@
             <mir:help-pmud help-text="{i18n:mir.help.related.item}" pmud="true" />
           </div>
           <xed:include ref="title.nonrequired" />
+          <xed:include ref="genre.simple.nonrequired" />
+          <mir:textfield xpath="mods:location/mods:url[@access='raw object']" help-text="{i18n:mir.help.link.raw_object}"
+              label="mir.placeholder.abstract.link" />
           <xed:include ref="host.volume" />
           <xed:include ref="host.issue" />
           <xed:include ref="host.articlenumber" />
@@ -471,6 +478,7 @@
       </xed:repeat>
       <script src="{$WebApplicationBaseURL}js/mir/relatedItem-modal.min.js" type="text/javascript"></script>
     </fieldset>
+    <xed:validate xpath="//mods:relatedItem[@xlink:href!='']" test="(@type!='isReferencedBy')" i18n="mir.validation.relatedItem" display="global" />
   </xed:template>
 
   <!-- ========== digibib specific templates ========== -->

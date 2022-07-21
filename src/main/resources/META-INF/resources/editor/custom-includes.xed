@@ -100,56 +100,81 @@
   </xed:template>
 
   <xed:template id="relatedPublication.repeated">
-    <xed:repeat xpath="mods:relatedItem" min="1" max="10">
-      <div class="mir-fieldset-content-centered">
-        <div class="form-group row d-flex align-items-center {$xed-validation-marker}">
-          <label class="col-md-3 col-form-label text-right">
-            <xed:output i18n="digibib.researchData.relatedPublication" />
-          </label>
-          <div class="col-md-6 controls">
-            <div class="row">
-              <div class="col">
-                <xed:bind xpath="@type" initially="">
-                  <select class="form-control form-control-inline">
-                    <option value="">
-                      <xed:output i18n="digibib.researchData.select.option.choose" />
-                    </option>
-                    <option value="host">
-                      <xed:output i18n="mir.relatedItem.host" />
-                    </option>
-                    <option value="constituent">
-                      <xed:output i18n="mir.relatedItem.constituent" />
-                    </option>
-                    <option value="references">
-                      <xed:output i18n="mir.relatedItem.references" />
-                    </option>
-                  </select>
-                </xed:bind>
-              </div>
+    <fieldset>
+      <legend class="mir-fieldset-legend">
+        <xed:output i18n="digibib.researchData.relatedPublication" />
+      </legend>
+      <xed:repeat xpath="mods:relatedItem" min="1" max="10">
+        <div class="mir-fieldset-content">
+          <div class="form-group row {$xed-validation-marker}">
+            <label class="col-md-3 col-form-label text-right">
+              <xed:output i18n="digibib.researchData.relatedPublication.type" />
+            </label>
+            <div class="col-md-6 controls">
+              <xed:bind xpath="@type" initially="">
+                <select class="form-control form-control-inline">
+                  <option value="">
+                    <xed:output i18n="digibib.researchData.select.option.choose" />
+                  </option>
+                  <option value="references">
+                    <xed:output i18n="mir.relatedItem.references" />
+                  </option>
+                </select>
+              </xed:bind>
             </div>
-            <div class="row">
-              <div class="col">
-                <xed:bind xpath="mods:titleInfo/mods:title">
-                  <input type="text" class="form-control form-control-inline"
-                    placeholder="{i18n:digibib.researchData.relatedPublication.name}" />
-                </xed:bind>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col">
-                <xed:bind xpath="@xlink:href">
-                  <input type="text" class="form-control form-control-inline"
-                    placeholder="{i18n:digibib.researchData.relatedPublication.link}" />
-                </xed:bind>
-              </div>
+            <mir:help-pmud help-text="{i18n:mir.help.related.item}" pmud="true" />
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label text-right">
+              <xed:output i18n="digibib.researchData.relatedPublication.title" />
+            </label>
+            <div class="col-md-6 controls">
+              <xed:bind xpath="mods:titleInfo/mods:title">
+                <input type="text" class="form-control form-control-inline" />
+              </xed:bind>
             </div>
           </div>
-          <mir:help-pmud help-text="{i18n:digibib.researchData.relatedPublication.help}" pmud="true" />
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label text-right">
+              <xed:output i18n="digibib.researchData.relatedPublication.genre" />
+            </label>
+            <div class="col-md-6 controls">
+              <xed:bind xpath="mods:genre[@type='intern'][@authorityURI=$mir_genres/label[@xml:lang='x-uri']/@text]/@valueURIxEditor">
+                <select class="form-control form-control-inline">
+                  <option value="">
+                    <xed:output i18n="mir.select" />
+                  </option>
+                  <option value="article">
+                    <xed:output i18n="digibib.genre.publication" />
+                  </option>
+                  <option value="research_data">
+                    <xed:output i18n="digibib.genre.researchData" />
+                  </option>
+                  <option value="software">
+                    <xed:output i18n="digibib.genre.software" />
+                  </option>
+                  <option value="speech">
+                    <xed:output i18n="digibib.genre.presentation" />
+                  </option>
+                </select>
+              </xed:bind>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label class="col-md-3 col-form-label text-right">
+              <xed:output i18n="digibib.researchData.relatedPublication.link" />
+            </label>
+            <div class="col-md-6 controls">
+              <xed:bind xpath="mods:location/mods:url[@access='raw object']">
+                <input type="text" class="form-control form-control-inline" />
+              </xed:bind>
+            </div>
+          </div>
         </div>
-      </div>
-      <xed:validate display="global" i18n="digibib.researchData.relatedPublication.error"
-        relevant-if="string-length(@type) &gt; 0 or string-length(mods:titleInfo/mods:title) &gt; 0 or string-length(@xlink:href) &gt; 0"
-        test="string-length(@type) &gt; 0 and (string-length(mods:titleInfo/mods:title) &gt; 0 or string-length(@xlink:href) &gt; 0)" />
-    </xed:repeat>
+        <xed:validate display="global" i18n="digibib.researchData.relatedPublication.error"
+            relevant-if="string-length(@type) &gt; 0 or string-length(mods:titleInfo/mods:title) &gt; 0 or string-length(mods:location/mods:url) &gt; 0"
+            test="string-length(@type) &gt; 0 and (string-length(mods:titleInfo/mods:title) &gt; 0 or string-length(mods:location/mods:url) &gt; 0)" />
+      </xed:repeat>
+    </fieldset>
   </xed:template>
 </xed:template>
