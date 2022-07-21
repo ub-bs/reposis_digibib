@@ -26,10 +26,7 @@
               <xed:bind xpath="@type" initially="">
                 <select class="form-control form-control-inline">
                   <option value="">
-                    <xed:output i18n="digibib.researchData.select.option.choose" />
-                  </option>
-                  <option value="">
-                    <xed:output i18n="digibib.researchData.select.option.choose" />
+                    <xed:output i18n="mir.select" />
                   </option>
                   <option value="host">
                     <xed:output i18n="mir.relatedItem.host" />

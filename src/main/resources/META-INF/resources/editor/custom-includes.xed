@@ -70,7 +70,7 @@
                 <xed:bind xpath="@type" initially="">
                   <select class="form-control form-control-inline">
                     <option value="">
-                      <xed:output i18n="digibib.researchData.select.option.choose" />
+                      <xed:output i18n="mir.select" />
                     </option>
                     <option value="content">
                       <xed:output i18n="digibib.researchData.other.comment.select.option.public" />
@@ -114,7 +114,7 @@
               <xed:bind xpath="@type" initially="">
                 <select class="form-control form-control-inline">
                   <option value="">
-                    <xed:output i18n="digibib.researchData.select.option.choose" />
+                    <xed:output i18n="mir.select" />
                   </option>
                   <option value="references">
                     <xed:output i18n="mir.relatedItem.references" />
