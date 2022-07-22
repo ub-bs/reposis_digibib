@@ -151,6 +151,9 @@
     <xsl:if test="contains('Dissertation Habilitation Diplomarbeit Abschlussarbeit Thesis Diploma thesis Master', $objectType)">
       <to>ub-diss@tu-braunschweig.de</to>
     </xsl:if>
+    <xsl:if test="contains('Forschungsdaten Research Data', $objectType)">
+      <to>forschungsdaten@tu-braunschweig.de</to>
+    </xsl:if>
   </xsl:template>
 
   <!-- Classification support -->
