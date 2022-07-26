@@ -27,9 +27,6 @@
 
 <script setup lang="ts">
 import {
-  defineProps,
-  defineEmits,
-  defineExpose,
   ref,
 } from 'vue';
 
