@@ -1,21 +1,24 @@
 <template>
   <div>
-    <button @click="openModal">Test</button>
-    <Modal ref="modal" />
+    <div class="row mb-3">
+      <div class="col d-flex justify-content-center">
+        <h3>{{ t('digibib.contact.frontend.manager.title') }}</h3>
+      </div>
+    </div>
     <!-- <div v-if="showAlert" class="row">
-      <div class="col-12">
+      <div class="col">
         <div class="alert alert-danger text-center" role="alert">
           {{ alertMessage }}
         </div>
       </div>
     </div> -->
-    <div class="row">
-      <div class="col-12">
+    <div class="row mb-3">
+      <div class="col">
         <Table />
       </div>
     </div>
-    <div class="row mt-3">
-      <div class="col-12 d-flex justify-content-center">
+    <div class="row">
+      <div class="col d-flex justify-content-center">
         <Pagination />
       </div>
     </div>
@@ -23,13 +26,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { useI18n } from 'vue-i18n';
 import Table from './components/Table.vue';
 import Pagination from './components/Pagination.vue';
-import Modal from './components/Modal.vue';
 
-const modal = ref<InstanceType<typeof Modal> | null>(null);
-function openModal() {
-  modal.value?.show();
-}
+const { t } = useI18n();
 </script>

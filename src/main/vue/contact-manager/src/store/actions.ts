@@ -10,13 +10,20 @@ export const actions: ActionTree<State, State> = {
       commit('setRequests', [
         {
           id: 1,
-          name: 'Name1',
-          email: 'Email',
+          name: 'Lennard Golsch',
+          email: 'l.golsch@tu-braunschweig.de',
           orcid: '1112-1212-1221',
           created: new Date(),
           state: 'ready',
           message: 'Message',
           objectID: 'mir_mods_12121212',
+          recipients: [
+            {
+              name: 'Lennard Golsch',
+              source: 'ORCID',
+              email: 'l.golsch@tu-braunschweig.de',
+            },
+          ],
         },
       ]);
     } else {

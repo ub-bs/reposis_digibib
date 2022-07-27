@@ -37,10 +37,10 @@ const pages = computed(() => {
   }
   return Array.from(Array(pageCount.value).keys());
 });
-function jumpToPage(page: number) {
+const jumpToPage = (page: number) => {
   if (page >= 0 && page < pageCount.value) {
     store.commit('setCurrentPage', page);
     store.dispatch('fetchData');
   }
-}
+};
 </script>
