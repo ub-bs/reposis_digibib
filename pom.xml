@@ -37,8 +37,15 @@
     <plugins>
       <plugin>
         <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+            </execution>
+        </executions>
         <configuration>
-          <createDependencyReducedPom>false</createDependencyReducedPom>
           <artifactSet>
             <excludes>
               <exclude>com.fasterxml.jackson.*:*</exclude>
@@ -51,14 +58,6 @@
             </excludes>
           </artifactSet>
         </configuration>
-        <executions>
-          <execution>
-            <goals>
-              <goal>shade</goal>
-            </goals>
-            <phase>package</phase>
-          </execution>
-        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -283,7 +282,6 @@
       <groupId>commons-validator</groupId>
       <artifactId>commons-validator</artifactId>
       <version>1.7</version>
-      <scope>provided</scope> 
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
