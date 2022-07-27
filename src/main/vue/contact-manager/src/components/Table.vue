@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col" class="col-2">
+        <th scope="col" class="col-1">
           {{ t('digibib.contact.frontend.manager.label.id') }}
         </th>
         <th scope="col" class="col-2">
@@ -11,7 +11,7 @@
         <th scope="col" class="col-2">
           {{ t('digibib.contact.frontend.manager.label.objectID') }}
         </th>
-        <th scope="col" class="col-4">
+        <th scope="col" class="col-5">
           {{ t('digibib.contact.frontend.manager.label.email') }}
         </th>
         <th scope="col" class="col-1">
@@ -24,7 +24,7 @@
     </thead>
     <tbody v-if="requests">
       <tr v-for="item in requests" :key="item">
-        <td class="col-2">
+        <td class="col-1">
           {{ item.id }}
         </td>
         <td class="col-2">
@@ -33,7 +33,7 @@
         <td class="col-2">
           {{ item.objectID }}
         </td>
-        <td class="col-4">
+        <td class="col-5">
           {{ item.email }}
         </td>
         <td class="col-1">
