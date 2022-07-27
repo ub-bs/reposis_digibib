@@ -38,7 +38,7 @@ const pages = computed(() => {
   return Array.from(Array(pageCount.value).keys());
 });
 const jumpToPage = (page: number) => {
-  if (page >= 0 && page < pageCount.value) {
+  if (page >= 0 && page < pageCount.value && page !== currentPage.value) {
     store.commit('setCurrentPage', page);
     store.dispatch('fetchData');
   }
