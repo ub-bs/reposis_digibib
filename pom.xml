@@ -36,6 +36,30 @@
   <build>
     <plugins>
       <plugin>
+        <artifactId>maven-shade-plugin</artifactId>
+        <executions>
+          <execution>
+            <phase>package</phase>
+              <goals>
+                <goal>shade</goal>
+              </goals>
+            </execution>
+        </executions>
+        <configuration>
+          <artifactSet>
+            <excludes>
+              <exclude>com.fasterxml.jackson.*:*</exclude>
+              <exclude>org.glassfish.jersey.core:*</exclude>
+              <exclude>org.glassfish.jersey.ext:*</exclude>
+              <exclude>org.apache.httpcomponents:*</exclude>
+              <exclude>org.apache.pdfbox:*</exclude>
+              <exclude>jakarta.*:*</exclude>
+              <exclude>com.sun.*:*</exclude>
+            </excludes>
+          </artifactSet>
+        </configuration>
+      </plugin>
+      <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
       </plugin>
@@ -236,7 +260,6 @@
       <groupId>commons-validator</groupId>
       <artifactId>commons-validator</artifactId>
       <version>1.7</version>
-      <scope>provided</scope> 
     </dependency>
     <dependency>
       <groupId>org.apache.logging.log4j</groupId>
