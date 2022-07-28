@@ -14,7 +14,7 @@ import de.vzg.reposis.digibib.contact.exception.ContactException;
 import org.mycore.restapi.v2.MCRErrorResponse;
 
 @Provider
-public class ContactExceptionMapper implements ExceptionMapper<ContactException> {
+public class ContactExceptionMapper implements ExceptionMapper<ContactException> { // TODO
 
     @Context
     Request request;

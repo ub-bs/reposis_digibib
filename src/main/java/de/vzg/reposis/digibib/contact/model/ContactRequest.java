@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -192,12 +190,6 @@ public class ContactRequest {
         return created;
     }
 
-    @PrePersist
-    protected void onCreate() {
-        created = new Date();
-        lastModified = new Date();
-    }
-
     /**
      * @param created date of creation
      */
@@ -226,11 +218,6 @@ public class ContactRequest {
     @Column(name = "lastModified")
     public Date getLastModified() {
         return lastModified;
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        lastModified = new Date();
     }
 
     /**

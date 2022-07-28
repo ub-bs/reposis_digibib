@@ -12,10 +12,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
-import de.vzg.reposis.digibib.contact.ContactRequestDAO;
-import de.vzg.reposis.digibib.contact.ContactService;
+import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.exception.InvalidMessageException;
+import de.vzg.reposis.digibib.contact.exception.InvalidContactRequestException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
 
@@ -55,13 +54,13 @@ public class RestObjectContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @MCRRequireTransaction
     public Response save(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            ContactRequest contactRequest) throws InvalidMessageException, ContactException {
+            ContactRequest contactRequest) throws InvalidContactRequestException, ContactException {
         if (!MCRMetadataManager.exists(objectID)) {
             throw new ContactException(objectID.toString() + " does not exist.");
         }
         contactRequest.setObjectID(objectID);
         if (!ValidationHelper.validateContactRequest(contactRequest)) {
-            throw new InvalidMessageException();
+            throw new InvalidContactRequestException();
         }
         String genre = null;
         try {
@@ -73,7 +72,7 @@ public class RestObjectContactResource {
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
             throw new ContactException("Not activated for genre: " + genre);
         }
-        ContactService.getInstance().saveContactRequest(contactRequest);
+        ContactRequestService.getInstance().saveContactRequest(contactRequest);
         return Response.ok().build();
     }
 
