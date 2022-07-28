@@ -1,5 +1,6 @@
 package de.vzg.reposis.digibib.contact;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -9,9 +10,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
-import javax.inject.Inject;
-
-import de.vzg.reposis.digibib.contact.exception.InvalidMessageException;
+import de.vzg.reposis.digibib.contact.exception.InvalidContactRequestException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
@@ -40,7 +40,6 @@ public class ContactRequestService {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    @Inject
     private ContactRequestDAO contactRequestDAO;
 
     private static ContactRequestService instance;
@@ -52,7 +51,9 @@ public class ContactRequestService {
         return instance;
     }
 
-    public ContactRequestService() { }
+    private ContactRequestService() {
+        contactRequestDAO = new ContactRequestDAO();
+    }
 
     public ContactRequest getContactRequestByID(long id) {
         return contactRequestDAO.findByID(id);
@@ -62,24 +63,28 @@ public class ContactRequestService {
         return List.copyOf(contactRequestDAO.findAll());
     }
 
-    public void saveContactRequest(ContactRequest contactRequest) {
+    public void saveContactRequest(ContactRequest contactRequest) throws InvalidContactRequestException, MCRException {
         if (!ValidationHelper.validateContactRequest(contactRequest)) {
-            throw new InvalidMessageException();
+            throw new InvalidContactRequestException();
         }
         final MCRObjectID objectID = contactRequest.getObjectID();
         if (objectID == null || !MCRMetadataManager.exists(objectID)) {
             throw new MCRException(objectID.toString() + " does not exist.");
         }
-        contactRequest.setCreatedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
-        contactRequest.setState(ContactRequestState.ACCEPTED); // Move to Service
-        LOGGER.info(contactRequest.toString());
+        final Date currentDate = new Date();
+        contactRequest.setCreated(currentDate);
+        contactRequest.setLastModified(currentDate);
+        final String currentUserID = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
+        contactRequest.setCreatedBy(currentUserID);
+        contactRequest.setLastModifiedBy(currentUserID);
+        contactRequest.setState(ContactRequestState.ACCEPTED);
         contactRequestDAO.save(contactRequest);
     }
 
-    public void removeContactRequestByID(long id) throws IllegalArgumentException { // TODO
+    public void removeContactRequestByID(long id) throws ContactRequestNotFoundException {
         final ContactRequest contactRequest = contactRequestDAO.findByID(id);
         if (contactRequest == null) {
-            throw new IllegalArgumentException();
+            throw new ContactRequestNotFoundException();
         }
         contactRequestDAO.remove(contactRequest);
     }
