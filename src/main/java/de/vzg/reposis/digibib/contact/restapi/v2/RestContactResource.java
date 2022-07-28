@@ -21,6 +21,8 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -28,6 +30,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -41,6 +44,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 
+import org.mycore.restapi.annotations.MCRRequireTransaction;
 import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
 import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 
@@ -61,10 +65,11 @@ public class RestContactResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public List<ContactRequest> findAll(@DefaultValue("0") @QueryParam("offset") int offset,
-        @DefaultValue("128") @QueryParam("limit") int limit) {
-        return ContactRequestService.getInstance().getContactRequests().stream().skip(offset).limit(limit)
-                .collect(Collectors.toList()); // TODO send size header
+    public List<ContactRequest> getContactRequests(@DefaultValue("0") @QueryParam("offset") int offset,
+        @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
+        List<ContactRequest> contactRequests = ContactRequestService.getInstance().getContactRequests();
+        response.setHeader("X-Total-Count", Integer.toString(contactRequests.size()));
+        return contactRequests.stream().skip(offset).limit(limit).collect(Collectors.toList());
     }
 
     @GET
@@ -82,13 +87,25 @@ public class RestContactResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRequest findAllByID(@PathParam(PARAM_CONTACT_REQUEST_ID) long id) {
+    public ContactRequest getContactRequestByID(@PathParam(PARAM_CONTACT_REQUEST_ID) long id) {
         return ContactRequestService.getInstance().getContactRequestByID(id);
     }
 
-    @POST
-    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}/execute")
-    public Response process(@PathParam(PARAM_CONTACT_REQUEST_ID) long id) {
-        return null; // TODO
+    @DELETE
+    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}")
+    @Operation(
+        summary = "Deletes contact request by id",
+        responses = {
+            @ApiResponse(responseCode = "204"),
+            @ApiResponse(responseCode = "401",
+                description = "You do not have create permission and need to authenticate first",
+                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist",
+                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
+        })
+    @MCRRequireTransaction
+    public Response removeContactRequestByID(@PathParam(PARAM_CONTACT_REQUEST_ID) long id) {
+        ContactRequestService.getInstance().removeContactRequestByID(id);
+        return Response.noContent().build();
     }
 }
