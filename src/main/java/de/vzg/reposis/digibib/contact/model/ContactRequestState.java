@@ -1,5 +1,5 @@
 package de.vzg.reposis.digibib.contact.model;
 
 public enum ContactRequestState {
-    ACCEPTED, READY, PEDNING, PROCESSING, FINISHED
+    ACCEPTED, PROCESSING, READY, REJECTED, PEDNING, FINISHED
 }

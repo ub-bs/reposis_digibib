@@ -9,6 +9,8 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
 import de.vzg.reposis.digibib.contact.exception.InvalidMessageException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
@@ -36,6 +38,20 @@ import org.mycore.util.concurrent.MCRTransactionableRunnable;
 
 public class ContactService {
 
+    @Inject
+    private ContactRequestDAO contactRequestDAO;
+
+    private static ContactService instance;
+
+    public static ContactService getInstance() {
+        if (instance == null) {
+            instance = new ContactService();
+        }
+        return instance;
+    }
+
+    public ContactService() { }
+
     private static final Logger LOGGER = LogManager.getLogger();
 
     private static ExecutorService CONTACT_SERVICE = Executors.newFixedThreadPool(3);
@@ -62,7 +78,7 @@ public class ContactService {
     }
 
     public ContactRequest getContactRequestByID(long id) {
-        return ContactRequestDAO.getInstance().findByID(id);
+        return contactRequestDAO.findByID(id);
     }
 
     public void saveContactRequest(ContactRequest contactRequest) {
@@ -75,15 +91,16 @@ public class ContactService {
         }
         contactRequest.setCreatedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
         contactRequest.setState(ContactRequestState.ACCEPTED); // Move to Service
-        ContactRequestDAO.getInstance().save(contactRequest);
+        LOGGER.info(contactRequest.toString());
+        contactRequestDAO.save(contactRequest);
     }
 
     public void removeContactRequestByID(long id) throws IllegalArgumentException { // TODO
-        final ContactRequest contactRequest = ContactRequestDAO.getInstance().findByID(id);
+        final ContactRequest contactRequest = contactRequestDAO.findByID(id);
         if (contactRequest == null) {
             throw new IllegalArgumentException();
         }
-        ContactRequestDAO.getInstance().remove(contactRequest);
+        contactRequestDAO.remove(contactRequest);
     }
 
     public static void contact(ContactRequest contactRequest) throws InvalidMessageException, MCRException {

@@ -1,6 +1,8 @@
 package de.vzg.reposis.digibib.contact.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;
@@ -12,9 +14,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -38,7 +43,7 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 })
 
 @Entity
-@Table(name = "ContactRequest")
+@Table(name = "contact_request")
 public class ContactRequest {
 
     private static final String PROP_SENDER = "email";
@@ -53,14 +58,19 @@ public class ContactRequest {
 
     private long id;
 
+    @Email
+    @NotNull
     private String sender;
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String message;
 
     private String orcid;
 
+    @NotNull
     private MCRObjectID objectID;
 
     private boolean sendCopy = false;
@@ -79,13 +89,15 @@ public class ContactRequest {
 
     private ContactRequestState state;
 
+    private List<ContactRequestRecipient> recipients = new ArrayList();
+
     public ContactRequest() { }
 
-    public ContactRequest(String sender, String name, String message, String orcid) {
+    public ContactRequest(MCRObjectID objectID, String sender, String name, String message) {
+        this.objectID = objectID;
         this.sender = sender;
         this.name = name;
         this.message = message;
-        this.orcid = orcid;
     }
 
     /**
@@ -251,6 +263,15 @@ public class ContactRequest {
 
     public void setState(ContactRequestState state) {
         this.state = state;
+    }
+
+    @OneToMany(mappedBy = "contactRequest")
+    public List<ContactRequestRecipient> getRecipients() {
+        return recipients;
+    }
+
+    public void setRecipients(List<ContactRequestRecipient> recipients) {
+        this.recipients = recipients;
     }
 
     @Override

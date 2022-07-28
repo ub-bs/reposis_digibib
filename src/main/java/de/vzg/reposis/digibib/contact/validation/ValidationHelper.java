@@ -1,28 +1,20 @@
 package de.vzg.reposis.digibib.contact.validation;
 
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import java.util.Set;
 
-import org.apache.commons.validator.routines.EmailValidator;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+
+import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
 public class ValidationHelper {
 
-    public static boolean validateEmail(String email) {
-        return EmailValidator.getInstance().isValid(email);
-    }
-
     public static boolean validateContactRequest(ContactRequest contactRequest) {
-        final String sender = contactRequest.getSender();
-        if (sender == null || !validateEmail(sender)) {
-            return false;
-        }
-        final String name = contactRequest.getName();
-        if (name == null || name.isEmpty()) {
-            return false;
-        }
-        final String message = contactRequest.getMessage();
-        if (message == null || message.isEmpty()) {
-            return false;
-        }
-        return true;
+        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        final Validator validator = factory.getValidator();
+        final Set<ConstraintViolation<ContactRequest>> constraintViolations = validator.validate(contactRequest);
+        return constraintViolations.size() == 0;
     }
 }

@@ -13,7 +13,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import de.vzg.reposis.digibib.contact.ContactRequestDAO;
+import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -45,7 +45,7 @@ public class RestContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRequest> findAll(@DefaultValue("0") @QueryParam("offset") int offset,
         @DefaultValue("128") @QueryParam("limit") int limit) {
-        return ContactRequestDAO.getInstance().findAll().stream().skip(offset).limit(limit)
+        return ContactRequestService.getInstance().getContactRequests().stream().skip(offset).limit(limit)
                 .collect(Collectors.toList()); // TODO send size header
     }
 
@@ -65,7 +65,7 @@ public class RestContactResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public ContactRequest findAllByID(@PathParam(PARAM_CONTACT_REQUEST_ID) long id) {
-        return ContactRequestDAO.getInstance().findByID(id);
+        return ContactRequestService.getInstance().getContactRequestByID(id);
     }
 
     @POST
