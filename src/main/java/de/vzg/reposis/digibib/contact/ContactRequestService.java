@@ -46,7 +46,7 @@ public class ContactRequestService {
     }
 
     private ContactRequestService() {
-        contactRequestDAO = new ContactRequestDAO();
+        contactRequestDAO = new ContactRequestDAOImpl();
     }
 
     public ContactRequest getContactRequestByID(long id) {
