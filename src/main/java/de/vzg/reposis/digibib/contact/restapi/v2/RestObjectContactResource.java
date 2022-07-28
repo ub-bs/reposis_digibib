@@ -13,6 +13,7 @@ import javax.ws.rs.core.Response;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactRequestDAO;
+import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.InvalidMessageException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -72,7 +73,7 @@ public class RestObjectContactResource {
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
             throw new ContactException("Not activated for genre: " + genre);
         }
-        ContactRequestDAO.getInstance().save(contactRequest);
+        ContactService.getInstance().saveContactRequest(contactRequest);
         return Response.ok().build();
     }
 

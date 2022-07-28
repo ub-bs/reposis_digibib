@@ -12,15 +12,6 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestDAO {
 
-    private static ContactRequestDAO instance;
-
-    public static ContactRequestDAO getInstance() {
-        if (instance == null) {
-            instance = new ContactRequestDAO();
-        }
-        return instance;
-    }
-
     public Collection<ContactRequest> findAll() {
         final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findAll", ContactRequest.class).getResultList();
