@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact;
 import java.util.Date;
 import java.util.List;
 
+import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.InvalidContactRequestException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -57,7 +58,7 @@ public class ContactRequestService {
         return List.copyOf(contactRequestDAO.findAll());
     }
 
-    public void saveContactRequest(ContactRequest contactRequest) throws InvalidContactRequestException, MCRException {
+    public void insertContactRequest(ContactRequest contactRequest) throws InvalidContactRequestException, MCRException {
         if (!ValidationHelper.validateContactRequest(contactRequest)) {
             throw new InvalidContactRequestException();
         }
@@ -71,8 +72,8 @@ public class ContactRequestService {
         final String currentUserID = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
         contactRequest.setCreatedBy(currentUserID);
         contactRequest.setLastModifiedBy(currentUserID);
-        contactRequest.setState(ContactRequestState.ACCEPTED);
-        contactRequestDAO.save(contactRequest);
+        contactRequest.setState(ContactRequestState.RECEIVED);
+        contactRequestDAO.insert(contactRequest);
     }
 
     public void removeContactRequestByID(long id) throws ContactRequestNotFoundException {
@@ -81,5 +82,32 @@ public class ContactRequestService {
             throw new ContactRequestNotFoundException();
         }
         contactRequestDAO.remove(contactRequest);
+    }
+
+    public void rejectContactRequest(long id) {
+        final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+        if (contactRequest == null) {
+            throw new ContactRequestNotFoundException();
+        }
+        if (!ContactRequestState.READY.equals(contactRequest.getState())) {
+            throw new ContactException("Contact request state is not ready.");
+        }
+        updateState(contactRequest, ContactRequestState.REJECTED);
+    }
+
+    public void forwardContactRequest(long id) {
+        final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+        if (contactRequest == null) {
+            throw new ContactRequestNotFoundException();
+        }
+        if (!ContactRequestState.READY.equals(contactRequest.getState())) {
+            throw new ContactException("Contact request state is not ready.");
+        }
+        updateState(contactRequest, ContactRequestState.ACCEPTED);
+    }
+
+    private void updateState(ContactRequest request, ContactRequestState state) {
+        request.setState(state);
+        contactRequestDAO.update(request);
     }
 }

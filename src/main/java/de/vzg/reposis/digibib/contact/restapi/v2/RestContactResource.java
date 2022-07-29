@@ -51,8 +51,6 @@ import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 @Path("/contacts/")
 public class RestContactResource {
 
-    protected final String PARAM_CONTACT_REQUEST_ID = "contact_request_id";
-
     @GET
     @Operation(
         summary = "Lists all contact requests",
@@ -73,7 +71,7 @@ public class RestContactResource {
     }
 
     @GET
-    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}")
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(
         summary = "Gets contact request by id",
         responses = {
@@ -87,12 +85,12 @@ public class RestContactResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRequest getContactRequestByID(@PathParam(PARAM_CONTACT_REQUEST_ID) long id) {
+    public ContactRequest getContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) {
         return ContactRequestService.getInstance().getContactRequestByID(id);
     }
 
     @DELETE
-    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}")
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(
         summary = "Deletes contact request by id",
         responses = {
@@ -104,7 +102,7 @@ public class RestContactResource {
                 content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
         })
     @MCRRequireTransaction
-    public Response removeContactRequestByID(@PathParam(PARAM_CONTACT_REQUEST_ID) long id) {
+    public Response removeContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) {
         ContactRequestService.getInstance().removeContactRequestByID(id);
         return Response.noContent().build();
     }

@@ -90,7 +90,27 @@ public class RestObjectContactResource {
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
             throw new ContactException("Not activated for genre: " + genre);
         }
-        ContactRequestService.getInstance().saveContactRequest(contactRequest);
+        ContactRequestService.getInstance().insertContactRequest(contactRequest);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
+    @MCRRequireTransaction
+    public Response forward(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactException {
+        ContactRequestService.getInstance().forwardContactRequest(id);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/reject")
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
+    @MCRRequireTransaction
+    public Response reject(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactException {
+        ContactRequestService.getInstance().rejectContactRequest(id);
         return Response.ok().build();
     }
 
