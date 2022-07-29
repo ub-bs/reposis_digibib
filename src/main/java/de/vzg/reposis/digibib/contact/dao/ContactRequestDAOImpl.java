@@ -16,7 +16,7 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact;
+package de.vzg.reposis.digibib.contact.dao;
 
 import java.util.Collection;
 
@@ -32,32 +32,27 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
 
     @Override
     public Collection<ContactRequest> findAll() {
-        final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
+        return MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findAll", ContactRequest.class).getResultList();
-        return contactRequests;
     }
 
     @Override
     public Collection<ContactRequest> findByObjectID(MCRObjectID objectID) {
-        final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
+        return MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByObjectID", ContactRequest.class)
                 .setParameter("objectID", objectID).getResultList();
-        return contactRequests;
     }
 
     @Override
     public Collection<ContactRequest> findByState(ContactRequestState state) {
-        final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
+        return MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByState", ContactRequest.class)
                 .setParameter("state", state).getResultList();
-        return contactRequests;
     }
 
     @Override
     public ContactRequest findByID(long id) {
-        final ContactRequest contactRequest = MCREntityManagerProvider.getCurrentEntityManager()
-            .find(ContactRequest.class, id);
-        return contactRequest;
+        return MCREntityManagerProvider.getCurrentEntityManager().find(ContactRequest.class, id);
     }
 
     @Override
