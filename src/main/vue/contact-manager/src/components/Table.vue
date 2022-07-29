@@ -62,7 +62,7 @@ import { useI18n } from 'vue-i18n';
 import Modal from './Modal.vue';
 
 const store = useStore();
-const requests = computed(() => store.state.requests);
+const requests = computed(() => store.getters.getCurrentRequests);
 const { t } = useI18n();
 const currentId = ref(null);
 const showModal = computed(() => store.state.showModal);
@@ -71,6 +71,6 @@ const viewRequest = (id: number) => {
   store.commit('setModal', { show: true, id });
 };
 const removeRequest = (id: number) => {
-  console.log(id);
+  store.dispatch('removeContactRequest', id);
 };
 </script>
