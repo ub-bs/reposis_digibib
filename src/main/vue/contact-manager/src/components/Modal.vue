@@ -136,7 +136,6 @@ const close = () => {
   store.commit('setModal', { show: false, id: undefined });
 };
 </script>
-
 <style>
 .modal-mask {
   position: fixed;
