@@ -16,21 +16,9 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact;
+package de.vzg.reposis.digibib.contact.restapi.v2;
 
-import java.util.Collection;
+public class RestConstants {
 
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.model.ContactRequestState;
-
-import org.mycore.datamodel.metadata.MCRObjectID;
-
-public interface ContactRequestDAO {
-    Collection<ContactRequest> findAll();
-    Collection<ContactRequest> findByObjectID(MCRObjectID objectID);
-    Collection<ContactRequest> findByState(ContactRequestState state);
-    ContactRequest findByID(long id);
-    void insert(ContactRequest contactRequest);
-    void update(ContactRequest contactRequest);
-    void remove(ContactRequest contactRequest);
+    public static final String PARAM_CONTACT_REQUEST_ID = "contact_request_id";
 }

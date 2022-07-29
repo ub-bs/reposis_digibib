@@ -30,12 +30,14 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestDAOImpl implements ContactRequestDAO {
 
+    @Override
     public Collection<ContactRequest> findAll() {
         final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findAll", ContactRequest.class).getResultList();
         return contactRequests;
     }
 
+    @Override
     public Collection<ContactRequest> findByObjectID(MCRObjectID objectID) {
         final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByObjectID", ContactRequest.class)
@@ -43,6 +45,7 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
         return contactRequests;
     }
 
+    @Override
     public Collection<ContactRequest> findByState(ContactRequestState state) {
         final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByState", ContactRequest.class)
@@ -50,16 +53,25 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
         return contactRequests;
     }
 
+    @Override
     public ContactRequest findByID(long id) {
         final ContactRequest contactRequest = MCREntityManagerProvider.getCurrentEntityManager()
             .find(ContactRequest.class, id);
         return contactRequest;
     }
 
-    public void save(ContactRequest contactRequest) {
+    @Override
+    public void insert(ContactRequest contactRequest) {
         MCREntityManagerProvider.getCurrentEntityManager().persist(contactRequest);
     }
 
+    @Override
+    public void update(ContactRequest contactRequest) {
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        entityManager.merge(contactRequest);
+    }
+
+    @Override
     public void remove(ContactRequest contactRequest) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
         entityManager.remove(entityManager.contains(contactRequest) ? contactRequest
