@@ -16,21 +16,17 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact;
+package de.vzg.reposis.digibib.contact.dao;
 
 import java.util.Collection;
 
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
-import org.mycore.datamodel.metadata.MCRObjectID;
-
-public interface ContactRequestDAO {
-    Collection<ContactRequest> findAll();
-    Collection<ContactRequest> findByObjectID(MCRObjectID objectID);
-    Collection<ContactRequest> findByState(ContactRequestState state);
-    ContactRequest findByID(long id);
-    void insert(ContactRequest contactRequest);
-    void update(ContactRequest contactRequest);
-    void remove(ContactRequest contactRequest);
+public interface ContactBaseDAO<T> {
+    Collection<T> findAll();
+    T findByID(long id);
+    void insert(T object);
+    void update(T object);
+    void remove(T object);
 }

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -270,13 +271,20 @@ public class ContactRequest {
         this.state = state;
     }
 
-    @OneToMany(mappedBy = "contactRequest")
+    @OneToMany(mappedBy = "contactRequest",
+              cascade = CascadeType.ALL,
+              orphanRemoval = true)
     public List<ContactRequestRecipient> getRecipients() {
         return recipients;
     }
 
     public void setRecipients(List<ContactRequestRecipient> recipients) {
         this.recipients = recipients;
+    }
+
+    public void addRecipient(ContactRequestRecipient recipient) {
+        recipients.add(recipient);
+        recipient.setContactRequest(this);
     }
 
     @Override
