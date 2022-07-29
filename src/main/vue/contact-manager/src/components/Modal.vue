@@ -74,10 +74,12 @@
                 {{ t('digibib.contact.frontend.manager.button.close') }}
               </button>
               <div class="btn-group">
-                <button type="button" class="btn btn-danger">
+                <button type="button" class="btn btn-danger" @click="reject"
+                    :disabled="state.state !== 'READY'">
                   {{ t('digibib.contact.frontend.manager.button.reject') }}
                 </button>
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-success" @click="forward"
+                    :disabled="state.state !== 'READY'">
                   {{ t('digibib.contact.frontend.manager.button.forward') }}
                 </button>
               </div>
@@ -134,6 +136,12 @@ onMounted(() => {
 });
 const close = () => {
   store.commit('setModal', { show: false, id: undefined });
+};
+const forward = () => {
+  store.dispatch('forwardContactRequest', { objectID: state.objectID, id: state.id });
+};
+const reject = () => {
+  store.dispatch('rejectContactRequest', { objectID: state.objectID, id: state.id });
 };
 </script>
 <style>
