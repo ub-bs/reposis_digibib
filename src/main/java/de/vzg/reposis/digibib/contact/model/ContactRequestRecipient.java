@@ -32,6 +32,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @NamedQueries({
     @NamedQuery(name = "ContactRequestRecipient.findAll",
         query = "SELECT r"
@@ -50,6 +52,7 @@ public class ContactRequestRecipient {
 
     private String email;
 
+    @JsonIgnore
     private ContactRequest contactRequest;
 
     public ContactRequestRecipient() { }

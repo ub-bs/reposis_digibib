@@ -299,6 +299,7 @@ public class ContactRequest {
         if (name != null) {
             result += "name: " + name + "\n";
         }
+        result += "state: " + state.toString() + "\n";
         if (orcid != null) {
             result += "orcid: " + orcid + "\n";
         }
