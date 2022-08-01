@@ -20,9 +20,6 @@ package de.vzg.reposis.digibib.contact.dao;
 
 import java.util.Collection;
 
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.model.ContactRequestState;
-
 public interface ContactBaseDAO<T> {
     Collection<T> findAll();
     T findByID(long id);

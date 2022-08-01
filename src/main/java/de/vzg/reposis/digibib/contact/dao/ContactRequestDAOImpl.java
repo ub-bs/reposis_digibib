@@ -62,8 +62,7 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
 
     @Override
     public void update(ContactRequest contactRequest) {
-        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        entityManager.merge(contactRequest);
+        MCREntityManagerProvider.getCurrentEntityManager().merge(contactRequest);
     }
 
     @Override

@@ -21,8 +21,6 @@ package de.vzg.reposis.digibib.contact;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAOImpl;
@@ -33,23 +31,20 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
-import org.mycore.common.events.MCRShutdownHandler;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestService {
 
-    private static final Logger LOGGER = LogManager.getLogger();
+    private static ContactRequestService instance;
 
     private ContactRequestDAO contactRequestDAO;
 
-    private static ContactRequestService instance;
-
-    private ExecutorService executor;
+    protected ContactRequestService() {
+        this.contactRequestDAO = new ContactRequestDAOImpl();
+    }
 
     public static ContactRequestService getInstance() {
         if (instance == null) {
@@ -58,35 +53,16 @@ public class ContactRequestService {
         return instance;
     }
 
-    private ContactRequestService() {
-        contactRequestDAO = new ContactRequestDAOImpl();
-        executor = Executors.newSingleThreadExecutor();
-        MCRShutdownHandler.getInstance().addCloseable(new MCRShutdownHandler.Closeable() {
-
-            @Override
-            public void prepareClose() {
-                // nothing to todo
-            }
-
-            @Override
-            public int getPriority() {
-                return Integer.MIN_VALUE;
-            }
-
-            @Override
-            public void close() {
-                LOGGER.info("Shutting down contact service...");
-                executor.shutdown();
-            }
-        });
+    public List<ContactRequest> getContactRequests() {
+        return List.copyOf(contactRequestDAO.findAll());
     }
 
     public ContactRequest getContactRequestByID(long id) {
         return contactRequestDAO.findByID(id);
     }
 
-    public List<ContactRequest> getContactRequests() {
-        return List.copyOf(contactRequestDAO.findAll());
+    public List<ContactRequest> listContactRequestsByState(ContactRequestState state) {
+        return new ArrayList(contactRequestDAO.findByState(state));
     }
 
     public void insertContactRequest(ContactRequest contactRequest) throws InvalidContactRequestException, MCRException {
@@ -106,7 +82,12 @@ public class ContactRequestService {
         contactRequest.setLastModifiedBy(currentUserID);
         contactRequest.setState(ContactRequestState.RECEIVED);
         contactRequestDAO.insert(contactRequest);
-        executor.execute(new ContactCollectorTask(contactRequestDAO, contactRequest));
+    }
+
+    public void updateContactRequest(ContactRequest contactRequest) {
+        contactRequest.setLastModified(new Date());
+        contactRequest.setLastModifiedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
+        contactRequestDAO.update(contactRequest);
     }
 
     public void removeContactRequestByID(long id) throws ContactRequestNotFoundException {
@@ -125,7 +106,8 @@ public class ContactRequestService {
         if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
             throw new ContactException("Contact request state is not ready.");
         }
-        updateState(contactRequest, ContactRequestState.REJECTED);
+        contactRequest.setState(ContactRequestState.REJECTED);
+        updateContactRequest(contactRequest);
     }
 
     public void forwardContactRequest(long id) {
@@ -136,11 +118,7 @@ public class ContactRequestService {
         if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
             throw new ContactException("Contact request state is not ready.");
         }
-        updateState(contactRequest, ContactRequestState.ACCEPTED);
-    }
-
-    private void updateState(ContactRequest request, ContactRequestState state) {
-        request.setState(state);
-        contactRequestDAO.update(request);
+        contactRequest.setState(ContactRequestState.ACCEPTED);
+        updateContactRequest(contactRequest);
     }
 }
