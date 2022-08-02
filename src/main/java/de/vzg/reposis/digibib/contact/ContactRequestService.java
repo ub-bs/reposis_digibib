@@ -21,6 +21,9 @@ package de.vzg.reposis.digibib.contact;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAOImpl;
@@ -38,87 +41,139 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestService {
 
-    private static ContactRequestService instance;
+    private final ContactRequestDAO contactRequestDAO;
 
-    private ContactRequestDAO contactRequestDAO;
+    private final ReadWriteLock lock;
+
+    private final Lock readLock;
+
+    private final Lock writeLock;
 
     protected ContactRequestService() {
-        this.contactRequestDAO = new ContactRequestDAOImpl();
+        contactRequestDAO = new ContactRequestDAOImpl();
+        lock = new ReentrantReadWriteLock();
+        readLock = lock.readLock();
+        writeLock = lock.writeLock();
     }
 
     public static ContactRequestService getInstance() {
-        if (instance == null) {
-            instance = new ContactRequestService();
-        }
-        return instance;
+        return Holder.INSTANCE;
     }
 
     public List<ContactRequest> getContactRequests() {
-        return List.copyOf(contactRequestDAO.findAll());
+        try {
+            readLock.lock();
+            return List.copyOf(contactRequestDAO.findAll());
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public ContactRequest getContactRequestByID(long id) {
-        return contactRequestDAO.findByID(id);
+        try {
+            readLock.lock();
+            return contactRequestDAO.findByID(id);
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public List<ContactRequest> listContactRequestsByState(ContactRequestState state) {
-        return new ArrayList(contactRequestDAO.findByState(state));
+        try {
+            readLock.lock();
+            return new ArrayList(contactRequestDAO.findByState(state));
+        } finally {
+            readLock.unlock();
+        }
     }
 
     public void insertContactRequest(ContactRequest contactRequest) throws InvalidContactRequestException, MCRException {
-        if (!ValidationHelper.validateContactRequest(contactRequest)) {
-            throw new InvalidContactRequestException();
+        try {
+            writeLock.lock();
+            if (!ValidationHelper.validateContactRequest(contactRequest)) {
+                throw new InvalidContactRequestException();
+            }
+            final MCRObjectID objectID = contactRequest.getObjectID();
+            if (objectID == null || !MCRMetadataManager.exists(objectID)) {
+                throw new MCRException(objectID.toString() + " does not exist.");
+            }
+            final Date currentDate = new Date();
+            contactRequest.setCreated(currentDate);
+            contactRequest.setLastModified(currentDate);
+            final String currentUserID = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
+            contactRequest.setRecipients(new ArrayList()); // sanitize recipients
+            contactRequest.setCreatedBy(currentUserID);
+            contactRequest.setLastModifiedBy(currentUserID);
+            contactRequest.setState(ContactRequestState.RECEIVED);
+            contactRequestDAO.insert(contactRequest);
+        } finally {
+            writeLock.unlock();
         }
-        final MCRObjectID objectID = contactRequest.getObjectID();
-        if (objectID == null || !MCRMetadataManager.exists(objectID)) {
-            throw new MCRException(objectID.toString() + " does not exist.");
-        }
-        final Date currentDate = new Date();
-        contactRequest.setCreated(currentDate);
-        contactRequest.setLastModified(currentDate);
-        final String currentUserID = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
-        contactRequest.setRecipients(new ArrayList()); // sanitize recipients
-        contactRequest.setCreatedBy(currentUserID);
-        contactRequest.setLastModifiedBy(currentUserID);
-        contactRequest.setState(ContactRequestState.RECEIVED);
-        contactRequestDAO.insert(contactRequest);
     }
 
     public void updateContactRequest(ContactRequest contactRequest) {
+        try {
+            writeLock.lock();
+            update(contactRequest);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void removeContactRequestByID(long id) throws ContactRequestNotFoundException {
+        try {
+            writeLock.lock();
+            final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+            if (contactRequest == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            contactRequestDAO.remove(contactRequest);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void rejectContactRequest(long id) {
+        try {
+            writeLock.lock();
+            final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+            if (contactRequest == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
+                throw new ContactException("Contact request state is not ready.");
+            }
+            contactRequest.setState(ContactRequestState.REJECTED);
+            update(contactRequest);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void forwardContactRequest(long id) {
+        try {
+            writeLock.lock();
+            final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+            if (contactRequest == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
+                throw new ContactException("Contact request state is not ready.");
+            }
+            contactRequest.setState(ContactRequestState.ACCEPTED);
+            update(contactRequest);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    private void update(ContactRequest contactRequest) {
         contactRequest.setLastModified(new Date());
         contactRequest.setLastModifiedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
         contactRequestDAO.update(contactRequest);
     }
 
-    public void removeContactRequestByID(long id) throws ContactRequestNotFoundException {
-        final ContactRequest contactRequest = contactRequestDAO.findByID(id);
-        if (contactRequest == null) {
-            throw new ContactRequestNotFoundException();
-        }
-        contactRequestDAO.remove(contactRequest);
-    }
-
-    public void rejectContactRequest(long id) {
-        final ContactRequest contactRequest = contactRequestDAO.findByID(id);
-        if (contactRequest == null) {
-            throw new ContactRequestNotFoundException();
-        }
-        if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
-            throw new ContactException("Contact request state is not ready.");
-        }
-        contactRequest.setState(ContactRequestState.REJECTED);
-        updateContactRequest(contactRequest);
-    }
-
-    public void forwardContactRequest(long id) {
-        final ContactRequest contactRequest = contactRequestDAO.findByID(id);
-        if (contactRequest == null) {
-            throw new ContactRequestNotFoundException();
-        }
-        if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
-            throw new ContactException("Contact request state is not ready.");
-        }
-        contactRequest.setState(ContactRequestState.ACCEPTED);
-        updateContactRequest(contactRequest);
+    private static class Holder {
+        static final ContactRequestService INSTANCE = new ContactRequestService();
     }
 }
