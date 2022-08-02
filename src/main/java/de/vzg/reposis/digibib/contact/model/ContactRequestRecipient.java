@@ -27,9 +27,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -52,7 +52,6 @@ public class ContactRequestRecipient {
 
     private String email;
 
-    @JsonIgnore
     private ContactRequest contactRequest;
 
     public ContactRequestRecipient() { }
@@ -115,6 +114,7 @@ public class ContactRequestRecipient {
         this.email = email;
     }
 
+    @JsonIgnore
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="contact_request_id")
     public ContactRequest getContactRequest() {

@@ -54,6 +54,7 @@ public class ContactCollectorTask implements Runnable {
     @Override
     public void run() {
         LOGGER.info("Running contact collection cron...");
+        // TODO lock service to prevent deletes
         contactRequestService.listContactRequestsByState(ContactRequestState.RECEIVED).stream().forEach((r) -> {
             try {
                 compute(r).call();
@@ -66,10 +67,9 @@ public class ContactCollectorTask implements Runnable {
     }
 
     private MCRFixedUserCallable<Void> compute(ContactRequest contactRequest) {
-        final MCRObjectID objectID = contactRequest.getObjectID();
-        LOGGER.info("Started new collection task for {}.", objectID.toString());
+        LOGGER.info("Started collection task for {}.", contactRequest.getObjectID().toString());
         return new MCRFixedUserCallable<>(() -> {
-            contactRequest.setState(ContactRequestState.PROCESSING);
+            contactRequest.setState(ContactRequestState.PROCESSING); // TODO single commits
             contactRequestService.updateContactRequest(contactRequest);
             if (contactRequest.getRecipients().isEmpty()) {
                 addFallbackRecipient(contactRequest);
@@ -83,14 +83,12 @@ public class ContactCollectorTask implements Runnable {
     private void addOrcidRecipients(ContactRequest contactRequest) {
         final MCRObjectID objectID = contactRequest.getObjectID();
         final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
-        final List<Element> authors = getAuthors(object);
-        /* for (Element author : authors) {
-            final String orcid = getORCID(author);
+        /* getAuthors(object).stream().forEach((a) -> {
+            final String orcid = getORCID(a);
             if (orcid != null) {
                 recipients.addAll(getEmails(orcid));
             }
-                // TODO extract affiliations
-        } */
+        }); */
     }
 
     private void addFallbackRecipient(ContactRequest contactRequest) {
@@ -100,7 +98,7 @@ public class ContactCollectorTask implements Runnable {
         contactRequest.addRecipient(fallback);
     }
 
-    private static List<Element> getAuthors(MCRObject object) {
+    private List<Element> getAuthors(MCRObject object) {
         return new MCRMODSWrapper(object).getElements("mods:name[@type='personal']");
     }
 }
