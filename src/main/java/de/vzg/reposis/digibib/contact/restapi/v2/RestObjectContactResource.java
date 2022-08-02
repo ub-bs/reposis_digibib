@@ -32,6 +32,7 @@ import javax.ws.rs.core.Response;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
+import de.vzg.reposis.digibib.contact.exception.ContactGenreNotEnabledException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
@@ -74,7 +75,8 @@ public class RestObjectContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @MCRRequireTransaction
     public Response save(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            ContactRequest contactRequest) throws ContactRequestInvalidException, ContactException {
+            ContactRequest contactRequest) throws ContactRequestInvalidException, ContactGenreNotEnabledException,
+            ContactException {
         if (!MCRMetadataManager.exists(objectID)) {
             throw new ContactRequestInvalidException(objectID.toString() + " does not exist.");
         }
@@ -90,7 +92,7 @@ public class RestObjectContactResource {
                                                                                 // mcrexceptino mapper works
         }
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
-            throw new ContactException("Not activated for genre: " + genre);
+            throw new ContactGenreNotEnabledException("Not activated for genre: " + genre);
         }
         ContactRequestService.getInstance().insertContactRequest(contactRequest);
         return Response.ok().build();
