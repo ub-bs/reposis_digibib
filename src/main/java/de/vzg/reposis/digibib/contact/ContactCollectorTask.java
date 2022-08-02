@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact;
 import java.util.List;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
@@ -54,30 +55,34 @@ public class ContactCollectorTask implements Runnable {
     @Override
     public void run() {
         LOGGER.info("Running contact collection cron...");
-        // TODO lock service to prevent deletes
         contactRequestService.listContactRequestsByState(ContactRequestState.RECEIVED).stream().forEach((r) -> {
-            try {
-                compute(r).call();
-            } catch (RuntimeException e) {
-                throw e;
-            } catch (Exception e) {
-                throw new MCRException(e);
-            }
+            compute(r);
         });
     }
 
-    private MCRFixedUserCallable<Void> compute(ContactRequest contactRequest) {
-        LOGGER.info("Started collection task for {}.", contactRequest.getObjectID().toString());
-        return new MCRFixedUserCallable<>(() -> {
-            contactRequest.setState(ContactRequestState.PROCESSING); // TODO single commits
+    private void updateContactRequest(ContactRequest contactRequest) throws Exception {
+        new MCRFixedUserCallable<>(() -> {
             contactRequestService.updateContactRequest(contactRequest);
+            return null;
+        }, MCRSystemUserInformation.getJanitorInstance()).call();
+    }
+
+    private void compute(ContactRequest contactRequest) {
+        try {
+            LOGGER.info("Started collection task for {}.", contactRequest.getObjectID().toString());
+            contactRequest.setState(ContactRequestState.PROCESSING);
+            updateContactRequest(contactRequest);
             if (contactRequest.getRecipients().isEmpty()) {
                 addFallbackRecipient(contactRequest);
             }
             contactRequest.setState(ContactRequestState.READY);
-            contactRequestService.updateContactRequest(contactRequest);
-            return null;
-        }, MCRSystemUserInformation.getJanitorInstance());
+            updateContactRequest(contactRequest);
+        } catch (ContactRequestNotFoundException e) {
+            LOGGER.info("Request seems deleted. skipping: {}...", contactRequest.getId());
+        } catch (Exception e) {
+            LOGGER.error("Error while computing contact request: {}.", contactRequest.getId(), e);
+            // TODO set error state
+        }
     }
 
     private void addOrcidRecipients(ContactRequest contactRequest) {
