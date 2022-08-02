@@ -87,5 +87,6 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
     public void remove(ContactRequest contactRequest) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
         entityManager.remove(entityManager.merge(contactRequest));
+        entityManager.detach(contactRequest);
     }
 }
