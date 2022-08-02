@@ -29,7 +29,8 @@ import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAOImpl;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
-import de.vzg.reposis.digibib.contact.exception.InvalidContactRequestException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
@@ -41,19 +42,19 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestService {
 
-    private final ContactRequestDAO contactRequestDAO;
-
     private final ReadWriteLock lock;
 
     private final Lock readLock;
 
     private final Lock writeLock;
 
+    private final ContactRequestDAO contactRequestDAO;
+
     protected ContactRequestService() {
-        contactRequestDAO = new ContactRequestDAOImpl();
         lock = new ReentrantReadWriteLock();
         readLock = lock.readLock();
         writeLock = lock.writeLock();
+        contactRequestDAO = new ContactRequestDAOImpl();
     }
 
     public static ContactRequestService getInstance() {
@@ -87,11 +88,11 @@ public class ContactRequestService {
         }
     }
 
-    public void insertContactRequest(ContactRequest contactRequest) throws InvalidContactRequestException, MCRException {
+    public void insertContactRequest(ContactRequest contactRequest) throws ContactRequestInvalidException, MCRException {
         try {
             writeLock.lock();
             if (!ValidationHelper.validateContactRequest(contactRequest)) {
-                throw new InvalidContactRequestException();
+                throw new ContactRequestInvalidException();
             }
             final MCRObjectID objectID = contactRequest.getObjectID();
             if (objectID == null || !MCRMetadataManager.exists(objectID)) {
@@ -111,21 +112,30 @@ public class ContactRequestService {
         }
     }
 
-    public void updateContactRequest(ContactRequest contactRequest) {
+    public void updateContactRequest(ContactRequest contactRequest) throws ContactRequestNotFoundException {
         try {
             writeLock.lock();
-            update(contactRequest);
+            final long id = contactRequest.getId();
+            if (contactRequestDAO.findByID(id) != null) {
+                update(contactRequest);
+            } else {
+                throw new ContactRequestNotFoundException();
+            }
         } finally {
             writeLock.unlock();
         }
     }
 
-    public void removeContactRequestByID(long id) throws ContactRequestNotFoundException {
+    public void removeContactRequestByID(long id) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest contactRequest = contactRequestDAO.findByID(id);
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
+            }
+            if (!ContactRequestState.PROCESSING.equals(contactRequest.getState())) {
+                throw new ContactRequestStateException("Cannot delete request while processing.");
             }
             contactRequestDAO.remove(contactRequest);
         } finally {
@@ -133,7 +143,8 @@ public class ContactRequestService {
         }
     }
 
-    public void rejectContactRequest(long id) {
+    public void rejectContactRequest(long id) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest contactRequest = contactRequestDAO.findByID(id);
@@ -141,7 +152,7 @@ public class ContactRequestService {
                 throw new ContactRequestNotFoundException();
             }
             if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
-                throw new ContactException("Contact request state is not ready.");
+                throw new ContactRequestStateException("Contact request state is not ready.");
             }
             contactRequest.setState(ContactRequestState.REJECTED);
             update(contactRequest);
@@ -150,7 +161,8 @@ public class ContactRequestService {
         }
     }
 
-    public void forwardContactRequest(long id) {
+    public void forwardContactRequest(long id) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest contactRequest = contactRequestDAO.findByID(id);
@@ -158,7 +170,7 @@ public class ContactRequestService {
                 throw new ContactRequestNotFoundException();
             }
             if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
-                throw new ContactException("Contact request state is not ready.");
+                throw new ContactRequestStateException("Contact request state is not ready.");
             }
             contactRequest.setState(ContactRequestState.ACCEPTED);
             update(contactRequest);
@@ -167,7 +179,7 @@ public class ContactRequestService {
         }
     }
 
-    private void update(ContactRequest contactRequest) {
+    protected void update(ContactRequest contactRequest) {
         contactRequest.setLastModified(new Date());
         contactRequest.setLastModifiedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
         contactRequestDAO.update(contactRequest);

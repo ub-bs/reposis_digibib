@@ -32,7 +32,9 @@ import javax.ws.rs.core.Response;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.exception.InvalidContactRequestException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
 
@@ -72,13 +74,13 @@ public class RestObjectContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @MCRRequireTransaction
     public Response save(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            ContactRequest contactRequest) throws InvalidContactRequestException, ContactException {
+            ContactRequest contactRequest) throws ContactRequestInvalidException, ContactException {
         if (!MCRMetadataManager.exists(objectID)) {
-            throw new ContactException(objectID.toString() + " does not exist.");
+            throw new ContactRequestInvalidException(objectID.toString() + " does not exist.");
         }
         contactRequest.setObjectID(objectID);
         if (!ValidationHelper.validateContactRequest(contactRequest)) {
-            throw new InvalidContactRequestException();
+            throw new ContactRequestInvalidException();
         }
         String genre = null;
         try {
@@ -99,7 +101,8 @@ public class RestObjectContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response forward(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactException {
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
         ContactRequestService.getInstance().forwardContactRequest(id);
         return Response.ok().build();
     }
@@ -109,7 +112,8 @@ public class RestObjectContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response reject(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactException {
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
         ContactRequestService.getInstance().rejectContactRequest(id);
         return Response.ok().build();
     }

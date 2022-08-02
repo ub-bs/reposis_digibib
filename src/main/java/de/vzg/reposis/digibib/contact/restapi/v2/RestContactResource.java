@@ -34,6 +34,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -84,8 +85,14 @@ public class RestContactResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRequest getContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) {
-        return ContactRequestService.getInstance().getContactRequestByID(id);
+    public ContactRequest getContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id)
+            throws ContactRequestNotFoundException {
+        final ContactRequest contactRequest = ContactRequestService.getInstance().getContactRequestByID(id);
+        if (contactRequest != null) {
+            return contactRequest;
+        } else {
+            throw new ContactRequestNotFoundException();
+        }
     }
 
     @DELETE
@@ -101,7 +108,8 @@ public class RestContactResource {
                 content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
         })
     @MCRRequireTransaction
-    public Response removeContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) {
+    public Response removeContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id)
+            throws ContactRequestNotFoundException {
         ContactRequestService.getInstance().removeContactRequestByID(id);
         return Response.noContent().build();
     }
