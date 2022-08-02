@@ -32,43 +32,60 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
 
     @Override
     public Collection<ContactRequest> findAll() {
-        return MCREntityManagerProvider.getCurrentEntityManager()
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findAll", ContactRequest.class).getResultList();
+        contactRequests.forEach(entityManager::detach);
+        return contactRequests;
     }
 
     @Override
     public Collection<ContactRequest> findByObjectID(MCRObjectID objectID) {
-        return MCREntityManagerProvider.getCurrentEntityManager()
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByObjectID", ContactRequest.class)
                 .setParameter("objectID", objectID).getResultList();
+        contactRequests.forEach(entityManager::detach);
+        return contactRequests;
     }
 
     @Override
     public Collection<ContactRequest> findByState(ContactRequestState state) {
-        return MCREntityManagerProvider.getCurrentEntityManager()
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByState", ContactRequest.class)
                 .setParameter("state", state).getResultList();
+        contactRequests.forEach(entityManager::detach);
+        return contactRequests;
     }
 
     @Override
     public ContactRequest findByID(long id) {
-        return MCREntityManagerProvider.getCurrentEntityManager().find(ContactRequest.class, id);
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        final ContactRequest contactRequest = entityManager.find(ContactRequest.class, id);
+        if (contactRequest != null) {
+            entityManager.detach(contactRequest);
+        }
+        return contactRequest;
     }
 
     @Override
     public void insert(ContactRequest contactRequest) {
-        MCREntityManagerProvider.getCurrentEntityManager().persist(contactRequest);
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        entityManager.persist(contactRequest);
+        entityManager.detach(contactRequest);
     }
 
     @Override
     public void update(ContactRequest contactRequest) {
-        MCREntityManagerProvider.getCurrentEntityManager().merge(contactRequest);
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        entityManager.merge(contactRequest);
+        entityManager.detach(contactRequest);
     }
 
     @Override
     public void remove(ContactRequest contactRequest) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        entityManager.remove(entityManager.contains(contactRequest) ? contactRequest
-                : entityManager.merge(contactRequest));
+        entityManager.remove(entityManager.merge(contactRequest));
     }
 }

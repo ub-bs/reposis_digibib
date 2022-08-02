@@ -28,6 +28,7 @@ import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -271,7 +272,8 @@ public class ContactRequest {
         this.state = state;
     }
 
-    @OneToMany(mappedBy = "contactRequest",
+    @OneToMany(fetch = FetchType.EAGER,
+              mappedBy = "contactRequest",
               cascade = CascadeType.ALL,
               orphanRemoval = true)
     public List<ContactRequestRecipient> getRecipients() {

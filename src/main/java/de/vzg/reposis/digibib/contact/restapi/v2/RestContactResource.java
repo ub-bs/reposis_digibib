@@ -65,7 +65,7 @@ public class RestContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRequest> getContactRequests(@DefaultValue("0") @QueryParam("offset") int offset,
         @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
-        List<ContactRequest> contactRequests = ContactRequestService.getInstance().getContactRequests();
+        final List<ContactRequest> contactRequests = ContactRequestService.getInstance().getContactRequests();
         response.setHeader("X-Total-Count", Integer.toString(contactRequests.size()));
         return contactRequests.stream().skip(offset).limit(limit).collect(Collectors.toList());
     }

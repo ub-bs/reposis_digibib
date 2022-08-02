@@ -115,8 +115,8 @@ public class ContactRequestRecipient {
     }
 
     @JsonIgnore
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="contact_request_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "contact_request_id")
     public ContactRequest getContactRequest() {
         return contactRequest;
     }
