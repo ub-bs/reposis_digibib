@@ -134,9 +134,6 @@ public class ContactRequestService {
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (!ContactRequestState.PROCESSING.equals(contactRequest.getState())) {
-                throw new ContactRequestStateException("Cannot delete request while processing.");
-            }
             contactRequestDAO.remove(contactRequest);
         } finally {
             writeLock.unlock();
