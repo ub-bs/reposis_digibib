@@ -35,12 +35,16 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestService {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private final ReadWriteLock lock;
 
@@ -148,7 +152,8 @@ public class ContactRequestService {
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
+            final ContactRequestState state = contactRequest.getState();
+            if (!(ContactRequestState.RECEIVED.equals(state) || ContactRequestState.READY.equals(state))) {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
             contactRequest.setState(ContactRequestState.REJECTED);
@@ -166,7 +171,7 @@ public class ContactRequestService {
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (!ContactRequestState.RECEIVED.equals(contactRequest.getState())) {
+            if (!ContactRequestState.READY.equals(contactRequest.getState())) {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
             contactRequest.setState(ContactRequestState.ACCEPTED);
