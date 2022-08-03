@@ -18,7 +18,9 @@
 
 package de.vzg.reposis.digibib.contact;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
@@ -29,8 +31,6 @@ import de.vzg.reposis.digibib.contact.model.RecipientSource;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.jdom2.Element;
-import org.mycore.common.MCRException;
 import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
@@ -46,7 +46,7 @@ public class ContactCollectorTask implements Runnable {
     private static final String FALLBACK_EMAIL = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackEmail");
 
-    private ContactRequestService contactRequestService;
+    private final ContactRequestService contactRequestService;
 
     public ContactCollectorTask() {
         this.contactRequestService = ContactRequestService.getInstance();
@@ -55,33 +55,40 @@ public class ContactCollectorTask implements Runnable {
     @Override
     public void run() {
         LOGGER.info("Running contact collection cron...");
+        final Map<MCRObjectID, List<ContactRequestRecipient>> recipientsCache = new HashMap();
         contactRequestService.listContactRequestsByState(ContactRequestState.RECEIVED).stream().forEach((r) -> {
-            compute(r);
+            LOGGER.info("Collecting recipients for {}", r.getId());
+            final List<ContactRequestRecipient> cachedRecipients = recipientsCache.get(r.getObjectID());
+            if (cachedRecipients != null) {
+                cachedRecipients.forEach((v) -> r.addRecipient(v));
+            } else {
+                try {
+                    new MCRFixedUserCallable<>(() -> { // use own transaction for each request to isolate errors
+                        collectRecipients(r);
+                        recipientsCache.put(r.getObjectID(), r.getRecipients());
+                        return null;
+                    }, MCRSystemUserInformation.getJanitorInstance()).call();
+                } catch (Exception e) {
+                    LOGGER.error(e);
+                }
+            }
         });
     }
 
-    private void updateContactRequest(ContactRequest contactRequest) throws Exception {
-        new MCRFixedUserCallable<>(() -> {
-            contactRequestService.updateContactRequest(contactRequest);
-            return null;
-        }, MCRSystemUserInformation.getJanitorInstance()).call();
-    }
-
-    private void compute(ContactRequest contactRequest) {
+    private void collectRecipients(ContactRequest contactRequest) {
         try {
-            LOGGER.info("Started collection task for {}.", contactRequest.getObjectID().toString());
-            contactRequest.setState(ContactRequestState.PROCESSING);
-            updateContactRequest(contactRequest);
             if (contactRequest.getRecipients().isEmpty()) {
                 addFallbackRecipient(contactRequest);
             }
             contactRequest.setState(ContactRequestState.READY);
-            updateContactRequest(contactRequest);
         } catch (ContactRequestNotFoundException e) {
-            LOGGER.info("Request seems deleted. skipping: {}...", contactRequest.getId());
-        } catch (Exception e) {
-            LOGGER.error("Error while computing contact request: {}.", contactRequest.getId(), e);
-            // TODO set error state
+            // nothing to do
+        } finally {
+            try {
+                contactRequestService.updateContactRequest(contactRequest);
+            } catch (ContactRequestNotFoundException e) {
+                // nothing to do
+            }
         }
     }
 
@@ -101,9 +108,5 @@ public class ContactCollectorTask implements Runnable {
                 new ContactRequestRecipient("FDM Team", RecipientSource.FALLBACK, FALLBACK_EMAIL);
         fallback.setContactRequest(contactRequest);
         contactRequest.addRecipient(fallback);
-    }
-
-    private List<Element> getAuthors(MCRObject object) {
-        return new MCRMODSWrapper(object).getElements("mods:name[@type='personal']");
     }
 }
