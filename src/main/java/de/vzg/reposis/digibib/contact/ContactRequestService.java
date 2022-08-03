@@ -54,7 +54,7 @@ public class ContactRequestService {
 
     private final ContactRequestDAO contactRequestDAO;
 
-    protected ContactRequestService() {
+    private ContactRequestService() {
         lock = new ReentrantReadWriteLock();
         readLock = lock.readLock();
         writeLock = lock.writeLock();
