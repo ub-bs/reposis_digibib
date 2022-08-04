@@ -4,19 +4,19 @@
     <name>reposis_digibib</name>
 
     <servlet>
-        <servlet-name>MCRVueRootServlet</servlet-name>
+        <servlet-name>MCRVueHandbuecherServlet</servlet-name>
         <servlet-class>org.mycore.vue.MCRVueRootServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MCRVueRootServlet</servlet-name>
+        <servlet-name>MCRVueHandbuecherServlet</servlet-name>
         <url-pattern>/handbuecher/*</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>MCRVueRootServlet</servlet-name>
+        <servlet-name>MCRVueContactServlet</servlet-name>
         <servlet-class>org.mycore.vue.MCRVueRootServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MCRVueRootServlet</servlet-name>
+        <servlet-name>MCRVueContactServlet</servlet-name>
         <url-pattern>/contact/*</url-pattern>
     </servlet-mapping>
 
