@@ -39,7 +39,7 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.util.concurrent.MCRFixedUserCallable;
 
-public class ContactCollectorTask implements Runnable {
+public class ContactCollectTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -48,7 +48,7 @@ public class ContactCollectorTask implements Runnable {
 
     private final ContactRequestService contactRequestService;
 
-    public ContactCollectorTask() {
+    public ContactCollectTask() {
         this.contactRequestService = ContactRequestService.getInstance();
     }
 

@@ -63,6 +63,6 @@ public class ContactTaskManager implements MCRStartupHandler.AutoExecutable {
         }
         ScheduledExecutorService cronExecutorService = Executors.newSingleThreadScheduledExecutor();
         addShutdownHandler(cronExecutorService);
-        cronExecutorService.scheduleWithFixedDelay(new ContactCollectorTask(), 1, 1, TimeUnit.MINUTES);
+        cronExecutorService.scheduleWithFixedDelay(new ContactCollectTask(), 1, 1, TimeUnit.MINUTES);
     }
 }

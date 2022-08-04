@@ -18,6 +18,7 @@
 
 package de.vzg.reposis.digibib.contact;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -36,7 +37,7 @@ import org.mycore.common.MCRMailer;
 import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.config.MCRConfiguration2;
 
-public class ContactRequestSendTask implements Runnable {
+public class ContactSendTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -50,7 +51,7 @@ public class ContactRequestSendTask implements Runnable {
 
     private final ContactRequestService contactRequestService;
 
-    public ContactRequestSendTask(ContactRequest contactRequest) {
+    public ContactSendTask(ContactRequest contactRequest) {
         this.contactRequest = contactRequest;
         this.contactRequestService = ContactRequestService.getInstance();
     }
