@@ -176,6 +176,7 @@ public class ContactRequestService {
             }
             contactRequest.setState(ContactRequestState.ACCEPTED);
             update(contactRequest);
+            new Thread(new ContactSendTask(contactRequest)).run(); // TODO necessary?
         } finally {
             writeLock.unlock();
         }
