@@ -39,12 +39,18 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
+import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
+import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
+import org.mycore.mods.MCRMODSWrapper;
 
 public class ContactRequestService {
 
     private static final Logger LOGGER = LogManager.getLogger();
+
+    private static final String FALLBACK_EMAIL = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackEmail");
 
     private final ReadWriteLock lock;
 

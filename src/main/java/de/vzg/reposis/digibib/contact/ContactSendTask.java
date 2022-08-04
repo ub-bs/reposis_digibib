@@ -78,7 +78,7 @@ public class ContactSendTask implements Runnable {
             properties.put("orcid", orcid);
         }
         try {
-            send(baseEmail.toXML(), MAIL_STYLESHEET, properties);;
+            send(baseEmail.toXML(), MAIL_STYLESHEET, properties);
             // TODO handle state
         } catch(MessagingException e) {
             LOGGER.error("Error while sending mail:", e);
