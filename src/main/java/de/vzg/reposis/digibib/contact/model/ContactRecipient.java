@@ -34,35 +34,29 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@NamedQueries({
-    @NamedQuery(name = "ContactRequestRecipient.findAll",
-        query = "SELECT r"
-            + "  FROM ContactRequestRecipient r"),
-})
-
 @Entity
-@Table(name = "contact_request_recipient")
-public class ContactRequestRecipient {
+@Table(name = "contact_recipient")
+public class ContactRecipient {
 
     private long id;
 
     private String name;
 
-    private RecipientSource recipientSource;
+    private ContactRecipientSource recipientSource;
 
     private String email;
 
     private ContactRequest contactRequest;
 
-    public ContactRequestRecipient() { }
+    public ContactRecipient() { }
 
-    public ContactRequestRecipient(String name, RecipientSource source, String email) {
+    public ContactRecipient(String name, ContactRecipientSource source, String email) {
         this.name = name;
         this.recipientSource = source;
         this.email = email;
     }
 
-    public ContactRequestRecipient(RecipientSource source, String email) {
+    public ContactRecipient(ContactRecipientSource source, String email) {
         this.recipientSource = source;
         this.email = email;
     }
@@ -96,11 +90,11 @@ public class ContactRequestRecipient {
     @Enumerated(EnumType.STRING)
     @Column(name = "type",
         nullable = false)
-    public RecipientSource getRecipientSource() {
+    public ContactRecipientSource getContactRecipientSource() {
         return recipientSource;
     }
 
-    public void setRecipientSource(RecipientSource source) {
+    public void setContactRecipientSource(ContactRecipientSource source) {
         this.recipientSource = source;
     }
 

@@ -22,15 +22,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 
-import de.vzg.reposis.digibib.contact.model.ContactRequestRecipient;
-import de.vzg.reposis.digibib.contact.model.RecipientSource;
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import de.vzg.reposis.digibib.contact.model.ContactRecipientSource;
 
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 
-public class ContactCollectTask implements Callable<List<ContactRequestRecipient>> {
+public class ContactCollectTask implements Callable<List<ContactRecipient>> {
 
     private final MCRObjectID objectID;
 
@@ -39,12 +39,12 @@ public class ContactCollectTask implements Callable<List<ContactRequestRecipient
     }
 
     @Override
-    public List<ContactRequestRecipient> call() {
+    public List<ContactRecipient> call() {
         return collectRecipients();
     }
 
-    private List<ContactRequestRecipient> collectRecipients() {
-        final List<ContactRequestRecipient> recipients = new ArrayList();
+    private List<ContactRecipient> collectRecipients() {
+        final List<ContactRecipient> recipients = new ArrayList();
         // addOrcidRecipients
         return recipients;
     }
