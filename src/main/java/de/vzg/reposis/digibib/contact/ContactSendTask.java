@@ -19,6 +19,8 @@
 package de.vzg.reposis.digibib.contact;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -26,7 +28,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
-import javax.mail.AuthenticationFailedException;
+
+import com.sun.mail.util.MailConnectException; // TODO add to mycore
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -54,6 +57,12 @@ public class ContactSendTask implements Runnable {
     private static final String MAIL_STYLESHEET = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Stylesheet");
 
+    private static final int SEND_RETRIES = MCRConfiguration2
+            .getOrThrow(ContactConstants.CONF_PREFIX + "Email.Send.Retries",  Integer::parseInt);
+
+    private static final int SLEEP_TIME = MCRConfiguration2
+            .getOrThrow(ContactConstants.CONF_PREFIX + "Email.Send.RetrySleepTime",  Integer::parseInt);
+
     private final ContactRequest contactRequest;
 
     private final ContactRequestService contactRequestService;
@@ -66,7 +75,7 @@ public class ContactSendTask implements Runnable {
     @Override
     public void run() {
         LOGGER.info("Sending contact request: ", contactRequest.getId());
-        final EMail baseEmail = createBaseEmail();
+        final EMail baseMail = createBaseMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", contactRequest.getSender());
         properties.put("id", contactRequest.getObjectID().toString());
@@ -78,29 +87,24 @@ public class ContactSendTask implements Runnable {
             properties.put("orcid", orcid);
         }
         try {
-            send(baseEmail.toXML(), MAIL_STYLESHEET, properties);
-            // TODO handle state
-        } catch(MessagingException e) {
-            LOGGER.error("Error while sending mail:", e);
+            final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
+            final EMail mail = EMail.parseXML(mailElement);
+            trySend(mail); // TODO handle State
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LOGGER.warn("send failed because of interruption");
         } catch (Exception e) {
             LOGGER.error(e);
         }
     }
 
-    private EMail createBaseEmail() {
+    private EMail createBaseMail() {
         final EMail mail = new EMail();
         final Set<String> recipients = contactRequest.getRecipients().stream().map(ContactRecipient::getEmail)
                 .collect(Collectors.toSet());
         mail.to = List.copyOf(recipients);
         mail.from = SENDER_NAME;
         return mail;
-    }
-
-    private void send(Document input, String stylesheet, Map<String, String> parameters) throws IOException,
-                JDOMException, SAXException, MessagingException {
-        final Element mailElement = transform(input, stylesheet, parameters).getRootElement();
-        final EMail mail = EMail.parseXML(mailElement);
-        ContactMailService.getInstance().sendMail(mail);
     }
 
     private static Document transform(Document input, String stylesheet, Map<String, String> parameters)
@@ -110,5 +114,28 @@ public class ContactSendTask implements Runnable {
         MCRParameterCollector parameterCollector = MCRParameterCollector.getInstanceFromUserSession();
         parameterCollector.setParameters(parameters);
         return transformer.transform(source, parameterCollector).asXML();
+    }
+
+    private static void trySend(EMail mail) throws UnsupportedEncodingException, InterruptedException,
+            MalformedURLException, MessagingException {
+        try {
+            send(mail);
+        } catch (MailConnectException f) {
+            LOGGER.info("Send mail failed, retrying...: ", f);
+            for (int i  = 0; i < SEND_RETRIES; i++) {
+                try {
+                    Thread.sleep(SLEEP_TIME);
+                    send(mail);
+                    break;
+                } catch (MailConnectException e) {
+                    LOGGER.info("Send mail failed, retrying...: ", e);
+                }
+            }
+        }
+    }
+
+    private static void send(EMail mail) throws MessagingException, UnsupportedEncodingException,
+                MalformedURLException {
+        ContactMailService.getInstance().sendMail(mail);
     }
 }

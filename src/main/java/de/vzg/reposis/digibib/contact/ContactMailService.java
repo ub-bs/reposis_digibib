@@ -105,8 +105,7 @@ public class ContactMailService {
         return Holder.INSTANCE;
     }
 
-    public void sendMail(EMail mail) throws MessagingException, AddressException, UnsupportedEncodingException,
-            MessagingException, MalformedURLException {
+    public void sendMail(EMail mail) throws UnsupportedEncodingException, MessagingException, MalformedURLException {
         MimeMessage msg = new MimeMessage(session);
         msg.setFrom(buildAddress(mail.from));
         if (mail.to != null) {

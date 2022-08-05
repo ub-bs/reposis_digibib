@@ -78,9 +78,8 @@ public class ContactCollectCronjob extends MCRCronjob {
                         List<ContactRecipient> recipients = new ContactCollectTask(objectID).call();
                         if (recipients.isEmpty()) {
                             addFallbackRecipient(recipients);
-                        } else {
-                            addRecipients(r, recipients);
                         }
+                        addRecipients(r, recipients);
                         recipientsCache.put(objectID, recipients);
                     }
                     r.setState(ContactRequestState.READY);
@@ -98,6 +97,7 @@ public class ContactCollectCronjob extends MCRCronjob {
     private void addFallbackRecipient(List<ContactRecipient> recipients) {
         final ContactRecipient fallback =
                 new ContactRecipient("FDM Team", ContactRecipientSource.FALLBACK, FALLBACK_EMAIL);
+        LOGGER.info("added fallback");
         recipients.add(fallback);
     }
 
