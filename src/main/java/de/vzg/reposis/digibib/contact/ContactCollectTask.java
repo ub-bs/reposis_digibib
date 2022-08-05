@@ -25,6 +25,7 @@ import java.util.concurrent.Callable;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRecipientSource;
 
+import org.jdom2.Element;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
@@ -57,5 +58,9 @@ public class ContactCollectTask implements Callable<List<ContactRecipient>> {
                 recipients.addAll(getEmails(orcid));
             }
         }); */
+    }
+
+    private List<Element> getAuthors(MCRObject object) {
+        return new MCRMODSWrapper(object).getElements("mods:name[@type='personal']");
     }
 }

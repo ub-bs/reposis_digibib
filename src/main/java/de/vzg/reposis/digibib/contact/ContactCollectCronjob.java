@@ -50,7 +50,7 @@ public class ContactCollectCronjob extends MCRCronjob {
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
         try { // preventive, to prevent dying
-            work();
+            doWork();
         } catch (Exception e) {
             LOGGER.error("Job failed: ", e);
         }
@@ -62,7 +62,7 @@ public class ContactCollectCronjob extends MCRCronjob {
         return "Collects recipients for all new contact requests.";
     }
 
-    public void work() {
+    public void doWork() {
         final ContactRequestService service = ContactRequestService.getInstance();
         LOGGER.info("Running contact collection cron...");
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
