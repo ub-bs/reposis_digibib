@@ -75,11 +75,11 @@
               </button>
               <div class="btn-group">
                 <button type="button" class="btn btn-danger" @click="reject"
-                    :disabled="state.state !== 'READY'">
+                    :disabled="state.state !== 'PROCESSED'">
                   {{ t('digibib.contact.frontend.manager.button.reject') }}
                 </button>
                 <button type="button" class="btn btn-success" @click="forward"
-                    :disabled="state.state !== 'READY'">
+                    :disabled="state.state !== 'PROCESSED'">
                   {{ t('digibib.contact.frontend.manager.button.forward') }}
                 </button>
               </div>
