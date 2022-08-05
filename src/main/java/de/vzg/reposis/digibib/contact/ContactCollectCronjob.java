@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipientSource;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -48,7 +49,11 @@ public class ContactCollectCronjob extends MCRCronjob {
     public void runJob() {
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
-        work();
+        try { // preventive, to prevent dying
+            work();
+        } catch (Exception e) {
+            LOGGER.error("Job failed: ", e);
+        }
         getProcessable().setProgress(100);
     }
 
@@ -82,6 +87,8 @@ public class ContactCollectCronjob extends MCRCronjob {
                     service.updateContactRequest(r);
                     return null;
                 }, MCRSystemUserInformation.getJanitorInstance()).call();
+            } catch (ContactRequestNotFoundException e) {
+                // request seems to be deleted in meantime, nothing to do
             } catch (Exception e) {
                 LOGGER.error(e);
             }
@@ -89,14 +96,12 @@ public class ContactCollectCronjob extends MCRCronjob {
     }
 
     private void addFallbackRecipient(List<ContactRecipient> recipients) {
-        ContactRecipient fallback =
+        final ContactRecipient fallback =
                 new ContactRecipient("FDM Team", ContactRecipientSource.FALLBACK, FALLBACK_EMAIL);
         recipients.add(fallback);
     }
 
     private void addRecipients(ContactRequest contactRequest, List<ContactRecipient> recipients) {
-        recipients.forEach((r) -> {
-            contactRequest.addRecipient(r);
-        });
+        recipients.forEach((r) -> contactRequest.addRecipient(r));
     }
 }
