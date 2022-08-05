@@ -107,7 +107,7 @@ public class ContactRequest {
 
     private ContactRequestState state;
 
-    private List<ContactRequestRecipient> recipients = new ArrayList();
+    private List<ContactRecipient> recipients = new ArrayList();
 
     public ContactRequest() { }
 
@@ -276,15 +276,15 @@ public class ContactRequest {
               mappedBy = "contactRequest",
               cascade = CascadeType.ALL,
               orphanRemoval = true)
-    public List<ContactRequestRecipient> getRecipients() {
+    public List<ContactRecipient> getRecipients() {
         return recipients;
     }
 
-    public void setRecipients(List<ContactRequestRecipient> recipients) {
+    public void setRecipients(List<ContactRecipient> recipients) {
         this.recipients = recipients;
     }
 
-    public void addRecipient(ContactRequestRecipient recipient) {
+    public void addRecipient(ContactRecipient recipient) {
         recipients.add(recipient);
         recipient.setContactRequest(this);
     }

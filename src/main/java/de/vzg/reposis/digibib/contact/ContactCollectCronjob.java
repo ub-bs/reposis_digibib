@@ -23,10 +23,10 @@ import java.util.List;
 import java.util.Map;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.model.ContactRecipientSource;
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.model.ContactRequestRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRequestState; // TODO innerclass of model
-import de.vzg.reposis.digibib.contact.model.RecipientSource; // TODO innerclass of model
+import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -60,17 +60,17 @@ public class ContactCollectCronjob extends MCRCronjob {
     public void work() {
         final ContactRequestService service = ContactRequestService.getInstance();
         LOGGER.info("Running contact collection cron...");
-        final Map<MCRObjectID, List<ContactRequestRecipient>> recipientsCache = new HashMap();
+        final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
         service.listContactRequestsByState(ContactRequestState.RECEIVED).stream().forEach((r) -> {
             LOGGER.info("Collecting recipients for {}", r.getId());
             final MCRObjectID objectID = r.getObjectID();
-            final List<ContactRequestRecipient> cachedRecipients = recipientsCache.get(objectID);
+            final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectID);
             try {
                 new MCRFixedUserCallable<>(() -> { // use own transaction for each request to isolate errors
                     if (cachedRecipients != null) {
                         cachedRecipients.forEach((v) -> r.addRecipient(v));
                     } else {
-                        List<ContactRequestRecipient> recipients = new ContactCollectTask(objectID).call();
+                        List<ContactRecipient> recipients = new ContactCollectTask(objectID).call();
                         if (recipients.isEmpty()) {
                             addFallbackRecipient(recipients);
                         } else {
@@ -88,13 +88,13 @@ public class ContactCollectCronjob extends MCRCronjob {
         });
     }
 
-    private void addFallbackRecipient(List<ContactRequestRecipient> recipients) {
-        ContactRequestRecipient fallback =
-                new ContactRequestRecipient("FDM Team", RecipientSource.FALLBACK, FALLBACK_EMAIL);
+    private void addFallbackRecipient(List<ContactRecipient> recipients) {
+        ContactRecipient fallback =
+                new ContactRecipient("FDM Team", ContactRecipientSource.FALLBACK, FALLBACK_EMAIL);
         recipients.add(fallback);
     }
 
-    private void addRecipients(ContactRequest contactRequest, List<ContactRequestRecipient> recipients) {
+    private void addRecipients(ContactRequest contactRequest, List<ContactRecipient> recipients) {
         recipients.forEach((r) -> {
             contactRequest.addRecipient(r);
         });

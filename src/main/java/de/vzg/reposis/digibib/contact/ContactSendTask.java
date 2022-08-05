@@ -30,7 +30,7 @@ import javax.mail.AuthenticationFailedException;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.model.ContactRequestRecipient;
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -89,7 +89,7 @@ public class ContactSendTask implements Runnable {
 
     private EMail createBaseEmail() {
         final EMail mail = new EMail();
-        final Set<String> recipients = contactRequest.getRecipients().stream().map(ContactRequestRecipient::getEmail)
+        final Set<String> recipients = contactRequest.getRecipients().stream().map(ContactRecipient::getEmail)
                 .collect(Collectors.toSet());
         mail.to = List.copyOf(recipients);
         mail.from = SENDER_NAME;
