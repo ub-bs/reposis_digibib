@@ -159,7 +159,7 @@ public class ContactRequestService {
                 throw new ContactRequestNotFoundException();
             }
             final ContactRequestState state = contactRequest.getState();
-            if (!(ContactRequestState.RECEIVED.equals(state) || ContactRequestState.READY.equals(state))) {
+            if (!(ContactRequestState.RECEIVED.equals(state) || ContactRequestState.PROCESSED.equals(state))) {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
             contactRequest.setState(ContactRequestState.REJECTED);
@@ -177,7 +177,7 @@ public class ContactRequestService {
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (!ContactRequestState.READY.equals(contactRequest.getState())) {
+            if (!ContactRequestState.PROCESSED.equals(contactRequest.getState())) {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
             contactRequest.setState(ContactRequestState.ACCEPTED);
@@ -190,7 +190,7 @@ public class ContactRequestService {
 
     private void update(ContactRequest contactRequest) {
         contactRequest.setLastModified(new Date());
-        contactRequest.setLastModifiedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
+        // contactRequest.setLastModifiedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
         contactRequestDAO.update(contactRequest);
     }
 

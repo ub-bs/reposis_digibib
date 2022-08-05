@@ -31,12 +31,13 @@ import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mcr.cronjob.MCRCronjob;
-import org.mycore.util.concurrent.MCRFixedUserCallable;
+import org.mycore.util.concurrent.MCRTransactionableCallable;
 
 public class ContactCollectCronjob extends MCRCronjob {
 
@@ -62,7 +63,16 @@ public class ContactCollectCronjob extends MCRCronjob {
         return "Collects recipients for all new contact requests.";
     }
 
-    public void doWork() {
+    private void updateContactRequest(ContactRequest contactRequest) throws Exception {
+        new MCRTransactionableCallable<>(() -> { // use own transaction for each request to isolate errors
+            LOGGER.info(MCRSessionMgr.getCurrentSession().getID());
+            ContactRequestService.getInstance().updateContactRequest(contactRequest);
+            return null;
+        // }, MCRSystemUserInformation.getJanitorInstance()).call();
+        }).call();
+    }
+
+    public void doWork() throws Exception {
         final ContactRequestService service = ContactRequestService.getInstance();
         LOGGER.info("Running contact collection cron...");
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
@@ -71,25 +81,32 @@ public class ContactCollectCronjob extends MCRCronjob {
             final MCRObjectID objectID = r.getObjectID();
             final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectID);
             try {
-                new MCRFixedUserCallable<>(() -> { // use own transaction for each request to isolate errors
-                    if (cachedRecipients != null) {
-                        cachedRecipients.forEach((v) -> r.addRecipient(v));
-                    } else {
-                        List<ContactRecipient> recipients = new ContactCollectTask(objectID).call();
-                        if (recipients.isEmpty()) {
-                            addFallbackRecipient(recipients);
-                        }
-                        addRecipients(r, recipients);
-                        recipientsCache.put(objectID, recipients);
+                r.setState(ContactRequestState.PROCESSING);
+                updateContactRequest(r);
+                if (cachedRecipients != null) {
+                    cachedRecipients.forEach((v) -> r.addRecipient(v)); // TODO
+                } else {
+                    List<ContactRecipient> recipients = new ContactCollectTask(objectID).call();
+                    if (recipients.isEmpty()) {
+                        addFallbackRecipient(recipients);
                     }
-                    r.setState(ContactRequestState.READY);
-                    service.updateContactRequest(r);
-                    return null;
-                }, MCRSystemUserInformation.getJanitorInstance()).call();
+                    addRecipients(r, recipients);
+                    recipientsCache.put(objectID, recipients);
+                }
+                r.setState(ContactRequestState.PROCESSED);
             } catch (ContactRequestNotFoundException e) {
                 // request seems to be deleted in meantime, nothing to do
             } catch (Exception e) {
+                r.setState(ContactRequestState.PROCESSING_FAILED);
                 LOGGER.error(e);
+            } finally {
+                try {
+                    updateContactRequest(r);
+                } catch (ContactRequestNotFoundException e) {
+                    // request seems to be deleted in meantime, nothing to do
+                } catch (Exception e) {
+                    LOGGER.warn("TODO");
+                }
             }
         });
     }
