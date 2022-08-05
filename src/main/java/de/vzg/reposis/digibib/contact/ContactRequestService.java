@@ -33,7 +33,7 @@ import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
-import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
+import de.vzg.reposis.digibib.contact.validation.ContactValidationHelper;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -101,7 +101,7 @@ public class ContactRequestService {
     public void insertContactRequest(ContactRequest contactRequest) throws ContactRequestInvalidException, MCRException {
         try {
             writeLock.lock();
-            if (!ValidationHelper.validateContactRequest(contactRequest)) {
+            if (!ContactValidationHelper.validateContactRequest(contactRequest)) {
                 throw new ContactRequestInvalidException();
             }
             final MCRObjectID objectID = contactRequest.getObjectID();

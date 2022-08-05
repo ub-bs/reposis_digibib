@@ -37,7 +37,7 @@ import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.validation.ValidationHelper;
+import de.vzg.reposis.digibib.contact.validation.ContactValidationHelper;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -81,7 +81,7 @@ public class RestObjectContactResource {
             throw new ContactRequestInvalidException(objectID.toString() + " does not exist.");
         }
         contactRequest.setObjectID(objectID);
-        if (!ValidationHelper.validateContactRequest(contactRequest)) {
+        if (!ContactValidationHelper.validateContactRequest(contactRequest)) {
             throw new ContactRequestInvalidException();
         }
         String genre = null;

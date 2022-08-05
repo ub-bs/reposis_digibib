@@ -24,7 +24,7 @@ import javax.validation.ValidatorFactory;
 
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
-public class ValidationHelper {
+public class ContactValidationHelper {
 
     public static boolean validateContactRequest(ContactRequest contactRequest) {
         final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
