@@ -32,7 +32,9 @@ import javax.mail.MessagingException;
 import com.sun.mail.util.MailConnectException; // TODO add to mycore
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 
 import org.apache.logging.log4j.Logger;
@@ -72,8 +74,7 @@ public class ContactSendTask implements Runnable {
     @Override
     public void run() {
         LOGGER.info("Sending contact request: ", contactRequest.getId());
-        // contactRequest.setState(ContactRequestState.SENDING);
-        // ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(contactRequest).call();
+
         final EMail baseMail = createBaseMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", contactRequest.getSender());
@@ -86,16 +87,30 @@ public class ContactSendTask implements Runnable {
             properties.put("orcid", orcid);
         }
         try {
+            contactRequest.setState(ContactRequestState.SENDING);
+            ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(contactRequest).call();
             final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
             final EMail mail = EMail.parseXML(mailElement);
             trySend(mail);
-            // contactRequest.setState(ContactRequestState.SENT);
-            // ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(contactRequest).call();
+            contactRequest.setState(ContactRequestState.SENT);
+        } catch (ContactRequestNotFoundException e) {
+            // nothing to do
         } catch (InterruptedException e) {
+            contactRequest.setState(ContactRequestState.SENDING_FAILED);
+            contactRequest.setComment(e.toString());
             Thread.currentThread().interrupt();
-            LOGGER.warn("send failed because of interruption");
         } catch (Exception e) {
+            contactRequest.setState(ContactRequestState.SENDING_FAILED);
+            contactRequest.setComment(e.toString());
             LOGGER.error(e);
+        } finally {
+            try {
+                ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(contactRequest).call();
+            } catch (ContactRequestNotFoundException e) {
+                // nothing to do
+            } catch (Exception e) {
+                LOGGER.error(e);
+            }
         }
     }
 

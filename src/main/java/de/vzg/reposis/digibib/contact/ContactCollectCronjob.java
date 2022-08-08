@@ -88,6 +88,7 @@ public class ContactCollectCronjob extends MCRCronjob {
                 // request seems to be deleted in meantime, nothing to do
             } catch (Exception e) {
                 r.setState(ContactRequestState.PROCESSING_FAILED);
+                r.setComment(e.toString());
                 LOGGER.error(e);
             } finally {
                 try {
