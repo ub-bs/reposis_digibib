@@ -65,14 +65,14 @@ public class ContactCollectCronjob extends MCRCronjob {
 
     public void doWork() throws Exception {
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
-        final ContactRequestService service = ContactRequestService.getInstance();
-        service.listContactRequestsByState(ContactRequestState.RECEIVED).stream().forEach((r) -> { // TODO replay proccessing state, handle error state
+        ContactRequestService.getInstance().listContactRequestsByState(ContactRequestState.RECEIVED).stream()
+                .forEach((r) -> { // TODO replay proccessing state, handle error state
             LOGGER.info("Collecting recipients for {}", r.getId());
             final MCRObjectID objectID = r.getObjectID();
             final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectID);
             try {
                 r.setState(ContactRequestState.PROCESSING);
-                service.updateContactRequestWithinOwnTransaction(r).call();
+                ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(r).call();
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
                 } else {
@@ -91,7 +91,7 @@ public class ContactCollectCronjob extends MCRCronjob {
                 LOGGER.error(e);
             } finally {
                 try {
-                    service.updateContactRequestWithinOwnTransaction(r).call();
+                    ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(r).call();
                 } catch (ContactRequestNotFoundException e) {
                     // request seems to be deleted in meantime, nothing to do
                 } catch (Exception e) {

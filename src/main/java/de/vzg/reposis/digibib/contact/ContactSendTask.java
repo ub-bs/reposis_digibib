@@ -65,16 +65,15 @@ public class ContactSendTask implements Runnable {
 
     private final ContactRequest contactRequest;
 
-    private final ContactRequestService contactRequestService;
-
     public ContactSendTask(ContactRequest contactRequest) {
         this.contactRequest = contactRequest;
-        this.contactRequestService = ContactRequestService.getInstance();
     }
 
     @Override
     public void run() {
         LOGGER.info("Sending contact request: ", contactRequest.getId());
+        // contactRequest.setState(ContactRequestState.SENDING);
+        // ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(contactRequest).call();
         final EMail baseMail = createBaseMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", contactRequest.getSender());
@@ -89,7 +88,9 @@ public class ContactSendTask implements Runnable {
         try {
             final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
             final EMail mail = EMail.parseXML(mailElement);
-            trySend(mail); // TODO handle State
+            trySend(mail);
+            // contactRequest.setState(ContactRequestState.SENT);
+            // ContactRequestServiceHelper.updateContactRequestWithinOwnTransaction(contactRequest).call();
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
             LOGGER.warn("send failed because of interruption");
