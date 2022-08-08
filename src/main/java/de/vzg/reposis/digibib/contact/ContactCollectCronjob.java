@@ -31,13 +31,10 @@ import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.mycore.common.MCRSessionMgr;
-import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mcr.cronjob.MCRCronjob;
-import org.mycore.util.concurrent.MCRFixedUserCallable;
 
 public class ContactCollectCronjob extends MCRCronjob {
 
@@ -51,7 +48,6 @@ public class ContactCollectCronjob extends MCRCronjob {
 
     @Override
     public void runJob() {
-        LOGGER.info("Running contact collection cron...");
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
         try { // preventive, to prevent dying
@@ -67,24 +63,16 @@ public class ContactCollectCronjob extends MCRCronjob {
         return "Collects recipients for all new contact requests.";
     }
 
-    private void updateContactRequest(ContactRequest contactRequest) throws Exception {
-        new MCRFixedUserCallable<>(() -> { // use own transaction for each request to isolate errors
-            LOGGER.info(MCRSessionMgr.getCurrentSession().getID());
-            ContactRequestService.getInstance().updateContactRequest(contactRequest);
-            return null;
-        }, MCRSystemUserInformation.getJanitorInstance()).call();
-    }
-
     public void doWork() throws Exception {
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
-        ContactRequestService.getInstance().listContactRequestsByState(ContactRequestState.RECEIVED).stream()
-                .forEach((r) -> {
+        final ContactRequestService service = ContactRequestService.getInstance();
+        service.listContactRequestsByState(ContactRequestState.RECEIVED).stream().forEach((r) -> { // TODO replay proccessing state, handle error state
             LOGGER.info("Collecting recipients for {}", r.getId());
             final MCRObjectID objectID = r.getObjectID();
             final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectID);
             try {
                 r.setState(ContactRequestState.PROCESSING);
-                updateContactRequest(r);
+                service.updateContactRequestWithinOwnTransaction(r).call();
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
                 } else {
@@ -103,7 +91,7 @@ public class ContactCollectCronjob extends MCRCronjob {
                 LOGGER.error(e);
             } finally {
                 try {
-                    updateContactRequest(r);
+                    service.updateContactRequestWithinOwnTransaction(r).call();
                 } catch (ContactRequestNotFoundException e) {
                     // request seems to be deleted in meantime, nothing to do
                 } catch (Exception e) {
