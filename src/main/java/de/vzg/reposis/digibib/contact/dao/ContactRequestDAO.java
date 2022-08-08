@@ -19,6 +19,7 @@
 package de.vzg.reposis.digibib.contact.dao;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
@@ -28,4 +29,5 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 public interface ContactRequestDAO extends ContactBaseDAO<ContactRequest> {
     Collection<ContactRequest> findByObjectID(MCRObjectID objectID);
     Collection<ContactRequest> findByState(ContactRequestState state);
+    ContactRequest findByUUID(UUID uuid);
 }

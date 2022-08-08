@@ -19,6 +19,7 @@
 package de.vzg.reposis.digibib.contact.dao;
 
 import java.util.Collection;
+import java.util.UUID;
 
 import javax.persistence.EntityManager;
 
@@ -43,7 +44,7 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
     @Override
     public Collection<ContactRequest> findByObjectID(MCRObjectID objectID) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final Collection<ContactRequest> contactRequests = MCREntityManagerProvider.getCurrentEntityManager()
+        final Collection<ContactRequest> contactRequests = entityManager
                 .createNamedQuery("ContactRequest.findByObjectID", ContactRequest.class)
                 .setParameter("objectID", objectID).getResultList();
         contactRequests.forEach(entityManager::detach);
@@ -68,6 +69,16 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
             entityManager.detach(contactRequest);
         }
         return contactRequest;
+    }
+
+    @Override
+    public ContactRequest findByUUID(UUID uuid) {
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        final Collection<ContactRequest> contactRequests = entityManager
+                .createNamedQuery("ContactRequest.findByUUID", ContactRequest.class)
+                .setParameter("uuid", uuid).getResultList(); // should contain at most one element
+        contactRequests.forEach(entityManager::detach);
+        return contactRequests.stream().findFirst().orElse(null);
     }
 
     @Override

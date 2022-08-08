@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
@@ -83,6 +84,15 @@ public class ContactRequestService {
         }
     }
 
+    public ContactRequest getContactRequestByUUID(UUID uuid) {
+        try {
+            readLock.lock();
+            return contactRequestDAO.findByUUID(uuid);
+        } finally {
+            readLock.unlock();
+        }
+    }
+
     public List<ContactRequest> listContactRequestsByState(ContactRequestState state) {
         try {
             readLock.lock();
@@ -135,6 +145,20 @@ public class ContactRequestService {
         try {
             writeLock.lock();
             final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+            if (contactRequest == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            contactRequestDAO.remove(contactRequest);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void removeContactRequestByUUID(UUID uuid) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
+        try {
+            writeLock.lock();
+            final ContactRequest contactRequest = contactRequestDAO.findByUUID(uuid);
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }

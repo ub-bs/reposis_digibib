@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -35,10 +36,12 @@ import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import org.mycore.backend.jpa.MCRObjectIDConverter;
@@ -52,6 +55,11 @@ import org.mycore.datamodel.metadata.MCRObjectID;
         query = "SELECT r"
             + "  FROM ContactRequest r"
             + "  WHERE r.objectID = :objectID"
+            + "  ORDER BY r.lastModified ASC"),
+    @NamedQuery(name = "ContactRequest.findByUUID",
+        query = "SELECT r"
+            + "  FROM ContactRequest r"
+            + "  WHERE r.uuid = :uuid"
             + "  ORDER BY r.lastModified ASC"),
     @NamedQuery(name = "ContactRequest.findByState",
         query = "SELECT r"
@@ -113,6 +121,9 @@ public class ContactRequest {
 
     public ContactRequest() { }
 
+    @Column(unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
+    private UUID uuid;
+
     public ContactRequest(MCRObjectID objectID, String sender, String name, String message) {
         this.objectID = objectID;
         this.sender = sender;
@@ -127,6 +138,7 @@ public class ContactRequest {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_request_id",
         nullable = false)
+    @JsonIgnore
     public long getId() {
         return id;
     }
@@ -134,6 +146,7 @@ public class ContactRequest {
     /**
      * @param id internal id
      */
+    @JsonProperty
     public void setId(long id) {
         this.id = id;
     }
@@ -268,6 +281,21 @@ public class ContactRequest {
     @Enumerated(EnumType.STRING)
     public ContactRequestState getState() {
         return state;
+    }
+
+    @PrePersist
+    private void prepersistUuidModel() {
+        if (uuid == null) {
+            uuid = UUID.randomUUID();
+        }
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
     }
 
     public void setState(ContactRequestState state) {
