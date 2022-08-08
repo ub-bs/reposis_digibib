@@ -109,6 +109,8 @@ public class ContactRequest {
 
     private List<ContactRecipient> recipients = new ArrayList();
 
+    private String comment;
+
     public ContactRequest() { }
 
     public ContactRequest(MCRObjectID objectID, String sender, String name, String message) {
@@ -287,6 +289,14 @@ public class ContactRequest {
     public void addRecipient(ContactRecipient recipient) {
         recipients.add(recipient);
         recipient.setContactRequest(this);
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
 
     @Override

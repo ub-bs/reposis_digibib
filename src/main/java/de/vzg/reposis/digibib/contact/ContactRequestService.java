@@ -39,10 +39,8 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
-import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
-import org.mycore.util.concurrent.MCRFixedUserCallable;
 
 public class ContactRequestService {
 
@@ -182,14 +180,6 @@ public class ContactRequestService {
         } finally {
             writeLock.unlock();
         }
-    }
-
-    public MCRFixedUserCallable<Void> updateContactRequestWithinOwnTransaction(ContactRequest contactRequest)
-            throws ContactRequestNotFoundException {
-        return new MCRFixedUserCallable<>(() -> {
-            updateContactRequest(contactRequest);
-            return null;
-        }, MCRSystemUserInformation.getJanitorInstance()); // TODO not fix
     }
 
     private void update(ContactRequest contactRequest) {
