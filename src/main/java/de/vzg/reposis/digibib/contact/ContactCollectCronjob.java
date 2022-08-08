@@ -37,7 +37,7 @@ import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mcr.cronjob.MCRCronjob;
-import org.mycore.util.concurrent.MCRTransactionableCallable;
+import org.mycore.util.concurrent.MCRFixedUserCallable;
 
 public class ContactCollectCronjob extends MCRCronjob {
 
@@ -48,6 +48,7 @@ public class ContactCollectCronjob extends MCRCronjob {
 
     @Override
     public void runJob() {
+        LOGGER.info("Running contact collection cron...");
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
         try { // preventive, to prevent dying
@@ -64,19 +65,17 @@ public class ContactCollectCronjob extends MCRCronjob {
     }
 
     private void updateContactRequest(ContactRequest contactRequest) throws Exception {
-        new MCRTransactionableCallable<>(() -> { // use own transaction for each request to isolate errors
+        new MCRFixedUserCallable<>(() -> { // use own transaction for each request to isolate errors
             LOGGER.info(MCRSessionMgr.getCurrentSession().getID());
             ContactRequestService.getInstance().updateContactRequest(contactRequest);
             return null;
-        // }, MCRSystemUserInformation.getJanitorInstance()).call();
-        }).call();
+        }, MCRSystemUserInformation.getJanitorInstance()).call();
     }
 
     public void doWork() throws Exception {
-        final ContactRequestService service = ContactRequestService.getInstance();
-        LOGGER.info("Running contact collection cron...");
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
-        service.listContactRequestsByState(ContactRequestState.RECEIVED).stream().forEach((r) -> {
+        ContactRequestService.getInstance().listContactRequestsByState(ContactRequestState.RECEIVED).stream()
+                .forEach((r) -> {
             LOGGER.info("Collecting recipients for {}", r.getId());
             final MCRObjectID objectID = r.getObjectID();
             final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectID);
@@ -84,9 +83,9 @@ public class ContactCollectCronjob extends MCRCronjob {
                 r.setState(ContactRequestState.PROCESSING);
                 updateContactRequest(r);
                 if (cachedRecipients != null) {
-                    cachedRecipients.forEach((v) -> r.addRecipient(v)); // TODO
+                    addRecipients(r, cachedRecipients);
                 } else {
-                    List<ContactRecipient> recipients = new ContactCollectTask(objectID).call();
+                    final List<ContactRecipient> recipients = new ContactCollectTask(objectID).call();
                     if (recipients.isEmpty()) {
                         addFallbackRecipient(recipients);
                     }
@@ -105,7 +104,7 @@ public class ContactCollectCronjob extends MCRCronjob {
                 } catch (ContactRequestNotFoundException e) {
                     // request seems to be deleted in meantime, nothing to do
                 } catch (Exception e) {
-                    LOGGER.warn("TODO");
+                    LOGGER.error(e);
                 }
             }
         });
