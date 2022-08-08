@@ -43,8 +43,11 @@ public class ContactCollectCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String FALLBACK_EMAIL = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackEmail");
+    private static final String FALLBACK_MAIL = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Fallback.Mail");
+
+    private static final String FALLBACK_NAME= MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Fallback.Name");
 
     @Override
     public void runJob() {
@@ -112,8 +115,7 @@ public class ContactCollectCronjob extends MCRCronjob {
 
     private void addFallbackRecipient(List<ContactRecipient> recipients) {
         final ContactRecipient fallback =
-                new ContactRecipient("FDM Team", ContactRecipientSource.FALLBACK, FALLBACK_EMAIL);
-        LOGGER.info("added fallback");
+                new ContactRecipient(FALLBACK_NAME, ContactRecipientSource.FALLBACK, FALLBACK_MAIL);
         recipients.add(fallback);
     }
 
