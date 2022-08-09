@@ -19,6 +19,7 @@
 package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
@@ -85,9 +86,9 @@ public class RestContactResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRequest getContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id)
+    public ContactRequest getContactRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
             throws ContactRequestNotFoundException {
-        final ContactRequest contactRequest = ContactRequestService.getInstance().getContactRequestByID(id);
+        final ContactRequest contactRequest = ContactRequestService.getInstance().getContactRequestByUUID(id);
         if (contactRequest != null) {
             return contactRequest;
         } else {
@@ -108,9 +109,9 @@ public class RestContactResource {
                 content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
         })
     @MCRRequireTransaction
-    public Response removeContactRequestByID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id)
+    public Response removeContactRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
             throws ContactRequestNotFoundException {
-        ContactRequestService.getInstance().removeContactRequestByID(id);
+        ContactRequestService.getInstance().removeContactRequestByUUID(id);
         return Response.noContent().build();
     }
 }
