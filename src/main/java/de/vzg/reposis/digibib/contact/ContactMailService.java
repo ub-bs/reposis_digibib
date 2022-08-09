@@ -67,7 +67,7 @@ public class ContactMailService {
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Protocol");
 
     private static final String STARTTLS = MCRConfiguration2
-            .getString(ContactConstants.CONF_PREFIX + "STMP.STARTTLS").orElse("disabled");
+            .getString(ContactConstants.CONF_PREFIX + "SMTP.STARTTLS").orElse("disabled");
 
     private static final String USER = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.User");
@@ -76,7 +76,7 @@ public class ContactMailService {
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.Password");
 
     private static final Boolean DEBUG = MCRConfiguration2
-            .getBoolean(ContactConstants.CONF_PREFIX + "SMTP.DEBUG").orElse(false);
+            .getBoolean(ContactConstants.CONF_PREFIX + "SMTP.Debug").orElse(false);
 
     private Session session;
 
