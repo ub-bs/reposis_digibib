@@ -168,11 +168,11 @@ public class ContactRequestService {
         }
     }
 
-    public void rejectContactRequest(long id) throws ContactRequestNotFoundException,
+    public void rejectContactRequest(UUID id) throws ContactRequestNotFoundException,
             ContactRequestStateException {
         try {
             writeLock.lock();
-            final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+            final ContactRequest contactRequest = contactRequestDAO.findByUUID(id);
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }
@@ -187,11 +187,11 @@ public class ContactRequestService {
         }
     }
 
-    public void forwardContactRequest(long id) throws ContactRequestNotFoundException,
+    public void forwardContactRequest(UUID id) throws ContactRequestNotFoundException,
             ContactRequestStateException {
         try {
             writeLock.lock();
-            final ContactRequest contactRequest = contactRequestDAO.findByID(id);
+            final ContactRequest contactRequest = contactRequestDAO.findByUUID(id);
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }

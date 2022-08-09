@@ -5,7 +5,7 @@ export type Recipient = {
 }
 
 export type Request = {
-  id: number;
+  uuid: string;
   name: string;
   email: string;
   orcid?: string;
@@ -24,7 +24,7 @@ export type State = {
   requests: Request[];
   expanded: number[];
   showModal: boolean;
-  showRequestId: number | undefined;
+  showRequestId: string | undefined;
 };
 
 export const state: State = {

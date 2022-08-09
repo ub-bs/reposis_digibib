@@ -25,7 +25,7 @@
     <tbody v-if="requests">
       <tr v-for="item in requests" :key="item">
         <td class="col-1">
-          {{ item.id }}
+          {{ item.uuid }}
         </td>
         <td class="col-2">
           {{ new Date(item.created).toLocaleString() }}
@@ -41,10 +41,10 @@
         </td>
         <td class="col-1">
           <div class="btn-group">
-            <a class="btn pt-0 pb-0" @click="viewRequest(item.id)">
+            <a class="btn pt-0 pb-0" @click="viewRequest(item.uuid)">
               <i class="fa fa-eye"></i>
             </a>
-            <a class="btn pt-0 pb-0" @click="removeRequest(item.id)">
+            <a class="btn pt-0 pb-0" @click="removeRequest(item.uuid)">
               <i class="fa fa-trash"></i>
             </a>
           </div>
@@ -66,11 +66,11 @@ const requests = computed(() => store.getters.getCurrentRequests);
 const { t } = useI18n();
 const currentId = ref(null);
 const showModal = computed(() => store.state.showModal);
-const viewRequest = (id: number) => {
+const viewRequest = (id: string) => {
   currentId.value = id;
   store.commit('setModal', { show: true, id });
 };
-const removeRequest = (id: number) => {
+const removeRequest = (id: string) => {
   store.dispatch('removeContactRequest', id);
 };
 </script>

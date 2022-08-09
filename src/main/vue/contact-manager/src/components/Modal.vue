@@ -101,7 +101,7 @@ import { useStore } from 'vuex';
 
 interface Props {
   size: string,
-  id: number,
+  id: string,
 }
 const props = defineProps<Props>();
 const { t } = useI18n();
@@ -120,7 +120,7 @@ const state = reactive({
 const setFields = () => {
   const request = store.getters.getRequestById(props.id);
   if (request) {
-    state.id = request.id;
+    state.id = request.uuid;
     state.name = request.name;
     state.email = request.email;
     state.orcid = request.orcid;
@@ -138,10 +138,10 @@ const close = () => {
   store.commit('setModal', { show: false, id: undefined });
 };
 const forward = () => {
-  store.dispatch('forwardContactRequest', { objectID: state.objectID, id: state.id });
+  store.dispatch('forwardContactRequest', { objectID: state.objectID, uuid: state.id });
 };
 const reject = () => {
-  store.dispatch('rejectContactRequest', { objectID: state.objectID, id: state.id });
+  store.dispatch('rejectContactRequest', { objectID: state.objectID, uuid: state.id });
 };
 </script>
 <style>

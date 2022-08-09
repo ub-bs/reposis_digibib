@@ -14,10 +14,10 @@ export const actions: ActionTree<State, State> = {
     }
     commit('setLoading', false);
   },
-  async removeContactRequest({ commit, state }, id: number): Promise<void> {
+  async removeContactRequest({ commit, state }, id: string): Promise<void> {
     try {
       await axios.delete(`api/v2/contacts/${id}`);
-      state.requests.splice(state.requests.findIndex((i) => i.id === id), 1);
+      state.requests.splice(state.requests.findIndex((i) => i.uuid === id), 1);
       commit('setTotalRows', state.totalRows - 1);
     } catch (error) {
       console.error(error);
@@ -25,14 +25,14 @@ export const actions: ActionTree<State, State> = {
   },
   async forwardContactRequest({ commit }, request: Request): Promise<void> {
     try {
-      await axios.post(`api/v2/objects/${request.objectID}/contacts/${request.id}/forward`);
+      await axios.post(`api/v2/objects/${request.objectID}/contacts/${request.uuid}/forward`);
     } catch (error) {
       console.error(error);
     }
   },
   async rejectContactRequest({ commit }, request: Request): Promise<void> {
     try {
-      await axios.post(`api/v2/objects/${request.objectID}/contacts/${request.id}/reject`);
+      await axios.post(`api/v2/objects/${request.objectID}/contacts/${request.uuid}/reject`);
     } catch (error) {
       console.error(error);
     }

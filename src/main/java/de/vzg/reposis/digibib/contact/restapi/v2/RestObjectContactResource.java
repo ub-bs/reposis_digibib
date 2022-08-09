@@ -19,6 +19,7 @@
 package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.Set;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.ws.rs.Consumes;
@@ -103,7 +104,7 @@ public class RestObjectContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response forward(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactRequestNotFoundException,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id) throws ContactRequestNotFoundException,
             ContactRequestStateException {
         ContactRequestService.getInstance().forwardContactRequest(id);
         return Response.ok().build();
@@ -114,7 +115,7 @@ public class RestObjectContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response reject(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) long id) throws ContactRequestNotFoundException,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id) throws ContactRequestNotFoundException,
             ContactRequestStateException {
         ContactRequestService.getInstance().rejectContactRequest(id);
         return Response.ok().build();
