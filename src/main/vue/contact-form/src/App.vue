@@ -46,7 +46,7 @@
           </div>
         </div>
         <div class="form-group required">
-          <label class="control-label" for="nameInput">
+          <label class="control-label" for="emailInput">
             {{ $t('digibib.contact.frontend.form.label.email') }}
           </label>
           <input type="email" class="form-control" id="emailInput" ref="email" required
@@ -83,21 +83,8 @@
             {{ $t('digibib.contact.frontend.form.label.sendCopy') }}
           </label>
         </div>
+        <input id="website" name="website" type="text" v-model="website"  />
       </form>
-      <div class="captcha mt-3">
-        <div class="row">
-          <div class="col-6">
-            <VueClientRecaptcha
-              :value="captchaInput"
-              @getCode="getCaptcha"
-            />
-          </div>
-          <div class="col-6 align-self-center">
-            <input class="form-control" type="text" v-model="captchaInput"
-              :class="captchaState === false ? 'is-invalid' : ''" />
-          </div>
-        </div>
-      </div>
     </modal>
   </div>
 </template>
@@ -105,10 +92,8 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 import { useI18n } from 'vue-i18n';
-import VueClientRecaptcha from 'vue-client-recaptcha';
 import Modal from './components/Modal.vue';
 import validateORCID from './utils';
-import 'vue-client-recaptcha/dist/style.css';
 
 interface IContactRequest {
   name: string;
@@ -123,7 +108,6 @@ const I18N_PFEFIX = 'digibib.contact.frontend.form.';
 @Options({
   components: {
     Modal,
-    VueClientRecaptcha,
   },
   props: {
     baseUrl: String,
@@ -136,10 +120,6 @@ export default class ContactForm extends Vue {
   private readonly objectId: string;
 
   private busy = false;
-
-  private captchaInput = '';
-
-  private captcha: string;
 
   private alertMessage = '';
 
@@ -157,20 +137,11 @@ export default class ContactForm extends Vue {
 
   private messageState: boolean = null;
 
-  private captchaState: boolean = null;
+  private website = '';
 
   private setup() {
     const { t } = useI18n();
     return t;
-  }
-
-  private getCaptcha(result: string): void {
-    this.captcha = result;
-  }
-
-  private validateCaptcha(): boolean {
-    this.captchaState = this.captcha === this.captchaInput;
-    return this.captchaState;
   }
 
   private showModal(): void {
@@ -193,7 +164,6 @@ export default class ContactForm extends Vue {
     this.busy = false;
     this.alertMessage = '';
     this.contactRequest = {} as IContactRequest;
-    this.captchaInput = '';
     this.resetStates();
   }
 
@@ -202,7 +172,6 @@ export default class ContactForm extends Vue {
     this.emailState = null;
     this.orcidState = null;
     this.messageState = null;
-    this.captchaState = null;
   }
 
   private checkFormValidity(): boolean {
@@ -225,7 +194,7 @@ export default class ContactForm extends Vue {
   private async handleSubmit(): Promise<void> {
     this.busy = true;
     this.resetStates();
-    if (this.checkFormValidity() && this.validateCaptcha()) {
+    if (this.checkFormValidity() && this.website.length === 0) {
       try {
         const response = await fetch(`${this.baseUrl}api/v2/objects/${this.objectId}/contacts`, {
           method: 'POST',
@@ -253,3 +222,8 @@ export default class ContactForm extends Vue {
   }
 }
 </script>
+<style>
+input#website {
+  display: none;
+}
+</style>
