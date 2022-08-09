@@ -138,10 +138,10 @@ const close = () => {
   store.commit('setModal', { show: false, id: undefined });
 };
 const forward = () => {
-  store.dispatch('forwardContactRequest', { objectID: state.objectID, uuid: state.id });
+  store.dispatch('forwardContactRequest', state.id);
 };
 const reject = () => {
-  store.dispatch('rejectContactRequest', { objectID: state.objectID, uuid: state.id });
+  store.dispatch('rejectContactRequest', state.id);
 };
 </script>
 <style>

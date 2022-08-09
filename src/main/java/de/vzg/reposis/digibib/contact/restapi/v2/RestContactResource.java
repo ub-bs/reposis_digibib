@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -36,6 +37,7 @@ import javax.ws.rs.core.Response;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -94,6 +96,26 @@ public class RestContactResource {
         } else {
             throw new ContactRequestNotFoundException();
         }
+    }
+
+    @POST
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
+    @MCRRequireTransaction
+    public Response forward(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
+            throws ContactRequestNotFoundException, ContactRequestStateException {
+        ContactRequestService.getInstance().forwardContactRequest(id);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/reject")
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
+    @MCRRequireTransaction
+    public Response reject(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
+            throws ContactRequestNotFoundException, ContactRequestStateException {
+        ContactRequestService.getInstance().rejectContactRequest(id);
+        return Response.ok().build();
     }
 
     @DELETE
