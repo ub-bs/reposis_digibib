@@ -99,28 +99,6 @@ public class RestObjectContactResource {
         return Response.ok().build();
     }
 
-    @POST
-    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response forward(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id) throws ContactRequestNotFoundException,
-            ContactRequestStateException {
-        ContactRequestService.getInstance().forwardContactRequest(id);
-        return Response.ok().build();
-    }
-
-    @POST
-    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/reject")
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response reject(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id) throws ContactRequestNotFoundException,
-            ContactRequestStateException {
-        ContactRequestService.getInstance().rejectContactRequest(id);
-        return Response.ok().build();
-    }
-
     private static String getGenre(MCRObjectID objectId) throws MCRException {
         final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectId);
         final MCRMODSWrapper wrapper = new MCRMODSWrapper(object);

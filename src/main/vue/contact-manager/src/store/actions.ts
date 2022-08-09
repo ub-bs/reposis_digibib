@@ -1,6 +1,6 @@
 import { ActionTree } from 'vuex';
 import axios from 'axios';
-import { State, Request } from './state';
+import { State } from './state';
 
 export const actions: ActionTree<State, State> = {
   async fetchData({ commit, state }): Promise<void> {
@@ -23,16 +23,16 @@ export const actions: ActionTree<State, State> = {
       console.error(error);
     }
   },
-  async forwardContactRequest({ commit }, request: Request): Promise<void> {
+  async forwardContactRequest({ commit }, id: string): Promise<void> {
     try {
-      await axios.post(`api/v2/objects/${request.objectID}/contacts/${request.uuid}/forward`);
+      await axios.post(`api/v2/contacts/${id}/forward`);
     } catch (error) {
       console.error(error);
     }
   },
-  async rejectContactRequest({ commit }, request: Request): Promise<void> {
+  async rejectContactRequest({ commit }, id: string): Promise<void> {
     try {
-      await axios.post(`api/v2/objects/${request.objectID}/contacts/${request.uuid}/reject`);
+      await axios.post(`api/v2/contacts/${id}/reject`);
     } catch (error) {
       console.error(error);
     }
