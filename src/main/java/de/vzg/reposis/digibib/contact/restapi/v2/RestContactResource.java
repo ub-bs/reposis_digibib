@@ -47,6 +47,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 
+import org.mycore.common.MCRException;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
 import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
 import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
@@ -101,20 +102,9 @@ public class RestContactResource {
     @POST
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
     public Response forward(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
-            throws ContactRequestNotFoundException, ContactRequestStateException {
+            throws ContactRequestNotFoundException, ContactRequestStateException, MCRException {
         ContactRequestService.getInstance().forwardContactRequest(id);
-        return Response.ok().build();
-    }
-
-    @POST
-    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/reject")
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response reject(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
-            throws ContactRequestNotFoundException, ContactRequestStateException {
-        ContactRequestService.getInstance().rejectContactRequest(id);
         return Response.ok().build();
     }
 
