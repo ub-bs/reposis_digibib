@@ -40,6 +40,7 @@ import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
+import org.mycore.common.MCRTransactionHelper;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
@@ -168,39 +169,57 @@ public class ContactRequestService {
         }
     }
 
-    public void rejectContactRequest(UUID id) throws ContactRequestNotFoundException,
-            ContactRequestStateException {
-        try {
-            writeLock.lock();
-            final ContactRequest contactRequest = contactRequestDAO.findByUUID(id);
-            if (contactRequest == null) {
-                throw new ContactRequestNotFoundException();
-            }
-            final ContactRequestState state = contactRequest.getState();
-            if (!(ContactRequestState.RECEIVED.equals(state) || ContactRequestState.PROCESSED.equals(state))) {
-                throw new ContactRequestStateException("Contact request state is not ready.");
-            }
-            contactRequest.setState(ContactRequestState.REJECTED);
-            update(contactRequest);
-        } finally {
-            writeLock.unlock();
-        }
-    }
-
     public void forwardContactRequest(UUID id) throws ContactRequestNotFoundException,
-            ContactRequestStateException {
+            ContactRequestStateException, MCRException {
         try {
             writeLock.lock();
             final ContactRequest contactRequest = contactRequestDAO.findByUUID(id);
             if (contactRequest == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (!ContactRequestState.PROCESSED.equals(contactRequest.getState())) {
+            if (!(ContactRequestState.PROCESSED.equals(contactRequest.getState())
+                    || ContactRequestState.SENDING_FAILED.equals(contactRequest.getState()))) {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
-            contactRequest.setState(ContactRequestState.ACCEPTED);
-            update(contactRequest);
-            new Thread(new ContactSendTask(contactRequest)).run(); // TODO necessary?
+            MCRTransactionHelper.beginTransaction();
+            boolean commitError = false;
+            try {
+                contactRequest.setState(ContactRequestState.SENDING);
+                update(contactRequest);
+                MCRTransactionHelper.commitTransaction();
+            } catch (Exception commitExc) {
+                commitError = true;
+                try {
+                    MCRTransactionHelper.rollbackTransaction();
+                } catch (Exception rollbackExc) {
+                    LOGGER.error("Error while rollbacking transaction.", rollbackExc);
+                }
+            }
+            if (!commitError) {
+                MCRTransactionHelper.beginTransaction();
+                try {
+                    new ContactSendTask(contactRequest).call();
+                    contactRequest.setState(ContactRequestState.SENT);
+                } catch (Exception e) {
+                    contactRequest.setState(ContactRequestState.SENDING_FAILED);
+                    contactRequest.setComment(e.toString());
+                } finally {
+                    try {
+                        update(contactRequest);
+                        MCRTransactionHelper.commitTransaction();
+                    } catch (Exception commitExc) {
+                        commitError = true;
+                        try {
+                            MCRTransactionHelper.rollbackTransaction();
+                        } catch (Exception rollbackExc) {
+                            LOGGER.error("Error while rollbacking transaction.", rollbackExc);
+                        }
+                    }
+                }
+            }
+            if (commitError) {
+                throw new MCRException("Error while commiting state");
+            }
         } finally {
             writeLock.unlock();
         }
