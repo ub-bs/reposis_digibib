@@ -322,6 +322,11 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
+      <groupId>com.github.cage</groupId>
+      <artifactId>cage</artifactId>
+      <version>1.0</version>
+    </dependency>
+    <dependency>
       <groupId>org.mycore</groupId>
       <artifactId>mycore-orcid</artifactId>
     </dependency>
