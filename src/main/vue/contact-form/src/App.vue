@@ -149,6 +149,7 @@ interface IContactRequest {
   email: string;
   orcid?: string;
   message: string;
+  objectId: string;
   sendCopy: boolean;
 }
 
@@ -226,6 +227,7 @@ export default class ContactForm extends Vue {
     this.resetStates();
     this.shuffleCaptcha();
     this.captchaSecret = '';
+    this.contactRequest.objectId = this.objectId;
   }
 
   private resetStates(): void {
@@ -249,7 +251,7 @@ export default class ContactForm extends Vue {
     if (this.contactRequest.orcid && !validateORCID(this.contactRequest.orcid)) {
       this.orcidState = false;
     }
-    if (this.captchaSecret.length !== 9) {
+    if (this.captchaSecret.length < 5) {
       this.captchaState = false;
     }
     return this.nameState === null && this.emailState === null && this.messageState === null
@@ -280,7 +282,7 @@ export default class ContactForm extends Vue {
       const token = await this.verifyCaptcha();
       if (token.length !== 0) {
         try {
-          const response = await fetch(`${this.baseUrl}api/v2/objects/${this.objectId}/contacts`, {
+          const response = await fetch(`${this.baseUrl}rsc/contact`, {
             method: 'POST',
             headers: {
               Accept: 'application/json, text/plain, */*',
