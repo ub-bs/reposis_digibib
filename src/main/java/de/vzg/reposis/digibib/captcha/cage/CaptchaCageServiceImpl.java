@@ -56,6 +56,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
         if (seenTokens.contains(token)) {
             return false;
         }
+        seenTokens.add(token);
         return true;
     }
 

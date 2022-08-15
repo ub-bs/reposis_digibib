@@ -16,12 +16,13 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.restapi.v2;
+package de.vzg.reposis.digibib.contact.rsc;
 
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -33,10 +34,6 @@ import javax.ws.rs.core.Response;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.exception.ContactGenreNotEnabledException;
-import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
-import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
-import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ContactValidationHelper;
 
@@ -58,9 +55,9 @@ import org.mycore.restapi.v2.MCRRestUtils;
 import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
 import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 
-@Path("/objects/{" + MCRRestAuthorizationFilter.PARAM_MCRID + "}/contacts")
+@Path("/contact")
 @Tag(name = MCRRestUtils.TAG_MYCORE_OBJECT)
-public class RestObjectContactResource {
+public class ContactResource {
 
     private static final Set<String> ALLOWED_GENRES = MCRConfiguration2
             .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream().flatMap(MCRConfiguration2::splitValue)
@@ -75,25 +72,23 @@ public class RestObjectContactResource {
                     @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @MCRRequireTransaction
-    public Response save(@PathParam(MCRRestAuthorizationFilter.PARAM_MCRID) MCRObjectID objectID,
-            ContactRequest contactRequest) throws ContactRequestInvalidException, ContactGenreNotEnabledException,
-            ContactException {
-        if (!MCRMetadataManager.exists(objectID)) {
-            throw new ContactRequestInvalidException(objectID.toString() + " does not exist.");
-        }
-        contactRequest.setObjectID(objectID);
+    @ContactCheckCageCaptcha
+    public Response save(ContactRequest contactRequest) throws BadRequestException {
         if (!ContactValidationHelper.validateContactRequest(contactRequest)) {
-            throw new ContactRequestInvalidException();
+            throw new BadRequestException("invalid request");
+        }
+        final MCRObjectID objectID = contactRequest.getObjectID();
+        if (!MCRMetadataManager.exists(objectID)) {
+            throw new BadRequestException(objectID.toString() + " does not exist");
         }
         String genre = null;
         try {
             genre = getGenre(objectID);
         } catch (MCRException e) {
-            throw new ContactException("No genre for: " + objectID.toString()); // TODO check if wrapping is ness or
-                                                                                // mcrexceptino mapper works
+            throw new BadRequestException("No genre for: " + objectID.toString());
         }
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
-            throw new ContactGenreNotEnabledException("Not activated for genre: " + genre);
+            throw new BadRequestException("Not activated for genre: " + genre);
         }
         ContactRequestService.getInstance().insertContactRequest(contactRequest);
         return Response.ok().build();
