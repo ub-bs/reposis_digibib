@@ -50,9 +50,7 @@ public class CaptchaCageResource {
 
     private static final Cage cage = new GCage();
 
-    private static final Set<String> generatedSecrets = new HashSet();
-
-    private static final Set<String> seenSecrets = new HashSet();
+    private static final Set<String> generatedSecrets = new HashSet(); // TODO use cache
 
     @GET
     @Produces("image/" + Cage.DEFAULT_FORMAT)
@@ -69,14 +67,14 @@ public class CaptchaCageResource {
     };
 
     @POST
-    @Path("/verify")
+    @Path("/userverify")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public TokenResponse verifySecret(String secret) throws MCRException {
-        if (!generatedSecrets.contains(secret) || seenSecrets.contains(secret)) {
+        if (!generatedSecrets.contains(secret)) {
             throw new BadRequestException();
         }
-        seenSecrets.add(secret);
+        generatedSecrets.remove(secret);
         final String token = CaptchaCageServiceImpl.createEncodedToken(secret);
         return new TokenResponse(token);
     };

@@ -149,7 +149,7 @@ interface IContactRequest {
   email: string;
   orcid?: string;
   message: string;
-  objectId: string;
+  objectID: string;
   sendCopy: boolean;
 }
 
@@ -227,7 +227,7 @@ export default class ContactForm extends Vue {
     this.resetStates();
     this.shuffleCaptcha();
     this.captchaSecret = '';
-    this.contactRequest.objectId = this.objectId;
+    this.contactRequest.objectID = this.objectId;
   }
 
   private resetStates(): void {
@@ -259,7 +259,7 @@ export default class ContactForm extends Vue {
   }
 
   private async verifyCaptcha(): Promise<string> {
-    const response = await fetch(`${this.baseUrl}rsc/captchaCage/verify`, {
+    const response = await fetch(`${this.baseUrl}rsc/captchaCage/userverify`, {
       method: 'POST',
       headers: {
         'Content-Type': 'text/plain',
@@ -287,6 +287,7 @@ export default class ContactForm extends Vue {
             headers: {
               Accept: 'application/json, text/plain, */*',
               'Content-Type': 'application/json',
+              'X-Captcha': token,
             },
             body: JSON.stringify(this.contactRequest),
           });
