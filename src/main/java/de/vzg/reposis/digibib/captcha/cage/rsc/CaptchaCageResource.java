@@ -24,7 +24,9 @@ import java.io.OutputStream;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
+import javax.inject.Singleton;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.Consumes;
@@ -40,23 +42,34 @@ import javax.ws.rs.core.StreamingOutput;
 
 import com.github.cage.Cage;
 import com.github.cage.GCage;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 
 import de.vzg.reposis.digibib.captcha.cage.CaptchaCageServiceImpl;
 
 import org.mycore.common.MCRException;
 
+@Singleton
 @Path("/captchaCage")
 public class CaptchaCageResource {
 
-    private static final Cage cage = new GCage();
+    private final Cache<String, Boolean> generatedSecrets;
 
-    private static final Set<String> generatedSecrets = new HashSet(); // TODO use cache
+    private final Cage cage;
+
+    public CaptchaCageResource() {
+        generatedSecrets = CacheBuilder.newBuilder()
+            .maximumSize(32768)
+            .expireAfterWrite(60, TimeUnit.MINUTES)
+            .build();
+        cage = new GCage();
+    }
 
     @GET
     @Produces("image/" + Cage.DEFAULT_FORMAT)
     public StreamingOutput getCaptcha(@Context HttpServletResponse resp) {
         final String secret = cage.getTokenGenerator().next();
-        generatedSecrets.add(secret);
+        generatedSecrets.put(secret, Boolean.TRUE);
         setResponseHeaders(resp);
         return new StreamingOutput() {
             @Override
@@ -64,20 +77,20 @@ public class CaptchaCageResource {
                 cage.draw(secret, os);
             }
         };
-    };
+    }
 
     @POST
     @Path("/userverify")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     public TokenResponse verifySecret(String secret) throws MCRException {
-        if (!generatedSecrets.contains(secret)) {
+        if (generatedSecrets.getIfPresent(secret) == null) {
             throw new BadRequestException();
         }
-        generatedSecrets.remove(secret);
+        generatedSecrets.invalidate(secret);
         final String token = CaptchaCageServiceImpl.createEncodedToken(secret);
         return new TokenResponse(token);
-    };
+    }
 
     private void setResponseHeaders(HttpServletResponse resp) {
         resp.setHeader("Cache-Control", "no-cache, no-store");
