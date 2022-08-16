@@ -50,22 +50,23 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 @NamedQueries({
     @NamedQuery(name = "ContactRequest.findAll",
         query = "SELECT r"
-            + "  FROM ContactRequest r"),
+            + "  FROM ContactRequest r"
+            + "  ORDER BY r.created DESC"),
     @NamedQuery(name = "ContactRequest.findByObjectID",
         query = "SELECT r"
             + "  FROM ContactRequest r"
             + "  WHERE r.objectID = :objectID"
-            + "  ORDER BY r.lastModified ASC"),
+            + "  ORDER BY r.created DESC"),
     @NamedQuery(name = "ContactRequest.findByUUID",
         query = "SELECT r"
             + "  FROM ContactRequest r"
             + "  WHERE r.uuid = :uuid"
-            + "  ORDER BY r.lastModified ASC"),
+            + "  ORDER BY r.created DESC"),
     @NamedQuery(name = "ContactRequest.findByState",
         query = "SELECT r"
             + "  FROM ContactRequest r"
             + "  WHERE r.state = :state"
-            + "  ORDER BY r.lastModified ASC"),
+            + "  ORDER BY r.created DESC"),
 })
 
 @Entity
