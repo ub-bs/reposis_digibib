@@ -58,10 +58,7 @@ public class CaptchaCageResource {
     private final Cage cage;
 
     public CaptchaCageResource() {
-        generatedSecrets = CacheBuilder.newBuilder()
-            .maximumSize(32768)
-            .expireAfterWrite(60, TimeUnit.MINUTES)
-            .build();
+        generatedSecrets = CacheBuilder.newBuilder().maximumSize(32768).expireAfterWrite(60, TimeUnit.MINUTES).build();
         cage = new GCage();
     }
 
@@ -107,7 +104,8 @@ public class CaptchaCageResource {
 
         private String verifiedToken;
 
-        TokenResponse() { }
+        TokenResponse() {
+        }
 
         TokenResponse(String verifiedToken) {
             this.verified = true;
@@ -125,7 +123,7 @@ public class CaptchaCageResource {
         public String getVerifiedToken() {
             return verifiedToken;
         }
-        
+
         public void setVerifiedToken(String verifiedToken) {
             this.verifiedToken = verifiedToken;
         }
