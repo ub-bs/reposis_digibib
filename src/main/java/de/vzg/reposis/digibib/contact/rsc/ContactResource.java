@@ -39,7 +39,6 @@ import de.vzg.reposis.digibib.contact.validation.ContactValidationHelper;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 
 import org.jdom2.Attribute;
 import org.jdom2.Element;
@@ -50,13 +49,8 @@ import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
-import org.mycore.restapi.v2.MCRRestAuthorizationFilter;
-import org.mycore.restapi.v2.MCRRestUtils;
-import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
-import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 
 @Path("/contact")
-@Tag(name = MCRRestUtils.TAG_MYCORE_OBJECT)
 public class ContactResource {
 
     private static final Set<String> ALLOWED_GENRES = MCRConfiguration2
@@ -66,11 +60,10 @@ public class ContactResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "contact involved persons of {" + MCRRestAuthorizationFilter.PARAM_MCRID + "}",
-            tags = MCRRestUtils.TAG_MYCORE_OBJECT, responses = {
+    @Operation(summary = "contact involved persons of given object",
+            responses = {
                     @ApiResponse(responseCode = "200", description = "operation was successful"),
                     @ApiResponse(responseCode = "404", description = "object is not found"), })
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
     public Response save(ContactRequest contactRequest) throws BadRequestException {
