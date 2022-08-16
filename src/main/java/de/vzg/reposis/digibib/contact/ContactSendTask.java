@@ -81,6 +81,9 @@ public class ContactSendTask implements Callable<Void> {
         final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
         final EMail mail = EMail.parseXML(mailElement);
         ContactMailService.getInstance().sendMail(mail);
+        if (contactRequest.isSendCopy()) {
+            // TODO send copy
+        }
         return null;
     }
 
