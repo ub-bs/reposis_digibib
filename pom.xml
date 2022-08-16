@@ -222,6 +222,10 @@
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>commons-io</groupId>
+      <artifactId>commons-io</artifactId>
+    </dependency>
+    <dependency>
       <groupId>jakarta.servlet</groupId>
       <artifactId>jakarta.servlet-api</artifactId>
     </dependency>
@@ -273,6 +277,10 @@
       <artifactId>log4j-api</artifactId>
     </dependency>
     <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+    </dependency>
+    <dependency>
       <groupId>org.jdom</groupId>
       <artifactId>jdom2</artifactId>
     </dependency>
@@ -315,6 +323,11 @@
       <groupId>org.mycore</groupId>
       <artifactId>mycore-mods</artifactId>
       <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mycore</groupId>
+      <artifactId>mycore-base</artifactId>
+      <type>test-jar</type>
     </dependency>
     <dependency>
       <groupId>org.mycore</groupId>

@@ -36,14 +36,7 @@ public class ContactCageCaptchaFilter implements javax.ws.rs.container.Container
     @Override
     public void filter(ContainerRequestContext requestContext) {
         final String token = requestContext.getHeaderString("X-Captcha");
-        if (token == null) {
-            throw new BadRequestException();
-        }
-        try {
-            if (!CaptchaCageServiceImpl.getInstance().validateToken(token)) {
-                throw new BadRequestException();
-            }
-        } catch (Exception e) {
+        if (token == null || !CaptchaCageServiceImpl.getInstance().validateToken(token)) {
             throw new BadRequestException();
         }
     }

@@ -23,9 +23,13 @@ import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
 
 import de.vzg.reposis.digibib.captcha.CaptchaService;
 
@@ -37,12 +41,17 @@ import org.mycore.crypt.MCRCryptKeyNoPermissionException;
 
 public class CaptchaCageServiceImpl implements CaptchaService {
 
+    private final static long TOKEN_LIFETIME = TimeUnit.MINUTES.toMillis(5);
+
     private final static String CIPHER_NAME = "captcha";
 
-    private final Set<Token> seenTokens;
+    private final Cache<String, Boolean> seenTokens;
 
     private CaptchaCageServiceImpl() { 
-        seenTokens = new HashSet();
+        seenTokens = CacheBuilder.newBuilder()
+            .maximumSize(10000)
+            .expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS)
+            .build();
     }
 
     public static CaptchaCageServiceImpl getInstance() {
@@ -50,14 +59,24 @@ public class CaptchaCageServiceImpl implements CaptchaService {
     }
 
     @Override
-    public boolean validateToken(String encodedToken) throws Exception {
-        final Token token = decodeToken(encodedToken);
-        final String secret = token.getSecret();
-        if (seenTokens.contains(token)) {
+    public synchronized boolean validateToken(String encodedToken) {
+        if (Boolean.TRUE.equals(seenTokens.getIfPresent(encodedToken))) {
             return false;
         }
-        seenTokens.add(token);
+        try {
+            final Token token = decodeToken(encodedToken);
+            if (!validateTokenExpiration(token)) {
+                return false;
+            }
+        } catch (Exception e) {
+            return false;
+        }
+        seenTokens.put(encodedToken, Boolean.TRUE);
         return true;
+    }
+
+    protected boolean validateTokenExpiration(Token token) {
+        return new Date().getTime() - token.getTimestamp().getTime() < TOKEN_LIFETIME;
     }
 
     public static String createEncodedToken(String secret) throws MCRException {
@@ -69,7 +88,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
         }
     }
 
-    private static String encodeToken(Token token) throws JsonProcessingException, MCRException {
+    protected static String encodeToken(Token token) throws JsonProcessingException, MCRException {
         try {
             final String json = new ObjectMapper().writeValueAsString(token);
             final MCRCipher cipher = MCRCipherManager.getCipher(CIPHER_NAME);
@@ -93,7 +112,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
         static final CaptchaCageServiceImpl INSTANCE = new CaptchaCageServiceImpl();
     }
 
-    private static class Token {
+    protected static class Token {
 
         private String secret;
 

@@ -169,7 +169,7 @@ public class ContactRequestService {
         }
     }
 
-    public void forwardContactRequest(UUID id) throws ContactRequestNotFoundException,
+    public void forwardContactRequest(UUID id) throws ContactRequestNotFoundException, // TODO test
             ContactRequestStateException, MCRException {
         try {
             writeLock.lock();
