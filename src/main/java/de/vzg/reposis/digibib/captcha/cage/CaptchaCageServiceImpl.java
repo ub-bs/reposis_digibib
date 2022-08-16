@@ -41,7 +41,7 @@ import org.mycore.crypt.MCRCryptKeyNoPermissionException;
 
 public class CaptchaCageServiceImpl implements CaptchaService {
 
-    private final static long TOKEN_LIFETIME = TimeUnit.MINUTES.toMillis(5);
+    private final static long TOKEN_LIFETIME = TimeUnit.MINUTES.toMillis(1);
 
     private final static String CIPHER_NAME = "captcha";
 
@@ -49,7 +49,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     private CaptchaCageServiceImpl() { 
         seenTokens = CacheBuilder.newBuilder()
-            .maximumSize(10000)
+            .maximumSize(1024)
             .expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS)
             .build();
     }
