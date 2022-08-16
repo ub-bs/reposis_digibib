@@ -47,11 +47,9 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     private final Cache<String, Boolean> seenTokens;
 
-    private CaptchaCageServiceImpl() { 
-        seenTokens = CacheBuilder.newBuilder()
-            .maximumSize(1024)
-            .expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS)
-            .build();
+    private CaptchaCageServiceImpl() {
+        seenTokens = CacheBuilder.newBuilder().maximumSize(1024).expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS)
+                .build();
     }
 
     public static CaptchaCageServiceImpl getInstance() {
@@ -118,7 +116,8 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
         private Date timestamp;
 
-        Token() {}
+        Token() {
+        }
 
         Token(String secret) {
             this.secret = secret;
