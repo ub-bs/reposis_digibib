@@ -210,7 +210,7 @@ public class ContactRequest {
     @JsonProperty(value = PROP_SEND_COPY)
     @Column(name = "send_copy",
         nullable = false)
-    public boolean getSendCopy() {
+    public boolean isSendCopy() {
         return this.sendCopy;
     }
 
