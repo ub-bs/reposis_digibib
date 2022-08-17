@@ -1,6 +1,5 @@
 <template>
-  <!-- {{ $t('digibib.contact.frontend.form.title') }} -->
-  <modal @ok="emit('close')" title="TODO">
+  <modal @ok="emit('close')" :title="$t('digibib.contact.frontend.form.title')" okOnly>
     <div>
       Die Anfrage wurde erfolgreich aufgenommen und wird nun an die Beteiligten weitergeleitet.
     </div>
@@ -23,6 +22,7 @@ defineProps({
 const emit = defineEmits(['close']);
 const close = () => emit('close');
 </script>
+
 <style>
 .modal-mask {
   position: fixed;
