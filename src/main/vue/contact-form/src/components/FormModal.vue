@@ -169,10 +169,12 @@ const checkFormValidity = () => {
 
 const handleSubmit = async () => {
   busy.value = true;
+  console.log(contactRequest); // TODO
   resetStates();
   if (checkFormValidity() && website.value.length === 0) {
     const token = await captcha.value.verifyCaptcha();
-    if (token.length !== 0) {
+    if (token) {
+      console.log('token ;)');
       try {
         const response = await fetch(`${props.baseUrl}rsc/contact`, {
           method: 'POST',
@@ -184,7 +186,7 @@ const handleSubmit = async () => {
           body: JSON.stringify(contactRequest.value),
         });
         busy.value = false;
-        if (!response.ok) {
+        if (response.ok) {
           emit('success');
         } else {
           showError.value = true;

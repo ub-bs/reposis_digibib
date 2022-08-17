@@ -42,14 +42,14 @@ onMounted(() => {
 const verifyCaptcha = async () => {
   if (captchaSecret.value.length === 0) {
     captchaState.value = false;
-    return '';
+    return null;
   }
   const response = await fetch(`${props.baseUrl}rsc/captchaCage/userverify`, {
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain',
     },
-    body: props.captchaSecret,
+    body: captchaSecret.value,
   });
   if (response.ok) {
     const result = await response.json();
@@ -59,7 +59,7 @@ const verifyCaptcha = async () => {
   }
   captchaState.value = false;
   shuffleCaptcha();
-  return ''; // TODO
+  return null;
 };
 defineExpose({
   verifyCaptcha,
