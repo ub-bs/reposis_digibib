@@ -1,29 +1,28 @@
 <template>
-  <transition name="modal">
+  <transition name="modal" appear>
     <div class="modal-mask">
-      <div class="modal-wrapper" @click="closeBackDrop">
+      <div class="modal-wrapper" @click="close">
         <div class="modal-dialog modal-lg" role="document" @click.stop="">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">
-                {{ $t('digibib.contact.frontend.form.title') }}
-              </h5>
+              <slot name="title">
+                <h5 class="modal-title">
+                  {{ title }}
+                </h5>
+                <button type="button" class="close" aria-label="Close">
+                  <span aria-hidden="true" @click="close">&times;</span>
+                </button>
+              </slot>
             </div>
             <div class="modal-body">
-              <div>
-        Die Anfrage wurde erfolgreich aufgenommen und wird nun an die Beteiligten weitergeleitet.
-              </div>
-              <div v-if="props.sendCopy">
-                Sie erhalten in Kürze eine Bestätigungsmail.
-              </div>
-              <div>
-  Sofern die Anfrage längst unbeantwortet bleibt, kontaktieren Sie bitte unseren Support.
-              </div>
+              <slot />
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-primary" @click="close">
-                OK
-              </button>
+              <slot name="footer">
+                <button type="button" class="btn btn-primary" @click="emit('ok')">
+                  {{ okTitle }}
+                </button>
+              </slot>
             </div>
           </div>
         </div>
@@ -35,12 +34,17 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue';
 
-interface Props {
-  sendCopy: boolean,
-}
-const props = defineProps<Props>();
-const emit = defineEmits(['close']);
-const close = () => emit('close');
+defineProps({
+  title: String,
+  okTitle: {
+    type: String,
+    default: 'OK',
+  },
+});
+const emit = defineEmits(['close', 'ok']);
+const close = () => {
+  emit('close');
+};
 </script>
 <style>
 .modal-mask {

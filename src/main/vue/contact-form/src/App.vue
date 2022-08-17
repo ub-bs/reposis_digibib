@@ -5,7 +5,7 @@
         {{ $t('digibib.contact.frontend.button.contact') }}
       </a>
     </Teleport>
-    <accept-modal sendCopy v-if="showAcceptModal" @close="showAcceptModal = false" />
+    <confirmation-modal sendCopy v-if="showConfirmationModal" @close="showConfirmationModal = false" />
     <form-modal :objectId="props.objectId" :baseUrl="props.baseUrl" v-if="showFormModal"
         @close="showFormModal = false" @success="handleSuccess" />
   </div>
@@ -13,8 +13,7 @@
 
 <script setup lang="ts">
 import { defineProps, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import AcceptModal from './components/AcceptModal.vue';
+import ConfirmationModal from './components/ConfirmationModal.vue';
 import FormModal from './components/FormModal.vue';
 
 interface Props {
@@ -22,11 +21,11 @@ interface Props {
   objectId: string,
 }
 const props = defineProps<Props>();
-const showAcceptModal = ref(false);
+const showConfirmationModal = ref(false);
 const showFormModal = ref(false);
 const handleSuccess = () => {
   showFormModal.value = false;
-  showAcceptModal.value = true;
+  showConfirmationModal.value = true;
 };
 </script>
 
