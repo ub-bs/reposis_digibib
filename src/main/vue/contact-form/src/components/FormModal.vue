@@ -1,9 +1,9 @@
 <template>
-  <modal :title="$t('digibib.contact.frontend.form.title')" @ok="handleSubmit" @close="emit('close')">
+  <modal :title="$t('digibib.contact.frontend.form.title')" @ok="handleSubmit" @close="emit('close')" :busy="busy">
     <div class="row">
       <div class="col-12">
-        <div v-if="showAlert" class="alert alert-danger" role="alert">
-          {{ alertMessage }}
+        <div v-if="showError" class="alert alert-danger" role="alert">
+          {{ $t('digibib.contact.frontend.form.error') }}
         </div>
       </div>
     </div>
@@ -92,7 +92,6 @@
 
 <script setup lang="ts">
 import {
-  computed,
   defineEmits,
   defineProps,
   onMounted,
@@ -107,7 +106,6 @@ const props = defineProps({
   objectId: String,
 });
 const emit = defineEmits(['close', 'success']);
-const close = () => emit('close');
 
 interface IContactRequest {
   name: string;
@@ -118,11 +116,8 @@ interface IContactRequest {
   sendCopy: boolean;
 }
 
-const I18N_PFEFIX = 'digibib.contact.frontend.form.';
-
 const busy = ref(false);
-const alertMessage = ref('');
-const showAlert = computed(() => alertMessage.value.length > 0);
+const showError = ref(false);
 const contactRequest: IContactRequest = reactive({}) as IContactRequest;
 const nameState: boolean = ref(null);
 const emailState: boolean = ref(null);
@@ -140,7 +135,7 @@ const resetStates = () => {
 
 const resetForm = () => {
   busy.value = false;
-  alertMessage.value = '';
+  showError.value = false;
   contactRequest.value = {} as IContactRequest;
   resetStates();
   contactRequest.objectID = props.objectId;
@@ -170,12 +165,13 @@ const handleSubmit = async () => {
         });
         busy.value = false;
         if (!response.ok) {
-          // alertMessage.value = t(`${I18N_PFEFIX}error`) as string;
-        } else {
           emit('success');
+        } else {
+          showError.value = true;
         }
       } catch (error) {
-        // alertMessage.value = t(`${I18N_PFEFIX}error`) as string;
+        showError.value = true;
+        busy.value = false;
       }
     }
   }

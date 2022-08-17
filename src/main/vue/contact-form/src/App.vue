@@ -1,12 +1,12 @@
 <template>
   <div>
     <Teleport to="#btnContact" append>
-      <a class="dropdown-item" role="menuitem" tabindex="-1" @click="showConfirmationModal = true">
+      <a class="dropdown-item" role="menuitem" tabindex="-1" @click="showFormModal = true">
         {{ $t('digibib.contact.frontend.button.contact') }}
       </a>
     </Teleport>
     <confirmation-modal sendCopy v-if="showConfirmationModal" @close="showConfirmationModal = false" />
-    <form-modal :objectId="props.objectId" :baseUrl="props.baseUrl" v-if="showFormModal"
+    <form-modal :objectId="objectId" :baseUrl="baseUrl" v-if="showFormModal"
         @close="showFormModal = false" @success="handleSuccess" />
   </div>
 </template>
@@ -15,11 +15,16 @@ import { defineProps, ref } from 'vue';
 import ConfirmationModal from './components/ConfirmationModal.vue';
 import FormModal from './components/FormModal.vue';
 
-interface Props {
-  baseUrl: string,
-  objectId: string,
-}
-const props = defineProps<Props>();
+defineProps({
+  baseUrl: {
+    type: String,
+    required: true,
+  },
+  objectId: {
+    type: String,
+    required: true,
+  },
+});
 const showConfirmationModal = ref(false);
 const showFormModal = ref(false);
 const handleSuccess = () => {
