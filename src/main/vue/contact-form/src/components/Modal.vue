@@ -30,7 +30,6 @@
     </div>
   </transition>
 </template>
-
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue';
 
