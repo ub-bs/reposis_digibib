@@ -1,4 +1,4 @@
-# contact-manager
+# contact-form
 
 ## Project setup
 ```
