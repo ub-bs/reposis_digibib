@@ -20,7 +20,7 @@
             <label class="control-label" for="nameInput">
               {{ $t('digibib.contact.frontend.form.label.name') }}
             </label>
-            <input type="text" class="form-control" id="nameInput" ref="name" required
+            <input type="text" class="form-control" id="nameInput" ref="nameInput" required
               :class="nameState === false ? 'is-invalid' : ''" v-model="contactRequest.name" />
             <div class="invalid-feedback" :class="nameState === false ? 'd-block' : ''">
               {{ $t('digibib.contact.frontend.form.validation.name') }}
@@ -29,12 +29,12 @@
         </div>
         <div class="col-6">
           <div class="form-group required">
-            <label class="control-label" for="emailInput">
+            <label class="control-label" for="mailInput">
               {{ $t('digibib.contact.frontend.form.label.email') }}
             </label>
-            <input type="email" class="form-control" id="emailInput" ref="email" required
-              :class="emailState === false ? 'is-invalid' : ''" v-model="contactRequest.email" />
-            <div class="invalid-feedback" :class="emailState === false ? 'd-block' : ''">
+            <input type="email" class="form-control" id="mailInput" ref="mailInput" required
+              :class="mailState === false ? 'is-invalid' : ''" v-model="contactRequest.email" />
+            <div class="invalid-feedback" :class="mailState === false ? 'd-block' : ''">
               {{ $t('digibib.contact.frontend.form.validation.email') }}
             </div>
           </div>
@@ -60,7 +60,7 @@
             <label class="control-label" for="messageInput">
               {{ $t('digibib.contact.frontend.form.label.message') }}
             </label>
-            <textarea type="text" class="form-control" id="messageInput" rows="10" ref="message"
+            <textarea type="text" class="form-control" id="messageInput" rows="10" ref="messageInput"
               :class="messageState === false ? 'is-invalid' : ''" v-model="contactRequest.message"
               required />
             <div class="invalid-feedback" :class="messageState === false ? 'd-block' : ''">
@@ -100,6 +100,7 @@ import {
 } from 'vue';
 import Modal from './Modal.vue';
 import CageCaptcha from './CageCaptcha.vue';
+import validateORCID from '../utils';
 
 const props = defineProps({
   baseUrl: String,
@@ -120,7 +121,10 @@ const busy = ref(false);
 const showError = ref(false);
 const contactRequest: IContactRequest = reactive({}) as IContactRequest;
 const nameState: boolean = ref(null);
-const emailState: boolean = ref(null);
+const nameInput = ref(null);
+const mailInput = ref(null);
+const messageInput = ref(null);
+const mailState: boolean = ref(null);
 const orcidState: boolean = ref(null);
 const messageState: boolean = ref(null);
 const website = ref('');
@@ -128,7 +132,7 @@ const captcha = ref(null);
 
 const resetStates = () => {
   nameState.value = null;
-  emailState.value = null;
+  mailState.value = null;
   orcidState.value = null;
   messageState.value = null;
 };
@@ -136,8 +140,8 @@ const resetStates = () => {
 const resetForm = () => {
   busy.value = false;
   showError.value = false;
-  contactRequest.value = {} as IContactRequest;
   resetStates();
+  contactRequest.value = {} as IContactRequest;
   contactRequest.objectID = props.objectId;
 };
 
@@ -145,7 +149,23 @@ onMounted(() => {
   resetForm();
 });
 
-const checkFormValidity = () => true;
+const checkFormValidity = () => {
+  if (!nameInput.value.checkValidity()) {
+    nameState.value = false;
+  }
+  if (!mailInput.value.checkValidity()) {
+    mailState.value = false;
+  }
+  if (!messageInput.value.checkValidity()) {
+    messageState.value = false;
+  }
+  if (contactRequest.orcid && !validateORCID(contactRequest.orcid)) {
+    orcidState.value = false;
+  }
+
+  return nameState.value === null && mailState.value === null && messageState.value === null
+      && orcidState.value === null;
+};
 
 const handleSubmit = async () => {
   busy.value = true;
