@@ -19,7 +19,7 @@
             </div>
             <div class="modal-footer">
               <slot name="footer">
-                <button type="button" class="btn btn-primary" @click="emit('ok')">
+                <button type="button" class="btn btn-primary" @click="ok">
                   {{ okTitle }}
                 </button>
               </slot>
@@ -33,7 +33,7 @@
 <script setup lang="ts">
 import { defineEmits, defineProps } from 'vue';
 
-defineProps({
+const props = defineProps({
   title: String,
   okTitle: {
     type: String,
@@ -43,10 +43,21 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  busy: {
+    type: Boolean,
+    default: false,
+  },
 });
 const emit = defineEmits(['close', 'ok']);
 const close = () => {
-  emit('close');
+  if (!props.busy) {
+    emit('close');
+  }
+};
+const ok = () => {
+  if (!props.busy) {
+    emit('ok');
+  }
 };
 </script>
 <style>
