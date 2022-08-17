@@ -8,7 +8,8 @@ export default function validateORCID(orcid: string): boolean {
     return false;
   }
   const digits = orcid.slice(0, -1).match(/\d/g);
-  const digitString = digits.join('');
+  /* eslint-disable  @typescript-eslint/no-non-null-assertion */
+  const digitString = digits!.join('');
   if (digitString.length !== 15) {
     return false;
   }
