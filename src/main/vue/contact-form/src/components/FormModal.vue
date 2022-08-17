@@ -84,21 +84,7 @@
     </form>
     <div class="row pt-1">
       <div class="col">
-        <div class="d-flex flex-column float-right" style="width: 225px">
-          <div class="d-flex flex-row">
-            <img style="width: 200px; height: auto;" :src="captchaUrl"
-                alt="graphical access code" />
-            <div class="d-flex flex-column justify-content-md-center"
-                style="width: 20px; margin-left: 5px;">
-              <i @click="shuffleCaptcha" class="fa fa-refresh" aria-hidden="true"></i>
-              <i class="fas fa-volume-up "></i>
-            </div>
-          </div>
-          <div class="pt-2">
-            <input type="text" v-model="captchaSecret" class="form-control-sm form-control w-100"
-              :class="captchaState === false ? 'is-invalid' : ''" />
-          </div>
-        </div>
+        <cage-captcha ref="captcha" :baseUrl="baseUrl"/>
       </div>
     </div>
   </modal>
@@ -114,6 +100,7 @@ import {
   ref,
 } from 'vue';
 import Modal from './Modal.vue';
+import CageCaptcha from './CageCaptcha.vue';
 
 const props = defineProps({
   baseUrl: String,
@@ -133,7 +120,6 @@ interface IContactRequest {
 
 const I18N_PFEFIX = 'digibib.contact.frontend.form.';
 
-const captchaUrl = ref('');
 const busy = ref(false);
 const alertMessage = ref('');
 const showAlert = computed(() => alertMessage.value.length > 0);
@@ -142,20 +128,14 @@ const nameState: boolean = ref(null);
 const emailState: boolean = ref(null);
 const orcidState: boolean = ref(null);
 const messageState: boolean = ref(null);
-const captchaState: boolean = ref(null);
-const captchaSecret = ref('');
 const website = ref('');
-
-const shuffleCaptcha = () => {
-  captchaUrl.value = `${props.baseUrl}rsc/captchaCage?${Date.now()}`;
-};
+const captcha = ref(null);
 
 const resetStates = () => {
   nameState.value = null;
   emailState.value = null;
   orcidState.value = null;
   messageState.value = null;
-  captchaState.value = null;
 };
 
 const resetForm = () => {
@@ -163,8 +143,6 @@ const resetForm = () => {
   alertMessage.value = '';
   contactRequest.value = {} as IContactRequest;
   resetStates();
-  shuffleCaptcha();
-  captchaSecret.value = '';
   contactRequest.objectID = props.objectId;
 };
 
@@ -172,30 +150,13 @@ onMounted(() => {
   resetForm();
 });
 
-const verifyCaptcha = async () => {
-  const response = await fetch(`${props.baseUrl}rsc/captchaCage/userverify`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'text/plain',
-    },
-    body: captchaSecret,
-  });
-  if (response.ok) {
-    const result = await response.json();
-    if (result.verified === true && result.verifiedToken.length !== 0) {
-      return result.verifiedToken;
-    }
-  }
-  return '';
-};
-
 const checkFormValidity = () => true;
 
 const handleSubmit = async () => {
   busy.value = true;
   resetStates();
   if (checkFormValidity() && website.value.length === 0) {
-    const token = await verifyCaptcha();
+    const token = await captcha.value.verifyCaptcha();
     if (token.length !== 0) {
       try {
         const response = await fetch(`${props.baseUrl}rsc/contact`, {
@@ -216,20 +177,13 @@ const handleSubmit = async () => {
       } catch (error) {
         // alertMessage.value = t(`${I18N_PFEFIX}error`) as string;
       }
-    } else {
-      captchaState.value = false;
-      shuffleCaptcha();
     }
-  } else {
-    busy.value = false;
   }
+  busy.value = false;
 };
 </script>
 <style>
 input#website {
   display: none;
-}
-.captcha-container {
-  width: 200px;
 }
 </style>

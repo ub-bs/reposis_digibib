@@ -9,7 +9,7 @@
                 <h5 class="modal-title">
                   {{ title }}
                 </h5>
-                <button type="button" class="close" aria-label="Close">
+                <button v-if="!okOnly" type="button" class="close" aria-label="Close">
                   <span aria-hidden="true" @click="close">&times;</span>
                 </button>
               </slot>
@@ -39,6 +39,10 @@ defineProps({
   okTitle: {
     type: String,
     default: 'OK',
+  },
+  okOnly: {
+    type: Boolean,
+    default: false,
   },
 });
 const emit = defineEmits(['close', 'ok']);
