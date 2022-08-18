@@ -154,10 +154,9 @@ const checkFormValidity = () => {
   if (!messageInput.value.checkValidity()) {
     messageState.value = false;
   }
-  if (contactRequest.orcid && !validateORCID(contactRequest.orcid)) {
+  if (contactRequest.value.orcid && !validateORCID(contactRequest.value.orcid)) {
     orcidState.value = false;
   }
-
   return nameState.value === null && mailState.value === null && messageState.value === null
       && orcidState.value === null;
 };
@@ -167,7 +166,6 @@ const handleSubmit = async () => {
   if (checkFormValidity() && website.value.length === 0) {
     const token = await captcha.value.verifyCaptcha();
     if (token) {
-      console.log('token ;)');
       try {
         const response = await fetch(`${props.baseUrl}rsc/contact`, {
           method: 'POST',

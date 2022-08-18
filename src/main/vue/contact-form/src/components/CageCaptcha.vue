@@ -5,7 +5,7 @@
           alt="graphical access code" />
       <div class="d-flex flex-column justify-content-md-center"
           style="width: 20px; margin-left: 5px;">
-        <i @click="shuffleCaptcha" class="fa fa-refresh" aria-hidden="true"></i>
+        <i @click="shuffleCaptcha" class="fas fa-redo" aria-hidden="true"></i>
         <i class="fas fa-volume-up "></i>
       </div>
     </div>
