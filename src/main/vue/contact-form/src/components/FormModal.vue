@@ -84,29 +84,23 @@
     </form>
     <div class="row pt-1">
       <div class="col">
-        <cage-captcha ref="captcha" :baseUrl="baseUrl"/>
+        <cage-captcha ref="captcha" :baseUrl="baseUrl + 'rsc/captchaCage'"/>
       </div>
     </div>
   </modal>
 </template>
 
 <script setup lang="ts">
+
 import {
   defineEmits,
   defineProps,
   onMounted,
-  reactive,
   ref,
 } from 'vue';
 import Modal from './Modal.vue';
 import CageCaptcha from './CageCaptcha.vue';
 import validateORCID from '../utils';
-
-const props = defineProps({
-  baseUrl: String,
-  objectId: String,
-});
-const emit = defineEmits(['close', 'success']);
 
 interface IContactRequest {
   name: string;
@@ -116,10 +110,14 @@ interface IContactRequest {
   objectID: string;
   sendCopy: boolean;
 }
-
+const props = defineProps({
+  baseUrl: String,
+  objectId: String,
+});
+const emit = defineEmits(['close', 'success']);
 const busy = ref(false);
 const showError = ref(false);
-const contactRequest: IContactRequest = reactive({}) as IContactRequest;
+const contactRequest: IContactRequest = ref({}) as IContactRequest;
 const nameState: boolean = ref(null);
 const nameInput = ref(null);
 const mailInput = ref(null);
@@ -129,26 +127,22 @@ const orcidState: boolean = ref(null);
 const messageState: boolean = ref(null);
 const website = ref('');
 const captcha = ref(null);
-
 const resetStates = () => {
   nameState.value = null;
   mailState.value = null;
   orcidState.value = null;
   messageState.value = null;
 };
-
 const resetForm = () => {
   busy.value = false;
   showError.value = false;
   resetStates();
   contactRequest.value = {} as IContactRequest;
-  contactRequest.objectID = props.objectId;
+  contactRequest.value.objectID = props.objectId;
 };
-
 onMounted(() => {
   resetForm();
 });
-
 const checkFormValidity = () => {
   if (!nameInput.value.checkValidity()) {
     nameState.value = false;
@@ -166,10 +160,8 @@ const checkFormValidity = () => {
   return nameState.value === null && mailState.value === null && messageState.value === null
       && orcidState.value === null;
 };
-
 const handleSubmit = async () => {
   busy.value = true;
-  console.log(contactRequest); // TODO
   resetStates();
   if (checkFormValidity() && website.value.length === 0) {
     const token = await captcha.value.verifyCaptcha();

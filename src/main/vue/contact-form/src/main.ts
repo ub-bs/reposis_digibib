@@ -4,7 +4,7 @@ import App from './App.vue';
 
 (async () => {
   const app = createApp(App, {
-    objectId: 'dbbs_mods_00000006',
+    objectId: 'mir_mods_00000001',
     baseUrl: 'http://localhost:8291/mir/',
   });
   const i18nResponse = await fetch('http://localhost:8291/mir/rsc/locale/translate/digibib.contact.frontend.*');
