@@ -45,7 +45,7 @@ public class ContactRecipient {
 
     private String name;
 
-    private ContactRecipientSource recipientSource;
+    private ContactRecipientOrigin origin;
 
     private String email;
 
@@ -57,14 +57,14 @@ public class ContactRecipient {
 
     public ContactRecipient() { }
 
-    public ContactRecipient(String name, ContactRecipientSource source, String email) {
+    public ContactRecipient(String name, ContactRecipientOrigin origin, String email) {
         this.name = name;
-        this.recipientSource = source;
+        this.origin = origin;
         this.email = email;
     }
 
-    public ContactRecipient(ContactRecipientSource source, String email) {
-        this.recipientSource = source;
+    public ContactRecipient(ContactRecipientOrigin origin, String email) {
+        this.origin = origin;
         this.email = email;
     }
 
@@ -98,12 +98,12 @@ public class ContactRecipient {
     @Enumerated(EnumType.STRING)
     @Column(name = "type",
         nullable = false)
-    public ContactRecipientSource getContactRecipientSource() {
-        return recipientSource;
+    public ContactRecipientOrigin getOrigin(){
+        return origin;
     }
 
-    public void setContactRecipientSource(ContactRecipientSource source) {
-        this.recipientSource = source;
+    public void setOrigin(ContactRecipientOrigin origin) {
+        this.origin = origin;
     }
 
     @Column(name = "email",

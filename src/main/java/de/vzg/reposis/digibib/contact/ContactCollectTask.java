@@ -23,7 +23,6 @@ import java.util.List;
 import java.util.concurrent.Callable;
 
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientSource;
 
 import org.jdom2.Element;
 import org.mycore.datamodel.metadata.MCRMetadataManager;

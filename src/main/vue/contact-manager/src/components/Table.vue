@@ -3,22 +3,22 @@
     <thead>
       <tr>
         <th scope="col" class="col-1">
-          {{ t('digibib.contact.frontend.manager.label.id') }}
+          {{ $t('digibib.contact.frontend.manager.label.id') }}
         </th>
         <th scope="col" class="col-2">
-          {{ t('digibib.contact.frontend.manager.label.created') }}
+          {{ $t('digibib.contact.frontend.manager.label.created') }}
         </th>
         <th scope="col" class="col-2">
-          {{ t('digibib.contact.frontend.manager.label.objectID') }}
+          {{ $t('digibib.contact.frontend.manager.label.objectID') }}
         </th>
         <th scope="col" class="col-5">
-          {{ t('digibib.contact.frontend.manager.label.email') }}
+          {{ $t('digibib.contact.frontend.manager.label.email') }}
         </th>
         <th scope="col" class="col-1">
-          {{ t('digibib.contact.frontend.manager.label.state') }}
+          {{ $t('digibib.contact.frontend.manager.label.state') }}
         </th>
         <th scope="col" class="col-1">
-          {{ t('digibib.contact.frontend.manager.label.actions') }}
+          {{ $t('digibib.contact.frontend.manager.label.actions') }}
         </th>
       </tr>
     </thead>
@@ -52,18 +52,16 @@
       </tr>
     </tbody>
   </table>
-  <Modal v-if="showModal" :id="currentId" size="lg" />
+  <RequestModal v-if="showModal" :id="currentId" size="lg" />
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
-import { useI18n } from 'vue-i18n';
-import Modal from './Modal.vue';
+import RequestModal from './RequestModal.vue';
 
 const store = useStore();
 const requests = computed(() => store.getters.getCurrentRequests);
-const { t } = useI18n();
 const currentId = ref(null);
 const showModal = computed(() => store.state.showModal);
 const viewRequest = (id: string) => {
