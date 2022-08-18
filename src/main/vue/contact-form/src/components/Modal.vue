@@ -2,7 +2,7 @@
   <transition name="modal" appear>
     <div class="modal-mask">
       <div class="modal-wrapper" @click="close">
-        <div class="modal-dialog modal-lg" role="document" @click.stop="">
+        <div class="modal-dialog" :class="'modal-' + size" role="document" @click.stop="">
           <div class="modal-content">
             <div class="modal-header">
               <slot name="title">
@@ -46,6 +46,10 @@ const props = defineProps({
   busy: {
     type: Boolean,
     default: false,
+  },
+  size: {
+    type: String,
+    default: 'md',
   },
 });
 const emit = defineEmits(['close', 'ok']);
