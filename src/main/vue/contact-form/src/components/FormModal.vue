@@ -1,5 +1,6 @@
 <template>
-  <modal :title="$t('digibib.contact.frontend.form.title')" @ok="handleSubmit" @close="emit('close')" :busy="busy">
+  <modal :title="$t('digibib.contact.frontend.form.title')" @ok="handleSubmit" @close="emit('close')" :busy="busy"
+      size="lg">
     <div class="row">
       <div class="col-12">
         <div v-if="showError" class="alert alert-danger" role="alert">
