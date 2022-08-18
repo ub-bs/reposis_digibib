@@ -5,9 +5,13 @@
         {{ $t('digibib.contact.frontend.button.contact') }}
       </a>
     </Teleport>
-    <confirmation-modal sendCopy v-if="showConfirmationModal" @close="showConfirmationModal = false" />
-    <form-modal :objectId="objectId" :baseUrl="baseUrl" v-if="showFormModal"
-        @close="showFormModal = false" @success="handleSuccess" />
+    <transition name="modal" appear>
+      <confirmation-modal sendCopy v-if="showConfirmationModal" @close="showConfirmationModal = false" />
+    </transition>
+    <transition name="modal" appear>
+      <form-modal :objectId="objectId" :baseUrl="baseUrl" v-if="showFormModal"
+          @close="showFormModal = false" @success="handleSuccess" />
+    </transition>
   </div>
 </template>
 <script setup lang="ts">
@@ -32,3 +36,13 @@ const handleSuccess = () => {
   showConfirmationModal.value = true;
 };
 </script>
+<style>
+.modal-enter-active,
+.modal-leave-active {
+  transition: opacity 0.3s ease;
+}
+.modal-enter-from,
+.modal-leave-to {
+  opacity: 0;
+}
+</style>
