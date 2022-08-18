@@ -33,7 +33,7 @@ const captchaSecret = ref('');
 const captchaState: boolean = ref(null);
 const captchaUrl = ref('');
 const shuffleCaptcha = () => {
-  captchaUrl.value = `${props.baseUrl}rsc/captchaCage?${Date.now()}`;
+  captchaUrl.value = `${props.baseUrl}?${Date.now()}`;
   captchaSecret.value = '';
 };
 onMounted(() => {
@@ -44,7 +44,7 @@ const verifyCaptcha = async () => {
     captchaState.value = false;
     return null;
   }
-  const response = await fetch(`${props.baseUrl}rsc/captchaCage/userverify`, {
+  const response = await fetch(`${props.baseUrl}/userverify`, {
     method: 'POST',
     headers: {
       'Content-Type': 'text/plain',
