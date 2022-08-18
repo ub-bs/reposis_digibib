@@ -19,5 +19,5 @@
 package de.vzg.reposis.digibib.contact.model;
 
 public enum ContactRecipientSource {
-    ORCID, FALLBACK
+    FALLBACK, MANUAL, ORCID
 }

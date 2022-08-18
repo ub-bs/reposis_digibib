@@ -21,4 +21,6 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 public class RestConstants {
 
     public static final String PARAM_CONTACT_REQUEST_ID = "contact_request_id";
+
+    public static final String PARAM_CONTACT_REQUEST_RECIPIENT_ID = "contact_request_recipient_id";
 }

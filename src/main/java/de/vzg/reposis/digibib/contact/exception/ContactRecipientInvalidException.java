@@ -18,9 +18,13 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
-public class ContactRequestNotFoundException extends ContactException {
+public class ContactRecipientInvalidException extends ContactException {
 
-    public ContactRequestNotFoundException() {
-        super("requestNotFound", "request not found.");
+    public ContactRecipientInvalidException () { // TODO
+        this("invalid recipient.");
+    }
+
+    public ContactRecipientInvalidException (String message) {
+        super("invalidRecipientRequest", message);
     }
 }

@@ -22,13 +22,31 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
-public class ContactValidationHelper {
+public class ContactValidator {
 
-    public static boolean validateContactRequest(ContactRequest contactRequest) {
-        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        final Validator validator = factory.getValidator();
-        return validator.validate(contactRequest).size() == 0;
+    private final Validator validator;
+
+    private ContactValidator() {
+       final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+       validator = factory.getValidator();
+    }
+
+    public static ContactValidator getInstance() {
+        return Holder.INSTANCE;
+    }
+
+    public boolean validateRequest(ContactRequest request) {
+        return validator.validate(request).size() == 0;
+    }
+
+    public boolean validateRecipient(ContactRecipient recipient) {
+        return validator.validate(recipient).size() == 0;
+    }
+
+    private static class Holder {
+        private static final ContactValidator INSTANCE = new ContactValidator();
     }
 }
