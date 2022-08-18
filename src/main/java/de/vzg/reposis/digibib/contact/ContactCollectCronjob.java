@@ -24,7 +24,7 @@ import java.util.Map;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientSource;
+import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
@@ -129,7 +129,7 @@ public class ContactCollectCronjob extends MCRCronjob {
 
     private void addFallbackRecipient(List<ContactRecipient> recipients) {
         final ContactRecipient fallback =
-                new ContactRecipient(FALLBACK_NAME, ContactRecipientSource.FALLBACK, FALLBACK_MAIL);
+                new ContactRecipient(FALLBACK_NAME, ContactRecipientOrigin.FALLBACK, FALLBACK_MAIL);
         recipients.add(fallback);
     }
 

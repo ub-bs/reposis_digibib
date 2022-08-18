@@ -47,7 +47,7 @@ import de.vzg.reposis.digibib.contact.exception.ContactRecipientInvalidException
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientSource;
+import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 
@@ -98,7 +98,7 @@ public class RestContactRecipientResource {
     public Response addRecipient(@QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID id,
             ContactRecipient recipient) throws ContactRecipientInvalidException, ContactRequestNotFoundException,
             ContactRequestStateException {
-        recipient.setContactRecipientSource(ContactRecipientSource.MANUAL);
+        recipient.setOrigin(ContactRecipientOrigin.MANUAL);
         if (!ContactValidator.getInstance().validateRecipient(recipient)) {
             throw new ContactRecipientInvalidException();
         }

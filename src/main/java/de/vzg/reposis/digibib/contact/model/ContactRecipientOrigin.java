@@ -18,6 +18,6 @@
 
 package de.vzg.reposis.digibib.contact.model;
 
-public enum ContactRecipientSource {
+public enum ContactRecipientOrigin {
     FALLBACK, MANUAL, ORCID
 }

@@ -15,7 +15,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineProps, ref } from 'vue';
+import { defineProps, ref } from 'vue'; // TODO check defineProps is needed
 import ConfirmationModal from './components/ConfirmationModal.vue';
 import FormModal from './components/FormModal.vue';
 
