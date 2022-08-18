@@ -122,7 +122,6 @@ public class ContactRequest {
 
     public ContactRequest() { }
 
-    @Column(unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
     public ContactRequest(MCRObjectID objectID, String sender, String name, String message) {
@@ -285,12 +284,13 @@ public class ContactRequest {
     }
 
     @PrePersist
-    private void prepersistUuidModel() {
+    private void prepersistUUIDModel() {
         if (uuid == null) {
             uuid = UUID.randomUUID();
         }
     }
 
+    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     public UUID getUuid() {
         return uuid;
     }
@@ -304,7 +304,7 @@ public class ContactRequest {
     }
 
     @OneToMany(fetch = FetchType.EAGER,
-              mappedBy = "contactRequest",
+              mappedBy = "request",
               cascade = CascadeType.ALL,
               orphanRemoval = true)
     public List<ContactRecipient> getRecipients() {
@@ -317,7 +317,7 @@ public class ContactRequest {
 
     public void addRecipient(ContactRecipient recipient) {
         recipients.add(recipient);
-        recipient.setContactRequest(this);
+        recipient.setRequest(this);
     }
 
     public String getComment() {

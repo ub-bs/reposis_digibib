@@ -18,6 +18,8 @@
 
 package de.vzg.reposis.digibib.contact.model;
 
+import java.util.UUID;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -30,6 +32,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -46,7 +49,11 @@ public class ContactRecipient {
 
     private String email;
 
-    private ContactRequest contactRequest;
+    private ContactRequest request;
+
+    private boolean enabled = true;
+
+    private UUID uuid;
 
     public ContactRecipient() { }
 
@@ -68,6 +75,7 @@ public class ContactRecipient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "recipient_id",
         nullable = false)
+    @JsonIgnore
     public long getId() {
         return id;
     }
@@ -111,11 +119,37 @@ public class ContactRecipient {
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "contact_request_id")
-    public ContactRequest getContactRequest() {
-        return contactRequest;
+    public ContactRequest getRequest() {
+        return request;
     }
 
-    public void setContactRequest(ContactRequest contactRequest) {
-        this.contactRequest = contactRequest;
+    public void setRequest(ContactRequest request) {
+        this.request = request;
+    }
+
+    @PrePersist
+    private void prepersistUUIDModel() {
+        if (uuid == null) {
+            uuid = UUID.randomUUID();
+        }
+    }
+
+    @Column(unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    @Column(name = "enabled",
+        nullable = false)
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 }

@@ -69,13 +69,13 @@ public class ContactCollectCronjob extends MCRCronjob {
 
     @Override
     public String getDescription() {
-        return "Collects recipients for all new contact requests.";
+        return "Collects recipients for all new requests.";
     }
 
     private void doWork() throws Exception {
         final ContactRequestService service = ContactRequestService.getInstance();
-        final List<ContactRequest> requests = service.listContactRequestsByState(ContactRequestState.RECEIVED);
-        requests.addAll(service.listContactRequestsByState(ContactRequestState.PROCESSING)); // TODO may error state
+        final List<ContactRequest> requests = service.listRequestsByState(ContactRequestState.RECEIVED);
+        requests.addAll(service.listRequestsByState(ContactRequestState.PROCESSING)); // TODO may error state
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
         requests.forEach((r) -> {
             LOGGER.info("Collecting recipients for {}", r.getId());
@@ -84,7 +84,7 @@ public class ContactCollectCronjob extends MCRCronjob {
             MCRTransactionHelper.beginTransaction();
             try {
                 r.setState(ContactRequestState.PROCESSING);
-                service.updateContactRequest(r);
+                service.updateRequest(r);
                 MCRTransactionHelper.commitTransaction();
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
@@ -111,7 +111,7 @@ public class ContactCollectCronjob extends MCRCronjob {
             } finally {
                 MCRTransactionHelper.beginTransaction();
                 try {
-                    service.updateContactRequest(r);
+                    service.updateRequest(r);
                     MCRTransactionHelper.commitTransaction();
                 } catch (ContactRequestNotFoundException e) {
                     // request seems to be deleted in meantime, nothing to do
@@ -133,7 +133,7 @@ public class ContactCollectCronjob extends MCRCronjob {
         recipients.add(fallback);
     }
 
-    private void addRecipients(ContactRequest contactRequest, List<ContactRecipient> recipients) {
-        recipients.forEach((r) -> contactRequest.addRecipient(r));
+    private void addRecipients(ContactRequest request, List<ContactRecipient> recipients) {
+        recipients.forEach((r) -> request.addRecipient(r));
     }
 }

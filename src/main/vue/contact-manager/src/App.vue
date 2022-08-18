@@ -2,7 +2,7 @@
   <div>
     <div class="row mb-3">
       <div class="col d-flex justify-content-center">
-        <h3>{{ t('digibib.contact.frontend.manager.title') }}</h3>
+        <h3>{{ $t('digibib.contact.frontend.manager.title') }}</h3>
       </div>
     </div>
     <!-- <div v-if="showAlert" class="row">
@@ -24,11 +24,7 @@
     </div>
   </div>
 </template>
-
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
 import Table from './components/Table.vue';
 import Pagination from './components/Pagination.vue';
-
-const { t } = useI18n();
 </script>

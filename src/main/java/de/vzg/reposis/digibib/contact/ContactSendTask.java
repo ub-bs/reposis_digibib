@@ -58,30 +58,30 @@ public class ContactSendTask implements Callable<Void> {
     private static final String MAIL_STYLESHEET = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Stylesheet");
 
-    private final ContactRequest contactRequest;
+    private final ContactRequest request;
 
-    public ContactSendTask(ContactRequest contactRequest) {
-        this.contactRequest = contactRequest;
+    public ContactSendTask(ContactRequest request) {
+        this.request = request;
     }
 
     @Override
     public Void call() throws Exception {
-        LOGGER.info("Sending contact request: ", contactRequest.getId());
+        LOGGER.info("Sending contact request: ", request.getId());
         final EMail baseMail = createBaseMail();
         final Map<String, String> properties = new HashMap();
-        properties.put("email", contactRequest.getSender());
-        properties.put("id", contactRequest.getObjectID().toString());
-        properties.put("message", contactRequest.getMessage());
-        properties.put("name", contactRequest.getName());
-        properties.put("title", contactRequest.getObjectID().toString());
-        final String orcid = contactRequest.getORCID();
+        properties.put("email", request.getSender());
+        properties.put("id", request.getObjectID().toString());
+        properties.put("message", request.getMessage());
+        properties.put("name", request.getName());
+        properties.put("title", request.getObjectID().toString());
+        final String orcid = request.getORCID();
         if (orcid != null) {
             properties.put("orcid", orcid);
         }
         final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
         final EMail mail = EMail.parseXML(mailElement);
         ContactMailService.getInstance().sendMail(mail);
-        if (contactRequest.isSendCopy()) {
+        if (request.isSendCopy()) {
             // TODO send copy
         }
         return null;
@@ -89,7 +89,7 @@ public class ContactSendTask implements Callable<Void> {
 
     private EMail createBaseMail() {
         final EMail mail = new EMail();
-        final Set<String> recipients = contactRequest.getRecipients().stream().map(ContactRecipient::getEmail)
+        final Set<String> recipients = request.getRecipients().stream().map(ContactRecipient::getEmail)
                 .collect(Collectors.toSet());
         mail.to = List.copyOf(recipients);
         mail.from = SENDER_NAME;

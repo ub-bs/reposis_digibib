@@ -35,7 +35,7 @@ import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.validation.ContactValidationHelper;
+import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -66,11 +66,11 @@ public class ContactResource {
                     @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
-    public Response save(ContactRequest contactRequest) throws BadRequestException {
-        if (!ContactValidationHelper.validateContactRequest(contactRequest)) {
+    public Response save(ContactRequest request) throws BadRequestException {
+        if (!ContactValidator.getInstance().validateRequest(request)) {
             throw new BadRequestException("invalid request");
         }
-        final MCRObjectID objectID = contactRequest.getObjectID();
+        final MCRObjectID objectID = request.getObjectID();
         if (!MCRMetadataManager.exists(objectID)) {
             throw new BadRequestException(objectID.toString() + " does not exist");
         }
@@ -83,7 +83,7 @@ public class ContactResource {
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
-        ContactRequestService.getInstance().insertContactRequest(contactRequest);
+        ContactRequestService.getInstance().insertRequest(request);
         return Response.ok().build();
     }
 
