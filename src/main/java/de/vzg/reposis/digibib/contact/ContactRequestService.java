@@ -253,6 +253,7 @@ public class ContactRequestService {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
             request.addRecipient(recipient);
+            update(request);
         } finally {
             writeLock.unlock();
         }
