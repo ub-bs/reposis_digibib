@@ -1,6 +1,8 @@
 <template>
   <transition name="modal">
-    <Modal :title="state.id" size="lg" @close="close">
+    <Modal :title="state.id" size="xl" scrollable @close="close">
+      <div> <!-- alert div -->
+      </div>
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="inputName">
@@ -24,15 +26,17 @@
             disabled />
         </div>
       </div>
+      <div class="form-row">
+        <div class="col-md-12">
+          <textarea class="form-control" rows="5" readonly v-model="state.message" />
+        </div>
+      </div>
       <hr class="my-4" />
-      <h6>
+      <h6 class="mb-2">
         {{ $t('digibib.contact.frontend.manager.label.recipients') }}
       </h6>
       <recipients-table :recipients="state.recipients" />
       <template v-slot:footer>
-        <button type="button" @click="close" class="btn btn-secondary">
-          {{ $t('digibib.contact.frontend.manager.button.close') }}
-        </button>
         <div class="btn-group">
           <button type="button" class="btn btn-danger" @click="reject"
               :disabled="state.state !== 'PROCESSED'">

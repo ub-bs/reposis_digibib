@@ -14,7 +14,7 @@
     </div> -->
     <div class="row mb-3">
       <div class="col">
-        <Table />
+        <OverviewTable />
       </div>
     </div>
     <div class="row">
@@ -25,6 +25,6 @@
   </div>
 </template>
 <script setup lang="ts">
-import Table from './components/Table.vue';
+import OverviewTable from './components/OverviewTable.vue';
 import Pagination from './components/Pagination.vue';
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="modal-mask">
     <div class="modal-wrapper" @click="close">
-      <div class="modal-dialog" :class="'modal-' + size" role="document" @click.stop="">
+      <div class="modal-dialog" :class="style" role="document" @click.stop="">
         <div class="modal-content">
           <div class="modal-header">
             <slot name="title">
@@ -29,7 +29,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { defineEmits } from 'vue';
+import { computed, defineEmits } from 'vue';
 
 const props = defineProps({
   title: String,
@@ -49,6 +49,10 @@ const props = defineProps({
     type: String,
     default: 'md',
   },
+  scrollable: {
+    type: Boolean,
+    default: false,
+  },
 });
 const emit = defineEmits(['close', 'ok']);
 const close = () => {
@@ -61,6 +65,13 @@ const ok = () => {
     emit('ok');
   }
 };
+const style = computed(() => {
+  let result = `modal-${props.size}`;
+  if (props.scrollable) {
+    result += ' modal-dialog-scrollable';
+  }
+  return result;
+});
 </script>
 <style>
 .modal-mask {

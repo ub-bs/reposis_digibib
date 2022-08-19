@@ -18,33 +18,32 @@
           {{ $t('digibib.contact.frontend.manager.label.state') }}
         </th>
         <th scope="col" class="col-1">
-          {{ $t('digibib.contact.frontend.manager.label.actions') }}
         </th>
       </tr>
     </thead>
     <tbody v-if="requests">
       <tr v-for="item in requests" :key="item">
-        <td class="col-1">
+        <td class="col-1 align-middle">
           {{ item.uuid }}
         </td>
-        <td class="col-2">
+        <td class="col-2 align-middle">
           {{ new Date(item.created).toLocaleString() }}
         </td>
-        <td class="col-2">
+        <td class="col-2 align-middle">
           {{ item.objectID }}
         </td>
-        <td class="col-5">
+        <td class="col-5 align-middle">
           {{ item.email }}
         </td>
-        <td class="col-1">
+        <td class="col-1 align-middle">
           {{ item.state }}
         </td>
-        <td class="col-1">
+        <td class="col-1 align-middle">
           <div class="btn-group">
-            <a class="btn pt-0 pb-0" @click="viewRequest(item.uuid)">
+            <a class="btn pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item.uuid)">
               <i class="fa fa-eye"></i>
             </a>
-            <a class="btn pt-0 pb-0" @click="removeRequest(item.uuid)">
+            <a class="btn pt-0 pb-0 pl-1 pr-2" @click="removeRequest(item.uuid)">
               <i class="fa fa-trash"></i>
             </a>
           </div>
@@ -52,7 +51,7 @@
       </tr>
     </tbody>
   </table>
-  <RequestModal v-if="showModal" :id="currentId" size="lg" />
+  <RequestModal v-if="showModal" :id="currentId" />
 </template>
 
 <script setup lang="ts">
