@@ -1,6 +1,6 @@
 import { ActionTree } from 'vuex';
 import axios from 'axios';
-import { State } from './state';
+import { Recipient, State } from './state';
 
 export const actions: ActionTree<State, State> = {
   async fetchData({ commit, state }): Promise<void> {
@@ -33,6 +33,13 @@ export const actions: ActionTree<State, State> = {
   async rejectContactRequest({ commit }, id: string): Promise<void> {
     try {
       await axios.post(`api/v2/contacts/${id}/reject`);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async addRecipient({ commit, state }, recipient: Recipient): Promise<void> {
+    try {
+      await axios.put(`api/v2/contacts/${state.showRequestId}/recipients`, recipient);
     } catch (error) {
       console.error(error);
     }

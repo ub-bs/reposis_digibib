@@ -1,7 +1,8 @@
 export type Recipient = {
   name: string;
-  source: string;
+  origin: string;
   email: string;
+  state: boolean;
 }
 
 export type Request = {
@@ -22,7 +23,6 @@ export type State = {
   totalRows: number;
   perPage: number;
   requests: Request[];
-  expanded: number[];
   showModal: boolean;
   showRequestId: string | undefined;
 };
@@ -33,7 +33,6 @@ export const state: State = {
   perPage: 8,
   requests: [],
   currentPage: 0,
-  expanded: [],
   showModal: false,
   showRequestId: undefined,
 };
