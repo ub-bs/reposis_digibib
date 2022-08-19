@@ -40,37 +40,17 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <td class="col-3">
-          <input class="form-control form-control-sm" type="text" />
-        </td>
-        <td class="col-2">
-          <select class="form-control form-control-sm">
-            <option value=""></option>
-            <option value="manual">MANUAL</option>
-          </select>
-        </td>
-        <td class="col-4">
-          <input class="form-control form-control-sm" type="text" />
-        </td>
-        <td class="col-1 align-middle text-center">
-          <input type="checkbox" />
-        </td>
-        <td class="col-1 text-center align-middle">
-          <div class="btn-group">
-            <a class="btn pr-1 pb-0 pt-0 border-0" @click="TODO">
-              <i class="fas fa-check"></i>
-            </a>
-            <a class="btn pl-1 pb-0 pt-0 border-0" @click="TODO">
-              <i class="fas fa-times"></i>
-            </a>
-          </div>
-        </td>
-      </tr>
+      <AddRecipientRow />
     </tbody>
   </table>
 </template>
-
 <script setup lang="ts">
-defineProps(['recipients']);
+import AddRecipientRow from './AddRecipientRow.vue';
+
+defineProps({
+  recipients: {
+    type: Array,
+    default: () => [],
+  },
+});
 </script>

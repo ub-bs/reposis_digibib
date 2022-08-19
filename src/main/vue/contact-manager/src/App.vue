@@ -25,6 +25,9 @@
   </div>
 </template>
 <script setup lang="ts">
+import useVuelidate from '@vuelidate/core';
 import OverviewTable from './components/OverviewTable.vue';
 import Pagination from './components/Pagination.vue';
+
+const v = useVuelidate();
 </script>
