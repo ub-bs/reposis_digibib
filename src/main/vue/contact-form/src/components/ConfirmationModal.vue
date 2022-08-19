@@ -11,7 +11,6 @@
 </template>
 
 <script setup lang="ts">
-import { defineEmits, defineProps } from 'vue';
 import Modal from './Modal.vue';
 
 defineProps({
