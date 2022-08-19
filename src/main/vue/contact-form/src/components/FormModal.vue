@@ -1,6 +1,6 @@
 <template>
-  <modal :title="$t('digibib.contact.frontend.form.title')" @ok="handleSubmit" @close="emit('close')" :busy="busy"
-      size="lg">
+  <modal :title="$t('digibib.contact.frontend.form.title')" scrollable @ok="handleSubmit" @close="emit('close')"
+      :busy="busy" size="lg">
     <div class="row">
       <div class="col-12">
         <div v-if="showError" class="alert alert-danger" role="alert">
@@ -83,6 +83,17 @@
       </div>
       <input id="website" name="website" type="text" v-model="website"  />
     </form>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" v-model="termsInput"
+            id="termsCheck" :class="termsState === false ? 'is-invalid' : ''">
+          <label class="form-check-label" for="termsCheck">
+            {{ $t('digibib.contact.frontend.form.label.acceptTerms') }}
+          </label>
+        </div>
+      </div>
+    </div>
     <div class="row pt-1">
       <div class="col">
         <cage-captcha ref="captcha" :baseUrl="baseUrl + 'rsc/captchaCage'"/>
@@ -93,12 +104,7 @@
 
 <script setup lang="ts">
 
-import {
-  defineEmits,
-  defineProps,
-  onMounted,
-  ref,
-} from 'vue';
+import { onMounted, ref } from 'vue';
 import Modal from './Modal.vue';
 import CageCaptcha from './CageCaptcha.vue';
 import validateORCID from '../utils';
@@ -123,9 +129,11 @@ const nameState: boolean = ref(null);
 const nameInput = ref(null);
 const mailInput = ref(null);
 const messageInput = ref(null);
+const termsInput = ref(false);
 const mailState: boolean = ref(null);
 const orcidState: boolean = ref(null);
 const messageState: boolean = ref(null);
+const termsState: boolean = ref(null);
 const website = ref('');
 const captcha = ref(null);
 const resetStates = () => {
@@ -133,6 +141,7 @@ const resetStates = () => {
   mailState.value = null;
   orcidState.value = null;
   messageState.value = null;
+  termsState.value = null;
 };
 const resetForm = () => {
   busy.value = false;
@@ -156,6 +165,9 @@ const checkFormValidity = () => {
   }
   if (contactRequest.value.orcid && !validateORCID(contactRequest.value.orcid)) {
     orcidState.value = false;
+  }
+  if (!termsInput.value) {
+    termsState.value = false;
   }
   return nameState.value === null && mailState.value === null && messageState.value === null
       && orcidState.value === null;
