@@ -95,7 +95,8 @@ public class RestContactRecipientResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public Response addRecipient(@QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID id,
+    @MCRRequireTransaction
+    public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id,
             ContactRecipient recipient) throws ContactRecipientInvalidException, ContactRequestNotFoundException,
             ContactRequestStateException {
         recipient.setOrigin(ContactRecipientOrigin.MANUAL);
@@ -120,7 +121,8 @@ public class RestContactRecipientResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public Response updateRecipient(@QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID id) {
-        return null;
+    @MCRRequireTransaction
+    public Response updateRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id) {
+        return Response.serverError().build();
     }
 }
