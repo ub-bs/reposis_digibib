@@ -2,7 +2,7 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col" class="col-1">
+        <th scope="col" class="col-3">
           {{ $t('digibib.contact.frontend.manager.label.id') }}
         </th>
         <th scope="col" class="col-2">
@@ -11,7 +11,7 @@
         <th scope="col" class="col-2">
           {{ $t('digibib.contact.frontend.manager.label.objectID') }}
         </th>
-        <th scope="col" class="col-5">
+        <th scope="col" class="col-3">
           {{ $t('digibib.contact.frontend.manager.label.email') }}
         </th>
         <th scope="col" class="col-1">
@@ -30,7 +30,9 @@
           {{ new Date(item.created).toLocaleString() }}
         </td>
         <td class="col-2 align-middle">
-          {{ item.objectID }}
+          <a :href="'receive/' + item.objectID" target="_blank">
+            {{ item.objectID }}
+          </a>
         </td>
         <td class="col-5 align-middle">
           {{ item.email }}
