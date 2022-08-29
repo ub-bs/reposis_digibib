@@ -1,9 +1,10 @@
+/* eslint-disable */
 import { ActionTree } from 'vuex';
 import axios from 'axios';
 import { Recipient, State } from './state';
 
 export const actions: ActionTree<State, State> = {
-  async fetchData({ commit, state }): Promise<void> {
+  async fetchData({ commit }): Promise<void> {
     commit('setLoading', true);
     try {
       const response = await axios.get('api/v2/contacts');
@@ -40,6 +41,21 @@ export const actions: ActionTree<State, State> = {
   async addRecipient({ commit, state }, recipient: Recipient): Promise<void> {
     try {
       await axios.put(`api/v2/contacts/${state.showRequestId}/recipients`, recipient);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async removeRecipient({ commit, state }, recipientId: String): Promise<void> {
+    try {
+      await axios.delete(`api/v2/contacts/${state.showRequestId}/recipients/${recipientId}`);
+    } catch (error) {
+      console.error(error);
+    }
+  },
+  async updateRecipient({ commit, state }, recipient: Recipient): Promise<void> {
+    try {
+      await axios.post(`api/v2/contacts/${state.showRequestId}/recipients/${state.editRecipientId}`, recipient);
+      commit('setEditRecipientId', undefined);
     } catch (error) {
       console.error(error);
     }

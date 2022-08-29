@@ -1,3 +1,7 @@
+export enum Origin {
+  Manual = 'MANUAL',
+}
+
 export type Recipient = {
   name: string;
   origin: string;
@@ -25,6 +29,7 @@ export type State = {
   requests: Request[];
   showModal: boolean;
   showRequestId: string | undefined;
+  editRecipientId: string | undefined;
 };
 
 export const state: State = {
@@ -35,4 +40,5 @@ export const state: State = {
   currentPage: 0,
   showModal: false,
   showRequestId: undefined,
+  editRecipientId: undefined,
 };

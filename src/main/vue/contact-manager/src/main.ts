@@ -7,6 +7,7 @@ import ContactManager from './App.vue';
 if (process.env.NODE_ENV === 'development') {
   axios.defaults.baseURL = 'http://134.169.20.124/mir/';
 } else {
+  // eslint-disable-next-line
   axios.defaults.baseURL = (window as any).webApplicationBaseURL;
 }
 

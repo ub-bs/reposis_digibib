@@ -35,6 +35,8 @@
       <h6 class="mb-2">
         {{ $t('digibib.contact.frontend.manager.label.recipients') }}
       </h6>
+      <p>Sofern ein Empfänger manuel hinzugefügt wurde, kann dieser editiert werden.
+          Ansonsten kann höchstens der Empfänger de- oder aktiviert werden.</p>
       <recipients-table :recipients="state.recipients" />
       <template v-slot:footer>
         <div class="btn-group">
