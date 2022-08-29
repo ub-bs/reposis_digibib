@@ -8,7 +8,9 @@
       <select class="form-control form-control-sm" v-model="recipient.origin"
           :class="v.origin.$error ? 'is-invalid' : ''" :disabled="disabled">
         <option disabled value=""></option>
-        <option :value="Origin.Manual">manuel</option> <!-- TODO i18n -->
+        <option :value="Origin.Manual">
+          {{ $t('digibib.contact.frontend.manager.label.origin.manual') }}
+        </option>
       </select>
     </td>
     <td class="col-4">
