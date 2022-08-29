@@ -17,5 +17,7 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'import/prefer-default-export': 'off',
     'vue/multi-word-component-names': 'off',
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "error",
   },
 };

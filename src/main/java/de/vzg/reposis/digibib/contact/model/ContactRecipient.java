@@ -51,7 +51,7 @@ public class ContactRecipient {
 
     private ContactRequest request;
 
-    private boolean enabled = true;
+    private boolean enabled;
 
     private UUID uuid;
 
@@ -61,11 +61,13 @@ public class ContactRecipient {
         this.name = name;
         this.origin = origin;
         this.email = email;
+        enabled = true;
     }
 
     public ContactRecipient(ContactRecipientOrigin origin, String email) {
         this.origin = origin;
         this.email = email;
+        enabled = true;
     }
 
     /**

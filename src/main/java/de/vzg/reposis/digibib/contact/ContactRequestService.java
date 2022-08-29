@@ -31,10 +31,13 @@ import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAOImpl;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientInvalidException;
+import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactRecipientOriginException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
@@ -253,6 +256,34 @@ public class ContactRequestService {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
             request.addRecipient(recipient);
+            update(request);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    public void removeRecipient(UUID requestUUID, UUID recipientUUID) { // TODO recipient DAO
+        try {
+            writeLock.lock();
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            if (request == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            if (!(ContactRequestState.PROCESSED.equals(request.getState())
+                    || ContactRequestState.RECEIVED.equals(request.getState()))) { // TODO function
+                throw new ContactRequestStateException("Contact request state is not ready.");
+            }
+            final List<ContactRecipient> recipients = request.getRecipients();
+            final ContactRecipient recipient = recipients.stream().filter(r -> r.getUuid().equals(recipientUUID))
+                    .findFirst().orElse(null);
+            if (recipient == null) {
+                throw new ContactRecipientNotFoundException();
+            }
+            if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
+                throw new ContactRecipientOriginException();
+            }
+            recipients.remove(recipient);
+            request.setRecipients(recipients);
             update(request);
         } finally {
             writeLock.unlock();
