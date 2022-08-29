@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.DefaultValue;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -124,5 +125,27 @@ public class RestContactRecipientResource {
     @MCRRequireTransaction
     public Response updateRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id) {
         return Response.serverError().build();
+    }
+
+    @DELETE
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
+    @Operation(
+        summary = "Deletes contact request recipient by id",
+        responses = {
+            @ApiResponse(responseCode = "201", content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                schema = @Schema(implementation = ContactRecipient.class))),
+            @ApiResponse(responseCode = "401",
+                description = "You do not have create permission and need to authenticate first",
+                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist",
+                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
+        })
+    @Produces(MediaType.APPLICATION_JSON)
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
+    @MCRRequireTransaction
+    public Response removeRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestID,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientID) {
+        ContactRequestService.getInstance().removeRecipient(requestID, recipientID);
+        return Response.noContent().build();
     }
 }
