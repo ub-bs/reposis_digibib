@@ -21,5 +21,7 @@ export const mutations: MutationTree<State> = {
     state.showModal = show;
     state.showRequestId = id;
   },
-
+  setEditRecipient(state, id): void {
+    state.editRecipientId = id;
+  },
 };

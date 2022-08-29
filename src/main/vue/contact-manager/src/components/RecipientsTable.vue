@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped">
     <thead>
       <tr>
         <th class="col-3">
@@ -19,33 +19,17 @@
       </tr>
     </thead>
     <tbody>
-      <tr v-for="item in recipients" :key="item">
-        <td class="col-3 align-middle">
-          {{ item.name }}
-        </td>
-        <td class="col-2 align-middle">
-          {{ item.origin }}
-        </td>
-        <td class="col-4 align-middle">
-          {{ item.email }}
-        </td>
-        <td class="col-1 text-center align-middle">
-          <input type="checkbox" v-model="item.enabled" disabled />
-        </td>
-        <td class="col-1 text-center align-middle">
-          <div class="btn-group">
-            <a class="btn pr-1 pt-0 pb-0 border-0" @click="TODO">
-              <i class="fas fa-edit"></i>
-            </a>
-          </div>
-        </td>
-      </tr>
+      <template v-for="recipient in recipients" :key="recipient">
+        <EditRecipientRow :recipient="recipient" />
+      </template>
+      <!-- TODO check request state -->
       <AddRecipientRow />
     </tbody>
   </table>
 </template>
 <script setup lang="ts">
 import AddRecipientRow from './AddRecipientRow.vue';
+import EditRecipientRow from './EditRecipientRow.vue';
 
 defineProps({
   recipients: {
