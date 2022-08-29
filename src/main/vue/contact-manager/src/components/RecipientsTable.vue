@@ -6,7 +6,7 @@
           {{ $t('digibib.contact.frontend.manager.label.name') }}
         </th>
         <th class="col-2">
-          {{ $t('digibib.contact.frontend.manager.label.source') }}
+          {{ $t('digibib.contact.frontend.manager.label.origin') }}
         </th>
         <th class="col-4">
           {{ $t('digibib.contact.frontend.manager.label.email') }}

@@ -10,7 +10,9 @@
     <td class="col-2">
       <select v-if="editable && editMode" class="form-control form-control-sm"
           v-model="recipientSave.origin" :class="v.origin.$error ? 'is-invalid' : ''">
-        <option :value="Origin.Manual">manuel</option> <!-- TODO i18n -->
+        <option :value="Origin.Manual">
+          {{ $t('digibib.contact.frontend.manager.label.origin.manual') }}
+        </option>
       </select>
       <span v-else>
         {{ recipient.origin }}
