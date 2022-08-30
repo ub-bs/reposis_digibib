@@ -82,7 +82,7 @@ public class RestContactRecipientResource {
         return recipients.stream().skip(offset).limit(limit).collect(Collectors.toList());
     }
 
-    @PUT
+    @POST
     @Operation(
         summary = "Creates new contact request recipient for id",
         responses = {
@@ -108,7 +108,7 @@ public class RestContactRecipientResource {
         return Response.noContent().build();
     }
 
-    @POST
+    @PUT
     @Operation(
         summary = "Updates contact request recipient by id",
         responses = {

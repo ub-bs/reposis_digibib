@@ -40,7 +40,7 @@ export const actions: ActionTree<State, State> = {
   },
   async addRecipient({ commit, state }, recipient: Recipient): Promise<void> {
     try {
-      await axios.put(`api/v2/contacts/${state.showRequestId}/recipients`, recipient);
+      await axios.post(`api/v2/contacts/${state.showRequestId}/recipients`, recipient);
     } catch (error) {
       console.error(error);
     }
@@ -54,7 +54,7 @@ export const actions: ActionTree<State, State> = {
   },
   async updateRecipient({ commit, state }, recipient: Recipient): Promise<void> {
     try {
-      await axios.post(`api/v2/contacts/${state.showRequestId}/recipients/${state.editRecipientId}`, recipient);
+      await axios.put(`api/v2/contacts/${state.showRequestId}/recipients/${state.editRecipientId}`, recipient);
       commit('setEditRecipientId', undefined);
     } catch (error) {
       console.error(error);
