@@ -18,6 +18,7 @@
 
 package de.vzg.reposis.digibib.contact.model;
 
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.Column;
@@ -36,6 +37,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@NamedQueries({
+    @NamedQuery(name = "ContactRecipient.findByUUID",
+        query = "SELECT r"
+            + "  FROM ContactRecipient r"
+            + "  WHERE r.uuid = :uuid"),
+})
 
 @Entity
 @Table(name = "contact_recipient")
@@ -153,5 +161,26 @@ public class ContactRecipient {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(uuid);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ContactRecipient other = (ContactRecipient) obj;
+        return Objects.equals(request, other.getRequest())
+                && Objects.equals(uuid, other.getUuid());
     }
 }

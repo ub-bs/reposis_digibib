@@ -6,7 +6,7 @@ export type Recipient = {
   name: string;
   origin: string;
   email: string;
-  state: boolean;
+  enabled: boolean;
 }
 
 export type Request = {

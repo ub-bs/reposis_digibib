@@ -27,7 +27,6 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import org.mycore.backend.jpa.MCREntityManagerProvider;
-import org.mycore.common.MCRTransactionHelper;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestDAOImpl implements ContactRequestDAO {

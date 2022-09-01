@@ -27,6 +27,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAO;
+import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAOImpl;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAOImpl;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
@@ -62,11 +64,14 @@ public class ContactRequestService {
 
     private final ContactRequestDAO requestDAO;
 
+    private final ContactRecipientDAO recipientDAO;
+
     private ContactRequestService() {
         lock = new ReentrantReadWriteLock();
         readLock = lock.readLock();
         writeLock = lock.writeLock();
         requestDAO = new ContactRequestDAOImpl();
+        recipientDAO = new ContactRecipientDAOImpl();
     }
 
     public static ContactRequestService getInstance() {
@@ -111,8 +116,18 @@ public class ContactRequestService {
 
     public List<ContactRecipient> listRecipients(UUID uuid) throws ContactRequestNotFoundException {
         try {
+            readLock.lock();
             return Optional.ofNullable(requestDAO.findByUUID(uuid))
                     .map(r -> r.getRecipients()).orElseThrow(() -> new ContactRequestNotFoundException());
+        } finally {
+            readLock.unlock();
+        }
+    }
+
+    public ContactRecipient getRecipientByUUID(UUID uuid) {
+        try {
+            readLock.lock();
+            return recipientDAO.findByUUID(uuid);
         } finally {
             readLock.unlock();
         }
@@ -240,20 +255,19 @@ public class ContactRequestService {
         }
     }
 
-    public void addRecipient(UUID uuid, ContactRecipient recipient) throws ContactRecipientInvalidException,
+    public void addRecipient(UUID requestUUID, ContactRecipient recipient) throws ContactRecipientInvalidException,
             ContactRequestNotFoundException, ContactRequestStateException {
         try {
             writeLock.lock();
             if (!ContactValidator.getInstance().validateRecipient(recipient)) {
                 throw new ContactRecipientInvalidException();
             }
-            final ContactRequest request = requestDAO.findByUUID(uuid);
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (!(ContactRequestState.PROCESSED.equals(request.getState())
-                    || ContactRequestState.RECEIVED.equals(request.getState()))) {
-                throw new ContactRequestStateException("Contact request state is not ready.");
+            if (!isWarmState(request.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
             }
             request.addRecipient(recipient);
             update(request);
@@ -262,32 +276,54 @@ public class ContactRequestService {
         }
     }
 
-    public void removeRecipient(UUID requestUUID, UUID recipientUUID) { // TODO recipient DAO
+    public void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
         try {
             writeLock.lock();
-            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            final ContactRequest request = requestDAO.findByID(recipient.getRequest().getId()); // workaround
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (!(ContactRequestState.PROCESSED.equals(request.getState())
-                    || ContactRequestState.RECEIVED.equals(request.getState()))) { // TODO function
-                throw new ContactRequestStateException("Contact request state is not ready.");
+            if (!isWarmState(request.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
             }
-            final List<ContactRecipient> recipients = request.getRecipients();
-            final ContactRecipient recipient = recipients.stream().filter(r -> r.getUuid().equals(recipientUUID))
-                    .findFirst().orElse(null);
-            if (recipient == null) {
-                throw new ContactRecipientNotFoundException();
-            }
-            if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
-                throw new ContactRecipientOriginException();
-            }
-            recipients.remove(recipient);
-            request.setRecipients(recipients);
+            request.removeRecipient(recipient);
             update(request);
         } finally {
             writeLock.unlock();
         }
+    }
+
+    public void updateRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
+        ContactRecipientNotFoundException, ContactRequestStateException {
+        try {
+            writeLock.lock();
+            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
+                throw new ContactRecipientInvalidException();
+            }
+            final ContactRecipient outdated = recipientDAO.findByID(recipient.getId());
+            if (outdated == null) {
+                throw new ContactRecipientNotFoundException();
+            }
+            final ContactRequest request = requestDAO.findByID(outdated.getRequest().getId()); // workaround
+            if (request == null) {
+                throw new ContactRequestNotFoundException(); // actually not possible because orphan removal
+            }
+            if (!isWarmState(request.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
+            }
+            recipient.setUuid(outdated.getUuid());
+            recipient.setRequest(outdated.getRequest());
+            request.removeRecipient(outdated); // TODO dirty
+            request.addRecipient(recipient);
+            update(request);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    private boolean isWarmState(ContactRequestState state) {
+        return (ContactRequestState.PROCESSED.equals(state) || ContactRequestState.RECEIVED.equals(state));
     }
 
     private void update(ContactRequest request) {

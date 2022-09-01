@@ -18,7 +18,7 @@
           :class="v.email.$error ? 'is-invalid' : ''" :disabled="disabled" />
     </td>
     <td class="col-1 align-middle text-center">
-      <input type="checkbox" v-model="recipient.state" :disabled="disabled" />
+      <input type="checkbox" v-model="recipient.enabled" :disabled="disabled" />
     </td>
     <td class="col-1 text-center align-middle">
       <div class="btn-group">
