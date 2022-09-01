@@ -44,7 +44,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientInvalidException;
+import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactRecipientOriginException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
@@ -56,76 +59,8 @@ import org.mycore.restapi.annotations.MCRRequireTransaction;
 import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
 import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 
-@Path("/contacts/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/recipients")
+@Path("/recipients")
 public class RestContactRecipientResource {
-
-    @GET
-    @Operation(
-        summary = "Gets contact request recipients by id",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
-    @Produces(MediaType.APPLICATION_JSON)
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public List<ContactRecipient> getRecipientsByUUID(@DefaultValue("0") @QueryParam("offset") int offset,
-            @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
-            @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID id) throws
-            ContactRequestNotFoundException {
-        final List<ContactRecipient> recipients = ContactRequestService.getInstance().listRecipients(id);
-        response.setHeader("X-Total-Count", Integer.toString(recipients.size()));
-        return recipients.stream().skip(offset).limit(limit).collect(Collectors.toList());
-    }
-
-    @POST
-    @Operation(
-        summary = "Creates new contact request recipient for id",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
-    @Produces(MediaType.APPLICATION_JSON)
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id,
-            ContactRecipient recipient) throws ContactRecipientInvalidException, ContactRequestNotFoundException,
-            ContactRequestStateException {
-        recipient.setOrigin(ContactRecipientOrigin.MANUAL);
-        if (!ContactValidator.getInstance().validateRecipient(recipient)) {
-            throw new ContactRecipientInvalidException();
-        }
-        ContactRequestService.getInstance().addRecipient(id, recipient);
-        return Response.noContent().build();
-    }
-
-    @PUT
-    @Operation(
-        summary = "Updates contact request recipient by id",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
-    @Produces(MediaType.APPLICATION_JSON)
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response updateRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id) {
-        return Response.serverError().build();
-    }
 
     @DELETE
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
@@ -143,9 +78,17 @@ public class RestContactRecipientResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response removeRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientID) {
-        ContactRequestService.getInstance().removeRecipient(requestID, recipientID);
+    public Response removeRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientID)
+            throws ContactException {
+        final ContactRequestService service = ContactRequestService.getInstance();
+        final ContactRecipient recipient = service.getRecipientByUUID(recipientID);
+        if (recipient == null) {
+            throw new ContactRecipientNotFoundException();
+        }
+        if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
+            throw new ContactRecipientOriginException();
+        }
+        service.removeRecipient(recipient);
         return Response.noContent().build();
     }
 }

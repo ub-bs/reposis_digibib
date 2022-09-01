@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
@@ -192,7 +193,7 @@ public class ContactRequest {
         return name;
     }
 
-    public void setName(final String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -202,7 +203,7 @@ public class ContactRequest {
         return orcid;
     }
 
-    public void setORCID(final String orcid) {
+    public void setORCID(String orcid) {
         this.orcid = orcid;
     }
 
@@ -228,7 +229,7 @@ public class ContactRequest {
     /**
      * @param created date of creation
      */
-    public void setCreated(final Date created) {
+    public void setCreated(Date created) {
         this.created = created;
     }
 
@@ -274,7 +275,7 @@ public class ContactRequest {
     /**
      * @param lastModifiedBy name of last modifier
      */
-    public void setLastModifiedBy(final String lastModifiedBy) {
+    public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }
 
@@ -320,12 +321,37 @@ public class ContactRequest {
         recipient.setRequest(this);
     }
 
+    public void removeRecipient(ContactRecipient recipient) {
+        recipients.remove(recipient);
+        recipient.setRequest(null);
+    }
+
     public String getComment() {
         return comment;
     }
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(uuid);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ContactRequest other = (ContactRequest) obj;
+        return Objects.equals(uuid, other.getUuid());
     }
 
     @Override

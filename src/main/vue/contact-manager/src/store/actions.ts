@@ -47,7 +47,7 @@ export const actions: ActionTree<State, State> = {
   },
   async removeRecipient({ commit, state }, recipientId: String): Promise<void> {
     try {
-      await axios.delete(`api/v2/contacts/${state.showRequestId}/recipients/${recipientId}`);
+      await axios.delete(`api/v2/recipients/${recipientId}`);
     } catch (error) {
       console.error(error);
     }
