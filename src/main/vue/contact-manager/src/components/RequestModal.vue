@@ -97,7 +97,7 @@ onMounted(() => {
   setFields();
 });
 const close = () => {
-  store.commit('setModal', { show: false, id: undefined });
+  store.dispatch('hideRequest');
 };
 const forward = () => {
   store.dispatch('forwardContactRequest', state.id);

@@ -17,8 +17,10 @@ export const mutations: MutationTree<State> = {
   setTotalRows(state, totalRows): void {
     state.totalRows = totalRows;
   },
-  setModal(state, { show, id }): void {
+  setShowModal(state, show): void {
     state.showModal = show;
+  },
+  setShowRequestId(state, id): void {
     state.showRequestId = id;
   },
   setEditRecipient(state, id): void {

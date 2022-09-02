@@ -60,4 +60,13 @@ export const actions: ActionTree<State, State> = {
       console.error(error);
     }
   },
+  async showRequest({ commit, state }, id: string): Promise<void> {
+    commit('setShowModal', true);
+    commit('setShowRequestId', id);
+    // TODO load recipients getter
+  },
+  async hideRequest({ commit }): Promise<void> {
+    commit('setShowModal', false);
+    commit('setShowRequestId', undefined);
+  },
 };

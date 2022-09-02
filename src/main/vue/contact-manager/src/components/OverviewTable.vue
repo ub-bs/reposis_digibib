@@ -67,7 +67,7 @@ const currentId = ref(null);
 const showModal = computed(() => store.state.showModal);
 const viewRequest = (id: string) => {
   currentId.value = id;
-  store.commit('setModal', { show: true, id });
+  store.dispatch('showRequest', id);
 };
 const removeRequest = (id: string) => {
   store.dispatch('removeContactRequest', id);
