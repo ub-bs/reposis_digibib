@@ -20,7 +20,6 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
@@ -81,8 +80,12 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRecipient> getRecipientsByRequestUUID(@DefaultValue("0") @QueryParam("offset") int offset,
             @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
-            @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID requestUUID) throws ContactRequestNotFoundException {
-        final List<ContactRecipient> recipients = ContactRequestService.getInstance().listRecipientsByUUID(requestUUID);
+            @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID) throws ContactRequestNotFoundException {
+        final ContactRequest request = ContactRequestService.getInstance().getRequestByUUID(requestUUID);
+        if (request == null) {
+            throw new ContactRequestNotFoundException();
+        }
+        final List<ContactRecipient> recipients = request.getRecipients();
         response.setHeader("X-Total-Count", Integer.toString(recipients.size()));
         return recipients.stream().skip(offset).limit(limit).collect(Collectors.toList());
     }
@@ -104,22 +107,14 @@ public class RestContactRecipientResource {
     @MCRRequireTransaction
     public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             ContactRecipient recipient) throws ContactException {
-        if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
-            throw new ContactRecipientOriginException();
-        }
-        final ContactRequestService service = ContactRequestService.getInstance();
-        final ContactRequest request = service.getRequestByUUID(requestUUID);
-        if (request == null) {
-            throw new ContactRequestNotFoundException();
-        }
-        service.addRecipient(request.getId(), recipient);
-        return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getUuid().toString()))).build();
+        ContactRequestService.getInstance().addRecipient(requestUUID, recipient);
+        return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getEmail()))).build();
     }
 
     @GET
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
     @Operation(
-        summary = "Gets contact request recipient by request uuid",
+        summary = "Gets contact request recipient by request uuid and mail",
         responses = {
             @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
                 schema = @Schema(implementation = ContactRecipient.class))),
@@ -131,13 +126,13 @@ public class RestContactRecipientResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRecipient getRecipientByUUID(@QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientUUID) throws ContactRequestNotFoundException {
+    public ContactRecipient getRecipientByMail(@QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID requestUUID,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactRequestNotFoundException {
         final ContactRequest request = ContactRequestService.getInstance().getRequestByUUID(requestUUID);
         if (request == null) {
             throw new ContactRequestNotFoundException();
         }
-        return request.getRecipients().stream().filter(r -> recipientUUID.equals(r.getUuid())).findFirst()
+        return request.getRecipients().stream().filter(r -> mail.equals(r.getEmail())).findFirst()
                 .orElseThrow(() -> new ContactRecipientNotFoundException());
     }
 
@@ -158,22 +153,10 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response updateRecipientByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientUUID,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail,
             ContactRecipient recipient) throws ContactException {
-        final ContactRequestService service = ContactRequestService.getInstance();
-        final ContactRecipient outdated = service.getRecipientByUUID(recipientUUID);
-        if (outdated == null) {
-            throw new ContactRecipientNotFoundException();
-        }
-        if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
-                  && (!Objects.equals(outdated.getName(), recipient.getName())
-                  || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
-                  || !Objects.equals(outdated.getEmail(), recipient.getEmail()))) {
-            throw new ContactRecipientOriginException();
-        }
-        recipient.setId(outdated.getId());
-        recipient.setRequest(outdated.getRequest());
-        service.updateRecipient(recipient);
+        recipient.setEmail(mail);
+        ContactRequestService.getInstance().updateRecipient(requestUUID, recipient);
         return Response.noContent().build();
     }
 
@@ -193,17 +176,9 @@ public class RestContactRecipientResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response removeRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientUUID)
-            throws ContactException {
-        final ContactRequestService service = ContactRequestService.getInstance();
-        final ContactRecipient recipient = service.getRecipientByUUID(recipientUUID);
-        if (recipient == null) {
-            throw new ContactRecipientNotFoundException();
-        }
-        if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
-            throw new ContactRecipientOriginException();
-        }
-        service.removeRecipient(recipient);
+    public Response removeRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactException {
+        ContactRequestService.getInstance().removeRecipient(requestUUID, mail);
         return Response.noContent().build();
     }
 }

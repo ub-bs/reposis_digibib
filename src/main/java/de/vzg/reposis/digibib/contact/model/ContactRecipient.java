@@ -38,13 +38,6 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-@NamedQueries({
-    @NamedQuery(name = "ContactRecipient.findByUUID",
-        query = "SELECT r"
-            + "  FROM ContactRecipient r"
-            + "  WHERE r.uuid = :uuid"),
-})
-
 @Entity
 @Table(name = "contact_recipient")
 public class ContactRecipient {
@@ -60,8 +53,6 @@ public class ContactRecipient {
     private ContactRequest request;
 
     private boolean enabled;
-
-    private UUID uuid;
 
     public ContactRecipient() { }
 
@@ -137,22 +128,6 @@ public class ContactRecipient {
         this.request = request;
     }
 
-    @PrePersist
-    private void prepersistUUIDModel() {
-        if (uuid == null) {
-            uuid = UUID.randomUUID();
-        }
-    }
-
-    @Column(unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
-    public UUID getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(UUID uuid) {
-        this.uuid = uuid;
-    }
-
     @Column(name = "enabled",
         nullable = false)
     public boolean isEnabled() {
@@ -165,7 +140,10 @@ public class ContactRecipient {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(uuid);
+        int hash = 7;
+        hash = 31 * hash + email.hashCode();
+        hash = 31 * hash + request.hashCode();
+        return hash;
     }
 
     @Override
@@ -181,11 +159,11 @@ public class ContactRecipient {
         }
         ContactRecipient other = (ContactRecipient) obj;
         return Objects.equals(request, other.getRequest())
-                && Objects.equals(uuid, other.getUuid());
+                && Objects.equals(email, other.getEmail());
     }
 
     @Override
     public String toString() {
-        return String.format("ID: %d, \nUUID: %s", id, uuid.toString());
+        return String.format("ID: %d, \nEmail: %s", id, email);
     }
 }

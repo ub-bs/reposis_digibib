@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.locks.Lock;
@@ -32,6 +33,7 @@ import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAOImpl;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAOImpl;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
+import de.vzg.reposis.digibib.contact.exception.ContactRecipientAlreadyExistsException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientOriginException;
@@ -109,25 +111,6 @@ public class ContactRequestService {
         try {
             readLock.lock();
             return requestDAO.findByUUID(uuid);
-        } finally {
-            readLock.unlock();
-        }
-    }
-
-    public List<ContactRecipient> listRecipientsByUUID(UUID uuid) throws ContactRequestNotFoundException {
-        try {
-            readLock.lock();
-            return Optional.ofNullable(requestDAO.findByUUID(uuid))
-                    .map(r -> r.getRecipients()).orElseThrow(() -> new ContactRequestNotFoundException());
-        } finally {
-            readLock.unlock();
-        }
-    }
-
-    public ContactRecipient getRecipientByUUID(UUID uuid) {
-        try {
-            readLock.lock();
-            return recipientDAO.findByUUID(uuid);
         } finally {
             readLock.unlock();
         }
@@ -255,73 +238,126 @@ public class ContactRequestService {
         }
     }
 
-    public void addRecipient(long requestID, ContactRecipient recipient) throws ContactRecipientInvalidException,
-            ContactRequestNotFoundException, ContactRequestStateException {
+    public void addRecipient(UUID requestUUID, ContactRecipient recipient) throws ContactRecipientInvalidException,
+            ContactRequestNotFoundException, ContactRequestStateException, ContactRecipientAlreadyExistsException {
         try {
             writeLock.lock();
-            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
-                throw new ContactRecipientInvalidException();
+            if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
+                throw new ContactRecipientOriginException();
             }
-            final ContactRequest request = requestDAO.findByID(requestID);
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
             if (!isWarmState(request.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            recipient.setRequest(request);
-            recipientDAO.insert(recipient); // to get id
-            update(request); // update modified
+            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
+                throw new ContactRecipientInvalidException();
+            }
+            addRecipient(request, recipient);
         } finally {
             writeLock.unlock();
         }
     }
 
-    public void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
+    public void addRecipient(ContactRequest request, ContactRecipient recipient) throws ContactRecipientAlreadyExistsException {
+        if (checkRecipientExists(request.getRecipients(), recipient)) {
+            throw new ContactRecipientAlreadyExistsException();
+        }
+        recipient.setRequest(request);
+        recipientDAO.insert(recipient); // to get id
+        update(request); // update modified
+    }
+
+    public void updateRecipient(UUID requestUUID, ContactRecipient recipient) throws ContactRequestNotFoundException,
+            ContactRecipientOriginException, ContactRecipientNotFoundException, ContactRequestStateException {
+        try {
+            writeLock.lock();
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            if (request == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            if (!isWarmState(request.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
+            }
+            final ContactRecipient outdated = request.getRecipients().stream().filter(r -> r.getEmail().equals(recipient.getEmail()))
+                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+            if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
+                      && (!Objects.equals(outdated.getName(), recipient.getName())
+                      || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
+                      || !Objects.equals(outdated.getEmail(), recipient.getEmail()))) {
+                throw new ContactRecipientOriginException();
+            }
+            recipient.setId(outdated.getId());
+            recipient.setRequest(outdated.getRequest());
+            updateRecipient(recipient);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    private void updateRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
+            ContactRecipientNotFoundException, ContactRequestStateException {
+        if (!ContactValidator.getInstance().validateRecipient(recipient)) {
+            throw new ContactRecipientInvalidException();
+        }
+        final ContactRequest request = recipient.getRequest();
+        if (request == null) {
+            throw new ContactRequestNotFoundException();
+        }
+        final ContactRecipient outdated = recipientDAO.findByID(recipient.getId());
+        if (outdated == null) {
+            throw new ContactRecipientNotFoundException();
+        }
+        if (!outdated.getEmail().equals(recipient.getEmail()) && checkRecipientExists(request.getRecipients(), recipient)) {
+            throw new ContactRecipientAlreadyExistsException();
+        }
+        outdated.setName(recipient.getName());
+        outdated.setOrigin(recipient.getOrigin());
+        outdated.setEmail(recipient.getEmail());
+        outdated.setEnabled(recipient.isEnabled());
+        recipientDAO.update(outdated);
+        update(request); // update modified
+    }
+
+    public void removeRecipient(UUID requestUUID, String mail) throws ContactRequestNotFoundException,
+            ContactRecipientOriginException, ContactRequestStateException {
+        try {
+            writeLock.lock();
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            if (request == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            if (!isWarmState(request.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
+            }
+            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> mail.equals(r.getEmail()))
+                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+            if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
+                throw new ContactRecipientOriginException();
+            }
+            removeRecipient(recipient);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    private void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
             ContactRequestStateException {
-        try {
-            writeLock.lock();
-            final ContactRequest request = recipient.getRequest();
-            if (request == null) {
-                throw new ContactRequestNotFoundException();
-            }
-            if (!isWarmState(request.getState())) {
-                throw new ContactRequestStateException("Not in warm state");
-            }
-            request.removeRecipient(recipient);
-            update(request);
-        } finally {
-            writeLock.unlock();
+        final ContactRequest request = recipient.getRequest();
+        if (request == null) {
+            throw new ContactRequestNotFoundException();
         }
+        request.removeRecipient(recipient);
+        update(request);
     }
 
-    public void updateRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
-        ContactRecipientNotFoundException, ContactRequestStateException {
-        try {
-            writeLock.lock();
-            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
-                throw new ContactRecipientInvalidException();
-            }
-            final ContactRequest request = recipient.getRequest();
-            if (request == null) {
-                throw new ContactRequestNotFoundException();
-            }
-            if (!isWarmState(request.getState())) {
-                throw new ContactRequestStateException("Not in warm state");
-            }
-            final ContactRecipient outdated = recipientDAO.findByID(recipient.getId());
-            if (outdated == null) {
-                throw new ContactRecipientNotFoundException();
-            }
-            outdated.setName(recipient.getName());
-            outdated.setOrigin(recipient.getOrigin());
-            outdated.setEmail(recipient.getEmail());
-            outdated.setEnabled(recipient.isEnabled());
-            recipientDAO.update(outdated);
-            update(request); // update modified
-        } finally {
-            writeLock.unlock();
+    private boolean checkRecipientExists(List<ContactRecipient> recipients , ContactRecipient recipient) {
+        if (recipients.size() == 0) {
+            return false;
         }
+        return recipients.stream().filter(r -> r.getEmail().equals(recipient.getEmail())).findAny().isPresent();
     }
 
     private boolean isWarmState(ContactRequestState state) {
