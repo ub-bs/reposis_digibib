@@ -65,11 +65,11 @@ const rules = computed(() => ({
 }));
 const editMode = ref(false);
 const disabled = computed(() => store.state.editRecipientId !== undefined
-    && store.state.editRecipientId !== props.recipient.uuid);
+    && store.state.editRecipientId !== props.recipient.email);
 const editable = computed(() => props.recipient.origin === Origin.Manual);
 const v = useVuelidate(rules, props.recipient);
 const handleEdit = () => {
-  store.commit('setEditRecipient', props.recipient.uuid);
+  store.commit('setEditRecipient', props.recipient.email);
   editMode.value = true;
 };
 const handleCancel = () => {
@@ -84,6 +84,6 @@ const handleUpdate = () => {
   }
 };
 const handleRemove = () => {
-  store.dispatch('removeRecipient', props.recipient.uuid);
+  store.dispatch('removeRecipient', props.recipient.email);
 };
 </script>
