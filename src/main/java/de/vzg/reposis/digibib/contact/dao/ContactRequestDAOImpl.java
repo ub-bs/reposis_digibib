@@ -34,40 +34,29 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
     @Override
     public Collection<ContactRequest> findAll() {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final Collection<ContactRequest> requests = MCREntityManagerProvider.getCurrentEntityManager()
+        return MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findAll", ContactRequest.class).getResultList();
-        requests.forEach(entityManager::detach);
-        return requests;
     }
 
     @Override
     public Collection<ContactRequest> findByObjectID(MCRObjectID objectID) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final Collection<ContactRequest> requests = entityManager
-                .createNamedQuery("ContactRequest.findByObjectID", ContactRequest.class)
+        return entityManager.createNamedQuery("ContactRequest.findByObjectID", ContactRequest.class)
                 .setParameter("objectID", objectID).getResultList();
-        requests.forEach(entityManager::detach);
-        return requests;
     }
 
     @Override
     public Collection<ContactRequest> findByState(ContactRequestState state) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final Collection<ContactRequest> requests = MCREntityManagerProvider.getCurrentEntityManager()
+        return MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByState", ContactRequest.class)
                 .setParameter("state", state).getResultList();
-        requests.forEach(entityManager::detach);
-        return requests;
     }
 
     @Override
     public ContactRequest findByID(long id) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final ContactRequest request = entityManager.find(ContactRequest.class, id);
-        if (request != null) {
-            entityManager.detach(request);
-        }
-        return request;
+        return entityManager.find(ContactRequest.class, id);
     }
 
     @Override
@@ -76,7 +65,6 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
         final Collection<ContactRequest> requests = entityManager
                 .createNamedQuery("ContactRequest.findByUUID", ContactRequest.class)
                 .setParameter("uuid", uuid).getResultList(); // should contain at most one element
-        requests.forEach(entityManager::detach);
         return requests.stream().findFirst().orElse(null);
     }
 
@@ -84,20 +72,20 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
     public void insert(ContactRequest request) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
         entityManager.persist(request);
-        entityManager.detach(request);
+        entityManager.flush();
     }
 
     @Override
     public void update(ContactRequest request) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
         entityManager.merge(request);
-        entityManager.detach(request);
+        entityManager.flush();
     }
 
     @Override
     public void remove(ContactRequest request) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
         entityManager.remove(entityManager.merge(request));
-        entityManager.detach(request);
+        entityManager.flush();
     }
 }

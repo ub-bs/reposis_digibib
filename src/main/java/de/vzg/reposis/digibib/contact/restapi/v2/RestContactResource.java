@@ -28,7 +28,6 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -39,12 +38,7 @@ import javax.ws.rs.core.Response;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientOriginException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
-import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -110,7 +104,7 @@ public class RestContactResource {
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
-            throws ContactRequestNotFoundException, ContactRequestStateException, MCRException {
+            throws ContactException, MCRException {
         ContactRequestService.getInstance().forwardRequest(id);
         return Response.ok().build();
     }
@@ -131,90 +125,6 @@ public class RestContactResource {
     public Response removeRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
             throws ContactRequestNotFoundException {
         ContactRequestService.getInstance().removeRequestByUUID(id);
-        return Response.noContent().build();
-    }
-
-    @GET
-    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/recipients")
-    @Operation(
-        summary = "Gets contact request recipients by id",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
-    @Produces(MediaType.APPLICATION_JSON)
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public List<ContactRecipient> getRecipientsByUUID(@DefaultValue("0") @QueryParam("offset") int offset,
-            @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
-            @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID id) throws
-            ContactRequestNotFoundException {
-        final List<ContactRecipient> recipients = ContactRequestService.getInstance().listRecipients(id);
-        response.setHeader("X-Total-Count", Integer.toString(recipients.size()));
-        return recipients.stream().skip(offset).limit(limit).collect(Collectors.toList());
-    }
-
-    @POST
-    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/recipients")
-    @Operation(
-        summary = "Creates new contact request recipient for id",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
-    @Produces(MediaType.APPLICATION_JSON)
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id, ContactRecipient recipient)
-            throws ContactException {
-        if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
-            throw new ContactRecipientOriginException();
-        }
-        ContactRequestService.getInstance().addRecipient(id, recipient);
-        return Response.noContent().build(); // TODO created
-    }
-
-    @PUT
-    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/recipients/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
-    @Operation(
-        summary = "Updates contact request recipient by id",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
-    @Produces(MediaType.APPLICATION_JSON)
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response updateRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientID,
-            ContactRecipient recipient) throws ContactException {
-        final ContactRequestService service = ContactRequestService.getInstance();
-        final ContactRecipient outdated = service.getRecipientByUUID(recipientID);
-        if (outdated == null) {
-            throw new ContactRecipientNotFoundException();
-        }
-        if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
-                  && (!Objects.equals(outdated.getName(), recipient.getName())
-                  || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
-                  || !Objects.equals(outdated.getEmail(), recipient.getEmail()))) {
-            throw new ContactRecipientOriginException();
-        }
-        recipient.setId(outdated.getId());
-        service.updateRecipient(recipient);
         return Response.noContent().build();
     }
 }

@@ -26,7 +26,6 @@ import javax.persistence.EntityManager;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 
 import org.mycore.backend.jpa.MCREntityManagerProvider;
-import org.mycore.common.MCRTransactionHelper;
 
 public class ContactRecipientDAOImpl implements ContactRecipientDAO {
 
@@ -38,11 +37,7 @@ public class ContactRecipientDAOImpl implements ContactRecipientDAO {
     @Override
     public ContactRecipient findByID(long id) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final ContactRecipient recipient = entityManager.find(ContactRecipient.class, id);
-        if (recipient != null) {
-            entityManager.detach(recipient);
-        }
-        return recipient;
+        return entityManager.find(ContactRecipient.class, id);
     }
 
     @Override
@@ -51,22 +46,27 @@ public class ContactRecipientDAOImpl implements ContactRecipientDAO {
         final Collection<ContactRecipient> recipients = entityManager
                 .createNamedQuery("ContactRecipient.findByUUID", ContactRecipient.class)
                 .setParameter("uuid", uuid).getResultList(); // should contain at most one element
-        recipients.forEach(entityManager::detach);
         return recipients.stream().findFirst().orElse(null);
     }
 
     @Override
     public void insert(ContactRecipient recipient) {
-        throw new UnsupportedOperationException();
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        entityManager.persist(recipient);
+        entityManager.flush();
     }
 
     @Override
     public void update(ContactRecipient recipient) {
-        throw new UnsupportedOperationException();
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        entityManager.merge(recipient);
+        entityManager.flush();
     }
 
     @Override
     public void remove(ContactRecipient recipient) {
-        throw new UnsupportedOperationException();
+        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
+        entityManager.remove(entityManager.merge(recipient));
+        entityManager.flush();
     }
 }

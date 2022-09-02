@@ -114,7 +114,7 @@ public class ContactRequestService {
         }
     }
 
-    public List<ContactRecipient> listRecipients(UUID uuid) throws ContactRequestNotFoundException {
+    public List<ContactRecipient> listRecipientsByUUID(UUID uuid) throws ContactRequestNotFoundException {
         try {
             readLock.lock();
             return Optional.ofNullable(requestDAO.findByUUID(uuid))
@@ -255,22 +255,23 @@ public class ContactRequestService {
         }
     }
 
-    public void addRecipient(UUID requestUUID, ContactRecipient recipient) throws ContactRecipientInvalidException,
+    public void addRecipient(long requestID, ContactRecipient recipient) throws ContactRecipientInvalidException,
             ContactRequestNotFoundException, ContactRequestStateException {
         try {
             writeLock.lock();
             if (!ContactValidator.getInstance().validateRecipient(recipient)) {
                 throw new ContactRecipientInvalidException();
             }
-            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            final ContactRequest request = requestDAO.findByID(requestID);
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
             if (!isWarmState(request.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            request.addRecipient(recipient);
-            update(request);
+            recipient.setRequest(request);
+            recipientDAO.insert(recipient); // to get id
+            update(request); // update modified
         } finally {
             writeLock.unlock();
         }
@@ -280,7 +281,7 @@ public class ContactRequestService {
             ContactRequestStateException {
         try {
             writeLock.lock();
-            final ContactRequest request = requestDAO.findByID(recipient.getRequest().getId()); // workaround
+            final ContactRequest request = recipient.getRequest();
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
@@ -301,22 +302,23 @@ public class ContactRequestService {
             if (!ContactValidator.getInstance().validateRecipient(recipient)) {
                 throw new ContactRecipientInvalidException();
             }
-            final ContactRecipient outdated = recipientDAO.findByID(recipient.getId());
-            if (outdated == null) {
-                throw new ContactRecipientNotFoundException();
-            }
-            final ContactRequest request = requestDAO.findByID(outdated.getRequest().getId()); // workaround
+            final ContactRequest request = recipient.getRequest();
             if (request == null) {
-                throw new ContactRequestNotFoundException(); // actually not possible because orphan removal
+                throw new ContactRequestNotFoundException();
             }
             if (!isWarmState(request.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            recipient.setUuid(outdated.getUuid());
-            recipient.setRequest(outdated.getRequest());
-            request.removeRecipient(outdated); // TODO dirty
-            request.addRecipient(recipient);
-            update(request);
+            final ContactRecipient outdated = recipientDAO.findByID(recipient.getId());
+            if (outdated == null) {
+                throw new ContactRecipientNotFoundException();
+            }
+            outdated.setName(recipient.getName());
+            outdated.setOrigin(recipient.getOrigin());
+            outdated.setEmail(recipient.getEmail());
+            outdated.setEnabled(recipient.isEnabled());
+            recipientDAO.update(outdated);
+            update(request); // update modified
         } finally {
             writeLock.unlock();
         }
