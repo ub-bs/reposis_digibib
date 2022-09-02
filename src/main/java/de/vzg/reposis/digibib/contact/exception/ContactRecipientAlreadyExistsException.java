@@ -16,11 +16,11 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.dao;
+package de.vzg.reposis.digibib.contact.exception;
 
-import java.util.UUID;
+public class ContactRecipientAlreadyExistsException extends ContactException {
 
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-
-public interface ContactRecipientDAO extends ContactBaseDAO<ContactRecipient> {
+    public ContactRecipientAlreadyExistsException() {
+        super("recipientAlreadyExists", "recipient already exists.");
+    }
 }
