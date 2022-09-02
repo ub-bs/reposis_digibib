@@ -183,4 +183,9 @@ public class ContactRecipient {
         return Objects.equals(request, other.getRequest())
                 && Objects.equals(uuid, other.getUuid());
     }
+
+    @Override
+    public String toString() {
+        return String.format("ID: %d, \nUUID: %s", id, uuid.toString());
+    }
 }
