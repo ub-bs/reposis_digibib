@@ -76,7 +76,6 @@ export const actions: ActionTree<State, State> = {
         state.currentRequest.recipients = recipients.filter(item => item.email != state.editRecipientId);
         state.currentRequest.recipients.push(recipient);
       }
-      commit('setEditRecipient', undefined);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
           commit('setModalErrorCode', (error.response?.data as ErrorResponse).errorCode);
@@ -84,6 +83,7 @@ export const actions: ActionTree<State, State> = {
         console.error(error);
       }
     }
+    commit('setEditRecipientId', undefined);
   },
   async showRequestModal({ commit, state }, id: string): Promise<void> {
     const currentRequest = state.requests.find((request) => request.uuid === id); // TODO may use getter

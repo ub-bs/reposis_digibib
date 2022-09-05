@@ -49,7 +49,7 @@ const props = defineProps({
     required: true,
   },
 });
-const recipientSave = JSON.parse(JSON.stringify(props.recipient));
+const recipientSave = ref(JSON.parse(JSON.stringify(props.recipient)));
 const store = useStore();
 const rules = computed(() => ({
   name: {
@@ -69,18 +69,19 @@ const disabled = computed(() => store.state.editRecipientId !== undefined
 const editable = computed(() => props.recipient.origin === Origin.Manual);
 const v = useVuelidate(rules, props.recipient);
 const handleEdit = () => {
-  store.commit('setEditRecipient', props.recipient.email);
+  store.commit('setEditRecipientId', props.recipient.email);
   editMode.value = true;
 };
 const handleCancel = () => {
-  store.commit('setEditRecipient', undefined);
+  store.commit('setEditRecipientId', undefined);
   editMode.value = false;
 };
 const handleUpdate = () => {
   v.value.$validate();
   if (!v.value.$error) {
-    store.dispatch('updateRecipient', recipientSave);
+    store.dispatch('updateRecipient', recipientSave.value);
     editMode.value = false;
+    recipientSave.value = props.recipient;
   }
 };
 const handleRemove = () => {
