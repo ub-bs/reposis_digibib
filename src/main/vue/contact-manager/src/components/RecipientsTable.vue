@@ -20,10 +20,10 @@
     </thead>
     <tbody>
       <template v-for="recipient in recipients" :key="recipient">
-        <EditRecipientRow :recipient="recipient" />
+        <RecipientRow v-if="!isWarmState(request.state)" :recipient="recipient" />
+        <EditRecipientRow v-else :recipient="recipient" />
       </template>
-      <!-- TODO check request state -->
-      <AddRecipientRow />
+      <AddRecipientRow v-if="isWarmState(request.state)" />
     </tbody>
   </table>
 </template>
@@ -32,7 +32,10 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import AddRecipientRow from './AddRecipientRow.vue';
 import EditRecipientRow from './EditRecipientRow.vue';
+import RecipientRow from './RecipientRow.vue';
+import { isWarmState } from '../utils';
 
 const store = useStore();
 const recipients = computed(() => store.getters.getCurrentRecipients);
+const request = store.state.currentRequest;
 </script>

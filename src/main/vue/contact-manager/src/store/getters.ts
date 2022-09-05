@@ -1,5 +1,6 @@
 import { GetterTree } from 'vuex';
-import { State, Recipient, Request } from './state';
+import { Recipient, Request, ErrorResponse } from '../utils';
+import { State } from './state';
 
 export type Getters = {
   getRequestById(state: State): (id :string) => Request | undefined;
