@@ -270,7 +270,7 @@ public class ContactRequestService {
         update(request); // update modified
     }
 
-    public void updateRecipient(UUID requestUUID, ContactRecipient recipient) throws ContactRequestNotFoundException,
+    public void updateRecipient(UUID requestUUID, String mail, ContactRecipient recipient) throws ContactRequestNotFoundException,
             ContactRecipientOriginException, ContactRecipientNotFoundException, ContactRequestStateException {
         try {
             writeLock.lock();
@@ -281,7 +281,7 @@ public class ContactRequestService {
             if (!isWarmState(request.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            final ContactRecipient outdated = request.getRecipients().stream().filter(r -> r.getEmail().equals(recipient.getEmail()))
+            final ContactRecipient outdated = request.getRecipients().stream().filter(r -> r.getEmail().equals(mail))
                     .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
                       && (!Objects.equals(outdated.getName(), recipient.getName())
@@ -289,15 +289,14 @@ public class ContactRequestService {
                       || !Objects.equals(outdated.getEmail(), recipient.getEmail()))) {
                 throw new ContactRecipientOriginException();
             }
-            recipient.setId(outdated.getId());
             recipient.setRequest(outdated.getRequest());
-            updateRecipient(recipient);
+            updateRecipient(outdated.getId(), recipient);
         } finally {
             writeLock.unlock();
         }
     }
 
-    private void updateRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
+    private void updateRecipient(long id, ContactRecipient recipient) throws ContactRequestNotFoundException,
             ContactRecipientNotFoundException, ContactRequestStateException {
         if (!ContactValidator.getInstance().validateRecipient(recipient)) {
             throw new ContactRecipientInvalidException();
@@ -306,7 +305,7 @@ public class ContactRequestService {
         if (request == null) {
             throw new ContactRequestNotFoundException();
         }
-        final ContactRecipient outdated = recipientDAO.findByID(recipient.getId());
+        final ContactRecipient outdated = recipientDAO.findByID(id);
         if (outdated == null) {
             throw new ContactRecipientNotFoundException();
         }

@@ -155,8 +155,7 @@ public class RestContactRecipientResource {
     public Response updateRecipientByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail,
             ContactRecipient recipient) throws ContactException {
-        recipient.setEmail(mail);
-        ContactRequestService.getInstance().updateRecipient(requestUUID, recipient);
+        ContactRequestService.getInstance().updateRecipient(requestUUID, mail, recipient);
         return Response.noContent().build();
     }
 
