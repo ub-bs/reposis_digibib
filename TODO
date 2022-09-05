@@ -1,0 +1,3 @@
+add X-RequestID header to identify failed message
+cron job that reads INBOX
+create tokens for recipient and add resolve servlet
