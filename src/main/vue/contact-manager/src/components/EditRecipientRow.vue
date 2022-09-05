@@ -40,7 +40,7 @@ import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
-import { Origin } from '../store/state';
+import { Origin } from '../utils';
 import EditToolbar from './EditToolbar.vue';
 
 const props = defineProps({

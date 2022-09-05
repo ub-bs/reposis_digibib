@@ -1,7 +1,8 @@
 /* eslint-disable */
 import { ActionTree } from 'vuex';
 import axios, { AxiosError } from 'axios';
-import { Recipient, State, ErrorResponse } from './state';
+import { State } from './state';
+import { Recipient, ErrorResponse } from '../utils';
 
 export const actions: ActionTree<State, State> = {
   async fetchData({ commit }): Promise<void> {
