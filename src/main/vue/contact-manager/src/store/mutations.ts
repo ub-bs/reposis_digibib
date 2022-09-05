@@ -20,7 +20,7 @@ export const mutations: MutationTree<State> = {
   setShowRequestModal(state, show): void {
     state.showRequestModal = show;
   },
-  setEditRecipient(state, id): void {
+  setEditRecipientId(state, id): void {
     state.editRecipientId = id;
   },
   setCurrentRequest(state, request): void {
