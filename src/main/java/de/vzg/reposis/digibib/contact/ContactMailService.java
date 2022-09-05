@@ -24,6 +24,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.stream.Collectors;
@@ -104,8 +105,11 @@ public class ContactMailService {
     public static ContactMailService getInstance() {
         return Holder.INSTANCE;
     }
-
     public void sendMail(EMail mail) throws UnsupportedEncodingException, MessagingException, MalformedURLException {
+        sendMail(mail, null);
+    }
+
+    public void sendMail(EMail mail, Map<String, String> headers) throws UnsupportedEncodingException, MessagingException, MalformedURLException {
         MimeMessage msg = new MimeMessage(session);
         msg.setFrom(buildAddress(mail.from));
         if (mail.to != null) {
@@ -126,6 +130,11 @@ public class ContactMailService {
         Optional<MessagePart> plainMsg = mail.getTextMessage();
         if (plainMsg.isPresent()) {
             msg.setText(plainMsg.get().message, ENCODING);
+        }
+        if (headers != null) {
+            for (var entry : headers.entrySet()) {
+                msg.addHeader(entry.getKey(), entry.getValue());
+            }
         }
         Transport.send(msg);
     }
