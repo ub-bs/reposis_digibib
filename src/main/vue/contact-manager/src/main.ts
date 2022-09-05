@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(store);
   app.mount('#app');
   if (process.env.NODE_ENV === 'development') {
-    axios.defaults.headers.common.Authorization = 'Basic YWRtaW5pc3RyYXRvcjphbGxlc3dpcmRndXQ=';
+    // axios.defaults.headers.common.Authorization = 'Basic YWRtaW5pc3RyYXRvcjphbGxlc3dpcmRndXQ=';
     store.dispatch('fetchData');
   } else {
     try {

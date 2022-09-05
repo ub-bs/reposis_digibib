@@ -10,6 +10,7 @@ export type State = {
   showRequestModal: boolean;
   editRecipientId: string | undefined;
   modalErrorCode: string | undefined;
+  applicationErrorCode: string | undefined;
 }
 
 export const state: State = {
@@ -22,4 +23,5 @@ export const state: State = {
   editRecipientId: undefined,
   currentRequest: undefined,
   modalErrorCode: undefined,
+  applicationErrorCode: undefined,
 };

@@ -6,15 +6,25 @@ import { Recipient, ErrorResponse } from '../utils';
 
 export const actions: ActionTree<State, State> = {
   async fetchData({ commit }): Promise<void> {
-    commit('setLoading', true);
     try {
+      commit('setLoading', true);
       const response = await axios.get('api/v2/contacts');
       commit('setRequests', response.data);
       commit('setTotalRows', response.headers['x-total-count']);
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+        const errorStatus = error.response.status;
+        if (errorStatus === 401 || errorStatus === 403) {
+          commit('setApplicationErrorCode', 'unauthorizedError');
+        } else {
+          commit('setApplicationErrorCode', (error.response.data as ErrorResponse).errorCode);
+        }
+      } else {
+        console.error(error);
+      }
+    } finally {
+      commit('setLoading', false);
     }
-    commit('setLoading', false);
   },
   async removeContactRequest({ commit, state }, id: string): Promise<void> {
     try {
@@ -46,7 +56,7 @@ export const actions: ActionTree<State, State> = {
       state.currentRequest?.recipients.push(recipient);
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-          commit('setModalErrorCode', (error.response?.data as ErrorResponse).errorCode);
+          commit('setModalErrorCode', (error.response.data as ErrorResponse).errorCode);
       } else {
         console.error(error);
       }
@@ -62,7 +72,7 @@ export const actions: ActionTree<State, State> = {
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-          commit('setModalErrorCode', (error.response?.data as ErrorResponse).errorCode);
+          commit('setModalErrorCode', (error.response.data as ErrorResponse).errorCode);
       } else {
         console.error(error);
       }
@@ -79,7 +89,7 @@ export const actions: ActionTree<State, State> = {
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
-          commit('setModalErrorCode', (error.response?.data as ErrorResponse).errorCode);
+          commit('setModalErrorCode', (error.response.data as ErrorResponse).errorCode);
       } else {
         console.error(error);
       }
