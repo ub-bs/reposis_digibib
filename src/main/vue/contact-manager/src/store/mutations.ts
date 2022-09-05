@@ -29,4 +29,7 @@ export const mutations: MutationTree<State> = {
   setModalErrorCode(state, errorCode): void {
     state.modalErrorCode = errorCode;
   },
+  setApplicationErrorCode(state, errorCode): void {
+    state.applicationErrorCode = errorCode;
+  },
 };
