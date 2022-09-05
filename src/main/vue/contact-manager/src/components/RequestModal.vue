@@ -69,10 +69,10 @@ const close = () => {
   store.dispatch('hideRequestModal');
 };
 const forward = () => {
-  store.dispatch('forwardContactRequest', request.value.id);
+  store.dispatch('forwardContactRequest', request.value.uuid);
 };
 const reject = () => {
-  store.dispatch('rejectContactRequest', request.value.id);
+  store.dispatch('rejectContactRequest', request.value.uuid);
 };
 const isProcessed = computed(() => request.value.state !== RequestState.Processed);
 </script>
