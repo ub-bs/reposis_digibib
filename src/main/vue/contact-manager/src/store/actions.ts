@@ -1,7 +1,7 @@
 /* eslint-disable */
 import { ActionTree } from 'vuex';
-import axios from 'axios';
-import { Recipient, State } from './state';
+import axios, { AxiosError } from 'axios';
+import { Recipient, State, ErrorResponse } from './state';
 
 export const actions: ActionTree<State, State> = {
   async fetchData({ commit }): Promise<void> {
@@ -39,34 +39,60 @@ export const actions: ActionTree<State, State> = {
     }
   },
   async addRecipient({ commit, state }, recipient: Recipient): Promise<void> {
+    commit('setModalErrorCode', undefined);
     try {
-      await axios.post(`api/v2/contacts/${state.showRequestId}/recipients`, recipient);
+      await axios.post(`api/v2/contacts/${state.currentRequest?.uuid}/recipients`, recipient);
+      state.currentRequest?.recipients.push(recipient);
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+          commit('setModalErrorCode', (error.response?.data as ErrorResponse).errorCode);
+      } else {
+        console.error(error);
+      }
     }
   },
   async removeRecipient({ commit, state }, recipientId: String): Promise<void> {
+    commit('setModalErrorCode', undefined);
     try {
-      await axios.delete(`api/v2/contacts/${state.showRequestId}/recipients/${recipientId}`);
+      await axios.delete(`api/v2/contacts/${state.currentRequest?.uuid}/recipients/${recipientId}`);
+      if (state.currentRequest) {
+        const recipients = state.currentRequest.recipients;
+        state.currentRequest.recipients = state.currentRequest.recipients.filter(item => item.email != recipientId);
+      }
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+          commit('setModalErrorCode', (error.response?.data as ErrorResponse).errorCode);
+      } else {
+        console.error(error);
+      }
     }
   },
-  async updateRecipient({ commit, state }, recipient: Recipient): Promise<void> {
+  async updateRecipient({ commit, state }, recipient: Recipient): Promise<void> { // TODO email collision update not working
+    commit('setModalErrorCode', undefined);
     try {
-      await axios.put(`api/v2/contacts/${state.showRequestId}/recipients/${state.editRecipientId}`, recipient);
-      commit('setEditRecipientId', undefined);
+      await axios.put(`api/v2/contacts/${state.currentRequest?.uuid}/recipients/${state.editRecipientId}`, recipient);
+      if (state.currentRequest) {
+        const recipients = state.currentRequest.recipients;
+        state.currentRequest.recipients = recipients.filter(item => item.email != state.editRecipientId);
+        state.currentRequest.recipients.push(recipient);
+      }
+      commit('setEditRecipient', undefined);
     } catch (error) {
-      console.error(error);
+      if (axios.isAxiosError(error) && error.response) {
+          commit('setModalErrorCode', (error.response?.data as ErrorResponse).errorCode);
+      } else {
+        console.error(error);
+      }
     }
   },
-  async showRequest({ commit, state }, id: string): Promise<void> {
-    commit('setShowModal', true);
-    commit('setShowRequestId', id);
-    // TODO load recipients getter
+  async showRequestModal({ commit, state }, id: string): Promise<void> {
+    const currentRequest = state.requests.find((request) => request.uuid === id); // TODO may use getter
+    commit('setCurrentRequest', currentRequest);
+    commit('setShowRequestModal', true);
   },
-  async hideRequest({ commit }): Promise<void> {
-    commit('setShowModal', false);
-    commit('setShowRequestId', undefined);
+  async hideRequestModal({ commit }): Promise<void> {
+    commit('setCurrentRequest', undefined);
+    commit('setModalErrorCode', undefined);
+    commit('setShowRequestModal', false);
   },
 };

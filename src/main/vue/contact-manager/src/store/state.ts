@@ -21,16 +21,21 @@ export type Request = {
   recipients: Recipient[];
 }
 
+export type ErrorResponse = {
+  errorCode: string;
+}
+
 export type State = {
   loading: boolean;
   currentPage: number;
   totalRows: number;
   perPage: number;
   requests: Request[];
-  showModal: boolean;
-  showRequestId: string | undefined;
+  currentRequest: Request | undefined;
+  showRequestModal: boolean;
   editRecipientId: string | undefined;
-};
+  modalErrorCode: string | undefined;
+}
 
 export const state: State = {
   loading: false,
@@ -38,7 +43,8 @@ export const state: State = {
   perPage: 8,
   requests: [],
   currentPage: 0,
-  showModal: false,
-  showRequestId: undefined,
+  showRequestModal: false,
   editRecipientId: undefined,
+  currentRequest: undefined,
+  modalErrorCode: undefined,
 };

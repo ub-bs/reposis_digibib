@@ -53,7 +53,7 @@
       </tr>
     </tbody>
   </table>
-  <RequestModal v-if="showModal" :id="currentId" />
+  <RequestModal v-if="showRequestModal" />
 </template>
 
 <script setup lang="ts">
@@ -64,10 +64,10 @@ import RequestModal from './RequestModal.vue';
 const store = useStore();
 const requests = computed(() => store.getters.getCurrentRequests);
 const currentId = ref(null);
-const showModal = computed(() => store.state.showModal);
+const showRequestModal = computed(() => store.state.showRequestModal);
 const viewRequest = (id: string) => {
   currentId.value = id;
-  store.dispatch('showRequest', id);
+  store.dispatch('showRequestModal', id);
 };
 const removeRequest = (id: string) => {
   store.dispatch('removeContactRequest', id);
