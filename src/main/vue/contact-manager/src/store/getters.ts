@@ -1,5 +1,5 @@
 import { GetterTree } from 'vuex';
-import { Recipient, Request, ErrorResponse } from '../utils';
+import { Recipient, Request } from '../utils';
 import { State } from './state';
 
 export type Getters = {
