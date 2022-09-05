@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="row mb-3">
+  <div class="container-fluid">
+    <div class="row">
       <div class="col d-flex justify-content-center">
         <h3>{{ $t('digibib.contact.frontend.manager.title') }}</h3>
       </div>
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div> -->
-    <div class="row mb-3">
+    <div class="row">
       <div class="col">
         <OverviewTable />
       </div>

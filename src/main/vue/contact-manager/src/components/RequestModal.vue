@@ -2,7 +2,7 @@
   <transition name="modal">
     <Modal :title="request.uuid" size="xl" scrollable @close="close">
       <div v-if="errorCode" class="alert alert-danger" role="alert">
-        {{ errorCode }}
+        {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
@@ -56,9 +56,7 @@
   </transition>
 </template>
 <script setup lang="ts">
-import {
-  computed,
-} from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import Modal from './Modal.vue';
 import { RequestState } from '../utils';
@@ -82,11 +80,9 @@ const isProcessed = computed(() => request.value.state !== RequestState.Processe
 .modal-enter-from {
   opacity: 0;
 }
-
 .modal-leave-to {
   opacity: 0;
 }
-
 .modal-enter-from .modal-container,
 .modal-leave-to .modal-container {
   -webkit-transform: scale(1.02);
