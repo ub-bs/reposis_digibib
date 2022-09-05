@@ -28,13 +28,11 @@
   </table>
 </template>
 <script setup lang="ts">
+import { computed } from 'vue';
+import { useStore } from 'vuex';
 import AddRecipientRow from './AddRecipientRow.vue';
 import EditRecipientRow from './EditRecipientRow.vue';
 
-defineProps({
-  recipients: {
-    type: Array,
-    default: () => [],
-  },
-});
+const store = useStore();
+const recipients = computed(() => store.getters.getCurrentRecipients);
 </script>

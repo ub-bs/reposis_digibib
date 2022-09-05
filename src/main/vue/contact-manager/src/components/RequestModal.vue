@@ -1,7 +1,8 @@
 <template>
   <transition name="modal">
     <Modal :title="state.id" size="xl" scrollable @close="close">
-      <div> <!-- alert div -->
+      <div v-if="errorCode" class="alert alert-danger" role="alert">
+        {{ errorCode }}
       </div>
       <div class="form-row">
         <div class="form-group col-md-4">
@@ -38,7 +39,7 @@
       <p>
         {{ $t('digibib.contact.frontend.manager.info.recipients') }}
       </p>
-      <recipients-table :recipients="state.recipients" />
+      <recipients-table />
       <template v-slot:footer>
         <div class="btn-group">
           <button type="button" class="btn btn-danger" @click="reject"
@@ -56,6 +57,7 @@
 </template>
 <script setup lang="ts">
 import {
+  computed,
   reactive,
   onMounted,
 } from 'vue';
@@ -65,7 +67,6 @@ import RecipientsTable from './RecipientsTable.vue';
 
 const props = defineProps({
   size: String,
-  id: String,
 });
 const store = useStore();
 const state = reactive({
@@ -80,7 +81,7 @@ const state = reactive({
   recipients: [],
 });
 const setFields = () => {
-  const request = store.getters.getRequestById(props.id);
+  const request = store.state.currentRequest;
   if (request) {
     state.id = request.uuid;
     state.name = request.name;
@@ -93,11 +94,12 @@ const setFields = () => {
     state.recipients = request.recipients;
   }
 };
+const errorCode = computed(() => store.state.modalErrorCode);
 onMounted(() => {
   setFields();
 });
 const close = () => {
-  store.dispatch('hideRequest');
+  store.dispatch('hideRequestModal');
 };
 const forward = () => {
   store.dispatch('forwardContactRequest', state.id);

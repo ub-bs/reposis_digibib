@@ -55,14 +55,15 @@ const rules = computed(() => ({
 const recipient = ref({});
 const v = useVuelidate(rules, recipient);
 const disabled = computed(() => store.state.editRecipientId !== undefined);
+const resetRecipient = () => {
+  v.value.$reset();
+  recipient.value = {};
+};
 const addRecipient = () => {
   v.value.$validate();
   if (!v.value.$error) {
     store.dispatch('addRecipient', recipient.value);
+    resetRecipient();
   }
-};
-const resetRecipient = () => {
-  v.value.$reset();
-  recipient.value = {};
 };
 </script>
