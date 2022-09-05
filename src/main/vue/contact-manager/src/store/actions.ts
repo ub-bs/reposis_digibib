@@ -68,7 +68,7 @@ export const actions: ActionTree<State, State> = {
       }
     }
   },
-  async updateRecipient({ commit, state }, recipient: Recipient): Promise<void> { // TODO email collision update not working
+  async updateRecipient({ commit, state }, recipient: Recipient): Promise<void> {
     commit('setModalErrorCode', undefined);
     try {
       await axios.put(`api/v2/contacts/${state.currentRequest?.uuid}/recipients/${state.editRecipientId}`, recipient);
@@ -87,13 +87,13 @@ export const actions: ActionTree<State, State> = {
     commit('setEditRecipientId', undefined);
   },
   async showRequestModal({ commit, state }, id: string): Promise<void> {
-    const currentRequest = state.requests.find((request) => request.uuid === id); // TODO may use getter
+    const currentRequest = this.getters.getRequestById(id);
     commit('setCurrentRequest', currentRequest);
     commit('setShowRequestModal', true);
   },
   async hideRequestModal({ commit }): Promise<void> {
+    commit('setShowRequestModal', false);
     commit('setCurrentRequest', undefined);
     commit('setModalErrorCode', undefined);
-    commit('setShowRequestModal', false);
   },
 };

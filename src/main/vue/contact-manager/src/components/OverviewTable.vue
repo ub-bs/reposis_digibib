@@ -23,7 +23,7 @@
     </thead>
     <tbody v-if="requests">
       <tr v-for="item in requests" :key="item">
-        <td class="col-1 align-middle">
+        <td class="col-3 align-middle">
           {{ item.uuid }}
         </td>
         <td class="col-2 align-middle">
@@ -34,7 +34,7 @@
             {{ item.objectID }}
           </a>
         </td>
-        <td class="col-5 align-middle">
+        <td class="col-3 align-middle">
           {{ item.email }}
         </td>
         <td class="col-1 align-middle">
