@@ -41,7 +41,7 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mcr.cronjob.MCRCronjob;
 import org.mycore.util.concurrent.MCRTransactionableCallable;
 
-public class ContactCollectCronjob extends MCRCronjob {
+public class ContactCollectRecipientsCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
 

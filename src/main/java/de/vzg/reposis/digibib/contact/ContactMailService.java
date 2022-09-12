@@ -33,17 +33,21 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.URLDataSource;
 import javax.mail.Authenticator;
+import javax.mail.Flags;
+import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Store;
 import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.search.FlagTerm;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -82,6 +86,16 @@ public class ContactMailService {
     private Session session;
 
     private ContactMailService() {
+        session = Session.getDefaultInstance(getProperties(), new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(USER, PASSWORD);
+            }
+        });
+        session.setDebug(DEBUG);
+    }
+
+    private Properties getProperties() {
         final Properties properties = new Properties();
         properties.setProperty("mail.smtp.host", HOST);
         properties.setProperty("mail.smtp.port", PORT);
@@ -93,13 +107,7 @@ public class ContactMailService {
             properties.setProperty("mail.smtp.starttls.required", "true");
         }
         properties.setProperty("mail.smtp.auth", "true");
-        session = Session.getDefaultInstance(properties, new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USER, PASSWORD);
-            }
-        });
-        session.setDebug(DEBUG);
+        return properties;
     }
 
     public static ContactMailService getInstance() {
@@ -107,6 +115,19 @@ public class ContactMailService {
     }
     public void sendMail(EMail mail) throws UnsupportedEncodingException, MessagingException, MalformedURLException {
         sendMail(mail, null);
+    }
+
+    public Message[] getUnreadMessages() throws MessagingException {
+        Properties properties = new Properties();
+        properties.put("mail.store.protocol", "imaps");
+
+        Session emailSession = Session.getInstance(properties);
+        Store store = emailSession.getStore();
+        store.connect(HOST, USER, PASSWORD);
+
+        Folder inbox = store.getFolder("INBOX");
+        inbox.open(Folder.READ_ONLY);
+        return inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
     }
 
     public void sendMail(EMail mail, Map<String, String> headers) throws UnsupportedEncodingException, MessagingException, MalformedURLException {
