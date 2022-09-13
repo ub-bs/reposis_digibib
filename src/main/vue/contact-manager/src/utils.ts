@@ -20,6 +20,7 @@ export type Recipient = {
   origin: Origin;
   email: string;
   enabled: boolean;
+  failed: boolean;
 }
 
 export type Request = {

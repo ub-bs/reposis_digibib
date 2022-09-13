@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr :class="recipient.failed ? 'table-danger' : ''">
     <td class="col-3">
       <input v-if="editable && editMode" class="form-control form-control-sm" type="text"
           v-model="recipientSave.name" :class="v.name.$error ? 'is-invalid' : ''" />
