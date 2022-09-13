@@ -21,4 +21,6 @@ package de.vzg.reposis.digibib.contact;
 public class ContactConstants {
 
     public static final String CONF_PREFIX = "Digibib.ContactService.";
+
+    public static final String REQUEST_HEADER_NAME = "X-Request-ID";
 }
