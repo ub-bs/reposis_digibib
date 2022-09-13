@@ -41,7 +41,7 @@ import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.mcr.cronjob.MCRCronjob;
 
-public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
+public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -70,7 +70,7 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
             inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
             final Message[] unreadMessages = getUnreadMessages();
-            LOGGER.info("Found {} unread messages", unreadMessages.length);
+            LOGGER.debug("Found {} unread messages.", unreadMessages.length);
             for (Message message : unreadMessages) {
                 if(message instanceof MimeMessage) {
                     final MimeMessage mime = (MimeMessage) message;
@@ -83,7 +83,6 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
                                 if (requestId != null) {
                                     final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
                                     if (recipients != null && recipients.length == 1) {
-                                        LOGGER.info(recipients[0]);
                                         // TODO update recipient, set mail as failed
                                         flagMessageAsSeen(message);
                                     }
@@ -116,7 +115,7 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
 
     @Override
     public String getDescription() {
-        return "Processes failed messages.";
+        return "Processes bounce messages.";
     }
 
     private void flagMessageAsSeen(Message message) throws MessagingException {
