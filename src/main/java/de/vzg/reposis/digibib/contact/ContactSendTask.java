@@ -21,14 +21,24 @@ package de.vzg.reposis.digibib.contact;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
@@ -42,6 +52,7 @@ import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.mycore.common.MCRMailer.EMail;
+import org.mycore.common.MCRMailer.EMail.MessagePart;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.content.MCRJDOMContent;
 import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
@@ -58,6 +69,42 @@ public class ContactSendTask implements Callable<Void> {
     private static final String MAIL_STYLESHEET = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Stylesheet");
 
+    private static final String ENCODING = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Encoding");
+
+    private static final String HOST = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Host");
+
+    private static final String PORT = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Port");
+
+    private static final String PROTOCOL = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Protocol");
+
+    private static final String STARTTLS = MCRConfiguration2
+            .getString(ContactConstants.CONF_PREFIX + "SMTP.STARTTLS").orElse("disabled");
+
+    private static final String USER = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.User");
+
+    private static final String PASSWORD = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.Password");
+
+    private static final Boolean DEBUG = MCRConfiguration2
+            .getBoolean(ContactConstants.CONF_PREFIX + "SMTP.Debug").orElse(false);
+
+    private static final Session session;
+
+    static {
+        session = Session.getDefaultInstance(getProperties(), new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(USER, PASSWORD);
+            }
+        });
+        session.setDebug(DEBUG);
+    }
+
     private final ContactRequest request;
 
     public ContactSendTask(ContactRequest request) {
@@ -67,7 +114,7 @@ public class ContactSendTask implements Callable<Void> {
     @Override
     public Void call() throws Exception {
         LOGGER.info("Sending contact request: ", request.getId());
-        final EMail baseMail = createBaseMail();
+        final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", request.getSender());
         properties.put("id", request.getObjectID().toString());
@@ -82,20 +129,33 @@ public class ContactSendTask implements Callable<Void> {
         final EMail mail = EMail.parseXML(mailElement);
         final Map<String, String> headers = new HashMap();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
-        ContactMailService.getInstance().sendMail(mail, headers);
+        for (String recipient : request.getRecipients().stream().map(ContactRecipient::getEmail).collect(Collectors.toList())) {
+            sendMail(mail, SENDER_NAME, recipient, headers);
+            // TODO flag as send
+        }
         if (request.isSendCopy()) {
             // TODO send copy
         }
         return null;
     }
 
-    private EMail createBaseMail() {
-        final EMail mail = new EMail();
-        final Set<String> recipients = request.getRecipients().stream().map(ContactRecipient::getEmail)
-                .collect(Collectors.toSet());
-        mail.to = List.copyOf(recipients);
-        mail.from = SENDER_NAME;
-        return mail;
+    private void sendMail(EMail mail, String from, String to, Map<String, String> headers)
+            throws MessagingException {
+        MimeMessage msg = new MimeMessage(session);
+        msg.setFrom(new InternetAddress(from));
+        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+        msg.setSentDate(new Date());
+        msg.setSubject(mail.subject, ENCODING);
+        Optional<MessagePart> plainMsg = mail.getTextMessage();
+        if (plainMsg.isPresent()) {
+            msg.setText(plainMsg.get().message, ENCODING);
+        }
+        if (headers != null) {
+            for (var entry : headers.entrySet()) {
+                msg.setHeader(entry.getKey(), entry.getValue());
+            }
+        }
+        Transport.send(msg);
     }
 
     private static Document transform(Document input, String stylesheet, Map<String, String> parameters)
@@ -105,5 +165,20 @@ public class ContactSendTask implements Callable<Void> {
         MCRParameterCollector parameterCollector = MCRParameterCollector.getInstanceFromUserSession();
         parameterCollector.setParameters(parameters);
         return transformer.transform(source, parameterCollector).asXML();
+    }
+
+    private static Properties getProperties() {
+        final Properties properties = new Properties();
+        properties.setProperty("mail.smtp.host", HOST);
+        properties.setProperty("mail.smtp.port", PORT);
+        properties.setProperty("mail.transport.protocol", PROTOCOL);
+        if ("enabled".equals(STARTTLS)) {
+            properties.setProperty("mail.smtp.starttls.enabled", "true");
+        } else if ("required".equals(STARTTLS)) {
+            properties.setProperty("mail.smtp.starttls.enabled", "true");
+            properties.setProperty("mail.smtp.starttls.required", "true");
+        }
+        properties.setProperty("mail.smtp.auth", "true");
+        return properties;
     }
 }
