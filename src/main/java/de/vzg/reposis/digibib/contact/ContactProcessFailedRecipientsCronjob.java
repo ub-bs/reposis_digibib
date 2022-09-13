@@ -18,7 +18,15 @@
 
 package de.vzg.reposis.digibib.contact;
 
+import java.io.IOException;
+
+import javax.mail.Address;
+import javax.mail.Message;
 import javax.mail.MessagingException;
+import javax.mail.Message.RecipientType;
+import javax.mail.internet.MimeMessage;
+
+import com.sun.mail.dsn.MultipartReport;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -29,13 +37,41 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    private static final String REPORT_MIMETYPE = "multipart/report";
+
     @Override
     public void runJob() {
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
         final ContactMailService service = ContactMailService.getInstance();
         try {
-            LOGGER.info(service.getUnreadMessages().length);
+            final Message[] unreadMessages = service.getUnreadMessages();
+            LOGGER.info("Found {} unread messages", unreadMessages.length);
+            for (Message message : unreadMessages) {
+                if(message instanceof MimeMessage) {
+                    final MimeMessage mime = (MimeMessage) message;
+                    if (mime.isMimeType(REPORT_MIMETYPE)) {
+                        try {
+                            final MultipartReport dsn = (MultipartReport) mime.getContent();
+                            MimeMessage m = dsn.getReturnedMessage();
+                            if(m != null) {
+                                final String requestId = m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null);
+                                if (requestId != null) {
+                                    LOGGER.info(requestId);
+                                    final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
+                                    if (recipients != null && recipients.length == 1) {
+                                        LOGGER.info(recipients[0]);
+                                        // TODO update recipient
+                                        // TODO read message
+                                    }
+                                }
+                            }
+                        } catch (IOException e) {
+                            LOGGER.warn(e);
+                        }
+                    }
+                }
+            }
         } catch (MessagingException e) {
             LOGGER.warn(e);
         }
@@ -44,6 +80,6 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
 
     @Override
     public String getDescription() {
-        return "Proccesses failed messages.";
+        return "Processes failed messages.";
     }
 }

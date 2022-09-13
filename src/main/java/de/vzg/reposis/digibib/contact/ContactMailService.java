@@ -99,6 +99,7 @@ public class ContactMailService {
         final Properties properties = new Properties();
         properties.setProperty("mail.smtp.host", HOST);
         properties.setProperty("mail.smtp.port", PORT);
+        properties.setProperty("mail.store.protocol", "imaps"); // TODO property
         properties.setProperty("mail.transport.protocol", PROTOCOL);
         if ("enabled".equals(STARTTLS)) {
             properties.setProperty("mail.smtp.starttls.enabled", "true");
@@ -117,17 +118,19 @@ public class ContactMailService {
         sendMail(mail, null);
     }
 
-    public Message[] getUnreadMessages() throws MessagingException {
-        Properties properties = new Properties();
-        properties.put("mail.store.protocol", "imaps");
+    public void flagMessageAsSeen(Message message) throws MessagingException {
+        message.setFlag(Flags.Flag.SEEN, true);
+    }
 
-        Session emailSession = Session.getInstance(properties);
-        Store store = emailSession.getStore();
+    public Message[] getUnreadMessages() throws MessagingException {
+        final Store store = session.getStore();
         store.connect(HOST, USER, PASSWORD);
 
-        Folder inbox = store.getFolder("INBOX");
-        inbox.open(Folder.READ_ONLY);
-        return inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
+        final Folder inbox = store.getFolder("INBOX");
+        inbox.open(Folder.READ_WRITE);
+        final Message[] unreadMessages = inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
+
+        return unreadMessages;
     }
 
     public void sendMail(EMail mail, Map<String, String> headers) throws UnsupportedEncodingException, MessagingException, MalformedURLException {
@@ -154,7 +157,7 @@ public class ContactMailService {
         }
         if (headers != null) {
             for (var entry : headers.entrySet()) {
-                msg.addHeader(entry.getKey(), entry.getValue());
+                msg.setHeader(entry.getKey(), entry.getValue());
             }
         }
         Transport.send(msg);

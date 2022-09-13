@@ -81,7 +81,7 @@ public class ContactSendTask implements Callable<Void> {
         final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
         final EMail mail = EMail.parseXML(mailElement);
         final Map<String, String> headers = new HashMap();
-        headers.put("X-Request-ID", request.getUuid().toString());
+        headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
         ContactMailService.getInstance().sendMail(mail, headers);
         if (request.isSendCopy()) {
             // TODO send copy
