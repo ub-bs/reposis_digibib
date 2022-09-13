@@ -19,17 +19,25 @@
 package de.vzg.reposis.digibib.contact;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.mail.Address;
+import javax.mail.Flags;
+import javax.mail.Folder;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Message.RecipientType;
+import javax.mail.NoSuchProviderException;
+import javax.mail.Session;
+import javax.mail.Store;
 import javax.mail.internet.MimeMessage;
+import javax.mail.search.FlagTerm;
 
 import com.sun.mail.dsn.MultipartReport;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.mcr.cronjob.MCRCronjob;
 
@@ -37,15 +45,31 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    private static final String HOST = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Host");
+
+    private static final String USER = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.User");
+
+    private static final String PASSWORD = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.Password");
+
     private static final String REPORT_MIMETYPE = "multipart/report";
+
+    private Folder inbox = null;
 
     @Override
     public void runJob() {
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
-        final ContactMailService service = ContactMailService.getInstance();
+        final Session session = Session.getInstance(new Properties());
+        Store store = null;
         try {
-            final Message[] unreadMessages = service.getUnreadMessages();
+            store = session.getStore("imaps");
+            store.connect(HOST, USER, PASSWORD);
+            inbox = store.getFolder("INBOX");
+            inbox.open(Folder.READ_WRITE);
+            final Message[] unreadMessages = getUnreadMessages();
             LOGGER.info("Found {} unread messages", unreadMessages.length);
             for (Message message : unreadMessages) {
                 if(message instanceof MimeMessage) {
@@ -53,16 +77,15 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
                     if (mime.isMimeType(REPORT_MIMETYPE)) {
                         try {
                             final MultipartReport dsn = (MultipartReport) mime.getContent();
-                            MimeMessage m = dsn.getReturnedMessage();
+                            final MimeMessage m = dsn.getReturnedMessage();
                             if(m != null) {
                                 final String requestId = m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null);
                                 if (requestId != null) {
-                                    LOGGER.info(requestId);
                                     final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
                                     if (recipients != null && recipients.length == 1) {
                                         LOGGER.info(recipients[0]);
-                                        // TODO update recipient
-                                        // TODO read message
+                                        // TODO update recipient, set mail as failed
+                                        flagMessageAsSeen(message);
                                     }
                                 }
                             }
@@ -72,8 +95,21 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
                     }
                 }
             }
+        } catch (NoSuchProviderException e) {
+            LOGGER.error(e);
         } catch (MessagingException e) {
             LOGGER.warn(e);
+        } finally {
+            try {
+                if (store != null) {
+                    if (inbox != null) {
+                        inbox.close(false);
+                    }
+                    store.close();
+                }
+            } catch (MessagingException e) {
+                LOGGER.warn(e);
+            }
         }
         getProcessable().setProgress(100);
     }
@@ -81,5 +117,13 @@ public class ContactProcessFailedRecipientsCronjob extends MCRCronjob {
     @Override
     public String getDescription() {
         return "Processes failed messages.";
+    }
+
+    private void flagMessageAsSeen(Message message) throws MessagingException {
+        message.setFlag(Flags.Flag.SEEN, true);
+    }
+
+    private Message[] getUnreadMessages() throws MessagingException {
+        return inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
     }
 }
