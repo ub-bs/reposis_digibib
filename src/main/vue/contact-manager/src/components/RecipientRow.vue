@@ -1,5 +1,5 @@
 <template>
-  <tr>
+  <tr :class="recipient.failed ? 'table-danger' : ''">
     <td class="col-3">
       {{ recipient.name }}
     </td>
