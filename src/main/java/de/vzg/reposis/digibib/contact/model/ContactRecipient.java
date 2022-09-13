@@ -54,6 +54,8 @@ public class ContactRecipient {
 
     private boolean enabled;
 
+    private boolean failed = false;
+
     public ContactRecipient() { }
 
     public ContactRecipient(String name, ContactRecipientOrigin origin, String email) {
@@ -136,6 +138,16 @@ public class ContactRecipient {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+    }
+
+    @Column(name = "failed",
+        nullable = true)
+    public boolean isFailed() {
+        return failed;
+    }
+
+    public void setFailed(boolean failed) {
+        this.failed = failed;
     }
 
     @Override

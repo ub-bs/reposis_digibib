@@ -296,6 +296,24 @@ public class ContactRequestService {
         }
     }
 
+    public void setRecipientFailed(UUID requestUUID, String mail, boolean failed) throws ContactRequestNotFoundException,
+        ContactRecipientNotFoundException {
+        try {
+            writeLock.lock();
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            if (request == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getEmail().equals(mail))
+                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+            recipient.setFailed(failed);
+            recipientDAO.update(recipient);
+            update(request); // update modified
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
     private void updateRecipient(long id, ContactRecipient recipient) throws ContactRequestNotFoundException,
             ContactRecipientNotFoundException, ContactRequestStateException {
         if (!ContactValidator.getInstance().validateRecipient(recipient)) {
@@ -316,6 +334,7 @@ public class ContactRequestService {
         outdated.setOrigin(recipient.getOrigin());
         outdated.setEmail(recipient.getEmail());
         outdated.setEnabled(recipient.isEnabled());
+        outdated.setFailed(recipient.isFailed());
         recipientDAO.update(outdated);
         update(request); // update modified
     }

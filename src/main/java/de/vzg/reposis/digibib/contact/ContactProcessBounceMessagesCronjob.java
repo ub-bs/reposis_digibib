@@ -20,6 +20,7 @@ package de.vzg.reposis.digibib.contact;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.util.UUID;
 
 import javax.mail.Address;
 import javax.mail.Flags;
@@ -37,9 +38,11 @@ import com.sun.mail.dsn.MultipartReport;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.mcr.cronjob.MCRCronjob;
+import org.mycore.util.concurrent.MCRFixedUserCallable;
 
 public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
@@ -62,10 +65,10 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
     public void runJob() {
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
-        final Session session = Session.getInstance(new Properties());
+        final Session mailSession = Session.getInstance(new Properties());
         Store store = null;
         try {
-            store = session.getStore("imaps");
+            store = mailSession.getStore("imaps");
             store.connect(HOST, USER, PASSWORD);
             inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
@@ -83,13 +86,23 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
                                 if (requestId != null) {
                                     final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
                                     if (recipients != null && recipients.length == 1) {
-                                        // TODO update recipient, set mail as failed
-                                        flagMessageAsSeen(message);
+                                        try {
+                                            new MCRFixedUserCallable<>(() -> {
+                                                ContactRequestService.getInstance()
+                                                        .setRecipientFailed(UUID.fromString(requestId), recipients[0].toString(), true);
+                                                return null;
+                                            }, MCRSystemUserInformation.getJanitorInstance()).call();
+                                            flagMessageAsSeen(message);
+                                        } catch (MessagingException e) {
+                                            LOGGER.error(e);
+                                        } catch (Exception e) {
+                                            LOGGER.error(e);
+                                        }
                                     }
                                 }
                             }
                         } catch (IOException e) {
-                            LOGGER.warn(e);
+                            LOGGER.error(e);
                         }
                     }
                 }
@@ -97,7 +110,7 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
         } catch (NoSuchProviderException e) {
             LOGGER.error(e);
         } catch (MessagingException e) {
-            LOGGER.warn(e);
+            LOGGER.error(e);
         } finally {
             try {
                 if (store != null) {
