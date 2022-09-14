@@ -56,12 +56,11 @@ import org.mycore.common.MCRMailer.EMail.MessagePart;
 import org.mycore.common.MCRSession;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.MCRSystemUserInformation;
+import org.mycore.common.MCRTransactionHelper;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.content.MCRJDOMContent;
 import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
 import org.mycore.common.xsl.MCRParameterCollector;
-import org.mycore.util.concurrent.MCRFixedUserCallable;
-import org.mycore.util.concurrent.MCRTransactionableCallable;
 import org.xml.sax.SAXException;
 
 public class ContactSendTask implements Runnable {
@@ -116,28 +115,12 @@ public class ContactSendTask implements Runnable {
         this.request = request;
     }
 
-    private void updateRequest() throws Exception {
-        new MCRTransactionableCallable<>(() -> {
-            ContactRequestService.getInstance().updateRequest(request);
-            return null;
-        }).call();
-    }
-
-    private void updateRecipient(ContactRecipient recipient) throws Exception {
-        new MCRTransactionableCallable<>(() -> {
-            ContactRequestService.getInstance().updateRecipient(recipient);
-            return null;
-        }).call();
-    }
-
     @Override
     public void run() {
         LOGGER.info("Sending contact request: {}", request.getId());
-
         MCRSessionMgr.unlock();
         final MCRSession session = MCRSessionMgr.getCurrentSession();
         session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
-
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", request.getSender());
@@ -158,24 +141,38 @@ public class ContactSendTask implements Runnable {
                 final String to = recipient.getEmail();
                 sendMail(mail, SENDER_NAME, to, headers);
                 recipient.setSent(true);
+                MCRTransactionHelper.beginTransaction();
                 try {
-                    updateRecipient(recipient);
+                    ContactRequestService.getInstance().updateRecipient(recipient);
+                    MCRTransactionHelper.commitTransaction();
                 } catch (Exception e) {
                     LOGGER.error(e);
+                    try {
+                        MCRTransactionHelper.rollbackTransaction();
+                    } catch (Exception rollbackExc) {
+                        LOGGER.error("Error while rollbacking transaction.", rollbackExc);
+                    }
                 }
             }
             if (request.isSendCopy()) {
                 // TODO send copy
             }
             request.setState(ContactRequestState.SENT);
-            updateRequest();
         } catch (Exception e) {
             request.setComment(e.getMessage());
             request.setState(ContactRequestState.SENDING_FAILED);
+        } finally {
+            MCRTransactionHelper.beginTransaction();
             try {
-                updateRequest();
-            } catch (Exception ex) {
-                LOGGER.error(ex);
+                ContactRequestService.getInstance().updateRequest(request);
+                MCRTransactionHelper.commitTransaction();
+            } catch (Exception e) {
+                LOGGER.error(e);
+                try {
+                    MCRTransactionHelper.rollbackTransaction();
+                } catch (Exception rollbackExc) {
+                    LOGGER.error("Error while rollbacking transaction.", rollbackExc);
+                }
             }
         }
         session.close();
