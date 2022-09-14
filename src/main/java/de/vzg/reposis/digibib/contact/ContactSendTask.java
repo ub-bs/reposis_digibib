@@ -53,13 +53,18 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.MCRMailer.EMail.MessagePart;
+import org.mycore.common.MCRSession;
+import org.mycore.common.MCRSessionMgr;
+import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.content.MCRJDOMContent;
 import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
 import org.mycore.common.xsl.MCRParameterCollector;
+import org.mycore.util.concurrent.MCRFixedUserCallable;
+import org.mycore.util.concurrent.MCRTransactionableCallable;
 import org.xml.sax.SAXException;
 
-public class ContactSendTask implements Callable<Void> {
+public class ContactSendTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -111,9 +116,28 @@ public class ContactSendTask implements Callable<Void> {
         this.request = request;
     }
 
+    private void updateRequest() throws Exception {
+        new MCRTransactionableCallable<>(() -> {
+            ContactRequestService.getInstance().updateRequest(request);
+            return null;
+        }).call();
+    }
+
+    private void updateRecipient(ContactRecipient recipient) throws Exception {
+        new MCRTransactionableCallable<>(() -> {
+            ContactRequestService.getInstance().updateRecipient(recipient);
+            return null;
+        }).call();
+    }
+
     @Override
-    public Void call() throws Exception {
-        LOGGER.info("Sending contact request: ", request.getId());
+    public void run() {
+        LOGGER.info("Sending contact request: {}", request.getId());
+
+        MCRSessionMgr.unlock();
+        final MCRSession session = MCRSessionMgr.getCurrentSession();
+        session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
+
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", request.getSender());
@@ -125,18 +149,36 @@ public class ContactSendTask implements Callable<Void> {
         if (orcid != null) {
             properties.put("orcid", orcid);
         }
-        final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
-        final EMail mail = EMail.parseXML(mailElement);
         final Map<String, String> headers = new HashMap();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
-        for (String recipient : request.getRecipients().stream().map(ContactRecipient::getEmail).collect(Collectors.toList())) {
-            sendMail(mail, SENDER_NAME, recipient, headers);
-            // TODO flag as send
+        try {
+            final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
+            final EMail mail = EMail.parseXML(mailElement);
+            for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && !r.isSent()).collect(Collectors.toList())) {
+                final String to = recipient.getEmail();
+                sendMail(mail, SENDER_NAME, to, headers);
+                recipient.setSent(true);
+                try {
+                    updateRecipient(recipient);
+                } catch (Exception e) {
+                    LOGGER.error(e);
+                }
+            }
+            if (request.isSendCopy()) {
+                // TODO send copy
+            }
+            request.setState(ContactRequestState.SENT);
+            updateRequest();
+        } catch (Exception e) {
+            request.setComment(e.getMessage());
+            request.setState(ContactRequestState.SENDING_FAILED);
+            try {
+                updateRequest();
+            } catch (Exception ex) {
+                LOGGER.error(ex);
+            }
         }
-        if (request.isSendCopy()) {
-            // TODO send copy
-        }
-        return null;
+        session.close();
     }
 
     private void sendMail(EMail mail, String from, String to, Map<String, String> headers)

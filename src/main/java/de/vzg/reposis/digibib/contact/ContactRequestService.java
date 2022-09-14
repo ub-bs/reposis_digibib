@@ -194,45 +194,10 @@ public class ContactRequestService {
                     || ContactRequestState.SENDING_FAILED.equals(request.getState()))) {
                 throw new ContactRequestStateException("Contact request state is not ready.");
             }
-            MCRTransactionHelper.beginTransaction();
-            boolean commitError = false;
-            try {
-                request.setState(ContactRequestState.SENDING);
-                update(request);
-                MCRTransactionHelper.commitTransaction();
-            } catch (Exception commitExc) {
-                commitError = true;
-                try {
-                    MCRTransactionHelper.rollbackTransaction();
-                } catch (Exception rollbackExc) {
-                    LOGGER.error("Error while rollbacking transaction.", rollbackExc);
-                }
-            }
-            if (!commitError) {
-                MCRTransactionHelper.beginTransaction();
-                try {
-                    new ContactSendTask(request).call();
-                    request.setState(ContactRequestState.SENT);
-                } catch (Exception e) {
-                    request.setState(ContactRequestState.SENDING_FAILED);
-                    request.setComment(e.toString());
-                } finally {
-                    try {
-                        update(request);
-                        MCRTransactionHelper.commitTransaction();
-                    } catch (Exception commitExc) {
-                        commitError = true;
-                        try {
-                            MCRTransactionHelper.rollbackTransaction();
-                        } catch (Exception rollbackExc) {
-                            LOGGER.error("Error while rollbacking transaction.", rollbackExc);
-                        }
-                    }
-                }
-            }
-            if (commitError) {
-                throw new MCRException("Error while commiting state");
-            }
+            request.setState(ContactRequestState.SENDING);
+            updateRequest(request);
+            Thread thread = new Thread(new ContactSendTask(request));
+            thread.start();
         } finally {
             writeLock.unlock();
         }
@@ -261,15 +226,6 @@ public class ContactRequestService {
         }
     }
 
-    public void addRecipient(ContactRequest request, ContactRecipient recipient) throws ContactRecipientAlreadyExistsException {
-        if (checkRecipientExists(request.getRecipients(), recipient)) {
-            throw new ContactRecipientAlreadyExistsException();
-        }
-        recipient.setRequest(request);
-        recipientDAO.insert(recipient); // to get id
-        update(request); // update modified
-    }
-
     public void updateRecipient(UUID requestUUID, String mail, ContactRecipient recipient) throws ContactRequestNotFoundException,
             ContactRecipientOriginException, ContactRecipientNotFoundException, ContactRequestStateException {
         try {
@@ -290,53 +246,11 @@ public class ContactRequestService {
                 throw new ContactRecipientOriginException();
             }
             recipient.setRequest(outdated.getRequest());
-            updateRecipient(outdated.getId(), recipient);
+            recipient.setId(outdated.getId());
+            updateRecipient(recipient);
         } finally {
             writeLock.unlock();
         }
-    }
-
-    public void setRecipientFailed(UUID requestUUID, String mail, boolean failed) throws ContactRequestNotFoundException,
-        ContactRecipientNotFoundException {
-        try {
-            writeLock.lock();
-            final ContactRequest request = requestDAO.findByUUID(requestUUID);
-            if (request == null) {
-                throw new ContactRequestNotFoundException();
-            }
-            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getEmail().equals(mail))
-                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
-            recipient.setFailed(failed);
-            recipientDAO.update(recipient);
-            update(request); // update modified
-        } finally {
-            writeLock.unlock();
-        }
-    }
-
-    private void updateRecipient(long id, ContactRecipient recipient) throws ContactRequestNotFoundException,
-            ContactRecipientNotFoundException, ContactRequestStateException {
-        if (!ContactValidator.getInstance().validateRecipient(recipient)) {
-            throw new ContactRecipientInvalidException();
-        }
-        final ContactRequest request = recipient.getRequest();
-        if (request == null) {
-            throw new ContactRequestNotFoundException();
-        }
-        final ContactRecipient outdated = recipientDAO.findByID(id);
-        if (outdated == null) {
-            throw new ContactRecipientNotFoundException();
-        }
-        if (!outdated.getEmail().equals(recipient.getEmail()) && checkRecipientExists(request.getRecipients(), recipient)) {
-            throw new ContactRecipientAlreadyExistsException();
-        }
-        outdated.setName(recipient.getName());
-        outdated.setOrigin(recipient.getOrigin());
-        outdated.setEmail(recipient.getEmail());
-        outdated.setEnabled(recipient.isEnabled());
-        outdated.setFailed(recipient.isFailed());
-        recipientDAO.update(outdated);
-        update(request); // update modified
     }
 
     public void removeRecipient(UUID requestUUID, String mail) throws ContactRequestNotFoundException,
@@ -361,7 +275,56 @@ public class ContactRequestService {
         }
     }
 
-    private void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
+    public void setRecipientFailed(UUID requestUUID, String mail, boolean failed) throws ContactRequestNotFoundException,
+            ContactRecipientNotFoundException {
+        try {
+            writeLock.lock();
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            if (request == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getEmail().equals(mail))
+                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+            recipient.setFailed(failed);
+            recipientDAO.update(recipient);
+            update(request); // update modified
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    protected void addRecipient(ContactRequest request, ContactRecipient recipient) throws ContactRecipientAlreadyExistsException {
+        if (checkRecipientExists(request.getRecipients(), recipient)) {
+            throw new ContactRecipientAlreadyExistsException();
+        }
+        recipient.setRequest(request);
+        recipientDAO.insert(recipient); // to get id
+        update(request); // update modified
+    }
+
+    protected void updateRecipient(ContactRecipient recipient) throws ContactRecipientNotFoundException,
+            ContactRecipientAlreadyExistsException {
+        if (!ContactValidator.getInstance().validateRecipient(recipient)) {
+            throw new ContactRecipientInvalidException();
+        }
+        final ContactRecipient outdated = recipientDAO.findByID(recipient.getId());
+        if (outdated == null) {
+            throw new ContactRecipientNotFoundException();
+        }
+        if (!outdated.getEmail().equals(recipient.getEmail()) && checkRecipientExists(recipient.getRequest().getRecipients(), recipient)) {
+            throw new ContactRecipientAlreadyExistsException();
+        }
+        outdated.setName(recipient.getName());
+        outdated.setOrigin(recipient.getOrigin());
+        outdated.setEmail(recipient.getEmail());
+        outdated.setEnabled(recipient.isEnabled());
+        outdated.setFailed(recipient.isFailed());
+        outdated.setSent(recipient.isSent());
+        recipientDAO.update(outdated);
+        update(outdated.getRequest()); // update modified
+    }
+
+    protected void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
             ContactRequestStateException {
         final ContactRequest request = recipient.getRequest();
         if (request == null) {

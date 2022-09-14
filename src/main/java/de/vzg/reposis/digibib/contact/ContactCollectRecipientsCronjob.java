@@ -72,6 +72,13 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         return "Collects recipients for all new requests.";
     }
 
+    private void updateRequest(ContactRequest request) throws Exception {
+        new MCRTransactionableCallable<>(() -> {
+            ContactRequestService.getInstance().updateRequest(request);
+            return null;
+        }).call();
+    }
+
     private void doWork() throws Exception {
         final ContactRequestService service = ContactRequestService.getInstance();
         final List<ContactRequest> requests = service.listRequestsByState(ContactRequestState.RECEIVED);
