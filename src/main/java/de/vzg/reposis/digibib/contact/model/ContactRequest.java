@@ -121,9 +121,9 @@ public class ContactRequest {
 
     private String comment;
 
-    public ContactRequest() { }
-
     private UUID uuid;
+
+    public ContactRequest() { }
 
     public ContactRequest(MCRObjectID objectID, String sender, String name, String message) {
         this.objectID = objectID;
@@ -285,7 +285,7 @@ public class ContactRequest {
     }
 
     @PrePersist
-    private void prepersistUUIDModel() {
+    protected void prepersistUUIDModel() {
         if (uuid == null) {
             uuid = UUID.randomUUID();
         }

@@ -19,16 +19,11 @@
 package de.vzg.reposis.digibib.contact;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.MalformedURLException;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
-import java.util.Set;
-import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
 
 import javax.mail.Authenticator;
@@ -41,7 +36,6 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
-import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;

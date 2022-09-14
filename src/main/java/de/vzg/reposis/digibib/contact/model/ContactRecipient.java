@@ -18,6 +18,7 @@
 
 package de.vzg.reposis.digibib.contact.model;
 
+import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -38,6 +39,14 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+@NamedQueries({
+    @NamedQuery(name = "ContactRecipient.findByUUID",
+        query = "SELECT r"
+            + "  FROM ContactRecipient r"
+            + "  WHERE r.uuid = :uuid"
+            + "  ORDER BY r.created DESC"),
+})
+
 @Entity
 @Table(name = "contact_recipient")
 public class ContactRecipient {
@@ -54,9 +63,13 @@ public class ContactRecipient {
 
     private boolean enabled;
 
+    private Date created;
+
     private boolean failed = false;
 
     private boolean sent = false;
+
+    private UUID uuid;
 
     public ContactRecipient() { }
 
@@ -130,6 +143,40 @@ public class ContactRecipient {
 
     public void setRequest(ContactRequest request) {
         this.request = request;
+    }
+
+    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
+
+    /**
+     * @return date of creation
+     */
+    @Column(name = "created")
+    public Date getCreated() {
+        return created;
+    }
+
+    /**
+     * @param created date of creation
+     */
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    @PrePersist
+    protected void prepersistUUIDModel() {
+        if (uuid == null) {
+            uuid = UUID.randomUUID();
+        }
+        if (created == null) {
+            created = new Date();
+        }
     }
 
     @Column(name = "enabled",

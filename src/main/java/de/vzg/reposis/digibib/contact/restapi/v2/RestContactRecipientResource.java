@@ -47,11 +47,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientOriginException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
-import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
 import org.mycore.restapi.annotations.MCRRequireTransaction;

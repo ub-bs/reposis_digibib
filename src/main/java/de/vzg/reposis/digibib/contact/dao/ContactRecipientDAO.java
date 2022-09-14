@@ -23,4 +23,5 @@ import java.util.UUID;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 
 public interface ContactRecipientDAO extends ContactBaseDAO<ContactRecipient> {
+    ContactRecipient findByUUID(UUID uuid);
 }
