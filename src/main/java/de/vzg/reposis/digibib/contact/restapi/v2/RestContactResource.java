@@ -103,6 +103,7 @@ public class RestContactResource {
     @POST
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
+    @MCRRequireTransaction
     public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID uuid)
             throws ContactException, MCRException {
         ContactRequestService.getInstance().forwardRequest(uuid);

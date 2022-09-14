@@ -56,6 +56,8 @@ public class ContactRecipient {
 
     private boolean failed = false;
 
+    private boolean sent = false;
+
     public ContactRecipient() { }
 
     public ContactRecipient(String name, ContactRecipientOrigin origin, String email) {
@@ -148,6 +150,16 @@ public class ContactRecipient {
 
     public void setFailed(boolean failed) {
         this.failed = failed;
+    }
+
+    @Column(name = "sent",
+        nullable = true)
+    public boolean isSent() {
+        return sent;
+    }
+
+    public void setSent(boolean sent) {
+        this.sent = sent;
     }
 
     @Override
