@@ -115,23 +115,11 @@ public class ContactSendTask implements Runnable {
         MCRSessionMgr.unlock();
         final MCRSession session = MCRSessionMgr.getCurrentSession();
         session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
-        final EMail baseMail = new EMail();
-        final Map<String, String> properties = new HashMap();
-        properties.put("email", request.getSender());
-        properties.put("id", request.getObjectID().toString());
-        properties.put("message", request.getMessage());
-        properties.put("name", request.getName());
-        properties.put("title", request.getObjectID().toString());
-        final String orcid = request.getORCID();
-        if (orcid != null) {
-            properties.put("orcid", orcid);
-        }
         final Map<String, String> headers = new HashMap();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
         try {
-            final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
-            final EMail mail = EMail.parseXML(mailElement);
             for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && !r.isSent()).collect(Collectors.toList())) {
+                final EMail mail = createMail(null);
                 final String to = recipient.getEmail();
                 sendMail(mail, SENDER_NAME, to, headers);
                 recipient.setSent(true);
@@ -149,7 +137,7 @@ public class ContactSendTask implements Runnable {
                 }
             }
             if (request.isSendCopy()) {
-                // TODO send copy
+                // sendMail(mail, SENDER_NAME, request.getSender(), null) // TODO
             }
             request.setState(ContactRequestState.SENT);
         } catch (Exception e) {
@@ -170,6 +158,26 @@ public class ContactSendTask implements Runnable {
             }
         }
         session.close();
+    }
+
+    private EMail createCopyMail() {
+        return null; // TODO
+    }
+
+    private EMail createMail(String token) throws IOException, JDOMException, SAXException {
+        final EMail baseMail = new EMail();
+        final Map<String, String> properties = new HashMap();
+        properties.put("email", request.getSender());
+        properties.put("id", request.getObjectID().toString());
+        properties.put("message", request.getMessage());
+        properties.put("name", request.getName());
+        properties.put("title", request.getObjectID().toString());
+        final String orcid = request.getORCID();
+        if (orcid != null) {
+            properties.put("orcid", orcid);
+        }
+        final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
+        return EMail.parseXML(mailElement);
     }
 
     private void sendMail(EMail mail, String from, String to, Map<String, String> headers)
