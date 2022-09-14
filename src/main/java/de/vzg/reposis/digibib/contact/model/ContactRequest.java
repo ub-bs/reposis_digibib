@@ -61,8 +61,7 @@ import org.mycore.datamodel.metadata.MCRObjectID;
     @NamedQuery(name = "ContactRequest.findByUUID",
         query = "SELECT r"
             + "  FROM ContactRequest r"
-            + "  WHERE r.uuid = :uuid"
-            + "  ORDER BY r.created DESC"),
+            + "  WHERE r.uuid = :uuid"),
     @NamedQuery(name = "ContactRequest.findByState",
         query = "SELECT r"
             + "  FROM ContactRequest r"
