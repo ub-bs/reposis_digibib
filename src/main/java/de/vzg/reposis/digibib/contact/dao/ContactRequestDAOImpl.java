@@ -33,7 +33,6 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
 
     @Override
     public Collection<ContactRequest> findAll() {
-        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
         return MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findAll", ContactRequest.class).getResultList();
     }
@@ -47,7 +46,6 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
 
     @Override
     public Collection<ContactRequest> findByState(ContactRequestState state) {
-        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
         return MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByState", ContactRequest.class)
                 .setParameter("state", state).getResultList();
@@ -55,14 +53,12 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
 
     @Override
     public ContactRequest findByID(long id) {
-        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        return entityManager.find(ContactRequest.class, id);
+        return MCREntityManagerProvider.getCurrentEntityManager().find(ContactRequest.class, id);
     }
 
     @Override
     public ContactRequest findByUUID(UUID uuid) {
-        final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final Collection<ContactRequest> requests = entityManager
+        final Collection<ContactRequest> requests = MCREntityManagerProvider.getCurrentEntityManager()
                 .createNamedQuery("ContactRequest.findByUUID", ContactRequest.class)
                 .setParameter("uuid", uuid).getResultList(); // should contain at most one element
         return requests.stream().findFirst().orElse(null);

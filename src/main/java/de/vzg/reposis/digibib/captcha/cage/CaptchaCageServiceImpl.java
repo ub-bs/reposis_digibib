@@ -18,11 +18,7 @@
 
 package de.vzg.reposis.digibib.captcha.cage;
 
-import java.awt.image.BufferedImage;
-import java.io.OutputStream;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

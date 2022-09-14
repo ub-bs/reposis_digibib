@@ -19,7 +19,6 @@
 package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.UUID;
 import java.util.stream.Collectors;
 

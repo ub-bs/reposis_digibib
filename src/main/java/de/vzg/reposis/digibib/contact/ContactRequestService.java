@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
@@ -32,7 +31,6 @@ import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAOImpl;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAOImpl;
-import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientAlreadyExistsException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
@@ -46,19 +44,12 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.LogManager;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
-import org.mycore.common.MCRTransactionHelper;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactRequestService {
-
-    private static final Logger LOGGER = LogManager.getLogger();
-
-    private final ReadWriteLock lock;
 
     private final Lock readLock;
 
@@ -69,7 +60,7 @@ public class ContactRequestService {
     private final ContactRecipientDAO recipientDAO;
 
     private ContactRequestService() {
-        lock = new ReentrantReadWriteLock();
+        final ReadWriteLock lock = new ReentrantReadWriteLock();
         readLock = lock.readLock();
         writeLock = lock.writeLock();
         requestDAO = new ContactRequestDAOImpl();
