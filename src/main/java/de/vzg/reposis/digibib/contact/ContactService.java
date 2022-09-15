@@ -187,7 +187,7 @@ public class ContactService {
             }
             request.setState(ContactRequestState.SENDING);
             updateRequest(request);
-            Thread thread = new Thread(new ContactSendTask(request));
+            Thread thread = new Thread(new ContactForwardRequestTask(request));
             thread.start();
         } finally {
             writeLock.unlock();

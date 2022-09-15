@@ -30,11 +30,11 @@ import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 
-public class ContactCollectTask implements Callable<List<ContactRecipient>> {
+public class ContactCollectRecipientsTask implements Callable<List<ContactRecipient>> {
 
     private final MCRObjectID objectID;
 
-    public ContactCollectTask(MCRObjectID objectID) {
+    public ContactCollectRecipientsTask(MCRObjectID objectID) {
         this.objectID = objectID;
     }
 
