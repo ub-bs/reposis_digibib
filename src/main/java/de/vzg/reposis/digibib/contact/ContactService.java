@@ -131,12 +131,12 @@ public class ContactService {
         }
     }
 
-    public void updateRequest(ContactRequest request) throws ContactRequestNotFoundException {
+    public void updateRequestByID(long id) throws ContactRequestNotFoundException {
         try {
             writeLock.lock();
-            final long id = request.getId();
-            if (requestDAO.findByID(id) != null) {
-                update(request);
+            final ContactRequest request = requestDAO.findByID(id);
+            if (request != null) {
+                updateRequest(request);
             } else {
                 throw new ContactRequestNotFoundException();
             }
@@ -206,7 +206,7 @@ public class ContactService {
             recipient.setConfirmed(new Date());
             recipientDAO.update(recipient);
             request.setState(ContactRequestState.CONFIRMED);
-            update(request); // update modified
+            updateRequest(request); // update modified
         } finally {
             writeLock.unlock();
         }
@@ -298,7 +298,7 @@ public class ContactService {
                     .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             recipient.setFailed(new Date());
             recipientDAO.update(recipient);
-            update(request); // update modified
+            updateRequest(request); // update modified
         } finally {
             writeLock.unlock();
         }
@@ -310,7 +310,7 @@ public class ContactService {
         }
         recipient.setRequest(request);
         recipientDAO.insert(recipient); // to get id
-        update(request); // update modified
+        updateRequest(request); // update modified
     }
 
     protected void updateRecipient(ContactRecipient recipient) throws ContactRecipientNotFoundException,
@@ -336,7 +336,7 @@ public class ContactService {
             outdated.setSent(recipient.getSent());
         }
         recipientDAO.update(outdated);
-        update(outdated.getRequest()); // update modified
+        updateRequest(outdated.getRequest()); // update modified
     }
 
     protected void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException,
@@ -346,7 +346,7 @@ public class ContactService {
             throw new ContactRequestNotFoundException();
         }
         request.removeRecipient(recipient);
-        update(request);
+        updateRequest(request);
     }
 
     private boolean checkRecipientExists(List<ContactRecipient> recipients, ContactRecipient recipient) {
@@ -360,7 +360,7 @@ public class ContactService {
         return (ContactRequestState.PROCESSED.equals(state) || ContactRequestState.RECEIVED.equals(state));
     }
 
-    private void update(ContactRequest request) {
+    private void updateRequest(ContactRequest request) {
         request.setLastModified(new Date());
         request.setLastModifiedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
         requestDAO.update(request);
