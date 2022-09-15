@@ -28,7 +28,7 @@
     <body>
       <xsl:value-of select="concat('Hallo ', $name, ',', $newline)" />
       <xsl:value-of select="$newline" />
-      <xsl:value-of select="concat('Wir haben folgende Kontaktanfrage für ', $id, ' [0] erhalten:', $newline)" />
+      <xsl:value-of select="concat('wir haben folgende Kontaktanfrage für ', $id, ' [0] erhalten:', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat($indent, '=====', $newline)" />
