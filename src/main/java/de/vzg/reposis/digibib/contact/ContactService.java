@@ -159,11 +159,11 @@ public class ContactService {
         }
     }
 
-    public void removeRequestByUUID(UUID uuid) throws ContactRequestNotFoundException,
+    public void removeRequestByUUID(UUID requestUUID) throws ContactRequestNotFoundException,
             ContactRequestStateException {
         try {
             writeLock.lock();
-            final ContactRequest request = requestDAO.findByUUID(uuid);
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
@@ -173,11 +173,11 @@ public class ContactService {
         }
     }
 
-    public void forwardRequest(UUID id) throws ContactRequestNotFoundException,
+    public void forwardRequestByUUID(UUID requestUUID) throws ContactRequestNotFoundException,
             ContactRequestStateException, MCRException {
         try {
             writeLock.lock();
-            final ContactRequest request = requestDAO.findByUUID(id);
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
@@ -194,7 +194,7 @@ public class ContactService {
         }
     }
 
-    public void confirmRequestByUUID(UUID requestUUID, UUID recipientUUID) {
+    public void confirmRequestByUUID(UUID requestUUID, UUID recipientUUID) throws ContactRequestNotFoundException, ContactRecipientNotFoundException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);

@@ -68,7 +68,7 @@ public class RestContactResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public List<ContactRequest> getRequests(@DefaultValue("0") @QueryParam("offset") int offset,
+    public List<ContactRequest> getAllRequests(@DefaultValue("0") @QueryParam("offset") int offset,
         @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
         final List<ContactRequest> requests = ContactService.getInstance().listRequests();
         response.setHeader("X-Total-Count", Integer.toString(requests.size()));
@@ -90,9 +90,9 @@ public class RestContactResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRequest getRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
+    public ContactRequest getRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
             throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactService.getInstance().getRequestByUUID(id);
+        final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request != null) {
             return request;
         } else {
@@ -112,24 +112,14 @@ public class RestContactResource {
         })
     @Produces(MediaType.TEXT_PLAIN)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
-    public String getRequestStatusByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
+    public String getRequestStatusByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
             throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactService.getInstance().getRequestByUUID(id);
+        final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request != null) {
             return request.getState().toString();
         } else {
             throw new ContactRequestNotFoundException();
         }
-    }
-
-    @POST
-    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    @MCRRequireTransaction
-    public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID uuid)
-            throws ContactException, MCRException {
-        ContactService.getInstance().forwardRequest(uuid);
-        return Response.ok().build();
     }
 
     @GET // TODO
@@ -142,12 +132,22 @@ public class RestContactResource {
                     @ApiResponse(responseCode = "404", description = "object is not found"),
             })
     @MCRRequireTransaction
-    public Response confirm(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
+    public Response confirmRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             @QueryParam("recipient") UUID recipientUUID) throws Exception {
         if (recipientUUID == null) {
             throw new BadRequestException();
         }
         ContactService.getInstance().confirmRequestByUUID(requestUUID, recipientUUID);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
+    @MCRRequireTransaction
+    public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
+            throws ContactException, MCRException {
+        ContactService.getInstance().forwardRequestByUUID(requestUUID);
         return Response.ok().build();
     }
 
@@ -164,9 +164,9 @@ public class RestContactResource {
                 content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
         })
     @MCRRequireTransaction
-    public Response removeRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
+    public Response removeRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
             throws ContactRequestNotFoundException {
-        ContactService.getInstance().removeRequestByUUID(id);
+        ContactService.getInstance().removeRequestByUUID(requestUUID);
         return Response.noContent().build();
     }
 }
