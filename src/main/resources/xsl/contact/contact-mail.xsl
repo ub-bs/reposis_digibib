@@ -2,6 +2,9 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:param name="email" />
   <xsl:param name="id" />
+  <xsl:param name="recipient" />
+  <xsl:param name="recipientID" />
+  <xsl:param name="requestID" />
   <xsl:param name="message" />
   <xsl:param name="name" />
   <xsl:param name="orcid" select="''" />
@@ -28,7 +31,7 @@
 
   <xsl:template name="body">
     <body>
-      <xsl:value-of select="concat('Hallo,', $newline)" />
+      <xsl:value-of select="concat('Hallo ', $recipient, ',', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('es gibt eine Kontaktanfrage für ', $title, ' [0]:', $newline)" />
       <xsl:value-of select="$newline" />
@@ -45,12 +48,17 @@
       </xsl:call-template>
       <xsl:value-of select="concat($indent, '=====', $newline)" />
       <xsl:value-of select="$newline" />
+      <xsl:value-of select="concat('Den aktuellen Status der Anfrage können Sie über [1] prüfen.', $newline)" />
+      <xsl:value-of select="concat('Sofern Sie Kontakt zum Interessenten aufgenommen haben, können Sie die Anfrage über [2] bestätigen.', $newline)" />
+      <xsl:value-of select="$newline" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('Beste Grüße', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('FD-Team der TU Braunschweig', $newline)" />
       <xsl:value-of select="$newline" />
-      <xsl:value-of select="concat('[0]: ', $WebApplicationBaseURL, 'receive/', $id)" />
+      <xsl:value-of select="concat('[0]: ', $WebApplicationBaseURL, 'receive/', $id, $newline)" />
+      <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'api/v2/contacts/', $requestID, '/status', $newline)" />
+      <xsl:value-of select="concat('[2]: ', $WebApplicationBaseURL, 'api/v2/contacts/', $requestID, '/confirm?recipient=', $recipientID, $newline)" />
     </body>
   </xsl:template>
 
