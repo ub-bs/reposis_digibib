@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage><section xml:lang="de" title="Hinweise zu Urheberrechtsfragen"><div>
-<h2>Hinweise zu Urheberrechtsfragen</h2>
+<h1 class="leo-page-headline">Hinweise zu Urheberrechtsfragen</h1>
 
-<p> </p>
 
 <div class="row">
 <div class="col-md-12">
@@ -31,15 +30,13 @@
 </ul>
 
 <p>Bitte wenden Sie sich bei allen Fragen an:</p>
-Frau Blanck und Herrn Kissler<br />
-E-Mail: ub-publikationsservices [at] tu-braunschweig.de<br />
+Frau Blanck / Frau Fischer / Herr Kissler<br />
+E-Mail: <span class="madress">ub-publikationsservices [at] tu-braunschweig.de</span><br />
 Telefon: +49 (0)531 391-5052</div>
 </div>
 </div>
 </section><section xml:lang="en" title="Notes on copyright"><div>
-<h2>Notes on copyright issues</h2>
-
-<p> </p>
+<h1 class="leo-page-headline">Notes on copyright issues</h1>
 
 <div class="row">
 <div class="col-md-12">
@@ -62,8 +59,9 @@ Telefon: +49 (0)531 391-5052</div>
 </ul>
 
 <p>Please contact with any questions:</p>
-Mrs. Blanck und Mr. Kissler<br />
-E-Mail: ub-publikationsservices [at] tu-braunschweig.de<br />
+Mrs. Blanck / Mrs. Fischer / Mr. Kissler<br />
+E-Mail: <span class="madress">ub-publikationsservices [at] tu-braunschweig.de</span><br />
 Telefon: +49 (0)531 391-5052</div>
 </div>
-</div></section><meta><log lastEditor="celsner" date="2022-09-09" time="16:47" /></meta></MyCoReWebPage>
+</div>
+</section><meta><log lastEditor="celsner" date="2022-09-13" time="14:53" /></meta></MyCoReWebPage>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <MyCoReWebPage><section xml:lang="de" title="Vertragsbedingungen"><div class="wiki-content" id="main-content">
-<h2>Vertragsbedingungen für <a href="#Pub_Anker">Publikationen</a> und <a href="#Anker_FD">Forschungsdaten</a></h2>
+<h1 class="leo-page-headline">Vertragsbedingungen</h1>
  
-
-<h3><a id="Pub_Anker" name="Pub_Anker">Publikationen</a></h3>
+<div class="row">
+<div class="col-12">
+<h3>Publikationen</h3>
 
 <p>Wenn Sie Ihre Publikation auf auf LeoPARD veröffentlichen möchten, erkennen Sie mit Ihrer Unterschrift auf dem <a href="/content/publish/deposit-single.pdf">Antragsformular</a>  folgende Vertragsbedingungen an:</p>
 
@@ -20,7 +21,7 @@
 
 <p><em>Stand: 31.08.2022</em></p>
 
-<h3><a id="Anker_FD" name="Anker_FD">Forschungsdaten</a></h3>
+<h3>Forschungsdaten</h3>
 
 <p>Wenn Sie auf LeoPARD Ihre Forschungsdaten gemäß der guten wissenschaftlichen Praxis für mindestens 10 Jahre archivieren oder veröffentlichen möchten, erkennen Sie in der <a href="/content/publish/deposit-rd.pdf">Einwilligungserklärung</a> mit Ihrer Unterschrift folgende Vertragsbedingungen an:</p>
 
@@ -37,16 +38,17 @@
 
 <p>Stand: 31.08.2022</p>
 
-<p> </p>
-
-<p> </p>
+</div>
+</div>
 </div>
 </section><section xml:lang="en" title="Terms_of_contract"><div>
-<h2>Terms of contract for <a href="#publications">publications</a> and <a href="#research_data">research data</a></h2>
+<h1 class="leo-page-headline">Terms of contract</h1>
+<div class="row">
+<div class="col-12">
 
 <p><strong>Note</strong>: This is the translation of the German terms of contract for publications and research data on the institutional repository of TU Braunschweig (LeoPARD). In case of any doubt, the German Version of these term is liable.</p>
 
-<h3><a id="publications" name="publications" />Publications</h3>
+<h3>Publications</h3>
 
 <p>If you wish to submit your publications on the institutional repository of Technische Universität Braunschweig (TU Braunschweig), you will acknowledge the following terms of contract with your signature on the application:</p>
 
@@ -60,10 +62,9 @@
 	<li>Braunschweig University Library has the right to convert the documents into other file formats or technically modify them alternatively, especially for the purpose of long-term archiving.</li>
 	<li>Braunschweig University Library assumes no liability in case of illegal download, transformation or distribution of the publication elsewhere by a third person.</li>
 </ol>
+<p />
 
-<h3> </h3>
-
-<h3><a id="research_data" name="research_data" />Research Data</h3>
+<h3>Research Data</h3>
 
 <p>If you wish to archive or publish your research data on the institutional repository of TU Braunschweig for at least 10 years in accordance with good scientific practice you will acknowledge the following terms of contract with your signature on the application:</p>
 
@@ -77,7 +78,7 @@
 	<li>Braunschweig University Library has the right to convert the documents into other file formats or technically modify them alternatively, especially for the purpose of long-term archiving.</li>
 	<li>Braunschweig University Library assumes no liability in case of illegal download, transformation or distribution of the publication elsewhere by a third person.</li>
 </ol>
-
-<p> </p>
 </div>
-</section><meta><log lastEditor="celsner" date="2022-09-09" time="16:43" /></meta></MyCoReWebPage>
+</div>
+</div>
+</section><meta><log lastEditor="celsner" date="2022-09-13" time="11:32" /></meta></MyCoReWebPage>
