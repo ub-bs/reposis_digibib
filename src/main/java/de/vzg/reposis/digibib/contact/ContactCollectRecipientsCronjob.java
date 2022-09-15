@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
@@ -74,13 +74,13 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
 
     private void updateRequest(ContactRequest request) throws Exception {
         new MCRTransactionableCallable<>(() -> {
-            ContactRequestService.getInstance().updateRequest(request);
+            ContactService.getInstance().updateRequest(request);
             return null;
         }).call();
     }
 
     private void doWork() throws Exception {
-        final ContactRequestService service = ContactRequestService.getInstance();
+        final ContactService service = ContactService.getInstance();
         final List<ContactRequest> requests = service.listRequestsByState(ContactRequestState.RECEIVED);
         requests.addAll(service.listRequestsByState(ContactRequestState.PROCESSING)); // TODO may error state
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();

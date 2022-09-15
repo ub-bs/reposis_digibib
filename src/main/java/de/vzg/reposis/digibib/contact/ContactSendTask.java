@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
 
-import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
@@ -72,7 +72,7 @@ public class ContactSendTask implements Runnable {
                 recipient.setSent(new Date());
                 MCRTransactionHelper.beginTransaction();
                 try {
-                    ContactRequestService.getInstance().updateRecipient(recipient);
+                    ContactService.getInstance().updateRecipient(recipient);
                     MCRTransactionHelper.commitTransaction();
                 } catch (Exception e) {
                     LOGGER.error(e);
@@ -90,7 +90,7 @@ public class ContactSendTask implements Runnable {
         } finally {
             MCRTransactionHelper.beginTransaction();
             try {
-                ContactRequestService.getInstance().updateRequest(request);
+                ContactService.getInstance().updateRequest(request);
                 MCRTransactionHelper.commitTransaction();
             } catch (Exception e) {
                 LOGGER.error(e);

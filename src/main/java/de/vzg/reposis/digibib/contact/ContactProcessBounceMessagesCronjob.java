@@ -87,7 +87,7 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
                                     if (recipients != null && recipients.length == 1) {
                                         try {
                                             new MCRFixedUserCallable<>(() -> {
-                                                ContactRequestService.getInstance()
+                                                ContactService.getInstance()
                                                         .setRecipientFailed(UUID.fromString(requestId), recipients[0].toString(), true);
                                                 return null;
                                             }, MCRSystemUserInformation.getJanitorInstance()).call();

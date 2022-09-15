@@ -49,7 +49,7 @@ import org.mycore.common.MCRSessionMgr;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-public class ContactRequestService {
+public class ContactService {
 
     private final Lock readLock;
 
@@ -59,7 +59,7 @@ public class ContactRequestService {
 
     private final ContactRecipientDAO recipientDAO;
 
-    private ContactRequestService() {
+    private ContactService() {
         final ReadWriteLock lock = new ReentrantReadWriteLock();
         readLock = lock.readLock();
         writeLock = lock.writeLock();
@@ -67,7 +67,7 @@ public class ContactRequestService {
         recipientDAO = new ContactRecipientDAOImpl();
     }
 
-    public static ContactRequestService getInstance() {
+    public static ContactService getInstance() {
         return Holder.INSTANCE;
     }
 
@@ -367,6 +367,6 @@ public class ContactRequestService {
     }
 
     private static class Holder {
-        static final ContactRequestService INSTANCE = new ContactRequestService();
+        static final ContactService INSTANCE = new ContactService();
     }
 }
