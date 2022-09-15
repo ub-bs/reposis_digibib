@@ -141,6 +141,6 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
     }
 
     private void addRecipients(ContactRequest request, List<ContactRecipient> recipients) {
-        recipients.forEach((r) -> request.addRecipient(r)); // TODO use service
+        recipients.forEach((r) -> request.addRecipient(r));
     }
 }

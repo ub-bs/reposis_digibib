@@ -136,9 +136,6 @@ public class ContactSendTask implements Runnable {
                     }
                 }
             }
-            if (request.isSendCopy()) {
-                // sendMail(mail, SENDER_NAME, request.getSender(), null) // TODO
-            }
             request.setState(ContactRequestState.SENT);
         } catch (Exception e) {
             request.setComment(e.getMessage());
@@ -158,10 +155,6 @@ public class ContactSendTask implements Runnable {
             }
         }
         session.close();
-    }
-
-    private EMail createCopyMail() {
-        return null; // TODO
     }
 
     private EMail createMail(String token) throws IOException, JDOMException, SAXException {

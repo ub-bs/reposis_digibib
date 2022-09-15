@@ -120,6 +120,7 @@ public class ContactRequest {
 
     private String comment;
 
+    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
     public ContactRequest() { }
@@ -290,7 +291,6 @@ public class ContactRequest {
         }
     }
 
-    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     public UUID getUuid() {
         return uuid;
     }

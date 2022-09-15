@@ -66,6 +66,7 @@ public class ContactRecipient {
 
     private boolean sent = false;
 
+    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
     public ContactRecipient() { }
@@ -142,7 +143,6 @@ public class ContactRecipient {
         this.request = request;
     }
 
-    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     public UUID getUuid() {
         return uuid;
     }
