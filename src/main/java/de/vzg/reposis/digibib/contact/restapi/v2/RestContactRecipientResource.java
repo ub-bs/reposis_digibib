@@ -75,7 +75,7 @@ public class RestContactRecipientResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public List<ContactRecipient> getRecipientsByUUID(@DefaultValue("0") @QueryParam("offset") int offset,
+    public List<ContactRecipient> getAllRecipientsByRequestUUID(@DefaultValue("0") @QueryParam("offset") int offset,
             @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
             @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID) throws ContactRequestNotFoundException {
         final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
@@ -124,7 +124,7 @@ public class RestContactRecipientResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public ContactRecipient getRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactRequestNotFoundException {
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactRequestNotFoundException { // TODO
         final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request == null) {
             throw new ContactRequestNotFoundException();
@@ -150,7 +150,7 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response updateRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail, // TODO
             ContactRecipient recipient) throws ContactException {
         ContactService.getInstance().updateRecipientByMail(requestUUID, mail, recipient);
         return Response.noContent().build();
@@ -173,7 +173,7 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response removeRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactException {
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactException { // TODO
         ContactService.getInstance().removeRecipientByMail(requestUUID, mail);
         return Response.noContent().build();
     }

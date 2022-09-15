@@ -96,12 +96,12 @@ public class ContactMailService {
     }
 
     public static void sendMail(EMail mail, String from, String to, Map<String, String> headers) throws MessagingException {
-        MimeMessage msg = new MimeMessage(session);
+        final MimeMessage msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(from));
         msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
         msg.setSentDate(new Date());
         msg.setSubject(mail.subject, ENCODING);
-        Optional<MessagePart> plainMsg = mail.getTextMessage();
+        final Optional<MessagePart> plainMsg = mail.getTextMessage();
         if (plainMsg.isPresent()) {
             msg.setText(plainMsg.get().message, ENCODING);
         }
