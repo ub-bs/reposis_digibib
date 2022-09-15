@@ -18,22 +18,12 @@
 
 package de.vzg.reposis.digibib.contact;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Optional;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeMessage;
 
 import de.vzg.reposis.digibib.contact.ContactRequestService;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -42,20 +32,13 @@ import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.jdom2.Document;
 import org.jdom2.Element;
-import org.jdom2.JDOMException;
 import org.mycore.common.MCRMailer.EMail;
-import org.mycore.common.MCRMailer.EMail.MessagePart;
 import org.mycore.common.MCRSession;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.MCRTransactionHelper;
 import org.mycore.common.config.MCRConfiguration2;
-import org.mycore.common.content.MCRJDOMContent;
-import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
-import org.mycore.common.xsl.MCRParameterCollector;
-import org.xml.sax.SAXException;
 
 public class ContactSendTask implements Runnable {
 
@@ -66,42 +49,6 @@ public class ContactSendTask implements Runnable {
 
     private static final String MAIL_STYLESHEET = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Stylesheet");
-
-    private static final String ENCODING = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Encoding");
-
-    private static final String HOST = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Host");
-
-    private static final String PORT = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Port");
-
-    private static final String PROTOCOL = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Protocol");
-
-    private static final String STARTTLS = MCRConfiguration2
-            .getString(ContactConstants.CONF_PREFIX + "SMTP.STARTTLS").orElse("disabled");
-
-    private static final String USER = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.User");
-
-    private static final String PASSWORD = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.Password");
-
-    private static final Boolean DEBUG = MCRConfiguration2
-            .getBoolean(ContactConstants.CONF_PREFIX + "SMTP.Debug").orElse(false);
-
-    private static final Session session;
-
-    static {
-        session = Session.getDefaultInstance(getProperties(), new Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(USER, PASSWORD);
-            }
-        });
-        session.setDebug(DEBUG);
-    }
 
     private final ContactRequest request;
 
@@ -119,9 +66,9 @@ public class ContactSendTask implements Runnable {
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
         try {
             for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
-                final EMail mail = createMail(null);
+                final EMail mail = createMail(recipient.getName(), null); // TODO
                 final String to = recipient.getEmail();
-                sendMail(mail, SENDER_NAME, to, headers);
+                ContactMailService.sendMail(mail, SENDER_NAME, to, headers);
                 recipient.setSent(new Date());
                 MCRTransactionHelper.beginTransaction();
                 try {
@@ -157,62 +104,20 @@ public class ContactSendTask implements Runnable {
         session.close();
     }
 
-    private EMail createMail(String token) throws IOException, JDOMException, SAXException {
+    private EMail createMail(String recipientName, String token) throws Exception {
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", request.getSender());
         properties.put("id", request.getObjectID().toString());
         properties.put("message", request.getMessage());
         properties.put("name", request.getName());
+        properties.put("recipient", recipientName);
         properties.put("title", request.getObjectID().toString());
         final String orcid = request.getORCID();
         if (orcid != null) {
             properties.put("orcid", orcid);
         }
-        final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
+        final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
         return EMail.parseXML(mailElement);
-    }
-
-    private void sendMail(EMail mail, String from, String to, Map<String, String> headers)
-            throws MessagingException {
-        MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(from));
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-        msg.setSentDate(new Date());
-        msg.setSubject(mail.subject, ENCODING);
-        Optional<MessagePart> plainMsg = mail.getTextMessage();
-        if (plainMsg.isPresent()) {
-            msg.setText(plainMsg.get().message, ENCODING);
-        }
-        if (headers != null) {
-            for (var entry : headers.entrySet()) {
-                msg.setHeader(entry.getKey(), entry.getValue());
-            }
-        }
-        Transport.send(msg);
-    }
-
-    private static Document transform(Document input, String stylesheet, Map<String, String> parameters)
-        throws IOException, JDOMException, SAXException {
-        MCRJDOMContent source = new MCRJDOMContent(input);
-        MCRXSL2XMLTransformer transformer = MCRXSL2XMLTransformer.getInstance("xsl/" + stylesheet + ".xsl");
-        MCRParameterCollector parameterCollector = MCRParameterCollector.getInstanceFromUserSession();
-        parameterCollector.setParameters(parameters);
-        return transformer.transform(source, parameterCollector).asXML();
-    }
-
-    private static Properties getProperties() {
-        final Properties properties = new Properties();
-        properties.setProperty("mail.smtp.host", HOST);
-        properties.setProperty("mail.smtp.port", PORT);
-        properties.setProperty("mail.transport.protocol", PROTOCOL);
-        if ("enabled".equals(STARTTLS)) {
-            properties.setProperty("mail.smtp.starttls.enabled", "true");
-        } else if ("required".equals(STARTTLS)) {
-            properties.setProperty("mail.smtp.starttls.enabled", "true");
-            properties.setProperty("mail.smtp.starttls.required", "true");
-        }
-        properties.setProperty("mail.smtp.auth", "true");
-        return properties;
     }
 }
