@@ -18,6 +18,8 @@
 
 package de.vzg.reposis.digibib.contact.rsc;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,7 +32,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
+import de.vzg.reposis.digibib.contact.ContactMailService;
 import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.ContactUtils;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 
@@ -40,6 +44,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.mycore.common.MCRException;
+import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
@@ -54,6 +59,12 @@ public class ContactResource {
             .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream().flatMap(MCRConfiguration2::splitValue)
             .collect(Collectors.toSet());
 
+    private static final String SENDER_NAME = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.SenderName");
+
+    private static final String MAIL_STYLESHEET = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Confirmation.Stylesheet");
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -63,7 +74,7 @@ public class ContactResource {
                     @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
-    public Response save(ContactRequest request) throws BadRequestException {
+    public Response save(ContactRequest request) throws Exception {
         if (!ContactValidator.getInstance().validateRequest(request)) {
             throw new BadRequestException("invalid request");
         }
@@ -82,9 +93,23 @@ public class ContactResource {
         }
         ContactRequestService.getInstance().insertRequest(request);
         if (request.isSendCopy()) {
-            // TODO send copy
+            final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(), request.getORCID(), objectID.toString());
+            ContactMailService.sendMail(confirmationMail, SENDER_NAME, request.getSender());
         }
         return Response.ok().build();
+    }
+
+    private static EMail createConfirmationMail(String name, String message, String orcid, String id) throws Exception {
+        final EMail baseMail = new EMail();
+        final Map<String, String> properties = new HashMap();
+        properties.put("id", id);
+        properties.put("message", message);
+        properties.put("name", name);
+        if (orcid != null) {
+            properties.put("name", orcid);
+        }
+        final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
+        return EMail.parseXML(mailElement);
     }
 
     private static String getGenre(MCRObjectID objectId) throws MCRException {
