@@ -20,7 +20,8 @@ export type Recipient = {
   origin: Origin;
   email: string;
   enabled: boolean;
-  failed: boolean;
+  failed: Date;
+  sent: Date;
 }
 
 export type Request = {

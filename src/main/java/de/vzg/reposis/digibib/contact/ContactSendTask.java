@@ -118,11 +118,11 @@ public class ContactSendTask implements Runnable {
         final Map<String, String> headers = new HashMap();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
         try {
-            for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && !r.isSent()).collect(Collectors.toList())) {
+            for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
                 final EMail mail = createMail(null);
                 final String to = recipient.getEmail();
                 sendMail(mail, SENDER_NAME, to, headers);
-                recipient.setSent(true);
+                recipient.setSent(new Date());
                 MCRTransactionHelper.beginTransaction();
                 try {
                     ContactRequestService.getInstance().updateRecipient(recipient);

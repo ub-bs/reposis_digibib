@@ -238,6 +238,8 @@ public class ContactRequestService {
             }
             recipient.setRequest(outdated.getRequest());
             recipient.setId(outdated.getId());
+            recipient.setFailed(null); // sanitizing
+            recipient.setSent(null);
             updateRecipient(recipient);
         } finally {
             writeLock.unlock();
@@ -276,7 +278,7 @@ public class ContactRequestService {
             }
             final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getEmail().equals(mail))
                     .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
-            recipient.setFailed(failed);
+            recipient.setFailed(new Date());
             recipientDAO.update(recipient);
             update(request); // update modified
         } finally {
@@ -309,8 +311,12 @@ public class ContactRequestService {
         outdated.setOrigin(recipient.getOrigin());
         outdated.setEmail(recipient.getEmail());
         outdated.setEnabled(recipient.isEnabled());
-        outdated.setFailed(recipient.isFailed());
-        outdated.setSent(recipient.isSent());
+        if (recipient.getFailed() != null) {
+            outdated.setFailed(recipient.getFailed());
+        }
+        if (recipient.getSent() != null) {
+            outdated.setSent(recipient.getSent());
+        }
         recipientDAO.update(outdated);
         update(outdated.getRequest()); // update modified
     }

@@ -62,9 +62,9 @@ public class ContactRecipient {
 
     private boolean enabled;
 
-    private boolean failed = false;
+    private Date failed;
 
-    private boolean sent = false;
+    private Date sent;
 
     @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
@@ -170,21 +170,21 @@ public class ContactRecipient {
 
     @Column(name = "failed",
         nullable = true)
-    public boolean isFailed() {
+    public Date getFailed() {
         return failed;
     }
 
-    public void setFailed(boolean failed) {
+    public void setFailed(Date failed) {
         this.failed = failed;
     }
 
     @Column(name = "sent",
         nullable = true)
-    public boolean isSent() {
+    public Date getSent() {
         return sent;
     }
 
-    public void setSent(boolean sent) {
+    public void setSent(Date sent) {
         this.sent = sent;
     }
 
