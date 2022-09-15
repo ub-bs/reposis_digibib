@@ -349,7 +349,7 @@ public class ContactService {
         update(request);
     }
 
-    private boolean checkRecipientExists(List<ContactRecipient> recipients , ContactRecipient recipient) {
+    private boolean checkRecipientExists(List<ContactRecipient> recipients, ContactRecipient recipient) {
         if (recipients.size() == 0) {
             return false;
         }
