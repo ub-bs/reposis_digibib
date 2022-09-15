@@ -36,7 +36,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -70,7 +70,7 @@ public class RestContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRequest> getRequests(@DefaultValue("0") @QueryParam("offset") int offset,
         @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
-        final List<ContactRequest> requests = ContactRequestService.getInstance().listRequests();
+        final List<ContactRequest> requests = ContactService.getInstance().listRequests();
         response.setHeader("X-Total-Count", Integer.toString(requests.size()));
         return requests.stream().skip(offset).limit(limit).collect(Collectors.toList());
     }
@@ -92,7 +92,7 @@ public class RestContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public ContactRequest getRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
             throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactRequestService.getInstance().getRequestByUUID(id);
+        final ContactRequest request = ContactService.getInstance().getRequestByUUID(id);
         if (request != null) {
             return request;
         } else {
@@ -114,7 +114,7 @@ public class RestContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     public String getRequestStatusByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
             throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactRequestService.getInstance().getRequestByUUID(id);
+        final ContactRequest request = ContactService.getInstance().getRequestByUUID(id);
         if (request != null) {
             return request.getState().toString();
         } else {
@@ -128,7 +128,7 @@ public class RestContactResource {
     @MCRRequireTransaction
     public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID uuid)
             throws ContactException, MCRException {
-        ContactRequestService.getInstance().forwardRequest(uuid);
+        ContactService.getInstance().forwardRequest(uuid);
         return Response.ok().build();
     }
 
@@ -147,7 +147,7 @@ public class RestContactResource {
         if (recipientUUID == null) {
             throw new BadRequestException();
         }
-        ContactRequestService.getInstance().confirmRequestByUUID(requestUUID, recipientUUID);
+        ContactService.getInstance().confirmRequestByUUID(requestUUID, recipientUUID);
         return Response.ok().build();
     }
 
@@ -166,7 +166,7 @@ public class RestContactResource {
     @MCRRequireTransaction
     public Response removeRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
             throws ContactRequestNotFoundException {
-        ContactRequestService.getInstance().removeRequestByUUID(id);
+        ContactService.getInstance().removeRequestByUUID(id);
         return Response.noContent().build();
     }
 }

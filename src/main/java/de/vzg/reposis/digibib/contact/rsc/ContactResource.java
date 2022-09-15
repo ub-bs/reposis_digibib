@@ -33,7 +33,7 @@ import javax.ws.rs.core.Response;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactMailService;
-import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.ContactUtils;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
@@ -91,7 +91,7 @@ public class ContactResource {
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
-        ContactRequestService.getInstance().insertRequest(request);
+        ContactService.getInstance().insertRequest(request);
         if (request.isSendCopy()) {
             final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(), request.getORCID(), objectID.toString());
             ContactMailService.sendMail(confirmationMail, SENDER_NAME, request.getSender());

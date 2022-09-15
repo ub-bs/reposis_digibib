@@ -44,7 +44,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 
-import de.vzg.reposis.digibib.contact.ContactRequestService;
+import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
@@ -78,7 +78,7 @@ public class RestContactRecipientResource {
     public List<ContactRecipient> getRecipientsByUUID(@DefaultValue("0") @QueryParam("offset") int offset,
             @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
             @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID) throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactRequestService.getInstance().getRequestByUUID(requestUUID);
+        final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request == null) {
             throw new ContactRequestNotFoundException();
         }
@@ -104,7 +104,7 @@ public class RestContactRecipientResource {
     @MCRRequireTransaction
     public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             ContactRecipient recipient) throws ContactException {
-        ContactRequestService.getInstance().addRecipient(requestUUID, recipient);
+        ContactService.getInstance().addRecipient(requestUUID, recipient);
         return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getEmail()))).build();
     }
 
@@ -125,7 +125,7 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public ContactRecipient getRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID requestUUID,
             @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactRequestService.getInstance().getRequestByUUID(requestUUID);
+        final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request == null) {
             throw new ContactRequestNotFoundException();
         }
@@ -152,7 +152,7 @@ public class RestContactRecipientResource {
     public Response updateRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail,
             ContactRecipient recipient) throws ContactException {
-        ContactRequestService.getInstance().updateRecipientByMail(requestUUID, mail, recipient);
+        ContactService.getInstance().updateRecipientByMail(requestUUID, mail, recipient);
         return Response.noContent().build();
     }
 
@@ -174,7 +174,7 @@ public class RestContactRecipientResource {
     @MCRRequireTransaction
     public Response removeRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactException {
-        ContactRequestService.getInstance().removeRecipientByMail(requestUUID, mail);
+        ContactService.getInstance().removeRecipientByMail(requestUUID, mail);
         return Response.noContent().build();
     }
 }
