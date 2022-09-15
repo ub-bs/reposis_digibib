@@ -81,6 +81,9 @@ public class ContactResource {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
         ContactRequestService.getInstance().insertRequest(request);
+        if (request.isSendCopy()) {
+            // TODO send copy
+        }
         return Response.ok().build();
     }
 

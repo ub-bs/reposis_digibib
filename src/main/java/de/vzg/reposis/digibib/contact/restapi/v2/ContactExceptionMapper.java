@@ -28,6 +28,7 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import de.vzg.reposis.digibib.contact.exception.ContactException;
+import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 
 import org.mycore.restapi.v2.MCRErrorResponse;
@@ -40,7 +41,8 @@ public class ContactExceptionMapper implements ExceptionMapper<ContactException>
 
     @Override
     public Response toResponse(ContactException exception) {
-        if (exception instanceof ContactRequestNotFoundException) {
+        if (exception instanceof ContactRequestNotFoundException
+                || exception instanceof ContactRecipientNotFoundException ) {
             return getResponse(exception, Response.Status.NOT_FOUND.getStatusCode(), exception.getErrorCode());
         }
         return getResponse(exception, Response.Status.BAD_REQUEST.getStatusCode(), exception.getErrorCode());

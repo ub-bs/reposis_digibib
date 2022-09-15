@@ -217,7 +217,7 @@ public class ContactRequestService {
         }
     }
 
-    public void updateRecipient(UUID requestUUID, String mail, ContactRecipient recipient) throws ContactRequestNotFoundException,
+    public void updateRecipientByMail(UUID requestUUID, String mail, ContactRecipient recipient) throws ContactRequestNotFoundException,
             ContactRecipientOriginException, ContactRecipientNotFoundException, ContactRequestStateException {
         try {
             writeLock.lock();
@@ -244,7 +244,7 @@ public class ContactRequestService {
         }
     }
 
-    public void removeRecipient(UUID requestUUID, String mail) throws ContactRequestNotFoundException,
+    public void removeRecipientByMail(UUID requestUUID, String mail) throws ContactRequestNotFoundException,
             ContactRecipientOriginException, ContactRequestStateException {
         try {
             writeLock.lock();
