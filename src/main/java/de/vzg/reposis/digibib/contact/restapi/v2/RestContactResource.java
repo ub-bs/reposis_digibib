@@ -100,6 +100,28 @@ public class RestContactResource {
         }
     }
 
+    @GET
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/status")
+    @Operation(
+        summary = "Gets contact request state by id",
+        responses = {
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                schema = @Schema(implementation = ContactRequest.class))),
+            @ApiResponse(responseCode = "404", description = "Request does not exist",
+                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
+        })
+    @Produces(MediaType.TEXT_PLAIN)
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
+    public String getRequestStatusByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID id)
+            throws ContactRequestNotFoundException {
+        final ContactRequest request = ContactRequestService.getInstance().getRequestByUUID(id);
+        if (request != null) {
+            return request.getState().toString();
+        } else {
+            throw new ContactRequestNotFoundException();
+        }
+    }
+
     @POST
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
@@ -110,7 +132,7 @@ public class RestContactResource {
         return Response.ok().build();
     }
 
-    @POST
+    @GET // TODO
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/confirm")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @Operation(summary = "confirm recipient",

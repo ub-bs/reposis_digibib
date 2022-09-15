@@ -66,7 +66,7 @@ public class ContactSendTask implements Runnable {
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
         try {
             for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
-                final EMail mail = createMail(recipient.getName(), null); // TODO
+                final EMail mail = createMail(recipient);
                 final String to = recipient.getEmail();
                 ContactMailService.sendMail(mail, SENDER_NAME, to, headers);
                 recipient.setSent(new Date());
@@ -104,14 +104,16 @@ public class ContactSendTask implements Runnable {
         session.close();
     }
 
-    private EMail createMail(String recipientName, String token) throws Exception {
+    private EMail createMail(ContactRecipient recipient) throws Exception {
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap();
         properties.put("email", request.getSender());
         properties.put("id", request.getObjectID().toString());
         properties.put("message", request.getMessage());
         properties.put("name", request.getName());
-        properties.put("recipient", recipientName);
+        properties.put("recipient", recipient.getName());
+        properties.put("recipientID", recipient.getUuid().toString());
+        properties.put("requestID", request.getUuid().toString());
         properties.put("title", request.getObjectID().toString());
         final String orcid = request.getORCID();
         if (orcid != null) {
