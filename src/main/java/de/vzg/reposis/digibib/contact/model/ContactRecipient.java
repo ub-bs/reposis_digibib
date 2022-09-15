@@ -66,6 +66,8 @@ public class ContactRecipient {
 
     private Date sent;
 
+    private Date confirmed;
+
     @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
@@ -186,6 +188,16 @@ public class ContactRecipient {
 
     public void setSent(Date sent) {
         this.sent = sent;
+    }
+
+    @Column(name = "confirmed",
+        nullable = true)
+    public Date getConfirmed() {
+        return confirmed;
+    }
+
+    public void setConfirmed(Date confirmed) {
+        this.confirmed = confirmed;
     }
 
     @Override

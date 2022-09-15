@@ -11,8 +11,7 @@ export enum RequestState {
   Sending = 'SENDING',
   Sending_Failed = 'SENDING_FAILED',
   Sent = 'SENT',
-  Rejected = 'REJECTED',
-  Accepted = 'ACCEPTED',
+  Confirmed = 'CONFIRMED',
 }
 
 export type Recipient = {
@@ -22,6 +21,7 @@ export type Recipient = {
   enabled: boolean;
   failed: Date;
   sent: Date;
+  confirmed: Date;
 }
 
 export type Request = {
