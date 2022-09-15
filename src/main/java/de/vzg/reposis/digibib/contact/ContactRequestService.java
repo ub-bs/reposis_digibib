@@ -194,6 +194,24 @@ public class ContactRequestService {
         }
     }
 
+    public void confirmRequestByUUID(UUID requestUUID, UUID recipientUUID) {
+        try {
+            writeLock.lock();
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            if (request == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getUuid().equals(recipientUUID))
+                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+            recipient.setConfirmed(new Date());
+            recipientDAO.update(recipient);
+            request.setState(ContactRequestState.CONFIRMED);
+            update(request); // update modified
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
     public void addRecipient(UUID requestUUID, ContactRecipient recipient) throws ContactRecipientInvalidException,
             ContactRequestNotFoundException, ContactRequestStateException, ContactRecipientAlreadyExistsException {
         try {

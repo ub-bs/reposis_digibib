@@ -23,6 +23,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.BadRequestException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
@@ -106,6 +107,25 @@ public class RestContactResource {
     public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID uuid)
             throws ContactException, MCRException {
         ContactRequestService.getInstance().forwardRequest(uuid);
+        return Response.ok().build();
+    }
+
+    @POST
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/confirm")
+    @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
+    @Operation(summary = "confirm recipient",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "operation was successful"),
+                    @ApiResponse(responseCode = "400", description = "invalid request"),
+                    @ApiResponse(responseCode = "404", description = "object is not found"),
+            })
+    @MCRRequireTransaction
+    public Response confirm(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
+            @QueryParam("recipient") UUID recipientUUID) throws Exception {
+        if (recipientUUID == null) {
+            throw new BadRequestException();
+        }
+        ContactRequestService.getInstance().confirmRequestByUUID(requestUUID, recipientUUID);
         return Response.ok().build();
     }
 
