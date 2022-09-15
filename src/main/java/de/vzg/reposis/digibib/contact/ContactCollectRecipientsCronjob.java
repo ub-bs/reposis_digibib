@@ -96,7 +96,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
                 } else {
-                    final List<ContactRecipient> recipients = new ContactCollectTask(objectID).call();
+                    final List<ContactRecipient> recipients = new ContactCollectRecipientsTask(objectID).call();
                     if (recipients.isEmpty()) {
                         addFallbackRecipient(recipients);
                     }

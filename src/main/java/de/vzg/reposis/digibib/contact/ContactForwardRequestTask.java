@@ -40,7 +40,7 @@ import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.MCRTransactionHelper;
 import org.mycore.common.config.MCRConfiguration2;
 
-public class ContactSendTask implements Runnable {
+public class ContactForwardRequestTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
@@ -52,7 +52,7 @@ public class ContactSendTask implements Runnable {
 
     private final ContactRequest request;
 
-    public ContactSendTask(ContactRequest request) {
+    public ContactForwardRequestTask(ContactRequest request) {
         this.request = request;
     }
 
