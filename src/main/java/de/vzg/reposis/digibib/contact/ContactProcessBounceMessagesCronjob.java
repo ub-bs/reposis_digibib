@@ -51,13 +51,13 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
     private static final Logger LOGGER = LogManager.getLogger();
 
     private static final String HOST = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Host");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
 
     private static final String USER = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.User");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
 
     private static final String PASSWORD = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "SMTP.Auth.Password");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
 
     private static final String REPORT_MIMETYPE = "multipart/report";
 

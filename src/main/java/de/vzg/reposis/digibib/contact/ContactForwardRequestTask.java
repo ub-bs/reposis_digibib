@@ -50,14 +50,13 @@ public class ContactForwardRequestTask implements Runnable {
     /**
      * Name of mail sender.
      */
-    private static final String SENDER_NAME = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.SenderName");
+
 
     /**
      * Name of stylesheet to transform mail.
      */
     private static final String MAIL_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Stylesheet");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "RecipientMail.Stylesheet");
 
     /**
      * The contact request.
@@ -79,8 +78,7 @@ public class ContactForwardRequestTask implements Runnable {
         try {
             for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
                 final EMail mail = createMail(recipient);
-                final String to = recipient.getEmail();
-                ContactMailService.sendMail(mail, SENDER_NAME, to, headers);
+                ContactMailService.sendMail(mail, recipient.getEmail(), headers);
                 recipient.setSent(new Date());
                 MCRTransactionHelper.beginTransaction();
                 try {
