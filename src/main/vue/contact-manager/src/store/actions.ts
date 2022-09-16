@@ -68,7 +68,7 @@ export const actions: ActionTree<State, State> = {
       await axios.delete(`api/v2/contacts/${state.currentRequest?.uuid}/recipients/${recipientId}`);
       if (state.currentRequest) {
         const recipients = state.currentRequest.recipients;
-        state.currentRequest.recipients = state.currentRequest.recipients.filter(item => item.email != recipientId);
+        state.currentRequest.recipients = state.currentRequest.recipients.filter(item => item.mail != recipientId);
       }
     } catch (error) {
       if (axios.isAxiosError(error) && error.response) {
@@ -84,7 +84,7 @@ export const actions: ActionTree<State, State> = {
       await axios.put(`api/v2/contacts/${state.currentRequest?.uuid}/recipients/${state.editRecipientId}`, recipient);
       if (state.currentRequest) {
         const recipients = state.currentRequest.recipients;
-        state.currentRequest.recipients = recipients.filter(item => item.email != state.editRecipientId);
+        state.currentRequest.recipients = recipients.filter(item => item.mail != state.editRecipientId);
         state.currentRequest.recipients.push(recipient);
       }
     } catch (error) {
