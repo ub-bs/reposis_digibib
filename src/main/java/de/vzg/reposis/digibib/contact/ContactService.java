@@ -303,7 +303,23 @@ public class ContactService {
             recipient.setId(outdated.getId());
             recipient.setFailed(null); // sanitizing
             recipient.setSent(null);
-            updateRecipient(recipient);
+            update(recipient);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    /**
+     * Updates recipient.
+     * @param recipient the recipient with parent and id
+     * @throws ContactRecipientAlreadyExistsException if recipient with given mail already exists
+     * @throws ContactRecipientNotFoundException if recipient cannot be found
+     */
+    public void updateRecipient(ContactRecipient recipient) throws ContactRecipientNotFoundException,
+            ContactRecipientAlreadyExistsException {
+        try {
+            writeLock.lock();
+            update(recipient);
         } finally {
             writeLock.unlock();
         }
@@ -371,7 +387,7 @@ public class ContactService {
      * @param recipient the recipient
      * @throws ContactRecipientAlreadyExistsException if recipient with mail already exists
      */
-    protected void addRecipient(ContactRequest request, ContactRecipient recipient)
+    private void addRecipient(ContactRequest request, ContactRecipient recipient)
             throws ContactRecipientAlreadyExistsException {
         if (checkRecipientExists(request.getRecipients(), recipient)) {
             throw new ContactRecipientAlreadyExistsException();
@@ -387,7 +403,7 @@ public class ContactService {
      * @throws ContactRecipientAlreadyExistsException if recipient with given mail already exists
      * @throws ContactRecipientNotFoundException if recipient cannot be found
      */
-    protected void updateRecipient(ContactRecipient recipient) throws ContactRecipientNotFoundException,
+    private void update(ContactRecipient recipient) throws ContactRecipientNotFoundException,
             ContactRecipientAlreadyExistsException {
         if (!ContactValidator.getInstance().validateRecipient(recipient)) {
             throw new ContactRecipientInvalidException();
@@ -418,7 +434,7 @@ public class ContactService {
      * @param recipient the recipient
      * @throws ContactRequestNotFoundException if parent request does not exist
      */
-    protected void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException {
+    private void removeRecipient(ContactRecipient recipient) throws ContactRequestNotFoundException {
         final ContactRequest request = recipient.getRequest();
         if (request == null) {
             throw new ContactRequestNotFoundException();
