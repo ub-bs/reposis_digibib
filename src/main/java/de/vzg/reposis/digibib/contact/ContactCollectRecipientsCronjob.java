@@ -52,13 +52,13 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
      * Mail of fallback recipient.
      */
     private static final String FALLBACK_MAIL = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Fallback.Mail");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
     /**
      * Name of fallback recipient.
      */
     private static final String FALLBACK_NAME= MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Fallback.Name");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Name");
 
     @Override
     public void runJob() {

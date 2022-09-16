@@ -59,11 +59,8 @@ public class ContactResource {
             .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream().flatMap(MCRConfiguration2::splitValue)
             .collect(Collectors.toSet());
 
-    private static final String SENDER_NAME = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.SenderName");
-
     private static final String MAIL_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Confirmation.Stylesheet");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "ConfirmationMail.Stylesheet");
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -94,7 +91,7 @@ public class ContactResource {
         ContactService.getInstance().insertRequest(request);
         if (request.isSendCopy()) {
             final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(), request.getORCID(), objectID.toString());
-            ContactMailService.sendMail(confirmationMail, SENDER_NAME, request.getSender());
+            ContactMailService.sendMail(confirmationMail, request.getSender());
         }
         return Response.ok().build();
     }
