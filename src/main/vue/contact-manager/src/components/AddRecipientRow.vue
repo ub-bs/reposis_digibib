@@ -14,8 +14,8 @@
       </select>
     </td>
     <td class="col-4">
-      <input class="form-control form-control-sm" type="text" v-model="recipient.email"
-          :class="v.email.$error ? 'is-invalid' : ''" :disabled="disabled" />
+      <input class="form-control form-control-sm" type="text" v-model="recipient.mail"
+          :class="v.mail.$error ? 'is-invalid' : ''" :disabled="disabled" />
     </td>
     <td class="col-1 align-middle text-center">
       <input type="checkbox" v-model="recipient.enabled" :disabled="disabled" />
@@ -44,7 +44,7 @@ const rules = computed(() => ({
   name: {
     required,
   },
-  email: {
+  mail: {
     required,
     email,
   },

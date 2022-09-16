@@ -7,7 +7,7 @@
       {{ recipient.origin }}
     </td>
     <td class="col-4">
-      {{ recipient.email }}
+      {{ recipient.mail }}
     </td>
     <td class="col-1 align-middle text-center">
       <input type="checkbox" v-model="recipientSave.enabled" disabled/>

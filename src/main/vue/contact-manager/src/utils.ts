@@ -17,7 +17,7 @@ export enum RequestState {
 export type Recipient = {
   name: string;
   origin: Origin;
-  email: string;
+  mail: string;
   enabled: boolean;
   failed: Date;
   sent: Date;

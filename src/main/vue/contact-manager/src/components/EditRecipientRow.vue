@@ -20,9 +20,9 @@
     </td>
     <td class="col-4">
       <input v-if="editable && editMode" class="form-control form-control-sm" type="text"
-          v-model="recipientSave.email" :class="v.email.$error ? 'is-invalid' : ''"/>
+          v-model="recipientSave.mail" :class="v.mail.$error ? 'is-invalid' : ''"/>
       <span v-else>
-        {{ recipient.email }}
+        {{ recipient.mail }}
       </span>
     </td>
     <td class="col-1 align-middle text-center">
@@ -55,7 +55,7 @@ const rules = computed(() => ({
   name: {
     required,
   },
-  email: {
+  mail: {
     required,
     email,
   },
@@ -65,11 +65,11 @@ const rules = computed(() => ({
 }));
 const editMode = ref(false);
 const disabled = computed(() => store.state.editRecipientId !== undefined
-    && store.state.editRecipientId !== props.recipient.email);
+    && store.state.editRecipientId !== props.recipient.mail);
 const editable = computed(() => props.recipient.origin === Origin.Manual);
 const v = useVuelidate(rules, props.recipient);
 const handleEdit = () => {
-  store.commit('setEditRecipientId', props.recipient.email);
+  store.commit('setEditRecipientId', props.recipient.mail);
   editMode.value = true;
 };
 const handleCancel = () => {
@@ -85,6 +85,6 @@ const handleUpdate = () => {
   }
 };
 const handleRemove = () => {
-  store.dispatch('removeRecipient', props.recipient.email);
+  store.dispatch('removeRecipient', props.recipient.mail);
 };
 </script>
