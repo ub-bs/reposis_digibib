@@ -35,19 +35,43 @@ import org.mycore.crypt.MCRCipherManager;
 import org.mycore.crypt.MCRCryptKeyFileNotFoundException;
 import org.mycore.crypt.MCRCryptKeyNoPermissionException;
 
+/**
+ * This class implements a captcha service and uses Cage.
+*/
 public class CaptchaCageServiceImpl implements CaptchaService {
 
+    /**
+     * Lifetime of a token in cache.
+     */
     private final static long TOKEN_LIFETIME = TimeUnit.MINUTES.toMillis(1);
 
+    /**
+     * Number of objects that are simultaneously held in the cache.
+     */
+    private final static int CACHE_SIZE = 1024;
+
+    /**
+     * Reference name for the chiper.
+     */
     private final static String CIPHER_NAME = "captcha";
 
+    /**
+     * Cache that holds all created tokens.
+     */
     private final Cache<String, Boolean> seenTokens;
 
+    /**
+     * Default constructor which initializes the cache.
+     */
     private CaptchaCageServiceImpl() {
-        seenTokens = CacheBuilder.newBuilder().maximumSize(1024).expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS)
-                .build();
+        seenTokens = CacheBuilder.newBuilder().maximumSize(CACHE_SIZE)
+                .expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS).build();
     }
 
+    /**
+     * Returns singleton instance of captcha service 
+     * @return captcha service
+     */
     public static CaptchaCageServiceImpl getInstance() {
         return ServiceHolder.INSTANCE;
     }
@@ -69,10 +93,21 @@ public class CaptchaCageServiceImpl implements CaptchaService {
         return true;
     }
 
+    /**
+     * Validates token against token lifetime.
+     * @param token the token
+     * @return true if token is younger than max lifetime
+     */
     protected boolean validateTokenExpiration(Token token) {
         return new Date().getTime() - token.getTimestamp().getTime() < TOKEN_LIFETIME;
     }
 
+    /**
+     * Uses secret to create an encrypted token.
+     * @param secret the token secret
+     * @return the token
+     * @throws MCRException if encryption fails
+     */
     public static String createEncodedToken(String secret) throws MCRException {
         final Token token = new Token(secret);
         try {
@@ -82,6 +117,13 @@ public class CaptchaCageServiceImpl implements CaptchaService {
         }
     }
 
+    /**
+     * Encrypts a token.
+     * @param token the token
+     * @return the encrypted token
+     * @throws JsonProcessingException if token cannot be parsed to string
+     * @throws MCRException if token encryption fails
+     */
     protected static String encodeToken(Token token) throws JsonProcessingException, MCRException {
         try {
             final String json = new ObjectMapper().writeValueAsString(token);
@@ -92,6 +134,13 @@ public class CaptchaCageServiceImpl implements CaptchaService {
         }
     }
 
+    /**
+     * Decrypts a token.
+     * @param encodedToken the encrypted token
+     * @return the token
+     * @throws JsonProcessingException if encoded token cannot be parsed to token
+     * @throws MCRException if decryption fails
+     */
     private static Token decodeToken(String encodedToken) throws JsonProcessingException, MCRException {
         try {
             final MCRCipher cipher = MCRCipherManager.getCipher(CIPHER_NAME);
@@ -102,14 +151,30 @@ public class CaptchaCageServiceImpl implements CaptchaService {
         }
     }
 
+    /**
+     * Lazy instance holder.
+     */
     private static class ServiceHolder {
+      
+        /**
+         * the instance
+         */
         static final CaptchaCageServiceImpl INSTANCE = new CaptchaCageServiceImpl();
     }
 
+    /**
+     * This class implements the token model.
+     */
     protected static class Token {
 
+        /**
+         * The token secret.
+         */
         private String secret;
 
+        /**
+         * The creation date.
+         */
         private Date timestamp;
 
         Token() {
