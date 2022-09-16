@@ -75,7 +75,7 @@ public class ContactForwardRequestTask implements Runnable {
         final MCRSession session = MCRSessionMgr.getCurrentSession();
         session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
         final Map<String, String> headers = new HashMap();
-        headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUuid().toString());
+        headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUUID().toString());
         try {
             for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
                 final EMail mail = createMail(recipient);
@@ -130,8 +130,8 @@ public class ContactForwardRequestTask implements Runnable {
         properties.put("message", request.getMessage());
         properties.put("name", request.getName());
         properties.put("recipient", recipient.getName());
-        properties.put("recipientID", recipient.getUuid().toString());
-        properties.put("requestID", request.getUuid().toString());
+        properties.put("recipientID", recipient.getUUID().toString());
+        properties.put("requestID", request.getUUID().toString());
         properties.put("title", request.getObjectID().toString());
         final String orcid = request.getORCID();
         if (orcid != null) {

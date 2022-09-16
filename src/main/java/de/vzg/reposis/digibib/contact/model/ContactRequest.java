@@ -61,7 +61,7 @@ import org.mycore.datamodel.metadata.MCRObjectID;
     @NamedQuery(name = "ContactRequest.findByUUID",
         query = "SELECT r"
             + "  FROM ContactRequest r"
-            + "  WHERE r.uuid = :uuid"),
+            + "  WHERE r.UUID = :uuid"),
     @NamedQuery(name = "ContactRequest.findByState",
         query = "SELECT r"
             + "  FROM ContactRequest r"
@@ -305,11 +305,11 @@ public class ContactRequest {
         }
     }
 
-    public UUID getUuid() {
+    public UUID getUUID() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUUID(UUID uuid) {
         this.uuid = uuid;
     }
 
@@ -364,7 +364,7 @@ public class ContactRequest {
             return false;
         }
         ContactRequest other = (ContactRequest) obj;
-        return Objects.equals(uuid, other.getUuid());
+        return Objects.equals(uuid, other.getUUID());
     }
 
     @Override

@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
     @NamedQuery(name = "ContactRecipient.findByUUID",
         query = "SELECT r"
             + "  FROM ContactRecipient r"
-            + "  WHERE r.uuid = :uuid"),
+            + "  WHERE r.UUID = :uuid"),
 })
 
 /**
@@ -178,11 +178,11 @@ public class ContactRecipient {
         this.request = request;
     }
 
-    public UUID getUuid() {
+    public UUID getUUID() {
         return uuid;
     }
 
-    public void setUuid(UUID uuid) {
+    public void setUUID(UUID uuid) {
         this.uuid = uuid;
     }
 
