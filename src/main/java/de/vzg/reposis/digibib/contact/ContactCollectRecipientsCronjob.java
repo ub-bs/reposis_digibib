@@ -41,13 +41,22 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mcr.cronjob.MCRCronjob;
 import org.mycore.util.concurrent.MCRTransactionableCallable;
 
+/**
+ * This class implements a cronjob that collects mails for contact requests.
+ */
 public class ContactCollectRecipientsCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Mail of fallback recipient.
+     */
     private static final String FALLBACK_MAIL = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Fallback.Mail");
 
+    /**
+     * Name of fallback recipient.
+     */
     private static final String FALLBACK_NAME= MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Fallback.Name");
 
@@ -72,6 +81,11 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         return "Collects recipients for all new requests.";
     }
 
+    /**
+     * Updates contact request within own transaction.
+     * @param request the contact request
+     * @throws Exception if update fails
+     */
     private void updateRequest(ContactRequest request) throws Exception {
         new MCRTransactionableCallable<>(() -> {
             ContactService.getInstance().updateRequestByID(request.getId());
@@ -79,6 +93,10 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         }).call();
     }
 
+    /**
+     * Collects mails for contact request.
+     * @throws Exception if job fails
+     */
     private void doWork() throws Exception {
         final ContactService service = ContactService.getInstance();
         final List<ContactRequest> requests = service.listRequestsByState(ContactRequestState.RECEIVED);
@@ -134,12 +152,21 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         });
     }
 
+    /**
+     * Adds fallback recipient to recipients
+     * @param recipients the recipients
+     */
     private void addFallbackRecipient(List<ContactRecipient> recipients) {
         final ContactRecipient fallback =
                 new ContactRecipient(FALLBACK_NAME, ContactRecipientOrigin.FALLBACK, FALLBACK_MAIL);
         recipients.add(fallback);
     }
 
+    /**
+     * Adds list of recipients to recipients to contact request.
+     * @param request the contact request
+     * @param recipients the recipients
+     */
     private void addRecipients(ContactRequest request, List<ContactRecipient> recipients) {
         recipients.forEach((r) -> request.addRecipient(r));
     }

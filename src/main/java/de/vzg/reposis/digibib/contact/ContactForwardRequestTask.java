@@ -40,16 +40,28 @@ import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.MCRTransactionHelper;
 import org.mycore.common.config.MCRConfiguration2;
 
+/**
+ * This task forwards a contact request to all recipients.
+ */
 public class ContactForwardRequestTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    /**
+     * Name of mail sender.
+     */
     private static final String SENDER_NAME = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.SenderName");
 
+    /**
+     * Name of stylesheet to transform mail.
+     */
     private static final String MAIL_STYLESHEET = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Email.Stylesheet");
 
+    /**
+     * The contact request.
+     */
     private final ContactRequest request;
 
     public ContactForwardRequestTask(ContactRequest request) {
@@ -104,6 +116,12 @@ public class ContactForwardRequestTask implements Runnable {
         session.close();
     }
 
+    /**
+     * Creates mail for recipient with given properties.
+     * @param recipient the recipient
+     * @return the mail
+     * @throws Exception if mail transformation fails
+     */
     private EMail createMail(ContactRecipient recipient) throws Exception {
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap();

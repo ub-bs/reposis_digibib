@@ -37,6 +37,9 @@ import org.mycore.common.MCRMailer.EMail.MessagePart;
 
 import org.mycore.common.config.MCRConfiguration2;
 
+/**
+ * This class implements a service to send mails via SMTP.
+ */
 public class ContactMailService {
 
     private static final String ENCODING = MCRConfiguration2
@@ -63,6 +66,9 @@ public class ContactMailService {
     private static final Boolean DEBUG = MCRConfiguration2
             .getBoolean(ContactConstants.CONF_PREFIX + "SMTP.Debug").orElse(false);
 
+    /**
+     * The mail session.
+     */
     private static final Session session;
 
     static {
@@ -75,6 +81,10 @@ public class ContactMailService {
         session.setDebug(DEBUG);
     }
 
+    /**
+     * This class bundles all properties to property object.
+     * @return bundled properties
+     */
     private static Properties getProperties() {
         final Properties properties = new Properties();
         properties.setProperty("mail.smtp.host", HOST);
@@ -90,11 +100,25 @@ public class ContactMailService {
         return properties;
     }
 
-
+    /**
+     * Sends mail without headers. 
+     * @param mail the mail
+     * @param from the sender mail
+     * @param to the recipient mail
+     * @throws MessagingException if sending fails
+     */
     public static void sendMail(EMail mail, String from, String to) throws MessagingException {
         sendMail(mail, from, to, null);
     }
 
+    /**
+     * Sends mail.
+     * @param mail the mail
+     * @param from the sender mail
+     * @param to the recipient mail
+     * @param header map of headers
+     * @throws MessagingException if sending fails
+     */
     public static void sendMail(EMail mail, String from, String to, Map<String, String> headers) throws MessagingException {
         final MimeMessage msg = new MimeMessage(session);
         msg.setFrom(new InternetAddress(from));

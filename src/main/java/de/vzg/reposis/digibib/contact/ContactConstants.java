@@ -18,9 +18,18 @@
 
 package de.vzg.reposis.digibib.contact;
 
+/**
+ * This class provides general constants.
+ */
 public class ContactConstants {
 
+    /**
+     * I18n prefix.
+     */
     public static final String CONF_PREFIX = "Digibib.ContactService.";
 
+    /**
+     * Header name for request id.
+     */
     public static final String REQUEST_HEADER_NAME = "X-Request-ID";
 }

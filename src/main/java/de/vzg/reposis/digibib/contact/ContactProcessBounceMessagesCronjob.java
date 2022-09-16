@@ -43,6 +43,9 @@ import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.mcr.cronjob.MCRCronjob;
 import org.mycore.util.concurrent.MCRFixedUserCallable;
 
+/**
+ * This class implements a cronjob that proccess bounces mails.
+ */
 public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
@@ -58,6 +61,9 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     private static final String REPORT_MIMETYPE = "multipart/report";
 
+    /**
+     * Mail inbox.
+     */
     private Folder inbox = null;
 
     @Override
@@ -130,10 +136,20 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
         return "Processes bounce messages.";
     }
 
+    /**
+     * Flags a message instance as seen.
+     * @param message the message instance
+     * @throws MessagingException if flagging failed
+     */
     private void flagMessageAsSeen(Message message) throws MessagingException {
         message.setFlag(Flags.Flag.SEEN, true);
     }
 
+    /**
+     * Returns all unreaded messages.
+     * @return the unreaded messages as array
+     * @throws MessagingException if inbox cannot be readed
+     */
     private Message[] getUnreadMessages() throws MessagingException {
         return inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
     }
