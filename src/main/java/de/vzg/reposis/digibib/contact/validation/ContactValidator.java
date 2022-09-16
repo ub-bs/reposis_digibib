@@ -56,6 +56,7 @@ public class ContactValidator {
      * @return true if recipient is valid
      */
     public boolean validateRecipient(ContactRecipient recipient) {
+        // TODO validate orcid
         return validator.validate(recipient).size() == 0;
     }
 
