@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.model;
 
+/**
+ * Enum that describes recipient origins.
+ */
 public enum ContactRecipientOrigin {
     FALLBACK, MANUAL, ORCID
 }

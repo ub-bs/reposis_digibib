@@ -20,8 +20,14 @@ package de.vzg.reposis.digibib.contact.exception;
 
 import org.mycore.common.MCRException;
 
+/**
+ * Parent class for contact exception.
+ */
 public class ContactException extends MCRException {
 
+    /**
+     * The internal errorCode which is also important for frontend.
+     */
     private String errorCode;
 
     public ContactException(String message) {

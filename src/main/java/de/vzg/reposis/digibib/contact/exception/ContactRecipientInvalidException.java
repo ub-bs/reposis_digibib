@@ -18,9 +18,12 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if the recipient is invalid.
+ */
 public class ContactRecipientInvalidException extends ContactException {
 
-    public ContactRecipientInvalidException () { // TODO
+    public ContactRecipientInvalidException () {
         this("invalid recipient.");
     }
 

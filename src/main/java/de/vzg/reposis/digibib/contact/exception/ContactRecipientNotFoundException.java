@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if the recipient does not exist.
+ */
 public class ContactRecipientNotFoundException extends ContactException {
 
     public ContactRecipientNotFoundException() {

@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if the request does not exist.
+ */
 public class ContactRequestNotFoundException extends ContactException {
 
     public ContactRequestNotFoundException() {

@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if the request is invalid.
+ */
 public class ContactRequestInvalidException extends ContactException {
 
     public ContactRequestInvalidException () {

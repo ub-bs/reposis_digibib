@@ -69,6 +69,9 @@ import org.mycore.datamodel.metadata.MCRObjectID;
             + "  ORDER BY r.created DESC"),
 })
 
+/**
+ * This class defines a model for a request.
+ */
 @Entity
 @Table(name = "contact_request")
 public class ContactRequest {
@@ -83,43 +86,84 @@ public class ContactRequest {
 
     private static final String PROP_SEND_COPY = "sendCopy";
 
+    /**
+     * Internal id.
+     */
     private long id;
 
+    /**
+     * Mail of requester.
+     */
     @Email
     @NotNull
     private String sender;
 
+    /**
+     * Name of requester.
+     */
     @NotNull
     private String name;
 
+    /**
+     * Message of requester.
+     */
     @NotNull
     private String message;
 
-    private String orcid;
+    /**
+     * Orcid of requester.
+     */
+    private String orcid; // TODO validation
 
+    /**
+     * Linked object of request.
+     */
     @NotNull
     private MCRObjectID objectID;
 
+    /**
+     * If requester wished copy.
+     */
     private boolean sendCopy = false;
 
-    /** The date of creation */
+    /**
+     * Date of creation.
+     */
     private Date created;
 
-    /** The name of creator */
+    /**
+     * Name of creator.
+     */
     private String createdBy;
 
-    /** The date of last modification */
+    /**
+     * Date of last modification.
+     */
     private Date lastModified;
 
-    /** The name of the last modifier */
+    /**
+     * Name of the last modifier.
+     */
     private String lastModifiedBy;
 
+    /**
+     * State of request.
+     */
     private ContactRequestState state;
 
+    /**
+     * List of recipients.
+     */
     private List<ContactRecipient> recipients = new ArrayList();
 
+    /**
+     * Generic comment field for request.
+     */
     private String comment;
 
+    /**
+     * Uuid of request.
+     */
     @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
@@ -132,9 +176,6 @@ public class ContactRequest {
         this.message = message;
     }
 
-    /**
-     * @return internal id
-     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contact_request_id",
@@ -144,9 +185,6 @@ public class ContactRequest {
         return id;
     }
 
-    /**
-     * @param id internal id
-     */
     @JsonProperty
     public void setId(long id) {
         this.id = id;
@@ -218,63 +256,39 @@ public class ContactRequest {
         this.sendCopy = sendCopy;
     }
 
-    /**
-     * @return date of creation
-     */
     @Column(name = "created")
     public Date getCreated() {
         return created;
     }
 
-    /**
-     * @param created date of creation
-     */
     public void setCreated(Date created) {
         this.created = created;
     }
 
-    /**
-     * @return name of creator
-     */
     @Column(name = "createdBy")
     public String getCreatedBy() {
         return createdBy;
     }
 
-    /**
-     * @param createdBy name of creator
-     */
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
     }
 
-    /**
-     * @return date of last modification
-     */
     @Column(name = "lastModified")
     public Date getLastModified() {
         return lastModified;
     }
 
-    /**
-     * @param lastModified date of last modification
-     */
     @Column(name = "lastModified")
     public void setLastModified(Date lastModified) {
         this.lastModified = lastModified;
     }
 
-    /**
-     * @return name of last modifier
-     */
     @Column(name = "lastModifiedBy")
     public String getLastModifiedBy() {
         return lastModifiedBy;
     }
 
-    /**
-     * @param lastModifiedBy name of last modifier
-     */
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
     }

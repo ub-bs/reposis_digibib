@@ -27,6 +27,9 @@ import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 
 import org.mycore.backend.jpa.MCREntityManagerProvider;
 
+/**
+ * This class implements a recipient dao.
+ */
 public class ContactRecipientDAOImpl implements ContactRecipientDAO {
 
     @Override
