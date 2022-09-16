@@ -102,7 +102,7 @@ public class ContactForwardRequestTask implements Runnable {
         } finally {
             MCRTransactionHelper.beginTransaction();
             try {
-                ContactService.getInstance().updateRequestByID(request.getId());
+                ContactService.getInstance().updateRequest(request);
                 MCRTransactionHelper.commitTransaction();
             } catch (Exception e) {
                 LOGGER.error(e);

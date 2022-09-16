@@ -88,7 +88,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
      */
     private void updateRequest(ContactRequest request) throws Exception {
         new MCRTransactionableCallable<>(() -> {
-            ContactService.getInstance().updateRequestByID(request.getId());
+            ContactService.getInstance().updateRequest(request);
             return null;
         }).call();
     }
@@ -109,7 +109,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
             MCRTransactionHelper.beginTransaction();
             try {
                 r.setState(ContactRequestState.PROCESSING);
-                service.updateRequestByID(r.getId());
+                service.updateRequest(r);
                 MCRTransactionHelper.commitTransaction();
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
@@ -136,7 +136,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
             } finally {
                 MCRTransactionHelper.beginTransaction();
                 try {
-                    service.updateRequestByID(r.getId());
+                    service.updateRequest(r);
                     MCRTransactionHelper.commitTransaction();
                 } catch (ContactRequestNotFoundException e) {
                     // request seems to be deleted in meantime, nothing to do
