@@ -96,7 +96,7 @@ public class ContactRequest {
      */
     @Email
     @NotNull
-    private String sender;
+    private String from;
 
     /**
      * Name of requester.
@@ -169,9 +169,9 @@ public class ContactRequest {
 
     public ContactRequest() { }
 
-    public ContactRequest(MCRObjectID objectID, String sender, String name, String message) {
+    public ContactRequest(MCRObjectID objectID, String from, String name, String message) {
         this.objectID = objectID;
-        this.sender = sender;
+        this.from = from;
         this.name = name;
         this.message = message;
     }
@@ -205,12 +205,12 @@ public class ContactRequest {
     @JsonProperty(value = PROP_SENDER, required = true)
     @Column(name = "sender",
         nullable = false)
-    public String getSender() {
-        return sender;
+    public String getFrom() {
+        return from;
     }
 
-    public void setSender(String sender) {
-        this.sender = sender;
+    public void setFrom(String from) {
+        this.from = from;
     }
 
     @JsonProperty(value = PROP_MESSAGE, required = true)
@@ -370,8 +370,8 @@ public class ContactRequest {
     @Override
     public String toString() {
         String result = "";
-        if (sender != null) {
-            result += "sender: " + sender + "\n";
+        if (from != null) {
+            result += "from: " + from + "\n";
         }
         if (message != null) {
             result += "message: " + message + "\n";

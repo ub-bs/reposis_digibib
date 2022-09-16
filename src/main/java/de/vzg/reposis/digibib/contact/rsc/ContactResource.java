@@ -91,7 +91,7 @@ public class ContactResource {
         ContactService.getInstance().insertRequest(request);
         if (request.isSendCopy()) {
             final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(), request.getORCID(), objectID.toString());
-            ContactMailService.sendMail(confirmationMail, request.getSender());
+            ContactMailService.sendMail(confirmationMail, request.getFrom());
         }
         return Response.ok().build();
     }

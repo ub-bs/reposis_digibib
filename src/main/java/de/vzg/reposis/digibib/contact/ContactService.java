@@ -291,12 +291,12 @@ public class ContactService {
             if (!isWarmState(request.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            final ContactRecipient outdated = request.getRecipients().stream().filter(r -> r.getEmail().equals(mail))
+            final ContactRecipient outdated = request.getRecipients().stream().filter(r -> r.getMail().equals(mail))
                     .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
                       && (!Objects.equals(outdated.getName(), recipient.getName())
                       || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
-                      || !Objects.equals(outdated.getEmail(), recipient.getEmail()))) {
+                      || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
                 throw new ContactRecipientOriginException();
             }
             recipient.setRequest(outdated.getRequest());
@@ -344,7 +344,7 @@ public class ContactService {
             if (!isWarmState(request.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> mail.equals(r.getEmail()))
+            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> mail.equals(r.getMail()))
                     .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
                 throw new ContactRecipientOriginException();
@@ -371,7 +371,7 @@ public class ContactService {
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
-            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getEmail().equals(mail))
+            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getMail().equals(mail))
                     .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             recipient.setFailed(new Date());
             recipientDAO.update(recipient);
@@ -412,12 +412,12 @@ public class ContactService {
         if (outdated == null) {
             throw new ContactRecipientNotFoundException();
         }
-        if (!outdated.getEmail().equals(recipient.getEmail()) && checkRecipientExists(recipient.getRequest().getRecipients(), recipient)) {
+        if (!outdated.getMail().equals(recipient.getMail()) && checkRecipientExists(recipient.getRequest().getRecipients(), recipient)) {
             throw new ContactRecipientAlreadyExistsException();
         }
         outdated.setName(recipient.getName());
         outdated.setOrigin(recipient.getOrigin());
-        outdated.setEmail(recipient.getEmail());
+        outdated.setMail(recipient.getMail());
         outdated.setEnabled(recipient.isEnabled());
         if (recipient.getFailed() != null) {
             outdated.setFailed(recipient.getFailed());
@@ -453,7 +453,7 @@ public class ContactService {
         if (recipients.size() == 0) {
             return false;
         }
-        return recipients.stream().filter(r -> r.getEmail().equals(recipient.getEmail())).findAny().isPresent();
+        return recipients.stream().filter(r -> r.getMail().equals(recipient.getMail())).findAny().isPresent();
     }
 
     /**
