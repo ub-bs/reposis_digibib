@@ -30,8 +30,14 @@ import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 
+/**
+ * Task that collects recipients for object id.
+ */
 public class ContactCollectRecipientsTask implements Callable<List<ContactRecipient>> {
 
+    /**
+     * The object id.
+     */
     private final MCRObjectID objectID;
 
     public ContactCollectRecipientsTask(MCRObjectID objectID) {
@@ -49,6 +55,9 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
         return recipients;
     }
 
+    /**
+     * Collect recipients from orcid.
+     */
     private void addOrcidRecipients() {
         final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
         /* getAuthors(object).stream().forEach((a) -> {
@@ -59,6 +68,11 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
         }); */
     }
 
+    /**
+     * Returns author elements for object.
+     * @param object the object
+     * @return list of author elements
+     */
     private List<Element> getAuthors(MCRObject object) {
         return new MCRMODSWrapper(object).getElements("mods:name[@type='personal']");
     }

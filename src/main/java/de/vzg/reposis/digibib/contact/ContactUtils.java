@@ -28,8 +28,21 @@ import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
 import org.mycore.common.xsl.MCRParameterCollector;
 import org.xml.sax.SAXException;
 
+/**
+ * This class implements common ulitity methods.
+ */
 public class ContactUtils {
 
+    /**
+     * This method transforms a given document with a given stylesheet name and parameters.
+     * @param input the document
+     * @param stylesheet the stylesheet name
+     * @param parameters a map of parameters
+     * @return the transformed document
+     * @throws IOException if stylesheet cannot be loaded
+     * @throws JDOMException if document is faulty
+     * @throws SAXException if stylesheet is faulty or it cannot be applied
+     */
     public static Document transform(Document input, String stylesheet, Map<String, String> parameters)
         throws IOException, JDOMException, SAXException {
         MCRJDOMContent source = new MCRJDOMContent(input);
