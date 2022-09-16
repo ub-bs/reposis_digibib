@@ -225,7 +225,7 @@ public class ContactService {
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
-            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getUuid().equals(recipientUUID))
+            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getUUID().equals(recipientUUID))
                     .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             recipient.setConfirmed(new Date());
             recipientDAO.update(recipient);

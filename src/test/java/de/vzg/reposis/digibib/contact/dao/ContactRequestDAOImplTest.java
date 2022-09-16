@@ -49,7 +49,7 @@ public class ContactRequestDAOImplTest extends MCRJPATestCase {
         dao.insert(request);
         final List<ContactRequest> requests = List.copyOf(dao.findAll());
         request = requests.get(0);
-        final UUID uuid = request.getUuid();
+        final UUID uuid = request.getUUID();
         assertNotNull(uuid);
         request = dao.findByUUID(uuid);
         assertNotNull(request);
