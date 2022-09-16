@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if the request is in wrong state.
+ */
 public class ContactRequestStateException extends ContactException {
 
     public ContactRequestStateException(String message) {

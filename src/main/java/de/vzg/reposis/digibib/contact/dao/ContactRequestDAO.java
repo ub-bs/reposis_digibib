@@ -26,8 +26,29 @@ import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import org.mycore.datamodel.metadata.MCRObjectID;
 
+/**
+ * This interfaces defindes methods for a request dao.
+ */
 public interface ContactRequestDAO extends ContactBaseDAO<ContactRequest> {
+
+    /**
+     * Returns a request collection by object id.
+     * @param objectID the object id
+     * @return the request collection
+     */
     Collection<ContactRequest> findByObjectID(MCRObjectID objectID);
+
+    /**
+     * Returns a request collection that are in given state.
+     * @param state the state
+     * @return the request collection
+     */
     Collection<ContactRequest> findByState(ContactRequestState state);
+
+    /**
+     * Returns a request by given uuid.
+     * @param uuid the uuid
+     * @return the request or null
+     */
     ContactRequest findByUUID(UUID uuid);
 }

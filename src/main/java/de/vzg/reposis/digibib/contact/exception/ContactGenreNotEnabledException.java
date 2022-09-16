@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if genre is not activated for a request.
+ */
 public class ContactGenreNotEnabledException extends ContactException {
 
     public ContactGenreNotEnabledException(String message) {

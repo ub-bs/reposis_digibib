@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if the recipient already exists.
+ */
 public class ContactRecipientAlreadyExistsException extends ContactException {
 
     public ContactRecipientAlreadyExistsException() {

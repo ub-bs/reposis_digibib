@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.exception;
 
+/**
+ * Exception if the recipient has wrong origin and can therefore not manipulated.
+ */
 public class ContactRecipientOriginException extends ContactException {
 
     public ContactRecipientOriginException() {

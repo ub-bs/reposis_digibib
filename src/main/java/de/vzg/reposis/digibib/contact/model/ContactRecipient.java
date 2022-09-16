@@ -46,28 +46,61 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
             + "  WHERE r.uuid = :uuid"),
 })
 
+/**
+ * This class defines a model for a recipient.
+ */
 @Entity
 @Table(name = "contact_recipient")
 public class ContactRecipient {
 
+    /**
+     * Internal id.
+     */
     private long id;
 
+    /**
+     * Name of the recipient.
+     */
     private String name;
 
+    /**
+     * Origin of recipient date.
+     */
     private ContactRecipientOrigin origin;
 
+    /**
+     * Recipient mail.
+     */
     private String email;
 
+    /**
+     * Parent request of recipient.
+     */
     private ContactRequest request;
 
+    /**
+     * If the request is enabled to sending
+     */
     private boolean enabled;
 
+    /**
+     * Date when the mail was bounced.
+     */
     private Date failed;
 
+    /**
+     * Date when the mail was sent.
+     */
     private Date sent;
 
+    /**
+     * Date when the recipeint has confirmed.
+     */
     private Date confirmed;
 
+    /**
+     * Uuid of recipient.
+     */
     @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 

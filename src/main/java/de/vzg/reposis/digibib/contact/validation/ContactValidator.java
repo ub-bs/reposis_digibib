@@ -25,6 +25,9 @@ import javax.validation.ValidatorFactory;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
+/**
+ * This class provies a validator service.
+ */
 public class ContactValidator {
 
     private final Validator validator;
@@ -38,14 +41,27 @@ public class ContactValidator {
         return Holder.INSTANCE;
     }
 
+    /**
+     * Validates a request against model.
+     * @param request the request
+     * @return true if request is valid
+     */
     public boolean validateRequest(ContactRequest request) {
         return validator.validate(request).size() == 0;
     }
 
+    /**
+     * Validates a recipient against model.
+     * @param recipient the recipient 
+     * @return true if recipient is valid
+     */
     public boolean validateRecipient(ContactRecipient recipient) {
         return validator.validate(recipient).size() == 0;
     }
 
+    /**
+     * Lazy instance holder.
+     */
     private static class Holder {
         private static final ContactValidator INSTANCE = new ContactValidator();
     }

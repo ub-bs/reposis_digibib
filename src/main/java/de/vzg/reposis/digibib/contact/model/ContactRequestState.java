@@ -18,6 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.model;
 
+/**
+ * Enum that describes request states.
+ */
 public enum ContactRequestState {
     RECEIVED, PROCESSING, PROCESSING_FAILED, PROCESSED, SENDING, SENDING_FAILED, SENT, CONFIRMED,
 }
