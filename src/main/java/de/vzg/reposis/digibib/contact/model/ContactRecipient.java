@@ -71,7 +71,7 @@ public class ContactRecipient {
     /**
      * Recipient mail.
      */
-    private String email;
+    private String mail;
 
     /**
      * Parent request of recipient.
@@ -106,16 +106,16 @@ public class ContactRecipient {
 
     public ContactRecipient() { }
 
-    public ContactRecipient(String name, ContactRecipientOrigin origin, String email) {
+    public ContactRecipient(String name, ContactRecipientOrigin origin, String mail) {
         this.name = name;
         this.origin = origin;
-        this.email = email;
+        this.mail = mail;
         enabled = true;
     }
 
-    public ContactRecipient(ContactRecipientOrigin origin, String email) {
+    public ContactRecipient(ContactRecipientOrigin origin, String mail) {
         this.origin = origin;
-        this.email = email;
+        this.mail = mail;
         enabled = true;
     }
 
@@ -157,14 +157,14 @@ public class ContactRecipient {
         this.origin = origin;
     }
 
-    @Column(name = "email",
+    @Column(name = "mail",
         nullable = false)
-    public String getEmail() {
-        return email;
+    public String getMail() {
+        return mail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setMail(String mail) {
+        this.mail = mail;
     }
 
     @JsonIgnore
@@ -236,7 +236,7 @@ public class ContactRecipient {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + email.hashCode();
+        hash = 31 * hash + mail.hashCode();
         hash = 31 * hash + request.hashCode();
         return hash;
     }
@@ -254,11 +254,11 @@ public class ContactRecipient {
         }
         ContactRecipient other = (ContactRecipient) obj;
         return Objects.equals(request, other.getRequest())
-                && Objects.equals(email, other.getEmail());
+                && Objects.equals(mail, other.getMail());
     }
 
     @Override
     public String toString() {
-        return String.format("ID: %d, \nEmail: %s", id, email);
+        return String.format("ID: %d, \nEmail: %s", id, mail);
     }
 }

@@ -105,7 +105,7 @@ public class RestContactRecipientResource {
     public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             ContactRecipient recipient) throws ContactException {
         ContactService.getInstance().addRecipient(requestUUID, recipient);
-        return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getEmail()))).build();
+        return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getMail()))).build();
     }
 
     @GET
@@ -129,7 +129,7 @@ public class RestContactRecipientResource {
         if (request == null) {
             throw new ContactRequestNotFoundException();
         }
-        return request.getRecipients().stream().filter(r -> mail.equals(r.getEmail())).findFirst()
+        return request.getRecipients().stream().filter(r -> mail.equals(r.getMail())).findFirst()
                 .orElseThrow(() -> new ContactRecipientNotFoundException());
     }
 

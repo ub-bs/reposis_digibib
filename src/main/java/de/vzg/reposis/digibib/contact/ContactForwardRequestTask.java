@@ -78,7 +78,7 @@ public class ContactForwardRequestTask implements Runnable {
         try {
             for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
                 final EMail mail = createMail(recipient);
-                ContactMailService.sendMail(mail, recipient.getEmail(), headers);
+                ContactMailService.sendMail(mail, recipient.getMail(), headers);
                 recipient.setSent(new Date());
                 MCRTransactionHelper.beginTransaction();
                 try {
@@ -123,7 +123,7 @@ public class ContactForwardRequestTask implements Runnable {
     private EMail createMail(ContactRecipient recipient) throws Exception {
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap();
-        properties.put("email", request.getSender());
+        properties.put("email", request.getFrom());
         properties.put("id", request.getObjectID().toString());
         properties.put("message", request.getMessage());
         properties.put("name", request.getName());
