@@ -211,7 +211,7 @@
           </xsl:otherwise>
         </xsl:choose>
       </xsl:variable>
-      <a id="{$menuID}" href="{$WebApplicationBaseURL}{$loaded_navigation_xml/menu[@id=$menuID]/item/@href}" class="nav-link {$activeClass}" >
+      <a id="{$menuID}" href="{$WebApplicationBaseURL}{substring($loaded_navigation_xml/menu[@id=$menuID]/item/@href,2)}" class="nav-link {$activeClass}" >
         <xsl:choose>
           <xsl:when test="$loaded_navigation_xml/menu[@id=$menuID]/item/label[lang($CurrentLang)] != ''">
             <xsl:value-of select="$loaded_navigation_xml/menu[@id=$menuID]/item/label[lang($CurrentLang)]" />
