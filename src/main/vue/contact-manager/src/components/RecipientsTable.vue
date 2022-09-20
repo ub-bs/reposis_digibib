@@ -36,6 +36,6 @@ import RecipientRow from './RecipientRow.vue';
 import { isWarmState } from '../utils';
 
 const store = useStore();
-const recipients = computed(() => store.getters.getCurrentRecipients);
-const request = store.state.currentRequest;
+const recipients = computed(() => store.getters['modal/getCurrentRecipients']);
+const request = store.state.modal.currentRequest;
 </script>
