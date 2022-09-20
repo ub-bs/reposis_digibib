@@ -62,7 +62,7 @@ const resetRecipient = () => {
 const addRecipient = () => {
   v.value.$validate();
   if (!v.value.$error) {
-    store.dispatch('addRecipient', recipient.value);
+    store.dispatch('modal/addRecipient', recipient.value);
     resetRecipient();
   }
 };

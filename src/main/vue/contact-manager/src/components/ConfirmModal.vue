@@ -11,14 +11,12 @@ const visible = ref(false);
 const title = ref(null);
 const message = ref(null);
 let resolvePromise;
-let rejectPromise;
 const show = (ops = {}) => {
   title.value = ops.title;
   message.value = ops.message;
   visible.value = true;
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     resolvePromise = resolve;
-    rejectPromise = reject;
   });
 };
 const ok = () => {

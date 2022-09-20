@@ -2,40 +2,9 @@
 import { ActionTree } from 'vuex';
 import axios, { AxiosError } from 'axios';
 import { State } from './state';
-import { Recipient, RequestState, ErrorResponse } from '../utils';
+import { Recipient, RequestState, ErrorResponse } from '../../utils';
 
 export const actions: ActionTree<State, State> = {
-  async fetchData({ commit }): Promise<void> {
-    commit('setApplicationErrorCode', undefined);
-    commit('setLoading', true);
-    try {
-      const response = await axios.get('api/v2/contacts');
-      commit('setRequests', response.data);
-      commit('setTotalRows', response.headers['x-total-count']);
-    } catch (error) {
-      if (error instanceof Error) {
-        commit('setApplicationErrorCode', error.message);
-      } else {
-        commit('setApplicationErrorCode', 'unknown');
-      }
-    } finally {
-      commit('setLoading', false);
-    }
-  },
-  async removeContactRequest({ commit, state }, id: string): Promise<void> {
-    commit('setApplicationErrorCode', undefined);
-    try {
-      await axios.delete(`api/v2/contacts/${id}`);
-      state.requests.splice(state.requests.findIndex((i) => i.uuid === id), 1);
-      commit('setTotalRows', state.totalRows - 1);
-    } catch (error) {
-      if (error instanceof Error) {
-        commit('setApplicationErrorCode', error.message);
-      } else {
-        commit('setApplicationErrorCode', 'unknown');
-      }
-    }
-  },
   async forwardCurrentRequest({ commit, state } ): Promise<void> {
     commit('setModalErrorCode', undefined);
     try {
@@ -100,8 +69,8 @@ export const actions: ActionTree<State, State> = {
       }
     }
   },
-  async showRequestModal({ commit, state, getters }, id: string): Promise<void> {
-    const currentRequest = getters.getRequestById(id);
+  async showRequestModal({ commit, state, rootGetters }, id: string): Promise<void> {
+    const currentRequest = rootGetters['getRequestById'](id);
     commit('setCurrentRequest', currentRequest);
     commit('setShowRequestModal', true);
   },

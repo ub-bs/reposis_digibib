@@ -64,27 +64,27 @@ const rules = computed(() => ({
   },
 }));
 const editMode = ref(false);
-const disabled = computed(() => store.state.editRecipientId !== undefined
-    && store.state.editRecipientId !== props.recipient.mail);
+const disabled = computed(() => store.state.main.editRecipientId !== undefined
+    && store.state.main.editRecipientId !== props.recipient.mail);
 const editable = computed(() => props.recipient.origin === Origin.Manual);
 const v = useVuelidate(rules, props.recipient);
 const handleEdit = () => {
-  store.commit('setEditRecipientId', props.recipient.mail);
+  store.commit('modal/setEditRecipientId', props.recipient.mail);
   editMode.value = true;
 };
 const handleCancel = () => {
-  store.commit('setEditRecipientId', undefined);
+  store.commit('modal/setEditRecipientId', undefined);
   editMode.value = false;
 };
 const handleUpdate = () => {
   v.value.$validate();
   if (!v.value.$error) {
-    store.dispatch('updateRecipient', recipientSave.value);
+    store.dispatch('modal/updateRecipient', recipientSave.value);
     editMode.value = false;
     recipientSave.value = props.recipient;
   }
 };
 const handleRemove = () => {
-  store.dispatch('removeRecipient', props.recipient.mail);
+  store.dispatch('modal/removeRecipient', props.recipient.mail);
 };
 </script>

@@ -28,9 +28,9 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 
 const store = useStore();
-const pageCount = computed(() => Math.ceil(store.state.totalRows / store.state.perPage));
-const currentPage = computed(() => store.state.currentPage);
-const totalRows = computed(() => store.state.totalRows);
+const pageCount = computed(() => Math.ceil(store.state.main.totalRows / store.state.main.perPage));
+const currentPage = computed(() => store.state.main.currentPage);
+const totalRows = computed(() => store.state.main.totalRows);
 const pages = computed(() => {
   if (totalRows.value === 0) {
     return [0];
@@ -39,7 +39,7 @@ const pages = computed(() => {
 });
 const jumpToPage = (page: number) => {
   if (page >= 0 && page < pageCount.value && page !== currentPage.value) {
-    store.commit('setCurrentPage', page);
+    store.main.commit('setCurrentPage', page);
   }
 };
 </script>

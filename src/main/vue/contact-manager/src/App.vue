@@ -40,5 +40,5 @@ import OverviewTable from './components/OverviewTable.vue';
 import Pagination from './components/Pagination.vue';
 
 const store = useStore();
-const errorCode = computed(() => store.state.applicationErrorCode);
+const errorCode = computed(() => store.state.main.applicationErrorCode);
 </script>

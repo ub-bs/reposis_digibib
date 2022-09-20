@@ -4,6 +4,9 @@
       <div v-if="errorCode" class="alert alert-danger" role="alert">
         {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
       </div>
+      <div v-if="infoCode" class="alert alert-success" role="alert">
+        {{ $t(`digibib.contact.frontend.manager.info.${infoCode}`) }}
+      </div>
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="inputName">
@@ -52,20 +55,21 @@
   </transition>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import Modal from './Modal.vue';
 import { RequestState } from '../utils';
 import RecipientsTable from './RecipientsTable.vue';
 
 const store = useStore();
-const request: Request = computed(() => store.state.currentRequest);
-const errorCode = computed(() => store.state.modalErrorCode);
+const request: Request = computed(() => store.state.modal.currentRequest);
+const errorCode = computed(() => store.state.modal.modalErrorCode);
+const infoCode = computed(() => store.state.modal.modalInfoCode);
 const close = () => {
-  store.dispatch('hideRequestModal');
+  store.dispatch('modal/hideRequestModal');
 };
 const forward = () => {
-  store.dispatch('forwardContactRequest', request.value.uuid);
+  store.dispatch('modal/forwardCurrentRequest');
 };
 const isProcessed = computed(() => request.value.state !== RequestState.Processed);
 </script>
