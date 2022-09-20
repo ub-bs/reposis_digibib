@@ -1,101 +1,106 @@
 <template>
-  <div class="row">
-    <div class="col-12">
-
-      <h2>Modulhandbücher</h2>
-
-    </div>
+  <div v-if="$route?.name?.toLowerCase()==='notfound'" class="row">
+    <router-view/>
   </div>
-  <div class="row">
-    <div class="col-12 col-md-8">
+  <template v-else>
+    <div class="row">
+      <div class="col-12">
 
-      <search />
+        <h2>Modulhandbücher</h2>
 
+      </div>
     </div>
-    <div class="col-12 col-md-4">
+    <div class="row">
+      <div class="col-12 col-md-8">
 
-      <h3>Ergebnisse einschränken</h3>
+        <search/>
 
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Suchbegriff</h4>
-        </div>
-        <div class="card-body">
-          <form class="form-inline">
-            <input
-              class="form-control mr-sm-2"
-              type="search"
-              placeholder="Schlagwort"
-              v-on:change="queryChanged"
-              v-on:keyup.prevent=""
-              v-model="queryForm">
-            <button
-              class="btn btn-outline-success my-2 my-sm-0"
-              type="submit"
-              v-on:click.prevent="queryChanged">
-              finden
-            </button>
-          </form>
-        </div>
       </div>
+      <div class="col-12 col-md-4">
 
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Kategorie</h4>
+        <h3>Ergebnisse einschränken</h3>
+
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Suchbegriff</h4>
+          </div>
+          <div class="card-body">
+            <form class="form-inline">
+              <input
+                  class="form-control mr-sm-2"
+                  type="search"
+                  placeholder="Schlagwort"
+                  v-on:change="queryChanged"
+                  v-on:keyup.prevent=""
+                  v-model="queryForm">
+              <button
+                  class="btn btn-outline-success my-2 my-sm-0"
+                  type="submit"
+                  v-on:click.prevent="queryChanged">
+                finden
+              </button>
+            </form>
+          </div>
         </div>
-        <div class="card-body">
-          <ul
-            v-if="model.classLoaded"
-            class="mm-selected-categories">
 
-            <li class="level-0">
-              <router-link v-if="model.crumbs.length>0" to="/" >
-                {{ model.i18n["digibib.module.crumb.root"] }}
-              </router-link>
-              <span v-else>
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Kategorie</h4>
+          </div>
+          <div class="card-body">
+            <ul
+                v-if="model.classLoaded"
+                class="mm-selected-categories">
+
+              <li class="level-0">
+                <router-link v-if="model.crumbs.length>0" to="/" >
+                  {{ model.i18n["digibib.module.crumb.root"] }}
+                </router-link>
+                <span v-else>
                 {{ model.i18n["digibib.module.crumb.root"] }}
               </span>
-            </li>
+              </li>
 
-            <li
-              v-for="(crumb, index) in model.crumbs"
-              :key="crumb.to"
-              :class="'level-' + parseInt(index + 1)">
-              <router-link v-if="model.crumbs.length !== index + 1" :to="crumb.to">
-                {{ crumb.label }}
-              </router-link>
-              <span v-else>
+              <li
+                  v-for="(crumb, index) in model.crumbs"
+                  :key="crumb.to"
+                  :class="'level-' + parseInt(index + 1)">
+                <router-link v-if="model.crumbs.length !== index + 1" :to="crumb.to">
+                  {{ crumb.label }}
+                </router-link>
+                <span v-else>
                 {{ crumb.label }}
               </span>
-            </li>
+              </li>
 
-          </ul>
-          <router-view/>
+            </ul>
+            <router-view/>
+          </div>
         </div>
-      </div>
 
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">Archiv</h4>
-        </div>
-        <div class="card-body">
-          <div
-            class="form-check form-check-inline">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              id="activeModuleCheckbox"
-              v-model="model.onlyValid">
-            <label
-              class="form-check-label font-weight-normal"
-              for="activeModuleCheckbox">
-              {{model.i18n["digibib.module.active.modules"]}}
-            </label>
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Archiv</h4>
+          </div>
+          <div class="card-body">
+            <div
+                class="form-check form-check-inline">
+              <input
+                  class="form-check-input"
+                  type="checkbox"
+                  id="activeModuleCheckbox"
+                  v-model="model.onlyValid">
+              <label
+                  class="form-check-label font-weight-normal"
+                  for="activeModuleCheckbox">
+                {{model.i18n["digibib.module.active.modules"]}}
+              </label>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
+  </template>
 </template>
 
 <script lang="ts">
@@ -151,6 +156,10 @@ export default class App extends Vue {
     this.model.classifications["discipline"] = discipline;
     this.model.classifications["mir_genres"] = genre;
     this.model.classifications["mir_institutes"] = mir_institutes;
+
+    if ((this?.$route?.name as string)?.toLowerCase() === 'notfound') {
+      return;
+    }
 
     this.$watch(
         () => this.$route.params,
@@ -299,6 +308,10 @@ export default class App extends Vue {
     this.convertFacetToStringArray(this.model.subjects, this.model.search.facet_counts.facet_fields["digibib.mods.subject.string"]);
     this.convertFacetToStringArray(this.model.faculties, this.model.search.facet_counts.facet_fields["digibib.mods.faculty"]);
     this.convertFacetToStringArray(this.model.disciplines, this.model.search.facet_counts.facet_fields["digibib.mods.discipline"]);
+
+    if (this.model.subjects.length == 0 || this.model.faculties.length == 0 || this.model.disciplines.length == 0) {
+      window.location.replace((window as any).webApplicationBaseURL + "handbuecher/404");
+    }
 
     this.model.searchComplete = true;
   }

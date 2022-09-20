@@ -3,8 +3,14 @@ import FacultyView from '../views/FacultyView.vue'
 import DisciplineView from "@/views/DisciplineView.vue";
 import SubjectView from "@/views/SubjectView.vue";
 import PlainView from "@/views/PlainView.vue";
+import NotFoundView from "@/views/NotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/404',
+    name: 'notfound',
+    component: NotFoundView
+  },
   {
     path: '/',
     name: 'faculty',
