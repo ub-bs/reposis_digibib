@@ -35,16 +35,9 @@ export const actions: ActionTree<State, State> = {
       console.error(error);
     }
   },
-  async forwardContactRequest({ commit }, id: string): Promise<void> {
+  async forwardContactRequest({ commit }, id: string): Promise<void> { // TODO
     try {
       await axios.post(`api/v2/contacts/${id}/forward`);
-    } catch (error) {
-      console.error(error);
-    }
-  },
-  async rejectContactRequest({ commit }, id: string): Promise<void> {
-    try {
-      await axios.post(`api/v2/contacts/${id}/reject`);
     } catch (error) {
       console.error(error);
     }

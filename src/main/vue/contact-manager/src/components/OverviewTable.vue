@@ -54,22 +54,33 @@
     </tbody>
   </table>
   <RequestModal v-if="showRequestModal" />
+  <ConfirmModal ref="confirmModal" />
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
+import ConfirmModal from './ConfirmModal.vue';
 import RequestModal from './RequestModal.vue';
 
 const store = useStore();
+const { t } = useI18n();
 const requests = computed(() => store.getters.getCurrentRequests);
-const currentId = ref(null);
+const confirmModal = ref(null);
 const showRequestModal = computed(() => store.state.showRequestModal);
 const viewRequest = (id: string) => {
-  currentId.value = id;
   store.dispatch('showRequestModal', id);
 };
-const removeRequest = (id: string) => {
-  store.dispatch('removeContactRequest', id);
+const removeRequest = async (id: string) => {
+  const ok = await confirmModal.value.show({
+    title: t('digibib.contact.frontend.manager.confirmDelete.title'),
+    message: t('digibib.contact.frontend.manager.confirmDelete.message', {
+      requestID: id,
+    }),
+  });
+  if (ok) {
+    store.dispatch('removeContactRequest', id);
+  }
 };
 </script>

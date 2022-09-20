@@ -8,7 +8,7 @@
               <h5 class="modal-title">
                 {{ title }}
               </h5>
-              <button v-if="!okOnly" type="button" class="close" aria-label="Close">
+              <button v-if="!hideHeaderClose" type="button" class="close" aria-label="Close">
                 <span aria-hidden="true" @click="close">&times;</span>
               </button>
             </slot>
@@ -18,6 +18,9 @@
           </div>
           <div class="modal-footer">
             <slot name="footer">
+              <button v-if="!okOnly" type="button" class="btn btn-secondary" @click="cancel">
+                {{ cancelTitle }}
+              </button>
               <button type="button" class="btn btn-primary" @click="ok">
                 {{ okTitle }}
               </button>
@@ -37,6 +40,10 @@ const props = defineProps({
     type: String,
     default: 'OK',
   },
+  cancelTitle: {
+    type: String,
+    default: 'Cancel',
+  },
   okOnly: {
     type: Boolean,
     default: false,
@@ -53,8 +60,12 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  hideHeaderClose: {
+    type: Boolean,
+    default: false,
+  },
 });
-const emit = defineEmits(['close', 'ok']);
+const emit = defineEmits(['close', 'ok', 'cancel']);
 const close = () => {
   if (!props.busy) {
     emit('close');
@@ -63,6 +74,11 @@ const close = () => {
 const ok = () => {
   if (!props.busy) {
     emit('ok');
+  }
+};
+const cancel = () => {
+  if (!props.busy) {
+    emit('cancel');
   }
 };
 const style = computed(() => {
