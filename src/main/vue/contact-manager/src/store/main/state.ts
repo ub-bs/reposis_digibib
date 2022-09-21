@@ -1,19 +1,21 @@
 import { Request } from '../../utils';
 
 export type State = {
+  isBooted: boolean;
   loading: boolean;
-  currentPage: number;
-  totalRows: number;
-  perPage: number;
-  requests: Request[];
   errorCode: string | undefined;
+  currentPage: number;
+  perPage: number;
+  totalRows: number;
+  requests: Request[];
 }
 
 export const state: State = {
+  isBooted: false,
   loading: false,
-  totalRows: 0,
-  perPage: 8,
-  requests: [],
-  currentPage: 0,
   errorCode: undefined,
+  currentPage: 0,
+  perPage: 8,
+  totalRows: 0,
+  requests: [],
 };

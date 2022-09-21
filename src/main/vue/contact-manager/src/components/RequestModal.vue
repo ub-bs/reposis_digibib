@@ -6,7 +6,7 @@
       </div>
       <div v-if="infoCode" class="alert alert-success" role="alert">
         {{ $t(`digibib.contact.frontend.manager.info.${infoCode}`) }}
-      </div>
+      </div> <!-- TODO add warning if request is in received state -->
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="inputName">
