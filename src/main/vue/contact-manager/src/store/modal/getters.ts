@@ -1,12 +1,13 @@
 import { GetterTree } from 'vuex';
-import { Recipient, Request } from '../../utils';
+import { RootState } from '../types';
+import { Recipient } from '../../utils';
 import { State } from './state';
 
 export type Getters = {
   getCurrentRecipients(state: State): Array<Recipient>;
 }
 
-export const getters: GetterTree<State, State> & Getters = {
+export const getters: GetterTree<State, RootState> & Getters = {
   getCurrentRecipients: (state) => {
     if (state.currentRequest === undefined) {
       return [];

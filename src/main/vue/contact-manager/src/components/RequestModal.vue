@@ -55,7 +55,7 @@
   </transition>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed } from 'vue';
 import { useStore } from 'vuex';
 import Modal from './Modal.vue';
 import { RequestState } from '../utils';
@@ -63,8 +63,8 @@ import RecipientsTable from './RecipientsTable.vue';
 
 const store = useStore();
 const request: Request = computed(() => store.state.modal.currentRequest);
-const errorCode = computed(() => store.state.modal.modalErrorCode);
-const infoCode = computed(() => store.state.modal.modalInfoCode);
+const errorCode = computed(() => store.state.modal.errorCode);
+const infoCode = computed(() => store.state.modal.infoCode);
 const close = () => {
   store.dispatch('modal/hideRequestModal');
 };
