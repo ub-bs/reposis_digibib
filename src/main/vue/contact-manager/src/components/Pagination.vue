@@ -1,7 +1,7 @@
 <template>
   <nav>
     <ul class="pagination">
-      <li class="page-item" :class="currentPage === 0 ? 'disabled' : ''"
+      <li class="page-item" :class="currentPage == 0 ? 'disabled' : ''"
           @click="jumpToPage(currentPage - 1)">
         <a class="page-link" href="#">
           {{ $t('digibib.contact.frontend.manager.button.previous') }}
@@ -13,7 +13,8 @@
           {{ page + 1 }}
         </a>
       </li>
-      <li class="page-item" :class="currentPage === pageCount - 1 ? 'disabled' : ''"
+      <li class="page-item"
+          :class="currentPage === pageCount - 1 || totalRows == 0 ? 'disabled' : ''"
           @click="jumpToPage(currentPage + 1)">
         <a class="page-link" href="#">
           {{ $t('digibib.contact.frontend.manager.button.next') }}

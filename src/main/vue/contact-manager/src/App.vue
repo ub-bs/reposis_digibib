@@ -15,7 +15,7 @@
         </div>
       </div>
     </div>
-    <template v-if="errorCode !== 'unauthorizedError'">
+    <template v-if="isBooted && errorCode !== 'unauthorizedError'">
       <div v-if="requests.length === 0" class="row">
         <div class="col">
           <div class="alert alert-warning text-center" role="alert">
@@ -49,6 +49,7 @@ const errorCode = computed(() => store.state.main.errorCode);
 const loading = computed(() => store.state.main.loading);
 const totalRows = computed(() => store.state.main.totalRows);
 const currentPage = computed(() => store.state.main.currentPage);
+const isBooted = computed(() => store.state.main.isBooted);
 const perPage = computed(() => store.state.main.perPage);
 const handlePageChange = (page) => {
   store.commit('main/SET_CURRENT_PAGE', page);

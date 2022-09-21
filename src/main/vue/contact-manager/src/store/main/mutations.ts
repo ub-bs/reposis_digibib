@@ -5,6 +5,7 @@ import { Request } from '../../utils';
 
 export type Mutations<S = State> = {
   [MutationTypes.SET_REQUESTS](state: S, payload: Request[]): void;
+  [MutationTypes.SET_IS_BOOTED](state: S, payload: boolean): void;
   [MutationTypes.SET_LOADING](state: S, payload: boolean): void;
   [MutationTypes.SET_CURRENT_PAGE](state: S, payload: number): void;
   [MutationTypes.SET_PER_PAGE](state: S, payload: number): void;
@@ -15,6 +16,9 @@ export type Mutations<S = State> = {
 export const mutations: MutationTree<State> & Mutations = {
   [MutationTypes.SET_REQUESTS](state: State, requests: Request[]): void {
     state.requests = requests;
+  },
+  [MutationTypes.SET_IS_BOOTED](state: State, booted: boolean): void {
+    state.isBooted = booted;
   },
   [MutationTypes.SET_LOADING](state: State, loading: boolean): void {
     state.loading = loading;

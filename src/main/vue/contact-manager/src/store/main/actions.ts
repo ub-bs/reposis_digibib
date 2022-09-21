@@ -6,6 +6,7 @@ import { getRequests, removeRequest } from '../../api/service';
 
 export const actions: ActionTree<State, RootState> = {
   async fetchData({ state, commit }): Promise<void> {
+    commit(MutationTypes.SET_LOADING, true);
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     try {
       const offset = state.currentPage * state.perPage;
@@ -19,9 +20,12 @@ export const actions: ActionTree<State, RootState> = {
       } else {
         commit(MutationTypes.SET_ERROR_CODE, 'unknown');
       }
+    } finally {
+      commit(MutationTypes.SET_LOADING, false);
     }
   },
   async removeContactRequest({ commit, state }, id: string): Promise<void> {
+    commit(MutationTypes.SET_LOADING, true);
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     try {
       await removeRequest(id);
@@ -43,6 +47,8 @@ export const actions: ActionTree<State, RootState> = {
       } else {
         commit(MutationTypes.SET_ERROR_CODE, 'unknown');
       }
+    } finally {
+      commit(MutationTypes.SET_LOADING, false);
     }
   },
 };

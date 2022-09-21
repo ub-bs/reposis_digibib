@@ -23,7 +23,6 @@ if (process.env.NODE_ENV === 'development') {
   app.use(i18n);
   app.use(store);
   app.mount('#app');
-  store.commit('main/SET_LOADING', true);
   store.commit('main/SET_PER_PAGE', 1);
   let authError = false;
   if (process.env.NODE_ENV === 'development') {
@@ -42,5 +41,5 @@ if (process.env.NODE_ENV === 'development') {
   } else {
     store.commit('main/SET_ERROR_CODE', 'unknown');
   }
-  store.commit('main/SET_LOADING', false);
+  store.commit('main/SET_IS_BOOTED', true);
 })();
