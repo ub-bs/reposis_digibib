@@ -17,6 +17,9 @@ axios.interceptors.response.use((response) => response, (error) => {
     if (error.response.status === 401 || error.response.status === 403) {
       return Promise.reject(new Error('unauthorizedError'));
     }
+    if (error.request) {
+      return Promise.reject(new Error('unknown'));
+    }
     const { errorCode } = (error.response.data as ErrorResponse);
     if (errorCode && errorCode !== 'UNKNOWN') {
       return Promise.reject(new Error(errorCode));
@@ -35,26 +38,36 @@ axios.interceptors.response.use((response) => response, (error) => {
     },
   });
   app.use(i18n);
-  store.commit('setCurrentPage', 0);
-  store.commit('setPerPage', 4);
   app.use(store);
   app.mount('#app');
+  store.commit('main/SET_LOADING', true);
+  store.commit('main/SET_CURRENT_PAGE', 0);
+  store.commit('main/SET_PER_PAGE', 4);
 
+  let authError = false;
   if (process.env.NODE_ENV === 'development') {
     axios.defaults.headers.common.Authorization = 'Basic YWRtaW5pc3RyYXRvcjphbGxlc3dpcmRndXQ=';
-    await store.dispatch('fetchData');
   } else {
     try {
       const jwtResponse = await axios.get('rsc/jwt');
       const jwtToken = jwtResponse.data.access_token;
       axios.defaults.headers.common.Authorization = `Bearer ${jwtToken}`;
-      await store.dispatch('fetchData');
     } catch (error) {
-      if (error instanceof Error) {
-        store.commit('setApplicationErrorCode', error.message);
-      } else {
-        store.commit('setApplicationErrorCode', 'unknown');
-      }
+      authError = true;
     }
   }
+  if (!authError) {
+    try {
+      await store.dispatch('main/fetchData');
+    } catch (error) {
+      if (error instanceof Error) {
+        store.commit('main/SET_ERROR_CODE', error.message);
+      } else {
+        store.commit('main/SET_ERROR_CODE', 'unknown');
+      }
+    }
+  } else {
+    store.commit('main/SET_ERROR_CODE', 'unknown');
+  }
+  store.commit('main/SET_LOADING', false);
 })();

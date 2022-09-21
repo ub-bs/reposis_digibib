@@ -59,18 +59,23 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useStore, mapGetters } from 'vuex';
+import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import ConfirmModal from './ConfirmModal.vue';
 import RequestModal from './RequestModal.vue';
 
+defineProps({
+  requests: {
+    required: true,
+  },
+});
 const store = useStore();
 const { t } = useI18n();
-const requests = computed(() => store.getters.getCurrentRequests);
 const confirmModal = ref(null);
 const showRequestModal = computed(() => store.state.modal.showRequestModal);
 const viewRequest = (id: string) => {
-  store.dispatch('modal/showRequestModal', id);
+  const request = store.getters['main/getRequestById'](id);
+  store.dispatch('modal/showRequestModal', request);
 };
 const removeRequest = async (id: string) => {
   const ok = await confirmModal.value.show({
@@ -79,6 +84,8 @@ const removeRequest = async (id: string) => {
       requestID: id,
     }),
   });
-  store.dispatch('removeContactRequest', id);
+  if (ok) {
+    store.dispatch('main/removeContactRequest', id);
+  }
 };
 </script>
