@@ -23,7 +23,8 @@
         <RecipientRow v-if="!isWarmState(request.state)" :recipient="recipient" />
         <EditRecipientRow v-else :recipient="recipient" />
       </template>
-      <AddRecipientRow v-if="isWarmState(request.state)" />
+      <AddRecipientRow
+        v-if="isWarmState(request.state) && request.state !== RequestState.Received" />
     </tbody>
   </table>
 </template>
@@ -33,7 +34,7 @@ import { useStore } from 'vuex';
 import AddRecipientRow from './AddRecipientRow.vue';
 import EditRecipientRow from './EditRecipientRow.vue';
 import RecipientRow from './RecipientRow.vue';
-import { isWarmState } from '../utils';
+import { isWarmState, RequestState } from '../utils';
 
 const store = useStore();
 const recipients = computed(() => store.getters['modal/getCurrentRecipients']);

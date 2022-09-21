@@ -25,21 +25,32 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
-import { useStore } from 'vuex';
 
-const store = useStore();
-const pageCount = computed(() => Math.ceil(store.state.main.totalRows / store.state.main.perPage));
-const currentPage = computed(() => store.state.main.currentPage);
-const totalRows = computed(() => store.state.main.totalRows);
+const props = defineProps({
+  totalRows: {
+    type: [Number, String],
+    required: true,
+  },
+  currentPage: {
+    type: [Number, String],
+    required: true,
+  },
+  perPage: {
+    type: [Number, String],
+    required: true,
+  },
+});
+const emit = defineEmits(['change']);
+const pageCount = computed(() => Math.ceil(props.totalRows / props.perPage));
 const pages = computed(() => {
-  if (totalRows.value === 0) {
+  if (props.totalRows === 0) {
     return [0];
   }
   return Array.from(Array(pageCount.value).keys());
 });
 const jumpToPage = (page: number) => {
-  if (page >= 0 && page < pageCount.value && page !== currentPage.value) {
-    store.main.commit('setCurrentPage', page);
+  if (page >= 0 && page < pageCount.value && page !== props.currentPage) {
+    emit('change', page);
   }
 };
 </script>
