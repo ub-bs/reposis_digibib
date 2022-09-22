@@ -34,13 +34,17 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue';
-import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
 import { Origin } from '../utils';
-import { ActionTypes } from '../store/modal/action-types';
 
-const store = useStore();
+defineProps({
+  disabled: {
+    type: Boolean,
+    required: true,
+  },
+});
+const emit = defineEmits(['add']);
 const rules = computed(() => ({
   name: {
     required,
@@ -55,16 +59,15 @@ const rules = computed(() => ({
 }));
 const recipient = ref({});
 const v = useVuelidate(rules, recipient);
-const disabled = computed(() => store.state.editRecipientId !== undefined);
-const resetRecipient = () => {
+const reset = () => {
   v.value.$reset();
   recipient.value = {};
 };
 const addRecipient = async () => {
   v.value.$validate();
   if (!v.value.$error) {
-    await store.dispatch(`modal/${ActionTypes.ADD_RECIPIENT}`, recipient.value);
-    resetRecipient();
+    emit('add', recipient.value);
+    reset();
   }
 };
 </script>

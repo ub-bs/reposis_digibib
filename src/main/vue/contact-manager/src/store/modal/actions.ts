@@ -79,7 +79,7 @@ export const actions: ActionTree<State, RootState> & Actions = {
         await updateRecipient(state.currentRequest.uuid, recipient.uuid, recipient);
         const { recipients } = state.currentRequest;
         state.currentRequest.recipients = recipients
-          .filter((item) => (item.mail !== state.editRecipientId));
+          .filter((item) => (item.uuid !== recipient.uuid));
         state.currentRequest.recipients.push(recipient);
       }
     } catch (error) {
@@ -88,8 +88,6 @@ export const actions: ActionTree<State, RootState> & Actions = {
       } else {
         commit(MutationTypes.SET_ERROR_CODE, 'unknown');
       }
-    } finally {
-      commit(MutationTypes.SET_EDIT_RECIPIENT_ID, undefined);
     }
   },
   async [ActionTypes.REMOVE_RECIPIENT]({ commit, state }, recipientUUID: string): Promise<void> {

@@ -20,23 +20,52 @@
     </thead>
     <tbody>
       <template v-for="recipient in recipients" :key="recipient">
-        <RecipientRow v-if="!isWarmState(request.state)" :recipient="recipient" />
-        <EditRecipientRow v-else :recipient="recipient" />
+        <RecipientRow v-if="!isWarmState(request.state)" readOnly :recipient="recipient" />
+        <RecipientRow v-else :recipient="recipient" @edit="handleEdit"
+          :editUUID="editUUID" @delete="handleDelete" @update="handleUpdate"/>
       </template>
       <AddRecipientRow
-        v-if="isWarmState(request.state) && request.state !== RequestState.Received" />
+        v-if="isWarmState(request.state) && request.state !== RequestState.Received"
+        :disabled="editUUID !== undefined" @add="handleAdd" />
     </tbody>
   </table>
+  <ConfirmModal ref="confirmModal" />
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
 import AddRecipientRow from './AddRecipientRow.vue';
-import EditRecipientRow from './EditRecipientRow.vue';
+import ConfirmModal from './ConfirmModal.vue';
 import RecipientRow from './RecipientRow.vue';
-import { isWarmState, RequestState } from '../utils';
+import { ActionTypes } from '../store/modal/action-types';
+import { isWarmState, Recipient, RequestState } from '../utils';
 
 const store = useStore();
+const { t } = useI18n();
+const confirmModal = ref(null);
 const recipients = computed(() => store.getters['modal/getCurrentRecipients']);
 const request = store.state.modal.currentRequest;
+const editUUID = ref();
+const handleEdit = (uuid: string) => {
+  editUUID.value = uuid;
+};
+const handleAdd = (recipient: Recipient) => {
+  store.dispatch(`modal/${ActionTypes.ADD_RECIPIENT}`, recipient);
+};
+const handleUpdate = (recipient: Recipient) => {
+  store.dispatch(`modal/${ActionTypes.UPDATE_RECIPIENT}`, recipient);
+  editUUID.value = undefined;
+};
+const handleDelete = async (recipientUUID: string) => {
+  const ok = await confirmModal.value.show({
+    title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
+    message: t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
+      mail: store.getters['modal/getRecipientByUUID'](recipientUUID).mail,
+    }),
+  });
+  if (ok) {
+    store.dispatch(`modal/${ActionTypes.REMOVE_RECIPIENT}`, recipientUUID);
+  }
+};
 </script>
