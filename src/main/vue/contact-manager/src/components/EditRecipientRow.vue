@@ -78,10 +78,10 @@ const handleCancel = () => {
   store.commit(`modal/${MutationTypes.SET_EDIT_RECIPIENT_ID}`, undefined);
   editMode.value = false;
 };
-const handleUpdate = () => {
+const handleUpdate = async () => {
   v.value.$validate();
   if (!v.value.$error) {
-    store.dispatch(`modal/${ActionTypes.UPDATE_RECIPIENT}`, recipientSave.value);
+    await store.dispatch(`modal/${ActionTypes.UPDATE_RECIPIENT}`, recipientSave.value);
     editMode.value = false;
     recipientSave.value = props.recipient;
   }
