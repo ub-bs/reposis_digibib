@@ -81,8 +81,8 @@ const viewRequest = (id: string) => {
 };
 const removeRequest = async (id: string) => {
   const ok = await confirmModal.value.show({
-    title: t('digibib.contact.frontend.manager.confirmDelete.title'),
-    message: t('digibib.contact.frontend.manager.confirmDelete.message', {
+    title: t('digibib.contact.frontend.manager.confirm.deleteRequest.title'),
+    message: t('digibib.contact.frontend.manager.confirm.deleteRequest.message', {
       requestID: id,
     }),
   });

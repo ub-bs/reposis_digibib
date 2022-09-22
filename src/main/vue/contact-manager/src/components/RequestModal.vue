@@ -53,24 +53,38 @@
       </template>
     </Modal>
   </transition>
+  <ConfirmModal ref="confirmModal" />
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
+import { useI18n } from 'vue-i18n';
+import ConfirmModal from './ConfirmModal.vue';
 import Modal from './Modal.vue';
-import { RequestState } from '../utils';
 import RecipientsTable from './RecipientsTable.vue';
 import { ActionTypes } from '../store/modal/action-types';
+import { RequestState } from '../utils';
 
 const store = useStore();
+const { t } = useI18n();
+const confirmModal = ref(null);
 const request: Request = computed(() => store.state.modal.currentRequest);
 const errorCode = computed(() => store.state.modal.errorCode);
 const infoCode = computed(() => store.state.modal.infoCode);
 const close = () => {
   store.dispatch(`modal/${ActionTypes.HIDE_REQUEST}`);
 };
-const forward = () => {
-  store.dispatch(`modal/${ActionTypes.FORWARD_REQUEST}`);
+const forward = async () => {
+  let ok = true;
+  if (request.value.recipients.filter((r) => r.enabled === true).length === 0) {
+    ok = await confirmModal.value.show({
+      title: t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.title'),
+      message: t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.message'),
+    });
+  }
+  if (ok) {
+    store.dispatch(`modal/${ActionTypes.FORWARD_REQUEST}`);
+  }
 };
 const isProcessed = computed(() => request.value.state !== RequestState.Processed);
 </script>
