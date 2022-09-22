@@ -38,6 +38,7 @@ import { useStore } from 'vuex';
 import useVuelidate from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
 import { Origin } from '../utils';
+import { ActionTypes } from '../store/modal/action-types';
 
 const store = useStore();
 const rules = computed(() => ({
@@ -62,7 +63,7 @@ const resetRecipient = () => {
 const addRecipient = () => {
   v.value.$validate();
   if (!v.value.$error) {
-    store.dispatch('modal/addRecipient', recipient.value);
+    store.dispatch(`modal/${ActionTypes.ADD_RECIPIENT}`, recipient.value);
     resetRecipient();
   }
 };

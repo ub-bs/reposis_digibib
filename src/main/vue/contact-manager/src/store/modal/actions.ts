@@ -1,8 +1,11 @@
-import { ActionTree } from 'vuex';
+import { ActionContext, ActionTree } from 'vuex';
 import { RootState } from '../types';
 import { State } from './state';
-import { Recipient, RequestState } from '../../utils';
+import { Request, Recipient, RequestState } from '../../utils';
+import { ActionTypes } from './action-types';
 import { MutationTypes } from './mutation-types';
+import { Mutations } from './mutations';
+import { Getters } from './getters';
 import {
   forwardRequest,
   addRecipient,
@@ -10,8 +13,29 @@ import {
   removeRecipient,
 } from '../../api/service';
 
-export const actions: ActionTree<State, RootState> = {
-  async forwardCurrentRequest({ commit, state }): Promise<void> {
+type AugmentedActionContext = {
+  commit<K extends keyof Mutations>(
+    key: K,
+    payload: Parameters<Mutations[K]>[1],
+  ): ReturnType<Mutations[K]>
+  getters<K extends keyof Getters>(
+    key: K,
+    payload: Parameters<Getters[K]>[1],
+  ): ReturnType<Getters[K]>
+} & Omit<ActionContext<State, RootState>, 'commit'>
+
+export interface Actions {
+  [ActionTypes.FORWARD_REQUEST]({ commit, state }: AugmentedActionContext): void,
+  [ActionTypes.ADD_RECIPIENT]({ commit, state }: AugmentedActionContext, payload: Recipient): void,
+  [ActionTypes.UPDATE_RECIPIENT]({ commit, state }:
+    AugmentedActionContext, payload: Recipient): void,
+  [ActionTypes.REMOVE_RECIPIENT]({ commit, state }: AugmentedActionContext, payload: string): void,
+  [ActionTypes.SHOW_REQUEST]({ commit }: AugmentedActionContext, payload: Request): void,
+  [ActionTypes.HIDE_REQUEST]({ commit }: AugmentedActionContext): void,
+}
+
+export const actions: ActionTree<State, RootState> & Actions = {
+  async [ActionTypes.FORWARD_REQUEST]({ commit, state }): Promise<void> {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
@@ -28,7 +52,7 @@ export const actions: ActionTree<State, RootState> = {
       }
     }
   },
-  async addRecipient({ commit, state }, recipient: Recipient): Promise<void> {
+  async [ActionTypes.ADD_RECIPIENT]({ commit, state }, recipient: Recipient): Promise<void> {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
@@ -45,7 +69,7 @@ export const actions: ActionTree<State, RootState> = {
       }
     }
   },
-  async updateRecipient({ commit, state }, recipient: Recipient): Promise<void> {
+  async [ActionTypes.UPDATE_RECIPIENT]({ commit, state }, recipient: Recipient): Promise<void> {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
@@ -66,7 +90,7 @@ export const actions: ActionTree<State, RootState> = {
       commit(MutationTypes.SET_EDIT_RECIPIENT_ID, undefined);
     }
   },
-  async removeRecipient({ commit, state }, recipientId: string): Promise<void> {
+  async [ActionTypes.REMOVE_RECIPIENT]({ commit, state }, recipientId: string): Promise<void> {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
@@ -83,11 +107,11 @@ export const actions: ActionTree<State, RootState> = {
       }
     }
   },
-  showRequestModal({ commit }, request: Request): void {
+  [ActionTypes.SHOW_REQUEST]({ commit }, request: Request): void {
     commit(MutationTypes.SET_CURRENT_REQUEST, request);
     commit(MutationTypes.SET_SHOW_REQUEST_MODAL, true);
   },
-  hideRequestModal({ commit }): void {
+  [ActionTypes.HIDE_REQUEST]({ commit }): void {
     commit(MutationTypes.SET_SHOW_REQUEST_MODAL, false);
     commit(MutationTypes.SET_CURRENT_REQUEST, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);

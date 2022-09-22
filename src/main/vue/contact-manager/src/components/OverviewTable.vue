@@ -63,6 +63,8 @@ import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import ConfirmModal from './ConfirmModal.vue';
 import RequestModal from './RequestModal.vue';
+import { ActionTypes as MainActionTypes } from '../store/main/action-types';
+import { ActionTypes as ModalActionTypes } from '../store/modal/action-types';
 
 defineProps({
   requests: {
@@ -75,7 +77,7 @@ const confirmModal = ref(null);
 const showRequestModal = computed(() => store.state.modal.showRequestModal);
 const viewRequest = (id: string) => {
   const request = store.getters['main/getRequestById'](id);
-  store.dispatch('modal/showRequestModal', request);
+  store.dispatch(`modal/${ModalActionTypes.SHOW_REQUEST}`, request);
 };
 const removeRequest = async (id: string) => {
   const ok = await confirmModal.value.show({
@@ -85,7 +87,7 @@ const removeRequest = async (id: string) => {
     }),
   });
   if (ok) {
-    store.dispatch('main/removeContactRequest', id);
+    store.dispatch(`main/${MainActionTypes.REMOVE_REQUEST}`, id);
   }
 };
 </script>
