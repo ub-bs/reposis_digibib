@@ -58,9 +58,10 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
       if (state.currentRequest) {
-        await addRecipient(state.currentRequest.uuid, recipient);
-        // recipient.id = response.headers.location.split('/').pop();
-        state.currentRequest.recipients.push(recipient);
+        const r = recipient;
+        const response = await addRecipient(state.currentRequest.uuid, r);
+        r.uuid = response.headers.location.split('/').pop();
+        state.currentRequest.recipients.push(r);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -74,8 +75,8 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
-      if (state.currentRequest && state.editRecipientId) {
-        await updateRecipient(state.currentRequest.uuid, state.editRecipientId, recipient);
+      if (state.currentRequest && recipient.uuid) {
+        await updateRecipient(state.currentRequest.uuid, recipient.uuid, recipient);
         const { recipients } = state.currentRequest;
         state.currentRequest.recipients = recipients
           .filter((item) => (item.mail !== state.editRecipientId));
@@ -91,14 +92,14 @@ export const actions: ActionTree<State, RootState> & Actions = {
       commit(MutationTypes.SET_EDIT_RECIPIENT_ID, undefined);
     }
   },
-  async [ActionTypes.REMOVE_RECIPIENT]({ commit, state }, recipientId: string): Promise<void> {
+  async [ActionTypes.REMOVE_RECIPIENT]({ commit, state }, recipientUUID: string): Promise<void> {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
       if (state.currentRequest) {
-        await removeRecipient(state.currentRequest.uuid, recipientId);
+        await removeRecipient(state.currentRequest.uuid, recipientUUID);
         state.currentRequest.recipients = state.currentRequest.recipients
-          .filter((item) => (item.mail !== recipientId));
+          .filter((item) => (item.uuid !== recipientUUID));
       }
     } catch (error) {
       if (error instanceof Error) {

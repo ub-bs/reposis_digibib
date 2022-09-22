@@ -269,6 +269,46 @@ public class ContactService {
     }
 
     /**
+     * Updates recipient of request by uuid.
+     * @param requestUUID the request uuid
+     * @param recipientUUID the recipient mail
+     * @param recipient the recipient
+     * @throws ContactRecipientInvalidException if recipient is invalid
+     * @throws ContactRecipientAlreadyExistsException if recipient with given mail already exists
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
+     * @throws ContactRecipientOriginException if request has wrong origin
+     */
+    public void updateRecipientByUUID(UUID requestUUID, UUID recipientUUID, ContactRecipient recipient)
+            throws ContactRequestNotFoundException, ContactRecipientOriginException, ContactRecipientNotFoundException,
+            ContactRequestStateException, ContactRecipientAlreadyExistsException {
+        try {
+            writeLock.lock();
+            final ContactRequest request = requestDAO.findByUUID(requestUUID);
+            if (request == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            if (!isWarmState(request.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
+            }
+            final ContactRecipient outdated = recipientDAO.findByUUID(recipientUUID);
+            if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
+                      && (!Objects.equals(outdated.getName(), recipient.getName())
+                      || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
+                      || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
+                throw new ContactRecipientOriginException();
+            }
+            recipient.setRequest(outdated.getRequest());
+            recipient.setId(outdated.getId());
+            recipient.setFailed(null); // sanitizing
+            recipient.setSent(null);
+            update(recipient);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    /**
      * Updates recipient of request by given mail.
      * @param requestUUID the request uuid
      * @param mail the recipient mail
@@ -326,15 +366,16 @@ public class ContactService {
     }
 
     /**
-     * Removes recipient of request by given mail.
+     * Removes recipient of request by given uuid.
      * @param requestUUID the request uuid
-     * @param mail the recipient mail
+     * @param recipientUUID the recipient uuid
      * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRecipientNotFoundException if recipient cannot be found
      * @throws ContactRequestStateException if request is in wrong state
      * @throws ContactRecipientOriginException if request has wrong origin
      */
-    public void removeRecipientByMail(UUID requestUUID, String mail) throws ContactRequestNotFoundException,
-            ContactRecipientOriginException, ContactRequestStateException {
+    public void removeRecipientByUUID(UUID requestUUID, UUID recipientUUID) throws ContactRequestNotFoundException,
+            ContactRecipientOriginException, ContactRecipientNotFoundException, ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -344,8 +385,10 @@ public class ContactService {
             if (!isWarmState(request.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            final ContactRecipient recipient = request.getRecipients().stream().filter(r -> mail.equals(r.getMail()))
-                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+            final ContactRecipient recipient = recipientDAO.findByUUID(recipientUUID);
+            if (recipient == null) {
+                new ContactRecipientNotFoundException();
+            }
             if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
                 throw new ContactRecipientOriginException();
             }

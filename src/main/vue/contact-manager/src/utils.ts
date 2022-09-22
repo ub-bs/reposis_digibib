@@ -15,6 +15,7 @@ export enum RequestState {
 }
 
 export type Recipient = {
+  uuid: string | undefined;
   name: string;
   origin: Origin;
   mail: string;

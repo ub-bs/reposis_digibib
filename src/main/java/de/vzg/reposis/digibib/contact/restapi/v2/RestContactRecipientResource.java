@@ -105,7 +105,7 @@ public class RestContactRecipientResource {
     public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             ContactRecipient recipient) throws ContactException {
         ContactService.getInstance().addRecipient(requestUUID, recipient);
-        return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getMail()))).build();
+        return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getUUID().toString()))).build();
     }
 
     @GET
@@ -136,7 +136,7 @@ public class RestContactRecipientResource {
     @PUT
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
     @Operation(
-        summary = "Updates contact request recipient by mail",
+        summary = "Updates contact request recipient by uuid",
         responses = {
             @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
                 schema = @Schema(implementation = ContactRecipient.class))),
@@ -150,16 +150,16 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response updateRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientUUID,
             ContactRecipient recipient) throws ContactException {
-        ContactService.getInstance().updateRecipientByMail(requestUUID, mail, recipient);
+        ContactService.getInstance().updateRecipientByUUID(requestUUID, recipientUUID, recipient);
         return Response.noContent().build();
     }
 
     @DELETE
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
     @Operation(
-        summary = "Deletes contact request recipient by mail",
+        summary = "Deletes contact request recipient by uuid",
         responses = {
             @ApiResponse(responseCode = "201", content = @Content(mediaType = MediaType.APPLICATION_JSON,
                 schema = @Schema(implementation = ContactRecipient.class))),
@@ -173,8 +173,8 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response removeRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactException {
-        ContactService.getInstance().removeRecipientByMail(requestUUID, mail);
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID recipientUUID) throws ContactException {
+        ContactService.getInstance().removeRecipientByUUID(requestUUID, recipientUUID);
         return Response.noContent().build();
     }
 }
