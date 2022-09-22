@@ -87,6 +87,6 @@ const handleUpdate = async () => {
   }
 };
 const handleRemove = () => {
-  store.dispatch(`modal/${ActionTypes.REMOVE_RECIPIENT}`, props.recipient.mail);
+  store.dispatch(`modal/${ActionTypes.REMOVE_RECIPIENT}`, props.recipient.uuid);
 };
 </script>
