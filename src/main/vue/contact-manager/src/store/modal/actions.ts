@@ -26,7 +26,8 @@ type AugmentedActionContext = {
 
 export interface Actions {
   [ActionTypes.FORWARD_REQUEST]({ commit, state }: AugmentedActionContext): void,
-  [ActionTypes.ADD_RECIPIENT]({ commit, state }: AugmentedActionContext, payload: Recipient): void,
+  [ActionTypes.ADD_RECIPIENT]({ commit, state }:
+    AugmentedActionContext, payload: Recipient): Promise<void>,
   [ActionTypes.UPDATE_RECIPIENT]({ commit, state }:
     AugmentedActionContext, payload: Recipient): void,
   [ActionTypes.REMOVE_RECIPIENT]({ commit, state }: AugmentedActionContext, payload: string): void,

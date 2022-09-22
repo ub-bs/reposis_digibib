@@ -60,10 +60,10 @@ const resetRecipient = () => {
   v.value.$reset();
   recipient.value = {};
 };
-const addRecipient = () => {
+const addRecipient = async () => {
   v.value.$validate();
   if (!v.value.$error) {
-    store.dispatch(`modal/${ActionTypes.ADD_RECIPIENT}`, recipient.value);
+    await store.dispatch(`modal/${ActionTypes.ADD_RECIPIENT}`, recipient.value);
     resetRecipient();
   }
 };
