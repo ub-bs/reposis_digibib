@@ -60,16 +60,17 @@ import { useStore } from 'vuex';
 import Modal from './Modal.vue';
 import { RequestState } from '../utils';
 import RecipientsTable from './RecipientsTable.vue';
+import { ActionTypes } from '../store/modal/action-types';
 
 const store = useStore();
 const request: Request = computed(() => store.state.modal.currentRequest);
 const errorCode = computed(() => store.state.modal.errorCode);
 const infoCode = computed(() => store.state.modal.infoCode);
 const close = () => {
-  store.dispatch('modal/hideRequestModal');
+  store.dispatch(`modal/${ActionTypes.HIDE_REQUEST}`);
 };
 const forward = () => {
-  store.dispatch('modal/forwardCurrentRequest');
+  store.dispatch(`modal/${ActionTypes.FORWARD_REQUEST}`);
 };
 const isProcessed = computed(() => request.value.state !== RequestState.Processed);
 </script>

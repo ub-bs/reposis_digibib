@@ -1,5 +1,5 @@
 <template>
-  <tr :class="recipient.failed ? 'table-danger' : ''">
+  <tr>
     <td class="col-3">
       <input v-if="editable && editMode" class="form-control form-control-sm" type="text"
           v-model="recipientSave.name" :class="v.name.$error ? 'is-invalid' : ''" />
@@ -42,6 +42,8 @@ import useVuelidate from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
 import { Origin } from '../utils';
 import EditToolbar from './EditToolbar.vue';
+import { ActionTypes } from '../store/modal/action-types';
+import { MutationTypes } from '../store/modal/mutation-types';
 
 const props = defineProps({
   recipient: {
@@ -69,22 +71,22 @@ const disabled = computed(() => store.state.main.editRecipientId !== undefined
 const editable = computed(() => props.recipient.origin === Origin.Manual);
 const v = useVuelidate(rules, props.recipient);
 const handleEdit = () => {
-  store.commit('modal/setEditRecipientId', props.recipient.mail);
+  store.commit(`modal/${MutationTypes.SET_EDIT_RECIPIENT_ID}`, props.recipient.mail);
   editMode.value = true;
 };
 const handleCancel = () => {
-  store.commit('modal/setEditRecipientId', undefined);
+  store.commit(`modal/${MutationTypes.SET_EDIT_RECIPIENT_ID}`, undefined);
   editMode.value = false;
 };
 const handleUpdate = () => {
   v.value.$validate();
   if (!v.value.$error) {
-    store.dispatch('modal/updateRecipient', recipientSave.value);
+    store.dispatch(`modal/${ActionTypes.UPDATE_RECIPIENT}`, recipientSave.value);
     editMode.value = false;
     recipientSave.value = props.recipient;
   }
 };
 const handleRemove = () => {
-  store.dispatch('modal/removeRecipient', props.recipient.mail);
+  store.dispatch(`modal/${ActionTypes.REMOVE_RECIPIENT}`, props.recipient.mail);
 };
 </script>

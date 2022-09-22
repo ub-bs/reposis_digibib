@@ -1,5 +1,5 @@
 <template>
-  <tr :class="recipient.failed ? 'table-danger' : ''">
+  <tr :class="recipient.failed ? 'table-danger' : (recipient.confirmed ? 'table-success' : '')">
     <td class="col-3">
       {{ recipient.name }}
     </td>

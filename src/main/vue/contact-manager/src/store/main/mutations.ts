@@ -10,7 +10,7 @@ export type Mutations<S = State> = {
   [MutationTypes.SET_CURRENT_PAGE](state: S, payload: number): void;
   [MutationTypes.SET_PER_PAGE](state: S, payload: number): void;
   [MutationTypes.SET_TOTAL_ROWS](state: S, payload: number): void;
-  [MutationTypes.SET_ERROR_CODE](state: S, payload: string): void;
+  [MutationTypes.SET_ERROR_CODE](state: S, payload: string | undefined): void;
 }
 
 export const mutations: MutationTree<State> & Mutations = {
@@ -32,7 +32,7 @@ export const mutations: MutationTree<State> & Mutations = {
   [MutationTypes.SET_TOTAL_ROWS](state: State, totalRows: number): void {
     state.totalRows = totalRows;
   },
-  [MutationTypes.SET_ERROR_CODE](state: State, errorCode: string): void {
+  [MutationTypes.SET_ERROR_CODE](state: State, errorCode: string | undefined): void {
     state.errorCode = errorCode;
   },
 };
