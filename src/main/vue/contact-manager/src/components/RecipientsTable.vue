@@ -12,7 +12,7 @@
           {{ $t('digibib.contact.frontend.manager.label.email') }}
         </th>
         <th class="col-1 text-center">
-          {{ $t('digibib.contact.frontend.manager.label.state') }}
+          {{ $t('digibib.contact.frontend.manager.label.forward') }}
         </th>
         <th class="col-1">
         </th>
@@ -20,12 +20,12 @@
     </thead>
     <tbody>
       <template v-for="recipient in recipients" :key="recipient">
-        <RecipientRow v-if="!isWarmState(request.state)" readOnly :recipient="recipient" />
-        <RecipientRow v-else :recipient="recipient" @edit="handleEdit"
-          :editUUID="editUUID" @delete="handleDelete" @update="handleUpdate"/>
+        <RecipientRow :recipient="recipient" :editUUID="editUUID"
+          :isForwarded="request.state === RequestState.Forwarded" @delete="handleDelete"
+          @edit="handleEdit" @update="handleUpdate" @mail="handleMail" />
       </template>
       <AddRecipientRow
-        v-if="isWarmState(request.state) && request.state !== RequestState.Received"
+        v-if="request.state === RequestState.Processed"
         :disabled="editUUID !== undefined" @add="handleAdd" />
     </tbody>
   </table>
@@ -39,7 +39,7 @@ import AddRecipientRow from './AddRecipientRow.vue';
 import ConfirmModal from './ConfirmModal.vue';
 import RecipientRow from './RecipientRow.vue';
 import { ActionTypes } from '../store/modal/action-types';
-import { isWarmState, Recipient, RequestState } from '../utils';
+import { Recipient, RequestState } from '../utils';
 
 const store = useStore();
 const { t } = useI18n();
@@ -67,5 +67,8 @@ const handleDelete = async (recipientUUID: string) => {
   if (ok) {
     store.dispatch(`modal/${ActionTypes.REMOVE_RECIPIENT}`, recipientUUID);
   }
+};
+const handleMail = () => {
+  console.log('TODO');
 };
 </script>
