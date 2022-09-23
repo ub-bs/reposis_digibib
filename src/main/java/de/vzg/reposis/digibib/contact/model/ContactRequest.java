@@ -149,7 +149,7 @@ public class ContactRequest {
     /**
      * State of request.
      */
-    private ContactRequestState state;
+    private int state;
 
     /**
      * List of recipients.
@@ -293,9 +293,8 @@ public class ContactRequest {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    @Enumerated(EnumType.STRING)
     public ContactRequestState getState() {
-        return state;
+        return ContactRequestState.resolve(state);
     }
 
     @PrePersist
@@ -314,7 +313,7 @@ public class ContactRequest {
     }
 
     public void setState(ContactRequestState state) {
-        this.state = state;
+        this.state = state.getValue();
     }
 
     @OneToMany(fetch = FetchType.EAGER,
@@ -379,7 +378,7 @@ public class ContactRequest {
         if (name != null) {
             result += "name: " + name + "\n";
         }
-        result += "state: " + state.toString() + "\n";
+        result += "state: " + state + "\n";
         if (orcid != null) {
             result += "orcid: " + orcid + "\n";
         }

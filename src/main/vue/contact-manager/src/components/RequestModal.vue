@@ -46,7 +46,7 @@
       <template v-slot:footer>
         <div class="btn-group">
           <button type="button" class="btn btn-success" @click="forward"
-              :disabled="isProcessed">
+              :disabled="request.state !== RequestState.Processed">
             {{ $t('digibib.contact.frontend.manager.button.forward') }}
           </button>
         </div>
@@ -86,7 +86,6 @@ const forward = async () => {
     store.dispatch(`modal/${ActionTypes.FORWARD_REQUEST}`);
   }
 };
-const isProcessed = computed(() => request.value.state !== RequestState.Processed);
 </script>
 <style>
 .modal-enter-from {
