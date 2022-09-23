@@ -6,7 +6,11 @@
       </div>
       <div v-if="infoCode" class="alert alert-success" role="alert">
         {{ $t(`digibib.contact.frontend.manager.info.${infoCode}`) }}
-      </div> <!-- TODO add warning if request is in received state -->
+      </div>
+      <div v-if="request.state < RequestState.Processed" class="alert alert-warning"
+          role="alert">
+        {{ $t(`digibib.contact.frontend.manager.warning.requestNotProcessed`) }}
+      </div>
       <div class="form-row">
         <div class="form-group col-md-4">
           <label for="inputName">
@@ -46,7 +50,7 @@
       <template v-slot:footer>
         <div class="btn-group">
           <button type="button" class="btn btn-success" @click="forward"
-              :disabled="request.state !== RequestState.Processed">
+              :disabled="forwardDisabled">
             {{ $t('digibib.contact.frontend.manager.button.forward') }}
           </button>
         </div>
@@ -71,6 +75,12 @@ const confirmModal = ref(null);
 const request: Request = computed(() => store.state.modal.currentRequest);
 const errorCode = computed(() => store.state.modal.errorCode);
 const infoCode = computed(() => store.state.modal.infoCode);
+const forwardDisabled = computed(() => {
+  if (request.value.state === RequestState.Sending_Failed) {
+    return false;
+  }
+  return request.value.state !== RequestState.Processed;
+});
 const close = () => {
   store.dispatch(`modal/${ActionTypes.HIDE_REQUEST}`);
 };

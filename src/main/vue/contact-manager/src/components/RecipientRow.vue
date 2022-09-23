@@ -30,8 +30,8 @@
       <input v-else type="checkbox" v-model="recipientSave.enabled" disabled/>
     </td>
     <td class="col-1 text-center align-middle">
-      <EditToolbar :disabled='disabled' :editMode='editUUID === recipient.uuid'
-          :edit="updateable" :remove="updateable" :mail="mailable" @edit="handleEdit"
+      <EditToolbar :editMode='editUUID === recipient.uuid'
+          :edit="updateable" :remove="removeable" :mail="mailable" @edit="handleEdit"
           @cancel="handleCancel" @update="handleUpdate" @remove="handleRemove" @mail="handleMail" />
     </td>
   </tr>
@@ -50,7 +50,11 @@ const props = defineProps({
   },
   editUUID: {
   },
-  isForwarded: {
+  isProcessed: {
+    type: Boolean,
+    default: false,
+  },
+  isSent: {
     type: Boolean,
     default: false,
   },
@@ -86,16 +90,22 @@ const rowStyle = computed(() => {
   return '';
 });
 const updateable = computed(() => {
-  if (props.isForwared != null) {
+  if (disabled.value) {
     return false;
   }
-  if (props.recipient.origin !== Origin.Manual) {
+  return props.isProcessed;
+});
+const removeable = computed(() => {
+  if (!updateable.value) {
     return false;
   }
-  return props.recipient.sent != null;
+  return props.recipient.origin === Origin.Manual;
 });
 const mailable = computed(() => {
-  if (props.isForwared != null) {
+  if (disabled.value) {
+    return false;
+  }
+  if (!props.isSent) {
     return false;
   }
   if (props.recipient.confirmed != null) {
