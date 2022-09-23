@@ -1,18 +1,21 @@
 <template>
   <div v-if="!editMode" class="btn-group">
-    <button class="btn pr-1 pb-0 pt-0 border-0" @click="$emit('edit')" :disabled="disabled">
+    <button class="btn shadow-none pr-1 pb-0 pt-0 border-0" @click="$emit('edit')"
+        :disabled="disabled">
       <i class="fas fa-edit"></i>
     </button>
-    <button class="btn pl-1 pb-0 pt-0 border-0" @click="$emit('remove')"
-          :disabled="disabled || !remove">
+    <button class="btn shadow-none pl-1 pb-0 pt-0 border-0" @click="$emit('remove')"
+        :disabled="disabled || !remove">
       <i class="fas fa-trash"></i>
     </button>
   </div>
   <div v-else class="btn-group">
-    <button class="btn pr-1 pb-0 pt-0 border-0" @click="$emit('update')" :disabled="disabled">
+    <button class="btn shadow-none pr-1 pb-0 pt-0 border-0" @click="$emit('update')"
+        :disabled="disabled">
       <i class="fas fa-check"></i>
     </button>
-    <button class="btn pl-1 pb-0 pt-0 border-0" @click="$emit('cancel')" :disabled="disabled">
+    <button class="btn shadow-none pl-1 pb-0 pt-0 border-0" @click="$emit('cancel')"
+        :disabled="disabled">
       <i class="fas fa-ban"></i>
     </button>
   </div>
