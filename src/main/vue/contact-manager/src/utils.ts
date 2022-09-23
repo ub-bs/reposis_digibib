@@ -4,14 +4,20 @@ export enum Origin {
 }
 
 export enum RequestState {
-  Received = 'RECEIVED',
-  Processing = 'PROCESSING',
-  Processing_Failed = 'PROCESSING_FAILED',
-  Processed = 'PROCESSED',
-  Sending = 'SENDING',
-  Sending_Failed = 'SENDING_FAILED',
-  Sent = 'SENT',
-  Confirmed = 'CONFIRMED',
+  Received = 0,
+  Processing = 1,
+  Processing_Failed = 2,
+  Processed = 3,
+  Sending = 4,
+  Sending_Failed = 5,
+  Sent = 6,
+  Confirmed = 7,
+}
+
+export namespace RequestState {
+  export function toString(state: RequestState): string {
+    return RequestState[state];
+  }
 }
 
 export type Recipient = {

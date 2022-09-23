@@ -169,17 +169,32 @@ public class ContactService {
      * Removes a contact request by given uuid.
      * @param uuid the request uuid
      * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
      */
-    public void removeRequestByUUID(UUID requestUUID) throws ContactRequestNotFoundException {
+    public void removeRequestByUUID(UUID requestUUID) throws ContactRequestNotFoundException,
+            ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
             if (request == null) {
                 throw new ContactRequestNotFoundException();
             }
-            requestDAO.remove(request);
+            remove(request);
         } finally {
             writeLock.unlock();
+        }
+    }
+
+    /**
+     * Removes a contact request.
+     * @param request the request
+     * @throws ContactRequestStateException if request is in wrong state
+     */
+    private void remove(ContactRequest request) throws ContactRequestStateException {
+        if (request.getState().getValue() <= ContactRequestState.PROCESSED.getValue()) {
+            requestDAO.remove(request);
+        } else {
+            throw new ContactRequestStateException("A forwarded request cannot be deleted.");
         }
     }
 

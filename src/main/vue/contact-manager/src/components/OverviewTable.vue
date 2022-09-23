@@ -38,16 +38,17 @@
           {{ item.email }}
         </td>
         <td class="col-1 align-middle">
-          {{ item.state }}
+          {{ RequestState.toString(item.state) }}
         </td>
         <td class="col-1 align-middle">
           <div class="btn-group">
-            <a class="btn pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item.uuid)">
+            <button class="btn pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item.uuid)">
               <i class="fa fa-eye"></i>
-            </a>
-            <a class="btn pt-0 pb-0 pl-1 pr-2" @click="removeRequest(item.uuid)">
+            </button>
+            <button class="btn pt-0 pb-0 pl-1 pr-2" @click="removeRequest(item.uuid)"
+              :disabled="item.state > RequestState.Processed">
               <i class="fa fa-trash"></i>
-            </a>
+            </button>
           </div>
         </td>
       </tr>
@@ -63,6 +64,7 @@ import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import ConfirmModal from './ConfirmModal.vue';
 import RequestModal from './RequestModal.vue';
+import { RequestState } from '../utils';
 import { ActionTypes as MainActionTypes } from '../store/main/action-types';
 import { ActionTypes as ModalActionTypes } from '../store/modal/action-types';
 

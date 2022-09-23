@@ -165,7 +165,7 @@ public class RestContactResource {
         })
     @MCRRequireTransaction
     public Response removeRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
-            throws ContactRequestNotFoundException {
+            throws ContactException {
         ContactService.getInstance().removeRequestByUUID(requestUUID);
         return Response.noContent().build();
     }
