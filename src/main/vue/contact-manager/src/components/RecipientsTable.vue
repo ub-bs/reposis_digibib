@@ -21,8 +21,10 @@
     <tbody>
       <template v-for="recipient in recipients" :key="recipient">
         <RecipientRow :recipient="recipient" :editUUID="editUUID"
-          :isForwarded="request.state === RequestState.Forwarded" @delete="handleDelete"
-          @edit="handleEdit" @update="handleUpdate" @mail="handleMail" />
+          :isProcessed="request.state === RequestState.Processed
+          || request.state === RequestState.Sending_Failed"
+          :isSent="request.state === RequestState.Sent || request.state === RequestState.Confirmed"
+          @delete="handleDelete" @edit="handleEdit" @update="handleUpdate" @mail="handleMail" />
       </template>
       <AddRecipientRow
         v-if="request.state === RequestState.Processed"
