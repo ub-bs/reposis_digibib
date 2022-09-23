@@ -22,10 +22,12 @@
     </td>
     <td class="col-1 text-center align-middle">
       <div class="btn-group">
-        <button class="btn pr-1 pb-0 pt-0 border-0" @click="addRecipient" :disabled="disabled">
+        <button class="btn shadow-none pr-1 pb-0 pt-0 border-0" @click="addRecipient"
+            :disabled="disabled">
           <i class="fas fa-check"></i>
         </button>
-        <button class="btn pl-1 pb-0 pt-0 border-0" @click="resetRecipient" :disabled="disabled">
+        <button class="btn shadow-none pl-1 pb-0 pt-0 border-0" @click="resetRecipient"
+            :disabled="disabled">
           <i class="fas fa-ban"></i>
         </button>
       </div>
