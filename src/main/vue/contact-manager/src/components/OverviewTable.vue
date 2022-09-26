@@ -1,46 +1,54 @@
 <template>
   <table class="table table-striped">
+    <colgroup>
+      <col style="width: 25%">
+      <col style="width: 15%">
+      <col style="width: 15%">
+      <col style="width: 30%">
+      <col style="width: 10%">
+      <col style="width: 5%">
+    </colgroup>
     <thead>
       <tr>
-        <th scope="col" class="col-3">
+        <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.id') }}
         </th>
-        <th scope="col" class="col-2">
+        <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.created') }}
         </th>
-        <th scope="col" class="col-2">
+        <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.objectID') }}
         </th>
-        <th scope="col" class="col-3">
+        <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.email') }}
         </th>
-        <th scope="col" class="col-1">
+        <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.state') }}
         </th>
-        <th scope="col" class="col-1">
+        <th scope="col">
         </th>
       </tr>
     </thead>
     <tbody v-if="requests">
       <tr v-for="item in requests" :key="item">
-        <td class="col-3 align-middle">
+        <td>
           {{ item.uuid }}
         </td>
-        <td class="col-2 align-middle">
+        <td>
           {{ new Date(item.created).toLocaleString() }}
         </td>
-        <td class="col-2 align-middle">
+        <td class="align-middle">
           <a :href="'receive/' + item.objectID" target="_blank">
             {{ item.objectID }}
           </a>
         </td>
-        <td class="col-3 align-middle">
+        <td>
           {{ item.email }}
         </td>
-        <td class="col-1 align-middle">
+        <td>
           {{ RequestState.toString(item.state) }}
         </td>
-        <td class="col-1 align-middle">
+        <td>
           <div class="btn-group">
             <button class="btn shadow-none pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item.uuid)">
               <i class="fa fa-eye"></i>
