@@ -7,6 +7,7 @@ import org.jdom2.input.SAXBuilder;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Entities;
+import org.mycore.common.MCRException;
 import org.mycore.common.content.MCRContent;
 import org.mycore.common.content.MCRJDOMContent;
 import org.mycore.common.content.MCRURLContent;
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.StringReader;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -29,9 +29,20 @@ import java.util.stream.Collectors;
 
 /**
  * <p>This Servlet can be bound to a URL where a Vue Build App with a createWebHistory() router is present.</p>
- * <p></p>
- * It will pass through resources that exists at this path like javascript and css, but at every other path it will deliver a modified version of the index.html.
- * The index.html is convert to xhtml and then will be wrapped with a MyCoReWebPage, which will produce the surrounding default layout.</p>
+ * <code>
+ * &lt;servlet&gt;<br>
+ * &nbsp;&nbsp;&lt;servlet-name&gt;MCRVueRootServlet&lt;/servlet-name&gt;<br>
+ * &nbsp;&nbsp;&lt;servlet-class&gt;org.mycore.webtools.vue.MCRVueRootServlet&lt;/servlet-class&gt;<br>
+ * &lt;/servlet&gt;<br>
+ * &lt;servlet-mapping&gt;<br>
+ * &nbsp;&nbsp;&lt;servlet-name&gt;MCRVueRootServlet&lt;/servlet-name&gt;<br>
+ * &nbsp;&nbsp;&lt;url-pattern&gt;/handbuecher/*&lt;/url-pattern&gt;<br>
+ * &lt;/servlet-mapping&gt;<br>
+ * </code>
+ * <p>It will pass through resources that exists at this path like javascript and css, but at every other path it will
+ * deliver a modified version of the index.html.
+ * The index.html is convert to xhtml and then will be wrapped with a MyCoReWebPage, which will produce the surrounding
+ * default layout.</p>
  * <p>In the example the vue app is located in: src/main/vue/modul_handbuecher</p>
  * <p>The Router needs to be configured like this:</p>
  * <code>
@@ -46,16 +57,6 @@ import java.util.stream.Collectors;
  * })
  * </code>
  * <p>The String "handbuecher/" is the location of the vue app below the java application context.</p>
- * <code>
- * &lt;servlet&gt;<br>
- * &nbsp;&nbsp;&lt;servlet-name&gt;MCRVueRootServlet&lt;/servlet-name&gt;<br>
- * &nbsp;&nbsp;&lt;servlet-class&gt;org.mycore.vue.MCRVueRootServlet&lt;/servlet-class&gt;<br>
- * &lt;/servlet&gt;<br>
- * &lt;servlet-mapping&gt;<br>
- * &nbsp;&nbsp;&lt;servlet-name&gt;MCRVueRootServlet&lt;/servlet-name&gt;<br>
- * &nbsp;&nbsp;&lt;url-pattern&gt;/handbuecher/*&lt;/url-pattern&gt;<br>
- * &lt;/servlet-mapping&gt;<br>
- * </code>
  * <p>To change the output destination of the vue compiler process you need to change the vue.config.js</p>
  * <code>
  * const { defineConfig } = require('@vue/cli-service')<br>
@@ -78,7 +79,8 @@ public class MCRVueRootServlet extends MCRContentServlet {
             return new MCRURLContent(resource);
         } else {
             URL indexResource = getServletContext().getResource(indexHtmlPath);
-            org.jdom2.Document mycoreWebpage = getIndexDocument(indexResource, MCRFrontendUtil.getBaseURL() + removeLeadingSlash(req.getServletPath()));
+            org.jdom2.Document mycoreWebpage = getIndexDocument(indexResource,
+                    MCRFrontendUtil.getBaseURL() + removeLeadingSlash(req.getServletPath()));
             if (pathInfo != null && pathInfo.endsWith("/404")) {
                 /* if there is a requested route which does not exist, the app should
                  * redirect to this /404 route the get the actual 404 Code.
@@ -106,20 +108,23 @@ public class MCRVueRootServlet extends MCRContentServlet {
             document.outerHtml();
             org.jdom2.Document jdom = new SAXBuilder().build(new StringReader(document.outerHtml()));
             Element jdomRoot = jdom.getRootElement();
-            List<Element> scriptAndLinks = jdomRoot.getChild("head").getChildren().stream().filter(el -> el.getName().equals("script") || el.getName().equals("link")).collect(Collectors.toList()).stream().map(Element::detach).peek(el -> {
-                String hrefAttr = el.getAttributeValue("href");
-                if (hrefAttr != null) {
-                    el.setAttribute("href", absoluteServletPath + "/" + hrefAttr);
-                }
+            List<Element> scriptAndLinks = jdomRoot.getChild("head").getChildren().stream()
+                    .filter(el -> el.getName().equals("script") || el.getName().equals("link"))
+                    .collect(Collectors.toList())
+                    .stream().map(Element::detach).peek(el -> {
+                        String hrefAttr = el.getAttributeValue("href");
+                        if (hrefAttr != null) {
+                            el.setAttribute("href", absoluteServletPath + "/" + hrefAttr);
+                        }
 
-                String srcAttr = el.getAttributeValue("src");
-                if (srcAttr != null) {
-                    el.setAttribute("src", absoluteServletPath + "/" + srcAttr);
-                }
-            }).collect(Collectors.toList());
+                        String srcAttr = el.getAttributeValue("src");
+                        if (srcAttr != null) {
+                            el.setAttribute("src", absoluteServletPath + "/" + srcAttr);
+                        }
+                    }).collect(Collectors.toList());
 
-
-            List<Element> bodyContent = new ArrayList<>(jdomRoot.getChild("body").getChildren()).stream().map(Element::detach).collect(Collectors.toList());
+            List<Element> bodyContent = new ArrayList<>(jdomRoot.getChild("body").getChildren()).stream()
+                    .map(Element::detach).collect(Collectors.toList());
 
             Element webPage = new Element("MyCoReWebPage");
             org.jdom2.Document webpageDoc = new org.jdom2.Document(webPage);
@@ -131,17 +136,8 @@ public class MCRVueRootServlet extends MCRContentServlet {
 
             return webpageDoc;
         } catch (JDOMException e) {
-            throw new RuntimeException(e);
+            throw new MCRException(e);
         }
     }
-
-    private void sendFile(HttpServletResponse resp, URL resource) throws IOException {
-        try (OutputStream os = resp.getOutputStream()) {
-            try (InputStream is = resource.openStream()) {
-                is.transferTo(os);
-            }
-        }
-    }
-
 
 }
