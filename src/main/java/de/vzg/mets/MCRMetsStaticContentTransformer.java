@@ -3,6 +3,7 @@ package de.vzg.mets;
 import org.mycore.datamodel.metadata.MCRMetaLinkID;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
+import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.datamodel.niofs.MCRPath;
 import org.mycore.services.staticcontent.MCRObjectStaticContentGenerator;
 
@@ -20,7 +21,9 @@ public class MCRMetsStaticContentTransformer extends MCRObjectStaticContentGener
             return false;
         }
 
-        return object.getStructure().getDerivates().stream().map(MCRMetaLinkID::getXLinkToID)
+        return object.getStructure().getDerivates().stream().map(MCRMetaLinkID::getXLinkHref)
+                .filter(MCRObjectID::isValid)
+                .map(MCRObjectID::getInstance)
                 .filter(MCRMetadataManager::exists)
                 .anyMatch(der -> Files.exists(MCRPath.getPath(der.toString(), "/mets.xml")));
     }
