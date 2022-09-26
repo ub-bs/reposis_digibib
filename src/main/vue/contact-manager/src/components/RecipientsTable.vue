@@ -1,20 +1,27 @@
 <template>
   <table class="table table-striped">
+    <colgroup>
+      <col style="width: 40%">
+      <col style="width: 5%">
+      <col style="width: 40%">
+      <col style="width: 10%">
+      <col style="width: 5%">
+    </colgroup>
     <thead>
       <tr>
-        <th class="col-3">
+        <th>
           {{ $t('digibib.contact.frontend.manager.label.name') }}
         </th>
-        <th class="col-2">
+        <th>
           {{ $t('digibib.contact.frontend.manager.label.origin') }}
         </th>
-        <th class="col-4">
+        <th>
           {{ $t('digibib.contact.frontend.manager.label.email') }}
         </th>
-        <th class="col-1 text-center">
+        <th class="text-center">
           {{ $t('digibib.contact.frontend.manager.label.forward') }}
         </th>
-        <th class="col-1">
+        <th>
         </th>
       </tr>
     </thead>
