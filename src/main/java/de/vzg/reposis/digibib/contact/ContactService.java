@@ -136,6 +136,10 @@ public class ContactService {
             final Date currentDate = new Date();
             request.setCreated(currentDate);
             request.setLastModified(currentDate);
+            final String orcid = request.getORCID();
+            if (orcid != null) {
+                request.setORCID(orcid.trim());
+            }
             final String currentUserID = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
             request.setRecipients(new ArrayList()); // sanitize recipients
             request.setCreatedBy(currentUserID);

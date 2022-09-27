@@ -45,6 +45,8 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import de.vzg.reposis.digibib.contact.validation.ValidORCID;
+
 import org.mycore.backend.jpa.MCRObjectIDConverter;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
@@ -113,7 +115,8 @@ public class ContactRequest {
     /**
      * Orcid of requester.
      */
-    private String orcid; // TODO validation
+    @ValidORCID
+    private String orcid;
 
     /**
      * Linked object of request.
