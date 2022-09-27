@@ -51,7 +51,6 @@ public class ContactForwardRequestTask implements Runnable {
      * Name of mail sender.
      */
 
-
     /**
      * Name of stylesheet to transform mail.
      */
@@ -76,7 +75,8 @@ public class ContactForwardRequestTask implements Runnable {
         final Map<String, String> headers = new HashMap();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getUUID().toString());
         try {
-            for (ContactRecipient recipient : request.getRecipients().stream().filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
+            for (ContactRecipient recipient : request.getRecipients().stream()
+                    .filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
                 final EMail mail = createMail(recipient);
                 ContactMailService.sendMail(mail, recipient.getMail(), headers);
                 recipient.setSent(new Date());
@@ -116,6 +116,7 @@ public class ContactForwardRequestTask implements Runnable {
 
     /**
      * Creates mail for recipient with given properties.
+     * 
      * @param recipient the recipient
      * @return the mail
      * @throws Exception if mail transformation fails
@@ -135,7 +136,8 @@ public class ContactForwardRequestTask implements Runnable {
         if (orcid != null) {
             properties.put("orcid", orcid);
         }
-        final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
+        final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties)
+                .getRootElement();
         return EMail.parseXML(mailElement);
     }
 }

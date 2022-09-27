@@ -25,6 +25,7 @@ public interface CaptchaService {
 
     /**
      * This methods validates a captcha token
+     * 
      * @param token the captcha token
      * @return true if token is valid
      * @throws Exception if token cannot be validated

@@ -57,7 +57,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
     /**
      * Name of fallback recipient.
      */
-    private static final String FALLBACK_NAME= MCRConfiguration2
+    private static final String FALLBACK_NAME = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Name");
 
     @Override
@@ -83,6 +83,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
 
     /**
      * Updates contact request within own transaction.
+     * 
      * @param request the contact request
      * @throws Exception if update fails
      */
@@ -95,6 +96,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
 
     /**
      * Collects mails for contact request.
+     * 
      * @throws Exception if job fails
      */
     private void doWork() throws Exception {
@@ -155,17 +157,19 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
 
     /**
      * Adds fallback recipient to recipients
+     * 
      * @param recipients the recipients
      */
     private void addFallbackRecipient(List<ContactRecipient> recipients) {
-        final ContactRecipient fallback =
-                new ContactRecipient(FALLBACK_NAME, ContactRecipientOrigin.FALLBACK, FALLBACK_MAIL);
+        final ContactRecipient fallback = new ContactRecipient(FALLBACK_NAME, ContactRecipientOrigin.FALLBACK,
+                FALLBACK_MAIL);
         recipients.add(fallback);
     }
 
     /**
      * Adds list of recipients to recipients to contact request.
-     * @param request the contact request
+     * 
+     * @param request    the contact request
      * @param recipients the recipients
      */
     private void addRecipients(ContactRequest request, List<ContactRecipient> recipients) {

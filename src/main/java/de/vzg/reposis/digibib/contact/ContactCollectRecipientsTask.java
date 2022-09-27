@@ -70,6 +70,7 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
 
     /**
      * Returns author elements for object.
+     * 
      * @param object the object
      * @return list of author elements
      */

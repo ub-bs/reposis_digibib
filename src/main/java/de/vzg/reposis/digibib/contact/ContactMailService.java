@@ -45,17 +45,15 @@ public class ContactMailService {
     private static final String ENCODING = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Encoding");
 
-    private static final String HOST = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
+    private static final String HOST = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
 
-    private static final String PORT = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Port");
+    private static final String PORT = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Port");
 
     private static final String PROTOCOL = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Protocol");
 
-    private static final String STARTTLS = MCRConfiguration2
-            .getString(ContactConstants.CONF_PREFIX + "Mail.STARTTLS").orElse("disabled");
+    private static final String STARTTLS = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Mail.STARTTLS")
+            .orElse("disabled");
 
     private static final String USER = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
@@ -63,8 +61,8 @@ public class ContactMailService {
     private static final String PASSWORD = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
 
-    private static final Boolean DEBUG = MCRConfiguration2
-            .getBoolean(ContactConstants.CONF_PREFIX + "Mail.Debug").orElse(false);
+    private static final Boolean DEBUG = MCRConfiguration2.getBoolean(ContactConstants.CONF_PREFIX + "Mail.Debug")
+            .orElse(false);
 
     private static final String SENDER_NAME = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.SenderName");
@@ -86,6 +84,7 @@ public class ContactMailService {
 
     /**
      * This class bundles all properties to property object.
+     * 
      * @return bundled properties
      */
     private static Properties getProperties() {
@@ -104,10 +103,11 @@ public class ContactMailService {
     }
 
     /**
-     * Sends mail without headers. 
+     * Sends mail without headers.
+     * 
      * @param mail the mail
      * @param from the sender mail
-     * @param to the recipient mail
+     * @param to   the recipient mail
      * @throws MessagingException if sending fails
      */
     public static void sendMail(EMail mail, String to) throws MessagingException {
@@ -116,9 +116,10 @@ public class ContactMailService {
 
     /**
      * Sends mail.
-     * @param mail the mail
-     * @param from the sender mail
-     * @param to the recipient mail
+     * 
+     * @param mail   the mail
+     * @param from   the sender mail
+     * @param to     the recipient mail
      * @param header map of headers
      * @throws MessagingException if sending fails
      */

@@ -34,17 +34,19 @@ import org.xml.sax.SAXException;
 public class ContactUtils {
 
     /**
-     * This method transforms a given document with a given stylesheet name and parameters.
-     * @param input the document
+     * This method transforms a given document with a given stylesheet name and
+     * parameters.
+     * 
+     * @param input      the document
      * @param stylesheet the stylesheet name
      * @param parameters a map of parameters
      * @return the transformed document
-     * @throws IOException if stylesheet cannot be loaded
+     * @throws IOException   if stylesheet cannot be loaded
      * @throws JDOMException if document is faulty
-     * @throws SAXException if stylesheet is faulty or it cannot be applied
+     * @throws SAXException  if stylesheet is faulty or it cannot be applied
      */
     public static Document transform(Document input, String stylesheet, Map<String, String> parameters)
-        throws IOException, JDOMException, SAXException {
+            throws IOException, JDOMException, SAXException {
         MCRJDOMContent source = new MCRJDOMContent(input);
         MCRXSL2XMLTransformer transformer = MCRXSL2XMLTransformer.getInstance("xsl/" + stylesheet + ".xsl");
         MCRParameterCollector parameterCollector = MCRParameterCollector.getInstanceFromUserSession();
