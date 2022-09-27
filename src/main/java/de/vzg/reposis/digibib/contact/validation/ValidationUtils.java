@@ -25,6 +25,7 @@ public class ValidationUtils {
 
     /**
      * Validates an ORCID
+     * 
      * @param orcid orcid
      * @return true if orcid is valid
      */
@@ -33,7 +34,7 @@ public class ValidationUtils {
             return false;
         }
         final char checkDigit = orcid.charAt(orcid.length() - 1);
-        final String rawORCID = orcid.substring(0, orcid.length() - 1).replaceAll("\\D+",""); 
+        final String rawORCID = orcid.substring(0, orcid.length() - 1).replaceAll("\\D+", "");
         if (rawORCID.length() != 15) {
             return false;
         }
@@ -41,18 +42,19 @@ public class ValidationUtils {
     }
 
     /**
-     * Generates check digit as per ISO 7064 11,2. 
+     * Generates check digit as per ISO 7064 11,2.
+     * 
      * @param baseDigits base digits
      * @return check digit
      */
-    private static char generateCheckDigit(String baseDigits) { 
-        int total = 0; 
-        for (int i = 0; i < baseDigits.length(); i++) { 
-            int digit = Character.getNumericValue(baseDigits.charAt(i)); 
-            total = (total + digit) * 2; 
-        } 
-        int remainder = total % 11; 
-        int result = (12 - remainder) % 11; 
-        return result == 10 ? 'X' : (char)(result + '0');
+    private static char generateCheckDigit(String baseDigits) {
+        int total = 0;
+        for (int i = 0; i < baseDigits.length(); i++) {
+            int digit = Character.getNumericValue(baseDigits.charAt(i));
+            total = (total + digit) * 2;
+        }
+        int remainder = total % 11;
+        int result = (12 - remainder) % 11;
+        return result == 10 ? 'X' : (char) (result + '0');
     }
 }
