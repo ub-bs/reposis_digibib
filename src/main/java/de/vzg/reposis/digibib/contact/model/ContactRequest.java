@@ -75,7 +75,7 @@ import org.mycore.datamodel.metadata.MCRObjectID;
  * This class defines a model for a request.
  */
 @Entity
-@Table(name = "contact_request")
+@Table(name = "contactRequest")
 public class ContactRequest {
 
     private static final String PROP_SENDER = "email";
@@ -181,7 +181,7 @@ public class ContactRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contact_request_id",
+    @Column(name = "contactId",
         nullable = false)
     @JsonIgnore
     public long getId() {
@@ -193,7 +193,7 @@ public class ContactRequest {
         this.id = id;
     }
 
-    @Column(name = "object_id",
+    @Column(name = "objectId",
         length = MCRObjectID.MAX_LENGTH,
         nullable = false)
     @Convert(converter = MCRObjectIDConverter.class)
@@ -249,7 +249,7 @@ public class ContactRequest {
     }
 
     @JsonProperty(value = PROP_SEND_COPY)
-    @Column(name = "send_copy",
+    @Column(name = "sendCopy",
         nullable = false)
     public boolean isSendCopy() {
         return this.sendCopy;
