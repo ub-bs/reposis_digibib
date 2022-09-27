@@ -50,7 +50,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * This class defines a model for a recipient.
  */
 @Entity
-@Table(name = "contact_recipient")
+@Table(name = "contactRecipient")
 public class ContactRecipient {
 
     /**
@@ -124,7 +124,7 @@ public class ContactRecipient {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recipient_id",
+    @Column(name = "recipientId",
         nullable = false)
     @JsonIgnore
     public long getId() {
@@ -169,7 +169,7 @@ public class ContactRecipient {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "contact_request_id")
+    @JoinColumn(name = "requestId")
     public ContactRequest getRequest() {
         return request;
     }
