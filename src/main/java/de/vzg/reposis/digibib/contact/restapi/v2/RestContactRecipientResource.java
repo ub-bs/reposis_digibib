@@ -77,7 +77,8 @@ public class RestContactRecipientResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRecipient> getAllRecipientsByRequestUUID(@DefaultValue("0") @QueryParam("offset") int offset,
             @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
-            @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID) throws ContactRequestNotFoundException {
+            @QueryParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
+            throws ContactRequestNotFoundException {
         final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request == null) {
             throw new ContactRequestNotFoundException();
@@ -105,7 +106,9 @@ public class RestContactRecipientResource {
     public Response addRecipient(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
             ContactRecipient recipient) throws ContactException {
         ContactService.getInstance().addRecipient(requestUUID, recipient);
-        return Response.created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getUUID().toString()))).build();
+        return Response
+                .created(info.getAbsolutePath().resolve(String.format("recipients/%s", recipient.getUUID().toString())))
+                .build();
     }
 
     @GET
@@ -123,8 +126,10 @@ public class RestContactRecipientResource {
         })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRecipient getRecipientByMail(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID requestUUID,
-            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail) throws ContactRequestNotFoundException {
+    public ContactRecipient getRecipientByMail(
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) UUID requestUUID,
+            @PathParam(RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID) String mail)
+            throws ContactRequestNotFoundException {
         final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request == null) {
             throw new ContactRequestNotFoundException();

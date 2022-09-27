@@ -170,7 +170,8 @@ public class ContactRequest {
     @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
-    public ContactRequest() { }
+    public ContactRequest() {
+    }
 
     public ContactRequest(MCRObjectID objectID, String from, String name, String message) {
         this.objectID = objectID;
@@ -181,8 +182,7 @@ public class ContactRequest {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contactId",
-        nullable = false)
+    @Column(name = "contactId", nullable = false)
     @JsonIgnore
     public long getId() {
         return id;
@@ -193,9 +193,7 @@ public class ContactRequest {
         this.id = id;
     }
 
-    @Column(name = "objectId",
-        length = MCRObjectID.MAX_LENGTH,
-        nullable = false)
+    @Column(name = "objectId", length = MCRObjectID.MAX_LENGTH, nullable = false)
     @Convert(converter = MCRObjectIDConverter.class)
     public MCRObjectID getObjectID() {
         return this.objectID;
@@ -206,8 +204,7 @@ public class ContactRequest {
     }
 
     @JsonProperty(value = PROP_SENDER, required = true)
-    @Column(name = "sender",
-        nullable = false)
+    @Column(name = "sender", nullable = false)
     public String getFrom() {
         return from;
     }
@@ -217,8 +214,7 @@ public class ContactRequest {
     }
 
     @JsonProperty(value = PROP_MESSAGE, required = true)
-    @Column(name = "message",
-        nullable = false)
+    @Column(name = "message", nullable = false)
     public String getMessage() {
         return message;
     }
@@ -228,8 +224,7 @@ public class ContactRequest {
     }
 
     @JsonProperty(value = PROP_NAME, required = true)
-    @Column(name = "name",
-        nullable = false)
+    @Column(name = "name", nullable = false)
     public String getName() {
         return name;
     }
@@ -249,8 +244,7 @@ public class ContactRequest {
     }
 
     @JsonProperty(value = PROP_SEND_COPY)
-    @Column(name = "sendCopy",
-        nullable = false)
+    @Column(name = "sendCopy", nullable = false)
     public boolean isSendCopy() {
         return this.sendCopy;
     }
@@ -319,10 +313,7 @@ public class ContactRequest {
         this.state = state.getValue();
     }
 
-    @OneToMany(fetch = FetchType.EAGER,
-              mappedBy = "request",
-              cascade = CascadeType.ALL,
-              orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<ContactRecipient> getRecipients() {
         return recipients;
     }

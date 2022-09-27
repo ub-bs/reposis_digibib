@@ -25,4 +25,5 @@ import javax.ws.rs.NameBinding;
 
 @NameBinding
 @Retention(RetentionPolicy.RUNTIME)
-public @interface ContactCheckCageCaptcha { }
+public @interface ContactCheckCageCaptcha {
+}

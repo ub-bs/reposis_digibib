@@ -26,13 +26,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
  * Contants that describe request states.
  */
 public enum ContactRequestState {
-    RECEIVED(0),
-    PROCESSING(1),
-    PROCESSING_FAILED(2),
-    PROCESSED(3),
-    SENDING(4),
-    SENDING_FAILED(5),
-    SENT(6),
+    RECEIVED(0), PROCESSING(1), PROCESSING_FAILED(2), PROCESSED(3), SENDING(4), SENDING_FAILED(5), SENT(6),
     CONFIRMED(7);
 
     private final int value;
@@ -42,10 +36,7 @@ public enum ContactRequestState {
     }
 
     public static ContactRequestState resolve(int value) {
-        return Arrays.stream(values())
-            .filter(o -> o.value == value)
-            .findFirst()
-            .orElse(null);
+        return Arrays.stream(values()).filter(o -> o.value == value).findFirst().orElse(null);
     }
 
     @JsonValue
