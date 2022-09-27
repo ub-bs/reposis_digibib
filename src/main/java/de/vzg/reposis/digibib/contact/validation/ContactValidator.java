@@ -33,8 +33,8 @@ public class ContactValidator {
     private final Validator validator;
 
     private ContactValidator() {
-       final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-       validator = factory.getValidator();
+        final ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
     }
 
     public static ContactValidator getInstance() {
@@ -43,6 +43,7 @@ public class ContactValidator {
 
     /**
      * Validates a request against model.
+     * 
      * @param request the request
      * @return true if request is valid
      */
@@ -52,7 +53,8 @@ public class ContactValidator {
 
     /**
      * Validates a recipient against model.
-     * @param recipient the recipient 
+     * 
+     * @param recipient the recipient
      * @return true if recipient is valid
      */
     public boolean validateRecipient(ContactRecipient recipient) {
