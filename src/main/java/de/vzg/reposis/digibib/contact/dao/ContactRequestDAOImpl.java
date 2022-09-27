@@ -50,8 +50,8 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
     @Override
     public Collection<ContactRequest> findByState(ContactRequestState state) {
         return MCREntityManagerProvider.getCurrentEntityManager()
-                .createNamedQuery("ContactRequest.findByState", ContactRequest.class)
-                .setParameter("state", state).getResultList();
+                .createNamedQuery("ContactRequest.findByState", ContactRequest.class).setParameter("state", state)
+                .getResultList();
     }
 
     @Override
@@ -62,8 +62,8 @@ public class ContactRequestDAOImpl implements ContactRequestDAO {
     @Override
     public ContactRequest findByUUID(UUID uuid) {
         final Collection<ContactRequest> requests = MCREntityManagerProvider.getCurrentEntityManager()
-                .createNamedQuery("ContactRequest.findByUUID", ContactRequest.class)
-                .setParameter("uuid", uuid).getResultList(); // should contain at most one element
+                .createNamedQuery("ContactRequest.findByUUID", ContactRequest.class).setParameter("uuid", uuid)
+                .getResultList(); // should contain at most one element
         return requests.stream().findFirst().orElse(null);
     }
 

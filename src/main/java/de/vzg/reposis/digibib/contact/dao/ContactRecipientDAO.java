@@ -29,6 +29,7 @@ public interface ContactRecipientDAO extends ContactBaseDAO<ContactRecipient> {
 
     /**
      * Returns a recipient by given uuid.
+     * 
      * @param uuid the uuid
      * @return the recipient or null
      */
