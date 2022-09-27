@@ -100,7 +100,8 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
     private void doWork() throws Exception {
         final ContactService service = ContactService.getInstance();
         final List<ContactRequest> requests = service.listRequestsByState(ContactRequestState.RECEIVED);
-        requests.addAll(service.listRequestsByState(ContactRequestState.PROCESSING)); // TODO may error state
+        requests.addAll(service.listRequestsByState(ContactRequestState.PROCESSING));
+        requests.addAll(service.listRequestsByState(ContactRequestState.PROCESSING_FAILED));
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
         requests.forEach((r) -> {
             LOGGER.info("Collecting recipients for {}", r.getId());
