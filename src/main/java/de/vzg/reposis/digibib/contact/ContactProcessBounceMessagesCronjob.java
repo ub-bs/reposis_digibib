@@ -50,8 +50,7 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String HOST = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
+    private static final String HOST = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
 
     private static final String USER = MCRConfiguration2
             .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
@@ -80,21 +79,21 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
             final Message[] unreadMessages = getUnreadMessages();
             LOGGER.debug("Found {} unread messages.", unreadMessages.length);
             for (Message message : unreadMessages) {
-                if(message instanceof MimeMessage) {
+                if (message instanceof MimeMessage) {
                     final MimeMessage mime = (MimeMessage) message;
                     if (mime.isMimeType(REPORT_MIMETYPE)) {
                         try {
                             final MultipartReport dsn = (MultipartReport) mime.getContent();
                             final MimeMessage m = dsn.getReturnedMessage();
-                            if(m != null) {
+                            if (m != null) {
                                 final String requestId = m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null);
                                 if (requestId != null) {
                                     final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
                                     if (recipients != null && recipients.length == 1) {
                                         try {
                                             new MCRFixedUserCallable<>(() -> {
-                                                ContactService.getInstance()
-                                                        .setRecipientFailed(UUID.fromString(requestId), recipients[0].toString(), true);
+                                                ContactService.getInstance().setRecipientFailed(
+                                                        UUID.fromString(requestId), recipients[0].toString(), true);
                                                 return null;
                                             }, MCRSystemUserInformation.getJanitorInstance()).call();
                                             flagMessageAsSeen(message);
@@ -138,6 +137,7 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     /**
      * Flags a message instance as seen.
+     * 
      * @param message the message instance
      * @throws MessagingException if flagging failed
      */
@@ -147,6 +147,7 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     /**
      * Returns all unreaded messages.
+     * 
      * @return the unreaded messages as array
      * @throws MessagingException if inbox cannot be readed
      */

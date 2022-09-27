@@ -69,7 +69,7 @@ public class RestContactResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRequest> getAllRequests(@DefaultValue("0") @QueryParam("offset") int offset,
-        @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
+            @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
         final List<ContactRequest> requests = ContactService.getInstance().listRequests();
         response.setHeader("X-Total-Count", Integer.toString(requests.size()));
         return requests.stream().skip(offset).limit(limit).collect(Collectors.toList());

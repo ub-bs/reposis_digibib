@@ -37,7 +37,7 @@ import org.mycore.crypt.MCRCryptKeyNoPermissionException;
 
 /**
  * This class implements a captcha service and uses Cage.
-*/
+ */
 public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
@@ -69,7 +69,8 @@ public class CaptchaCageServiceImpl implements CaptchaService {
     }
 
     /**
-     * Returns singleton instance of captcha service 
+     * Returns singleton instance of captcha service
+     * 
      * @return captcha service
      */
     public static CaptchaCageServiceImpl getInstance() {
@@ -95,6 +96,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Validates token against token lifetime.
+     * 
      * @param token the token
      * @return true if token is younger than max lifetime
      */
@@ -104,6 +106,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Uses secret to create an encrypted token.
+     * 
      * @param secret the token secret
      * @return the token
      * @throws MCRException if encryption fails
@@ -119,10 +122,11 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Encrypts a token.
+     * 
      * @param token the token
      * @return the encrypted token
      * @throws JsonProcessingException if token cannot be parsed to string
-     * @throws MCRException if token encryption fails
+     * @throws MCRException            if token encryption fails
      */
     protected static String encodeToken(Token token) throws JsonProcessingException, MCRException {
         try {
@@ -136,10 +140,11 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Decrypts a token.
+     * 
      * @param encodedToken the encrypted token
      * @return the token
      * @throws JsonProcessingException if encoded token cannot be parsed to token
-     * @throws MCRException if decryption fails
+     * @throws MCRException            if decryption fails
      */
     private static Token decodeToken(String encodedToken) throws JsonProcessingException, MCRException {
         try {
@@ -155,7 +160,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
      * Lazy instance holder.
      */
     private static class ServiceHolder {
-      
+
         /**
          * the instance
          */
