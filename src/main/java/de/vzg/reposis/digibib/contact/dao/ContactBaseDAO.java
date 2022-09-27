@@ -27,12 +27,14 @@ public interface ContactBaseDAO<T> {
 
     /**
      * Returns all entities.
+     * 
      * @return collection of entity
      */
     Collection<T> findAll();
 
     /**
      * Returns entity by id.
+     * 
      * @param id internal id
      * @return the entity or null
      */
@@ -40,19 +42,22 @@ public interface ContactBaseDAO<T> {
 
     /**
      * Inserts entity.
+     * 
      * @param object the entity
-     */ 
+     */
     void insert(T object);
 
     /**
      * Updates an entity.
+     * 
      * @param object the entity
-     */ 
+     */
     void update(T object);
 
     /**
      * Removes an entity.
+     * 
      * @param object the entity
-     */ 
+     */
     void remove(T object);
 }

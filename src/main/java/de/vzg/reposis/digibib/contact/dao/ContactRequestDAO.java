@@ -33,6 +33,7 @@ public interface ContactRequestDAO extends ContactBaseDAO<ContactRequest> {
 
     /**
      * Returns a request collection by object id.
+     * 
      * @param objectID the object id
      * @return the request collection
      */
@@ -40,6 +41,7 @@ public interface ContactRequestDAO extends ContactBaseDAO<ContactRequest> {
 
     /**
      * Returns a request collection that are in given state.
+     * 
      * @param state the state
      * @return the request collection
      */
@@ -47,6 +49,7 @@ public interface ContactRequestDAO extends ContactBaseDAO<ContactRequest> {
 
     /**
      * Returns a request by given uuid.
+     * 
      * @param uuid the uuid
      * @return the request or null
      */
