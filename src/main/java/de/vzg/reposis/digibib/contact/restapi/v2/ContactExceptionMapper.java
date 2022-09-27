@@ -42,7 +42,7 @@ public class ContactExceptionMapper implements ExceptionMapper<ContactException>
     @Override
     public Response toResponse(ContactException exception) {
         if (exception instanceof ContactRequestNotFoundException
-                || exception instanceof ContactRecipientNotFoundException ) {
+                || exception instanceof ContactRecipientNotFoundException) {
             return getResponse(exception, Response.Status.NOT_FOUND.getStatusCode(), exception.getErrorCode());
         }
         return getResponse(exception, Response.Status.BAD_REQUEST.getStatusCode(), exception.getErrorCode());

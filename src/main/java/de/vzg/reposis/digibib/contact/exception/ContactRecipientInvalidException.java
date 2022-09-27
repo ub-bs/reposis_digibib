@@ -23,11 +23,11 @@ package de.vzg.reposis.digibib.contact.exception;
  */
 public class ContactRecipientInvalidException extends ContactException {
 
-    public ContactRecipientInvalidException () {
+    public ContactRecipientInvalidException() {
         this("invalid recipient.");
     }
 
-    public ContactRecipientInvalidException (String message) {
+    public ContactRecipientInvalidException(String message) {
         super("invalidRecipientRequest", message);
     }
 }

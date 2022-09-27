@@ -104,7 +104,8 @@ public class ContactRecipient {
     @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
-    public ContactRecipient() { }
+    public ContactRecipient() {
+    }
 
     public ContactRecipient(String name, ContactRecipientOrigin origin, String mail) {
         this.name = name;
@@ -124,8 +125,7 @@ public class ContactRecipient {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recipientId",
-        nullable = false)
+    @Column(name = "recipientId", nullable = false)
     @JsonIgnore
     public long getId() {
         return id;
@@ -147,9 +147,8 @@ public class ContactRecipient {
     }
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "type",
-        nullable = false)
-    public ContactRecipientOrigin getOrigin(){
+    @Column(name = "type", nullable = false)
+    public ContactRecipientOrigin getOrigin() {
         return origin;
     }
 
@@ -157,8 +156,7 @@ public class ContactRecipient {
         this.origin = origin;
     }
 
-    @Column(name = "mail",
-        nullable = false)
+    @Column(name = "mail", nullable = false)
     public String getMail() {
         return mail;
     }
@@ -193,8 +191,7 @@ public class ContactRecipient {
         }
     }
 
-    @Column(name = "enabled",
-        nullable = false)
+    @Column(name = "enabled", nullable = false)
     public boolean isEnabled() {
         return enabled;
     }
@@ -203,8 +200,7 @@ public class ContactRecipient {
         this.enabled = enabled;
     }
 
-    @Column(name = "failed",
-        nullable = true)
+    @Column(name = "failed", nullable = true)
     public Date getFailed() {
         return failed;
     }
@@ -213,8 +209,7 @@ public class ContactRecipient {
         this.failed = failed;
     }
 
-    @Column(name = "sent",
-        nullable = true)
+    @Column(name = "sent", nullable = true)
     public Date getSent() {
         return sent;
     }
@@ -223,8 +218,7 @@ public class ContactRecipient {
         this.sent = sent;
     }
 
-    @Column(name = "confirmed",
-        nullable = true)
+    @Column(name = "confirmed", nullable = true)
     public Date getConfirmed() {
         return confirmed;
     }
@@ -253,8 +247,7 @@ public class ContactRecipient {
             return false;
         }
         ContactRecipient other = (ContactRecipient) obj;
-        return Objects.equals(request, other.getRequest())
-                && Objects.equals(mail, other.getMail());
+        return Objects.equals(request, other.getRequest()) && Objects.equals(mail, other.getMail());
     }
 
     @Override

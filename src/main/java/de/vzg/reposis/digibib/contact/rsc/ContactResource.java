@@ -90,7 +90,8 @@ public class ContactResource {
         }
         ContactService.getInstance().insertRequest(request);
         if (request.isSendCopy()) {
-            final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(), request.getORCID(), objectID.toString());
+            final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
+                    request.getORCID(), objectID.toString());
             ContactMailService.sendMail(confirmationMail, request.getFrom());
         }
         return Response.ok().build();
@@ -105,7 +106,8 @@ public class ContactResource {
         if (orcid != null) {
             properties.put("name", orcid);
         }
-        final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
+        final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties)
+                .getRootElement();
         return EMail.parseXML(mailElement);
     }
 
