@@ -58,6 +58,7 @@ public class ContactForwardRequestTask implements Runnable {
         final MCRSession session = MCRSessionMgr.getCurrentSession();
         session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
         try {
+            MCRTransactionHelper.beginTransaction();
             for (ContactRecipient recipient : request.getRecipients().stream()
                     .filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
                 try {
@@ -75,7 +76,6 @@ public class ContactForwardRequestTask implements Runnable {
             request.setComment(e.getMessage());
             request.setState(ContactRequestState.SENDING_FAILED);
         } finally {
-            MCRTransactionHelper.beginTransaction();
             try {
                 ContactService.getInstance().updateRequest(request);
                 MCRTransactionHelper.commitTransaction();

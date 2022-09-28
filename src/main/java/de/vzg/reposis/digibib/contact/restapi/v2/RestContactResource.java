@@ -130,9 +130,9 @@ public class RestContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @QueryParam("recipient") UUID recipientUUID) throws ContactException {
-        if (recipientUUID != null) {
-            ContactService.getInstance().forwardRequestToRecipientByUUID(requestUUID, recipientUUID);
+            @QueryParam("recipient") String recipient) throws ContactException { // TODO check if string or UUID
+        if (recipient != null) {
+            ContactService.getInstance().forwardRequestToRecipientByUUID(requestUUID, UUID.fromString(recipient));
         } else {
             ContactService.getInstance().forwardRequestByUUID(requestUUID);
         }

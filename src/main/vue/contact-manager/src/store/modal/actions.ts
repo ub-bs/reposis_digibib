@@ -8,6 +8,7 @@ import { Mutations } from './mutations';
 import { Getters } from './getters';
 import {
   forwardRequest,
+  forwardRequestToRecipient,
   addRecipient,
   updateRecipient,
   removeRecipient,
@@ -26,6 +27,8 @@ type AugmentedActionContext = {
 
 export interface Actions {
   [ActionTypes.FORWARD_REQUEST]({ commit, state }: AugmentedActionContext): void,
+  [ActionTypes.FORWARD_REQUEST_TO_RECIPIENT]({ commit, state }:
+    AugmentedActionContext, payload: string): void,
   [ActionTypes.ADD_RECIPIENT]({ commit, state }:
     AugmentedActionContext, payload: Recipient): Promise<void>,
   [ActionTypes.UPDATE_RECIPIENT]({ commit, state }:
@@ -44,6 +47,23 @@ export const actions: ActionTree<State, RootState> & Actions = {
         await forwardRequest(state.currentRequest.uuid);
         state.currentRequest.state = RequestState.Sending;
         commit(MutationTypes.SET_INFO_CODE, 'forward');
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        commit(MutationTypes.SET_ERROR_CODE, error.message);
+      } else {
+        commit(MutationTypes.SET_ERROR_CODE, 'unknown');
+      }
+    }
+  },
+  async [ActionTypes.FORWARD_REQUEST_TO_RECIPIENT]({ commit, state }, id: string): Promise<void> {
+    commit(MutationTypes.SET_ERROR_CODE, undefined);
+    commit(MutationTypes.SET_INFO_CODE, undefined);
+    try {
+      if (state.currentRequest) {
+        await forwardRequestToRecipient(state.currentRequest.uuid, id);
+        // TODO get recipient and reset sent and failed
+        commit(MutationTypes.SET_INFO_CODE, 'forwardRecipient');
       }
     } catch (error) {
       if (error instanceof Error) {
