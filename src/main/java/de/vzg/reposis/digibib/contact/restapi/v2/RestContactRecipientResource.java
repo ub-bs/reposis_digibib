@@ -62,17 +62,12 @@ public class RestContactRecipientResource {
     private UriInfo info;
 
     @GET
-    @Operation(
-        summary = "Gets contact request recipients by request uuid",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
+    @Operation(summary = "Gets contact request recipients by request uuid", responses = {
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = ContactRecipient.class))),
+            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRecipient> getAllRecipientsByRequestUUID(@DefaultValue("0") @QueryParam("offset") int offset,
@@ -89,17 +84,12 @@ public class RestContactRecipientResource {
     }
 
     @POST
-    @Operation(
-        summary = "Creates new contact request recipient",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
+    @Operation(summary = "Creates new contact request recipient", responses = {
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = ContactRecipient.class))),
+            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
@@ -113,17 +103,12 @@ public class RestContactRecipientResource {
 
     @GET
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
-    @Operation(
-        summary = "Gets contact request recipient by request uuid and mail",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
+    @Operation(summary = "Gets contact request recipient by request uuid and mail", responses = {
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = ContactRecipient.class))),
+            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public ContactRecipient getRecipientByMail(
@@ -140,17 +125,12 @@ public class RestContactRecipientResource {
 
     @PUT
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
-    @Operation(
-        summary = "Updates contact request recipient by uuid",
-        responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
+    @Operation(summary = "Updates contact request recipient by uuid", responses = {
+            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = ContactRecipient.class))),
+            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
@@ -163,17 +143,12 @@ public class RestContactRecipientResource {
 
     @DELETE
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_RECIPIENT_ID + "}")
-    @Operation(
-        summary = "Deletes contact request recipient by uuid",
-        responses = {
-            @ApiResponse(responseCode = "201", content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipient.class))),
-            @ApiResponse(responseCode = "401",
-                description = "You do not have create permission and need to authenticate first",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist",
-                content = { @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        })
+    @Operation(summary = "Deletes contact request recipient by uuid", responses = {
+            @ApiResponse(responseCode = "201", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = ContactRecipient.class))),
+            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
