@@ -160,7 +160,12 @@ public class ContactRequest {
     private List<ContactRecipient> recipients = new ArrayList();
 
     /**
-     * Generic comment field for request.
+     * Debug field for internal purposes.
+     */
+    private String debug;
+
+    /**
+     * Comment field for editors
      */
     private String comment;
 
@@ -330,6 +335,14 @@ public class ContactRequest {
     public void removeRecipient(ContactRecipient recipient) {
         recipients.remove(recipient);
         recipient.setRequest(null);
+    }
+
+    public String getDebug() {
+        return debug;
+    }
+
+    public void setDebug(String debug) {
+        this.debug = debug;
     }
 
     public String getComment() {

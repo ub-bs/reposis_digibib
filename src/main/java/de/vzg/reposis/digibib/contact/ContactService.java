@@ -163,10 +163,10 @@ public class ContactService {
     }
 
     /**
-     * Updates a contact request
+     * Updates a contact request.
      * 
      * @param request the request
-     * @throws ContactRequestNotFoundException if contact request does not exist.
+     * @throws ContactRequestNotFoundException if contact request does not exist
      */
     public void updateRequest(ContactRequest request) throws ContactRequestNotFoundException {
         try {
@@ -176,6 +176,35 @@ public class ContactService {
             } else {
                 throw new ContactRequestNotFoundException();
             }
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    /**
+     * Updates a contact request by uuid, meta fields are ignored.
+     * 
+     * @param requestUUID uuid of request
+     * @param request the request
+     * @throws ContactRequestNotFoundException if request with uuid does not exist
+     * @throws ContactRequestStateException    if request is in cold state
+    */
+    public void updateRequestByUUID(UUID requestUUID, ContactRequest request) throws ContactRequestNotFoundException,
+        ContactRequestStateException {
+        try {
+            writeLock.lock();
+            final ContactRequest outdated = requestDAO.findByUUID(requestUUID);
+            if (outdated == null) {
+                throw new ContactRequestNotFoundException();
+            }
+            if (outdated.getState().getValue() <= ContactRequestState.PROCESSED.getValue()) {
+                throw new ContactRequestStateException("A forwarded request cannot be deleted.");
+            }
+            final String comment = request.getComment();
+            if (comment != null) {
+                outdated.setComment(comment);
+            }
+            update(outdated);
         } finally {
             writeLock.unlock();
         }
