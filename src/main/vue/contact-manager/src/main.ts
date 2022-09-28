@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === 'development') {
   app.use(i18n);
   app.use(store);
   app.mount('#app');
-  store.commit(`main/${MutationTypes.SET_PER_PAGE}`, 1);
+  store.commit(`main/${MutationTypes.SET_PER_PAGE}`, 8);
   let authError = false;
   if (process.env.NODE_ENV === 'development') {
     axios.defaults.headers.common.Authorization = 'Basic YWRtaW5pc3RyYXRvcjphbGxlc3dpcmRndXQ=';

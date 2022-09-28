@@ -77,7 +77,7 @@ const handleDelete = async (recipientUUID: string) => {
     store.dispatch(`modal/${ActionTypes.REMOVE_RECIPIENT}`, recipientUUID);
   }
 };
-const handleMail = () => {
-  console.log('TODO');
+const handleMail = (recipientUUID: string) => {
+  store.dispatch(`modal/${ActionTypes.FORWARD_REQUEST_TO_RECIPIENT}`, recipientUUID);
 };
 </script>

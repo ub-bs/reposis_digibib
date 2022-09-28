@@ -25,6 +25,9 @@ public class ValidORCIDValidator implements ConstraintValidator<ValidORCID, Stri
 
     @Override
     public boolean isValid(String orcid, ConstraintValidatorContext context) {
-        return ValidationUtils.validateORCID(orcid);
+        if (orcid != null) {
+            return ValidationUtils.validateORCID(orcid);
+        }
+        return true;
     }
 }

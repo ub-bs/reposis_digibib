@@ -47,12 +47,16 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
 public class ContactService {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private final Lock readLock;
 
@@ -230,13 +234,14 @@ public class ContactService {
             try {
                 ContactForwardRequestHelper.sendMail(recipient);
                 recipient.setFailed(null);
-            } catch (MessagingException e) {
+            } catch (Exception e) {
+                LOGGER.error(e);
                 recipient.setFailed(new Date());
+                throw new MCRException("Sending failed."); // TODO own exception
             } finally {
                 recipient.setSent(new Date());
                 update(recipient);
                 update(request);
-                throw new MCRException("Sending failed."); // TODO
             }
         } finally {
             writeLock.unlock();

@@ -78,7 +78,7 @@ const editMode = computed(() => props.editUUID === props.recipient.uuid);
 const disabled = computed(() => props.editUUID !== undefined
   && props.editUUID !== props.recipient.uuid);
 const rowStyle = computed(() => {
-  if (props.recipient.success) {
+  if (props.recipient.confirmed) {
     return 'table-success';
   }
   if (props.recipient.failed) {

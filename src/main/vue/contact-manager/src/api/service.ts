@@ -19,6 +19,7 @@ axios.interceptors.response.use((response) => response, (error) => {
 const getRequests = (offset: number, limit: number) => axios.get(`api/v2/contacts?offset=${offset}&limit=${limit}`);
 const removeRequest = (id: string) => axios.delete(`api/v2/contacts/${id}`);
 const forwardRequest = (id: string) => axios.post(`api/v2/contacts/${id}/forward`);
+const forwardRequestToRecipient = (id: string, recipientID: string) => axios.post(`api/v2/contacts/${id}/forward?recipient=${recipientID}`);
 const addRecipient = (id: string, recipient: Recipient) => axios.post(`api/v2/contacts/${id}/recipients`, recipient);
 const updateRecipient = (id: string, recipientID: string, recipient: Recipient) => axios.put(`api/v2/contacts/${id}/recipients/${recipientID}`, recipient);
 const removeRecipient = (id: string, recipientID: string) => axios.delete(`api/v2/contacts/${id}/recipients/${recipientID}`);
@@ -27,6 +28,7 @@ export {
   getRequests,
   removeRequest,
   forwardRequest,
+  forwardRequestToRecipient,
   addRecipient,
   updateRecipient,
   removeRecipient,
