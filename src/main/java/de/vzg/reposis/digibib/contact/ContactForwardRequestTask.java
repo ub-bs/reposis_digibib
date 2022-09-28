@@ -73,7 +73,7 @@ public class ContactForwardRequestTask implements Runnable {
             }
             request.setState(ContactRequestState.SENT);
         } catch (Exception e) {
-            request.setComment(e.getMessage());
+            request.setDebug(e.getMessage());
             request.setState(ContactRequestState.SENDING_FAILED);
         } finally {
             try {

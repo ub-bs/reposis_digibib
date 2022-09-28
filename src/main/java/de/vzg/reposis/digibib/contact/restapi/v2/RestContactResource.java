@@ -28,6 +28,7 @@ import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -108,7 +109,7 @@ public class RestContactResource {
         }
     }
 
-    @GET // TODO
+    @GET
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/confirm")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @Operation(summary = "confirm recipient", responses = {
@@ -137,6 +138,20 @@ public class RestContactResource {
             ContactService.getInstance().forwardRequestByUUID(requestUUID);
         }
         return Response.ok().build();
+    }
+
+    @PUT
+    @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}")
+    @Operation(summary = "Updates contact request by id", responses = { @ApiResponse(responseCode = "204"),
+            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
+            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
+    @MCRRequireTransaction
+    public Response updateRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
+            ContactRequest request) throws ContactException {
+        ContactService.getInstance().updateRequestByUUID(requestUUID, request);
+        return Response.noContent().build();
     }
 
     @DELETE

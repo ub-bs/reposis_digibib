@@ -134,7 +134,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
                     LOGGER.error("Error while rollbacking transaction.", rollbackExc);
                 }
                 r.setState(ContactRequestState.PROCESSING_FAILED);
-                r.setComment(e.toString());
+                r.setDebug(e.toString());
                 LOGGER.error(e);
             } finally {
                 MCRTransactionHelper.beginTransaction();
