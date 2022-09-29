@@ -42,6 +42,7 @@ import { computed } from 'vue';
 import { useStore } from 'vuex';
 import OverviewTable from './components/OverviewTable.vue';
 import Pagination from './components/Pagination.vue';
+import { ActionTypes } from './store/main/action-types';
 
 const store = useStore();
 const requests = computed(() => store.state.main.requests);
@@ -51,9 +52,9 @@ const totalRows = computed(() => store.state.main.totalRows);
 const currentPage = computed(() => store.state.main.currentPage);
 const isBooted = computed(() => store.state.main.isBooted);
 const perPage = computed(() => store.state.main.perPage);
-const handlePageChange = (page) => {
+const handlePageChange = async (page) => {
   store.commit('main/SET_CURRENT_PAGE', page);
-  store.dispatch('main/fetchData');
+  await store.dispatch(`main/${ActionTypes.FETCH_REQUESTS}`);
 };
 </script>
 
