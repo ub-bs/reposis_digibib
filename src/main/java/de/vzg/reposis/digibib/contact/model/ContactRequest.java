@@ -150,6 +150,11 @@ public class ContactRequest {
     private String lastModifiedBy;
 
     /**
+     * Date of forwarding.
+     */
+    private Date forwarded;
+
+    /**
      * State of request.
      */
     private int state;
@@ -293,6 +298,14 @@ public class ContactRequest {
 
     public void setLastModifiedBy(String lastModifiedBy) {
         this.lastModifiedBy = lastModifiedBy;
+    }
+
+    public Date getForwarded() {
+        return forwarded;
+    }
+
+    public void setForwarded(Date forwarded) {
+        this.forwarded = forwarded;
     }
 
     public ContactRequestState getState() {

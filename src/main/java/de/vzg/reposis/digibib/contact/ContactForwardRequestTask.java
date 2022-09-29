@@ -72,6 +72,7 @@ public class ContactForwardRequestTask implements Runnable {
                 }
             }
             request.setState(ContactRequestState.SENT);
+            request.setForwarded(new Date());
         } catch (Exception e) {
             request.setDebug(e.getMessage());
             request.setState(ContactRequestState.SENDING_FAILED);
