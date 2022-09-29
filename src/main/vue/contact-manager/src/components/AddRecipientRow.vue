@@ -26,7 +26,7 @@
             :disabled="disabled">
           <i class="fas fa-check"></i>
         </button>
-        <button class="btn shadow-none pl-1 pb-0 pt-0 border-0" @click="resetRecipient"
+        <button class="btn shadow-none pl-1 pb-0 pt-0 border-0" @click="reset"
             :disabled="disabled">
           <i class="fas fa-ban"></i>
         </button>

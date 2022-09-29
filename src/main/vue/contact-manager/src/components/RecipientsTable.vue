@@ -31,7 +31,8 @@
           :isProcessed="request.state === RequestState.Processed
           || request.state === RequestState.Sending_Failed"
           :isSent="request.state === RequestState.Sent || request.state === RequestState.Confirmed"
-          @delete="handleDelete" @edit="handleEdit" @update="handleUpdate" @mail="handleMail" />
+          @delete="handleDelete" @edit="handleEdit" @update="handleUpdate" @mail="handleMail"
+          @cancel="handleCancel" />
       </template>
       <AddRecipientRow
         v-if="request.state === RequestState.Processed"
@@ -58,6 +59,9 @@ const request = store.state.modal.currentRequest;
 const editUUID = ref();
 const handleEdit = (uuid: string) => {
   editUUID.value = uuid;
+};
+const handleCancel = () => {
+  editUUID.value = undefined;
 };
 const handleAdd = (recipient: Recipient) => {
   store.dispatch(`modal/${ActionTypes.ADD_RECIPIENT}`, recipient);
