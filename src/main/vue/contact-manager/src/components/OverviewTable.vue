@@ -2,17 +2,20 @@
   <table class="table table-striped">
     <colgroup>
       <col style="width: 20%">
-      <col style="width: 17%">
-      <col style="width: 17%">
+      <col style="width: 11%">
+      <col style="width: 12%">
+      <col style="width: 12%">
       <col style="width: 7%">
-      <col style="width: 10%">
-      <col style="width: 35%">
+      <col style="width: 50%">
       <col style="width: 5%">
     </colgroup>
     <thead>
       <tr>
         <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.id') }}
+        </th>
+        <th scope="col">
+          {{ $t('digibib.contact.frontend.manager.label.objectID') }}
         </th>
         <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.created') }}
@@ -24,10 +27,7 @@
           {{ $t('digibib.contact.frontend.manager.label.state') }}
         </th>
         <th scope="col">
-          {{ $t('digibib.contact.frontend.manager.label.objectID') }}
-        </th>
-        <th scope="col">
-          {{ $t('digibib.contact.frontend.manager.label.email') }}
+          {{ $t('digibib.contact.frontend.manager.label.requester') }}
         </th>
         <th scope="col">
         </th>
@@ -39,6 +39,11 @@
           {{ item.uuid }}
         </td>
         <td class="align-middle">
+          <a :href="'receive/' + item.objectID" target="_blank">
+            {{ item.objectID }}
+          </a>
+        </td>
+        <td class="align-middle">
           {{ new Date(item.created).toLocaleString() }}
         </td>
         <td class="align-middle">
@@ -48,12 +53,7 @@
           {{ RequestState.toString(item.state) }}
         </td>
         <td class="align-middle">
-          <a :href="'receive/' + item.objectID" target="_blank">
-            {{ item.objectID }}
-          </a>
-        </td>
-        <td class="align-middle">
-          {{ item.email }}
+          {{ item.name + ' (' + item.email + ')' }}
         </td>
         <td class="align-middle">
           <div class="btn-group">
