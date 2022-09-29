@@ -1,14 +1,14 @@
 <template>
   <tr :class="rowStyle">
     <td class="col-3">
-      <input v-if="updateable && editMode" class="form-control form-control-sm" type="text"
+      <input v-if="isManualOrigin && editMode" class="form-control form-control-sm" type="text"
           v-model="recipientSave.name" :class="v.name.$error ? 'is-invalid' : ''" />
       <span v-else>
         {{ recipient.name }}
       </span>
     </td>
     <td class="col-2">
-      <select v-if="updateable && editMode" class="form-control form-control-sm"
+      <select v-if="isManualOrigin && editMode" class="form-control form-control-sm"
           v-model="recipientSave.origin" :class="v.origin.$error ? 'is-invalid' : ''">
         <option :value="Origin.Manual">
           {{ $t('digibib.contact.frontend.manager.label.origin.manual') }}
@@ -19,7 +19,7 @@
       </span>
     </td>
     <td class="col-4">
-      <input v-if="updateable && editMode" class="form-control form-control-sm" type="text"
+      <input v-if="isManualOrigin && editMode" class="form-control form-control-sm" type="text"
           v-model="recipientSave.mail" :class="v.mail.$error ? 'is-invalid' : ''"/>
       <span v-else>
         {{ recipient.mail }}
@@ -27,7 +27,7 @@
     </td>
     <td class="col-1 align-middle text-center">
       <input v-if="editMode" type="checkbox" v-model="recipientSave.enabled"/>
-      <input v-else type="checkbox" v-model="recipientSave.enabled" disabled/>
+      <input v-else type="checkbox" :checked="recipient.enabled" disabled/>
     </td>
     <td class="col-1 text-center align-middle">
       <EditToolbar :editMode='editUUID === recipient.uuid'
@@ -59,7 +59,7 @@ const props = defineProps({
     default: false,
   },
 });
-const emit = defineEmits(['delete', 'edit', 'mail', 'update']);
+const emit = defineEmits(['cancel', 'delete', 'edit', 'mail', 'update']);
 const rules = computed(() => ({
   name: {
     required,
@@ -89,6 +89,7 @@ const rowStyle = computed(() => {
   }
   return '';
 });
+const isManualOrigin = computed(() => props.recipient.origin === Origin.Manual);
 const updateable = computed(() => {
   if (disabled.value) {
     return false;
@@ -99,7 +100,7 @@ const removeable = computed(() => {
   if (!updateable.value) {
     return false;
   }
-  return props.recipient.origin === Origin.Manual;
+  return isManualOrigin.value;
 });
 const mailable = computed(() => {
   if (disabled.value) {
@@ -117,7 +118,8 @@ const handleEdit = () => {
   emit('edit', props.recipient.uuid);
 };
 const handleCancel = () => {
-  emit('edit', undefined);
+  recipientSave.value = JSON.parse(JSON.stringify(props.recipient));
+  emit('cancel');
 };
 const handleUpdate = () => {
   v.value.$validate();
