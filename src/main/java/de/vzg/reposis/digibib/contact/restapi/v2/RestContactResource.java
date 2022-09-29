@@ -40,7 +40,9 @@ import javax.ws.rs.core.Response;
 import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -103,6 +105,15 @@ public class RestContactResource {
             throws ContactRequestNotFoundException {
         final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request != null) {
+            if (ContactRequestState.CONFIRMED.equals(request.getState())) {
+                final List<ContactRecipient> recipients = request.getRecipients().stream()
+                        .filter(r -> r.getConfirmed() != null).collect(Collectors.toList());
+                String result = "";
+                for (ContactRecipient recipient : recipients) {
+                    result += String.format("CONFIRMED by: %s\n", recipient.getName());
+                }
+                return result;
+            }
             return request.getState().toString();
         } else {
             throw new ContactRequestNotFoundException();
