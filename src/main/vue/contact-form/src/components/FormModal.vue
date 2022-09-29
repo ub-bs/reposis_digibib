@@ -190,7 +190,7 @@ const handleSubmit = async () => {
         });
         busy.value = false;
         if (response.ok) {
-          emit('success');
+          emit('success', contactRequest.value);
         } else {
           showError.value = true;
         }
