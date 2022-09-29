@@ -197,7 +197,8 @@ public class ContactService {
             if (outdated == null) {
                 throw new ContactRequestNotFoundException();
             }
-            if (outdated.getState().getValue() <= ContactRequestState.PROCESSED.getValue()) {
+            if (!ContactRequestState.SENDING_FAILED.equals(outdated.getState().getValue()) &&
+                    outdated.getState().getValue() > ContactRequestState.PROCESSED.getValue()) {
                 throw new ContactRequestStateException("A forwarded request cannot be deleted.");
             }
             final String comment = request.getComment();

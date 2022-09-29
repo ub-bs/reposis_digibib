@@ -9,6 +9,7 @@ import { Getters } from './getters';
 import {
   forwardRequest,
   forwardRequestToRecipient,
+  updateRequest,
   addRecipient,
   updateRecipient,
   removeRecipient,
@@ -34,6 +35,7 @@ export interface Actions {
   [ActionTypes.UPDATE_RECIPIENT]({ commit, state }:
     AugmentedActionContext, payload: Recipient): void,
   [ActionTypes.REMOVE_RECIPIENT]({ commit, state }: AugmentedActionContext, payload: string): void,
+  [ActionTypes.UPDATE_REQUEST]({ commit, state }: AugmentedActionContext, payload: Request): void,
   [ActionTypes.SHOW_REQUEST]({ commit }: AugmentedActionContext, payload: Request): void,
   [ActionTypes.HIDE_REQUEST]({ commit }: AugmentedActionContext): void,
 }
@@ -118,6 +120,21 @@ export const actions: ActionTree<State, RootState> & Actions = {
         await removeRecipient(state.currentRequest.uuid, recipientUUID);
         state.currentRequest.recipients = state.currentRequest.recipients
           .filter((item) => (item.uuid !== recipientUUID));
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        commit(MutationTypes.SET_ERROR_CODE, error.message);
+      } else {
+        commit(MutationTypes.SET_ERROR_CODE, 'unknown');
+      }
+    }
+  },
+  async [ActionTypes.UPDATE_REQUEST]({ commit, state }, request: Request): Promise<void> {
+    commit(MutationTypes.SET_ERROR_CODE, undefined);
+    commit(MutationTypes.SET_INFO_CODE, undefined);
+    try {
+      if (state.currentRequest) {
+        await updateRequest(state.currentRequest.uuid, request);
       }
     } catch (error) {
       if (error instanceof Error) {

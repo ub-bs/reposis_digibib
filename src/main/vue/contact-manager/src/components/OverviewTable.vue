@@ -21,7 +21,7 @@
           {{ $t('digibib.contact.frontend.manager.label.created') }}
         </th>
         <th scope="col">
-          {{ $t('digibib.contact.frontend.manager.label.forwared') }}
+          {{ $t('digibib.contact.frontend.manager.label.forwarded') }}
         </th>
         <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.state') }}
