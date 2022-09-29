@@ -1,11 +1,12 @@
 <template>
   <table class="table table-striped">
     <colgroup>
-      <col style="width: 25%">
-      <col style="width: 15%">
-      <col style="width: 15%">
-      <col style="width: 30%">
+      <col style="width: 20%">
+      <col style="width: 17%">
+      <col style="width: 17%">
+      <col style="width: 7%">
       <col style="width: 10%">
+      <col style="width: 35%">
       <col style="width: 5%">
     </colgroup>
     <thead>
@@ -17,13 +18,16 @@
           {{ $t('digibib.contact.frontend.manager.label.created') }}
         </th>
         <th scope="col">
+          {{ $t('digibib.contact.frontend.manager.label.forwared') }}
+        </th>
+        <th scope="col">
+          {{ $t('digibib.contact.frontend.manager.label.state') }}
+        </th>
+        <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.objectID') }}
         </th>
         <th scope="col">
           {{ $t('digibib.contact.frontend.manager.label.email') }}
-        </th>
-        <th scope="col">
-          {{ $t('digibib.contact.frontend.manager.label.state') }}
         </th>
         <th scope="col">
         </th>
@@ -31,24 +35,27 @@
     </thead>
     <tbody v-if="requests">
       <tr v-for="item in requests" :key="item">
-        <td>
+        <td class="align-middle">
           {{ item.uuid }}
         </td>
-        <td>
+        <td class="align-middle">
           {{ new Date(item.created).toLocaleString() }}
+        </td>
+        <td class="align-middle">
+          {{ item.forwarded != null ? new Date(item.forwarded).toLocaleString() : '-' }}
+        </td>
+        <td class="align-middle">
+          {{ RequestState.toString(item.state) }}
         </td>
         <td class="align-middle">
           <a :href="'receive/' + item.objectID" target="_blank">
             {{ item.objectID }}
           </a>
         </td>
-        <td>
+        <td class="align-middle">
           {{ item.email }}
         </td>
-        <td>
-          {{ RequestState.toString(item.state) }}
-        </td>
-        <td>
+        <td class="align-middle">
           <div class="btn-group">
             <button class="btn shadow-none pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item.uuid)">
               <i class="fa fa-eye"></i>
