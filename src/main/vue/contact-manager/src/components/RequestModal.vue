@@ -34,9 +34,29 @@
             disabled />
         </div>
       </div>
-      <div class="form-row">
-        <div class="col-md-12">
-          <textarea class="form-control" rows="5" readonly v-model="request.message" />
+      <div class="form-group">
+        <textarea class="form-control" rows="5" readonly v-model="request.message" />
+      </div>
+      <hr class="my-4" />
+      <div class="form-group">
+        <label for="inputComment">
+          {{ $t('digibib.contact.frontend.manager.label.comment') }}
+        </label>
+        <div class="d-flex flex-row">
+          <textarea id="inputComment" class="form-control" rows="4"
+            :readonly="!commentEditMode || !editable"
+            v-model="request.comment" @click="handleCommentClick" />
+          <div v-if="commentEditMode" class="d-flex flex-column pl-1">
+            <div class="btn-group-vertical">
+              <button class="btn btn-primary shadow-none" @click="handleCommentSave" title="Save">
+                <i class="fa fa-check"></i>
+              </button>
+              <button class="btn btn-primary shadow-none" @click="handleCommentCancel"
+                  title="Cancel">
+                <i class="fa fa-xmark"></i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <hr class="my-4" />
@@ -95,6 +115,28 @@ const forward = async () => {
   if (ok) {
     store.dispatch(`modal/${ActionTypes.FORWARD_REQUEST}`);
   }
+};
+const editable = computed(() => {
+  if (request.value.state < RequestState.Sending) {
+    return true;
+  }
+  return request.value.state === RequestState.Sending_Failed;
+});
+const commentEditMode = ref(false);
+let commentSave = '';
+const handleCommentClick = () => {
+  if (editable.value) {
+    commentSave = request.value.comment;
+    commentEditMode.value = true;
+  }
+};
+const handleCommentSave = async () => {
+  store.dispatch(`modal/${ActionTypes.UPDATE_REQUEST}`, request.value);
+  commentEditMode.value = false;
+};
+const handleCommentCancel = () => {
+  request.value.comment = commentSave;
+  commentEditMode.value = false;
 };
 </script>
 <style>

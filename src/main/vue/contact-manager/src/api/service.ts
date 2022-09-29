@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ErrorResponse, Recipient } from '../utils';
+import { ErrorResponse, Recipient, Request } from '../utils';
 
 // TODO own instance
 
@@ -18,6 +18,7 @@ axios.interceptors.response.use((response) => response, (error) => {
 
 const getRequests = (offset: number, limit: number) => axios.get(`api/v2/contacts?offset=${offset}&limit=${limit}`);
 const removeRequest = (id: string) => axios.delete(`api/v2/contacts/${id}`);
+const updateRequest = (id: string, request: Request) => axios.put(`api/v2/contacts/${id}`, request);
 const forwardRequest = (id: string) => axios.post(`api/v2/contacts/${id}/forward`);
 const forwardRequestToRecipient = (id: string, recipientID: string) => axios.post(`api/v2/contacts/${id}/forward?recipient=${recipientID}`);
 const addRecipient = (id: string, recipient: Recipient) => axios.post(`api/v2/contacts/${id}/recipients`, recipient);
@@ -26,6 +27,7 @@ const removeRecipient = (id: string, recipientID: string) => axios.delete(`api/v
 
 export {
   getRequests,
+  updateRequest,
   removeRequest,
   forwardRequest,
   forwardRequestToRecipient,
