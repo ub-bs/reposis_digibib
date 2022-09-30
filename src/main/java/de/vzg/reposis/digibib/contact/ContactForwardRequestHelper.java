@@ -78,6 +78,10 @@ public class ContactForwardRequestHelper {
         if (orcid != null) {
             properties.put("orcid", orcid);
         }
+        final String comment = r.getComment();
+        if (comment != null) {
+            properties.put("comment", comment);
+        }
         final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties)
                 .getRootElement();
         return EMail.parseXML(mailElement);

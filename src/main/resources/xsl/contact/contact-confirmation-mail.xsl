@@ -30,7 +30,6 @@
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('wir haben folgende Kontaktanfrage für ', $id, ' [0] erhalten:', $newline)" />
       <xsl:value-of select="$newline" />
-      <xsl:value-of select="$newline" />
       <xsl:value-of select="concat($indent, '=====', $newline)" />
       <xsl:value-of select="concat($indent, 'Name:  ', $name, $newline)" />
       <xsl:if test="string-length($orcid) &gt; 0">
@@ -42,6 +41,8 @@
       </xsl:call-template>
       <xsl:value-of select="concat($indent, '=====', $newline)" />
       <xsl:value-of select="$newline" />
+      <xsl:value-of select="concat('Die Anfrage wird nun geprüft und nach erfolgreicher Prüfung an die Beteiligten weitergeleitet.', $newline)" />
+      <xsl:value-of select="concat('Sollten Sie in den nächsten 5 Werktagen keine Bestätigung über eine Weiterleitung erhalten haben, kontaktieren Sie bitte unseren Support: forschungsdaten@tu-braunschweig.de', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('Beste Grüße', $newline)" />
       <xsl:value-of select="$newline" />
