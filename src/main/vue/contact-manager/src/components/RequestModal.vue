@@ -44,15 +44,15 @@
         </label>
         <div class="d-flex flex-row">
           <textarea id="inputComment" class="form-control" rows="4"
-            :readonly="!commentEditMode || !editable"
+            :readonly="!commentEditMode || !editable" @blur="handleCommentCancel"
             v-model="request.comment" @click="handleCommentClick" />
           <div v-if="commentEditMode" class="d-flex flex-column pl-1">
             <div class="btn-group-vertical">
-              <button class="btn btn-primary shadow-none" @click="handleCommentSave" title="Save">
+              <button class="btn btn-primary shadow-none" @mousedown="handleCommentSave"
+                  title="Save">
                 <i class="fa fa-check"></i>
               </button>
-              <button class="btn btn-primary shadow-none" @click="handleCommentCancel"
-                  title="Cancel">
+              <button class="btn btn-primary shadow-none" title="Cancel">
                 <i class="fa fa-xmark"></i>
               </button>
             </div>
@@ -131,11 +131,14 @@ const handleCommentClick = () => {
   }
 };
 const handleCommentSave = async () => {
+  commentSave = request.value.comment;
   store.dispatch(`modal/${ActionTypes.UPDATE_REQUEST}`, request.value);
   commentEditMode.value = false;
 };
 const handleCommentCancel = () => {
-  request.value.comment = commentSave;
+  if (request.value.comment !== commentSave) {
+    request.value.comment = commentSave;
+  }
   commentEditMode.value = false;
 };
 </script>
