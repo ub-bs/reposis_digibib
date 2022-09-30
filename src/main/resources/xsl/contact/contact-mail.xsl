@@ -9,6 +9,7 @@
   <xsl:param name="name" />
   <xsl:param name="orcid" select="''" />
   <xsl:param name="title" />
+  <xsl:param name="comment" />
   <xsl:param name="WebApplicationBaseURL" />
   <!-- TODO language english or german? -->
 
@@ -35,7 +36,6 @@
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('es gibt eine Kontaktanfrage für ', $title, ' [0]:', $newline)" />
       <xsl:value-of select="$newline" />
-      <xsl:value-of select="$newline" />
       <xsl:value-of select="concat($indent, '=====', $newline)" />
       <xsl:value-of select="concat($indent, 'Name:  ', $name, $newline)" />
       <xsl:value-of select="concat($indent, 'Email: ', $email, $newline)" />
@@ -48,6 +48,14 @@
       </xsl:call-template>
       <xsl:value-of select="concat($indent, '=====', $newline)" />
       <xsl:value-of select="$newline" />
+      <xsl:if test="string-length($comment) &gt; 0">
+        <xsl:value-of select="$newline" />
+        <xsl:value-of select="concat('Kommentar der Administration:', $newline)" />
+        <xsl:call-template name="split">
+          <xsl:with-param name="text" select="$comment"/>
+        </xsl:call-template>
+        <xsl:value-of select="$newline" />
+      </xsl:if>
       <xsl:value-of select="concat('Den aktuellen Status der Anfrage können Sie über [1] prüfen.', $newline)" />
       <xsl:value-of select="concat('Sofern Sie Kontakt zum Interessenten aufgenommen haben, können Sie die Anfrage über [2] bestätigen.', $newline)" />
       <xsl:value-of select="$newline" />
