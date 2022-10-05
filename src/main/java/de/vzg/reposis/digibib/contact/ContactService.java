@@ -267,7 +267,7 @@ public class ContactService {
             } catch (Exception e) {
                 LOGGER.error(e);
                 recipient.setFailed(new Date());
-                throw new MCRException("Sending failed."); // TODO own exception
+                throw new MCRException("Sending failed.");
             } finally {
                 recipient.setSent(new Date());
                 update(recipient);
