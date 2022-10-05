@@ -70,17 +70,6 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="col-12">
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" v-model="contactRequest.sendCopy"
-              id="sendCopyCheck">
-            <label class="form-check-label" for="sendCopyCheck">
-              {{ $t('digibib.contact.frontend.form.label.sendCopy') }}
-            </label>
-          </div>
-        </div>
-      </div>
       <input id="website" name="website" type="text" v-model="website"  />
     </form>
     <div class="row">
@@ -115,7 +104,6 @@ interface IContactRequest {
   orcid?: string;
   message: string;
   objectID: string;
-  sendCopy: boolean;
 }
 const props = defineProps({
   baseUrl: String,
@@ -190,7 +178,7 @@ const handleSubmit = async () => {
         });
         busy.value = false;
         if (response.ok) {
-          emit('success', contactRequest.value);
+          emit('success');
         } else {
           showError.value = true;
         }

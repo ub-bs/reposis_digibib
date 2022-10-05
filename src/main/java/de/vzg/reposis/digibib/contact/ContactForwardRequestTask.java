@@ -19,6 +19,8 @@
 package de.vzg.reposis.digibib.contact;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.mail.MessagingException;
@@ -29,11 +31,13 @@ import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.jdom2.Element;
 import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.MCRSession;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.MCRTransactionHelper;
+import org.mycore.common.config.MCRConfiguration2;
 
 /**
  * This task forwards a contact request to all recipients.
@@ -41,6 +45,9 @@ import org.mycore.common.MCRTransactionHelper;
 public class ContactForwardRequestTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
+
+    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
 
     /**
      * The contact request.
@@ -73,6 +80,11 @@ public class ContactForwardRequestTask implements Runnable {
             }
             request.setState(ContactRequestState.SENT);
             request.setForwarded(new Date());
+            try {
+                sendForwardingConfirmation();
+            } catch (Exception e) {
+                LOGGER.error("Cannot send forward confirmation.", e);
+            }
         } catch (Exception e) {
             request.setDebug(e.getMessage());
             request.setState(ContactRequestState.SENDING_FAILED);
@@ -90,5 +102,16 @@ public class ContactForwardRequestTask implements Runnable {
             }
         }
         session.close();
+    }
+
+    private void sendForwardingConfirmation() throws Exception {
+        final EMail forwardConfirmation = new EMail();
+        final Map<String, String> properties = new HashMap();
+        properties.put("id", request.getObjectID().toString());
+        properties.put("name", request.getName());
+        final Element mailElement = ContactUtils
+                .transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET, properties)
+                .getRootElement();
+        ContactMailService.sendMail(EMail.parseXML(mailElement), request.getFrom());
     }
 }
