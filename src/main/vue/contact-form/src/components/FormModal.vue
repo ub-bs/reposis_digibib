@@ -61,7 +61,7 @@
             <label class="control-label" for="messageInput">
               {{ $t('digibib.contact.frontend.form.label.message') }}
             </label>
-            <textarea type="text" class="form-control" id="messageInput" rows="10" ref="messageInput"
+            <textarea type="text" class="form-control" id="messageInput" rows="8" ref="messageInput"
               :class="messageState === false ? 'is-invalid' : ''" v-model="contactRequest.message"
               required />
             <div class="invalid-feedback" :class="messageState === false ? 'd-block' : ''">
@@ -74,20 +74,23 @@
     </form>
     <div class="row">
       <div class="col-12">
-        <div class="form-check">
+        <div class="form-check required">
           <input class="form-check-input" type="checkbox" v-model="termsInput"
             id="termsCheck" :class="termsState === false ? 'is-invalid' : ''">
-          <label class="form-check-label" for="termsCheck">
+          <label class="control-label form-check-label" for="termsCheck">
             {{ $t('digibib.contact.frontend.form.label.acceptTerms') }}
           </label>
         </div>
       </div>
     </div>
-    <div class="row pt-1">
+    <div class="row pt-4">
       <div class="col">
         <cage-captcha ref="captcha" :baseUrl="baseUrl + 'rsc/captchaCage'"/>
       </div>
     </div>
+    <span class="small font-weight-light" id="required-label">
+     {{ $t('digibib.contact.frontend.form.label.required') }}
+    </span>
   </modal>
 </template>
 
@@ -191,8 +194,14 @@ const handleSubmit = async () => {
   busy.value = false;
 };
 </script>
-<style>
+<style scoped>
 input#website {
   display: none;
+}
+.form-check .control-label:after, .form-group.required .control-label:after {
+  content:"\00a0*";
+}
+#required-label:before {
+  content:"*\00a0";
 }
 </style>
