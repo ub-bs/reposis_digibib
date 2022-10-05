@@ -6,7 +6,7 @@
       </a>
     </Teleport>
     <transition name="modal" appear>
-      <confirmation-modal :sendCopy="isCopy" v-if="showConfirmationModal" @close="showConfirmationModal = false" />
+      <confirmation-modal v-if="showConfirmationModal" @close="showConfirmationModal = false" />
     </transition>
     <transition name="modal" appear>
       <form-modal :objectId="objectId" :baseUrl="baseUrl" v-if="showFormModal"
@@ -31,11 +31,9 @@ defineProps({
 });
 const showConfirmationModal = ref(false);
 const showFormModal = ref(false);
-const isCopy = ref(false);
-const handleSuccess = (request) => {
+const handleSuccess = () => {
   showFormModal.value = false;
   showConfirmationModal.value = true;
-  isCopy.value = request.sendCopy;
 };
 </script>
 <style>

@@ -86,8 +86,6 @@ public class ContactRequest {
 
     private static final String PROP_ORCID = "orcid";
 
-    private static final String PROP_SEND_COPY = "sendCopy";
-
     /**
      * Internal id.
      */
@@ -123,11 +121,6 @@ public class ContactRequest {
      */
     @NotNull
     private MCRObjectID objectID;
-
-    /**
-     * If requester wished copy.
-     */
-    private boolean sendCopy = false;
 
     /**
      * Date of creation.
@@ -251,16 +244,6 @@ public class ContactRequest {
 
     public void setORCID(String orcid) {
         this.orcid = orcid;
-    }
-
-    @JsonProperty(value = PROP_SEND_COPY)
-    @Column(name = "sendCopy", nullable = false)
-    public boolean isSendCopy() {
-        return this.sendCopy;
-    }
-
-    public void setSendCopy(boolean sendCopy) {
-        this.sendCopy = sendCopy;
     }
 
     @Column(name = "created")
@@ -402,7 +385,6 @@ public class ContactRequest {
         if (orcid != null) {
             result += "orcid: " + orcid + "\n";
         }
-        result += "send copy: " + String.valueOf(sendCopy);
         return result;
     }
 }

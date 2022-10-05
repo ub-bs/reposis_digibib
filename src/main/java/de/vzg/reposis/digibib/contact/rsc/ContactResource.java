@@ -41,6 +41,8 @@ import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.mycore.common.MCRException;
@@ -55,12 +57,20 @@ import org.mycore.restapi.annotations.MCRRequireTransaction;
 @Path("/contact")
 public class ContactResource {
 
+    private static final Logger LOGGER = LogManager.getLogger();
+
     private static final Set<String> ALLOWED_GENRES = MCRConfiguration2
             .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream().flatMap(MCRConfiguration2::splitValue)
             .collect(Collectors.toSet());
 
-    private static final String MAIL_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "ConfirmationMail.Stylesheet");
+    private static final String NEW_REQUEST_STYLESHEET = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "NewRequestMail.Stylesheet");
+
+    private static final String RECEIPT_CONFIRMATION_STYLESHEET = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "ReceiptConfirmationMail.Stylesheet");
+
+    private static final String FALLBACK_MAIL = MCRConfiguration2
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -89,12 +99,24 @@ public class ContactResource {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
         ContactService.getInstance().insertRequest(request);
-        if (request.isSendCopy()) {
-            final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
-                    request.getORCID(), objectID.toString());
-            ContactMailService.sendMail(confirmationMail, request.getFrom());
+        final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
+                request.getORCID(), objectID.toString());
+        ContactMailService.sendMail(confirmationMail, request.getFrom());
+        try {
+            ContactMailService.sendMail(createNotificationMail(objectID.toString()), FALLBACK_MAIL);
+        } catch (Exception e) {
+            LOGGER.error("Cannot send notification mail", e);
         }
         return Response.ok().build();
+    }
+
+    private static EMail createNotificationMail(String id) throws Exception {
+        final EMail baseMail = new EMail();
+        final Map<String, String> properties = new HashMap();
+        properties.put("id", id);
+        final Element mailElement = ContactUtils
+                .transform(baseMail.toXML(), NEW_REQUEST_STYLESHEET, properties).getRootElement();
+        return EMail.parseXML(mailElement);
     }
 
     private static EMail createConfirmationMail(String name, String message, String orcid, String id) throws Exception {
@@ -106,8 +128,8 @@ public class ContactResource {
         if (orcid != null) {
             properties.put("name", orcid);
         }
-        final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties)
-                .getRootElement();
+        final Element mailElement = ContactUtils
+                .transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties).getRootElement();
         return EMail.parseXML(mailElement);
     }
 

@@ -36,7 +36,7 @@ public class ContactForwardRequestHelper {
      * Name of stylesheet to transform mail.
      */
     private static final String MAIL_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "RecipientMail.Stylesheet");
+            .getStringOrThrow(ContactConstants.CONF_PREFIX + "RequestMail.Stylesheet");
 
     /**
      * Creates Email for recipient and sends it.
