@@ -10,14 +10,14 @@ export type Getters = {
 
 export const getters: GetterTree<State, RootState> & Getters = {
   getCurrentRecipients: (state: State) => {
-    if (state.currentRequest === undefined) {
+    if (state.request === undefined) {
       return [];
     }
-    return state.currentRequest.recipients;
+    return state.request.recipients;
   },
   getRecipientByUUID: (state: State) => (uuid: string) => {
-    if (state.currentRequest && state.currentRequest.recipients) {
-      return state.currentRequest.recipients.find((r) => r.uuid === uuid);
+    if (state.request && state.request.recipients) {
+      return state.request.recipients.find((r) => r.uuid === uuid);
     }
     return undefined;
   },

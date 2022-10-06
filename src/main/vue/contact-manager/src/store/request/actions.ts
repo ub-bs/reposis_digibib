@@ -36,8 +36,6 @@ export interface Actions {
     AugmentedActionContext, payload: Recipient): void,
   [ActionTypes.REMOVE_RECIPIENT]({ commit, state }: AugmentedActionContext, payload: string): void,
   [ActionTypes.UPDATE_REQUEST]({ commit, state }: AugmentedActionContext, payload: Request): void,
-  [ActionTypes.SHOW_REQUEST]({ commit }: AugmentedActionContext, payload: Request): void,
-  [ActionTypes.HIDE_REQUEST]({ commit }: AugmentedActionContext): void,
 }
 
 export const actions: ActionTree<State, RootState> & Actions = {
@@ -45,9 +43,9 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
-      if (state.currentRequest) {
-        await forwardRequest(state.currentRequest.uuid);
-        state.currentRequest.state = RequestState.Sending;
+      if (state.request) {
+        await forwardRequest(state.request.uuid);
+        state.request.state = RequestState.Sending;
         commit(MutationTypes.SET_INFO_CODE, 'forward');
       }
     } catch (error) {
@@ -62,8 +60,9 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
-      if (state.currentRequest) {
-        await forwardRequestToRecipient(state.currentRequest.uuid, id);
+      if (state.request) {
+        await forwardRequestToRecipient(state.request.uuid, id);
+        // const recipient = getters.getRecipientByUUID(id);
         // TODO get recipient and reset sent and failed
         commit(MutationTypes.SET_INFO_CODE, 'forwardRecipient');
       }
@@ -79,11 +78,11 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
-      if (state.currentRequest) {
+      if (state.request) {
         const r = recipient;
-        const response = await addRecipient(state.currentRequest.uuid, r);
+        const response = await addRecipient(state.request.uuid, r);
         r.uuid = response.headers.location.split('/').pop();
-        state.currentRequest.recipients.push(r);
+        state.request.recipients.push(r);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -97,12 +96,12 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
-      if (state.currentRequest && recipient.uuid) {
-        await updateRecipient(state.currentRequest.uuid, recipient.uuid, recipient);
-        const { recipients } = state.currentRequest;
-        state.currentRequest.recipients = recipients
+      if (state.request && recipient.uuid) {
+        await updateRecipient(state.request.uuid, recipient.uuid, recipient);
+        const { recipients } = state.request;
+        state.request.recipients = recipients
           .filter((item) => (item.uuid !== recipient.uuid));
-        state.currentRequest.recipients.push(recipient);
+        state.request.recipients.push(recipient);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -116,9 +115,9 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
-      if (state.currentRequest) {
-        await removeRecipient(state.currentRequest.uuid, recipientUUID);
-        state.currentRequest.recipients = state.currentRequest.recipients
+      if (state.request) {
+        await removeRecipient(state.request.uuid, recipientUUID);
+        state.request.recipients = state.request.recipients
           .filter((item) => (item.uuid !== recipientUUID));
       }
     } catch (error) {
@@ -133,8 +132,8 @@ export const actions: ActionTree<State, RootState> & Actions = {
     commit(MutationTypes.SET_ERROR_CODE, undefined);
     commit(MutationTypes.SET_INFO_CODE, undefined);
     try {
-      if (state.currentRequest) {
-        await updateRequest(state.currentRequest.uuid, request);
+      if (state.request) {
+        await updateRequest(state.request.uuid, request);
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -143,15 +142,5 @@ export const actions: ActionTree<State, RootState> & Actions = {
         commit(MutationTypes.SET_ERROR_CODE, 'unknown');
       }
     }
-  },
-  [ActionTypes.SHOW_REQUEST]({ commit }, request: Request): void {
-    commit(MutationTypes.SET_CURRENT_REQUEST, request);
-    commit(MutationTypes.SET_SHOW_REQUEST_MODAL, true);
-  },
-  [ActionTypes.HIDE_REQUEST]({ commit }): void {
-    commit(MutationTypes.SET_SHOW_REQUEST_MODAL, false);
-    commit(MutationTypes.SET_CURRENT_REQUEST, undefined);
-    commit(MutationTypes.SET_INFO_CODE, undefined);
-    commit(MutationTypes.SET_ERROR_CODE, undefined);
   },
 };

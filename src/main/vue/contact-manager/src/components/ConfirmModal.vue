@@ -27,7 +27,5 @@ const cancel = () => {
   visible.value = false;
   resolvePromise(false);
 };
-defineExpose({
-  show,
-});
+defineExpose({ show });
 </script>
