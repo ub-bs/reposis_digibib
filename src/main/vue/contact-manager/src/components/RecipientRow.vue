@@ -1,5 +1,5 @@
 <template>
-  <tr :class="rowStyle">
+  <tr :class="rowStyle" :title="title">
     <td class="col-3">
       <input v-if="isManualOrigin && editMode" class="form-control form-control-sm" type="text"
           v-model="recipientSave.name" :class="v.name.$error ? 'is-invalid' : ''" />
@@ -39,6 +39,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
+import { useI18n } from 'vue-i18n';
 import { required, email } from '@vuelidate/validators';
 import { Origin } from '../utils';
 import EditToolbar from './EditToolbar.vue';
@@ -72,6 +73,7 @@ const rules = computed(() => ({
     required,
   },
 }));
+const { t } = useI18n();
 const v = useVuelidate(rules, props.recipient);
 const recipientSave = ref(JSON.parse(JSON.stringify(props.recipient)));
 const editMode = computed(() => props.editUUID === props.recipient.uuid);
@@ -86,6 +88,24 @@ const rowStyle = computed(() => {
   }
   if (props.recipient.sent) {
     return 'table-warning';
+  }
+  return '';
+});
+const title = computed(() => {
+  if (props.recipient.confirmed != null) {
+    return t('digibib.contact.frontend.manager.info.confirmed', {
+      date: new Date(props.recipient.confirmed).toLocaleString(),
+    });
+  }
+  if (props.recipient.failed != null) {
+    return t('digibib.contact.frontend.manager.info.failed', {
+      date: new Date(props.recipient.failed).toLocaleString(),
+    });
+  }
+  if (props.recipient.sent != null) {
+    return t('digibib.contact.frontend.manager.info.sent', {
+      date: new Date(props.recipient.sent).toLocaleString(),
+    });
   }
   return '';
 });

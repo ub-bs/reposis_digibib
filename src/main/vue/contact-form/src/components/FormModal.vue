@@ -198,9 +198,6 @@ const handleSubmit = async () => {
 input#website {
   display: none;
 }
-.form-check .control-label:after, .form-group.required .control-label:after {
-  content:"\00a0*";
-}
 #required-label:before {
   content:"*\00a0";
 }
