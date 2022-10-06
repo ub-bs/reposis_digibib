@@ -1,6 +1,6 @@
 <template>
-  <div class="modal-mask">
-    <div class="modal-wrapper" @click="close">
+  <Transition name="modal-fade">
+    <div class="modal-backdrop" @click="close">
       <div class="modal-dialog" :class="style" role="document" @click.stop="">
         <div class="modal-content">
           <div class="modal-header">
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </Transition>
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
@@ -90,18 +90,25 @@ const style = computed(() => {
 });
 </script>
 <style>
-.modal-mask {
-  position: fixed;
+.modal-backdrop {
   z-index: 9998;
+  position: fixed;
   top: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+.modal-fade-enter-from {
+  opacity: 0;
+}
+.modal-fade-enter-active,
+.modal-fade-leave-active,
+.modal-fade-leave-from,
+.modal-fade-leave-to {
+  transition: all 0.3s ease-out;
 }
 </style>

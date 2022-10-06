@@ -48,14 +48,14 @@ import { useI18n } from 'vue-i18n';
 import AddRecipientRow from './AddRecipientRow.vue';
 import ConfirmModal from './ConfirmModal.vue';
 import RecipientRow from './RecipientRow.vue';
-import { ActionTypes } from '../store/modal/action-types';
+import { ActionTypes } from '../store/request/action-types';
 import { Recipient, RequestState } from '../utils';
 
 const store = useStore();
 const { t } = useI18n();
 const confirmModal = ref(null);
-const recipients = computed(() => store.getters['modal/getCurrentRecipients']);
-const request = store.state.modal.currentRequest;
+const recipients = computed(() => store.getters['request/getCurrentRecipients']);
+const { request } = store.state.request;
 const editUUID = ref();
 const handleEdit = (uuid: string) => {
   editUUID.value = uuid;
@@ -64,24 +64,24 @@ const handleCancel = () => {
   editUUID.value = undefined;
 };
 const handleAdd = (recipient: Recipient) => {
-  store.dispatch(`modal/${ActionTypes.ADD_RECIPIENT}`, recipient);
+  store.dispatch(`request/${ActionTypes.ADD_RECIPIENT}`, recipient);
 };
 const handleUpdate = (recipient: Recipient) => {
-  store.dispatch(`modal/${ActionTypes.UPDATE_RECIPIENT}`, recipient);
+  store.dispatch(`request/${ActionTypes.UPDATE_RECIPIENT}`, recipient);
   editUUID.value = undefined;
 };
 const handleDelete = async (recipientUUID: string) => {
   const ok = await confirmModal.value.show({
     title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
     message: t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
-      mail: store.getters['modal/getRecipientByUUID'](recipientUUID).mail,
+      mail: store.getters['request/getRecipientByUUID'](recipientUUID).mail,
     }),
   });
   if (ok) {
-    store.dispatch(`modal/${ActionTypes.REMOVE_RECIPIENT}`, recipientUUID);
+    store.dispatch(`request/${ActionTypes.REMOVE_RECIPIENT}`, recipientUUID);
   }
 };
 const handleMail = (recipientUUID: string) => {
-  store.dispatch(`modal/${ActionTypes.FORWARD_REQUEST_TO_RECIPIENT}`, recipientUUID);
+  store.dispatch(`request/${ActionTypes.FORWARD_REQUEST_TO_RECIPIENT}`, recipientUUID);
 };
 </script>
