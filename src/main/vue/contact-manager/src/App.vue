@@ -46,7 +46,6 @@ import Pagination from './components/Pagination.vue';
 import { ActionTypes } from './store/request/action-types';
 
 const perPage = 8;
-
 const store = useStore();
 const errorCode = ref(null);
 const loading = ref(true);
