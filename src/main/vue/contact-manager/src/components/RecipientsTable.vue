@@ -98,7 +98,7 @@ const removeRecipient = async (recipientUUID: string) => {
   const ok = await confirmModal.value.show({
     title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
     message: t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
-      mail: recipientUUID, // TODO extract mail
+      mail: store.getters['request/getRecipientByUUID'](props.request.uuid, recipientUUID).mail,
     }),
   });
   if (ok) {
