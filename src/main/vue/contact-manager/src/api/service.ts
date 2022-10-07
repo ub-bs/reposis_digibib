@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { ErrorResponse, Recipient, Request } from '../utils';
 
-// TODO own instance
-
 axios.interceptors.response.use((response) => response, (error) => {
   if (axios.isAxiosError(error) && error.response) {
     if (error.response.status === 401 || error.response.status === 403) {
