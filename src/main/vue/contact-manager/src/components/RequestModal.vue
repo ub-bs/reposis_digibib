@@ -43,11 +43,11 @@
       </label>
       <div class="d-flex flex-row">
         <textarea id="inputComment" class="form-control" rows="4"
-          :readonly="!commentEditMode || !editable" @blur="handleCommentCancel"
-          v-model="request.comment" @click="handleCommentClick" />
+          :readonly="!commentEditMode || !editable" @blur="cancelCommentEdit"
+          v-model="request.comment" @click="startCommentEdit" />
         <div v-if="commentEditMode" class="d-flex flex-column pl-1">
           <div class="btn-group-vertical">
-            <button class="btn btn-primary shadow-none" @mousedown="handleCommentSave"
+            <button class="btn btn-primary shadow-none" @mousedown="updateComment"
                 title="Save">
               <i class="fa fa-check"></i>
             </button>
@@ -65,10 +65,11 @@
     <p>
       {{ $t('digibib.contact.frontend.manager.info.recipients') }}
     </p>
-    <recipients-table />
+    <recipients-table @action-started="resetInfoError" @error="handleError" @info="handleInfo"
+      :request="request" />
     <template v-slot:footer>
       <div class="btn-group">
-        <button type="button" class="btn btn-success" @click="forward"
+        <button type="button" class="btn btn-success" @click="forwardRequest"
             :disabled="forwardDisabled">
           {{ $t('digibib.contact.frontend.manager.button.forward') }}
         </button>
@@ -91,16 +92,57 @@ const store = useStore();
 const { t } = useI18n();
 const showModal = ref(false);
 const confirmModal = ref(null);
-const request: Request = ref({});
-const errorCode = computed(() => store.state.request.errorCode);
-const infoCode = computed(() => store.state.request.infoCode);
+const request: Request = ref();
+const commentEditMode = ref(false);
+let commentSave = '';
+const errorCode = ref();
+const infoCode = ref();
 const forwardDisabled = computed(() => {
   if (request.value.state === RequestState.Sending_Failed) {
     return false;
   }
   return request.value.state !== RequestState.Processed;
 });
-const forward = async () => {
+const resetInfoError = () => {
+  errorCode.value = null;
+  infoCode.value = null;
+};
+const handleInfo = (code) => {
+  infoCode.value = code;
+};
+const handleError = (code) => {
+  errorCode.value = code;
+};
+const editable = computed(() => {
+  if (request.value.state < RequestState.Sending) {
+    return true;
+  }
+  return request.value.state === RequestState.Sending_Failed;
+});
+const startCommentEdit = () => {
+  if (editable.value) {
+    commentSave = request.value.comment;
+    commentEditMode.value = true;
+  }
+};
+const cancelCommentEdit = () => {
+  if (request.value.comment !== commentSave) {
+    request.value.comment = commentSave;
+  }
+  commentEditMode.value = false;
+};
+const updateComment = async () => {
+  errorCode.value = null;
+  commentSave = request.value.comment;
+  try {
+    await store.dispatch(`request/${ActionTypes.UPDATE_REQUEST}`, request.value);
+  } catch (error) {
+    handleError(error instanceof Error ? error.message : 'unknown');
+  } finally {
+    commentEditMode.value = false;
+  }
+};
+const forwardRequest = async () => {
   let ok = true;
   if (request.value.recipients.filter((r) => r.enabled === true).length === 0) {
     ok = await confirmModal.value.show({
@@ -109,36 +151,17 @@ const forward = async () => {
     });
   }
   if (ok) {
-    store.dispatch(`request/${ActionTypes.FORWARD_REQUEST}`);
+    try {
+      await store.dispatch(`request/${ActionTypes.FORWARD_REQUEST}`, request.value.uuid);
+      handleInfo('forward');
+    } catch (error) {
+      handleError(error instanceof Error ? error.message : 'unknown');
+    }
   }
 };
-const editable = computed(() => {
-  if (request.value.state < RequestState.Sending) {
-    return true;
-  }
-  return request.value.state === RequestState.Sending_Failed;
-});
-const commentEditMode = ref(false);
-let commentSave = '';
-const handleCommentClick = () => {
-  if (editable.value) {
-    commentSave = request.value.comment;
-    commentEditMode.value = true;
-  }
-};
-const handleCommentSave = async () => {
-  commentSave = request.value.comment;
-  store.dispatch(`request/${ActionTypes.UPDATE_REQUEST}`, request.value);
-  commentEditMode.value = false;
-};
-const handleCommentCancel = () => {
-  if (request.value.comment !== commentSave) {
-    request.value.comment = commentSave;
-  }
-  commentEditMode.value = false;
-};
-const show = () => {
-  request.value = store.state.request.request;
+const show = (r: Request) => {
+  request.value = r;
+  resetInfoError();
   showModal.value = true;
 };
 const hide = () => {

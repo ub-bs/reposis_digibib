@@ -1,4 +1,0 @@
-export enum ActionTypes {
-  FETCH_REQUESTS = 'FETCH_REQUESTS',
-  REMOVE_REQUEST = 'REMOVE_REQUEST',
-}

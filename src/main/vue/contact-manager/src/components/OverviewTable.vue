@@ -57,7 +57,7 @@
         </td>
         <td class="align-middle">
           <div class="btn-group">
-            <button class="btn shadow-none pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item.uuid)">
+            <button class="btn shadow-none pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item)">
               <i class="fa fa-eye"></i>
             </button>
             <button class="btn shadow-none pt-0 pb-0 pl-1 pr-2" @click="removeRequest(item.uuid)"
@@ -79,9 +79,8 @@ import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import ConfirmModal from './ConfirmModal.vue';
 import RequestModal from './RequestModal.vue';
-import { RequestState } from '../utils';
-import { ActionTypes as MainActionTypes } from '../store/main/action-types';
-import { MutationTypes as ModalMutationTypes } from '../store/request/mutation-types';
+import { Request, RequestState } from '../utils';
+import { ActionTypes } from '../store/request/action-types';
 
 defineProps({
   requests: {
@@ -90,12 +89,10 @@ defineProps({
 });
 const store = useStore();
 const { t } = useI18n();
-const confirmModal = ref(null);
-const requestModal = ref(null);
-const viewRequest = (id: string) => {
-  const request = store.getters['main/getRequestById'](id);
-  store.commit(`request/${ModalMutationTypes.SET_REQUEST}`, request);
-  requestModal.value.show();
+const confirmModal = ref();
+const requestModal = ref();
+const viewRequest = (request: Request) => {
+  requestModal.value.show(request);
 };
 const removeRequest = async (id: string) => {
   const ok = await confirmModal.value.show({
@@ -105,7 +102,7 @@ const removeRequest = async (id: string) => {
     }),
   });
   if (ok) {
-    store.dispatch(`main/${MainActionTypes.REMOVE_REQUEST}`, id);
+    await store.dispatch(`request/${ActionTypes.REMOVE_REQUEST}`, id); // TODO error
   }
 };
 </script>

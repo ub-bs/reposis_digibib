@@ -31,8 +31,9 @@
     </td>
     <td class="col-1 text-center align-middle">
       <EditToolbar :editMode='editUUID === recipient.uuid'
-          :edit="updateable" :remove="removeable" :mail="mailable" @edit="handleEdit"
-          @cancel="handleCancel" @update="handleUpdate" @remove="handleRemove" @mail="handleMail" />
+          :edit="updateable" :remove="removeable" :mail="mailable" @edit="startEdit"
+          @cancel="cancelEdit" @update="updateRecipient" @remove="removeRecipient"
+          @mail="mailRecipient" />
     </td>
   </tr>
 </template>
@@ -134,23 +135,23 @@ const mailable = computed(() => {
   }
   return props.recipient.failed != null;
 });
-const handleEdit = () => {
+const startEdit = () => {
   emit('edit', props.recipient.uuid);
 };
-const handleCancel = () => {
+const cancelEdit = () => {
   recipientSave.value = JSON.parse(JSON.stringify(props.recipient));
   emit('cancel');
 };
-const handleUpdate = () => {
+const updateRecipient = () => {
   v.value.$validate();
   if (!v.value.$error) {
     emit('update', recipientSave.value);
   }
 };
-const handleRemove = () => {
+const removeRecipient = () => {
   emit('delete', props.recipient.uuid);
 };
-const handleMail = () => {
+const mailRecipient = () => {
   emit('mail', props.recipient.uuid);
 };
 </script>

@@ -38,24 +38,61 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import axios from 'axios';
 import OverviewTable from './components/OverviewTable.vue';
 import Pagination from './components/Pagination.vue';
-import { ActionTypes } from './store/main/action-types';
+import { ActionTypes } from './store/request/action-types';
+
+const perPage = 4;
 
 const store = useStore();
-const requests = computed(() => store.state.main.requests);
-const errorCode = computed(() => store.state.main.errorCode);
-const loading = computed(() => store.state.main.loading);
-const totalRows = computed(() => store.state.main.totalRows);
-const currentPage = computed(() => store.state.main.currentPage);
-const isBooted = computed(() => store.state.main.isBooted);
-const perPage = computed(() => store.state.main.perPage);
+const requests = computed(() => store.getters['request/getRequests']);
+const errorCode = ref(null);
+const loading = ref(true);
+const totalRows = computed(() => store.state.request.totalCount);
+const currentPage = ref(0);
+const isBooted = ref(false);
 const handlePageChange = async (page) => {
-  store.commit('main/SET_CURRENT_PAGE', page);
-  await store.dispatch(`main/${ActionTypes.FETCH_REQUESTS}`);
+  currentPage.value = page;
+  try {
+    await store.dispatch(`request/${ActionTypes.FETCH}`, {
+      offset: page * perPage,
+      limit: page * perPage + perPage,
+    });
+  } catch (error) {
+    errorCode.value = error instanceof Error ? error.message : 'unknown';
+  }
 };
+onMounted(async () => {
+  let authError = false;
+  if (process.env.NODE_ENV === 'development') {
+    axios.defaults.headers.common.Authorization = 'Basic YWRtaW5pc3RyYXRvcjphbGxlc3dpcmRndXQ=';
+  } else {
+    try {
+      const jwtResponse = await axios.get('rsc/jwt');
+      const jwtToken = jwtResponse.data.access_token;
+      axios.defaults.headers.common.Authorization = `Bearer ${jwtToken}`;
+    } catch (error) {
+      authError = true;
+    }
+  }
+  if (!authError) {
+    try {
+      await store.dispatch(`request/${ActionTypes.FETCH}`, {
+        offset: 0,
+        limit: perPage,
+      });
+    } catch (error) {
+      errorCode.value = error instanceof Error ? error.message : 'unknown';
+    }
+  } else {
+    errorCode.value = 'unknown';
+  }
+  isBooted.value = true;
+  loading.value = false;
+});
 </script>
 
 <style scoped>

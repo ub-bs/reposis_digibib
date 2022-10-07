@@ -1,8 +1,6 @@
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 import axios from 'axios';
-import { ActionTypes } from './store/main/action-types';
-import { MutationTypes } from './store/main/mutation-types';
 import store from './store';
 import ContactManager from './App.vue';
 
@@ -25,23 +23,4 @@ if (process.env.NODE_ENV === 'development') {
   app.use(i18n);
   app.use(store);
   app.mount('#app');
-  store.commit(`main/${MutationTypes.SET_PER_PAGE}`, 8);
-  let authError = false;
-  if (process.env.NODE_ENV === 'development') {
-    axios.defaults.headers.common.Authorization = 'Basic YWRtaW5pc3RyYXRvcjphbGxlc3dpcmRndXQ=';
-  } else {
-    try {
-      const jwtResponse = await axios.get('rsc/jwt');
-      const jwtToken = jwtResponse.data.access_token;
-      axios.defaults.headers.common.Authorization = `Bearer ${jwtToken}`;
-    } catch (error) {
-      authError = true;
-    }
-  }
-  if (!authError) {
-    await store.dispatch(`main/${ActionTypes.FETCH_REQUESTS}`);
-  } else {
-    store.commit(`main/${MutationTypes.SET_ERROR_CODE}`, 'unknown');
-  }
-  store.commit(`main/${MutationTypes.SET_IS_BOOTED}`, true);
 })();
