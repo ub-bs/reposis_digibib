@@ -74,7 +74,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import ConfirmModal from './ConfirmModal.vue';
@@ -82,14 +82,10 @@ import RequestModal from './RequestModal.vue';
 import { Request, RequestState } from '../utils';
 import { ActionTypes } from '../store/request/action-types';
 
-defineProps({
-  requests: {
-    required: true,
-  },
-});
 const emit = defineEmits(['error']);
 const store = useStore();
 const { t } = useI18n();
+const requests = computed(() => store.getters['request/getRequests']);
 const confirmModal = ref();
 const requestModal = ref();
 const viewRequest = (request: Request) => {

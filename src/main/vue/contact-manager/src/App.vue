@@ -16,7 +16,7 @@
       </div>
     </div>
     <template v-if="isBooted && errorCode !== 'unauthorizedError'">
-      <div v-if="requests.length === 0" class="row">
+      <div v-if="totalCount === 0" class="row">
         <div class="col">
           <div class="alert alert-warning text-center" role="alert">
             {{ $t('digibib.contact.frontend.manager.info.noRequests') }}
@@ -25,12 +25,12 @@
       </div>
       <div class="row">
         <div class="col">
-          <OverviewTable :requests="requests" @error="handleError" />
+          <OverviewTable @error="handleError" />
         </div>
       </div>
       <div class="row">
         <div class="col d-flex justify-content-center">
-          <Pagination :total-rows="totalRows" :per-page="perPage" :current-page="currentPage"
+          <Pagination :total-rows="totalCount" :per-page="perPage" :current-page="currentPage"
             @change="handlePageChange" />
         </div>
       </div>
@@ -48,10 +48,9 @@ import { ActionTypes } from './store/request/action-types';
 const perPage = 8;
 
 const store = useStore();
-const requests = computed(() => store.getters['request/getRequests']);
 const errorCode = ref(null);
 const loading = ref(true);
-const totalRows = computed(() => store.state.request.totalCount);
+const totalCount = computed(() => store.state.request.totalCount);
 const currentPage = ref(0);
 const isBooted = ref(false);
 const handlePageChange = async (page) => {
