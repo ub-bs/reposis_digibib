@@ -14,7 +14,7 @@ axios.interceptors.response.use((response) => response, (error) => {
   return Promise.reject(new Error('unknown'));
 });
 
-const getRequests = (offset: number, limit: number) => axios.get(`api/v2/contacts?offset=${offset}&limit=${limit}`);
+const fetchRequests = (offset: number, limit: number) => axios.get(`api/v2/contacts?offset=${offset}&limit=${limit}`);
 const removeRequest = (id: string) => axios.delete(`api/v2/contacts/${id}`);
 const updateRequest = (id: string, request: Request) => axios.put(`api/v2/contacts/${id}`, request);
 const forwardRequest = (id: string) => axios.post(`api/v2/contacts/${id}/forward`);
@@ -24,7 +24,7 @@ const updateRecipient = (id: string, recipientID: string, recipient: Recipient) 
 const removeRecipient = (id: string, recipientID: string) => axios.delete(`api/v2/contacts/${id}/recipients/${recipientID}`);
 
 export {
-  getRequests,
+  fetchRequests,
   updateRequest,
   removeRequest,
   forwardRequest,

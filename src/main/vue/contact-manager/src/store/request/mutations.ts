@@ -1,7 +1,7 @@
 import { MutationTree } from 'vuex';
 import { State } from './state';
 import { MutationTypes } from './mutation-types';
-import { Request, RequestState } from '../../utils';
+import { Request } from '../../utils';
 
 export type Mutations<S = State> = {
   [MutationTypes.SET_REQUESTS](state: S, payload: Request[]): void;
