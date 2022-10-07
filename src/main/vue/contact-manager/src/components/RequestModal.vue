@@ -135,7 +135,10 @@ const updateComment = async () => {
   errorCode.value = null;
   commentSave = request.value.comment;
   try {
-    await store.dispatch(`request/${ActionTypes.UPDATE_REQUEST}`, request.value);
+    await store.dispatch(`request/${ActionTypes.UPDATE_REQUEST}`, {
+      slug: request.value.uuid,
+      request: request.value,
+    });
   } catch (error) {
     handleError(error instanceof Error ? error.message : 'unknown');
   } finally {
