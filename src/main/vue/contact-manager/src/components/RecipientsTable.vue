@@ -26,23 +26,24 @@
       </tr>
     </thead>
     <tbody>
-      <template v-for="recipient in recipients" :key="recipient">
+      <template v-for="recipient in request.recipients" :key="recipient">
         <RecipientRow :recipient="recipient" :editUUID="editUUID"
           :isProcessed="request.state === RequestState.Processed
           || request.state === RequestState.Sending_Failed"
-          :isSent="request.state === RequestState.Sent || request.state === RequestState.Confirmed"
-          @delete="handleDelete" @edit="handleEdit" @update="handleUpdate" @mail="handleMail"
-          @cancel="handleCancel" />
+          :isSent="request.state === RequestState.Sent
+          || request.state === RequestState.Confirmed"
+          @delete="removeRecipient" @edit="startEdit" @update="updateRecipient"
+          @mail="mailRecipient" @cancel="cancelEdit" />
       </template>
       <AddRecipientRow
         v-if="request.state === RequestState.Processed"
-        :disabled="editUUID !== undefined" @add="handleAdd" />
+        :disabled="editUUID !== undefined" @add="addRecipient" />
     </tbody>
   </table>
   <ConfirmModal ref="confirmModal" />
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { ref } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
 import AddRecipientRow from './AddRecipientRow.vue';
@@ -51,37 +52,77 @@ import RecipientRow from './RecipientRow.vue';
 import { ActionTypes } from '../store/request/action-types';
 import { Recipient, RequestState } from '../utils';
 
+const props = defineProps({
+  request: {
+    type: Object,
+    required: true,
+  },
+});
 const store = useStore();
 const { t } = useI18n();
+const emit = defineEmits(['error', 'info', 'actionStarted']);
 const confirmModal = ref(null);
-const recipients = computed(() => store.getters['request/getCurrentRecipients']);
-const { request } = store.state.request;
 const editUUID = ref();
-const handleEdit = (uuid: string) => {
+const startEdit = (uuid: string) => {
   editUUID.value = uuid;
 };
-const handleCancel = () => {
+const cancelEdit = () => {
   editUUID.value = undefined;
 };
-const handleAdd = (recipient: Recipient) => {
-  store.dispatch(`request/${ActionTypes.ADD_RECIPIENT}`, recipient);
+const addRecipient = async (recipient: Recipient) => {
+  emit('actionStarted');
+  try {
+    await store.dispatch(`request/${ActionTypes.ADD_RECIPIENT}`, {
+      slug: props.request.uuid,
+      recipient,
+    });
+  } catch (error) {
+    emit('error', (error instanceof Error ? error.message : 'unknown'));
+  }
 };
-const handleUpdate = (recipient: Recipient) => {
-  store.dispatch(`request/${ActionTypes.UPDATE_RECIPIENT}`, recipient);
-  editUUID.value = undefined;
+const updateRecipient = async (recipient: Recipient) => {
+  emit('actionStarted');
+  try {
+    await store.dispatch(`request/${ActionTypes.UPDATE_RECIPIENT}`, {
+      slug: props.request.uuid,
+      recipientUUID: recipient.uuid,
+      recipient,
+    });
+  } catch (error) {
+    emit('error', (error instanceof Error ? error.message : 'unknown'));
+  } finally {
+    editUUID.value = undefined;
+  }
 };
-const handleDelete = async (recipientUUID: string) => {
+const removeRecipient = async (recipientUUID: string) => {
   const ok = await confirmModal.value.show({
     title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
     message: t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
-      mail: store.getters['request/getRecipientByUUID'](recipientUUID).mail,
+      mail: recipientUUID, // TODO extract mail
     }),
   });
   if (ok) {
-    store.dispatch(`request/${ActionTypes.REMOVE_RECIPIENT}`, recipientUUID);
+    emit('actionStarted');
+    try {
+      await store.dispatch(`request/${ActionTypes.REMOVE_RECIPIENT}`, {
+        slug: props.request.uuid,
+        recipientUUID,
+      });
+    } catch (error) {
+      emit('error', (error instanceof Error ? error.message : 'unknown'));
+    }
   }
 };
-const handleMail = (recipientUUID: string) => {
-  store.dispatch(`request/${ActionTypes.FORWARD_REQUEST_TO_RECIPIENT}`, recipientUUID);
+const mailRecipient = async (recipientUUID: string) => {
+  emit('actionStarted');
+  try {
+    await store.dispatch(`request/${ActionTypes.FORWARD_REQUEST_TO_RECIPIENT}`, {
+      slug: props.request.uuid,
+      recipientUUID,
+    });
+    emit('info', 'forwardRecipient');
+  } catch (error) {
+    emit('error', (error instanceof Error ? error.message : 'unknown'));
+  }
 };
 </script>
