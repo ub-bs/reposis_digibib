@@ -69,7 +69,7 @@ const handleError = (code) => {
 onMounted(async () => {
   let authError = false;
   if (process.env.NODE_ENV === 'development') {
-    axios.defaults.headers.common.Authorization = 'Basic YWRtaW5pc3RyYXRvcjphbGxlc3dpcmRndXQ=';
+    axios.defaults.headers.common.Authorization = `Basic ${process.env.VUE_APP_API_TOKEN}`;
   } else {
     try {
       const jwtResponse = await axios.get('rsc/jwt');
