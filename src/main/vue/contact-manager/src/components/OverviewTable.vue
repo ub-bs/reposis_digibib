@@ -87,6 +87,7 @@ defineProps({
     required: true,
   },
 });
+const emit = defineEmits(['error']);
 const store = useStore();
 const { t } = useI18n();
 const confirmModal = ref();
@@ -102,7 +103,11 @@ const removeRequest = async (id: string) => {
     }),
   });
   if (ok) {
-    await store.dispatch(`request/${ActionTypes.REMOVE_REQUEST}`, id); // TODO error
+    try {
+      await store.dispatch(`request/${ActionTypes.REMOVE_REQUEST}`, id);
+    } catch (error) {
+      emit('error', error instanceof Error ? error.message : 'unknown');
+    }
   }
 };
 </script>

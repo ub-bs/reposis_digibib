@@ -25,7 +25,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <OverviewTable :requests="requests" />
+          <OverviewTable :requests="requests" @error="handleError" />
         </div>
       </div>
       <div class="row">
@@ -45,7 +45,7 @@ import OverviewTable from './components/OverviewTable.vue';
 import Pagination from './components/Pagination.vue';
 import { ActionTypes } from './store/request/action-types';
 
-const perPage = 4;
+const perPage = 8;
 
 const store = useStore();
 const requests = computed(() => store.getters['request/getRequests']);
@@ -64,6 +64,9 @@ const handlePageChange = async (page) => {
   } catch (error) {
     errorCode.value = error instanceof Error ? error.message : 'unknown';
   }
+};
+const handleError = (code) => {
+  errorCode.value = code;
 };
 onMounted(async () => {
   let authError = false;
@@ -85,7 +88,7 @@ onMounted(async () => {
         limit: perPage,
       });
     } catch (error) {
-      errorCode.value = error instanceof Error ? error.message : 'unknown';
+      handleError(error instanceof Error ? error.message : 'unknown');
     }
   } else {
     errorCode.value = 'unknown';
