@@ -1,28 +1,26 @@
 <template>
-  <div class="modal-mask">
-    <div class="modal-wrapper" @click="close">
-      <div class="modal-dialog" :class="style" role="document" @click.stop="">
-        <div class="modal-content">
-          <div class="modal-header">
-            <slot name="title">
-              <h5 class="modal-title">
-                {{ title }}
-              </h5>
-              <button v-if="!okOnly" type="button" class="close" aria-label="Close">
-                <span aria-hidden="true" @click="close">&times;</span>
-              </button>
-            </slot>
-          </div>
-          <div class="modal-body">
-            <slot />
-          </div>
-          <div class="modal-footer">
-            <slot name="footer">
-              <button type="button" class="btn btn-primary" @click="ok">
-                {{ okTitle }}
-              </button>
-            </slot>
-          </div>
+  <div class="modal-backdrop" @click="close">
+    <div class="modal-dialog modal-dialog-centered" :class="style" role="document" @click.stop="">
+      <div class="modal-content">
+        <div class="modal-header">
+          <slot name="title">
+            <h5 class="modal-title">
+              {{ title }}
+            </h5>
+            <button v-if="!okOnly" type="button" class="close" aria-label="Close">
+              <span aria-hidden="true" @click="close">&times;</span>
+            </button>
+          </slot>
+        </div>
+        <div class="modal-body">
+          <slot />
+        </div>
+        <div class="modal-footer">
+          <slot name="footer">
+            <button type="button" class="btn btn-primary" @click="ok">
+              {{ okTitle }}
+            </button>
+          </slot>
         </div>
       </div>
     </div>
@@ -74,18 +72,8 @@ const style = computed(() => {
 });
 </script>
 <style>
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: table;
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.3);
 }
-.modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
-}
+
 </style>
