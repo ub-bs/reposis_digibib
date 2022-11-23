@@ -21,7 +21,7 @@ package de.vzg.reposis.digibib.contact.dao;
 import java.util.Collection;
 import java.util.UUID;
 
-import javax.persistence.EntityManager;
+import jakarta.persistence.EntityManager;
 
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;

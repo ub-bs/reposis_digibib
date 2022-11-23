@@ -18,15 +18,15 @@
 
 package de.vzg.reposis.digibib.contact.rsc;
 
-import javax.ws.rs.BadRequestException;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.ext.Provider;
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.ext.Provider;
 
 import de.vzg.reposis.digibib.captcha.cage.CaptchaCageServiceImpl;
 
 @Provider
 @ContactCheckCageCaptcha
-public class ContactCageCaptchaFilter implements javax.ws.rs.container.ContainerRequestFilter {
+public class ContactCageCaptchaFilter implements jakarta.ws.rs.container.ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) {

@@ -18,9 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.validation;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.Validation;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;

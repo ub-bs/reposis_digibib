@@ -18,8 +18,8 @@
 
 package de.vzg.reposis.digibib.contact.validation;
 
-import javax.validation.ConstraintValidator;
-import javax.validation.ConstraintValidatorContext;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 public class ValidORCIDValidator implements ConstraintValidator<ValidORCID, String> {
 
