@@ -27,7 +27,7 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAOImpl;

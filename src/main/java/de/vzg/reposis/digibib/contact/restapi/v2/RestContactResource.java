@@ -20,7 +20,6 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.BadRequestException;
@@ -70,7 +69,7 @@ public class RestContactResource {
             @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
         final List<ContactRequest> requests = ContactService.getInstance().listRequests();
         response.setHeader("X-Total-Count", Integer.toString(requests.size()));
-        return requests.stream().skip(offset).limit(limit).collect(Collectors.toList());
+        return requests.stream().skip(offset).limit(limit).toList();
     }
 
     @GET
@@ -107,7 +106,7 @@ public class RestContactResource {
         if (request != null) {
             if (ContactRequestState.CONFIRMED.equals(request.getState())) {
                 final List<ContactRecipient> recipients = request.getRecipients().stream()
-                        .filter(r -> r.getConfirmed() != null).collect(Collectors.toList());
+                        .filter(r -> r.getConfirmed() != null).toList();
                 String result = "";
                 for (ContactRecipient recipient : recipients) {
                     result += String.format("CONFIRMED by: %s\n", recipient.getName());

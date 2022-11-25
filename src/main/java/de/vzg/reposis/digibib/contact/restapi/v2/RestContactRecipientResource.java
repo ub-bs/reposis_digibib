@@ -20,7 +20,6 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.DELETE;
@@ -80,7 +79,7 @@ public class RestContactRecipientResource {
         }
         final List<ContactRecipient> recipients = request.getRecipients();
         response.setHeader("X-Total-Count", Integer.toString(recipients.size()));
-        return recipients.stream().skip(offset).limit(limit).collect(Collectors.toList());
+        return recipients.stream().skip(offset).limit(limit).toList();
     }
 
     @POST

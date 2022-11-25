@@ -24,7 +24,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
-import java.util.stream.Collectors;
 
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
@@ -87,7 +86,7 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
                 .filter(Optional::isPresent)
                 .map(Optional::get)
                 .distinct()
-                .collect(Collectors.toList());
+                .toList();
         for (MCRUser user : users) {
             final Set<String> mails = new HashSet();
             final MCRORCIDUser orcidUser = new MCRORCIDUser(user);
@@ -122,7 +121,7 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
                 .fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class).getEmails().stream()
                 .map(Email::getEmail)
                 .distinct()
-                .collect(Collectors.toList());
+                .toList();
     }
 
     private List<String> fetchMailsFromMemberAPI(MCRORCIDCredentials credentials) throws MCRORCIDRequestException {
@@ -132,8 +131,7 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
         return mails.getEmails().stream()
                 .map(Email::getEmail)
                 .distinct()
-                .collect(Collectors.toList());
-        
+                .toList();
     }
 
     /**

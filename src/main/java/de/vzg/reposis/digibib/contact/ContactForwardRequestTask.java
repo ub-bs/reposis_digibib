@@ -21,9 +21,8 @@ package de.vzg.reposis.digibib.contact;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import javax.mail.MessagingException;
+import jakarta.mail.MessagingException;
 
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -67,7 +66,7 @@ public class ContactForwardRequestTask implements Runnable {
         try {
             MCRTransactionHelper.beginTransaction();
             for (ContactRecipient recipient : request.getRecipients().stream()
-                    .filter(r -> r.isEnabled() && r.getSent() == null).collect(Collectors.toList())) {
+                    .filter(r -> r.isEnabled() && r.getSent() == null).toList()) {
                 try {
                     ContactForwardRequestHelper.sendMail(recipient);
                     recipient.setFailed(null);
