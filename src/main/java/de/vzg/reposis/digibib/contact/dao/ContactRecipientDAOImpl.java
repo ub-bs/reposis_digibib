@@ -46,9 +46,9 @@ public class ContactRecipientDAOImpl implements ContactRecipientDAO {
     @Override
     public ContactRecipient findByUUID(UUID uuid) {
         final EntityManager entityManager = MCREntityManagerProvider.getCurrentEntityManager();
-        final Collection<ContactRecipient> recipients = entityManager
-                .createNamedQuery("ContactRecipient.findByUUID", ContactRecipient.class).setParameter("uuid", uuid)
-                .getResultList(); // should contain at most one element
+        final Collection<ContactRecipient> recipients
+            = entityManager.createNamedQuery("ContactRecipient.findByUUID", ContactRecipient.class)
+                .setParameter("uuid", uuid).getResultList(); // should contain at most one element
         return recipients.stream().findFirst().orElse(null);
     }
 

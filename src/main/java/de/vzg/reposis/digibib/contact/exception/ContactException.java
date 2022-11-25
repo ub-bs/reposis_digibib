@@ -26,6 +26,10 @@ import org.mycore.common.MCRException;
 public class ContactException extends MCRException {
 
     /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    /**
      * The internal errorCode which is also important for frontend.
      */
     private String errorCode;

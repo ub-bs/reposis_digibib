@@ -42,7 +42,7 @@ public class ContactExceptionMapper implements ExceptionMapper<ContactException>
     @Override
     public Response toResponse(ContactException exception) {
         if (exception instanceof ContactRequestNotFoundException
-                || exception instanceof ContactRecipientNotFoundException) {
+            || exception instanceof ContactRecipientNotFoundException) {
             return getResponse(exception, Response.Status.NOT_FOUND.getStatusCode(), exception.getErrorCode());
         }
         return getResponse(exception, Response.Status.BAD_REQUEST.getStatusCode(), exception.getErrorCode());
@@ -51,9 +51,9 @@ public class ContactExceptionMapper implements ExceptionMapper<ContactException>
     // TODO use rest api function
     private static Response getResponse(Exception e, int statusCode, String errorCode) {
         MCRErrorResponse response = MCRErrorResponse.fromStatus(statusCode).withCause(e).withMessage(e.getMessage())
-                .withDetail(Optional.of(e).map(ex -> (ex instanceof WebApplicationException) ? ex.getCause() : ex)
-                        .map(Object::getClass).map(Class::getName).orElse(null))
-                .withErrorCode(errorCode);
+            .withDetail(Optional.of(e).map(ex -> (ex instanceof WebApplicationException) ? ex.getCause() : ex)
+                .map(Object::getClass).map(Class::getName).orElse(null))
+            .withErrorCode(errorCode);
         // LogManager.getLogger().error(response::getLogMessage, e);
         return Response.status(response.getStatus()).entity(response).build();
     }

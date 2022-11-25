@@ -46,7 +46,7 @@ public class ContactUtils {
      * @throws SAXException  if stylesheet is faulty or it cannot be applied
      */
     public static Document transform(Document input, String stylesheet, Map<String, String> parameters)
-            throws IOException, JDOMException, SAXException {
+        throws IOException, JDOMException, SAXException {
         MCRJDOMContent source = new MCRJDOMContent(input);
         MCRXSL2XMLTransformer transformer = MCRXSL2XMLTransformer.getInstance("xsl/" + stylesheet + ".xsl");
         MCRParameterCollector parameterCollector = MCRParameterCollector.getInstanceFromUserSession();

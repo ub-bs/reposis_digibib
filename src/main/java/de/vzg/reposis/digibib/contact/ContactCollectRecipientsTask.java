@@ -80,15 +80,12 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
     private void addOrcidRecipients(List<ContactRecipient> recipients) {
         final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
         final List<MCRUser> users = getAuthors(object).stream()
-                .flatMap(a -> a.getChildren("nameIdentifier", MCRConstants.MODS_NAMESPACE).stream())
-                .filter(c -> "orcid".equalsIgnoreCase(c.getAttributeValue("type")))
-                .map(e -> MCRUserManager.getUsers(MCRORCIDUser.ATTR_ID_PREFIX + "orcid", e.getText()).findFirst())
-                .filter(Optional::isPresent)
-                .map(Optional::get)
-                .distinct()
-                .toList();
+            .flatMap(a -> a.getChildren("nameIdentifier", MCRConstants.MODS_NAMESPACE).stream())
+            .filter(c -> "orcid".equalsIgnoreCase(c.getAttributeValue("type")))
+            .map(e -> MCRUserManager.getUsers(MCRORCIDUser.ATTR_ID_PREFIX + "orcid", e.getText()).findFirst())
+            .filter(Optional::isPresent).map(Optional::get).distinct().toList();
         for (MCRUser user : users) {
-            final Set<String> mails = new HashSet();
+            final Set<String> mails = new HashSet<String>();
             final MCRORCIDUser orcidUser = new MCRORCIDUser(user);
             final MCRORCIDCredentials credentials = orcidUser.getCredentials();
             final Set<String> otherOrcids = orcidUser.getORCIDs();
@@ -118,20 +115,14 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
 
     private List<String> fetchMailsFromPublicAPI(String orcid) throws MCRORCIDRequestException {
         return MCRORCIDAPIClientFactoryImpl.getInstance().createPublicClient()
-                .fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class).getEmails().stream()
-                .map(Email::getEmail)
-                .distinct()
-                .toList();
+            .fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class).getEmails().stream().map(Email::getEmail).distinct()
+            .toList();
     }
 
     private List<String> fetchMailsFromMemberAPI(MCRORCIDCredentials credentials) throws MCRORCIDRequestException {
         Emails mails = MCRORCIDAPIClientFactoryImpl.getInstance().createMemberClient(credentials)
-                .fetch(MCRORCIDSectionImpl.EMAIL, Emails.class);
-        LOGGER.info(mails.getEmails().size());
-        return mails.getEmails().stream()
-                .map(Email::getEmail)
-                .distinct()
-                .toList();
+            .fetch(MCRORCIDSectionImpl.EMAIL, Emails.class);
+        return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
     }
 
     /**
@@ -142,6 +133,6 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
      */
     private List<Element> getAuthors(MCRObject object) {
         return new MCRMODSWrapper(object)
-                .getElements("mods:name[@type='personal']");
+            .getElements("mods:name[@type='personal']");
     }
 }

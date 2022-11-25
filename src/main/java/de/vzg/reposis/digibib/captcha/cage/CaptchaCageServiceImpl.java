@@ -65,7 +65,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
      */
     private CaptchaCageServiceImpl() {
         seenTokens = CacheBuilder.newBuilder().maximumSize(CACHE_SIZE)
-                .expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS).build();
+            .expireAfterWrite(TOKEN_LIFETIME, TimeUnit.MILLISECONDS).build();
     }
 
     /**

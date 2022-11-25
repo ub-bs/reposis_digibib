@@ -18,7 +18,6 @@
 
 package de.vzg.reposis.digibib.contact;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,8 +34,8 @@ public class ContactForwardRequestHelper {
     /**
      * Name of stylesheet to transform mail.
      */
-    private static final String MAIL_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "RequestMail.Stylesheet");
+    private static final String MAIL_STYLESHEET
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "RequestMail.Stylesheet");
 
     /**
      * Creates Email for recipient and sends it.
@@ -49,7 +48,7 @@ public class ContactForwardRequestHelper {
             throw new MCRException("Request no set.");
         }
         final ContactRequest r = recipient.getRequest();
-        final Map<String, String> headers = new HashMap();
+        final Map<String, String> headers = new HashMap<String, String>();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, r.getUUID().toString());
         final EMail mail = createMail(recipient);
         ContactMailService.sendMail(mail, recipient.getMail(), headers);
@@ -65,7 +64,7 @@ public class ContactForwardRequestHelper {
     private static EMail createMail(ContactRecipient recipient) throws Exception {
         final ContactRequest r = recipient.getRequest();
         final EMail baseMail = new EMail();
-        final Map<String, String> properties = new HashMap();
+        final Map<String, String> properties = new HashMap<String, String>();
         properties.put("email", r.getFrom());
         properties.put("id", r.getObjectID().toString());
         properties.put("message", r.getMessage());
@@ -83,7 +82,7 @@ public class ContactForwardRequestHelper {
             properties.put("comment", comment);
         }
         final Element mailElement = ContactUtils.transform(baseMail.toXML(), MAIL_STYLESHEET, properties)
-                .getRootElement();
+            .getRootElement();
         return EMail.parseXML(mailElement);
     }
 }

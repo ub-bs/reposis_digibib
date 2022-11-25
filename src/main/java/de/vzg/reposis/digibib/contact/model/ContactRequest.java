@@ -28,8 +28,6 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.EnumType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -155,7 +153,7 @@ public class ContactRequest {
     /**
      * List of recipients.
      */
-    private List<ContactRecipient> recipients = new ArrayList();
+    private List<ContactRecipient> recipients = new ArrayList<ContactRecipient>();
 
     /**
      * Debug field for internal purposes.

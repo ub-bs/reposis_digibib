@@ -99,9 +99,6 @@ public class CaptchaCageResource {
 
         private String verifiedToken;
 
-        TokenResponse() {
-        }
-
         TokenResponse(String verifiedToken) {
             this.verified = true;
             this.verifiedToken = verifiedToken;

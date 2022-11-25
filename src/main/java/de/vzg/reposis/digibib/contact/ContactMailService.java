@@ -42,30 +42,30 @@ import org.mycore.common.config.MCRConfiguration2;
  */
 public class ContactMailService {
 
-    private static final String ENCODING = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Encoding");
+    private static final String ENCODING
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Encoding");
 
     private static final String HOST = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
 
     private static final String PORT = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Port");
 
-    private static final String PROTOCOL = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Protocol");
+    private static final String PROTOCOL
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Protocol");
 
-    private static final String STARTTLS = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Mail.STARTTLS")
-            .orElse("disabled");
+    private static final String STARTTLS
+        = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Mail.STARTTLS").orElse("disabled");
 
-    private static final String USER = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
+    private static final String USER
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
 
-    private static final String PASSWORD = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
+    private static final String PASSWORD
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
 
-    private static final Boolean DEBUG = MCRConfiguration2.getBoolean(ContactConstants.CONF_PREFIX + "Mail.Debug")
-            .orElse(false);
+    private static final Boolean DEBUG
+        = MCRConfiguration2.getBoolean(ContactConstants.CONF_PREFIX + "Mail.Debug").orElse(false);
 
-    private static final String SENDER_NAME = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.SenderName");
+    private static final String SENDER_NAME
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.SenderName");
 
     /**
      * The mail session.

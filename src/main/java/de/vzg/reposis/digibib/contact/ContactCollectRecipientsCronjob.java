@@ -22,7 +22,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
@@ -39,7 +38,6 @@ import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mcr.cronjob.MCRCronjob;
-import org.mycore.util.concurrent.MCRTransactionableCallable;
 
 /**
  * This class implements a cronjob that collects mails for contact requests.
@@ -51,14 +49,14 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
     /**
      * Mail of fallback recipient.
      */
-    private static final String FALLBACK_MAIL = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
+    private static final String FALLBACK_MAIL
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
     /**
      * Name of fallback recipient.
      */
-    private static final String FALLBACK_NAME = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Name");
+    private static final String FALLBACK_NAME
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Name");
 
     @Override
     public void runJob() {
@@ -82,19 +80,6 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
     }
 
     /**
-     * Updates contact request within own transaction.
-     * 
-     * @param request the contact request
-     * @throws Exception if update fails
-     */
-    private void updateRequest(ContactRequest request) throws Exception {
-        new MCRTransactionableCallable<>(() -> {
-            ContactService.getInstance().updateRequest(request);
-            return null;
-        }).call();
-    }
-
-    /**
      * Collects mails for contact request.
      * 
      * @throws Exception if job fails
@@ -104,7 +89,8 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         final List<ContactRequest> requests = service.listRequestsByState(ContactRequestState.RECEIVED);
         requests.addAll(service.listRequestsByState(ContactRequestState.PROCESSING));
         requests.addAll(service.listRequestsByState(ContactRequestState.PROCESSING_FAILED));
-        final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap();
+        final Map<MCRObjectID, List<ContactRecipient>> recipientsCache
+            = new HashMap<MCRObjectID, List<ContactRecipient>>();
         requests.forEach((r) -> {
             LOGGER.info("Collecting recipients for {}", r.getId());
             final MCRObjectID objectID = r.getObjectID();
@@ -161,8 +147,8 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
      * @param recipients the recipients
      */
     private void addFallbackRecipient(List<ContactRecipient> recipients) {
-        final ContactRecipient fallback = new ContactRecipient(FALLBACK_NAME, ContactRecipientOrigin.FALLBACK,
-                FALLBACK_MAIL);
+        final ContactRecipient fallback
+            = new ContactRecipient(FALLBACK_NAME, ContactRecipientOrigin.FALLBACK, FALLBACK_MAIL);
         recipients.add(fallback);
     }
 

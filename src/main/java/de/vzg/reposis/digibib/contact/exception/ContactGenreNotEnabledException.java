@@ -23,6 +23,11 @@ package de.vzg.reposis.digibib.contact.exception;
  */
 public class ContactGenreNotEnabledException extends ContactException {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     public ContactGenreNotEnabledException(String message) {
         super("genreNotEnabled", message);
     }

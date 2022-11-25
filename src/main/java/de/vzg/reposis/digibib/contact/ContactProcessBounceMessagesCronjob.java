@@ -52,11 +52,11 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     private static final String HOST = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
 
-    private static final String USER = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
+    private static final String USER
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
 
-    private static final String PASSWORD = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
+    private static final String PASSWORD
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
 
     private static final String REPORT_MIMETYPE = "multipart/report";
 
@@ -93,7 +93,7 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
                                         try {
                                             new MCRFixedUserCallable<>(() -> {
                                                 ContactService.getInstance().setRecipientFailed(
-                                                        UUID.fromString(requestId), recipients[0].toString(), true);
+                                                    UUID.fromString(requestId), recipients[0].toString(), true);
                                                 return null;
                                             }, MCRSystemUserInformation.getJanitorInstance()).call();
                                             flagMessageAsSeen(message);

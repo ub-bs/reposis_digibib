@@ -22,8 +22,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import jakarta.mail.MessagingException;
-
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
@@ -45,8 +43,7 @@ public class ContactForwardRequestTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
+    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
 
     /**
      * The contact request.
@@ -105,12 +102,10 @@ public class ContactForwardRequestTask implements Runnable {
 
     private void sendForwardingConfirmation() throws Exception {
         final EMail forwardConfirmation = new EMail();
-        final Map<String, String> properties = new HashMap();
+        final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", request.getObjectID().toString());
         properties.put("name", request.getName());
-        final Element mailElement = ContactUtils
-                .transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET, properties)
-                .getRootElement();
+        final Element mailElement = ContactUtils.transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET, properties).getRootElement();
         ContactMailService.sendMail(EMail.parseXML(mailElement), request.getFrom());
     }
 }

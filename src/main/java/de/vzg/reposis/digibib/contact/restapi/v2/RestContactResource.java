@@ -50,7 +50,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 // import io.swagger.v3.oas.annotations.tags.Tag;
 
-import org.mycore.common.MCRException;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
 import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
 import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
@@ -60,13 +59,15 @@ public class RestContactResource {
 
     @GET
     @Operation(summary = "Lists all contact requests", responses = { @ApiResponse(responseCode = "200", content = {
-            @Content(mediaType = MediaType.APPLICATION_JSON, array = @ArraySchema(schema = @Schema(implementation = ContactRequest.class))) }),
-            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
+        @Content(mediaType = MediaType.APPLICATION_JSON,
+            array = @ArraySchema(schema = @Schema(implementation = ContactRequest.class))) }),
+        @ApiResponse(responseCode = "401",
+            description = "You do not have create permission and need to authenticate first", content = {
+                @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactRequest> getAllRequests(@DefaultValue("0") @QueryParam("offset") int offset,
-            @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
+        @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
         final List<ContactRequest> requests = ContactService.getInstance().listRequests();
         response.setHeader("X-Total-Count", Integer.toString(requests.size()));
         return requests.stream().skip(offset).limit(limit).toList();
@@ -75,15 +76,18 @@ public class RestContactResource {
     @GET
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(summary = "Gets contact request by id", responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = ContactRequest.class))),
-            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
+        @ApiResponse(responseCode = "200",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                schema = @Schema(implementation = ContactRequest.class))),
+        @ApiResponse(responseCode = "401",
+            description = "You do not have create permission and need to authenticate first", content = {
+                @Content(mediaType = MediaType.APPLICATION_JSON) }),
+        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+            @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public ContactRequest getRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
-            throws ContactRequestNotFoundException {
+        throws ContactRequestNotFoundException {
         final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request != null) {
             return request;
@@ -95,18 +99,20 @@ public class RestContactResource {
     @GET
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/status")
     @Operation(summary = "Gets contact request state by id", responses = {
-            @ApiResponse(responseCode = "200", content = @Content(mediaType = MediaType.APPLICATION_JSON, schema = @Schema(implementation = ContactRequest.class))),
-            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
+        @ApiResponse(responseCode = "200",
+            content = @Content(mediaType = MediaType.APPLICATION_JSON,
+                schema = @Schema(implementation = ContactRequest.class))),
+        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+            @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.TEXT_PLAIN)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     public String getRequestStatusByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
-            throws ContactRequestNotFoundException {
+        throws ContactRequestNotFoundException {
         final ContactRequest request = ContactService.getInstance().getRequestByUUID(requestUUID);
         if (request != null) {
             if (ContactRequestState.CONFIRMED.equals(request.getState())) {
                 final List<ContactRecipient> recipients = request.getRecipients().stream()
-                        .filter(r -> r.getConfirmed() != null).toList();
+                    .filter(r -> r.getConfirmed() != null).toList();
                 String result = "";
                 for (ContactRecipient recipient : recipients) {
                     result += String.format("CONFIRMED by: %s\n", recipient.getName());
@@ -123,12 +129,12 @@ public class RestContactResource {
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/confirm")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
     @Operation(summary = "confirm recipient", responses = {
-            @ApiResponse(responseCode = "200", description = "operation was successful"),
-            @ApiResponse(responseCode = "400", description = "invalid request"),
-            @ApiResponse(responseCode = "404", description = "object is not found"), })
+        @ApiResponse(responseCode = "200", description = "operation was successful"),
+        @ApiResponse(responseCode = "400", description = "invalid request"),
+        @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRequireTransaction
     public Response confirmRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @QueryParam("recipient") UUID recipientUUID) throws Exception {
+        @QueryParam("recipient") UUID recipientUUID) throws Exception {
         if (recipientUUID == null) {
             throw new BadRequestException();
         }
@@ -141,7 +147,7 @@ public class RestContactResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
     public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            @QueryParam("recipient") UUID recipientUUID) throws ContactException {
+        @QueryParam("recipient") UUID recipientUUID) throws ContactException {
         if (recipientUUID != null) {
             ContactService.getInstance().forwardRequestToRecipientByUUID(requestUUID, recipientUUID);
         } else {
@@ -153,13 +159,14 @@ public class RestContactResource {
     @PUT
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(summary = "Updates contact request by id", responses = { @ApiResponse(responseCode = "204"),
-            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
+        @ApiResponse(responseCode = "401",
+            description = "You do not have create permission and need to authenticate first", content = {
+                @Content(mediaType = MediaType.APPLICATION_JSON) }),
+        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+            @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @MCRRequireTransaction
     public Response updateRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-            ContactRequest request) throws ContactException {
+        ContactRequest request) throws ContactException {
         ContactService.getInstance().updateRequestByUUID(requestUUID, request);
         return Response.noContent().build();
     }
@@ -167,13 +174,14 @@ public class RestContactResource {
     @DELETE
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(summary = "Deletes contact request by id", responses = { @ApiResponse(responseCode = "204"),
-            @ApiResponse(responseCode = "401", description = "You do not have create permission and need to authenticate first", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }),
-            @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
-                    @Content(mediaType = MediaType.APPLICATION_JSON) }), })
+        @ApiResponse(responseCode = "401",
+            description = "You do not have create permission and need to authenticate first", content = {
+                @Content(mediaType = MediaType.APPLICATION_JSON) }),
+        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+            @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @MCRRequireTransaction
     public Response removeRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
-            throws ContactException {
+        throws ContactException {
         ContactService.getInstance().removeRequestByUUID(requestUUID);
         return Response.noContent().build();
     }

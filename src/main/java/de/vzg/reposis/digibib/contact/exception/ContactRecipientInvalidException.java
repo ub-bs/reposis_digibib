@@ -23,6 +23,11 @@ package de.vzg.reposis.digibib.contact.exception;
  */
 public class ContactRecipientInvalidException extends ContactException {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+
     public ContactRecipientInvalidException() {
         this("invalid recipient.");
     }

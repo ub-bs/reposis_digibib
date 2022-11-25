@@ -59,26 +59,26 @@ public class ContactResource {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final Set<String> ALLOWED_GENRES = MCRConfiguration2
-            .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream().flatMap(MCRConfiguration2::splitValue)
-            .collect(Collectors.toSet());
+    private static final Set<String> ALLOWED_GENRES
+        = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
+            .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
 
-    private static final String NEW_REQUEST_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "NewRequestMail.Stylesheet");
+    private static final String NEW_REQUEST_STYLESHEET
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "NewRequestMail.Stylesheet");
 
-    private static final String RECEIPT_CONFIRMATION_STYLESHEET = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "ReceiptConfirmationMail.Stylesheet");
+    private static final String RECEIPT_CONFIRMATION_STYLESHEET
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "ReceiptConfirmationMail.Stylesheet");
 
-    private static final String FALLBACK_MAIL = MCRConfiguration2
-            .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
+    private static final String FALLBACK_MAIL
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "contact involved persons of given object",
-            responses = {
-                    @ApiResponse(responseCode = "200", description = "operation was successful"),
-                    @ApiResponse(responseCode = "404", description = "object is not found"), })
+        responses = {
+            @ApiResponse(responseCode = "200", description = "operation was successful"),
+            @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
     public Response save(ContactRequest request) throws Exception {
@@ -100,7 +100,7 @@ public class ContactResource {
         }
         ContactService.getInstance().insertRequest(request);
         final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
-                request.getORCID(), objectID.toString());
+            request.getORCID(), objectID.toString());
         ContactMailService.sendMail(confirmationMail, request.getFrom());
         try {
             ContactMailService.sendMail(createNotificationMail(objectID.toString()), FALLBACK_MAIL);
@@ -112,24 +112,24 @@ public class ContactResource {
 
     private static EMail createNotificationMail(String id) throws Exception {
         final EMail baseMail = new EMail();
-        final Map<String, String> properties = new HashMap();
+        final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", id);
-        final Element mailElement = ContactUtils
-                .transform(baseMail.toXML(), NEW_REQUEST_STYLESHEET, properties).getRootElement();
+        final Element mailElement
+            = ContactUtils.transform(baseMail.toXML(), NEW_REQUEST_STYLESHEET, properties).getRootElement();
         return EMail.parseXML(mailElement);
     }
 
     private static EMail createConfirmationMail(String name, String message, String orcid, String id) throws Exception {
         final EMail baseMail = new EMail();
-        final Map<String, String> properties = new HashMap();
+        final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", id);
         properties.put("message", message);
         properties.put("name", name);
         if (orcid != null) {
             properties.put("name", orcid);
         }
-        final Element mailElement = ContactUtils
-                .transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties).getRootElement();
+        final Element mailElement
+            = ContactUtils.transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties).getRootElement();
         return EMail.parseXML(mailElement);
     }
 

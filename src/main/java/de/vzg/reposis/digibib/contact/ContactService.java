@@ -27,8 +27,6 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import jakarta.mail.MessagingException;
-
 import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAO;
 import de.vzg.reposis.digibib.contact.dao.ContactRecipientDAOImpl;
 import de.vzg.reposis.digibib.contact.dao.ContactRequestDAO;
@@ -107,7 +105,7 @@ public class ContactService {
     public List<ContactRequest> listRequestsByState(ContactRequestState state) {
         try {
             readLock.lock();
-            return new ArrayList(requestDAO.findByState(state));
+            return new ArrayList<ContactRequest>(requestDAO.findByState(state));
         } finally {
             readLock.unlock();
         }
@@ -152,7 +150,7 @@ public class ContactService {
                 request.setORCID(orcid.trim());
             }
             final String currentUserID = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
-            request.setRecipients(new ArrayList()); // sanitize recipients
+            request.setRecipients(new ArrayList<ContactRecipient>()); // sanitize recipients
             request.setCreatedBy(currentUserID);
             request.setLastModifiedBy(currentUserID);
             request.setState(ContactRequestState.RECEIVED);
@@ -198,7 +196,7 @@ public class ContactService {
                 throw new ContactRequestNotFoundException();
             }
             if (!ContactRequestState.SENDING_FAILED.equals(outdated.getState().getValue()) &&
-                    outdated.getState().getValue() > ContactRequestState.PROCESSED.getValue()) {
+                outdated.getState().getValue() > ContactRequestState.PROCESSED.getValue()) {
                 throw new ContactRequestStateException("A forwarded request cannot be deleted.");
             }
             final String comment = request.getComment();
@@ -219,7 +217,7 @@ public class ContactService {
      * @throws ContactRequestStateException    if request is in wrong state
      */
     public void removeRequestByUUID(UUID requestUUID) throws ContactRequestNotFoundException,
-            ContactRequestStateException {
+        ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -244,8 +242,8 @@ public class ContactService {
      * @throws MCRException                      if sending failed
      */
     public void forwardRequestToRecipientByUUID(UUID requestUUID, UUID recipientUUID)
-            throws ContactRequestNotFoundException, ContactRecipientNotFoundException, ContactRequestStateException,
-            ContactRecipientStateException, MCRException {
+        throws ContactRequestNotFoundException, ContactRecipientNotFoundException, ContactRequestStateException,
+        ContactRecipientStateException, MCRException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -256,8 +254,8 @@ public class ContactService {
                 throw new ContactRequestStateException("Request needs to be forwarded.");
             }
             final ContactRecipient recipient = request.getRecipients().stream()
-                    .filter(r -> r.getUUID().equals(recipientUUID)).findFirst()
-                    .orElseThrow(() -> new ContactRecipientNotFoundException());
+                .filter(r -> r.getUUID().equals(recipientUUID)).findFirst()
+                .orElseThrow(() -> new ContactRecipientNotFoundException());
             if (recipient.getSent() != null && recipient.getFailed() == null) {
                 throw new ContactRecipientStateException("Recipient is in wrong state.");
             }
@@ -286,7 +284,7 @@ public class ContactService {
      * @throws ContactRequestStateException    if request is in wrong state
      */
     public void forwardRequestByUUID(UUID requestUUID) throws ContactRequestNotFoundException,
-            ContactRequestStateException {
+        ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -294,7 +292,7 @@ public class ContactService {
                 throw new ContactRequestNotFoundException();
             }
             if (!(ContactRequestState.PROCESSED.equals(request.getState())
-                    || ContactRequestState.SENDING_FAILED.equals(request.getState()))) {
+                || ContactRequestState.SENDING_FAILED.equals(request.getState()))) {
                 throw new ContactRequestStateException("Request is not ready.");
             }
             request.setState(ContactRequestState.SENDING);
@@ -315,7 +313,7 @@ public class ContactService {
      * @throws ContactRecipientNotFoundException if recipient cannot be found
      */
     public void confirmRequestByUUID(UUID requestUUID, UUID recipientUUID) throws ContactRequestNotFoundException,
-            ContactRecipientNotFoundException {
+        ContactRecipientNotFoundException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -323,8 +321,8 @@ public class ContactService {
                 throw new ContactRequestNotFoundException();
             }
             final ContactRecipient recipient = request.getRecipients().stream()
-                    .filter(r -> r.getUUID().equals(recipientUUID)).findFirst()
-                    .orElseThrow(() -> new ContactRecipientNotFoundException());
+                .filter(r -> r.getUUID().equals(recipientUUID)).findFirst()
+                .orElseThrow(() -> new ContactRecipientNotFoundException());
             recipient.setConfirmed(new Date());
             recipientDAO.update(recipient);
             request.setState(ContactRequestState.CONFIRMED);
@@ -346,7 +344,7 @@ public class ContactService {
      * @throws ContactRequestStateException           if request is in wrong state
      */
     public void addRecipient(UUID requestUUID, ContactRecipient recipient) throws ContactRecipientInvalidException,
-            ContactRequestNotFoundException, ContactRequestStateException, ContactRecipientAlreadyExistsException {
+        ContactRequestNotFoundException, ContactRequestStateException, ContactRecipientAlreadyExistsException {
         try {
             writeLock.lock();
             if (!ContactRecipientOrigin.MANUAL.equals(recipient.getOrigin())) {
@@ -382,8 +380,8 @@ public class ContactService {
      * @throws ContactRecipientOriginException        if request has wrong origin
      */
     public void updateRecipientByUUID(UUID requestUUID, UUID recipientUUID, ContactRecipient recipient)
-            throws ContactRequestNotFoundException, ContactRecipientOriginException, ContactRecipientNotFoundException,
-            ContactRequestStateException, ContactRecipientAlreadyExistsException {
+        throws ContactRequestNotFoundException, ContactRecipientOriginException, ContactRecipientNotFoundException,
+        ContactRequestStateException, ContactRecipientAlreadyExistsException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -395,9 +393,9 @@ public class ContactService {
             }
             final ContactRecipient outdated = recipientDAO.findByUUID(recipientUUID);
             if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
-                    && (!Objects.equals(outdated.getName(), recipient.getName())
-                            || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
-                            || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
+                && (!Objects.equals(outdated.getName(), recipient.getName())
+                    || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
+                    || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
                 throw new ContactRecipientOriginException();
             }
             recipient.setRequest(outdated.getRequest());
@@ -424,8 +422,8 @@ public class ContactService {
      * @throws ContactRecipientOriginException        if request has wrong origin
      */
     public void updateRecipientByMail(UUID requestUUID, String mail, ContactRecipient recipient)
-            throws ContactRequestNotFoundException, ContactRecipientOriginException, ContactRecipientNotFoundException,
-            ContactRequestStateException, ContactRecipientAlreadyExistsException {
+        throws ContactRequestNotFoundException, ContactRecipientOriginException, ContactRecipientNotFoundException,
+        ContactRequestStateException, ContactRecipientAlreadyExistsException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -436,11 +434,11 @@ public class ContactService {
                 throw new ContactRequestStateException("Not in warm state");
             }
             final ContactRecipient outdated = request.getRecipients().stream().filter(r -> r.getMail().equals(mail))
-                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+                .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             if (!ContactRecipientOrigin.MANUAL.equals(outdated.getOrigin())
-                    && (!Objects.equals(outdated.getName(), recipient.getName())
-                            || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
-                            || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
+                && (!Objects.equals(outdated.getName(), recipient.getName())
+                    || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
+                    || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
                 throw new ContactRecipientOriginException();
             }
             recipient.setRequest(outdated.getRequest());
@@ -462,7 +460,7 @@ public class ContactService {
      * @throws ContactRecipientNotFoundException      if recipient cannot be found
      */
     public void updateRecipient(ContactRecipient recipient)
-            throws ContactRecipientNotFoundException, ContactRecipientAlreadyExistsException {
+        throws ContactRecipientNotFoundException, ContactRecipientAlreadyExistsException {
         try {
             writeLock.lock();
             update(recipient);
@@ -482,7 +480,7 @@ public class ContactService {
      * @throws ContactRecipientOriginException   if request has wrong origin
      */
     public void removeRecipientByUUID(UUID requestUUID, UUID recipientUUID) throws ContactRequestNotFoundException,
-            ContactRecipientOriginException, ContactRecipientNotFoundException, ContactRequestStateException {
+        ContactRecipientOriginException, ContactRecipientNotFoundException, ContactRequestStateException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -515,7 +513,7 @@ public class ContactService {
      * @throws ContactRecipientNotFoundException if recipient does not exist
      */
     public void setRecipientFailed(UUID requestUUID, String mail, boolean failed)
-            throws ContactRequestNotFoundException, ContactRecipientNotFoundException {
+        throws ContactRequestNotFoundException, ContactRecipientNotFoundException {
         try {
             writeLock.lock();
             final ContactRequest request = requestDAO.findByUUID(requestUUID);
@@ -523,7 +521,7 @@ public class ContactService {
                 throw new ContactRequestNotFoundException();
             }
             final ContactRecipient recipient = request.getRecipients().stream().filter(r -> r.getMail().equals(mail))
-                    .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
+                .findFirst().orElseThrow(() -> new ContactRecipientNotFoundException());
             recipient.setFailed(new Date());
             recipientDAO.update(recipient);
             update(request); // update modified
@@ -541,7 +539,7 @@ public class ContactService {
      *                                                exists
      */
     private void addRecipient(ContactRequest request, ContactRecipient recipient)
-            throws ContactRecipientAlreadyExistsException {
+        throws ContactRecipientAlreadyExistsException {
         if (checkRecipientExists(request.getRecipients(), recipient)) {
             throw new ContactRecipientAlreadyExistsException();
         }
@@ -559,7 +557,7 @@ public class ContactService {
      * @throws ContactRecipientNotFoundException      if recipient cannot be found
      */
     private void update(ContactRecipient recipient)
-            throws ContactRecipientNotFoundException, ContactRecipientAlreadyExistsException {
+        throws ContactRecipientNotFoundException, ContactRecipientAlreadyExistsException {
         if (!ContactValidator.getInstance().validateRecipient(recipient)) {
             throw new ContactRecipientInvalidException();
         }
@@ -568,7 +566,7 @@ public class ContactService {
             throw new ContactRecipientNotFoundException();
         }
         if (!outdated.getMail().equals(recipient.getMail())
-                && checkRecipientExists(recipient.getRequest().getRecipients(), recipient)) {
+            && checkRecipientExists(recipient.getRequest().getRecipients(), recipient)) {
             throw new ContactRecipientAlreadyExistsException();
         }
         outdated.setName(recipient.getName());
