@@ -181,7 +181,7 @@
       <div id="basic" class="collapse show metadata-box">
         <div class="card card-body">
           <xed:include ref="title.original" />
-          <xed:if test="not($genre='software')">
+          <xed:if test="not($genre_intern='software')">
             <xed:include ref="title.translated" />
           </xed:if>
           <xed:include ref="abstract.repeated" />
@@ -199,7 +199,7 @@
               <xed:output i18n="digibib.researchData.involved" />
             </legend>
             <xed:choose>
-              <xed:when test="$genre='software'">
+              <xed:when test="$genre_intern='software'">
                 <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="involved.repeated" />
               </xed:when>
               <xed:otherwise>
@@ -207,7 +207,7 @@
               </xed:otherwise>
             </xed:choose>
           </fieldset>
-          <xed:if test="$genre!='software'">
+          <xed:if test="$genre_intern!='software'">
             <xed:include ref="openAIRE" after="person.repeated"/>
           </xed:if>
           <fieldset>
@@ -221,7 +221,7 @@
             </div>
           </fieldset>
           <xed:choose>
-            <xed:when test="$genre='software'">
+            <xed:when test="$genre_intern='software'">
               <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="relatedPublication.repeated" />
             </xed:when>
             <xed:otherwise>
