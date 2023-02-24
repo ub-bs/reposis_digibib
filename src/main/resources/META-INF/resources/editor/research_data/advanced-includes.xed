@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xed:template xmlns:xed="http://www.mycore.de/xeditor"
+  xmlns:fn="http://www.w3.org/2005/xpath-functions"
+  xmlns:mir="http://www.mycore.de/mir">
+
+  <xed:template id="default-pair-validation">
+    <xed:validate display="global" i18n="digibib.researchData.advanced.error"
+      relevant-if="contains(fn:string[@key='type'], ':other') or string-length(fn:string[@key='description']) &gt; 0"
+      test="string-length(fn:string[@key='type']) &gt; 0 and string-length(fn:string[@key='description']) &gt; 0" />
+  </xed:template>
+
+  <xed:template id="type.repeated">
+    <xed:repeat xpath="fn:array[@key='type']/fn:map">
+      <div class="mir-fieldset-content-centered">
+        <div class="form-group row d-flex align-items-center {$xed-validation-marker}">
+          <label class="col-md-3 col-form-label text-right">
+            <xed:output i18n="digibib.researchData.advanced.type" />
+          </label>
+          <div class="col-md-6 controls">
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='type']">
+                  <select class="form-control form-control-inline">
+                    <option value="">
+                      <xed:output i18n="mir.select" />
+                    </option>
+                    <xed:include uri="xslStyle:items2options:classification:editorComplete:1:children:research_data_types" />
+                  </select>
+                </xed:bind>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='description']">
+                  <textarea class="form-control form-control-inline" rows="2"
+                    placeholder="{i18n:digibib.researchData.advanced.type.description}" />
+                </xed:bind>
+              </div>
+            </div>
+          </div>
+          <mir:help-pmud help-text="{i18n:digibib.researchData.advanced.type.help}" pmud="true" />
+        </div>
+      </div>
+      <xed:include ref="default-pair-validation" />
+    </xed:repeat>
+  </xed:template>
+
+  <xed:template id="research-object.repeated">
+    <xed:repeat xpath="fn:array[@key='researchObject']/fn:map">
+      <div class="mir-fieldset-content-centered">
+        <div class="form-group row d-flex align-items-center {$xed-validation-marker}">
+          <label class="col-md-3 col-form-label text-right">
+            <xed:output i18n="digibib.researchData.advanced.researchObject" />
+          </label>
+          <div class="col-md-6 controls">
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='type']">
+                  <select class="form-control form-control-inline">
+                    <option value="">
+                      <xed:output i18n="mir.select" />
+                    </option>
+                    <xed:include uri="xslStyle:items2options:classification:editorComplete:1:children:research_objects" />
+                  </select>
+                </xed:bind>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='description']">
+                  <textarea class="form-control form-control-inline" rows="2"
+                    placeholder="{i18n:digibib.researchData.advanced.researchObject.description}" />
+                </xed:bind>
+              </div>
+            </div>
+          </div>
+          <mir:help-pmud help-text="{i18n:digibib.researchData.advanced.researchObject.help}" pmud="true" />
+        </div>
+      </div>
+      <xed:include ref="default-pair-validation" />
+    </xed:repeat>
+  </xed:template>
+
+  <xed:template id="data-origin.repeated">
+    <xed:repeat xpath="fn:array[@key='dataOrigin']/fn:map">
+      <div class="mir-fieldset-content-centered">
+        <div class="form-group row d-flex align-items-center {$xed-validation-marker}">
+          <label class="col-md-3 col-form-label text-right">
+            <xed:output i18n="digibib.researchData.advanced.dataOrigin" />
+          </label>
+          <div class="col-md-6 controls">
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='type']">
+                  <select class="form-control form-control-inline">
+                    <option value="">
+                      <xed:output i18n="mir.select" />
+                    </option>
+                    <xed:include uri="xslStyle:items2options:classification:editorComplete:1:children:data_origins" />
+                  </select>
+                </xed:bind>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='description']">
+                  <textarea class="form-control form-control-inline" rows="2"
+                    placeholder="{i18n:digibib.researchData.advanced.dataOrigin.description}" />
+                </xed:bind>
+              </div>
+            </div>
+          </div>
+          <mir:help-pmud help-text="{i18n:digibib.researchData.advanced.dataOrigin.help}" pmud="true" />
+        </div>
+      </div>
+      <xed:include ref="default-pair-validation" />
+    </xed:repeat>
+  </xed:template>
+
+  <xed:template id="software.repeated">
+    <xed:repeat xpath="fn:array[@key='software_types']/fn:map">
+      <div class="mir-fieldset-content-centered">
+        <div class="form-group row d-flex align-items-center {$xed-validation-marker}">
+          <label class="col-md-3 col-form-label text-right">
+            <xed:output i18n="digibib.researchData.advanced.software" />
+          </label>
+          <div class="col-md-6 controls">
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='type']">
+                  <select class="form-control form-control-inline">
+                    <option value="">
+                      <xed:output i18n="mir.select" />
+                    </option>
+                    <xed:include uri="xslStyle:items2options:classification:editorComplete:1:children:software_types" />
+                  </select>
+                </xed:bind>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='name']">
+                  <input type="text" class="form-control form-control-inline"
+                    placeholder="{i18n:digibib.researchData.advanced.software.name}" />
+                </xed:bind>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <xed:bind xpath="fn:string[@key='version']">
+                  <input type="text" class="form-control form-control-inline"
+                    placeholder="{i18n:digibib.researchData.advanced.software.version}" />
+                </xed:bind>
+              </div>
+            </div>
+          </div>
+          <mir:help-pmud help-text="{i18n:digibib.researchData.advanced.software.help}" pmud="true" />
+        </div>
+      </div>
+      <xed:validate display="global" i18n="digibib.researchData.advanced.error"
+        relevant-if="string-length(fn:string[@key='type']) &gt; 0 or string-length(fn:string[@key='name']) &gt; 0 or string-length(fn:string[@key='version']) &gt; 0"
+        test="string-length(fn:string[@key='type']) &gt; 0 and string-length(fn:string[@key='name']) &gt; 0" />
+    </xed:repeat>
+  </xed:template>
+
+  <xed:template id="methods">
+    <mir:textarea xpath="fn:string[@key='methods']" label="digibib.researchData.advanced.methods"
+      help-text="{i18n:digibib.researchData.advanced.methods.help}" rows="2" />
+  </xed:template>
+
+  <xed:template id="instruments">
+    <mir:textarea xpath="fn:string[@key='instruments']" label="digibib.researchData.advanced.instruments"
+      help-text="{i18n:digibib.researchData.advanced.instruments.help}" rows="2" />
+  </xed:template>
+
+  <xed:template id="processing">
+    <mir:textarea xpath="fn:string[@key='processing']" label="digibib.researchData.advanced.processing"
+      help-text="{i18n:digibib.researchData.advanced.processing.help}" rows="2" />
+  </xed:template>
+</xed:template>
