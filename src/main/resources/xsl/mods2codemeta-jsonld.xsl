@@ -44,14 +44,14 @@
         </xsl:for-each>
       </fn:array>
     </xsl:if>
-    <xsl:if test="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']">
-      <fn:string key="datePublished">
-        <xsl:value-of select="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']" />
+    <xsl:if test="mods:originInfo[@eventType='creation']/mods:dateCreated[@encoding='w3cdtf']">
+      <fn:string key="dateCreated">
+        <xsl:value-of select="mods:originInfo[@eventType='creation']/mods:dateCreated[@encoding='w3cdtf']" />
       </fn:string>
     </xsl:if>
-    <xsl:if test="mods:originInfo[@eventType='creation']/mods:dateModified[@encoding='w3cdtf' and not(@type)]">
+    <xsl:if test="mods:originInfo[@eventType='update']/mods:dateModified[@encoding='w3cdtf']">
       <fn:string key="dateModified">
-        <xsl:value-of select="mods:originInfo[@eventType='creation']/mods:dateModified[@encoding='w3cdtf' and not(@type)]" />
+        <xsl:value-of select="mods:originInfo[@eventType='update']/mods:dateModified[@encoding='w3cdtf']" />
       </fn:string>
     </xsl:if>
     <xsl:if test="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']">
