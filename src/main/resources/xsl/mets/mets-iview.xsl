@@ -194,9 +194,9 @@
         <mets:fptr FILEID="{concat('DOWNLOAD_',$ncName)}" />
       </xsl:if>
 
-      <xsl:if test="mets:fptr[$copyFileGrp/mets:file/@ID=@FILEID]">
+      <xsl:if test="mets:fptr[$copyFileGrp/mets:fileGrp/mets:file/@ID=@FILEID]">
         <!-- Copy fptr that have match in copyFileGrp -->
-        <xsl:copy-of select="mets:fptr[$copyFileGrp/mets:file/@ID=@FILEID]" />
+        <xsl:copy-of select="mets:fptr[$copyFileGrp/mets:fileGrp/mets:file/@ID=@FILEID]" />
       </xsl:if>
     </xsl:copy>
   </xsl:template>
