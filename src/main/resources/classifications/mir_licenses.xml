@@ -13,9 +13,9 @@
       <label xml:lang="en" text="Open Access related to alliance or national license" />
     </category>
     <category ID="cc_4.0">
+      <label xml:lang="en" text="Creative Commons 4.0 International Licenses" />
       <label xml:lang="x-group" text="true" />
       <label xml:lang="de" text="Creative Commons 4.0 International Lizenzen" />
-      <label xml:lang="en" text="Creative Commons 4.0 International Licenses" />
       <url xlink:href="https://creativecommons.org/licenses/" xlink:type="locator" />
       <category ID="cc_by_4.0">
         <label xml:lang="en" text="CC BY 4.0" description="Attribution 4.0" />
@@ -28,8 +28,8 @@
         <url xlink:href="https://creativecommons.org/licenses/by-sa/4.0/" xlink:type="locator" />
       </category>
       <category ID="cc_by-nd_4.0">
-        <label xml:lang="de" text="CC BY-ND 4.0" description="Namensnennung - Keine Bearbeitungen 4.0" />
         <label xml:lang="en" text="CC BY-ND 4.0" description="Attribution-NoDerivatives 4.0" />
+        <label xml:lang="de" text="CC BY-ND 4.0" description="Namensnennung - Keine Bearbeitungen 4.0" />
         <url xlink:href="https://creativecommons.org/licenses/by-nd/4.0/" xlink:type="locator" />
       </category>
       <category ID="cc_by-nc_4.0">
@@ -50,10 +50,10 @@
     </category>
     <category ID="cc_3.0">
       <label xml:lang="de" text="Creative Commons 3.0 International Lizenzen" />
-      <label xml:lang="en" text="Creative Commons 3.0 International Licenses" />
+      <label xml:lang="x-genres" text="research_data software" />
       <label xml:lang="x-group" text="true" />
       <label xml:lang="x-genres-mode" text="deny" />
-      <label xml:lang="x-genres" text="research_data software" />
+      <label xml:lang="en" text="Creative Commons 3.0 International Licenses" />
       <url xlink:href="https://creativecommons.org/licenses/" xlink:type="locator" />
       <category ID="cc_by_3.0">
         <label xml:lang="de" text="CC BY 3.0" description="Namensnennung 3.0" />
@@ -65,8 +65,8 @@
         <label xml:lang="en" text="CC BY-SA 3.0" description="Attribution-ShareAlike 3.0" />
       </category>
       <category ID="cc_by-nd_3.0">
-        <label xml:lang="en" text="CC BY-ND 3.0" description="Attribution-NoDerivatives 3.0" />
         <label xml:lang="de" text="CC BY-ND 3.0" description="Namensnennung - Keine Bearbeitungen 3.0" />
+        <label xml:lang="en" text="CC BY-ND 3.0" description="Attribution-NoDerivatives 3.0" />
         <url xlink:href="https://creativecommons.org/licenses/by-nd/3.0/" xlink:type="locator" />
       </category>
       <category ID="cc_by-nc_3.0">
@@ -98,13 +98,18 @@
       </category>
     </category>
     <category ID="software_licenses">
-      <label xml:lang="de" text="Software-Lizenzen" />
       <label xml:lang="en" text="Software Licenses" />
-      <label xml:lang="x-group" text="true" />
       <label xml:lang="x-genres" text="research_data software" />
+      <label xml:lang="x-group" text="true" />
+      <label xml:lang="de" text="Software-Lizenzen" />
+      <category ID="lgpl_v3">
+        <label xml:lang="de" text="GNU Lesser GPL v3.0" />
+        <label xml:lang="en" text="GNU Lesser GPL v3.0" />
+        <url xlink:href="https://www.gnu.org/licenses/lgpl-3.0.en.html" xlink:type="locator" />
+      </category>
       <category ID="apache2">
-        <label xml:lang="de" text="Apache License 2" />
         <label xml:lang="en" text="Apache License 2" />
+        <label xml:lang="de" text="Apache License 2" />
         <url xlink:href="https://www.apache.org/licenses/LICENSE-2.0" xlink:type="locator" />
       </category>
       <category ID="eupl_1.2">
