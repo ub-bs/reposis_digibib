@@ -151,7 +151,7 @@
     </xsl:if>
     <xsl:if test="count(mods:identifier) &gt; 0">
       <xsl:call-template name="parse-identifier">
-        <xsl:with-param name="identifier" select="mods:nameIdentifier" />
+        <xsl:with-param name="identifier" select="mods:identifier" />
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="count(mods:accessCondition[@xlink:href]) &gt; 0">
