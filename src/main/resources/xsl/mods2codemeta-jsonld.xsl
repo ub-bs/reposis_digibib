@@ -59,7 +59,7 @@
         <xsl:value-of select="mods:originInfo[@eventType='publication']/mods:dateIssued[@encoding='w3cdtf']" />
       </fn:string>
     </xsl:if>
-    <xsl:variable name="creator" select="mods:name[contains(mods:role/mods:roleTerm, 'cre')]" />
+    <xsl:variable name="creator" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='cre']" />
     <xsl:if test="count($creator) &gt; 0">
       <fn:array key="creator">
         <xsl:call-template name="parse-name">
@@ -67,7 +67,7 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="contributor" select="mods:name[contains(mods:role/mods:roleTerm, 'ctb')]" />
+    <xsl:variable name="contributor" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='ctb']" />
     <xsl:if test="count($contributor) &gt; 0">
       <fn:array key="contributor">
         <xsl:call-template name="parse-name">
@@ -75,7 +75,7 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="copyrightHolder" select="mods:name[contains(mods:role/mods:roleTerm, 'cph')]" />
+    <xsl:variable name="copyrightHolder" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='cph']" />
     <xsl:if test="count($copyrightHolder) &gt; 0">
       <fn:array key="copyrightHolder">
         <xsl:call-template name="parse-name">
@@ -83,7 +83,7 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="publisher" select="mods:name[contains(mods:role/mods:roleTerm, 'pbl')]" />
+    <xsl:variable name="publisher" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='pbl']" />
     <xsl:if test="count($publisher) &gt; 0">
       <fn:array key="publisher">
         <xsl:call-template name="parse-name">
@@ -91,7 +91,7 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="provider" select="mods:name[contains(mods:role/mods:roleTerm, 'prv')]" />
+    <xsl:variable name="provider" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='prv']" />
     <xsl:if test="count($provider) &gt; 0">
       <fn:array key="provider">
         <xsl:call-template name="parse-name">
@@ -99,7 +99,7 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="maintainer" select="mods:name[contains(mods:role/mods:roleTerm, 'led')]" />
+    <xsl:variable name="maintainer" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='led']" />
     <xsl:if test="count($maintainer) &gt; 0">
       <fn:array key="maintainer">
         <xsl:call-template name="parse-name">
@@ -107,7 +107,7 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="funder" select="mods:name[contains(mods:role/mods:roleTerm, 'fnd')]" />
+    <xsl:variable name="funder" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='fnd']" />
     <xsl:if test="count($funder) &gt; 0">
       <fn:array key="funder">
         <xsl:call-template name="parse-name">
@@ -115,7 +115,7 @@
         </xsl:call-template>
       </fn:array>
     </xsl:if>
-    <xsl:variable name="sponsor" select="mods:name[contains(mods:role/mods:roleTerm, 'spn')]" />
+    <xsl:variable name="sponsor" select="mods:name[mods:role/mods:roleTerm[@authority='marcrelator' and @type='code']/text()='spn']" />
     <xsl:if test="count($sponsor) &gt; 0">
       <fn:array key="sponsor">
         <xsl:call-template name="parse-name">
