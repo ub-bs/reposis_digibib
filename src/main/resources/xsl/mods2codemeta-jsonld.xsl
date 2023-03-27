@@ -212,17 +212,19 @@
     </xsl:for-each>
   </xsl:template>
 
+  <!-- https://github.com/ESIPFed/science-on-schema.org/issues/13 -->
+  <!-- https://github.com/ESIPFed/science-on-schema.org/pull/94 -->
   <xsl:template name="parse-identifier">
     <xsl:param name="identifier" />
     <fn:array key="identifier">
       <xsl:for-each select="$identifier">
         <fn:map>
-          <fn:string key="@type">PropertyValue</fn:string>
-          <fn:string key="propertyID">
-            <xsl:value-of select="@type" />
+          <fn:string key="@type">schema:PropertyValue</fn:string>
+          <fn:string key="schema:propertyID">
+            <xsl:value-of select="concat('http://purl.org/spar/datacite/', @type)" />
           </fn:string>
-          <fn:string key="value">
-            <xsl:value-of select="text()" />
+          <fn:string key="schema:value">
+            <xsl:value-of select="concat(@type, ':', text())" />
           </fn:string>
         </fn:map>
       </xsl:for-each>
