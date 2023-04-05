@@ -364,8 +364,8 @@
 
   <!-- codeRepository -->
   <xed:template id="code-repository">
-    <mir:textfield xpath="fn:string[@key='codeRepository']" label="digibib.researchData.codeMeta.codeRepo"
-      help-text="{i18n:digibib.researchData.codeMeta.codeRepo.help}" />
+    <mir:textfield xpath="fn:string[@key='codeRepository']" label="digibib.researchData.codeMeta.codeRepository"
+      help-text="{i18n:digibib.researchData.codeMeta.codeRepository.help}" />
     <xed:validate xpath="//fn:string[@key='codeRepository']" class="de.gbv.reposis.util.ValidationHelper"
       method="validateURL" i18n="digibib.invalidURL" display="global" />
   </xed:template>

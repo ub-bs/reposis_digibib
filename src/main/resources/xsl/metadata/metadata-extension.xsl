@@ -11,42 +11,43 @@
     <xsl:param name="i18n" />
     <xsl:param name="pre-value" />
     <xsl:param name="value" />
-    <xsl:param name="url" />
     <dt>
       <xsl:value-of select="document(concat('i18n:', $i18n))" />
     </dt>
     <dd>
       <xsl:choose>
-        <xsl:when test="$url">
-          <a href="{$url}">
-            <xsl:choose>
-              <xsl:when test="$value">
-                <xsl:value-of select="$value" />
-              </xsl:when>
-              <xsl:otherwise>
-                <xsl:value-of select="$url" />
-              </xsl:otherwise>
-            </xsl:choose>
-          </a>
+        <xsl:when test="$pre-value and $value">
+          <strong>
+            <xsl:value-of select="$pre-value" />
+          </strong>
+          <xsl:text> </xsl:text>
         </xsl:when>
-        <xsl:otherwise>
-          <xsl:choose>
-            <xsl:when test="$pre-value and $value">
-              <strong>
-                <xsl:value-of select="$pre-value" />
-              </strong>
-              <xsl:text> </xsl:text>
-            </xsl:when>
-            <xsl:when test="$pre-value">
-              <xsl:value-of select="$pre-value" />
-            </xsl:when>
-          </xsl:choose>
-          <xsl:if test="$value">
-            <xsl:value-of select="$value" />
-          </xsl:if>
-        </xsl:otherwise>
+        <xsl:when test="$pre-value">
+          <xsl:value-of select="$pre-value" />
+        </xsl:when>
       </xsl:choose>
+      <xsl:if test="$value">
+        <xsl:copy-of select="$value" />
+      </xsl:if>
     </dd>
+  </xsl:template>
+
+  <xsl:template name="build-link">
+    <xsl:param name="url" />
+    <xsl:param name="text" select="$url"/>
+    <a href="{$url}">
+      <xsl:value-of select="$text" />
+    </a>
+  </xsl:template>
+
+  <xsl:template name="concat">
+    <xsl:param name="input" />
+    <xsl:for-each select="$input">
+      <xsl:copy-of select="."/>
+      <xsl:if test="position() != last()">
+        <xsl:text>, </xsl:text>
+      </xsl:if>
+    </xsl:for-each>
   </xsl:template>
 
   <xsl:template match="/">
@@ -154,6 +155,79 @@
     </xsl:if>
   </xsl:template>
 
+  <xsl:template match="fn:string" mode="codemeta">
+    <xsl:call-template name="print-field">
+      <xsl:with-param name="i18n" select="concat('digibib.researchData.codeMeta.', @key)" />
+      <xsl:with-param name="value" select="." />
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="fn:array" mode="codemeta">
+    <xsl:choose>
+      <xsl:when test="fn:map">
+        <xsl:call-template name="print-field">
+          <xsl:with-param name="i18n" select="concat('digibib.researchData.codeMeta.', @key)" />
+          <xsl:with-param name="value">
+            <xsl:call-template name="concat">
+              <xsl:with-param name="input" select="fn:map/fn:string[@key='@value']" />
+            </xsl:call-template>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="print-field">
+          <xsl:with-param name="i18n" select="concat('digibib.researchData.codeMeta.', @key)" />
+          <xsl:with-param name="value">
+            <xsl:call-template name="concat">
+              <xsl:with-param name="input" select="fn:string" />
+            </xsl:call-template>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+
+  <xsl:template match="fn:string[@key='codeRepository' or @key='buildInstructions' or @key='releaseNotes' or @key='readme' or @key='issueTracker' or @key='contIntegration']" mode="codemeta">
+    <xsl:call-template name="print-field">
+      <xsl:with-param name="i18n" select="concat('digibib.researchData.codeMeta.', @key)" />
+      <xsl:with-param name="value">
+        <xsl:call-template name="build-link">
+          <xsl:with-param name="url" select="." />
+        </xsl:call-template>
+      </xsl:with-param>
+    </xsl:call-template>
+  </xsl:template>
+
+  <xsl:template match="fn:array[@key='softwareRequirements' or @key='softwareSuggestions']" mode="codemeta">
+    <xsl:variable name="links">
+      <xsl:for-each select="fn:map">
+        <xsl:choose>
+          <xsl:when test="fn:string[@key='name'] and fn:string[@key='codeRepository']">
+            <xsl:call-template name="build-link">
+              <xsl:with-param name="url" select="fn:string[@key='codeRepository']" />
+              <xsl:with-param name="text" select="fn:string[@key='name']" />
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:when test="fn:string[@key='codeRepository']">
+            <xsl:call-template name="build-link">
+              <xsl:with-param name="url" select="fn:string[@key='codeRepository']" />
+            </xsl:call-template>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:value-of select="fn:string[@key='name']" />
+          </xsl:otherwise>
+        </xsl:choose>
+        <xsl:if test="position() != last()">
+          <xsl:text>, </xsl:text>
+        </xsl:if>
+      </xsl:for-each>
+    </xsl:variable>
+    <xsl:call-template name="print-field">
+      <xsl:with-param name="i18n" select="concat('digibib.researchData.codeMeta.', @key)" />
+      <xsl:with-param name="value" select="$links" />
+    </xsl:call-template>
+  </xsl:template>
+
   <xsl:template name="codemeta">
     <xsl:param name="codemeta" />
     <xsl:if test="$codemeta/fn:map[@key='developmentStatus']">
@@ -168,127 +242,65 @@
       </xsl:call-template>
     </xsl:if>
     <xsl:if test="$codemeta/fn:string[@key='version']">
-      <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.version'" />
-        <xsl:with-param name="value" select="$codemeta/fn:string[@key='version']" />
-      </xsl:call-template>
+      <xsl:apply-templates select="$codemeta/fn:string[@key='version']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='applicationCategory']">
-      <xsl:for-each select="$codemeta/fn:array[@key='applicationCategory']/fn:map">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.applicationCategory'" />
-          <xsl:with-param name="value" select="fn:string[@key='@value']" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='applicationCategory']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='applicationSubCategory']">
-      <xsl:for-each select="$codemeta/fn:array[@key='applicationSubCategory']/fn:map">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.applicationSubCategory'" />
-          <xsl:with-param name="value" select="fn:string[@key='@value']" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='applicationSubCategory']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='programmingLanguage']">
-      <xsl:for-each select="$codemeta/fn:array[@key='programmingLanguage']/fn:map">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.programmingLanguage'" />
-          <xsl:with-param name="value" select="fn:string[@key='name']" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:call-template name="print-field">
+        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.programmingLanguage'" />
+        <xsl:with-param name="value">
+          <xsl:call-template name="concat">
+            <xsl:with-param name="input" select="$codemeta/fn:array[@key='programmingLanguage']/fn:map/fn:string[@key='name']" />
+          </xsl:call-template>
+        </xsl:with-param>
+      </xsl:call-template>
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='operatingSystem']">
-      <xsl:for-each select="$codemeta/fn:array[@key='operatingSystem']">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.operatingSystem'" />
-          <xsl:with-param name="value" select="fn:string" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='operatingSystem']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='processorRequirements']">
-      <xsl:for-each select="$codemeta/fn:array[@key='processorRequirements']">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.processorRequirements'" />
-          <xsl:with-param name="value" select="fn:string" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='processorRequirements']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='memoryRequirements']">
-      <xsl:for-each select="$codemeta/fn:array[@key='memoryRequirements']/fn:map">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.memoryRequirements'" />
-          <xsl:with-param name="value" select="fn:string[@key='@value']" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='memoryRequirements']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='storageRequirements']">
-      <xsl:for-each select="$codemeta/fn:array[@key='storageRequirements']/fn:map">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.storageRequirements'" />
-          <xsl:with-param name="value" select="fn:string[@key='@value']" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='storageRequirements']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='runtimePlatform']">
-      <xsl:for-each select="$codemeta/fn:array[@key='runtimePlatform']">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.runtimePlatform'" />
-          <xsl:with-param name="value" select="fn:string" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='runtimePlatform']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='softwareRequirements']">
-      <xsl:for-each select="$codemeta/fn:array[@key='softwareRequirements']/fn:map">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.softwareRequirements'" />
-          <xsl:with-param name="value" select="fn:string[@key='name']" />
-          <xsl:with-param name="url" select="fn:string[@key='codeRepository']" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='softwareRequirements']" mode="codemeta" />
+    </xsl:if>
+    <xsl:if test="$codemeta/fn:array[@key='softwareSuggestions']">
+      <xsl:apply-templates select="$codemeta/fn:array[@key='softwareSuggestions']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:array[@key='permissions']">
-      <xsl:for-each select="$codemeta/fn:array[@key='permissions']">
-        <xsl:call-template name="print-field">
-          <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.permissions'" />
-          <xsl:with-param name="value" select="fn:string" />
-        </xsl:call-template>
-      </xsl:for-each>
+      <xsl:apply-templates select="$codemeta/fn:array[@key='permissions']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:string[@key='codeRepository']">
-      <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.codeRepo'" />
-        <xsl:with-param name="url" select="$codemeta/fn:string[@key='codeRepository']" />
-      </xsl:call-template>
+      <xsl:apply-templates select="$codemeta/fn:string[@key='codeRepository']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:string[@key='buildInstructions']">
-      <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.buildInstructions'" />
-        <xsl:with-param name="url" select="$codemeta/fn:string[@key='buildInstructions']" />
-      </xsl:call-template>
+      <xsl:apply-templates select="$codemeta/fn:string[@key='buildInstructions']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:string[@key='releaseNotes']">
-      <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.releaseNotes'" />
-        <xsl:with-param name="url" select="$codemeta/fn:string[@key='releaseNotes']" />
-      </xsl:call-template>
+      <xsl:apply-templates select="$codemeta/fn:string[@key='releaseNotes']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:string[@key='contIntegration']">
-      <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.contIntegration'" />
-        <xsl:with-param name="url" select="$codemeta/fn:string[@key='contIntegration']" />
-      </xsl:call-template>
+      <xsl:apply-templates select="$codemeta/fn:string[@key='contIntegration']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:string[@key='issueTracker']">
-      <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.issueTracker'" />
-        <xsl:with-param name="url" select="$codemeta/fn:string[@key='issueTracker']" />
-      </xsl:call-template>
+      <xsl:apply-templates select="$codemeta/fn:string[@key='issueTracker']" mode="codemeta" />
     </xsl:if>
     <xsl:if test="$codemeta/fn:string[@key='readme']">
-      <xsl:call-template name="print-field">
-        <xsl:with-param name="i18n" select="'digibib.researchData.codeMeta.readme'" />
-        <xsl:with-param name="url" select="$codemeta/fn:string[@key='readme']" />
-      </xsl:call-template>
+      <xsl:apply-templates select="$codemeta/fn:string[@key='readme']" mode="codemeta" />
     </xsl:if>
   </xsl:template>
 </xsl:stylesheet>
