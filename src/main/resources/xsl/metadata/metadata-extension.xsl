@@ -53,6 +53,7 @@
     <xsl:variable name="mods" select="mycoreobject/metadata/def.modsContainer/modsContainer/mods:mods" />
       <div id="metadata-extension">
         <div class="mir_metadata" style="margin-top:-30px;">
+          <hr class="my-3" />
           <dl>
             <xsl:if test="$mods/mods:extension[@displayLabel='codemeta-part']/fn:map">
               <xsl:call-template name="codemeta">
