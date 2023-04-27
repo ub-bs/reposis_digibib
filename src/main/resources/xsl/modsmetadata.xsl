@@ -907,6 +907,11 @@
             <xsl:with-param select="$parentID" name="obj_id" />
           </xsl:call-template>
         </xsl:when>
+        <xsl:when test="mods:location/mods:url[@access='raw object']">
+          <a href="{mods:location/mods:url[@access='raw object']}">
+            <xsl:value-of select="mods:titleInfo/mods:title" />
+          </a>
+        </xsl:when>
         <xsl:otherwise>
           <xsl:value-of select="mods:titleInfo/mods:title" />
         </xsl:otherwise>
