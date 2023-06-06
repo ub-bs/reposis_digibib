@@ -248,7 +248,10 @@
       </h5>
       <div id="extension" class="collapse metadata-box">
         <div class="card card-body">
-          <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="cartographics" />
+          <!-- disable cartographics in advanced metadata in admin mask -->
+          <xed:if test="$genre_intern">
+            <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/editor-includes.xed" ref="cartographics" />
+          </xed:if>
           <xed:bind xpath="mods:extension[@displayLabel='advanced-part']/fn:map" xmlns:fn="http://www.w3.org/2005/xpath-functions">
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/advanced-includes.xed" ref="type.repeated" />
             <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/advanced-includes.xed" ref="research-object.repeated" />
