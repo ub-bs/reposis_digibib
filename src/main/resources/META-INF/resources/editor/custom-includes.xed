@@ -119,6 +119,9 @@
                   <option value="references">
                     <xed:output i18n="mir.relatedItem.references" />
                   </option>
+                  <option value="isReferencedBy">
+                    <xed:output i18n="mir.relatedItem.isReferencedBy" />
+                  </option>
                 </select>
               </xed:bind>
             </div>
@@ -159,6 +162,34 @@
                 </select>
               </xed:bind>
             </div>
+          </div>
+          <div class="form-group row">
+            <xed:repeat xpath="mods:identifier" min="1" max="10">
+              <label class="col-md-3 col-form-label text-right">
+                <xed:output i18n="digibib.researchData.identifier" />
+              </label>
+              <div class="col-md-6">
+                <div class="row">
+                  <div class="col-md-4" style="padding-right: 2px">
+                    <xed:bind xpath="@type" name="type">
+                      <select class="form-control identifierSelect">
+                        <xed:include uri="xslStyle:items2options:classification:editor:-1:children:identifier" />
+                        <xed:load-resource name="identifier" uri="classification:metadata:-1:children:identifier" />
+                        <xed:if test="not($identifier//category[@ID=$type]) and not($type='')">
+                          <option value="{$type}" selected="">
+                            <xed:output value="$type" i18n="mir.identifier.other" />
+                          </option>
+                        </xed:if>
+                      </select>
+                    </xed:bind>
+                  </div>
+                  <div class="col-md-8" style="padding-left: 2px">
+                    <input type="text" size="30" class="form-control form-control-inline" />
+                  </div>
+                </div>
+              </div>
+              <mir:help-pmud help-text="{i18n:mir.help.identifier}" pmud="true" />
+            </xed:repeat>
           </div>
           <div class="form-group row">
             <label class="col-md-3 col-form-label text-right">
