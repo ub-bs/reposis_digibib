@@ -21,7 +21,6 @@ package de.vzg.reposis.digibib.contact;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
@@ -30,20 +29,16 @@ import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.jdom2.Element;
-import org.mycore.common.MCRConstants;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
-import org.mycore.mods.MCRMODSWrapper;
-import org.mycore.orcid2.client.MCRORCIDReadClient;
-import org.mycore.orcid2.client.exception.MCRORCIDRequestException;
-import org.mycore.orcid2.user.MCRORCIDCredentials;
+import org.mycore.orcid2.MCRORCIDUtils;
+import org.mycore.orcid2.client.MCRORCIDClientFactory;
+import org.mycore.orcid2.client.MCRORCIDCredential;
+import org.mycore.orcid2.v3.client.MCRORCIDClientHelper;
+import org.mycore.orcid2.v3.client.MCRORCIDSectionImpl;
 import org.mycore.orcid2.user.MCRORCIDUser;
-import org.mycore.orcid2.v3.MCRORCIDAPIClientFactoryImpl;
-import org.mycore.orcid2.v3.MCRORCIDSectionImpl;
-import org.mycore.user2.MCRUser;
-import org.mycore.user2.MCRUserManager;
+import org.mycore.orcid2.user.MCRORCIDUserUtils;
 import org.orcid.jaxb.model.v3.release.record.Emails;
 import org.orcid.jaxb.model.v3.release.record.Email;
 
@@ -79,32 +74,37 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
      */
     private void addOrcidRecipients(List<ContactRecipient> recipients) {
         final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
-        final List<MCRUser> users = getAuthors(object).stream()
-            .flatMap(a -> a.getChildren("nameIdentifier", MCRConstants.MODS_NAMESPACE).stream())
-            .filter(c -> "orcid".equalsIgnoreCase(c.getAttributeValue("type")))
-            .map(e -> MCRUserManager.getUsers(MCRORCIDUser.ATTR_ID_PREFIX + "orcid", e.getText()).findFirst())
-            .filter(Optional::isPresent).map(Optional::get).distinct().toList();
-        for (MCRUser user : users) {
+        final List<String> orcids = new ArrayList(MCRORCIDUtils.getORCIDs(object));
+        for (String orcid : orcids) {
             final Set<String> mails = new HashSet<String>();
-            final MCRORCIDUser orcidUser = new MCRORCIDUser(user);
-            final MCRORCIDCredentials credentials = orcidUser.getCredentials();
-            final Set<String> otherOrcids = orcidUser.getORCIDs();
-            if (credentials != null) {
+            final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);
+            if (orcidUser != null) {
+                // TODO may check all credentials of user
+                final MCRORCIDCredential credential = orcidUser.getCredentialByORCID(orcid);
+                final Set<String> otherOrcids = orcidUser.getORCIDs();
+                if (credential != null) {
+                    try {
+                        mails.addAll(fetchMailsFromMemberAPI(orcid, credential));
+                        otherOrcids.remove(orcid);
+                    } catch (Exception e) {
+                        LOGGER.warn(e);
+                    }
+                }
+                for (String otherOrcid : otherOrcids) {
+                    try {
+                        mails.addAll(fetchMailsFromPublicAPI(otherOrcid));
+                    } catch (Exception e) {
+                        LOGGER.warn(e);
+                    }
+                }
+            } else {
                 try {
-                    mails.addAll(fetchMailsFromMemberAPI(credentials));
-                    otherOrcids.remove(credentials.getORCID());
+                    mails.addAll(fetchMailsFromPublicAPI(orcid));
                 } catch (Exception e) {
                     LOGGER.warn(e);
                 }
             }
-            for (String otherOrcid : otherOrcids) {
-                try {
-                    mails.addAll(fetchMailsFromPublicAPI(otherOrcid));
-                } catch (Exception e) {
-                    LOGGER.warn(e);
-                }
-            }
-            final String name = user.getRealName() != null ? user.getRealName() : user.getUserName();
+            final String name = orcidUser.getUser().getRealName() != null ? orcidUser.getUser().getRealName() : orcidUser.getUser().getUserName();
             mails.stream()
                 .map(m -> new ContactRecipient(name, ContactRecipientOrigin.ORCID, m))
                 .forEach(r -> {
@@ -113,26 +113,15 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
         }
     }
 
-    private List<String> fetchMailsFromPublicAPI(String orcid) throws MCRORCIDRequestException {
-        return MCRORCIDAPIClientFactoryImpl.getInstance().createPublicClient()
-            .fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class).getEmails().stream().map(Email::getEmail).distinct()
-            .toList();
+    private List<String> fetchMailsFromPublicAPI(String orcid) {
+        return extractMails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class));
     }
 
-    private List<String> fetchMailsFromMemberAPI(MCRORCIDCredentials credentials) throws MCRORCIDRequestException {
-        Emails mails = MCRORCIDAPIClientFactoryImpl.getInstance().createMemberClient(credentials)
-            .fetch(MCRORCIDSectionImpl.EMAIL, Emails.class);
+    private List<String> fetchMailsFromMemberAPI(String orcid, MCRORCIDCredential credential) {
+        return extractMails(MCRORCIDClientHelper.getClientFactory().createUserClient(orcid, credential).fetch(MCRORCIDSectionImpl.EMAIL, Emails.class));
+    }
+
+    private List<String> extractMails(Emails mails) {
         return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
-    }
-
-    /**
-     * Returns author elements for object 
-     * 
-     * @param object the object
-     * @return list of author elements
-     */
-    private List<Element> getAuthors(MCRObject object) {
-        return new MCRMODSWrapper(object)
-            .getElements("mods:name[@type='personal']");
     }
 }
