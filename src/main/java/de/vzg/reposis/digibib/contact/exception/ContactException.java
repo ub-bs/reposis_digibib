@@ -34,6 +34,11 @@ public class ContactException extends MCRException {
      */
     private String errorCode;
 
+    public ContactException(String message, Throwable cause) {
+        super(message, cause);
+        errorCode = "contactError";
+    }
+
     public ContactException(String message) {
         super(message);
         errorCode = "contactError";

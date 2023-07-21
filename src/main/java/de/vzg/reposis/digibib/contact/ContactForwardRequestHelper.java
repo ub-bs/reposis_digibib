@@ -18,12 +18,13 @@
 
 package de.vzg.reposis.digibib.contact;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-
 import org.jdom2.Element;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRMailer.EMail;
@@ -41,11 +42,11 @@ public class ContactForwardRequestHelper {
      * Creates Email for recipient and sends it.
      *
      * @param recipient the recipient
-     * @throws Exception if mail cannot be send
+     * @throws ContactException if mail cannot be send
      */
-    public static void sendMail(ContactRecipient recipient) throws Exception {
+    public static void sendMail(ContactRecipient recipient) {
         if (recipient.getRequest() == null) {
-            throw new MCRException("Request no set.");
+            throw new ContactException("Request no set.");
         }
         final ContactRequest r = recipient.getRequest();
         final Map<String, String> headers = new HashMap<String, String>();
@@ -59,9 +60,9 @@ public class ContactForwardRequestHelper {
      * 
      * @param recipient the recipient
      * @return the mail
-     * @throws Exception if mail transformation fails
+     * @throws ContactException if mail transformation fails
      */
-    private static EMail createMail(ContactRecipient recipient) throws Exception {
+    private static EMail createMail(ContactRecipient recipient) {
         final ContactRequest r = recipient.getRequest();
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();

@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact;
 import java.io.IOException;
 import java.util.Map;
 
+import de.vzg.reposis.digibib.contact.exception.ContactException;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.mycore.common.content.MCRJDOMContent;
@@ -41,16 +42,17 @@ public class ContactUtils {
      * @param stylesheet the stylesheet name
      * @param parameters a map of parameters
      * @return the transformed document
-     * @throws IOException   if stylesheet cannot be loaded
-     * @throws JDOMException if document is faulty
-     * @throws SAXException  if stylesheet is faulty or it cannot be applied
+     * @throws ContactException if transformation failed
      */
-    public static Document transform(Document input, String stylesheet, Map<String, String> parameters)
-        throws IOException, JDOMException, SAXException {
+    public static Document transform(Document input, String stylesheet, Map<String, String> parameters) {
         MCRJDOMContent source = new MCRJDOMContent(input);
         MCRXSL2XMLTransformer transformer = MCRXSL2XMLTransformer.getInstance("xsl/" + stylesheet + ".xsl");
         MCRParameterCollector parameterCollector = MCRParameterCollector.getInstanceFromUserSession();
         parameterCollector.setParameters(parameters);
-        return transformer.transform(source, parameterCollector).asXML();
+        try {
+            return transformer.transform(source, parameterCollector).asXML();
+        } catch (IOException | JDOMException | SAXException e) {
+            throw new ContactException("Cannot transform document", e);
+        }
     }
 }

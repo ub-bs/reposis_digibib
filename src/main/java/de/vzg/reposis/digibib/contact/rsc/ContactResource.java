@@ -102,6 +102,7 @@ public class ContactResource {
         final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
             request.getORCID(), objectID.toString());
         ContactMailService.sendMail(confirmationMail, request.getFrom());
+        // notification mail is not required, log is sufficient
         try {
             ContactMailService.sendMail(createNotificationMail(objectID.toString()), FALLBACK_MAIL);
         } catch (Exception e) {

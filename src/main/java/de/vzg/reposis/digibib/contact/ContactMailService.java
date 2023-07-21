@@ -32,9 +32,9 @@ import jakarta.mail.Transport;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 
+import de.vzg.reposis.digibib.contact.exception.ContactException;
 import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.MCRMailer.EMail.MessagePart;
-
 import org.mycore.common.config.MCRConfiguration2;
 
 /**
@@ -108,9 +108,9 @@ public class ContactMailService {
      * @param mail the mail
      * @param from the sender mail
      * @param to   the recipient mail
-     * @throws MessagingException if sending fails
+     * @throws ContactException if sending fails
      */
-    public static void sendMail(EMail mail, String to) throws MessagingException {
+    public static void sendMail(EMail mail, String to) {
         sendMail(mail, to, null);
     }
 
@@ -121,23 +121,27 @@ public class ContactMailService {
      * @param from   the sender mail
      * @param to     the recipient mail
      * @param header map of headers
-     * @throws MessagingException if sending fails
+     * @throws ContactException if sending fails
      */
-    public static void sendMail(EMail mail, String to, Map<String, String> headers) throws MessagingException {
+    public static void sendMail(EMail mail, String to, Map<String, String> headers) {
         final MimeMessage msg = new MimeMessage(session);
-        msg.setFrom(new InternetAddress(SENDER_NAME));
-        msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
-        msg.setSentDate(new Date());
-        msg.setSubject(mail.subject, ENCODING);
-        final Optional<MessagePart> plainMsg = mail.getTextMessage();
-        if (plainMsg.isPresent()) {
-            msg.setText(plainMsg.get().message, ENCODING);
-        }
-        if (headers != null) {
-            for (var entry : headers.entrySet()) {
-                msg.setHeader(entry.getKey(), entry.getValue());
+        try {
+            msg.setFrom(new InternetAddress(SENDER_NAME));
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
+            msg.setSentDate(new Date());
+            msg.setSubject(mail.subject, ENCODING);
+            final Optional<MessagePart> plainMsg = mail.getTextMessage();
+            if (plainMsg.isPresent()) {
+                msg.setText(plainMsg.get().message, ENCODING);
             }
+            if (headers != null) {
+                for (var entry : headers.entrySet()) {
+                    msg.setHeader(entry.getKey(), entry.getValue());
+                }
+            }
+            Transport.send(msg);
+        } catch (MessagingException e) {
+            throw new ContactException("Cannot send mail", e);
         }
-        Transport.send(msg);
     }
 }

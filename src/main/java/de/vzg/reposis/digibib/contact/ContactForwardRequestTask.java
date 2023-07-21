@@ -100,7 +100,7 @@ public class ContactForwardRequestTask implements Runnable {
         session.close();
     }
 
-    private void sendForwardingConfirmation() throws Exception {
+    private void sendForwardingConfirmation() {
         final EMail forwardConfirmation = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", request.getObjectID().toString());
