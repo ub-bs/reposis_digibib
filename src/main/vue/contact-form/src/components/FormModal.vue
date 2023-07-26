@@ -1,96 +1,98 @@
 <template>
   <modal :title="$t('digibib.contact.frontend.form.title')" scrollable @ok="handleSubmit" @close="emit('close')"
       :busy="busy" size="lg">
-    <div class="row">
-      <div class="col-12">
-        <div v-if="showError" class="alert alert-danger" role="alert">
-          {{ $t('digibib.contact.frontend.form.error') }}
-        </div>
-      </div>
-    </div>
-    <div class="row pb-4">
-      <div class="col-12">
-        {{ $t('digibib.contact.frontend.form.text') }}
-      </div>
-    </div>
-    <!-- TODO mark required fields -->
-    <form ref="form" @submit.stop.prevent="handleSubmit">
-      <div class="form-row">
-        <div class="col-6">
-          <div class="form-group required">
-            <label class="control-label" for="nameInput">
-              {{ $t('digibib.contact.frontend.form.label.name') }}
-            </label>
-            <input type="text" class="form-control" id="nameInput" ref="nameInput" required
-              :class="nameState === false ? 'is-invalid' : ''" v-model="contactRequest.name" />
-            <div class="invalid-feedback" :class="nameState === false ? 'd-block' : ''">
-              {{ $t('digibib.contact.frontend.form.validation.name') }}
-            </div>
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="form-group required">
-            <label class="control-label" for="mailInput">
-              {{ $t('digibib.contact.frontend.form.label.email') }}
-            </label>
-            <input type="email" class="form-control" id="mailInput" ref="mailInput" required
-              :class="mailState === false ? 'is-invalid' : ''" v-model="contactRequest.email" />
-            <div class="invalid-feedback" :class="mailState === false ? 'd-block' : ''">
-              {{ $t('digibib.contact.frontend.form.validation.email') }}
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <div class="form-group">
-            <label for="orcidInput">
-              {{ $t('digibib.contact.frontend.form.label.orcid') }}
-            </label>
-            <input type="text" class="form-control" id="orcidInput" ref="orcid"
-              :class="orcidState === false ? 'is-invalid' : ''" v-model="contactRequest.orcid" />
-            <div class="invalid-feedback" :class="orcidState === false ? 'd-block' : ''">
-              {{ $t('digibib.contact.frontend.form.validation.orcid') }}
-            </div>
+          <div v-if="showError" class="alert alert-danger" role="alert">
+            {{ $t('digibib.contact.frontend.form.error') }}
           </div>
         </div>
       </div>
+      <div class="row pb-4">
+        <div class="col-12">
+          {{ $t('digibib.contact.frontend.form.text') }}
+        </div>
+      </div>
+      <!-- TODO mark required fields -->
+      <form ref="form" @submit.stop.prevent="handleSubmit">
+        <div class="form-row">
+          <div class="col-6">
+            <div class="form-group required">
+              <label class="control-label" for="nameInput">
+                {{ $t('digibib.contact.frontend.form.label.name') }}
+              </label>
+              <input type="text" class="form-control" id="nameInput" ref="nameInput" required
+                :class="nameState === false ? 'is-invalid' : ''" v-model="contactRequest.name" />
+              <div class="invalid-feedback" :class="nameState === false ? 'd-block' : ''">
+                {{ $t('digibib.contact.frontend.form.validation.name') }}
+              </div>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-group required">
+              <label class="control-label" for="mailInput">
+                {{ $t('digibib.contact.frontend.form.label.email') }}
+              </label>
+              <input type="email" class="form-control" id="mailInput" ref="mailInput" required
+                :class="mailState === false ? 'is-invalid' : ''" v-model="contactRequest.email" />
+              <div class="invalid-feedback" :class="mailState === false ? 'd-block' : ''">
+                {{ $t('digibib.contact.frontend.form.validation.email') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group">
+              <label for="orcidInput">
+                {{ $t('digibib.contact.frontend.form.label.orcid') }}
+              </label>
+              <input type="text" class="form-control" id="orcidInput" ref="orcid"
+                :class="orcidState === false ? 'is-invalid' : ''" v-model="contactRequest.orcid" />
+              <div class="invalid-feedback" :class="orcidState === false ? 'd-block' : ''">
+                {{ $t('digibib.contact.frontend.form.validation.orcid') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12">
+            <div class="form-group required">
+              <label class="control-label" for="messageInput">
+                {{ $t('digibib.contact.frontend.form.label.message') }}
+              </label>
+              <textarea type="text" class="form-control" id="messageInput" rows="8" ref="messageInput"
+                :class="messageState === false ? 'is-invalid' : ''" v-model="contactRequest.message"
+                required />
+              <div class="invalid-feedback" :class="messageState === false ? 'd-block' : ''">
+                {{ $t('digibib.contact.frontend.form.validation.message') }}
+              </div>
+            </div>
+          </div>
+        </div>
+        <input id="website" name="website" type="text" v-model="website"  />
+      </form>
       <div class="row">
         <div class="col-12">
-          <div class="form-group required">
-            <label class="control-label" for="messageInput">
-              {{ $t('digibib.contact.frontend.form.label.message') }}
+          <div class="form-check required">
+            <input class="form-check-input" type="checkbox" v-model="termsInput"
+              id="termsCheck" :class="termsState === false ? 'is-invalid' : ''">
+            <label class="control-label form-check-label" for="termsCheck">
+              {{ $t('digibib.contact.frontend.form.label.acceptTerms') }}
             </label>
-            <textarea type="text" class="form-control" id="messageInput" rows="8" ref="messageInput"
-              :class="messageState === false ? 'is-invalid' : ''" v-model="contactRequest.message"
-              required />
-            <div class="invalid-feedback" :class="messageState === false ? 'd-block' : ''">
-              {{ $t('digibib.contact.frontend.form.validation.message') }}
-            </div>
           </div>
         </div>
       </div>
-      <input id="website" name="website" type="text" v-model="website"  />
-    </form>
-    <div class="row">
-      <div class="col-12">
-        <div class="form-check required">
-          <input class="form-check-input" type="checkbox" v-model="termsInput"
-            id="termsCheck" :class="termsState === false ? 'is-invalid' : ''">
-          <label class="control-label form-check-label" for="termsCheck">
-            {{ $t('digibib.contact.frontend.form.label.acceptTerms') }}
-          </label>
+      <div class="row pt-4">
+        <div class="col">
+          <cage-captcha ref="captcha" :baseUrl="baseUrl + 'rsc/captchaCage'"/>
         </div>
       </div>
+      <span class="small font-weight-light" id="required-label">
+       {{ $t('digibib.contact.frontend.form.label.required') }}
+      </span>
     </div>
-    <div class="row pt-4">
-      <div class="col">
-        <cage-captcha ref="captcha" :baseUrl="baseUrl + 'rsc/captchaCage'"/>
-      </div>
-    </div>
-    <span class="small font-weight-light" id="required-label">
-     {{ $t('digibib.contact.frontend.form.label.required') }}
-    </span>
   </modal>
 </template>
 
