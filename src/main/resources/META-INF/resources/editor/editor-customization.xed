@@ -171,6 +171,51 @@
     <xed:include ref="extent"                            after="date.recorded.datetimepicker" />
   </xed:modify>
 
+  <xed:template id="person.corresponding">
+    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='aut']" />
+    <xed:bind xpath="mods:name[@type='personal'][mods:role/mods:roleTerm[@authority='marcrelator'][@type='code']='cre']" />
+    <mir:person.extended.repeated help-text="{i18n:mir.help.research.data.person}" authorSpecification="true">
+      <option value="aut">
+        <xed:output i18n="mir.role.author" />
+      </option>
+      <option value="ann">
+        <xed:output i18n="mir.role.annotator" />
+      </option>
+      <option value="cre">
+        <xed:output i18n="mir.role.creator" />
+      </option>
+      <option value="col">
+        <xed:output i18n="mir.role.collector" />
+      </option>
+      <option value="ctb">
+        <xed:output i18n="mir.role.contributor" />
+      </option>
+      <option value="dtc">
+        <xed:output i18n="mir.role.dataContributor" />
+      </option>
+      <option value="ivr">
+        <xed:output i18n="mir.role.interviewer" />
+      </option>
+      <option value="mdc">
+        <xed:output i18n="mir.role.metadataContact" />
+      </option>
+      <option value="pbl">
+        <xed:output i18n="mir.role.publisher" />
+      </option>
+      <option value="rev">
+        <xed:output i18n="mir.role.reviewer" />
+      </option>
+      <option value="own">
+        <xed:output i18n="mir.role.owner" />
+      </option>
+      <option value="oth">
+        <xed:output i18n="mir.role.other" />
+      </option>
+    </mir:person.extended.repeated>
+    <xed:validate xpath="//mods:mods" test="count(mods:name/mods:role/mods:roleTerm[@valueURIxEditor='corresponding_author']) &gt; 0"
+      display="global" i18n="editor.correspondingAuthor.required" />
+  </xed:template>
+
   <xed:template id="research-data-base">
     <div class="card">
       <h5 class="card-header">
@@ -203,7 +248,7 @@
                 <xed:include uri="xslStyle:editor/mir2xeditor:webapp:editor/research_data/codemeta-includes.xed" ref="involved.repeated" />
               </xed:when>
               <xed:otherwise>
-                <xed:include ref="research.data.person.repeated" />
+                <xed:include ref="person.corresponding" />
               </xed:otherwise>
             </xed:choose>
           </fieldset>
