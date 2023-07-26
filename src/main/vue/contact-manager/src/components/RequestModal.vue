@@ -1,72 +1,74 @@
 <template>
   <Modal v-if="showModal" :title="request.uuid" size="xl" scrollable @close="hide">
-    <div v-if="errorCode" class="alert alert-danger" role="alert">
-      {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
-    </div>
-    <div v-if="infoCode" class="alert alert-success" role="alert">
-      {{ $t(`digibib.contact.frontend.manager.info.${infoCode}`) }}
-    </div>
-    <div v-if="request.state < RequestState.Processed" class="alert alert-warning"
-        role="alert">
-      {{ $t(`digibib.contact.frontend.manager.warning.requestNotProcessed`) }}
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <label for="inputName">
-          {{ $t('digibib.contact.frontend.manager.label.name') }}
-        </label>
-        <input type="text" class="form-control" id="inputName" v-model="request.name"
-          disabled />
+    <div class="container-fluid">
+      <div v-if="errorCode" class="alert alert-danger" role="alert">
+        {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
       </div>
-      <div class="form-group col-md-5">
-        <label for="inputEmail">
-          {{ $t('digibib.contact.frontend.manager.label.email') }}
-        </label>
-        <input type="text" class="form-control" id="inputEmail" v-model="request.email"
-          disabled />
+      <div v-if="infoCode" class="alert alert-success" role="alert">
+        {{ $t(`digibib.contact.frontend.manager.info.${infoCode}`) }}
       </div>
-      <div class="form-group col-md-3">
-        <label for="inputOrcid">
-          {{ $t('digibib.contact.frontend.manager.label.orcid') }}
-        </label>
-        <input type="text" class="form-control" id="inputOrcid" v-model="request.orcid"
-          disabled />
+      <div v-if="request.state < RequestState.Processed" class="alert alert-warning"
+          role="alert">
+        {{ $t(`digibib.contact.frontend.manager.warning.requestNotProcessed`) }}
       </div>
-    </div>
-    <div class="form-group">
-      <textarea class="form-control" rows="5" readonly v-model="request.message" />
-    </div>
-    <hr class="my-4" />
-    <div class="form-group">
-      <label for="inputComment">
-        {{ $t('digibib.contact.frontend.manager.label.comment') }}
-      </label>
-      <div class="d-flex flex-row">
-        <textarea id="inputComment" class="form-control" rows="4"
-          :readonly="!commentEditMode || !editable" @blur="cancelCommentEdit"
-          v-model="request.comment" @click="startCommentEdit" />
-        <div v-if="commentEditMode" class="d-flex flex-column pl-1">
-          <div class="btn-group-vertical">
-            <button class="btn btn-primary shadow-none" @mousedown="updateComment"
-                title="Save">
-              <i class="fa fa-check"></i>
-            </button>
-            <button class="btn btn-primary shadow-none" title="Cancel">
-              <i class="fa fa-xmark"></i>
-            </button>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="inputName">
+            {{ $t('digibib.contact.frontend.manager.label.name') }}
+          </label>
+          <input type="text" class="form-control" id="inputName" v-model="request.name"
+            disabled />
+        </div>
+        <div class="form-group col-md-5">
+          <label for="inputEmail">
+            {{ $t('digibib.contact.frontend.manager.label.email') }}
+          </label>
+          <input type="text" class="form-control" id="inputEmail" v-model="request.email"
+            disabled />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="inputOrcid">
+            {{ $t('digibib.contact.frontend.manager.label.orcid') }}
+          </label>
+          <input type="text" class="form-control" id="inputOrcid" v-model="request.orcid"
+            disabled />
+        </div>
+      </div>
+      <div class="form-group">
+        <textarea class="form-control" rows="5" readonly v-model="request.message" />
+      </div>
+      <hr class="my-4" />
+      <div class="form-group">
+        <label for="inputComment">
+          {{ $t('digibib.contact.frontend.manager.label.comment') }}
+        </label>
+        <div class="d-flex flex-row">
+          <textarea id="inputComment" class="form-control" rows="4"
+            :readonly="!commentEditMode || !editable" @blur="cancelCommentEdit"
+            v-model="request.comment" @click="startCommentEdit" />
+          <div v-if="commentEditMode" class="d-flex flex-column pl-1">
+            <div class="btn-group-vertical">
+              <button class="btn btn-primary shadow-none" @mousedown="updateComment"
+                  title="Save">
+                <i class="fa fa-check"></i>
+              </button>
+              <button class="btn btn-primary shadow-none" title="Cancel">
+                <i class="fa fa-xmark"></i>
+              </button>
+            </div>
           </div>
         </div>
       </div>
+      <hr class="my-4" />
+      <h6 class="mb-2">
+        {{ $t('digibib.contact.frontend.manager.label.recipients') }}
+      </h6>
+      <p>
+        {{ $t('digibib.contact.frontend.manager.info.recipients') }}
+      </p>
+      <recipients-table @action-started="resetInfoError" @error="handleError" @info="handleInfo"
+        :request="request" />
     </div>
-    <hr class="my-4" />
-    <h6 class="mb-2">
-      {{ $t('digibib.contact.frontend.manager.label.recipients') }}
-    </h6>
-    <p>
-      {{ $t('digibib.contact.frontend.manager.info.recipients') }}
-    </p>
-    <recipients-table @action-started="resetInfoError" @error="handleError" @info="handleInfo"
-      :request="request" />
     <template v-slot:footer>
       <div class="btn-group">
         <button type="button" class="btn btn-success" @click="forwardRequest"
