@@ -18,9 +18,11 @@
 
 package de.vzg.reposis.digibib.contact;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
@@ -30,14 +32,18 @@ import de.vzg.reposis.digibib.contact.model.ContactRequestState;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.jdom2.Element;
 import org.mycore.common.MCRSession;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.MCRTransactionHelper;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
+import org.mycore.datamodel.metadata.MCRMetadataManager;
+import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mcr.cronjob.MCRCronjob;
+import org.mycore.mods.MCRMODSWrapper;
 
 /**
  * This class implements a cronjob that collects mails for contact requests.
@@ -103,7 +109,20 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
                 } else {
-                    final List<ContactRecipient> recipients = new ContactCollectRecipientsTask(objectID).call();
+                    final List<ContactRecipient> recipients = new ArrayList();
+                    try {
+                        final List<Element> correspondingAuthors = getCorrespondingAuthors(objectID);
+                        for (Element correspondingAuthor : correspondingAuthors) {
+                            final NameWrapper wrapper = new NameWrapper(correspondingAuthor);
+                            if (wrapper.hasORCID()) {
+                                final String name = wrapper.getName();
+                                final Set<String> mails = ContactORCIDService.getMails(wrapper.getORCID());
+                                mails.forEach(m -> recipients.add(new ContactRecipient(name, ContactRecipientOrigin.ORCID, m)));
+                            }
+                        }
+                    } catch (Exception e) {
+                        //
+                    }
                     if (recipients.isEmpty()) {
                         addFallbackRecipient(recipients);
                     }
@@ -160,5 +179,11 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
      */
     private void addRecipients(ContactRequest request, List<ContactRecipient> recipients) {
         recipients.forEach((r) -> request.addRecipient(r));
+    }
+
+    // TODO
+    private List<Element> getCorrespondingAuthors(MCRObjectID objectID) {
+        final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
+        return new MCRMODSWrapper(object).getElements("mods:name/mods:nameIdentifier[mods:role/mods]");
     }
 }
