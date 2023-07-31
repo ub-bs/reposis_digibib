@@ -112,16 +112,19 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
                     final List<ContactRecipient> recipients = new ArrayList();
                     try {
                         final List<Element> correspondingAuthors = getCorrespondingAuthors(objectID);
+                        LOGGER.debug("Found {} corresponding authors", correspondingAuthors.size());
                         for (Element correspondingAuthor : correspondingAuthors) {
                             final NameWrapper wrapper = new NameWrapper(correspondingAuthor);
                             if (wrapper.hasORCID()) {
+                                LOGGER.debug("Found linked ORCID iD: {}", wrapper.getORCID());
                                 final String name = wrapper.getName();
                                 final Set<String> mails = ContactORCIDService.getMails(wrapper.getORCID());
+                                LOGGER.debug("Found {} mails", mails.size());
                                 mails.forEach(m -> recipients.add(new ContactRecipient(name, ContactRecipientOrigin.ORCID, m)));
                             }
                         }
                     } catch (Exception e) {
-                        //
+                        LOGGER.info(e);
                     }
                     if (recipients.isEmpty()) {
                         addFallbackRecipient(recipients);
@@ -181,9 +184,9 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         recipients.forEach((r) -> request.addRecipient(r));
     }
 
-    // TODO
     private List<Element> getCorrespondingAuthors(MCRObjectID objectID) {
         final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
-        return new MCRMODSWrapper(object).getElements("mods:name/mods:nameIdentifier[mods:role/mods]");
+        // return new MCRMODSWrapper(object).getElements("mods:name[mods:role/mods:modsTerm/@valueURI='https://www.mycore.de/classifications/author_roles#corresponding_author']");
+        return new MCRMODSWrapper(object).getElements("mods:name");
     }
 }

@@ -18,18 +18,13 @@
 
 package de.vzg.reposis.digibib.contact;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
+import java.util.stream.Collectors;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
-import org.mycore.orcid2.client.MCRORCIDClientFactory;
-import org.mycore.orcid2.client.MCRORCIDCredential;
 import org.mycore.orcid2.v3.client.MCRORCIDClientHelper;
 import org.mycore.orcid2.v3.client.MCRORCIDSectionImpl;
 import org.mycore.orcid2.user.MCRORCIDUser;
@@ -48,50 +43,40 @@ public class ContactORCIDService {
      * Fetches mail for given ORCID iD.
      * 
      * @param orcid the ORCID iD
-     * @return List of mails
+     * @return Set of mails
      */
     public static Set<String> getMails(String orcid) {
-        final Set<String> mails = new HashSet<String>();
         final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);
         if (orcidUser != null) {
-            final Set<String> otherOrcids = orcidUser.getORCIDs();
-            for (String o : otherOrcids) {
-                final MCRORCIDCredential credential = orcidUser.getCredentialByORCID(o);
-                if (credential != null) {
-                    try {
-                        mails.addAll(fetchMailsFromMemberAPI(o, credential));
-                        otherOrcids.remove(o);
-                    } catch (Exception e) {
-                        LOGGER.warn(e);
-                    }
-                }
-            }
-            for (String otherOrcid : otherOrcids) {
+            final Set<String> mails = new HashSet();
+            final Set<String> orcids = orcidUser.getORCIDs();
+            for (String o : orcids) {
                 try {
-                    mails.addAll(fetchMailsFromPublicAPI(otherOrcid));
+                    mails.addAll(extractMails(fetchMailsWithBestCredential(o)));
                 } catch (Exception e) {
                     LOGGER.warn(e);
                 }
             }
+            return mails;
         } else {
             try {
-                mails.addAll(fetchMailsFromPublicAPI(orcid));
+                return extractMails(fetchMailsFromPublicAPI(orcid));
             } catch (Exception e) {
                 LOGGER.warn(e);
+                return Collections.emptySet();
             }
         }
-        return mails;
     }
 
-    private static List<String> fetchMailsFromPublicAPI(String orcid) {
-        return extractMails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class));
+    private static Emails fetchMailsWithBestCredential(String orcid) {
+        return MCRORCIDClientHelper.fetchWithBestCredentials(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class);
     }
 
-    private static List<String> fetchMailsFromMemberAPI(String orcid, MCRORCIDCredential credential) {
-        return extractMails(MCRORCIDClientHelper.getClientFactory().createUserClient(orcid, credential).fetch(MCRORCIDSectionImpl.EMAIL, Emails.class));
+    private static Emails fetchMailsFromPublicAPI(String orcid) {
+        return MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class);
     }
 
-    private static List<String> extractMails(Emails mails) {
-        return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
+    private static Set<String> extractMails(Emails mails) {
+        return mails.getEmails().stream().map(Email::getEmail).distinct().collect(Collectors.toSet());
     }
 }

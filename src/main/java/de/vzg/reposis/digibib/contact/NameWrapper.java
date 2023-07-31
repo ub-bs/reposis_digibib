@@ -46,9 +46,9 @@ public class NameWrapper {
      * @return the name or null
      */
     public String getName() {
-        String name = element.getChildTextTrim("mods:displayForm", MCRConstants.MODS_NAMESPACE);
+        String name = element.getChildTextTrim("displayForm", MCRConstants.MODS_NAMESPACE);
         if (name == null) {
-            final List<Element> nameParts = element.getChildren("mods:namePart", MCRConstants.MODS_NAMESPACE);
+            final List<Element> nameParts = element.getChildren("namePart", MCRConstants.MODS_NAMESPACE);
             if (!nameParts.isEmpty()) {
                 if (nameParts.size() == 1 && nameParts.get(0).getAttribute("type") == null) {
                     return nameParts.get(0).getTextTrim();
@@ -79,7 +79,7 @@ public class NameWrapper {
      * @return ORCID iD or null
      */
     public String getORCID() {
-        return element.getChildren("mods:nameIdentifier", MCRConstants.MODS_NAMESPACE).stream()
+        return element.getChildren("nameIdentifier", MCRConstants.MODS_NAMESPACE).stream()
             .filter(e -> Objects.equals(e.getAttributeValue("type"), "orcid"))
             .map(Element::getTextTrim).findFirst().orElse(null);
     }
@@ -90,7 +90,7 @@ public class NameWrapper {
      * @return true if ORCID iD exists
      */
     public boolean hasORCID() {
-        return element.getChildren("mods:nameIdentifier", MCRConstants.MODS_NAMESPACE).stream()
+        return element.getChildren("nameIdentifier", MCRConstants.MODS_NAMESPACE).stream()
             .anyMatch(e -> Objects.equals(e.getAttributeValue("type"), "orcid"));
     }
 
@@ -100,7 +100,7 @@ public class NameWrapper {
      * @return List of affiliation names
      */
     public List<String> getAffiliationNames() {
-        return element.getChildren("mods:affiliation", MCRConstants.MODS_NAMESPACE).stream()
+        return element.getChildren("affiliation", MCRConstants.MODS_NAMESPACE).stream()
             .map(Element::getTextTrim).toList();
     }
 
