@@ -47,12 +47,14 @@ import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.mycore.common.MCRException;
 import org.mycore.common.MCRMailer.EMail;
+import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
+import org.mycore.util.concurrent.MCRFixedUserCallable;
 
 @Path("/contact")
 public class ContactResource {
@@ -74,7 +76,6 @@ public class ContactResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
     @Operation(summary = "contact involved persons of given object",
         responses = {
             @ApiResponse(responseCode = "200", description = "operation was successful"),
@@ -99,15 +100,20 @@ public class ContactResource {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
         ContactService.getInstance().insertRequest(request);
-        final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
-            request.getORCID(), objectID.toString());
-        ContactMailService.sendMail(confirmationMail, request.getFrom());
-        // notification mail is not required, log is sufficient
-        try {
-            ContactMailService.sendMail(createNotificationMail(objectID.toString()), FALLBACK_MAIL);
-        } catch (Exception e) {
-            LOGGER.error("Cannot send notification mail", e);
-        }
+        final Thread notifyThread = new Thread(() -> {
+            try {
+                new MCRFixedUserCallable<>(() -> {
+                    final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
+                        request.getORCID(), objectID.toString());
+                    ContactMailService.sendMail(confirmationMail, request.getFrom());
+                    ContactMailService.sendMail(createNotificationMail(objectID.toString()), FALLBACK_MAIL);
+                    return null;
+                }, MCRSystemUserInformation.getJanitorInstance()).call();
+            } catch (Exception e) {
+                LOGGER.error("NotifyThread failed", e);
+            }
+        });
+        notifyThread.start();
         return Response.ok().build();
     }
 
