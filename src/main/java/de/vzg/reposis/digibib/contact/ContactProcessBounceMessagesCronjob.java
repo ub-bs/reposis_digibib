@@ -83,24 +83,26 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
                     final MimeMessage mime = (MimeMessage) message;
                     if (mime.isMimeType(REPORT_MIMETYPE)) {
                         try {
-                            final MultipartReport dsn = (MultipartReport) mime.getContent();
-                            final MimeMessage m = dsn.getReturnedMessage();
-                            if (m != null) {
-                                final String requestId = m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null);
-                                if (requestId != null) {
-                                    final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
-                                    if (recipients != null && recipients.length == 1) {
-                                        try {
-                                            new MCRFixedUserCallable<>(() -> {
-                                                ContactService.getInstance().setRecipientFailed(
-                                                    UUID.fromString(requestId), recipients[0].toString(), true);
-                                                return null;
-                                            }, MCRSystemUserInformation.getJanitorInstance()).call();
-                                            flagMessageAsSeen(message);
-                                        } catch (MessagingException e) {
-                                            LOGGER.error(e);
-                                        } catch (Exception e) {
-                                            LOGGER.error(e);
+                            if (mime.getContent() instanceof MultipartReport) {
+                                final MultipartReport dsn = (MultipartReport) mime.getContent();
+                                final MimeMessage m = dsn.getReturnedMessage();
+                                if (m != null) {
+                                    final String requestId = m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null);
+                                    if (requestId != null) {
+                                        final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
+                                        if (recipients != null && recipients.length == 1) {
+                                            try {
+                                                new MCRFixedUserCallable<>(() -> {
+                                                    ContactService.getInstance().setRecipientFailed(
+                                                        UUID.fromString(requestId), recipients[0].toString(), true);
+                                                    return null;
+                                                }, MCRSystemUserInformation.getJanitorInstance()).call();
+                                                flagMessageAsSeen(message);
+                                            } catch (MessagingException e) {
+                                                LOGGER.error(e);
+                                            } catch (Exception e) {
+                                                LOGGER.error(e);
+                                            }
                                         }
                                     }
                                 }
