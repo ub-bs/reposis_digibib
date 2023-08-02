@@ -26,7 +26,6 @@ import java.util.stream.Collectors;
 
 import org.jdom2.Element;
 import org.mycore.common.MCRConstants;
-import org.mycore.orcid2.util.MCRIdentifier;
 
 public class NameWrapper {
 

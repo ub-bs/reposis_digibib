@@ -128,7 +128,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
      * @throws JsonProcessingException if token cannot be parsed to string
      * @throws MCRException            if token encryption fails
      */
-    protected static String encodeToken(Token token) throws JsonProcessingException, MCRException {
+    protected static String encodeToken(Token token) throws JsonProcessingException {
         try {
             final String json = new ObjectMapper().writeValueAsString(token);
             final MCRCipher cipher = MCRCipherManager.getCipher(CIPHER_NAME);
@@ -146,7 +146,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
      * @throws JsonProcessingException if encoded token cannot be parsed to token
      * @throws MCRException            if decryption fails
      */
-    private static Token decodeToken(String encodedToken) throws JsonProcessingException, MCRException {
+    private static Token decodeToken(String encodedToken) throws JsonProcessingException {
         try {
             final MCRCipher cipher = MCRCipherManager.getCipher(CIPHER_NAME);
             final String json = cipher.decrypt(encodedToken);

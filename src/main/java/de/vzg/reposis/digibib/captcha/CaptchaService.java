@@ -28,7 +28,6 @@ public interface CaptchaService {
      * 
      * @param token the captcha token
      * @return true if token is valid
-     * @throws Exception if token cannot be validated
      */
-    boolean validateToken(String token) throws Exception;
+    boolean validateToken(String token);
 }

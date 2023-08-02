@@ -42,8 +42,6 @@ import com.google.common.cache.CacheBuilder;
 
 import de.vzg.reposis.digibib.captcha.cage.CaptchaCageServiceImpl;
 
-import org.mycore.common.MCRException;
-
 @Singleton
 @Path("/captchaCage")
 public class CaptchaCageResource {
@@ -75,7 +73,7 @@ public class CaptchaCageResource {
     @Path("/userverify")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public TokenResponse verifySecret(String secret) throws MCRException {
+    public TokenResponse verifySecret(String secret) {
         if (generatedSecrets.getIfPresent(secret) == null) {
             throw new BadRequestException();
         }
