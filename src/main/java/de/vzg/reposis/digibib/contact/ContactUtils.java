@@ -30,7 +30,7 @@ import org.mycore.common.xsl.MCRParameterCollector;
 import org.xml.sax.SAXException;
 
 /**
- * This class implements common ulitity methods.
+ * This class implements common utility methods.
  */
 public class ContactUtils {
 
@@ -45,9 +45,9 @@ public class ContactUtils {
      * @throws ContactException if transformation failed
      */
     public static Document transform(Document input, String stylesheet, Map<String, String> parameters) {
-        MCRJDOMContent source = new MCRJDOMContent(input);
-        MCRXSL2XMLTransformer transformer = MCRXSL2XMLTransformer.getInstance("xsl/" + stylesheet + ".xsl");
-        MCRParameterCollector parameterCollector = MCRParameterCollector.getInstanceFromUserSession();
+        final MCRJDOMContent source = new MCRJDOMContent(input);
+        final MCRXSL2XMLTransformer transformer = MCRXSL2XMLTransformer.getInstance("xsl/" + stylesheet + ".xsl");
+        final MCRParameterCollector parameterCollector = new MCRParameterCollector();
         parameterCollector.setParameters(parameters);
         try {
             return transformer.transform(source, parameterCollector).asXML();
