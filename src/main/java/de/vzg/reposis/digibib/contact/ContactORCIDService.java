@@ -44,6 +44,7 @@ public class ContactORCIDService {
      * 
      * @param orcid the ORCID iD
      * @return Set of mails
+     * @throws ContactException if fetch fails
      */
     public static Set<String> getMails(String orcid) {
         final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);

@@ -18,6 +18,7 @@
 
 package de.vzg.reposis.digibib.contact;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
@@ -111,7 +112,7 @@ public class ContactMailService {
      * @throws ContactException if sending fails
      */
     public static void sendMail(EMail mail, String to) {
-        sendMail(mail, to, null);
+        sendMail(mail, to, Collections.emptyMap());
     }
 
     /**
@@ -134,10 +135,8 @@ public class ContactMailService {
             if (plainMsg.isPresent()) {
                 msg.setText(plainMsg.get().message, ENCODING);
             }
-            if (headers != null) {
-                for (var entry : headers.entrySet()) {
-                    msg.setHeader(entry.getKey(), entry.getValue());
-                }
+            for (var entry : headers.entrySet()) {
+                msg.setHeader(entry.getKey(), entry.getValue());
             }
             Transport.send(msg);
         } catch (MessagingException e) {

@@ -98,8 +98,6 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
                                                     return null;
                                                 }, MCRSystemUserInformation.getJanitorInstance()).call();
                                                 flagMessageAsSeen(message);
-                                            } catch (MessagingException e) {
-                                                LOGGER.error(e);
                                             } catch (Exception e) {
                                                 LOGGER.error(e);
                                             }
@@ -113,8 +111,6 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
                     }
                 }
             }
-        } catch (NoSuchProviderException e) {
-            LOGGER.error(e);
         } catch (MessagingException e) {
             LOGGER.error(e);
         } finally {
