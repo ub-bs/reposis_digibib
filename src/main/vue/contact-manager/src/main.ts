@@ -1,5 +1,7 @@
 import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
+import { ModalPlugin, PaginationPlugin } from 'bootstrap-vue';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 import axios from 'axios';
 import store from './store';
 import ContactManager from './App.vue';
@@ -22,5 +24,7 @@ if (process.env.NODE_ENV === 'development') {
   });
   app.use(i18n);
   app.use(store);
+  app.use(ModalPlugin);
+  app.use(PaginationPlugin);
   app.mount('#app');
 })();

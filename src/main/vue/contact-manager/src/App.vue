@@ -30,7 +30,7 @@
       </div>
       <div class="row">
         <div class="col d-flex justify-content-center">
-          <Pagination :total-rows="totalCount" :per-page="perPage" :current-page="currentPage"
+          <b-pagination :total-rows="totalCount" :per-page="perPage" v-model="currentPage"
             @change="handlePageChange" />
         </div>
       </div>
@@ -42,7 +42,6 @@ import { ref, computed, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
 import OverviewTable from './components/OverviewTable.vue';
-import Pagination from './components/Pagination.vue';
 import { ActionTypes } from './store/request/action-types';
 
 const perPage = 8;
@@ -56,8 +55,8 @@ const handlePageChange = async (page) => {
   currentPage.value = page;
   try {
     await store.dispatch(`request/${ActionTypes.FETCH}`, {
-      offset: page * perPage,
-      limit: page * perPage + perPage,
+      offset: (page - 1) * perPage,
+      limit: (page - 1) * perPage + perPage,
     });
   } catch (error) {
     errorCode.value = error instanceof Error ? error.message : 'unknown';

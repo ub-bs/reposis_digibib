@@ -1,5 +1,6 @@
 <template>
-  <Modal v-if="showModal" :title="request.uuid" size="xl" scrollable @close="hide">
+  <b-modal id="request-modal" v-if="request !== undefined" :title="request.uuid" size="xl"
+    scrollable>
     <div class="container-fluid">
       <div v-if="errorCode" class="alert alert-danger" role="alert">
         {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
@@ -69,7 +70,7 @@
       <recipients-table @action-started="resetInfoError" @error="handleError" @info="handleInfo"
         :request="request" />
     </div>
-    <template v-slot:footer>
+    <template v-slot:modal-footer>
       <div class="btn-group">
         <button type="button" class="btn btn-success" @click="forwardRequest"
             :disabled="forwardDisabled">
@@ -77,28 +78,26 @@
         </button>
       </div>
     </template>
-  </Modal>
-  <ConfirmModal ref="confirmModal" />
+  </b-modal>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, getCurrentInstance, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
-import ConfirmModal from './ConfirmModal.vue';
-import Modal from './Modal.vue';
+import { BModal, BvModal } from 'bootstrap-vue';
 import RecipientsTable from './RecipientsTable.vue';
 import { ActionTypes } from '../store/request/action-types';
 import { RequestState } from '../utils';
 
 const store = useStore();
+const request = computed(() => store.state.request.modalData);
 const { t } = useI18n();
-const showModal = ref(false);
-const confirmModal = ref(null);
-const request: Request = ref();
 const commentEditMode = ref(false);
 let commentSave = '';
 const errorCode = ref();
 const infoCode = ref();
+// eslint-disable-next-line
+const instance = (getCurrentInstance() as any);
 const forwardDisabled = computed(() => {
   if (request.value.state === RequestState.Sending_Failed) {
     return false;
@@ -148,29 +147,18 @@ const updateComment = async () => {
   }
 };
 const forwardRequest = async () => {
-  let ok = true;
-  if (request.value.recipients.filter((r) => r.enabled === true).length === 0) {
-    ok = await confirmModal.value.show({
+  if (request.value.recipients.filter((r) => r.enabled === true).length > 0) {
+    const bvModal = instance.ctx._bv__modal as BvModal;
+    bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.message'), {
       title: t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.title'),
-      message: t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.message'),
+    }).then((value) => {
+      if (value) {
+        store.dispatch(`request/${ActionTypes.FORWARD_REQUEST}`, request.value.uuid);
+        handleInfo('forward');
+      }
+    }).catch((error) => {
+      handleError(error instanceof Error ? error.message : 'unknown');
     });
   }
-  if (ok) {
-    try {
-      await store.dispatch(`request/${ActionTypes.FORWARD_REQUEST}`, request.value.uuid);
-      handleInfo('forward');
-    } catch (error) {
-      handleError(error instanceof Error ? error.message : 'unknown');
-    }
-  }
 };
-const show = (r: Request) => {
-  request.value = r;
-  resetInfoError();
-  showModal.value = true;
-};
-const hide = () => {
-  showModal.value = false;
-};
-defineExpose({ show, hide });
 </script>

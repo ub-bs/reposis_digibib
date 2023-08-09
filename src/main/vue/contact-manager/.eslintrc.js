@@ -18,6 +18,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'vue/multi-word-component-names': 'off',
     "no-shadow": "off",
+    "no-underscore-dangle": "off",
     "@typescript-eslint/no-shadow": "error",
     "@typescript-eslint/no-namespace": "off",
   },

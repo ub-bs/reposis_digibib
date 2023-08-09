@@ -12,6 +12,7 @@ export type Mutations<S = State> = {
   [MutationTypes.SET_TOTAL_COUNT](state: S, count: number): void;
   [MutationTypes.UPDATE_REQUEST](state: S, payload): void;
   [MutationTypes.REMOVE_REQUEST](state: S, payload: string): void;
+  [MutationTypes.SET_MODAL_DATA](state: S, payload: Request): void;
 }
 
 export const mutations: MutationTree<State> & Mutations = {
@@ -46,5 +47,8 @@ export const mutations: MutationTree<State> & Mutations = {
   },
   [MutationTypes.REMOVE_REQUEST](state: State, slug: string): void {
     delete state.cache[slug];
+  },
+  [MutationTypes.SET_MODAL_DATA](state: State, payload: Request): void {
+    state.modalData = payload;
   },
 };

@@ -31,12 +31,13 @@ type AugmentedActionContext = {
 export interface Actions {
   [ActionTypes.FETCH]({ commit }: AugmentedActionContext, payload): void,
   [ActionTypes.FORWARD_REQUEST]({ commit }: AugmentedActionContext, payload: string): void,
-  [ActionTypes.FORWARD_REQUEST_TO_RECIPIENT]({ commit }: AugmentedActionContext, payload): void,
+  [ActionTypes.FORWARD_REQUEST_TO_RECIPIENT](payload): void,
   [ActionTypes.ADD_RECIPIENT]({ commit }: AugmentedActionContext, payload): Promise<void>,
   [ActionTypes.UPDATE_RECIPIENT]({ commit }: AugmentedActionContext, payload): void,
   [ActionTypes.REMOVE_RECIPIENT]({ commit }: AugmentedActionContext, payload): void,
   [ActionTypes.UPDATE_REQUEST]({ commit }: AugmentedActionContext, payload): void,
   [ActionTypes.REMOVE_REQUEST]({ commit }: AugmentedActionContext, payload: string): void,
+  [ActionTypes.SET_MODAL_DATA]({ commit }: AugmentedActionContext, payload): void,
 }
 
 export const actions: ActionTree<State, RootState> & Actions = {
@@ -49,7 +50,7 @@ export const actions: ActionTree<State, RootState> & Actions = {
     await forwardRequest(slug);
     commit(MutationTypes.SET_STATE, { slug, state: RequestState.Sending });
   },
-  async [ActionTypes.FORWARD_REQUEST_TO_RECIPIENT]({ commit }, { slug, recipientUUID })
+  async [ActionTypes.FORWARD_REQUEST_TO_RECIPIENT]({ slug, recipientUUID })
     : Promise<void> {
     await forwardRequestToRecipient(slug, recipientUUID);
     // TODO get recipient and reset sent and failed
@@ -76,5 +77,8 @@ export const actions: ActionTree<State, RootState> & Actions = {
   async [ActionTypes.REMOVE_REQUEST]({ commit }, slug): Promise<void> {
     await removeRequest(slug);
     commit(MutationTypes.REMOVE_REQUEST, slug);
+  },
+  async [ActionTypes.SET_MODAL_DATA]({ commit }, slug): Promise<void> {
+    commit(MutationTypes.SET_MODAL_DATA, slug);
   },
 };

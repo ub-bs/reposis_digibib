@@ -57,7 +57,8 @@
         </td>
         <td class="align-middle">
           <div class="btn-group">
-            <button class="btn shadow-none pt-0 pb-0 pr-1 pl-2" @click="viewRequest(item)">
+            <button v-b-modal.request-modal class="btn shadow-none pt-0 pb-0 pr-1 pl-2"
+              @click="viewRequest(item)">
               <i class="fa fa-eye"></i>
             </button>
             <button class="btn shadow-none pt-0 pb-0 pl-1 pr-2" @click="removeRequest(item.uuid)"
@@ -69,15 +70,14 @@
       </tr>
     </tbody>
   </table>
-  <RequestModal ref="requestModal" />
-  <ConfirmModal ref="confirmModal" />
+  <RequestModal />
 </template>
 
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { computed, getCurrentInstance } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
-import ConfirmModal from './ConfirmModal.vue';
+import { BvModal } from 'bootstrap-vue';
 import RequestModal from './RequestModal.vue';
 import { Request, RequestState } from '../utils';
 import { ActionTypes } from '../store/request/action-types';
@@ -86,24 +86,23 @@ const emit = defineEmits(['error']);
 const store = useStore();
 const { t } = useI18n();
 const requests = computed(() => store.getters['request/getRequests']);
-const confirmModal = ref();
-const requestModal = ref();
-const viewRequest = (request: Request) => {
-  requestModal.value.show(request);
+const viewRequest = async (request: Request) => {
+  await store.dispatch(`request/${ActionTypes.SET_MODAL_DATA}`, request);
 };
+// eslint-disable-next-line
+const instance = (getCurrentInstance() as any);
 const removeRequest = async (id: string) => {
-  const ok = await confirmModal.value.show({
+  const bvModal = instance.ctx._bv__modal as BvModal;
+  bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.deleteRequest.message', {
+    requestID: id,
+  }), {
     title: t('digibib.contact.frontend.manager.confirm.deleteRequest.title'),
-    message: t('digibib.contact.frontend.manager.confirm.deleteRequest.message', {
-      requestID: id,
-    }),
-  });
-  if (ok) {
-    try {
-      await store.dispatch(`request/${ActionTypes.REMOVE_REQUEST}`, id);
-    } catch (error) {
-      emit('error', error instanceof Error ? error.message : 'unknown');
+  }).then((value) => {
+    if (value) {
+      store.dispatch(`request/${ActionTypes.REMOVE_REQUEST}`, id);
     }
-  }
+  }).catch((error) => {
+    emit('error', error instanceof Error ? error.message : 'unknown');
+  });
 };
 </script>

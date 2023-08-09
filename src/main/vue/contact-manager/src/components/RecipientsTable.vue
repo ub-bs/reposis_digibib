@@ -40,14 +40,13 @@
         :disabled="editUUID !== undefined" @add="addRecipient" />
     </tbody>
   </table>
-  <ConfirmModal ref="confirmModal" />
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { getCurrentInstance, ref } from 'vue';
 import { useStore } from 'vuex';
 import { useI18n } from 'vue-i18n';
+import { BvModal } from 'bootstrap-vue';
 import AddRecipientRow from './AddRecipientRow.vue';
-import ConfirmModal from './ConfirmModal.vue';
 import RecipientRow from './RecipientRow.vue';
 import { ActionTypes } from '../store/request/action-types';
 import { Recipient, RequestState } from '../utils';
@@ -61,8 +60,9 @@ const props = defineProps({
 const store = useStore();
 const { t } = useI18n();
 const emit = defineEmits(['error', 'info', 'actionStarted']);
-const confirmModal = ref(null);
 const editUUID = ref();
+// eslint-disable-next-line
+const instance = (getCurrentInstance() as any);
 const startEdit = (uuid: string) => {
   editUUID.value = uuid;
 };
@@ -95,23 +95,22 @@ const updateRecipient = async (recipient: Recipient) => {
   }
 };
 const removeRecipient = async (recipientUUID: string) => {
-  const ok = await confirmModal.value.show({
+  const bvModal = instance.ctx._bv__modal as BvModal;
+  bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
+    mail: store.getters['request/getRecipientByUUID'](props.request.uuid, recipientUUID).mail,
+  }), {
     title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
-    message: t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
-      mail: store.getters['request/getRecipientByUUID'](props.request.uuid, recipientUUID).mail,
-    }),
-  });
-  if (ok) {
-    emit('actionStarted');
-    try {
-      await store.dispatch(`request/${ActionTypes.REMOVE_RECIPIENT}`, {
+  }).then((value) => {
+    if (value) {
+      emit('actionStarted');
+      store.dispatch(`request/${ActionTypes.REMOVE_RECIPIENT}`, {
         slug: props.request.uuid,
         recipientUUID,
       });
-    } catch (error) {
-      emit('error', (error instanceof Error ? error.message : 'unknown'));
     }
-  }
+  }).catch((error) => {
+    emit('error', (error instanceof Error ? error.message : 'unknown'));
+  });
 };
 const mailRecipient = async (recipientUUID: string) => {
   emit('actionStarted');
