@@ -36,6 +36,7 @@ import org.jdom2.Element;
 import org.mycore.common.MCRSession;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.MCRSystemUserInformation;
+import org.mycore.common.MCRUserInformation;
 import org.mycore.common.MCRTransactionHelper;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
@@ -70,14 +71,16 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         getProcessable().setProgress(0);
         MCRSessionMgr.unlock();
         final MCRSession session = MCRSessionMgr.getCurrentSession();
+        final MCRUserInformation userInformation = session.getUserInformation();
         session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
         try { // preventive, to prevent dying
             doWork();
         } catch (Exception e) {
             LOGGER.error("Job failed: ", e);
+        } finally {
+            session.setUserInformation(userInformation);
+            getProcessable().setProgress(100);
         }
-        session.close();
-        getProcessable().setProgress(100);
     }
 
     @Override

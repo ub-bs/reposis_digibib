@@ -19,5 +19,4 @@
         <servlet-name>MCRVueContactServlet</servlet-name>
         <url-pattern>/contact/*</url-pattern>
     </servlet-mapping>
-
 </web-fragment>
