@@ -18,7 +18,7 @@
       </div>
       <div class="row">
         <div class="col">
-          <OverviewTable @error="handleError" />
+          <overview-table />
         </div>
       </div>
       <div class="row">

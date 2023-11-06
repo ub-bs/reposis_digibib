@@ -3,7 +3,7 @@ import { JWT, fetchJWT } from '@/utils';
 import { useConfigStore } from './config-store';
 
 interface State {
-  accessToken: string | undefined
+  accessToken?: string
 }
 
 export const useAuthStore = defineStore('auth', {

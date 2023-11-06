@@ -10,16 +10,16 @@
     <thead>
       <tr>
         <th>
-          {{ $t('digibib.contact.frontend.manager.label.name') }}
+          {{ tc('label.name') }}
         </th>
         <th>
-          {{ $t('digibib.contact.frontend.manager.label.origin') }}
+          {{ tc('label.origin') }}
         </th>
         <th>
-          {{ $t('digibib.contact.frontend.manager.label.email') }}
+          {{ tc('label.email') }}
         </th>
         <th class="text-center">
-          {{ $t('digibib.contact.frontend.manager.label.forward') }}
+          {{ tc('label.forward') }}
         </th>
         <th>
         </th>
@@ -45,7 +45,7 @@ import {
 } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { BvModal } from 'bootstrap-vue';
-import { Recipient, RequestState } from '@/utils';
+import { getI18nKey, Recipient, RequestState } from '@/utils';
 import { useRequestStore } from '@/stores';
 import AddRecipientRow from './AddRecipientRow.vue';
 import RecipientRow from './RecipientRow.vue';
@@ -54,17 +54,8 @@ const instance: Component = getCurrentInstance();
 const store = useRequestStore();
 const emit = defineEmits(['error', 'info', 'actionStarted']);
 const { t } = useI18n();
-const recipients = computed(() => {
-  if (store.request) {
-    const result = [];
-    for (let i = 0; i < store.request.recipients.length; i += 1) {
-      result.push(store.request.recipients[i]);
-      result[i]._rowVariant = 'success';
-    }
-    return result;
-  }
-  return [];
-});
+const tc = (value: string, obj?) => t(getI18nKey(value), obj);
+const recipients = computed(() => ((store.request) ? store.request.recipients : []));
 const editUUID = ref();
 const startEdit = (uuid: string) => {
   editUUID.value = uuid;
@@ -92,10 +83,10 @@ const updateRecipient = async (recipient: Recipient) => {
 };
 const removeRecipient = async (recipientUUID: string) => {
   const bvModal = instance.ctx._bv__modal as BvModal;
-  const value = await bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
+  const value = await bvModal.msgBoxConfirm(tc('confirm.deleteRecipient.message', {
     mail: store.getRecipientById(recipientUUID).mail,
   }), {
-    title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
+    title: tc('confirm.deleteRecipient.title'),
   });
   if (value) {
     emit('actionStarted');

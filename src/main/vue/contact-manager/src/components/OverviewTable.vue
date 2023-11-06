@@ -1,7 +1,7 @@
 <template>
   <b-table :fields="fields" :items="requests" sort-icon-left responsive striped>
     <template #cell(objectID)="data">
-      <a :href="'receive/' + data.item.objectID" target="_blank">
+      <a :href="`${getWebApplicationBaseURL()}receive/${data.item.objectID}`" target="_blank">
         {{ data.item.objectID }}
       </a>
     </template>
@@ -28,55 +28,60 @@
 import { Component, computed, getCurrentInstance } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { BvModal, BTable } from 'bootstrap-vue';
-import { Request, RequestState } from '@/utils';
+import {
+  getI18nKey,
+  Request,
+  RequestState,
+  getWebApplicationBaseURL,
+} from '@/utils';
 import { useApplicationStore, useRequestStore } from '@/stores';
 import RequestModal from './RequestModal.vue';
 
-const emit = defineEmits(['error']);
 const instance: Component = getCurrentInstance();
 const store = useApplicationStore();
 const requestStore = useRequestStore();
 const { t } = useI18n();
+const tc = (value: string, obj?) => t(getI18nKey(value), obj);
 const requests = computed(() => store.requests);
 const fields = [
   {
     key: 'uuid',
     thClass: 'col-3 text-center',
     tdClass: 'col-3 text-center align-middle',
-    label: t('digibib.contact.frontend.manager.label.id'),
+    label: tc('label.id'),
   },
   {
     key: 'objectID',
     thClass: 'col-2 text-center',
     tdClass: 'col-2 text-center align-middle',
-    label: t('digibib.contact.frontend.manager.label.objectID'),
+    label: tc('label.objectID'),
   },
   {
     key: 'created',
     thClass: 'col-1 text-center',
     tdClass: 'col-1 text-center align-middle',
-    label: t('digibib.contact.frontend.manager.label.created'),
+    label: tc('label.created'),
     formatter: (value) => ((value) ? new Date(value).toLocaleDateString() : '-'),
   },
   {
     key: 'forwarded',
     thClass: 'col-1 text-center',
     tdClass: 'col-1 text-center align-middle',
-    label: t('digibib.contact.frontend.manager.label.forwarded'),
+    label: tc('label.forwarded'),
     formatter: (value) => ((value) ? new Date(value).toLocaleDateString() : '-'),
   },
   {
     key: 'state',
     thClass: 'col-1 text-center',
     tdClass: 'col-1 text-center align-middle',
-    label: t('digibib.contact.frontend.manager.label.state'),
+    label: tc('label.state'),
     formatter: (value) => ((value) ? RequestState.toString(value) : '-'),
   },
   {
     key: 'requester',
     thClass: 'col-3 text-center',
     tdClass: 'col-3 text-center align-middle',
-    label: t('digibib.contact.frontend.manager.label.requester'),
+    label: tc('label.requester'),
   },
   {
     key: 'edit',
@@ -91,16 +96,22 @@ const viewRequest = (request: Request) => {
 };
 const removeRequest = async (id: string) => {
   const bvModal = instance.ctx._bv__modal as BvModal;
-  const value = await bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.deleteRequest.message', {
+  const value = await bvModal.msgBoxConfirm(tc('confirm.deleteRequest.message', {
     requestID: id,
   }), {
-    title: t('digibib.contact.frontend.manager.confirm.deleteRequest.title'),
+    title: tc('confirm.deleteRequest.title'),
   });
   if (value) {
     try {
       await store.removeRequest(id);
+      bvModal.msgBoxOk(tc('info.deleteRequestSuccess'), {
+        title: tc('confirm.deleteRequest.title'),
+      });
     } catch (error) {
-      emit('error', error instanceof Error ? error.message : 'unknown');
+      bvModal.msgBoxOk(tc('error.deleteRequestFailed'), {
+        title: t('confirm.deleteRequest.title'),
+        okVariant: 'danger',
+      });
     }
   }
 };

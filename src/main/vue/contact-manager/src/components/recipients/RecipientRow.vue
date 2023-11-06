@@ -11,7 +11,7 @@
       <select v-if="isManualOrigin && editMode" class="form-control form-control-sm"
           v-model="recipientSave.origin" :class="v.origin.$error ? 'is-invalid' : ''">
         <option :value="Origin.Manual">
-          {{ $t('digibib.contact.frontend.manager.label.origin.manual') }}
+          {{ tc('label.origin.manual') }}
         </option>
       </select>
       <span v-else>
@@ -43,7 +43,7 @@ import { useRequestStore } from '@/stores';
 import useVuelidate from '@vuelidate/core';
 import { useI18n } from 'vue-i18n';
 import { required, email } from '@vuelidate/validators';
-import { Origin, RequestState } from '@/utils';
+import { getI18nKey, Origin } from '@/utils';
 import EditToolbar from './EditToolbar.vue';
 
 const props = defineProps({
@@ -68,12 +68,8 @@ const rules = computed(() => ({
   },
 }));
 const { t } = useI18n();
+const tc = (value: string, obj?) => t(getI18nKey(value), obj);
 const store = useRequestStore();
-const isProcessed = computed(() => (
-  store.request ? (store.request.state === RequestState.Processed
-    || store.request.state === RequestState.Sending_Failed) : false));
-const isSent = computed(() => (store.request ? (store.request.state === RequestState.Sent
-    || store.request.state === RequestState.Confirmed) : false));
 const v = useVuelidate(rules, props.recipient);
 const recipientSave = ref(JSON.parse(JSON.stringify(props.recipient)));
 const editMode = computed(() => props.editUUID === props.recipient.uuid);
@@ -93,17 +89,17 @@ const rowStyle = computed(() => {
 });
 const title = computed(() => {
   if (props.recipient.confirmed != null) {
-    return t('digibib.contact.frontend.manager.info.confirmed', {
+    return tc('info.confirmed', {
       date: new Date(props.recipient.confirmed).toLocaleString(),
     });
   }
   if (props.recipient.failed != null) {
-    return t('digibib.contact.frontend.manager.info.failed', {
+    return tc('info.failed', {
       date: new Date(props.recipient.failed).toLocaleString(),
     });
   }
   if (props.recipient.sent != null) {
-    return t('digibib.contact.frontend.manager.info.sent', {
+    return tc('info.sent', {
       date: new Date(props.recipient.sent).toLocaleString(),
     });
   }
@@ -114,7 +110,7 @@ const updateable = computed(() => {
   if (disabled.value) {
     return false;
   }
-  return isProcessed.value;
+  return store.isRequestProcessed;
 });
 const removeable = computed(() => {
   if (!updateable.value) {
@@ -126,7 +122,7 @@ const mailable = computed(() => {
   if (disabled.value) {
     return false;
   }
-  if (!isSent.value) {
+  if (!store.isRequestSent) {
     return false;
   }
   if (props.recipient.confirmed != null) {

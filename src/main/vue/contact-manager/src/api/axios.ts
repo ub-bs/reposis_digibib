@@ -42,7 +42,7 @@ instance.interceptors.response.use((response) => response, (error) => {
       }
     }
   }
-  return Promise.reject(new Error('fatal'));
+  return Promise.reject(new Error('unknown'));
 });
 
 export default instance;

@@ -32,9 +32,9 @@ export type Recipient = {
   origin: Origin;
   mail: string;
   enabled: boolean;
-  failed: Date;
-  sent: Date;
-  confirmed: Date;
+  failed?: Date;
+  sent?: Date;
+  confirmed?: Date;
 }
 
 export type Request = {
@@ -65,3 +65,5 @@ export const fetchJWT = async (webApplicationBaseURL: string): Promise<JWT> => (
 
 export const isWarmState = (state: RequestState): boolean => (RequestState.Processed === state
   || RequestState.Received === state);
+
+export const getI18nKey = (value: string) => `digibib.contact.frontend.manager.${value}`;

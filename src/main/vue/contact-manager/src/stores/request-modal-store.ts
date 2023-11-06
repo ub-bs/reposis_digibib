@@ -11,13 +11,12 @@ import { Request, RequestState, Recipient } from '@/utils';
 
 interface State {
   showModal: boolean
-  request: Request | undefined
+  request?: Request
 }
 
 export const useRequestStore = defineStore('request', {
   state: (): State => ({
     showModal: false,
-    request: undefined,
   }),
   getters: {
     getRecipientById(state) {
@@ -27,6 +26,41 @@ export const useRequestStore = defineStore('request', {
         }
         return undefined;
       };
+    },
+    isEditable: (state): boolean => {
+      if (state.request) {
+        if (state.request.state < RequestState.Sending) {
+          return true;
+        }
+        return state.request.state === RequestState.Sending_Failed;
+      }
+      return false;
+    },
+    isRequestProcessed: (state): boolean => {
+      if (state.request) {
+        return state.request.state === RequestState.Processed
+          || state.request.state === RequestState.Sending_Failed;
+      }
+      return false;
+    },
+    isRequestSent: (state): boolean => {
+      if (state.request) {
+        return state.request.state === RequestState.Sent
+          || state.request.state === RequestState.Confirmed;
+      }
+      return false;
+    },
+    isReadyToForward: (state): boolean => {
+      if (state.request) {
+        if (state.request.state === RequestState.Sending_Failed) {
+          return false;
+        }
+        if (state.request.state !== RequestState.Processed) {
+          return false;
+        }
+        return (state.request.recipients.filter((r) => r.enabled === true).length > 0);
+      }
+      return false;
     },
   },
   actions: {
@@ -39,8 +73,14 @@ export const useRequestStore = defineStore('request', {
     async forwardRequestToRecipient(id: string): Promise<void> {
       if (this.request) {
         await forwardRequestToRecipient(this.request.uuid, id);
+        const index = this.request.recipients.findIndex((r) => r.uuid === id);
+        if (index > -1) {
+          this.request.recipients[index].failed = undefined;
+          this.request.recipients[index].sent = new Date();
+        } else {
+          throw new Error();
+        }
       }
-      // TODO get recipient and reset sent and failed
     },
     async addRecipient(recipient: Recipient): Promise<void> {
       if (this.request) {
