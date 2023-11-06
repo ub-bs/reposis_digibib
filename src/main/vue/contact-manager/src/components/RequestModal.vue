@@ -1,5 +1,5 @@
 <template>
-  <b-modal id="request-modal" v-if="request !== undefined" :title="request.uuid" size="xl"
+  <b-modal id="request-modal" v-if="store.showModal" :title="request.uuid" size="xl"
     scrollable>
     <div class="container-fluid">
       <div v-if="errorCode" class="alert alert-danger" role="alert">
@@ -67,8 +67,7 @@
       <p>
         {{ $t('digibib.contact.frontend.manager.info.recipients') }}
       </p>
-      <recipients-table @action-started="resetInfoError" @error="handleError" @info="handleInfo"
-        :request="request" />
+      <recipients-table @action-started="resetInfoError" @error="handleError" @info="handleInfo" />
     </div>
     <template v-slot:modal-footer>
       <div class="btn-group">
@@ -81,23 +80,26 @@
   </b-modal>
 </template>
 <script setup lang="ts">
-import { computed, getCurrentInstance, ref } from 'vue';
-import { useStore } from 'vuex';
+import {
+  Component,
+  computed,
+  getCurrentInstance,
+  ref,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 import { BModal, BvModal } from 'bootstrap-vue';
-import RecipientsTable from './RecipientsTable.vue';
-import { ActionTypes } from '../store/request/action-types';
-import { RequestState } from '../utils';
+import { RequestState } from '@/utils';
+import { useRequestStore } from '@/stores/request-modal-store';
+import RecipientsTable from './recipients/RecipientsTable.vue';
 
-const store = useStore();
-const request = computed(() => store.state.request.modalData);
+const store = useRequestStore();
+const request = computed(() => store.request);
 const { t } = useI18n();
 const commentEditMode = ref(false);
 let commentSave = '';
 const errorCode = ref();
 const infoCode = ref();
-// eslint-disable-next-line
-const instance = (getCurrentInstance() as any);
+const instance: Component = getCurrentInstance();
 const forwardDisabled = computed(() => {
   if (request.value.state === RequestState.Sending_Failed) {
     return false;
@@ -136,10 +138,7 @@ const updateComment = async () => {
   errorCode.value = null;
   commentSave = request.value.comment;
   try {
-    await store.dispatch(`request/${ActionTypes.UPDATE_REQUEST}`, {
-      slug: request.value.uuid,
-      request: request.value,
-    });
+    await store.updateRequest(request.value.uuid, request.value);
   } catch (error) {
     handleError(error instanceof Error ? error.message : 'unknown');
   } finally {
@@ -149,16 +148,17 @@ const updateComment = async () => {
 const forwardRequest = async () => {
   if (request.value.recipients.filter((r) => r.enabled === true).length > 0) {
     const bvModal = instance.ctx._bv__modal as BvModal;
-    bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.message'), {
+    const value = await bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.message'), {
       title: t('digibib.contact.frontend.manager.confirm.forwardNoRecipient.title'),
-    }).then((value) => {
-      if (value) {
-        store.dispatch(`request/${ActionTypes.FORWARD_REQUEST}`, request.value.uuid);
-        handleInfo('forward');
-      }
-    }).catch((error) => {
-      handleError(error instanceof Error ? error.message : 'unknown');
     });
+    if (value) {
+      try {
+        await store.forwardRequest(request.value.uuid);
+        handleInfo('forward');
+      } catch (error) {
+        handleError(error instanceof Error ? error.message : 'unknown');
+      }
+    }
   }
 };
 </script>

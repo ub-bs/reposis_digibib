@@ -39,10 +39,11 @@
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue';
+import { useRequestStore } from '@/stores';
 import useVuelidate from '@vuelidate/core';
 import { useI18n } from 'vue-i18n';
 import { required, email } from '@vuelidate/validators';
-import { Origin } from '../utils';
+import { Origin, RequestState } from '@/utils';
 import EditToolbar from './EditToolbar.vue';
 
 const props = defineProps({
@@ -51,14 +52,6 @@ const props = defineProps({
     required: true,
   },
   editUUID: {
-  },
-  isProcessed: {
-    type: Boolean,
-    default: false,
-  },
-  isSent: {
-    type: Boolean,
-    default: false,
   },
 });
 const emit = defineEmits(['cancel', 'delete', 'edit', 'mail', 'update']);
@@ -75,6 +68,12 @@ const rules = computed(() => ({
   },
 }));
 const { t } = useI18n();
+const store = useRequestStore();
+const isProcessed = computed(() => (
+  store.request ? (store.request.state === RequestState.Processed
+    || store.request.state === RequestState.Sending_Failed) : false));
+const isSent = computed(() => (store.request ? (store.request.state === RequestState.Sent
+    || store.request.state === RequestState.Confirmed) : false));
 const v = useVuelidate(rules, props.recipient);
 const recipientSave = ref(JSON.parse(JSON.stringify(props.recipient)));
 const editMode = computed(() => props.editUUID === props.recipient.uuid);
@@ -115,7 +114,7 @@ const updateable = computed(() => {
   if (disabled.value) {
     return false;
   }
-  return props.isProcessed;
+  return isProcessed.value;
 });
 const removeable = computed(() => {
   if (!updateable.value) {
@@ -127,7 +126,7 @@ const mailable = computed(() => {
   if (disabled.value) {
     return false;
   }
-  if (!props.isSent) {
+  if (!isSent.value) {
     return false;
   }
   if (props.recipient.confirmed != null) {

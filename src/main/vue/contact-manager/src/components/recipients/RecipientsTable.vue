@@ -1,5 +1,5 @@
 <template>
-  <table class="table table-striped">
+  <table class="table table-striped" v-if="store.request">
     <colgroup>
       <col style="width: 40%">
       <col style="width: 5%">
@@ -26,43 +26,46 @@
       </tr>
     </thead>
     <tbody>
-      <template v-for="recipient in request.recipients" :key="recipient">
-        <RecipientRow :recipient="recipient" :editUUID="editUUID"
-          :isProcessed="request.state === RequestState.Processed
-          || request.state === RequestState.Sending_Failed"
-          :isSent="request.state === RequestState.Sent
-          || request.state === RequestState.Confirmed"
-          @delete="removeRecipient" @edit="startEdit" @update="updateRecipient"
-          @mail="mailRecipient" @cancel="cancelEdit" />
+      <template v-for="recipient in recipients" :key="recipient">
+        <RecipientRow :recipient="recipient" :editUUID="editUUID" @delete="removeRecipient"
+          @edit="startEdit" @update="updateRecipient" @mail="mailRecipient" @cancel="cancelEdit" />
       </template>
       <AddRecipientRow
-        v-if="request.state === RequestState.Processed"
+        v-if="store.request.state === RequestState.Processed"
         :disabled="editUUID !== undefined" @add="addRecipient" />
     </tbody>
   </table>
 </template>
 <script setup lang="ts">
-import { getCurrentInstance, ref } from 'vue';
-import { useStore } from 'vuex';
+import {
+  computed,
+  Component,
+  getCurrentInstance,
+  ref,
+} from 'vue';
 import { useI18n } from 'vue-i18n';
 import { BvModal } from 'bootstrap-vue';
+import { Recipient, RequestState } from '@/utils';
+import { useRequestStore } from '@/stores';
 import AddRecipientRow from './AddRecipientRow.vue';
 import RecipientRow from './RecipientRow.vue';
-import { ActionTypes } from '../store/request/action-types';
-import { Recipient, RequestState } from '../utils';
 
-const props = defineProps({
-  request: {
-    type: Object,
-    required: true,
-  },
-});
-const store = useStore();
-const { t } = useI18n();
+const instance: Component = getCurrentInstance();
+const store = useRequestStore();
 const emit = defineEmits(['error', 'info', 'actionStarted']);
+const { t } = useI18n();
+const recipients = computed(() => {
+  if (store.request) {
+    const result = [];
+    for (let i = 0; i < store.request.recipients.length; i += 1) {
+      result.push(store.request.recipients[i]);
+      result[i]._rowVariant = 'success';
+    }
+    return result;
+  }
+  return [];
+});
 const editUUID = ref();
-// eslint-disable-next-line
-const instance = (getCurrentInstance() as any);
 const startEdit = (uuid: string) => {
   editUUID.value = uuid;
 };
@@ -72,10 +75,7 @@ const cancelEdit = () => {
 const addRecipient = async (recipient: Recipient) => {
   emit('actionStarted');
   try {
-    await store.dispatch(`request/${ActionTypes.ADD_RECIPIENT}`, {
-      slug: props.request.uuid,
-      recipient,
-    });
+    await store.addRecipient(recipient);
   } catch (error) {
     emit('error', (error instanceof Error ? error.message : 'unknown'));
   }
@@ -83,11 +83,7 @@ const addRecipient = async (recipient: Recipient) => {
 const updateRecipient = async (recipient: Recipient) => {
   emit('actionStarted');
   try {
-    await store.dispatch(`request/${ActionTypes.UPDATE_RECIPIENT}`, {
-      slug: props.request.uuid,
-      recipientUUID: recipient.uuid,
-      recipient,
-    });
+    await store.updateRecipient(recipient.uuid, recipient);
   } catch (error) {
     emit('error', (error instanceof Error ? error.message : 'unknown'));
   } finally {
@@ -96,29 +92,24 @@ const updateRecipient = async (recipient: Recipient) => {
 };
 const removeRecipient = async (recipientUUID: string) => {
   const bvModal = instance.ctx._bv__modal as BvModal;
-  bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
-    mail: store.getters['request/getRecipientByUUID'](props.request.uuid, recipientUUID).mail,
+  const value = await bvModal.msgBoxConfirm(t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
+    mail: store.getRecipientById(recipientUUID).mail,
   }), {
     title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
-  }).then((value) => {
-    if (value) {
-      emit('actionStarted');
-      store.dispatch(`request/${ActionTypes.REMOVE_RECIPIENT}`, {
-        slug: props.request.uuid,
-        recipientUUID,
-      });
-    }
-  }).catch((error) => {
-    emit('error', (error instanceof Error ? error.message : 'unknown'));
   });
+  if (value) {
+    emit('actionStarted');
+    try {
+      await store.removeRecipient(recipientUUID);
+    } catch (error) {
+      emit('error', (error instanceof Error ? error.message : 'unknown'));
+    }
+  }
 };
 const mailRecipient = async (recipientUUID: string) => {
   emit('actionStarted');
   try {
-    await store.dispatch(`request/${ActionTypes.FORWARD_REQUEST_TO_RECIPIENT}`, {
-      slug: props.request.uuid,
-      recipientUUID,
-    });
+    await store.forwardRequestToRecipient(recipientUUID);
     emit('info', 'forwardRecipient');
   } catch (error) {
     emit('error', (error instanceof Error ? error.message : 'unknown'));

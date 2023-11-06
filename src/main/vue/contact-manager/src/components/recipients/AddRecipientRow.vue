@@ -38,7 +38,7 @@
 import { computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
-import { Origin } from '../utils';
+import { Origin } from '@/utils';
 
 defineProps({
   disabled: {

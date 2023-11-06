@@ -1,3 +1,9 @@
+declare global {
+ interface Window {
+   webApplicationBaseURL: string;
+ }
+}
+
 export enum Origin {
   Manual = 'MANUAL',
   Fallback = 'FALLBACK',
@@ -43,10 +49,19 @@ export type Request = {
   recipients: Recipient[];
 }
 
-export type ErrorResponse = {
-  errorCode: string;
+export type JWT = {
+  login_success: boolean;
+  access_token: string;
+  token_type: string;
 }
 
-export function isWarmState(state: RequestState): boolean {
-  return RequestState.Processed === state || RequestState.Received === state;
-}
+export const getWebApplicationBaseURL = (): string | undefined => window.webApplicationBaseURL;
+
+export const fetchI18n = async (webApplicationBaseURL: string) => (
+  await fetch(`${webApplicationBaseURL}rsc/locale/translate/digibib.contact.frontend.*`)).json();
+
+export const fetchJWT = async (webApplicationBaseURL: string): Promise<JWT> => (
+  await fetch(`${webApplicationBaseURL}rsc/jwt?`)).json();
+
+export const isWarmState = (state: RequestState): boolean => (RequestState.Processed === state
+  || RequestState.Received === state);

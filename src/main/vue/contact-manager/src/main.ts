@@ -2,29 +2,35 @@ import { createApp } from 'vue';
 import { createI18n } from 'vue-i18n';
 import { ModalPlugin, PaginationPlugin } from 'bootstrap-vue';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import axios from 'axios';
-import store from './store';
-import ContactManager from './App.vue';
+import { fetchI18n, getWebApplicationBaseURL } from '@/utils';
+import { useConfigStore } from '@/stores';
+import { createPinia } from 'pinia';
+import ContactManager from '@/App.vue';
 
-if (process.env.NODE_ENV === 'development') {
-  axios.defaults.baseURL = 'http://134.169.20.124/mir/';
-} else {
-  // eslint-disable-next-line
-  axios.defaults.baseURL = (window as any).webApplicationBaseURL;
-}
+const webApplicationBaseURL = getWebApplicationBaseURL() as string;
 
 (async () => {
   const app = createApp(ContactManager);
-  const i18nResponse = await axios.get('rsc/locale/translate/digibib.contact.frontend.*');
+  const data = await fetchI18n(webApplicationBaseURL);
   const i18n = createI18n({
     locale: '_',
     messages: {
-      _: i18nResponse.data,
+      _: data,
     },
   });
+  app.use(createPinia());
+  const configStore = useConfigStore();
+  configStore.webApplicationBaseURL = webApplicationBaseURL;
   app.use(i18n);
-  app.use(store);
   app.use(ModalPlugin);
   app.use(PaginationPlugin);
+  app.config.errorHandler = (err, instance, info) => {
+    // eslint-disable-next-line
+    console.error('Global error:', err);
+    // eslint-disable-next-line
+    console.log('Vue instance:', instance);
+    // eslint-disable-next-line
+    console.log('Error info:', info);
+  };
   app.mount('#app');
 })();
