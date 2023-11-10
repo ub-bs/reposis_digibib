@@ -102,18 +102,22 @@ public class CaptchaCageResource {
             this.verifiedToken = verifiedToken;
         }
 
+        @SuppressWarnings("unused")
         public boolean isVerified() {
             return verified;
         }
 
+        @SuppressWarnings("unused")
         public void setVerified(boolean verified) {
             this.verified = verified;
         }
 
+        @SuppressWarnings("unused")
         public String getVerifiedToken() {
             return verifiedToken;
         }
 
+        @SuppressWarnings("unused")
         public void setVerifiedToken(String verifiedToken) {
             this.verifiedToken = verifiedToken;
         }

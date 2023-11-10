@@ -49,7 +49,7 @@ public class ContactORCIDMailLookup implements ContactMailLookup {
         }
         final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);
         if (orcidUser != null) {
-            final Set<String> mails = new HashSet();
+            final Set<String> mails = new HashSet<String>();
             final Set<String> orcids = orcidUser.getORCIDs();
             for (String o : orcids) {
                 try {

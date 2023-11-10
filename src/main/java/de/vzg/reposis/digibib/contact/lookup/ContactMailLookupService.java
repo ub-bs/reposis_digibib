@@ -25,7 +25,6 @@ import java.util.stream.Collectors;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.util.NameWrapper;
 
 import org.apache.logging.log4j.Logger;
@@ -51,7 +50,7 @@ public class ContactMailLookupService {
      * @return a List of ContactRecipients
      */
     public static List<ContactRecipient> getRecipients(NameWrapper nameWrapper) {
-        final List<ContactRecipient> recipients = new ArrayList();
+        final List<ContactRecipient> recipients = new ArrayList<ContactRecipient>();
         for (ContactMailLookup lookup : LOOKUPS) {
             LOGGER.debug("Looking up {}...", lookup.getName());
             try {

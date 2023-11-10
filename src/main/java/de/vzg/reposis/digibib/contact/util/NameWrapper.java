@@ -52,7 +52,7 @@ public class NameWrapper {
                 if (nameParts.size() == 1 && nameParts.get(0).getAttribute("type") == null) {
                     return nameParts.get(0).getTextTrim();
                 }
-                final List<String> givenNames = new ArrayList();
+                final List<String> givenNames = new ArrayList<String>();
                 String familyName = null;
                 for (Element namePart : nameParts) {
                     switch(namePart.getAttributeValue("type")) {

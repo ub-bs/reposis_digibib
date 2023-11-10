@@ -8,6 +8,7 @@ lib/pi-tester.jar
 # eclipse
 .project
 .settings/
+.classpath
 
 #intellij
 *.iml

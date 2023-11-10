@@ -22,7 +22,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactService;
@@ -116,7 +115,7 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
                 } else {
-                    final List<ContactRecipient> recipients = new ArrayList();
+                    final List<ContactRecipient> recipients = new ArrayList<ContactRecipient>();
                     final List<Element> correspondingAuthors = getCorrespondingAuthors(objectID);
                     LOGGER.debug("Found {} corresponding authors", correspondingAuthors.size());
                     correspondingAuthors.forEach(c -> {
