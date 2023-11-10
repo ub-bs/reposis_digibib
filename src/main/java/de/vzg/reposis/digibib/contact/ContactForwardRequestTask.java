@@ -44,7 +44,8 @@ public class ContactForwardRequestTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
+    private static final String FORWARDING_CONFIRMATION_STYLESHEET
+        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
 
     /**
      * The contact request.

@@ -5,8 +5,8 @@ declare global {
 }
 
 export enum Origin {
-  Manual = 'MANUAL',
-  Fallback = 'FALLBACK',
+  Manual = 'manual',
+  Fallback = 'fallback',
 }
 
 export enum RequestState {

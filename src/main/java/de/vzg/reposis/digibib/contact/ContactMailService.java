@@ -84,26 +84,6 @@ public class ContactMailService {
     }
 
     /**
-     * This class bundles all properties to property object.
-     * 
-     * @return bundled properties
-     */
-    private static Properties getProperties() {
-        final Properties properties = new Properties();
-        properties.setProperty("mail.smtp.host", HOST);
-        properties.setProperty("mail.smtp.port", PORT);
-        properties.setProperty("mail.transport.protocol", PROTOCOL);
-        if ("enabled".equals(STARTTLS)) {
-            properties.setProperty("mail.smtp.starttls.enabled", "true");
-        } else if ("required".equals(STARTTLS)) {
-            properties.setProperty("mail.smtp.starttls.enabled", "true");
-            properties.setProperty("mail.smtp.starttls.required", "true");
-        }
-        properties.setProperty("mail.smtp.auth", "true");
-        return properties;
-    }
-
-    /**
      * Sends mail without headers.
      * 
      * @param mail the mail
@@ -142,5 +122,25 @@ public class ContactMailService {
         } catch (MessagingException e) {
             throw new ContactException("Cannot send mail", e);
         }
+    }
+
+    /**
+     * This class bundles all properties to property object.
+     * 
+     * @return bundled properties
+     */
+    private static Properties getProperties() {
+        final Properties properties = new Properties();
+        properties.setProperty("mail.smtp.host", HOST);
+        properties.setProperty("mail.smtp.port", PORT);
+        properties.setProperty("mail.transport.protocol", PROTOCOL);
+        if ("enabled".equals(STARTTLS)) {
+            properties.setProperty("mail.smtp.starttls.enabled", "true");
+        } else if ("required".equals(STARTTLS)) {
+            properties.setProperty("mail.smtp.starttls.enabled", "true");
+            properties.setProperty("mail.smtp.starttls.required", "true");
+        }
+        properties.setProperty("mail.smtp.auth", "true");
+        return properties;
     }
 }

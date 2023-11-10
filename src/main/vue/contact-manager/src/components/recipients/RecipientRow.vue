@@ -15,7 +15,7 @@
         </option>
       </select>
       <span v-else>
-        {{ recipient.origin }}
+        {{ tc(`label.origin.${recipient.origin}`) }}
       </span>
     </td>
     <td class="col-4">

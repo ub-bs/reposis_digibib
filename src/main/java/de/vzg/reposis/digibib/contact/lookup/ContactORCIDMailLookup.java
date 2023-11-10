@@ -71,7 +71,7 @@ public class ContactORCIDMailLookup implements ContactMailLookup {
 
     @Override
     public String getName() {
-        return "ORCID";
+        return "orcid";
     }
 
     private static Emails fetchMailsWithBestCredential(String orcid) {
