@@ -16,7 +16,7 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact;
+package de.vzg.reposis.digibib.contact.util;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -16,21 +16,30 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.model;
+package de.vzg.reposis.digibib.contact.lookup;
+
+import java.util.Set;
+
+import de.vzg.reposis.digibib.contact.util.NameWrapper;
 
 /**
- * Definies default origins.
+ * Provides mail look up.
  */
-public class ContactRecipientOrigin {
+public interface ContactMailLookup {
 
     /**
-     * Defines fallback origin.
+     * Gets mails for NameWrapper.
+     * 
+     * @param nameWrapper the NameWrapper
+     * @return the mails as Set
+     * @throws ContactException if cannot get mails
      */
-    public static final String FALLBACK = "fallback";
+    Set<String> getMails(NameWrapper nameWrapper);
 
     /**
-     * Defines manual origin.
+     * Get name of service.
+     * 
+     * @return the name
      */
-    public static final String MANUAL = "manual";
-
+    String getName();
 }

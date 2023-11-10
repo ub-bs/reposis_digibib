@@ -16,7 +16,7 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact;
+package de.vzg.reposis.digibib.contact.cronjob;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -33,6 +33,9 @@ import jakarta.mail.internet.MimeMessage;
 import jakarta.mail.search.FlagTerm;
 
 import com.sun.mail.dsn.MultipartReport;
+
+import de.vzg.reposis.digibib.contact.ContactConstants;
+import de.vzg.reposis.digibib.contact.ContactService;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;

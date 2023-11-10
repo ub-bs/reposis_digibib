@@ -16,12 +16,14 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact;
+package de.vzg.reposis.digibib.contact.lookup;
 
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import de.vzg.reposis.digibib.contact.util.NameWrapper;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -33,20 +35,18 @@ import org.orcid.jaxb.model.v3.release.record.Emails;
 import org.orcid.jaxb.model.v3.release.record.Email;
 
 /**
- * Provides ORCID Service.
+ * Provides ORCID lookup.
  */
-public class ContactORCIDService {
+public class ContactORCIDMailLookup implements ContactMailLookup {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /**
-     * Fetches mail for given ORCID iD.
-     * 
-     * @param orcid the ORCID iD
-     * @return Set of mails
-     * @throws ContactException if fetch fails
-     */
-    public static Set<String> getMails(String orcid) {
+    @Override
+    public Set<String> getMails(NameWrapper nameWrapper) {
+        final String orcid = nameWrapper.getORCID();
+        if (orcid == null) {
+            return Collections.emptySet();
+        }
         final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);
         if (orcidUser != null) {
             final Set<String> mails = new HashSet();
@@ -67,6 +67,11 @@ public class ContactORCIDService {
                 return Collections.emptySet();
             }
         }
+    }
+
+    @Override
+    public String getName() {
+        return "ORCID";
     }
 
     private static Emails fetchMailsWithBestCredential(String orcid) {

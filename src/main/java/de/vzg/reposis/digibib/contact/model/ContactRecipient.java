@@ -64,9 +64,9 @@ public class ContactRecipient {
     private String name;
 
     /**
-     * Origin of recipient date.
+     * Origin of recipient.
      */
-    private ContactRecipientOrigin origin;
+    private String origin;
 
     /**
      * Recipient mail.
@@ -107,14 +107,14 @@ public class ContactRecipient {
     public ContactRecipient() {
     }
 
-    public ContactRecipient(String name, ContactRecipientOrigin origin, String mail) {
+    public ContactRecipient(String name, String origin, String mail) {
         this.name = name;
         this.origin = origin;
         this.mail = mail;
         enabled = true;
     }
 
-    public ContactRecipient(ContactRecipientOrigin origin, String mail) {
+    public ContactRecipient(String origin, String mail) {
         this.origin = origin;
         this.mail = mail;
         enabled = true;
@@ -146,13 +146,12 @@ public class ContactRecipient {
         this.name = name;
     }
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "type", nullable = false)
-    public ContactRecipientOrigin getOrigin() {
+    @Column(name = "origin", nullable = false)
+    public String getOrigin() {
         return origin;
     }
 
-    public void setOrigin(ContactRecipientOrigin origin) {
+    public void setOrigin(String origin) {
         this.origin = origin;
     }
 
@@ -231,7 +230,9 @@ public class ContactRecipient {
     public int hashCode() {
         int hash = 7;
         hash = 31 * hash + mail.hashCode();
-        hash = 31 * hash + request.hashCode();
+        if (request != null) {
+            hash = 31 * hash + request.hashCode();
+        }
         return hash;
     }
 

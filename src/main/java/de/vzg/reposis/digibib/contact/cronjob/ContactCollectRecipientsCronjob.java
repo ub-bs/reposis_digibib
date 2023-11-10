@@ -16,7 +16,7 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact;
+package de.vzg.reposis.digibib.contact.cronjob;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,11 +24,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import de.vzg.reposis.digibib.contact.ContactConstants;
+import de.vzg.reposis.digibib.contact.ContactService;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
+import de.vzg.reposis.digibib.contact.lookup.ContactMailLookupService;
 import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestState;
+import de.vzg.reposis.digibib.contact.util.NameWrapper;
 
 import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
@@ -113,22 +117,12 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
                     addRecipients(r, cachedRecipients);
                 } else {
                     final List<ContactRecipient> recipients = new ArrayList();
-                    try {
-                        final List<Element> correspondingAuthors = getCorrespondingAuthors(objectID);
-                        LOGGER.debug("Found {} corresponding authors", correspondingAuthors.size());
-                        for (Element correspondingAuthor : correspondingAuthors) {
-                            final NameWrapper wrapper = new NameWrapper(correspondingAuthor);
-                            if (wrapper.hasORCID()) {
-                                LOGGER.debug("Found linked ORCID iD: {}", wrapper.getORCID());
-                                final String name = wrapper.getName();
-                                final Set<String> mails = ContactORCIDService.getMails(wrapper.getORCID());
-                                LOGGER.debug("Found {} mails", mails.size());
-                                mails.forEach(m -> recipients.add(new ContactRecipient(name, ContactRecipientOrigin.ORCID, m)));
-                            }
-                        }
-                    } catch (Exception e) {
-                        LOGGER.info(e);
-                    }
+                    final List<Element> correspondingAuthors = getCorrespondingAuthors(objectID);
+                    LOGGER.debug("Found {} corresponding authors", correspondingAuthors.size());
+                    correspondingAuthors.forEach(c -> {
+                        // TODO unique mails or deactive duplicates default
+                        recipients.addAll(ContactMailLookupService.getRecipients(new NameWrapper(c)));
+                    });
                     if (recipients.isEmpty()) {
                         addFallbackRecipient(recipients);
                     }

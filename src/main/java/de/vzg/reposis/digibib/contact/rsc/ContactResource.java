@@ -33,8 +33,8 @@ import jakarta.ws.rs.core.Response;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactMailService;
 import de.vzg.reposis.digibib.contact.ContactService;
-import de.vzg.reposis.digibib.contact.ContactUtils;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.util.ContactUtils;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 
 import io.swagger.v3.oas.annotations.Operation;

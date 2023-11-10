@@ -24,6 +24,7 @@ import java.util.Map;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.util.ContactUtils;
 import org.jdom2.Element;
 import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.config.MCRConfiguration2;
