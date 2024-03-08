@@ -25,7 +25,7 @@ public class ValidationUtils {
 
     /**
      * Validates an ORCID
-     * 
+     *
      * @param orcid orcid
      * @return true if orcid is valid
      */
@@ -43,7 +43,7 @@ public class ValidationUtils {
 
     /**
      * Generates check digit as per ISO 7064 11,2.
-     * 
+     *
      * @param baseDigits base digits
      * @return check digit
      */

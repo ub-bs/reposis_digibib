@@ -20,18 +20,17 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.Optional;
 
+import org.mycore.restapi.v2.MCRErrorResponse;
+
+import de.vzg.reposis.digibib.contact.exception.ContactException;
+import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.Request;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
-
-import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
-import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
-
-import org.mycore.restapi.v2.MCRErrorResponse;
 
 @Provider
 public class ContactExceptionMapper implements ExceptionMapper<ContactException> {

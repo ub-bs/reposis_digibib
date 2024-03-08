@@ -16,22 +16,23 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.dao;
+package de.vzg.reposis.digibib.contact.persistence;
 
+import java.util.Optional;
 import java.util.UUID;
 
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import de.vzg.reposis.digibib.contact.persistence.model.ContactRecipientData;
 
 /**
  * This interfaces defindes methods for a recipient dao.
  */
-public interface ContactRecipientDAO extends ContactBaseDAO<ContactRecipient> {
+public interface ContactRecipientRepository extends ContactBaseRepository<ContactRecipientData> {
 
     /**
      * Returns a recipient by given uuid.
-     * 
+     *
      * @param uuid the uuid
      * @return the recipient or null
      */
-    ContactRecipient findByUUID(UUID uuid);
+    Optional<ContactRecipientData> findByUUID(UUID uuid);
 }

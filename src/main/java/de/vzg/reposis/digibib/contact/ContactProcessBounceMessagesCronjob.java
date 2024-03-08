@@ -19,29 +19,31 @@
 package de.vzg.reposis.digibib.contact;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
 
-import jakarta.mail.Address;
-import jakarta.mail.Flags;
-import jakarta.mail.Folder;
-import jakarta.mail.Message;
-import jakarta.mail.MessagingException;
-import jakarta.mail.NoSuchProviderException;
-import jakarta.mail.Session;
-import jakarta.mail.Store;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.search.FlagTerm;
-
-import com.sun.mail.dsn.MultipartReport;
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.processing.MCRProcessableStatus;
 import org.mycore.mcr.cronjob.MCRCronjob;
 import org.mycore.util.concurrent.MCRFixedUserCallable;
+
+import com.sun.mail.dsn.MultipartReport;
+
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import jakarta.mail.Address;
+import jakarta.mail.Flags;
+import jakarta.mail.Folder;
+import jakarta.mail.Message;
+import jakarta.mail.MessagingException;
+import jakarta.mail.Session;
+import jakarta.mail.Store;
+import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.search.FlagTerm;
 
 /**
  * This class implements a cronjob that proccess bounces mails.
@@ -52,18 +54,20 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
 
     private static final String HOST = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Host");
 
-    private static final String USER
-        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
+    private static final String USER = MCRConfiguration2
+        .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.User");
 
-    private static final String PASSWORD
-        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
+    private static final String PASSWORD = MCRConfiguration2
+        .getStringOrThrow(ContactConstants.CONF_PREFIX + "Mail.Auth.Password");
 
     private static final String REPORT_MIMETYPE = "multipart/report";
 
-    /**
-     * Mail inbox.
-     */
     private Folder inbox = null;
+
+    @Override
+    public String getDescription() {
+        return "Processes bounce messages.";
+    }
 
     @Override
     public void runJob() {
@@ -80,40 +84,10 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
             LOGGER.debug("Found {} unread messages.", unreadMessages.length);
             for (Message message : unreadMessages) {
                 if (message instanceof MimeMessage) {
-                    final MimeMessage mime = (MimeMessage) message;
-                    if (mime.isMimeType(REPORT_MIMETYPE)) {
-                        try {
-                            final MultipartReport dsn = (MultipartReport) mime.getContent();
-                            final MimeMessage m = dsn.getReturnedMessage();
-                            if (m != null) {
-                                final String requestId = m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null);
-                                if (requestId != null) {
-                                    final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
-                                    if (recipients != null && recipients.length == 1) {
-                                        try {
-                                            new MCRFixedUserCallable<>(() -> {
-                                                ContactService.getInstance().setRecipientFailed(
-                                                    UUID.fromString(requestId), recipients[0].toString(), true);
-                                                return null;
-                                            }, MCRSystemUserInformation.getJanitorInstance()).call();
-                                            flagMessageAsSeen(message);
-                                        } catch (MessagingException e) {
-                                            LOGGER.error(e);
-                                        } catch (Exception e) {
-                                            LOGGER.error(e);
-                                        }
-                                    }
-                                }
-                            }
-                        } catch (IOException e) {
-                            LOGGER.error(e);
-                        }
-                    }
+                    processMessage(message);
                 }
             }
-        } catch (NoSuchProviderException e) {
-            LOGGER.error(e);
-        } catch (MessagingException e) {
+        } catch (IOException | MessagingException e) {
             LOGGER.error(e);
         } finally {
             try {
@@ -130,27 +104,45 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
         getProcessable().setProgress(100);
     }
 
-    @Override
-    public String getDescription() {
-        return "Processes bounce messages.";
+    private void processMessage(Message message) throws MessagingException, IOException {
+        final MimeMessage mime = (MimeMessage) message;
+        if (mime.isMimeType(REPORT_MIMETYPE)) {
+            final MultipartReport dsn = (MultipartReport) mime.getContent();
+            final MimeMessage m = dsn.getReturnedMessage();
+            if (m != null) {
+                final Optional<UUID> requestId = Optional
+                    .ofNullable(m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null))
+                    .map(UUID::fromString);
+                if (requestId.isPresent()) {
+                    final Address[] recipients = m.getRecipients(Message.RecipientType.TO);
+                    if (recipients != null && recipients.length == 1) {
+                        try {
+                            new MCRFixedUserCallable<>(() -> {
+                                final ContactRecipient recipient = ContactServiceImpl.getInstance()
+                                    .getRecipient(requestId.get());
+                                recipient.setFailed(new Date());
+                                ContactServiceImpl.getInstance().updateRecipient(requestId.get(),
+                                    recipient);
+                                return null;
+                            }, MCRSystemUserInformation.getJanitorInstance()).call();
+                            flagMessageAsSeen(message);
+                        } catch (MessagingException e) {
+                            LOGGER.error(e);
+                        } catch (Exception e) {
+                            LOGGER.error(e);
+                        }
+                    }
+                }
+            }
+
+        }
+
     }
 
-    /**
-     * Flags a message instance as seen.
-     * 
-     * @param message the message instance
-     * @throws MessagingException if flagging failed
-     */
     private void flagMessageAsSeen(Message message) throws MessagingException {
         message.setFlag(Flags.Flag.SEEN, true);
     }
 
-    /**
-     * Returns all unreaded messages.
-     * 
-     * @return the unreaded messages as array
-     * @throws MessagingException if inbox cannot be readed
-     */
     private Message[] getUnreadMessages() throws MessagingException {
         return inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false));
     }

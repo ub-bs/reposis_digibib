@@ -21,19 +21,18 @@ package de.vzg.reposis.digibib.captcha.cage;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-
-import de.vzg.reposis.digibib.captcha.CaptchaService;
-
 import org.mycore.common.MCRException;
 import org.mycore.crypt.MCRCipher;
 import org.mycore.crypt.MCRCipherManager;
 import org.mycore.crypt.MCRCryptKeyFileNotFoundException;
 import org.mycore.crypt.MCRCryptKeyNoPermissionException;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.cache.Cache;
+import com.google.common.cache.CacheBuilder;
+
+import de.vzg.reposis.digibib.captcha.CaptchaService;
 
 /**
  * This class implements a captcha service and uses Cage.
@@ -55,6 +54,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
      */
     private final static String CIPHER_NAME = "captcha";
 
+    // TODO use MCRCache
     /**
      * Cache that holds all created tokens.
      */
@@ -70,7 +70,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Returns singleton instance of captcha service
-     * 
+     *
      * @return captcha service
      */
     public static CaptchaCageServiceImpl getInstance() {
@@ -96,7 +96,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Validates token against token lifetime.
-     * 
+     *
      * @param token the token
      * @return true if token is younger than max lifetime
      */
@@ -106,7 +106,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Uses secret to create an encrypted token.
-     * 
+     *
      * @param secret the token secret
      * @return the token
      * @throws MCRException if encryption fails
@@ -122,7 +122,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Encrypts a token.
-     * 
+     *
      * @param token the token
      * @return the encrypted token
      * @throws JsonProcessingException if token cannot be parsed to string
@@ -140,7 +140,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
     /**
      * Decrypts a token.
-     * 
+     *
      * @param encodedToken the encrypted token
      * @return the token
      * @throws JsonProcessingException if encoded token cannot be parsed to token
@@ -187,7 +187,7 @@ public class CaptchaCageServiceImpl implements CaptchaService {
 
         Token(String secret) {
             this.secret = secret;
-            this.timestamp = new Date();
+            timestamp = new Date();
         }
 
         public String getSecret() {
@@ -215,10 +215,10 @@ public class CaptchaCageServiceImpl implements CaptchaService {
                 return false;
             }
             final Token other = (Token) obj;
-            if ((this.secret == null) ? (other.secret != null) : !this.secret.equals(other.secret)) {
+            if ((secret == null) ? (other.secret != null) : !secret.equals(other.secret)) {
                 return false;
             }
-            if ((this.timestamp == null) ? (other.timestamp != null) : !this.timestamp.equals(other.timestamp)) {
+            if ((timestamp == null) ? (other.timestamp != null) : !timestamp.equals(other.timestamp)) {
                 return false;
             }
             return true;

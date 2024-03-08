@@ -16,22 +16,23 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.dao;
+package de.vzg.reposis.digibib.contact.persistence;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
-
 import org.junit.Test;
 import org.mycore.common.MCRJPATestCase;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-public class ContactRequestDAOImplTest extends MCRJPATestCase {
+import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
+
+public class ContactRequestRepositoryImplTest extends MCRJPATestCase {
 
     private final String OBJECT_ID = "mcr_test_00000001";
 
@@ -44,23 +45,22 @@ public class ContactRequestDAOImplTest extends MCRJPATestCase {
 
     @Test
     public void testFindByUUID() {
-        final ContactRequestDAO dao = new ContactRequestDAOImpl();
-        ContactRequest request = new ContactRequest(MCRObjectID.getInstance(OBJECT_ID), "", "", "");
+        final ContactRequestRepository dao = new ContactRequestRepositoryImpl();
+        ContactRequestData request = new ContactRequestData(MCRObjectID.getInstance(OBJECT_ID), "", "", "");
         dao.insert(request);
-        final List<ContactRequest> requests = List.copyOf(dao.findAll());
+        final List<ContactRequestData> requests = List.copyOf(dao.findAll());
         request = requests.get(0);
         final UUID uuid = request.getUUID();
         assertNotNull(uuid);
-        request = dao.findByUUID(uuid);
-        assertNotNull(request);
+        assertTrue(dao.findByUUID(uuid).isPresent());
     }
 
     @Test
     public void testInsert() {
-        final ContactRequestDAO dao = new ContactRequestDAOImpl();
-        ContactRequest request = new ContactRequest(MCRObjectID.getInstance(OBJECT_ID), "", "", "");
+        final ContactRequestRepository dao = new ContactRequestRepositoryImpl();
+        ContactRequestData request = new ContactRequestData(MCRObjectID.getInstance(OBJECT_ID), "", "", "");
         dao.insert(request);
-        final List<ContactRequest> requests = List.copyOf(dao.findAll());
+        final List<ContactRequestData> requests = List.copyOf(dao.findAll());
         assertEquals(1, requests.size());
     }
 }

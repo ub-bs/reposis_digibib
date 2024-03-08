@@ -24,23 +24,22 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.orcid2.MCRORCIDUtils;
-import org.mycore.orcid2.client.MCRORCIDClientFactory;
 import org.mycore.orcid2.client.MCRORCIDCredential;
-import org.mycore.orcid2.v3.client.MCRORCIDClientHelper;
-import org.mycore.orcid2.v3.client.MCRORCIDSectionImpl;
 import org.mycore.orcid2.user.MCRORCIDUser;
 import org.mycore.orcid2.user.MCRORCIDUserUtils;
-import org.orcid.jaxb.model.v3.release.record.Emails;
+import org.mycore.orcid2.v3.client.MCRORCIDClientHelper;
+import org.mycore.orcid2.v3.client.MCRORCIDSectionImpl;
 import org.orcid.jaxb.model.v3.release.record.Email;
+import org.orcid.jaxb.model.v3.release.record.Emails;
+
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 
 /**
  * Task that collects recipients for object id.
@@ -49,9 +48,6 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    /**
-     * The object id.
-     */
     private final MCRObjectID objectID;
 
     public ContactCollectRecipientsTask(MCRObjectID objectID) {
@@ -64,17 +60,14 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
     }
 
     private List<ContactRecipient> collectRecipients() {
-        final List<ContactRecipient> recipients = new ArrayList();
+        final List<ContactRecipient> recipients = new ArrayList<ContactRecipient>();
         addOrcidRecipients(recipients);
         return recipients;
     }
 
-    /**
-     * Collect recipients from orcid.
-     */
     private void addOrcidRecipients(List<ContactRecipient> recipients) {
         final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
-        final List<String> orcids = new ArrayList(MCRORCIDUtils.getORCIDs(object));
+        final List<String> orcids = new ArrayList<String>(MCRORCIDUtils.getORCIDs(object));
         for (String orcid : orcids) {
             final Set<String> mails = new HashSet<String>();
             final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);
@@ -104,7 +97,8 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
                     LOGGER.warn(e);
                 }
             }
-            final String name = orcidUser.getUser().getRealName() != null ? orcidUser.getUser().getRealName() : orcidUser.getUser().getUserName();
+            final String name = orcidUser.getUser().getRealName() != null ? orcidUser.getUser().getRealName()
+                : orcidUser.getUser().getUserName();
             mails.stream()
                 .map(m -> new ContactRecipient(name, ContactRecipientOrigin.ORCID, m))
                 .forEach(r -> {
@@ -113,15 +107,17 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
         }
     }
 
-    private List<String> fetchMailsFromPublicAPI(String orcid) {
-        return extractMails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid, MCRORCIDSectionImpl.EMAIL, Emails.class));
+    private List<String> extractMails(Emails mails) {
+        return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
     }
 
     private List<String> fetchMailsFromMemberAPI(String orcid, MCRORCIDCredential credential) {
-        return extractMails(MCRORCIDClientHelper.getClientFactory().createUserClient(orcid, credential).fetch(MCRORCIDSectionImpl.EMAIL, Emails.class));
+        return extractMails(MCRORCIDClientHelper.getClientFactory().createUserClient(orcid, credential)
+            .fetch(MCRORCIDSectionImpl.EMAIL, Emails.class));
     }
 
-    private List<String> extractMails(Emails mails) {
-        return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
+    private List<String> fetchMailsFromPublicAPI(String orcid) {
+        return extractMails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid,
+            MCRORCIDSectionImpl.EMAIL, Emails.class));
     }
 }

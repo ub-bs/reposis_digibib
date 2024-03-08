@@ -69,7 +69,9 @@ import java.util.stream.Collectors;
  */
 public class MCRVueRootServlet extends MCRContentServlet {
 
-    @Override
+    private static final long serialVersionUID = 1L;
+
+	@Override
     public MCRContent getContent(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String pathInfo = req.getPathInfo();
         String indexHtmlPath = req.getServletPath() + "/index.html";

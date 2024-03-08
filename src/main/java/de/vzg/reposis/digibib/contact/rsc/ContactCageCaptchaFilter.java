@@ -18,11 +18,10 @@
 
 package de.vzg.reposis.digibib.contact.rsc;
 
+import de.vzg.reposis.digibib.captcha.cage.CaptchaCageServiceImpl;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.ext.Provider;
-
-import de.vzg.reposis.digibib.captcha.cage.CaptchaCageServiceImpl;
 
 @Provider
 @ContactCheckCageCaptcha

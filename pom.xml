@@ -25,7 +25,6 @@
   </parent>
 
   <artifactId>reposis_digibib</artifactId>
-  <version>2022.06.3-SNAPSHOT</version>
   <properties>
     <MCR.AppName>digibib</MCR.AppName>
     <!-- we can use single files from main version -->
@@ -254,7 +253,6 @@
     <dependency>
       <groupId>com.github.jsonld-java</groupId>
       <artifactId>jsonld-java</artifactId>
-      <version>0.13.4</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
@@ -394,6 +392,11 @@
       <groupId>org.mycore</groupId>
       <artifactId>mycore-user2</artifactId>
     </dependency>
+    <dependency>
+    <groupId>org.orcid</groupId>
+      <artifactId>orcid-model</artifactId>
+      <version>3.0.4</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

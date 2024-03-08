@@ -16,48 +16,49 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.dao;
+package de.vzg.reposis.digibib.contact.persistence;
 
 import java.util.Collection;
+import java.util.Optional;
 
 /**
  * Generic intefaces which defines dao methods for an entity.
  */
-public interface ContactBaseDAO<T> {
+public interface ContactBaseRepository<T> {
 
     /**
      * Returns all entities.
-     * 
+     *
      * @return collection of entity
      */
     Collection<T> findAll();
 
     /**
      * Returns entity by id.
-     * 
+     *
      * @param id internal id
      * @return the entity or null
      */
-    T findByID(long id);
+    Optional<T> findByID(long id);
 
     /**
      * Inserts entity.
-     * 
+     *
      * @param object the entity
      */
     void insert(T object);
 
     /**
-     * Updates an entity.
-     * 
-     * @param object the entity
-     */
-    void update(T object);
-
-    /**
      * Removes an entity.
-     * 
+     *
      * @param object the entity
      */
     void remove(T object);
+
+    /**
+     * Updates an entity.
+     *
+     * @param object the entity
+     */
+    void save(T object);
 }

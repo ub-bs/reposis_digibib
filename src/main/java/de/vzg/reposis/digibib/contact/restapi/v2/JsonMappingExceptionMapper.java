@@ -18,15 +18,16 @@
 
 package de.vzg.reposis.digibib.contact.restapi.v2;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
+
 import jakarta.annotation.Priority;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-
 @Provider
-@Priority(1) // to prevent jersey shadowing
+// prevent jersey shadowing
+@Priority(1)
 public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingException> {
 
     @Override

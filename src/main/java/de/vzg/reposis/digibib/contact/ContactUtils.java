@@ -21,13 +21,14 @@ package de.vzg.reposis.digibib.contact;
 import java.io.IOException;
 import java.util.Map;
 
-import de.vzg.reposis.digibib.contact.exception.ContactException;
 import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.mycore.common.content.MCRJDOMContent;
 import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
 import org.mycore.common.xsl.MCRParameterCollector;
 import org.xml.sax.SAXException;
+
+import de.vzg.reposis.digibib.contact.exception.ContactException;
 
 /**
  * This class implements common ulitity methods.
@@ -37,7 +38,7 @@ public class ContactUtils {
     /**
      * This method transforms a given document with a given stylesheet name and
      * parameters.
-     * 
+     *
      * @param input      the document
      * @param stylesheet the stylesheet name
      * @param parameters a map of parameters

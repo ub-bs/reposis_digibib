@@ -18,25 +18,21 @@
 
 package de.vzg.reposis.digibib.contact;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.jdom2.Element;
+import org.mycore.common.MCRMailer.EMail;
+import org.mycore.common.config.MCRConfiguration2;
 
 import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import org.jdom2.Element;
-import org.mycore.common.MCRException;
-import org.mycore.common.MCRMailer.EMail;
-import org.mycore.common.config.MCRConfiguration2;
 
 public class ContactForwardRequestHelper {
 
-    /**
-     * Name of stylesheet to transform mail.
-     */
-    private static final String MAIL_STYLESHEET
-        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "RequestMail.Stylesheet");
+    private static final String MAIL_STYLESHEET = MCRConfiguration2
+        .getStringOrThrow(ContactConstants.CONF_PREFIX + "RequestMail.Stylesheet");
 
     /**
      * Creates Email for recipient and sends it.
@@ -55,13 +51,6 @@ public class ContactForwardRequestHelper {
         ContactMailService.sendMail(mail, recipient.getMail(), headers);
     }
 
-    /**
-     * Creates mail for recipient with given properties.
-     * 
-     * @param recipient the recipient
-     * @return the mail
-     * @throws ContactException if mail transformation fails
-     */
     private static EMail createMail(ContactRecipient recipient) {
         final ContactRequest r = recipient.getRequest();
         final EMail baseMail = new EMail();

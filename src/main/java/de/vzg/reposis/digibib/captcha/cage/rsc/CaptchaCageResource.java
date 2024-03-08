@@ -93,7 +93,7 @@ public class CaptchaCageResource {
         resp.setDateHeader("Expires", time);
     }
 
-    private static class TokenResponse {
+    static class TokenResponse {
 
         private boolean verified;
 

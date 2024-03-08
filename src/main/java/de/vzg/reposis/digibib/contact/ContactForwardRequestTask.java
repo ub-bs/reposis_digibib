@@ -22,12 +22,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.model.ContactRequestState;
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom2.Element;
 import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.MCRSession;
@@ -36,6 +32,10 @@ import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.MCRTransactionHelper;
 import org.mycore.common.config.MCRConfiguration2;
 
+import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.model.ContactRequestState;
+
 /**
  * This task forwards a contact request to all recipients.
  */
@@ -43,11 +43,9 @@ public class ContactForwardRequestTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
+    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2
+        .getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
 
-    /**
-     * The contact request.
-     */
     private final ContactRequest request;
 
     public ContactForwardRequestTask(ContactRequest request) {
@@ -56,22 +54,22 @@ public class ContactForwardRequestTask implements Runnable {
 
     @Override
     public void run() {
-        LOGGER.info("Sending contact request: {}", request.getId());
+        LOGGER.info("Sending contact request: {}", request.getUUID());
         MCRSessionMgr.unlock();
         final MCRSession session = MCRSessionMgr.getCurrentSession();
         session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
         try {
             MCRTransactionHelper.beginTransaction();
             for (ContactRecipient recipient : request.getRecipients().stream()
-                    .filter(r -> r.isEnabled() && r.getSent() == null).toList()) {
+                .filter(r -> r.isEnabled() && r.getSent() == null).toList()) {
                 try {
                     ContactForwardRequestHelper.sendMail(recipient);
                     recipient.setFailed(null);
-                } catch (Exception e){
+                } catch (Exception e) {
                     recipient.setFailed(new Date());
                 } finally {
                     recipient.setSent(new Date());
-                    ContactService.getInstance().updateRecipient(recipient);
+                    ContactServiceImpl.getInstance().updateRecipient(request.getUUID(), recipient);
                 }
             }
             request.setState(ContactRequestState.SENT);
@@ -86,7 +84,7 @@ public class ContactForwardRequestTask implements Runnable {
             request.setState(ContactRequestState.SENDING_FAILED);
         } finally {
             try {
-                ContactService.getInstance().updateRequest(request);
+                ContactServiceImpl.getInstance().updateRequest(request);
                 MCRTransactionHelper.commitTransaction();
             } catch (Exception e) {
                 LOGGER.error(e);
@@ -105,7 +103,8 @@ public class ContactForwardRequestTask implements Runnable {
         final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", request.getObjectID().toString());
         properties.put("name", request.getName());
-        final Element mailElement = ContactUtils.transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET, properties).getRootElement();
+        final Element mailElement = ContactUtils
+            .transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET, properties).getRootElement();
         ContactMailService.sendMail(EMail.parseXML(mailElement), request.getFrom());
     }
 }

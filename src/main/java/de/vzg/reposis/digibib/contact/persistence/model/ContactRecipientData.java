@@ -16,13 +16,49 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.model;
+package de.vzg.reposis.digibib.contact.persistence.model;
 
 import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
-public class ContactRecipient {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
+
+@NamedQueries({
+    @NamedQuery(name = "ContactRecipient.findByUUID",
+        query = "SELECT r"
+            + "  FROM ContactRecipient r"
+            + "  WHERE r.UUID = :uuid"),
+})
+
+/**
+ * This class defines a model for a recipient.
+ */
+@Entity
+@Table(name = "contactRecipient")
+public class ContactRecipientData {
+
+    /**
+     * Internal id.
+     */
+    private long id;
 
     /**
      * Name of the recipient.
@@ -42,7 +78,7 @@ public class ContactRecipient {
     /**
      * Parent request of recipient.
      */
-    private ContactRequest request;
+    private ContactRequestData request;
 
     /**
      * If the request is enabled to sending
@@ -67,22 +103,41 @@ public class ContactRecipient {
     /**
      * Uuid of recipient.
      */
+    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
-    public ContactRecipient() {
+    public ContactRecipientData() {
     }
 
-    public ContactRecipient(String name, ContactRecipientOrigin origin, String mail) {
+    public ContactRecipientData(String name, ContactRecipientOrigin origin, String mail) {
         this.name = name;
         this.origin = origin;
         this.mail = mail;
         enabled = true;
     }
 
-    public ContactRecipient(ContactRecipientOrigin origin, String mail) {
+    public ContactRecipientData(ContactRecipientOrigin origin, String mail) {
         this.origin = origin;
         this.mail = mail;
         enabled = true;
+    }
+
+    /**
+     * @return internal id
+     */
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "recipientId", nullable = false)
+    @JsonIgnore
+    public long getId() {
+        return id;
+    }
+
+    /**
+     * @param id internal id
+     */
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -93,6 +148,8 @@ public class ContactRecipient {
         this.name = name;
     }
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "type", nullable = false)
     public ContactRecipientOrigin getOrigin() {
         return origin;
     }
@@ -101,6 +158,7 @@ public class ContactRecipient {
         this.origin = origin;
     }
 
+    @Column(name = "mail", nullable = false)
     public String getMail() {
         return mail;
     }
@@ -109,11 +167,14 @@ public class ContactRecipient {
         this.mail = mail;
     }
 
-    public ContactRequest getRequest() {
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "requestId")
+    public ContactRequestData getRequest() {
         return request;
     }
 
-    public void setRequest(ContactRequest request) {
+    public void setRequest(ContactRequestData request) {
         this.request = request;
     }
 
@@ -125,6 +186,14 @@ public class ContactRecipient {
         this.uuid = uuid;
     }
 
+    @PrePersist
+    protected void prepersistUUIDModel() {
+        if (uuid == null) {
+            uuid = UUID.randomUUID();
+        }
+    }
+
+    @Column(name = "enabled", nullable = false)
     public boolean isEnabled() {
         return enabled;
     }
@@ -133,6 +202,7 @@ public class ContactRecipient {
         this.enabled = enabled;
     }
 
+    @Column(name = "failed", nullable = true)
     public Date getFailed() {
         return failed;
     }
@@ -141,6 +211,7 @@ public class ContactRecipient {
         this.failed = failed;
     }
 
+    @Column(name = "sent", nullable = true)
     public Date getSent() {
         return sent;
     }
@@ -149,6 +220,7 @@ public class ContactRecipient {
         this.sent = sent;
     }
 
+    @Column(name = "confirmed", nullable = true)
     public Date getConfirmed() {
         return confirmed;
     }
@@ -159,22 +231,29 @@ public class ContactRecipient {
 
     @Override
     public int hashCode() {
-        return Objects.hash(confirmed, enabled, failed, mail, name, origin, request, sent, uuid);
+        int hash = 7;
+        hash = 31 * hash + mail.hashCode();
+        hash = 31 * hash + request.hashCode();
+        return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
-        ContactRecipient other = (ContactRecipient) obj;
-        return Objects.equals(confirmed, other.confirmed) && enabled == other.enabled
-            && Objects.equals(failed, other.failed) && Objects.equals(mail, other.mail)
-            && Objects.equals(name, other.name) && origin == other.origin && Objects.equals(request, other.request)
-            && Objects.equals(sent, other.sent) && Objects.equals(uuid, other.uuid);
+        }
+        ContactRecipientData other = (ContactRecipientData) obj;
+        return Objects.equals(request, other.getRequest()) && Objects.equals(mail, other.getMail());
     }
 
+    @Override
+    public String toString() {
+        return String.format("ID: %d, \nEmail: %s", id, mail);
+    }
 }

@@ -23,26 +23,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import jakarta.ws.rs.BadRequestException;
-import jakarta.ws.rs.Consumes;
-import jakarta.ws.rs.POST;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-
-import de.vzg.reposis.digibib.contact.ContactConstants;
-import de.vzg.reposis.digibib.contact.ContactMailService;
-import de.vzg.reposis.digibib.contact.ContactService;
-import de.vzg.reposis.digibib.contact.ContactUtils;
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.validation.ContactValidator;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-
-import org.apache.logging.log4j.Logger;
 import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.mycore.common.MCRException;
@@ -54,31 +36,46 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
 
+import de.vzg.reposis.digibib.contact.ContactConstants;
+import de.vzg.reposis.digibib.contact.ContactMailService;
+import de.vzg.reposis.digibib.contact.ContactServiceImpl;
+import de.vzg.reposis.digibib.contact.ContactUtils;
+import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.validation.ContactValidator;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import jakarta.ws.rs.BadRequestException;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
+
 @Path("/contact")
 public class ContactResource {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final Set<String> ALLOWED_GENRES
-        = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
-            .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
+    private static final Set<String> ALLOWED_GENRES = MCRConfiguration2
+        .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
+        .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
 
-    private static final String NEW_REQUEST_STYLESHEET
-        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "NewRequestMail.Stylesheet");
+    private static final String NEW_REQUEST_STYLESHEET = MCRConfiguration2
+        .getStringOrThrow(ContactConstants.CONF_PREFIX + "NewRequestMail.Stylesheet");
 
-    private static final String RECEIPT_CONFIRMATION_STYLESHEET
-        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "ReceiptConfirmationMail.Stylesheet");
+    private static final String RECEIPT_CONFIRMATION_STYLESHEET = MCRConfiguration2
+        .getStringOrThrow(ContactConstants.CONF_PREFIX + "ReceiptConfirmationMail.Stylesheet");
 
-    private static final String FALLBACK_MAIL
-        = MCRConfiguration2.getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
+    private static final String FALLBACK_MAIL = MCRConfiguration2
+        .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "contact involved persons of given object",
-        responses = {
-            @ApiResponse(responseCode = "200", description = "operation was successful"),
-            @ApiResponse(responseCode = "404", description = "object is not found"), })
+    @Operation(summary = "contact involved persons of given object", responses = {
+        @ApiResponse(responseCode = "200", description = "operation was successful"),
+        @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
     public Response save(ContactRequest request) throws Exception {
@@ -98,7 +95,7 @@ public class ContactResource {
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
-        ContactService.getInstance().insertRequest(request);
+        ContactServiceImpl.getInstance().addRequest(request);
         final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
             request.getORCID(), objectID.toString());
         ContactMailService.sendMail(confirmationMail, request.getFrom());
@@ -115,8 +112,8 @@ public class ContactResource {
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", id);
-        final Element mailElement
-            = ContactUtils.transform(baseMail.toXML(), NEW_REQUEST_STYLESHEET, properties).getRootElement();
+        final Element mailElement = ContactUtils.transform(baseMail.toXML(), NEW_REQUEST_STYLESHEET, properties)
+            .getRootElement();
         return EMail.parseXML(mailElement);
     }
 
@@ -129,8 +126,8 @@ public class ContactResource {
         if (orcid != null) {
             properties.put("name", orcid);
         }
-        final Element mailElement
-            = ContactUtils.transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties).getRootElement();
+        final Element mailElement = ContactUtils
+            .transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties).getRootElement();
         return EMail.parseXML(mailElement);
     }
 
