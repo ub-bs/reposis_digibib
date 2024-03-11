@@ -88,8 +88,8 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap<MCRObjectID, List<ContactRecipient>>();
         requests.forEach((r) -> {
             LOGGER.info("Collecting recipients for {}", r.getId());
-            final MCRObjectID objectID = r.getObjectId();
-            final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectID);
+            final MCRObjectID objectId = r.getObjectId();
+            final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectId);
             MCRTransactionHelper.beginTransaction();
             try {
                 r.setState(ContactRequestState.PROCESSING);
@@ -98,12 +98,12 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
                 if (cachedRecipients != null) {
                     addRecipients(r, cachedRecipients);
                 } else {
-                    final List<ContactRecipient> recipients = new ContactCollectRecipientsTask(objectID).call();
+                    final List<ContactRecipient> recipients = new ContactCollectRecipientsTask(objectId).call();
                     if (recipients.isEmpty()) {
                         addFallbackRecipient(recipients);
                     }
                     addRecipients(r, recipients);
-                    recipientsCache.put(objectID, recipients);
+                    recipientsCache.put(objectId, recipients);
                 }
                 r.setState(ContactRequestState.PROCESSED);
             } catch (ContactRequestNotFoundException e) {

@@ -48,10 +48,10 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private final MCRObjectID objectID;
+    private final MCRObjectID objectId;
 
     public ContactCollectRecipientsTask(MCRObjectID objectID) {
-        this.objectID = objectID;
+        objectId = objectID;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
     }
 
     private void addOrcidRecipients(List<ContactRecipient> recipients) {
-        final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectID);
+        final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectId);
         final List<String> orcids = new ArrayList<String>(MCRORCIDUtils.getORCIDs(object));
         for (String orcid : orcids) {
             final Set<String> mails = new HashSet<String>();
@@ -77,7 +77,7 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
                 final Set<String> otherOrcids = orcidUser.getORCIDs();
                 if (credential != null) {
                     try {
-                        mails.addAll(fetchMailsFromMemberAPI(orcid, credential));
+                        mails.addAll(fetchMailsFromMemberApi(orcid, credential));
                         otherOrcids.remove(orcid);
                     } catch (Exception e) {
                         LOGGER.warn(e);
@@ -85,14 +85,14 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
                 }
                 for (String otherOrcid : otherOrcids) {
                     try {
-                        mails.addAll(fetchMailsFromPublicAPI(otherOrcid));
+                        mails.addAll(fetchMailsFromPublicApi(otherOrcid));
                     } catch (Exception e) {
                         LOGGER.warn(e);
                     }
                 }
             } else {
                 try {
-                    mails.addAll(fetchMailsFromPublicAPI(orcid));
+                    mails.addAll(fetchMailsFromPublicApi(orcid));
                 } catch (Exception e) {
                     LOGGER.warn(e);
                 }
@@ -111,12 +111,12 @@ public class ContactCollectRecipientsTask implements Callable<List<ContactRecipi
         return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
     }
 
-    private List<String> fetchMailsFromMemberAPI(String orcid, MCRORCIDCredential credential) {
+    private List<String> fetchMailsFromMemberApi(String orcid, MCRORCIDCredential credential) {
         return extractMails(MCRORCIDClientHelper.getClientFactory().createUserClient(orcid, credential)
             .fetch(MCRORCIDSectionImpl.EMAIL, Emails.class));
     }
 
-    private List<String> fetchMailsFromPublicAPI(String orcid) {
+    private List<String> fetchMailsFromPublicApi(String orcid) {
         return extractMails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid,
             MCRORCIDSectionImpl.EMAIL, Emails.class));
     }

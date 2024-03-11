@@ -55,7 +55,7 @@ public class ContactForwardRequestTask implements Runnable {
             for (ContactRecipient recipient : request.getRecipients().stream()
                 .filter(r -> r.isEnabled() && r.getSent() == null).toList()) {
                 try {
-                    ContactServiceHelper.sendRequestToRecipient(request, recipient);
+                    ContactServiceHelper.sendRequestMailToRecipient(request, recipient);
                     recipient.setFailed(null);
                 } catch (Exception e) {
                     recipient.setFailed(new Date());

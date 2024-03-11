@@ -60,7 +60,7 @@ public class ContactServiceHelper {
      * @param request request
      * @param recipient recipient
      */
-    protected static void sendRequestToRecipient(ContactRequest request, ContactRecipient recipient) {
+    protected static void sendRequestMailToRecipient(ContactRequest request, ContactRecipient recipient) {
         final Map<String, String> headers = new HashMap<String, String>();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getId().toString());
         final EMail mail = createMail(request, recipient);

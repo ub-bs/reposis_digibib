@@ -226,7 +226,7 @@ public class ContactServiceImpl implements ContactService {
             try {
                 final ContactRecipient recipient = ContactMapper.toDomain(recipientData);
                 final ContactRequest request = ContactMapper.toDomain(requestData);
-                ContactServiceHelper.sendRequestToRecipient(request, recipient);
+                ContactServiceHelper.sendRequestMailToRecipient(request, recipient);
                 recipientData.setFailed(null);
                 recipientData.setSent(new Date());
             } catch (Exception e) {

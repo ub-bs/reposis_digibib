@@ -74,9 +74,8 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
         getProcessable().setStatus(MCRProcessableStatus.processing);
         getProcessable().setProgress(0);
         final Session mailSession = Session.getInstance(new Properties());
-        Store store = null;
-        try {
-            store = mailSession.getStore("imaps");
+        // TODO may move to mail service
+        try (Store store = mailSession.getStore("imaps")) {
             store.connect(HOST, USER, PASSWORD);
             inbox = store.getFolder("INBOX");
             inbox.open(Folder.READ_WRITE);
@@ -89,17 +88,6 @@ public class ContactProcessBounceMessagesCronjob extends MCRCronjob {
             }
         } catch (IOException | MessagingException e) {
             LOGGER.error(e);
-        } finally {
-            try {
-                if (store != null) {
-                    if (inbox != null) {
-                        inbox.close(false);
-                    }
-                    store.close();
-                }
-            } catch (MessagingException e) {
-                LOGGER.warn(e);
-            }
         }
         getProcessable().setProgress(100);
     }
