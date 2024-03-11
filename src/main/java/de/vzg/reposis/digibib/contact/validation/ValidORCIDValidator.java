@@ -21,12 +21,12 @@ package de.vzg.reposis.digibib.contact.validation;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-public class ValidORCIDValidator implements ConstraintValidator<ValidORCID, String> {
+public class ValidOrcidValidator implements ConstraintValidator<ValidOrcid, String> {
 
     @Override
     public boolean isValid(String orcid, ConstraintValidatorContext context) {
         if (orcid != null) {
-            return ValidationUtils.validateORCID(orcid);
+            return ValidationUtils.validateOrcid(orcid);
         }
         return true;
     }

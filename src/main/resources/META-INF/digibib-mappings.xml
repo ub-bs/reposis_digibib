@@ -2,6 +2,6 @@
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm http://xmlns.jcp.org/xml/ns/persistence/orm_2_2.xsd"
                  version="2.2">
-  <entity class="de.vzg.reposis.digibib.contact.model.ContactRequest" />
-  <entity class="de.vzg.reposis.digibib.contact.model.ContactRecipient" />
+  <entity class="de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData" />
+  <entity class="de.vzg.reposis.digibib.contact.persistence.model.ContactRecipientData" />
 </entity-mappings>

@@ -34,13 +34,13 @@ import jakarta.validation.Payload;
 /**
  * The annoteated element must be a valid orcid.
  */
-@Constraint(validatedBy = ValidORCIDValidator.class)
+@Constraint(validatedBy = ValidOrcidValidator.class)
 @Target({ METHOD, LOCAL_VARIABLE, FIELD, PARAMETER })
 @Retention(RUNTIME)
 @Documented
-public @interface ValidORCID {
+public @interface ValidOrcid {
 
-    String message() default "A valid ORCID must be specified.";
+    String message() default "A valid orcid id must be specified.";
 
     Class<?>[] groups() default {};
 

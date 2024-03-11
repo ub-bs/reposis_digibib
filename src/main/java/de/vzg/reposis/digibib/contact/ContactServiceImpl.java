@@ -80,109 +80,6 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public ContactRecipient getRecipient(UUID recipientId) {
-        try {
-            writeLock.lock();
-            return recipientRepository.findByUUID(recipientId).map(ContactMapper::toDomain)
-                .orElseThrow(() -> new ContactRecipientNotFoundException());
-        } finally {
-            writeLock.unlock();
-        }
-    }
-
-    @Override
-    public void addRecipient(UUID requestId, ContactRecipient recipient) {
-        try {
-            writeLock.lock();
-            if (!Objects.equals(ContactRecipientOrigin.MANUAL, recipient.getOrigin())) {
-                throw new ContactRecipientOriginException();
-            }
-            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
-                throw new ContactRecipientInvalidException();
-            }
-            final ContactRequestData requestData = requestRepository.findByUUID(requestId)
-                .orElseThrow(() -> new ContactRequestNotFoundException());
-            if (!checkWarmState(requestData.getState())) {
-                throw new ContactRequestStateException("Not in warm state");
-            }
-            if (checkRecipientExists(requestData.getRecipients(), recipient)) {
-                throw new ContactRecipientAlreadyExistsException();
-            }
-            final ContactRecipientData recipientData = ContactMapper.toData(recipient);
-            recipientData.setRequest(requestData);
-            requestData.addRecipient(recipientData);
-            update(requestData); // update modified
-        } finally {
-            writeLock.unlock();
-        }
-    }
-
-    @Override
-    public void deleteRecipient(UUID requestId, UUID recipientId) {
-        try {
-            writeLock.lock();
-            final ContactRequestData requestData = requestRepository.findByUUID(requestId)
-                .orElseThrow(() -> new ContactRequestNotFoundException());
-            if (!checkWarmState(requestData.getState())) {
-                throw new ContactRequestStateException("Not in warm state");
-            }
-            final ContactRecipientData recipientData = recipientRepository.findByUUID(recipientId)
-                .orElseThrow(() -> new ContactRecipientNotFoundException());
-            if (!Objects.equals(ContactRecipientOrigin.MANUAL, recipientData.getOrigin())) {
-                throw new ContactRecipientOriginException();
-            }
-            requestData.removeRecipient(recipientData);
-            update(requestData);
-        } finally {
-            writeLock.unlock();
-        }
-    }
-
-    @Override
-    public void updateRecipient(UUID requestId, ContactRecipient recipient) {
-        try {
-            writeLock.lock();
-            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
-                throw new ContactRecipientInvalidException();
-            }
-            final ContactRequestData requestData = requestRepository.findByUUID(requestId)
-                .orElseThrow(() -> new ContactRequestNotFoundException());
-            if (!checkWarmState(requestData.getState())) {
-                throw new ContactRequestStateException("Not in warm state");
-            }
-            final ContactRecipientData outdated = recipientRepository.findByUUID(recipient.getUUID())
-                .orElseThrow(() -> new ContactRecipientNotFoundException());
-            if (!Objects.equals(ContactRecipientOrigin.MANUAL, outdated.getOrigin())
-                && (!Objects.equals(outdated.getName(), recipient.getName())
-                    || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
-                    || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
-                throw new ContactRecipientOriginException();
-            }
-            if (!Objects.equals(outdated.getMail(), recipient.getMail())
-                && checkRecipientExists(requestData.getRecipients(), recipient)) {
-                throw new ContactRecipientAlreadyExistsException();
-            }
-            outdated.setName(recipient.getName());
-            outdated.setOrigin(recipient.getOrigin());
-            outdated.setMail(recipient.getMail());
-            outdated.setEnabled(recipient.isEnabled());
-            Optional.ofNullable(recipient.getFailed()).ifPresent(outdated::setFailed);
-            Optional.ofNullable(recipient.getSent()).ifPresent(outdated::setSent);
-            recipientRepository.save(outdated);
-            update(outdated.getRequest()); // update modified
-        } finally {
-            writeLock.unlock();
-        }
-    }
-
-    private boolean checkRecipientExists(List<ContactRecipientData> recipients, ContactRecipient recipient) {
-        if (recipients.size() == 0) {
-            return false;
-        }
-        return recipients.stream().filter(r -> Objects.equals(r.getMail(), recipient.getMail())).findAny().isPresent();
-    }
-
-    @Override
     public ContactRequest getRequest(UUID requestId) {
         try {
             readLock.lock();
@@ -210,7 +107,7 @@ public class ContactServiceImpl implements ContactService {
             if (!ContactValidator.getInstance().validateRequest(request)) {
                 throw new ContactRequestInvalidException();
             }
-            final MCRObjectID objectID = request.getObjectID();
+            final MCRObjectID objectID = request.getObjectId();
             if (objectID == null || !MCRMetadataManager.exists(objectID)) {
                 throw new ContactRequestInvalidException(objectID.toString() + " does not exist.");
             }
@@ -224,6 +121,14 @@ public class ContactServiceImpl implements ContactService {
             requestData.setLastModifiedBy(currentUserID);
             requestData.setState(ContactRequestState.RECEIVED);
             requestRepository.insert(requestData);
+
+            ContactServiceHelper.sendConfirmationMail(request);
+            try {
+                ContactServiceHelper.sendNewRequestMail(request);
+            } catch (Exception e) {
+                // notification mail is not required, log is sufficient
+                LOGGER.error("Cannot send notification mail", e);
+            }
         } finally {
             writeLock.unlock();
         }
@@ -233,7 +138,7 @@ public class ContactServiceImpl implements ContactService {
     public void updateRequest(ContactRequest request) {
         try {
             writeLock.lock();
-            requestRepository.findByUUID(request.getUUID()).ifPresentOrElse(r -> update(r), () -> {
+            requestRepository.findByUUID(request.getId()).ifPresentOrElse(r -> update(r), () -> {
                 throw new ContactRequestNotFoundException();
             });
         } finally {
@@ -304,7 +209,7 @@ public class ContactServiceImpl implements ContactService {
     }
 
     @Override
-    public void forwardRequestToRecipient(UUID requestId, UUID recipientId) {
+    public void forwardRequest(UUID requestId, UUID recipientId) {
         try {
             writeLock.lock();
             final ContactRequestData requestData = requestRepository.findByUUID(requestId)
@@ -320,7 +225,8 @@ public class ContactServiceImpl implements ContactService {
             }
             try {
                 final ContactRecipient recipient = ContactMapper.toDomain(recipientData);
-                ContactForwardRequestHelper.sendMail(recipient);
+                final ContactRequest request = ContactMapper.toDomain(requestData);
+                ContactServiceHelper.sendRequestToRecipient(request, recipient);
                 recipientData.setFailed(null);
                 recipientData.setSent(new Date());
             } catch (Exception e) {
@@ -333,6 +239,109 @@ public class ContactServiceImpl implements ContactService {
         } finally {
             writeLock.unlock();
         }
+    }
+
+    @Override
+    public ContactRecipient getRecipient(UUID recipientId) {
+        try {
+            writeLock.lock();
+            return recipientRepository.findByUUID(recipientId).map(ContactMapper::toDomain)
+                .orElseThrow(() -> new ContactRecipientNotFoundException());
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    @Override
+    public void addRecipient(UUID requestId, ContactRecipient recipient) {
+        try {
+            writeLock.lock();
+            if (!Objects.equals(ContactRecipientOrigin.MANUAL, recipient.getOrigin())) {
+                throw new ContactRecipientOriginException();
+            }
+            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
+                throw new ContactRecipientInvalidException();
+            }
+            final ContactRequestData requestData = requestRepository.findByUUID(requestId)
+                .orElseThrow(() -> new ContactRequestNotFoundException());
+            if (!checkWarmState(requestData.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
+            }
+            if (checkRecipientExists(requestData.getRecipients(), recipient)) {
+                throw new ContactRecipientAlreadyExistsException();
+            }
+            final ContactRecipientData recipientData = ContactMapper.toData(recipient);
+            recipientData.setRequest(requestData);
+            requestData.addRecipient(recipientData);
+            update(requestData); // update modified
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    @Override
+    public void deleteRecipient(UUID requestId, UUID recipientId) {
+        try {
+            writeLock.lock();
+            final ContactRequestData requestData = requestRepository.findByUUID(requestId)
+                .orElseThrow(() -> new ContactRequestNotFoundException());
+            if (!checkWarmState(requestData.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
+            }
+            final ContactRecipientData recipientData = recipientRepository.findByUUID(recipientId)
+                .orElseThrow(() -> new ContactRecipientNotFoundException());
+            if (!Objects.equals(ContactRecipientOrigin.MANUAL, recipientData.getOrigin())) {
+                throw new ContactRecipientOriginException();
+            }
+            requestData.removeRecipient(recipientData);
+            update(requestData);
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    @Override
+    public void updateRecipient(UUID requestId, ContactRecipient recipient) {
+        try {
+            writeLock.lock();
+            if (!ContactValidator.getInstance().validateRecipient(recipient)) {
+                throw new ContactRecipientInvalidException();
+            }
+            final ContactRequestData requestData = requestRepository.findByUUID(requestId)
+                .orElseThrow(() -> new ContactRequestNotFoundException());
+            if (!checkWarmState(requestData.getState())) {
+                throw new ContactRequestStateException("Not in warm state");
+            }
+            final ContactRecipientData outdated = recipientRepository.findByUUID(recipient.getId())
+                .orElseThrow(() -> new ContactRecipientNotFoundException());
+            if (!Objects.equals(ContactRecipientOrigin.MANUAL, outdated.getOrigin())
+                && (!Objects.equals(outdated.getName(), recipient.getName())
+                    || !Objects.equals(outdated.getOrigin(), recipient.getOrigin())
+                    || !Objects.equals(outdated.getMail(), recipient.getMail()))) {
+                throw new ContactRecipientOriginException();
+            }
+            if (!Objects.equals(outdated.getMail(), recipient.getMail())
+                && checkRecipientExists(requestData.getRecipients(), recipient)) {
+                throw new ContactRecipientAlreadyExistsException();
+            }
+            outdated.setName(recipient.getName());
+            outdated.setOrigin(recipient.getOrigin());
+            outdated.setMail(recipient.getMail());
+            outdated.setEnabled(recipient.isEnabled());
+            Optional.ofNullable(recipient.getFailed()).ifPresent(outdated::setFailed);
+            Optional.ofNullable(recipient.getSent()).ifPresent(outdated::setSent);
+            recipientRepository.save(outdated);
+            update(outdated.getRequest()); // update modified
+        } finally {
+            writeLock.unlock();
+        }
+    }
+
+    private boolean checkRecipientExists(List<ContactRecipientData> recipients, ContactRecipient recipient) {
+        if (recipients.size() == 0) {
+            return false;
+        }
+        return recipients.stream().filter(r -> Objects.equals(r.getMail(), recipient.getMail())).findAny().isPresent();
     }
 
     private boolean checkWarmState(ContactRequestState state) {

@@ -18,17 +18,12 @@
 
 package de.vzg.reposis.digibib.contact.rsc;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdom2.Attribute;
 import org.jdom2.Element;
 import org.mycore.common.MCRException;
-import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
@@ -37,9 +32,7 @@ import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
-import de.vzg.reposis.digibib.contact.ContactMailService;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
-import de.vzg.reposis.digibib.contact.ContactUtils;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 import io.swagger.v3.oas.annotations.Operation;
@@ -55,20 +48,9 @@ import jakarta.ws.rs.core.Response;
 @Path("/contact")
 public class ContactResource {
 
-    private static final Logger LOGGER = LogManager.getLogger();
-
     private static final Set<String> ALLOWED_GENRES = MCRConfiguration2
         .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
         .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
-
-    private static final String NEW_REQUEST_STYLESHEET = MCRConfiguration2
-        .getStringOrThrow(ContactConstants.CONF_PREFIX + "NewRequestMail.Stylesheet");
-
-    private static final String RECEIPT_CONFIRMATION_STYLESHEET = MCRConfiguration2
-        .getStringOrThrow(ContactConstants.CONF_PREFIX + "ReceiptConfirmationMail.Stylesheet");
-
-    private static final String FALLBACK_MAIL = MCRConfiguration2
-        .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -82,53 +64,21 @@ public class ContactResource {
         if (!ContactValidator.getInstance().validateRequest(request)) {
             throw new BadRequestException("invalid request");
         }
-        final MCRObjectID objectID = request.getObjectID();
-        if (!MCRMetadataManager.exists(objectID)) {
-            throw new BadRequestException(objectID.toString() + " does not exist");
+        final MCRObjectID objectId = request.getObjectId();
+        if (!MCRMetadataManager.exists(objectId)) {
+            throw new BadRequestException(objectId.toString() + " does not exist");
         }
         String genre = null;
         try {
-            genre = getGenre(objectID);
+            genre = getGenre(objectId);
         } catch (MCRException e) {
-            throw new BadRequestException("No genre for: " + objectID.toString());
+            throw new BadRequestException("No genre for: " + objectId.toString());
         }
         if (genre == null || !ALLOWED_GENRES.contains(genre)) {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
         ContactServiceImpl.getInstance().addRequest(request);
-        final EMail confirmationMail = createConfirmationMail(request.getName(), request.getMessage(),
-            request.getORCID(), objectID.toString());
-        ContactMailService.sendMail(confirmationMail, request.getFrom());
-        // notification mail is not required, log is sufficient
-        try {
-            ContactMailService.sendMail(createNotificationMail(objectID.toString()), FALLBACK_MAIL);
-        } catch (Exception e) {
-            LOGGER.error("Cannot send notification mail", e);
-        }
         return Response.ok().build();
-    }
-
-    private static EMail createNotificationMail(String id) throws Exception {
-        final EMail baseMail = new EMail();
-        final Map<String, String> properties = new HashMap<String, String>();
-        properties.put("id", id);
-        final Element mailElement = ContactUtils.transform(baseMail.toXML(), NEW_REQUEST_STYLESHEET, properties)
-            .getRootElement();
-        return EMail.parseXML(mailElement);
-    }
-
-    private static EMail createConfirmationMail(String name, String message, String orcid, String id) throws Exception {
-        final EMail baseMail = new EMail();
-        final Map<String, String> properties = new HashMap<String, String>();
-        properties.put("id", id);
-        properties.put("message", message);
-        properties.put("name", name);
-        if (orcid != null) {
-            properties.put("name", orcid);
-        }
-        final Element mailElement = ContactUtils
-            .transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties).getRootElement();
-        return EMail.parseXML(mailElement);
     }
 
     private static String getGenre(MCRObjectID objectId) throws MCRException {

@@ -80,9 +80,9 @@ public class RestContactResource {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRequest getRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
+    public ContactRequest getRequest(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId)
         throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestUUID);
+        final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);
         if (request != null) {
             return request;
         } else {
@@ -98,9 +98,9 @@ public class RestContactResource {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.TEXT_PLAIN)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
-    public String getRequestStatusByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
+    public String getRequestStatus(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId)
         throws ContactRequestNotFoundException {
-        final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestUUID);
+        final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);
         if (request != null) {
             if (ContactRequestState.CONFIRMED.equals(request.getState())) {
                 final List<ContactRecipient> recipients = request.getRecipients().stream()
@@ -125,12 +125,12 @@ public class RestContactResource {
         @ApiResponse(responseCode = "400", description = "invalid request"),
         @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRequireTransaction
-    public Response confirmRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-        @QueryParam("recipient") UUID recipientUUID) throws Exception {
-        if (recipientUUID == null) {
+    public Response confirmRequest(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+        @QueryParam("recipient") UUID recipientId) throws Exception {
+        if (recipientId == null) {
             throw new BadRequestException();
         }
-        ContactServiceImpl.getInstance().confirmRequest(requestUUID, recipientUUID);
+        ContactServiceImpl.getInstance().confirmRequest(requestId, recipientId);
         return Response.ok().build();
     }
 
@@ -138,12 +138,12 @@ public class RestContactResource {
     @Path("/{" + RestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response forwardRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
-        @QueryParam("recipient") UUID recipientUUID) throws ContactException {
-        if (recipientUUID != null) {
-            ContactServiceImpl.getInstance().forwardRequestToRecipient(requestUUID, recipientUUID);
+    public Response forwardRequest(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+        @QueryParam("recipient") UUID recipientId) throws ContactException {
+        if (recipientId != null) {
+            ContactServiceImpl.getInstance().forwardRequest(requestId, recipientId);
         } else {
-            ContactServiceImpl.getInstance().forwardRequest(requestUUID);
+            ContactServiceImpl.getInstance().forwardRequest(requestId);
         }
         return Response.ok().build();
     }
@@ -156,7 +156,7 @@ public class RestContactResource {
         @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @MCRRequireTransaction
-    public Response updateRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID,
+    public Response updateRequest(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
         ContactRequest request) throws ContactException {
         ContactServiceImpl.getInstance().updateRequest(request);
         return Response.noContent().build();
@@ -170,9 +170,9 @@ public class RestContactResource {
         @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @MCRRequireTransaction
-    public Response removeRequestByUUID(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestUUID)
+    public Response removeRequest(@PathParam(RestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId)
         throws ContactException {
-        ContactServiceImpl.getInstance().deleteRequest(requestUUID);
+        ContactServiceImpl.getInstance().deleteRequest(requestId);
         return Response.noContent().build();
     }
 }

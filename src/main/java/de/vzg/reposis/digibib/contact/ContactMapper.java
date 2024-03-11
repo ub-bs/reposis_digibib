@@ -17,7 +17,7 @@ public class ContactMapper {
         recipient.setMail(recipientData.getMail());
         recipient.setOrigin(recipientData.getOrigin());
         recipient.setSent(recipientData.getSent());
-        recipient.setUUID(recipientData.getUUID());
+        recipient.setId(recipientData.getUUID());
         return recipient;
     }
 
@@ -29,7 +29,7 @@ public class ContactMapper {
         recipientData.setMail(recipient.getMail());
         recipientData.setOrigin(recipient.getOrigin());
         recipientData.setSent(recipient.getSent());
-        recipientData.setUUID(recipient.getUUID());
+        recipientData.setUUID(recipient.getId());
         return recipientData;
     }
 
@@ -45,8 +45,8 @@ public class ContactMapper {
         request.setLastModifiedBy(requestData.getLastModifiedBy());
         request.setMessage(requestData.getMessage());
         request.setName(requestData.getName());
-        request.setObjectID(requestData.getObjectID());
-        request.setORCID(requestData.getORCID());
+        request.setObjectId(requestData.getObjectID());
+        request.setOrcid(requestData.getORCID());
         request.setState(requestData.getState());
         requestData.getRecipients().stream().map(ContactMapper::toDomain).forEach(request::addRecipient);
         return request;
@@ -64,8 +64,8 @@ public class ContactMapper {
         requestData.setLastModifiedBy(request.getLastModifiedBy());
         requestData.setMessage(request.getMessage());
         requestData.setName(request.getName());
-        requestData.setObjectID(request.getObjectID());
-        Optional.ofNullable(request.getORCID()).map(String::trim).ifPresent(requestData::setORCID);
+        requestData.setObjectID(request.getObjectId());
+        Optional.ofNullable(request.getOrcid()).map(String::trim).ifPresent(requestData::setORCID);
         requestData.setState(request.getState());
         request.getRecipients().stream().map(ContactMapper::toData).forEach(requestData::addRecipient);
         return requestData;

@@ -22,52 +22,28 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
+/**
+ * Contact recipient model.
+ */
 public class ContactRecipient {
 
-    /**
-     * Name of the recipient.
-     */
+    private UUID id;
+
     private String name;
 
-    /**
-     * Origin of recipient date.
-     */
     private ContactRecipientOrigin origin;
 
-    /**
-     * Recipient mail.
-     */
     private String mail;
 
-    /**
-     * Parent request of recipient.
-     */
-    private ContactRequest request;
-
-    /**
-     * If the request is enabled to sending
-     */
     private boolean enabled;
 
-    /**
-     * Date when the mail was bounced.
-     */
     private Date failed;
 
-    /**
-     * Date when the mail was sent.
-     */
     private Date sent;
 
-    /**
-     * Date when the recipeint has confirmed.
-     */
     private Date confirmed;
 
-    /**
-     * Uuid of recipient.
-     */
-    private UUID uuid;
+    private ContactRequest request;
 
     public ContactRecipient() {
     }
@@ -85,46 +61,87 @@ public class ContactRecipient {
         enabled = true;
     }
 
+    /**
+     * Returns id of recipient.
+     *
+     * @return id
+     */
+    public UUID getId() {
+        return id;
+    }
+
+    /**
+     * Sets id of recipient
+     *
+     * @param id id
+     */
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    /**
+     * Returns name of recipient.
+     *
+     * @return name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets namne of recipient.
+     *
+     * @param name name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Returns origin of recipient.
+     *
+     * @return origin
+     */
     public ContactRecipientOrigin getOrigin() {
         return origin;
     }
 
+    /**
+     * Sets origin of recipient.
+     *
+     * @param origin origin
+     */
     public void setOrigin(ContactRecipientOrigin origin) {
         this.origin = origin;
     }
 
+    /**
+     * Returns mail address of recipient.
+     *
+     * @return mail address
+     */
     public String getMail() {
         return mail;
     }
 
+    /**
+     * Sets mail address of
+     *
+     * @param mail
+     */
     public void setMail(String mail) {
         this.mail = mail;
     }
 
+    /*
     public ContactRequest getRequest() {
         return request;
     }
-
+    
     public void setRequest(ContactRequest request) {
         this.request = request;
     }
-
-    public UUID getUUID() {
-        return uuid;
-    }
-
-    public void setUUID(UUID uuid) {
-        this.uuid = uuid;
-    }
-
+    */
     public boolean isEnabled() {
         return enabled;
     }
@@ -159,7 +176,7 @@ public class ContactRecipient {
 
     @Override
     public int hashCode() {
-        return Objects.hash(confirmed, enabled, failed, mail, name, origin, request, sent, uuid);
+        return Objects.hash(confirmed, enabled, failed, mail, name, origin, request, sent, id);
     }
 
     @Override
@@ -174,7 +191,7 @@ public class ContactRecipient {
         return Objects.equals(confirmed, other.confirmed) && enabled == other.enabled
             && Objects.equals(failed, other.failed) && Objects.equals(mail, other.mail)
             && Objects.equals(name, other.name) && origin == other.origin && Objects.equals(request, other.request)
-            && Objects.equals(sent, other.sent) && Objects.equals(uuid, other.uuid);
+            && Objects.equals(sent, other.sent) && Objects.equals(id, other.id);
     }
 
 }

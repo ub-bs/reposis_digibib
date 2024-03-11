@@ -87,8 +87,8 @@ public class ContactCollectRecipientsCronjob extends MCRCronjob {
         requests.addAll(listRequestsByState(service, ContactRequestState.PROCESSING_FAILED));
         final Map<MCRObjectID, List<ContactRecipient>> recipientsCache = new HashMap<MCRObjectID, List<ContactRecipient>>();
         requests.forEach((r) -> {
-            LOGGER.info("Collecting recipients for {}", r.getUUID());
-            final MCRObjectID objectID = r.getObjectID();
+            LOGGER.info("Collecting recipients for {}", r.getId());
+            final MCRObjectID objectID = r.getObjectId();
             final List<ContactRecipient> cachedRecipients = recipientsCache.get(objectID);
             MCRTransactionHelper.beginTransaction();
             try {

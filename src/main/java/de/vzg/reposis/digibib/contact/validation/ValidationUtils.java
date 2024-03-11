@@ -29,7 +29,7 @@ public class ValidationUtils {
      * @param orcid orcid
      * @return true if orcid is valid
      */
-    public static boolean validateORCID(String orcid) {
+    public static boolean validateOrcid(String orcid) {
         if (orcid.length() < 16) {
             return false;
         }

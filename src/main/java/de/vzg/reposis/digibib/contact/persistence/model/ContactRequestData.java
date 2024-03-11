@@ -24,6 +24,14 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.mycore.backend.jpa.MCRObjectIDConverter;
+import org.mycore.datamodel.metadata.MCRObjectID;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import de.vzg.reposis.digibib.contact.model.ContactRequestState;
+import de.vzg.reposis.digibib.contact.validation.ValidOrcid;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
@@ -40,34 +48,21 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import de.vzg.reposis.digibib.contact.model.ContactRequestState;
-import de.vzg.reposis.digibib.contact.validation.ValidORCID;
-
-import org.mycore.backend.jpa.MCRObjectIDConverter;
-import org.mycore.datamodel.metadata.MCRObjectID;
-
 @NamedQueries({
-    @NamedQuery(name = "ContactRequest.findAll",
-        query = "SELECT r"
-            + "  FROM ContactRequest r"
-            + "  ORDER BY r.created DESC"),
-    @NamedQuery(name = "ContactRequest.findByObjectID",
-        query = "SELECT r"
-            + "  FROM ContactRequest r"
-            + "  WHERE r.objectID = :objectID"
-            + "  ORDER BY r.created DESC"),
-    @NamedQuery(name = "ContactRequest.findByUUID",
-        query = "SELECT r"
-            + "  FROM ContactRequest r"
-            + "  WHERE r.UUID = :uuid"),
-    @NamedQuery(name = "ContactRequest.findByState",
-        query = "SELECT r"
-            + "  FROM ContactRequest r"
-            + "  WHERE r.state = :state"
-            + "  ORDER BY r.created DESC"),
+    @NamedQuery(name = "ContactRequest.findAll", query = "SELECT r"
+        + "  FROM ContactRequestData r"
+        + "  ORDER BY r.created DESC"),
+    @NamedQuery(name = "ContactRequest.findByObjectID", query = "SELECT r"
+        + "  FROM ContactRequestData r"
+        + "  WHERE r.objectID = :objectID"
+        + "  ORDER BY r.created DESC"),
+    @NamedQuery(name = "ContactRequest.findByUUID", query = "SELECT r"
+        + "  FROM ContactRequestData r"
+        + "  WHERE r.UUID = :uuid"),
+    @NamedQuery(name = "ContactRequest.findByState", query = "SELECT r"
+        + "  FROM ContactRequestData r"
+        + "  WHERE r.state = :state"
+        + "  ORDER BY r.created DESC"),
 })
 
 /**
@@ -112,7 +107,7 @@ public class ContactRequestData {
     /**
      * Orcid of requester.
      */
-    @ValidORCID
+    @ValidOrcid
     private String orcid;
 
     /**
@@ -198,7 +193,7 @@ public class ContactRequestData {
     @Column(name = "objectId", length = MCRObjectID.MAX_LENGTH, nullable = false)
     @Convert(converter = MCRObjectIDConverter.class)
     public MCRObjectID getObjectID() {
-        return this.objectID;
+        return objectID;
     }
 
     public void setObjectID(MCRObjectID objectID) {

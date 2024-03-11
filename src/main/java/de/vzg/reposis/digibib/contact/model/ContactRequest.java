@@ -24,19 +24,23 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.mycore.datamodel.metadata.MCRObjectID;
+
+import de.vzg.reposis.digibib.contact.validation.ValidOrcid;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
-
-import de.vzg.reposis.digibib.contact.validation.ValidORCID;
-
-import org.mycore.datamodel.metadata.MCRObjectID;
 
 /**
  * This class defines a model for a request.
  */
 public class ContactRequest {
 
-	/**
+    /**
+     * Uuid of request.
+     */
+    private UUID id;
+
+    /**
      * Mail of requester.
      */
     @Email
@@ -58,14 +62,14 @@ public class ContactRequest {
     /**
      * Orcid of requester.
      */
-    @ValidORCID
+    @ValidOrcid
     private String orcid;
 
     /**
      * Linked object of request.
      */
     @NotNull
-    private MCRObjectID objectID;
+    private MCRObjectID objectId;
 
     /**
      * Date of creation.
@@ -112,27 +116,22 @@ public class ContactRequest {
      */
     private String comment;
 
-    /**
-     * Uuid of request.
-     */
-    private UUID uuid;
-
     public ContactRequest() {
     }
 
     public ContactRequest(MCRObjectID objectID, String from, String name, String message) {
-        this.objectID = objectID;
+        objectId = objectID;
         this.from = from;
         this.name = name;
         this.message = message;
     }
 
-    public MCRObjectID getObjectID() {
-        return this.objectID;
+    public MCRObjectID getObjectId() {
+        return objectId;
     }
 
-    public void setObjectID(MCRObjectID objectID) {
-        this.objectID = objectID;
+    public void setObjectId(MCRObjectID objectId) {
+        this.objectId = objectId;
     }
 
     public String getFrom() {
@@ -159,11 +158,11 @@ public class ContactRequest {
         this.name = name;
     }
 
-    public String getORCID() {
+    public String getOrcid() {
         return orcid;
     }
 
-    public void setORCID(String orcid) {
+    public void setOrcid(String orcid) {
         this.orcid = orcid;
     }
 
@@ -211,12 +210,12 @@ public class ContactRequest {
         return ContactRequestState.resolve(state);
     }
 
-    public UUID getUUID() {
-        return uuid;
+    public UUID getId() {
+        return id;
     }
 
-    public void setUUID(UUID uuid) {
-        this.uuid = uuid;
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public void setState(ContactRequestState state) {
@@ -233,12 +232,10 @@ public class ContactRequest {
 
     public void addRecipient(ContactRecipient recipient) {
         recipients.add(recipient);
-        recipient.setRequest(this);
     }
 
     public void removeRecipient(ContactRecipient recipient) {
         recipients.remove(recipient);
-        recipient.setRequest(null);
     }
 
     public String getDebug() {
@@ -256,31 +253,31 @@ public class ContactRequest {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    
-    @Override
-	public int hashCode() {
-		return Objects.hash(comment, created, createdBy, debug, forwarded, from, lastModified, lastModifiedBy, message,
-				name, objectID, orcid, recipients, state, uuid);
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ContactRequest other = (ContactRequest) obj;
-		return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
-				&& Objects.equals(createdBy, other.createdBy) && Objects.equals(debug, other.debug)
-				&& Objects.equals(forwarded, other.forwarded) && Objects.equals(from, other.from)
-				&& Objects.equals(lastModified, other.lastModified)
-				&& Objects.equals(lastModifiedBy, other.lastModifiedBy) && Objects.equals(message, other.message)
-				&& Objects.equals(name, other.name) && Objects.equals(objectID, other.objectID)
-				&& Objects.equals(orcid, other.orcid) && Objects.equals(recipients, other.recipients)
-				&& state == other.state && Objects.equals(uuid, other.uuid);
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(comment, created, createdBy, debug, forwarded, from, lastModified, lastModifiedBy, message,
+            name, objectId, orcid, recipients, state, id);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        ContactRequest other = (ContactRequest) obj;
+        return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
+            && Objects.equals(createdBy, other.createdBy) && Objects.equals(debug, other.debug)
+            && Objects.equals(forwarded, other.forwarded) && Objects.equals(from, other.from)
+            && Objects.equals(lastModified, other.lastModified)
+            && Objects.equals(lastModifiedBy, other.lastModifiedBy) && Objects.equals(message, other.message)
+            && Objects.equals(name, other.name) && Objects.equals(objectId, other.objectId)
+            && Objects.equals(orcid, other.orcid) && Objects.equals(recipients, other.recipients)
+            && state == other.state && Objects.equals(id, other.id);
+    }
 
     @Override
     public String toString() {

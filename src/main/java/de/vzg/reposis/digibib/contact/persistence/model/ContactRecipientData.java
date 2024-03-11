@@ -22,10 +22,13 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -37,15 +40,10 @@ import jakarta.persistence.NamedQuery;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
-
 @NamedQueries({
-    @NamedQuery(name = "ContactRecipient.findByUUID",
-        query = "SELECT r"
-            + "  FROM ContactRecipient r"
-            + "  WHERE r.UUID = :uuid"),
+    @NamedQuery(name = "ContactRecipient.findByUUID", query = "SELECT r"
+        + "  FROM ContactRecipientData r"
+        + "  WHERE r.UUID = :uuid"),
 })
 
 /**

@@ -156,5 +156,5 @@ public interface ContactService {
      * @throws ContactRequestStateException      if request is in wrong state
      * @throws MCRException                      if sending failed
      */
-    void forwardRequestToRecipient(UUID requestId, UUID recipientId);
+    void forwardRequest(UUID requestId, UUID recipientId);
 }

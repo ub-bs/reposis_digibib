@@ -19,18 +19,13 @@
 package de.vzg.reposis.digibib.contact;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.jdom2.Element;
-import org.mycore.common.MCRMailer.EMail;
 import org.mycore.common.MCRSession;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.MCRSystemUserInformation;
 import org.mycore.common.MCRTransactionHelper;
-import org.mycore.common.config.MCRConfiguration2;
 
 import de.vzg.reposis.digibib.contact.model.ContactRecipient;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -43,9 +38,6 @@ public class ContactForwardRequestTask implements Runnable {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
-    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2
-        .getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
-
     private final ContactRequest request;
 
     public ContactForwardRequestTask(ContactRequest request) {
@@ -54,7 +46,7 @@ public class ContactForwardRequestTask implements Runnable {
 
     @Override
     public void run() {
-        LOGGER.info("Sending contact request: {}", request.getUUID());
+        LOGGER.info("Sending contact request: {}", request.getId());
         MCRSessionMgr.unlock();
         final MCRSession session = MCRSessionMgr.getCurrentSession();
         session.setUserInformation(MCRSystemUserInformation.getJanitorInstance());
@@ -63,19 +55,19 @@ public class ContactForwardRequestTask implements Runnable {
             for (ContactRecipient recipient : request.getRecipients().stream()
                 .filter(r -> r.isEnabled() && r.getSent() == null).toList()) {
                 try {
-                    ContactForwardRequestHelper.sendMail(recipient);
+                    ContactServiceHelper.sendRequestToRecipient(request, recipient);
                     recipient.setFailed(null);
                 } catch (Exception e) {
                     recipient.setFailed(new Date());
                 } finally {
                     recipient.setSent(new Date());
-                    ContactServiceImpl.getInstance().updateRecipient(request.getUUID(), recipient);
+                    ContactServiceImpl.getInstance().updateRecipient(request.getId(), recipient);
                 }
             }
             request.setState(ContactRequestState.SENT);
             request.setForwarded(new Date());
             try {
-                sendForwardingConfirmation();
+                ContactServiceHelper.sendRequestForwardedMail(request);
             } catch (Exception e) {
                 LOGGER.error("Cannot send forward confirmation.", e);
             }
@@ -96,15 +88,5 @@ public class ContactForwardRequestTask implements Runnable {
             }
         }
         session.close();
-    }
-
-    private void sendForwardingConfirmation() {
-        final EMail forwardConfirmation = new EMail();
-        final Map<String, String> properties = new HashMap<String, String>();
-        properties.put("id", request.getObjectID().toString());
-        properties.put("name", request.getName());
-        final Element mailElement = ContactUtils
-            .transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET, properties).getRootElement();
-        ContactMailService.sendMail(EMail.parseXML(mailElement), request.getFrom());
     }
 }
