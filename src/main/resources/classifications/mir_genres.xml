@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <mycoreclass xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="MCRClassification.xsd" ID="mir_genres">
   <label xml:lang="en" text="genre" description="A list of publication types" />
   <label xml:lang="x-uri" text="http://www.mycore.org/classifications/mir_genres" />
@@ -6,30 +5,30 @@
   <categories>
     <category ID="article">
       <label xml:lang="en" text="Article / Chapter" />
-      <label xml:lang="x-hosts" text="journal book collection festschrift proceedings standalone" />
-      <label xml:lang="x-mapping" text="marcgt:article diniPublType:article schemaOrg:Article" />
+      <label xml:lang="x-hosts" text="journal newspaper collection festschrift proceedings standalone" />
+      <label xml:lang="x-mapping" text="marcgt:article diniPublType:article diniPublType2022:Article schemaOrg:ScholarlyArticle" />
       <label xml:lang="de" text="Artikel / Aufsatz" />
     </category>
     <category ID="thesis">
       <label xml:lang="en" text="Thesis" />
       <label xml:lang="de" text="Hochschulschriften" />
-      <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:doctoralThesis XMetaDissPlusThesisLevel:thesis.doctoral" />
+      <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:workingPaper schemaOrg:Thesis XMetaDissPlusThesisLevel:other" />
       <label xml:lang="x-group" text="true" />
       <label xml:lang="x-hosts" text="series standalone" />
       <category ID="dissertation">
         <label xml:lang="en" text="Thesis" />
         <label xml:lang="de" text="Dissertation" />
-        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:doctoralThesis XMetaDissPlusThesisLevel:thesis.doctoral" />
+        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:doctoralThesis diniPublType2022:PhDThesis schemaOrg:Thesis XMetaDissPlusThesisLevel:thesis.doctoral" />
         <label xml:lang="x-hosts" text="series standalone" />
       </category>
       <category ID="habilitation">
         <label xml:lang="de" text="Habilitation" />
-        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:doctoralThesis XMetaDissPlusThesisLevel:thesis.habilitation" />
+        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:doctoralThesis diniPublType2022:Habilitation schemaOrg:Thesis XMetaDissPlusThesisLevel:thesis.habilitation" />
         <label xml:lang="x-hosts" text="series standalone" />
         <label xml:lang="en" text="Habilitation" />
       </category>
       <category ID="diploma_thesis">
-        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:masterThesis XMetaDissPlusThesisLevel:Diplom" />
+        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:masterThesis diniPublType2022:MasterThesis schemaOrg:Thesis XMetaDissPlusThesisLevel:Diplom" />
         <label xml:lang="x-hosts" text="series standalone" />
         <label xml:lang="en" text="Diploma thesis" />
         <label xml:lang="de" text="Diplomarbeit" />
@@ -38,22 +37,22 @@
         <label xml:lang="en" text="Master thesis" />
         <label xml:lang="de" text="Abschlussarbeit" />
         <label xml:lang="x-hosts" text="series standalone" />
-        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:masterThesis XMetaDissPlusThesisLevel:master" />
+        <label xml:lang="x-mapping" text="marcgt:thesis diniPublType:masterThesis diniPublType2022:MasterThesis schemaOrg:Thesis XMetaDissPlusThesisLevel:master" />
       </category>
     </category>
     <category ID="collection">
       <label xml:lang="de" text="Sammelwerk" />
-      <label xml:lang="x-mapping" text="marcgt:series diniPublType:Other" />
+      <label xml:lang="x-mapping" text="marcgt:series diniPublType:other diniPublType2022:EditedCollection schemaOrg:Book" />
       <label xml:lang="x-hosts" text="series standalone" />
       <label xml:lang="en" text="Collection" />
       <category ID="festschrift">
         <label xml:lang="en" text="Festschrift" />
-        <label xml:lang="x-mapping" text="marcgt:festschrift diniPublType:report" />
+        <label xml:lang="x-mapping" text="marcgt:festschrift diniPublType:report diniPublType2022:Report schemaOrg:Report" />
         <label xml:lang="x-hosts" text="series standalone" />
         <label xml:lang="de" text="Festschrift" />
       </category>
       <category ID="proceedings">
-        <label xml:lang="x-mapping" text="marcgt:conference_publication diniPublType:conferenceObject" />
+        <label xml:lang="x-mapping" text="marcgt:conference_publication diniPublType:conferenceObject diniPublType2022:ConferenceProceedings schemaOrg:Book" />
         <label xml:lang="en" text="Proceedings" />
         <label xml:lang="de" text="Tagungsband" />
         <label xml:lang="x-hosts" text="series standalone" />
@@ -62,118 +61,119 @@
     <category ID="report">
       <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="de" text="Report" />
-      <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report" />
+      <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report diniPublType2022:Report schemaOrg:Report" />
       <label xml:lang="en" text="Report" />
       <category ID="research_results">
-        <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
-        <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report" />
+        <label xml:lang="x-hosts" text="standalone" />
+        <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report diniPublType2022:Report schemaOrg:Report" />
         <label xml:lang="en" text="Research Results" />
         <label xml:lang="de" text="Forschungsergebnisse" />
       </category>
       <category ID="declaration">
-        <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
-        <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report" />
+        <label xml:lang="x-hosts" text="standalone" />
+        <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report diniPublType2022:Report schemaOrg:Report" />
         <label xml:lang="de" text="Fachliche Stellungnahme" />
         <label xml:lang="en" text="Professional declaration" />
       </category>
     </category>
     <category ID="in_house">
       <label xml:lang="x-hosts" text="standalone" />
-      <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report" />
+      <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report diniPublType2022:Report schemaOrg:Report" />
       <label xml:lang="en" text="In house" />
       <label xml:lang="de" text="Hausinterne Veröffentlichung" />
       <category ID="press_release">
-        <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
-        <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report" />
+        <label xml:lang="x-hosts" text="standalone" />
+        <label xml:lang="x-mapping" text="marcgt:reporting diniPublType:report diniPublType2022:Report schemaOrg:Report" />
         <label xml:lang="de" text="Pressemitteilung" />
         <label xml:lang="en" text="Press Release" />
       </category>
       <category ID="module_manual">
         <label xml:lang="de" text="Modulhandbuch" />
         <label xml:lang="en" text="Module Manual" />
+        <label xml:lang="x-mapping" text="diniPublType:Other diniPublType2022:Other" />
       </category>
     </category>
     <category ID="teaching_material">
       <label xml:lang="de" text="Lehrmaterial" />
       <label xml:lang="x-hosts" text="standalone lecture" />
-      <label xml:lang="x-mapping" text="marcgt:instruction diniPublType:CourseMaterial" />
+      <label xml:lang="x-mapping" text="marcgt:instruction diniPublType:CourseMaterial diniPublType2022:CourseMaterial schemaOrg:LearningResource" />
       <label xml:lang="en" text="Teaching Resource" />
     </category>
     <category ID="book">
       <label xml:lang="de" text="Buch" />
-      <label xml:lang="x-mapping" text="marcgt:book diniPublType:book" />
-      <label xml:lang="x-hosts" text="series journal standalone" />
+      <label xml:lang="x-mapping" text="marcgt:book diniPublType:book diniPublType2022:Book schemaOrg:Book" />
+      <label xml:lang="x-hosts" text="series standalone" />
       <label xml:lang="en" text="Book" />
     </category>
     <category ID="journal">
       <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="en" text="Journal" />
       <label xml:lang="de" text="Zeitschrift" />
-      <label xml:lang="x-mapping" text="marcgt:journal diniPublType:Periodical" />
+      <label xml:lang="x-mapping" text="marcgt:journal diniPublType:Periodical diniPublType2022:Periodical schemaOrg:Periodical" />
     </category>
     <category ID="issue">
-      <label xml:lang="x-mapping" text="marcgt:issue diniPublType:PeriodicalPart" />
-      <label xml:lang="x-hosts" text="journal standalone" />
+      <label xml:lang="x-mapping" text="marcgt:issue diniPublType:PeriodicalPart diniPublType2022:PeriodicalPart schemaOrg:PublicationIssue" />
+      <label xml:lang="x-hosts" text="standalone journal series" />
       <label xml:lang="en" text="Issue" />
       <label xml:lang="de" text="Zeitschriftenheft" />
     </category>
     <category ID="series">
       <label xml:lang="x-hosts" text="standalone" />
-      <label xml:lang="x-mapping" text="marcgt:series diniPublType:Other" />
+      <label xml:lang="x-mapping" text="marcgt:series diniPublType:other diniPublType2022:Other schemaOrg:BookSeries" />
       <label xml:lang="en" text="Series" />
       <label xml:lang="de" text="Serie" />
     </category>
     <category ID="speech">
       <label xml:lang="en" text="Lecture / Speech" />
-      <label xml:lang="x-hosts" text="series journal book collection festschrift proceedings standalone" />
-      <label xml:lang="x-mapping" text="marcgt:article diniPublType:other" />
+      <label xml:lang="x-hosts" text="proceedings standalone" />
+      <label xml:lang="x-mapping" text="marcgt:article diniPublType:other diniPublType2022:Other schemaOrg:Article" />
       <label xml:lang="de" text="Vortrag" />
     </category>
     <category ID="interview">
-      <label xml:lang="x-mapping" text="marcgt:interview diniPublType:report" />
+      <label xml:lang="x-mapping" text="marcgt:interview diniPublType:report diniPublType2022:Report schemaOrg:Report" />
       <label xml:lang="en" text="Interview" />
-      <label xml:lang="x-hosts" text="journal series collection festschrift proceedings book standalone" />
+      <label xml:lang="x-hosts" text="journal newspaper standalone" />
       <label xml:lang="de" text="Interview" />
     </category>
     <category ID="research_data">
       <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="de" text="Forschungsdaten" />
-      <label xml:lang="x-mapping" text="marcgt:database diniPublType:ResearchData schemaOrg:Dataset" />
+      <label xml:lang="x-mapping" text="marcgt:database diniPublType:ResearchData diniPublType2022:ResearchData schemaOrg:Dataset" />
       <label xml:lang="en" text="Research Data" />
       <category ID="software">
         <label xml:lang="en" text="Software" />
-        <label xml:lang="x-mapping" text="marcgt:computer_program diniPublType:Software" />
+        <label xml:lang="x-mapping" text="marcgt:computer_program diniPublType:Software diniPublType2022:Software schemaOrg:SoftwareApplication" />
         <label xml:lang="x-hosts" text="standalone" />
         <label xml:lang="de" text="Software" />
       </category>
     </category>
     <category ID="archive">
       <label xml:lang="de" text="Archivalie" description="Ein Archivale (eher bekannt unter dem Plural: Archivalien) ist eine in einem Archiv aufbewahrte Unterlage." />
-      <label xml:lang="x-mapping" text="marcgt:series diniPublType:Other" />
+      <label xml:lang="x-mapping" text="marcgt:series diniPublType:Other diniPublType2022:Other" />
       <label xml:lang="en" text="Archive" description="archival materials / documents" />
       <label xml:lang="x-hosts" text="standalone series" />
     </category>
     <category ID="poster">
-      <label xml:lang="x-mapping" text="marcgt:technical_drawing diniPublType:ResearchData" />
+      <label xml:lang="x-mapping" text="marcgt:technical_drawing diniPublType:ResearchData diniPublType2022:ConferencePoster schemaOrg:PresentationDigitalDocument" />
       <label xml:lang="en" text="Poster" />
-      <label xml:lang="x-hosts" text="proceedings collection festschrift standalone" />
+      <label xml:lang="x-hosts" text="proceedings standalone" />
       <label xml:lang="de" text="Poster" />
     </category>
     <category ID="audio">
-      <label xml:lang="x-hosts" text="standalone lecture series journal collection festschrift proceedings book" />
-      <label xml:lang="x-mapping" text="marcgt:sound diniPublType:Sound" />
+      <label xml:lang="x-hosts" text="standalone lecture" />
+      <label xml:lang="x-mapping" text="marcgt:sound diniPublType:Sound diniPublType2022:Sound schemaOrg:MediaObject" />
       <label xml:lang="de" text="Tondokument" />
       <label xml:lang="en" text="Audio File" />
     </category>
     <category ID="video">
-      <label xml:lang="x-hosts" text="standalone lecture series journal collection festschrift proceedings book" />
+      <label xml:lang="x-hosts" text="standalone lecture" />
       <label xml:lang="de" text="Film / Video" />
       <label xml:lang="en" text="Movie / Video" />
-      <label xml:lang="x-mapping" text="marcgt:motion_picture diniPublType:MovingImage" />
+      <label xml:lang="x-mapping" text="marcgt:motion_picture diniPublType:MovingImage diniPublType2022:MovingImage schemaOrg:MediaObject" />
     </category>
     <category ID="picture">
       <label xml:lang="x-hosts" text="standalone lecture" />
-      <label xml:lang="x-mapping" text="marcgt:picture diniPublType:StillImage" />
+      <label xml:lang="x-mapping" text="marcgt:picture diniPublType:StillImage diniPublType2022:StillImage schemaOrg:MediaObject" />
       <label xml:lang="de" text="Bild" />
       <label xml:lang="en" text="Picture" />
     </category>
@@ -181,7 +181,7 @@
       <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="de" text="Vorlesung" />
       <label xml:lang="en" text="Lecture" />
-      <label xml:lang="x-mapping" text="marcgt:series diniPublType:lecture" />
+      <label xml:lang="x-mapping" text="marcgt:series diniPublType:lecture diniPublType2022:Lecture schemaOrg:Course" />
     </category>
   </categories>
 </mycoreclass>
