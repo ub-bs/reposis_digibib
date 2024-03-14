@@ -32,10 +32,6 @@ $(document).ready(function() {
     };
   }
 
-  // replace placeholder USERNAME with username
-  var userID = $("#currentUser strong").html();
-  var newHref = 'https://leopard.tu-braunschweig.de/servlets/solr/select?q=state%3Asubmitted%20AND%20createdby:' + userID + '&fq=objectType:mods';
-  $("a[href='https://leopard.tu-braunschweig.de/servlets/solr/select?q=state%3Asubmitted%20AND%20createdby:USERNAME']").attr('href', newHref);
 // spam protection for mails
   $('span.madress').each(function(i) {
       var text = $(this).text();
