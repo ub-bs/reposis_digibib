@@ -361,7 +361,7 @@
     <xsl:param name="label"/>
 
     <xsl:variable name="hitsSortList" xmlns:encoder="xalan://java.net.URLEncoder"
-                  select="document(concat('solr:q=',encoder:encode($query), '&amp;rows=1000&amp;sort=mods.part.order.', $objectID, ' desc,mods.dateIssued desc, mods.dateIssued.host desc,',  $modsPart, ' desc, mods.title.main desc&amp;group=true&amp;group.limit=1000&amp;group.field=mods.yearIssued'))/response/lst[@name='grouped']/lst[@name='mods.yearIssued']" />
+                  select="document(concat('solr:q=',encoder:encode($query), '&amp;rows=1000&amp;sort=mods.part.order.', $objectID, '%20desc,mods.dateIssued%20desc,%20mods.dateIssued.host%20desc,',  $modsPart, '%20desc,%20mods.title.main%20desc&amp;group=true&amp;group.limit=1000&amp;group.field=mods.yearIssued'))/response/lst[@name='grouped']/lst[@name='mods.yearIssued']" />
     <xsl:if test="$hitsSortList/int[@name='matches'] &gt; 0">
         <xsl:call-template name="listRelatedItems">
           <xsl:with-param name="hits" select="$hitsSortList"/>
@@ -466,7 +466,7 @@
           <span class="subtitle">
             <span class="delimiter">
               <xsl:value-of select="$nbsp" />
-            <xsl:text> : </xsl:text>
+              <xsl:text>: </xsl:text>
             </span>
             <xsl:copy-of select="$alternateContent/subTitle/node()" />
           </span>
@@ -481,7 +481,7 @@
           <span class="subtitle">
             <span class="delimiter">
               <xsl:value-of select="$nbsp" />
-            <xsl:text> : </xsl:text>
+              <xsl:text>: </xsl:text>
             </span>
             <xsl:value-of select="mods:subTitle" />
           </span>
