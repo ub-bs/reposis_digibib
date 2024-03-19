@@ -16,7 +16,7 @@
 
   <xsl:template name="subject">
     <subject>
-      <xsl:value-of select="concat('Neue Kontaktanfrage zu:' , $id)" />
+      <xsl:value-of select="concat('Neue Kontaktanfrage zu: ' , $id)" />
     </subject>
   </xsl:template>
 

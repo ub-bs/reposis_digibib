@@ -2,72 +2,108 @@ package de.vzg.reposis.digibib.contact;
 
 import java.util.Optional;
 
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import de.vzg.reposis.digibib.contact.model.ContactForwarding;
+import de.vzg.reposis.digibib.contact.model.ContactPerson;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRecipientData;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 
+/**
+ * Maps between domain and data.
+ */
 public class ContactMapper {
 
-    public static ContactRecipient toDomain(ContactRecipientData recipientData) {
-        final ContactRecipient recipient = new ContactRecipient();
-        recipient.setConfirmed(recipientData.getConfirmed());
-        recipient.setEnabled(recipientData.isEnabled());
-        recipient.setFailed(recipientData.getFailed());
-        recipient.setMail(recipientData.getMail());
-        recipient.setOrigin(recipientData.getOrigin());
-        recipient.setSent(recipientData.getSent());
-        recipient.setId(recipientData.getUUID());
-        return recipient;
+    /**
+     * Maps and returns {@link ContactRecipientData} to {@link ContactPerson}.
+     *
+     * @param recipientData recipient data.
+     * @return contact person
+     */
+    public static ContactPerson toDomain(ContactRecipientData recipientData) {
+        final ContactPerson contactPerson
+            = new ContactPerson(recipientData.getName(), recipientData.getMail(), recipientData.getOrigin());
+        contactPerson.setEnabled(recipientData.isEnabled());
+        if (recipientData.getSent() != null || recipientData.getFailed() != null
+            || recipientData.getConfirmed() != null) {
+            final ContactForwarding forwarding = new ContactForwarding();
+            forwarding.setConfirmed(recipientData.getConfirmed());
+            forwarding.setFailed(recipientData.getFailed());
+            forwarding.setDate(recipientData.getSent());
+            contactPerson.setForwarding(forwarding);
+        }
+        return contactPerson;
     }
 
-    public static ContactRecipientData toData(ContactRecipient recipient) {
+    /**
+     * Maps and returns {@link ContactPerson} to {@link ContactRecipientData}.
+     *
+     * @param contactPerson contact person
+     * @return contact recipient data
+     */
+    public static ContactRecipientData toData(ContactPerson contactPerson) {
         final ContactRecipientData recipientData = new ContactRecipientData();
-        recipientData.setConfirmed(recipient.getConfirmed());
-        recipientData.setEnabled(recipient.isEnabled());
-        recipientData.setFailed(recipient.getFailed());
-        recipientData.setMail(recipient.getMail());
-        recipientData.setOrigin(recipient.getOrigin());
-        recipientData.setSent(recipient.getSent());
-        recipientData.setUUID(recipient.getId());
+        recipientData.setName(contactPerson.getName());
+        recipientData.setMail(contactPerson.getMail());
+        recipientData.setOrigin(contactPerson.getOrigin());
+        recipientData.setEnabled(contactPerson.isEnabled());
+        if (contactPerson.getForwarding() != null) {
+            recipientData.setConfirmed(contactPerson.getForwarding().getConfirmed());
+            recipientData.setFailed(contactPerson.getForwarding().getFailed());
+            recipientData.setSent(contactPerson.getForwarding().getDate());
+        }
         return recipientData;
     }
 
+    /**
+     * Maps and returns {@link ContactRequestData} to {@link ContactRequest}.
+     *
+     * @param requestData request data
+     * @return contact request
+     */
     public static ContactRequest toDomain(ContactRequestData requestData) {
-        final ContactRequest request = new ContactRequest();
+        final ContactRequestBody requestBody = new ContactRequestBody(requestData.getName(), requestData.getFrom(),
+            requestData.getOrcid(), requestData.getMessage());
+        final ContactRequest request = new ContactRequest(requestBody);
+        request.setId(requestData.getUuid());
+        request.setObjectId(requestData.getObjectId());
         request.setComment(requestData.getComment());
         request.setCreated(requestData.getCreated());
-        request.setCreatedBy(request.getCreatedBy());
-        request.setDebug(requestData.getDebug());
+        request.setCreatedBy(requestData.getCreatedBy());
+        request.setDebugMesssage(requestData.getDebug());
         request.setForwarded(requestData.getForwarded());
-        request.setFrom(requestData.getFrom());
         request.setLastModified(requestData.getLastModified());
         request.setLastModifiedBy(requestData.getLastModifiedBy());
-        request.setMessage(requestData.getMessage());
-        request.setName(requestData.getName());
-        request.setObjectId(requestData.getObjectID());
-        request.setOrcid(requestData.getORCID());
         request.setState(requestData.getState());
-        requestData.getRecipients().stream().map(ContactMapper::toDomain).forEach(request::addRecipient);
+        requestData.getRecipients().stream().map(ContactMapper::toDomain).forEach(request.getContactPersons()::add);
         return request;
     }
 
+    /**
+     * Maps and returns {@link ContactRequest} to {@link ContactRequestData}.
+     *
+     * @param request request
+     * @return contact request data
+     */
     public static ContactRequestData toData(ContactRequest request) {
         final ContactRequestData requestData = new ContactRequestData();
         requestData.setComment(request.getComment());
         requestData.setCreated(request.getCreated());
         requestData.setCreatedBy(request.getCreatedBy());
-        requestData.setDebug(request.getDebug());
+        requestData.setDebug(request.getDebugMessage());
         requestData.setForwarded(request.getForwarded());
-        requestData.setFrom(request.getFrom());
         requestData.setLastModified(request.getLastModified());
         requestData.setLastModifiedBy(request.getLastModifiedBy());
-        requestData.setMessage(request.getMessage());
-        requestData.setName(request.getName());
-        requestData.setObjectID(request.getObjectId());
-        Optional.ofNullable(request.getOrcid()).map(String::trim).ifPresent(requestData::setORCID);
         requestData.setState(request.getState());
-        request.getRecipients().stream().map(ContactMapper::toData).forEach(requestData::addRecipient);
+        requestData.setObjectId(request.getObjectId());
+        request.getContactPersons().stream().map(ContactMapper::toData).forEach(requestData::addRecipient);
+        final ContactRequestBody requestBody = request.getBody();
+        if (requestBody != null) {
+            requestData.setFrom(requestBody.fromMail());
+            requestData.setMessage(requestBody.message());
+            requestData.setName(requestBody.fromName());
+            Optional.ofNullable(requestBody.fromOrcid()).map(String::trim).ifPresent(requestData::setOrcid);
+        }
         return requestData;
     }
 }

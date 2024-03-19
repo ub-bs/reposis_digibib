@@ -24,35 +24,35 @@ import java.util.UUID;
 
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-import de.vzg.reposis.digibib.contact.model.ContactRequestState;
+import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 
 /**
- * This interfaces defindes methods for a request dao.
+ * Defines {@link ContactBaseRepository} interface for {@link ContactRequestData}.
  */
 public interface ContactRequestRepository extends ContactBaseRepository<ContactRequestData> {
 
     /**
-     * Returns a request collection by object id.
+     * Returns a collection over {@link ContactRequestData} elements by object id.
      *
-     * @param objectID the object id
-     * @return the request collection
+     * @param objectId object id
+     * @return collection over contact request data elements
      */
-    Collection<ContactRequestData> findByObjectID(MCRObjectID objectID);
+    Collection<ContactRequestData> findByObjectId(MCRObjectID objectId);
 
     /**
      * Returns a request collection that are in given state.
      *
-     * @param state the state
-     * @return the request collection
+     * @param state state
+     * @return collection over contact request data elements
      */
-    Collection<ContactRequestData> findByState(ContactRequestState state);
+    Collection<ContactRequestData> findByState(ContactRequest.State state);
 
     /**
-     * Returns a request by given uuid.
+     * Returns optional with request by given uuid.
      *
-     * @param uuid the uuid
-     * @return the request or null
+     * @param uuid uuid
+     * @return optional with request
      */
-    Optional<ContactRequestData> findByUUID(UUID uuid);
+    Optional<ContactRequestData> findByUuid(UUID uuid);
 }

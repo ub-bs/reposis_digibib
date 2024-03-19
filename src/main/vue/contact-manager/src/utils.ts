@@ -1,17 +1,13 @@
-export enum Origin {
-  Manual = 'MANUAL',
-  Fallback = 'FALLBACK',
-}
+export const ORIGIN_MANUAL = 'manual';
+
+export const ORIGIN_FALLBACK = 'fallback';
 
 export enum RequestState {
-  Received = 0,
-  Processing = 1,
-  Processing_Failed = 2,
-  Processed = 3,
-  Sending = 4,
-  Sending_Failed = 5,
-  Sent = 6,
-  Confirmed = 7,
+  RECEIVED = 0,
+  PROCESSED = 10,
+  FORWARDING = 20,
+  FORWARDED = 30,
+  CONFIRMED = 40,
 }
 
 export namespace RequestState {
@@ -20,33 +16,38 @@ export namespace RequestState {
   }
 }
 
-export type Recipient = {
-  uuid: string | undefined;
-  name: string;
-  origin: Origin;
-  mail: string;
-  enabled: boolean;
+export type Forwarding = {
+  date: Date;
   failed: Date;
-  sent: Date;
   confirmed: Date;
 }
 
-export type Request = {
-  uuid: string;
+export type ContactPerson = {
   name: string;
   email: string;
-  orcid?: string;
-  created: Date;
-  state: RequestState;
+  origin: string;
+  enabled: boolean;
+  forwarding?: Forwarding;
+}
+
+export type RequestBody = {
+  name: string;
+  email: string;
   message: string;
-  objectID: string;
-  recipients: Recipient[];
+  orcid?: string;
+}
+
+export type Request = {
+  id: string;
+  objectId: string;
+  body: RequestBody;
+  created: Date;
+  forwarded: Date;
+  state: RequestState;
+  contactPersons: ContactPerson[];
+  comment: string;
 }
 
 export type ErrorResponse = {
   errorCode: string;
-}
-
-export function isWarmState(state: RequestState): boolean {
-  return RequestState.Processed === state || RequestState.Received === state;
 }

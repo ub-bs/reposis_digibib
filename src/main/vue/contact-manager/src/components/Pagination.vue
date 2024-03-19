@@ -29,15 +29,15 @@ import { computed } from 'vue';
 
 const props = defineProps({
   totalRows: {
-    type: [Number, String],
+    type: [Number],
     required: true,
   },
   currentPage: {
-    type: [Number, String],
+    type: [Number],
     required: true,
   },
   perPage: {
-    type: [Number, String],
+    type: [Number],
     required: true,
   },
 });

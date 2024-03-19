@@ -19,6 +19,7 @@
 package de.vzg.reposis.digibib.contact.model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -26,275 +27,309 @@ import java.util.UUID;
 
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-import de.vzg.reposis.digibib.contact.validation.ValidOrcid;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
- * This class defines a model for a request.
+ * Defines request model.
  */
 public class ContactRequest {
 
-    /**
-     * Uuid of request.
-     */
     private UUID id;
 
-    /**
-     * Mail of requester.
-     */
-    @Email
-    @NotNull
-    private String from;
-
-    /**
-     * Name of requester.
-     */
-    @NotNull
-    private String name;
-
-    /**
-     * Message of requester.
-     */
-    @NotNull
-    private String message;
-
-    /**
-     * Orcid of requester.
-     */
-    @ValidOrcid
-    private String orcid;
-
-    /**
-     * Linked object of request.
-     */
-    @NotNull
     private MCRObjectID objectId;
 
-    /**
-     * Date of creation.
-     */
+    private ContactRequestBody request;
+
     private Date created;
 
-    /**
-     * Name of creator.
-     */
     private String createdBy;
 
-    /**
-     * Date of last modification.
-     */
     private Date lastModified;
 
-    /**
-     * Name of the last modifier.
-     */
     private String lastModifiedBy;
 
-    /**
-     * Date of forwarding.
-     */
     private Date forwarded;
 
-    /**
-     * State of request.
-     */
-    private int state;
+    private State state;
 
-    /**
-     * List of recipients.
-     */
-    private List<ContactRecipient> recipients = new ArrayList<ContactRecipient>();
+    private List<ContactPerson> contactPersons = new ArrayList<ContactPerson>();
 
-    /**
-     * Debug field for internal purposes.
-     */
-    private String debug;
+    private String debugMessage;
 
-    /**
-     * Comment field for editors
-     */
     private String comment;
+
+    /**
+     * Constructs new request job with request.
+     */
+    public ContactRequest(ContactRequestBody request) {
+        setRequest(request);
+    }
 
     public ContactRequest() {
     }
 
-    public ContactRequest(MCRObjectID objectID, String from, String name, String message) {
-        objectId = objectID;
-        this.from = from;
-        this.name = name;
-        this.message = message;
-    }
-
-    public MCRObjectID getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(MCRObjectID objectId) {
-        this.objectId = objectId;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public void setFrom(String from) {
-        this.from = from;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getOrcid() {
-        return orcid;
-    }
-
-    public void setOrcid(String orcid) {
-        this.orcid = orcid;
-    }
-
-    public Date getCreated() {
-        return created;
-    }
-
-    public void setCreated(Date created) {
-        this.created = created;
-    }
-
-    public String getCreatedBy() {
-        return createdBy;
-    }
-
-    public void setCreatedBy(String createdBy) {
-        this.createdBy = createdBy;
-    }
-
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public Date getForwarded() {
-        return forwarded;
-    }
-
-    public void setForwarded(Date forwarded) {
-        this.forwarded = forwarded;
-    }
-
-    public ContactRequestState getState() {
-        return ContactRequestState.resolve(state);
-    }
-
+    /**
+     * Returns request id.
+     *
+     * @return id
+     */
     public UUID getId() {
         return id;
     }
 
+    /**
+     * Sets request id.
+     *
+     * @param id id
+     */
     public void setId(UUID id) {
         this.id = id;
     }
 
-    public void setState(ContactRequestState state) {
-        this.state = state.getValue();
+    /**
+     * Returns linked object id.
+     *
+     * @return object id
+     */
+    public MCRObjectID getObjectId() {
+        return objectId;
     }
 
-    public List<ContactRecipient> getRecipients() {
-        return recipients;
+    /**
+     * Sets linked object id.
+     *
+     * @param objectId object id
+     */
+    public void setObjectId(MCRObjectID objectId) {
+        this.objectId = objectId;
     }
 
-    public void setRecipients(List<ContactRecipient> recipients) {
-        this.recipients = recipients;
+    /**
+     * Returns request.
+     *
+     * @return request
+     */
+    public ContactRequestBody getBody() {
+        return request;
     }
 
-    public void addRecipient(ContactRecipient recipient) {
-        recipients.add(recipient);
+    /**
+     * Sets request.
+     *
+     * @param request
+     */
+    public void setRequest(ContactRequestBody request) {
+        this.request = request;
     }
 
-    public void removeRecipient(ContactRecipient recipient) {
-        recipients.remove(recipient);
+    /**
+     * Return date of request creation.
+     *
+     * @return date of request creation
+     */
+    public Date getCreated() {
+        return created;
     }
 
-    public String getDebug() {
-        return debug;
+    /**
+     * Sets date of request creation.
+     *
+     * @param created date of request creation
+     */
+    public void setCreated(Date created) {
+        this.created = created;
     }
 
-    public void setDebug(String debug) {
-        this.debug = debug;
+    /**
+     * Returns name of creator.
+     *
+     * @return name of creator
+     */
+    public String getCreatedBy() {
+        return createdBy;
     }
 
+    /**
+     * Sets name of creator.
+     *
+     * @param createdBy name of creator
+     */
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    /**
+     * Returns date of last modification.
+     *
+     * @return date of last modification
+     */
+    public Date getLastModified() {
+        return lastModified;
+    }
+
+    /**
+     * Sets date of last modification.
+     *
+     * @param lastModified date of last modification
+     */
+    public void setLastModified(Date lastModified) {
+        this.lastModified = lastModified;
+    }
+
+    /**
+     * Returns name of last modifier.
+     *
+     * @return date of last modification
+     */
+    public String getLastModifiedBy() {
+        return lastModifiedBy;
+    }
+
+    /**
+     * Sets name of last modifier.
+     *
+     * @param lastModifiedBy name of last modifier
+     */
+    public void setLastModifiedBy(String lastModifiedBy) {
+        this.lastModifiedBy = lastModifiedBy;
+    }
+
+    /**
+     * Returns date of forwarding.
+     *
+     * @return date of forwarding
+     */
+    public Date getForwarded() {
+        return forwarded;
+    }
+
+    /**
+     * Sets date of forwarding
+     *
+     * @param forwarded date of forwarding
+     */
+    public void setForwarded(Date forwarded) {
+        this.forwarded = forwarded;
+    }
+
+    /**
+     * Returns request state.
+     *
+     * @return state
+     */
+    public State getState() {
+        return state;
+    }
+
+    /**
+     * Sets request state.
+     *
+     * @param state state
+     */
+    public void setState(State state) {
+        this.state = state;
+    }
+
+    /**
+     * Returns list of recipient elements.
+     *
+     * @return list of recipient elements
+     */
+    public List<ContactPerson> getContactPersons() {
+        return contactPersons;
+    }
+
+    /**
+     * Sets list of recipient elements.
+     *
+     * @param recipients list of recipient elements
+     */
+    public void setContactPersons(List<ContactPerson> contactPersons) {
+        this.contactPersons = contactPersons;
+    }
+
+    /**
+     * Returns debug message.
+     *
+     * @return debug message
+     */
+    public String getDebugMessage() {
+        return debugMessage;
+    }
+
+    /**
+     * Sets debug message
+     *
+     * @param debugMessage debug message
+     */
+    public void setDebugMesssage(String debugMessage) {
+        this.debugMessage = debugMessage;
+    }
+
+    /**
+     * Returns comment.
+     *
+     * @return comment
+     */
     public String getComment() {
         return comment;
     }
 
+    /**
+     * Sets comment.
+     *
+     * @param comment comment
+     */
     public void setComment(String comment) {
         this.comment = comment;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(comment, created, createdBy, debug, forwarded, from, lastModified, lastModifiedBy, message,
-            name, objectId, orcid, recipients, state, id);
+        return Objects.hash(comment, created, createdBy, debugMessage, forwarded, lastModified, lastModifiedBy,
+            contactPersons, state, id);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         ContactRequest other = (ContactRequest) obj;
         return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
-            && Objects.equals(createdBy, other.createdBy) && Objects.equals(debug, other.debug)
-            && Objects.equals(forwarded, other.forwarded) && Objects.equals(from, other.from)
-            && Objects.equals(lastModified, other.lastModified)
-            && Objects.equals(lastModifiedBy, other.lastModifiedBy) && Objects.equals(message, other.message)
-            && Objects.equals(name, other.name) && Objects.equals(objectId, other.objectId)
-            && Objects.equals(orcid, other.orcid) && Objects.equals(recipients, other.recipients)
+            && Objects.equals(createdBy, other.createdBy) && Objects.equals(debugMessage, other.debugMessage)
+            && Objects.equals(forwarded, other.forwarded) && Objects.equals(lastModified, other.lastModified)
+            && Objects.equals(lastModifiedBy, other.lastModifiedBy)
+            && Objects.equals(contactPersons, other.contactPersons)
             && state == other.state && Objects.equals(id, other.id);
     }
 
-    @Override
-    public String toString() {
-        String result = "";
-        if (from != null) {
-            result += "from: " + from + "\n";
+    /**
+     * Describe possible request states.
+     */
+    public enum State {
+        RECEIVED(0), PROCESSED(10), FORWARDING(20), FORWARDED(30), CONFIRMED(40);
+
+        private final int value;
+
+        State(int value) {
+            this.value = value;
         }
-        if (message != null) {
-            result += "message: " + message + "\n";
+
+        public static State resolve(int value) {
+            return Arrays.stream(values()).filter(o -> o.value == value).findFirst().orElse(null);
         }
-        if (name != null) {
-            result += "name: " + name + "\n";
+
+        @JsonValue
+        public int getValue() {
+            return value;
         }
-        result += "state: " + state + "\n";
-        if (orcid != null) {
-            result += "orcid: " + orcid + "\n";
-        }
-        return result;
     }
+
 }

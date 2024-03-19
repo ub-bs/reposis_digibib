@@ -16,54 +16,24 @@
       </div>
     </div>
     <template v-if="isBooted && errorCode !== 'unauthorizedError'">
-      <div v-if="totalCount === 0" class="row">
-        <div class="col">
-          <div class="alert alert-warning text-center" role="alert">
-            {{ $t('digibib.contact.frontend.manager.info.noRequests') }}
-          </div>
-        </div>
-      </div>
       <div class="row">
         <div class="col">
           <OverviewTable @error="handleError" />
-        </div>
-      </div>
-      <div class="row">
-        <div class="col d-flex justify-content-center">
-          <Pagination :total-rows="totalCount" :per-page="perPage" :current-page="currentPage"
-            @change="handlePageChange" />
         </div>
       </div>
     </template>
   </div>
 </template>
 <script setup lang="ts">
-import { ref, computed, onMounted } from 'vue';
-import { useStore } from 'vuex';
+import { ref, onMounted } from 'vue';
 import axios from 'axios';
 import OverviewTable from './components/OverviewTable.vue';
-import Pagination from './components/Pagination.vue';
-import { ActionTypes } from './store/request/action-types';
 
-const perPage = 8;
-const store = useStore();
-const errorCode = ref(null);
+const errorCode = ref();
 const loading = ref(true);
-const totalCount = computed(() => store.state.request.totalCount);
-const currentPage = ref(0);
 const isBooted = ref(false);
-const handlePageChange = async (page) => {
-  currentPage.value = page;
-  try {
-    await store.dispatch(`request/${ActionTypes.FETCH}`, {
-      offset: page * perPage,
-      limit: page * perPage + perPage,
-    });
-  } catch (error) {
-    errorCode.value = error instanceof Error ? error.message : 'unknown';
-  }
-};
-const handleError = (code) => {
+
+const handleError = (code: string) => {
   errorCode.value = code;
 };
 onMounted(async () => {
@@ -79,16 +49,7 @@ onMounted(async () => {
       authError = true;
     }
   }
-  if (!authError) {
-    try {
-      await store.dispatch(`request/${ActionTypes.FETCH}`, {
-        offset: 0,
-        limit: perPage,
-      });
-    } catch (error) {
-      handleError(error instanceof Error ? error.message : 'unknown');
-    }
-  } else {
+  if (authError) {
     errorCode.value = 'unknown';
   }
   isBooted.value = true;

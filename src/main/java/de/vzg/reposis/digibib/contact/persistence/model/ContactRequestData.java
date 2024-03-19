@@ -27,15 +27,16 @@ import java.util.UUID;
 import org.mycore.backend.jpa.MCRObjectIDConverter;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import de.vzg.reposis.digibib.contact.model.ContactRequestState;
+import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.validation.ValidOrcid;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -52,13 +53,13 @@ import jakarta.validation.constraints.NotNull;
     @NamedQuery(name = "ContactRequest.findAll", query = "SELECT r"
         + "  FROM ContactRequestData r"
         + "  ORDER BY r.created DESC"),
-    @NamedQuery(name = "ContactRequest.findByObjectID", query = "SELECT r"
+    @NamedQuery(name = "ContactRequest.findByObjectId", query = "SELECT r"
         + "  FROM ContactRequestData r"
-        + "  WHERE r.objectID = :objectID"
+        + "  WHERE r.objectId = :objectId"
         + "  ORDER BY r.created DESC"),
-    @NamedQuery(name = "ContactRequest.findByUUID", query = "SELECT r"
+    @NamedQuery(name = "ContactRequest.findByUuid", query = "SELECT r"
         + "  FROM ContactRequestData r"
-        + "  WHERE r.UUID = :uuid"),
+        + "  WHERE r.uuid = :uuid"),
     @NamedQuery(name = "ContactRequest.findByState", query = "SELECT r"
         + "  FROM ContactRequestData r"
         + "  WHERE r.state = :state"
@@ -71,14 +72,6 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name = "contactRequest")
 public class ContactRequestData {
-
-    private static final String PROP_SENDER = "email";
-
-    private static final String PROP_MESSAGE = "message";
-
-    private static final String PROP_NAME = "name";
-
-    private static final String PROP_ORCID = "orcid";
 
     /**
      * Internal id.
@@ -114,7 +107,7 @@ public class ContactRequestData {
      * Linked object of request.
      */
     @NotNull
-    private MCRObjectID objectID;
+    private MCRObjectID objectId;
 
     /**
      * Date of creation.
@@ -144,7 +137,8 @@ public class ContactRequestData {
     /**
      * State of request.
      */
-    private int state;
+    @Enumerated(EnumType.STRING)
+    private ContactRequest.State state;
 
     /**
      * List of recipients.
@@ -157,7 +151,7 @@ public class ContactRequestData {
     private String debug;
 
     /**
-     * Comment field for editors
+     * Comment field for editors.
      */
     private String comment;
 
@@ -167,20 +161,15 @@ public class ContactRequestData {
     @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
     private UUID uuid;
 
+    /**
+     * Constructs new {@link ContactRequestData}.
+     */
     public ContactRequestData() {
-    }
-
-    public ContactRequestData(MCRObjectID objectID, String from, String name, String message) {
-        this.objectID = objectID;
-        this.from = from;
-        this.name = name;
-        this.message = message;
     }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "contactId", nullable = false)
-    @JsonIgnore
     public long getId() {
         return id;
     }
@@ -192,15 +181,14 @@ public class ContactRequestData {
 
     @Column(name = "objectId", length = MCRObjectID.MAX_LENGTH, nullable = false)
     @Convert(converter = MCRObjectIDConverter.class)
-    public MCRObjectID getObjectID() {
-        return objectID;
+    public MCRObjectID getObjectId() {
+        return objectId;
     }
 
-    public void setObjectID(MCRObjectID objectID) {
-        this.objectID = objectID;
+    public void setObjectId(MCRObjectID objectID) {
+        this.objectId = objectID;
     }
 
-    @JsonProperty(value = PROP_SENDER, required = true)
     @Column(name = "sender", nullable = false)
     public String getFrom() {
         return from;
@@ -210,7 +198,6 @@ public class ContactRequestData {
         this.from = from;
     }
 
-    @JsonProperty(value = PROP_MESSAGE, required = true)
     @Column(name = "message", nullable = false)
     public String getMessage() {
         return message;
@@ -220,7 +207,6 @@ public class ContactRequestData {
         this.message = message;
     }
 
-    @JsonProperty(value = PROP_NAME, required = true)
     @Column(name = "name", nullable = false)
     public String getName() {
         return name;
@@ -230,13 +216,12 @@ public class ContactRequestData {
         this.name = name;
     }
 
-    @JsonProperty(value = PROP_ORCID)
     @Column(name = "orcid")
-    public String getORCID() {
+    public String getOrcid() {
         return orcid;
     }
 
-    public void setORCID(String orcid) {
+    public void setOrcid(String orcid) {
         this.orcid = orcid;
     }
 
@@ -285,8 +270,12 @@ public class ContactRequestData {
         this.forwarded = forwarded;
     }
 
-    public ContactRequestState getState() {
-        return ContactRequestState.resolve(state);
+    public ContactRequest.State getState() {
+        return state;
+    }
+
+    public void setState(ContactRequest.State state) {
+        this.state = state;
     }
 
     @PrePersist
@@ -296,16 +285,12 @@ public class ContactRequestData {
         }
     }
 
-    public UUID getUUID() {
+    public UUID getUuid() {
         return uuid;
     }
 
-    public void setUUID(UUID uuid) {
+    public void setUuid(UUID uuid) {
         this.uuid = uuid;
-    }
-
-    public void setState(ContactRequestState state) {
-        this.state = state.getValue();
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -345,7 +330,8 @@ public class ContactRequestData {
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(uuid);
+        return Objects.hash(comment, created, createdBy, debug, forwarded, from, id, lastModified, lastModifiedBy,
+            message, name, objectId, orcid, recipients, state, uuid);
     }
 
     @Override
@@ -360,25 +346,12 @@ public class ContactRequestData {
             return false;
         }
         ContactRequestData other = (ContactRequestData) obj;
-        return Objects.equals(uuid, other.getUUID());
-    }
-
-    @Override
-    public String toString() {
-        String result = "";
-        if (from != null) {
-            result += "from: " + from + "\n";
-        }
-        if (message != null) {
-            result += "message: " + message + "\n";
-        }
-        if (name != null) {
-            result += "name: " + name + "\n";
-        }
-        result += "state: " + state + "\n";
-        if (orcid != null) {
-            result += "orcid: " + orcid + "\n";
-        }
-        return result;
+        return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
+            && Objects.equals(createdBy, other.createdBy) && Objects.equals(debug, other.debug)
+            && Objects.equals(forwarded, other.forwarded) && Objects.equals(from, other.from) && id == other.id
+            && Objects.equals(lastModified, other.lastModified) && Objects.equals(lastModifiedBy, other.lastModifiedBy)
+            && Objects.equals(message, other.message) && Objects.equals(name, other.name)
+            && Objects.equals(objectId, other.objectId) && Objects.equals(orcid, other.orcid)
+            && Objects.equals(recipients, other.recipients) && state == other.state && Objects.equals(uuid, other.uuid);
     }
 }

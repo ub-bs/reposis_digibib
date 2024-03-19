@@ -45,22 +45,31 @@ public class ContactRequestRepositoryImplTest extends MCRJPATestCase {
 
     @Test
     public void testFindByUUID() {
-        final ContactRequestRepository dao = new ContactRequestRepositoryImpl();
-        ContactRequestData request = new ContactRequestData(MCRObjectID.getInstance(OBJECT_ID), "", "", "");
-        dao.insert(request);
-        final List<ContactRequestData> requests = List.copyOf(dao.findAll());
+        final ContactRequestRepository repository = new ContactRequestRepositoryImpl();
+        ContactRequestData request = createRequest();
+        repository.insert(request);
+        final List<ContactRequestData> requests = List.copyOf(repository.findAll());
         request = requests.get(0);
-        final UUID uuid = request.getUUID();
+        final UUID uuid = request.getUuid();
         assertNotNull(uuid);
-        assertTrue(dao.findByUUID(uuid).isPresent());
+        assertTrue(repository.findByUuid(uuid).isPresent());
     }
 
     @Test
     public void testInsert() {
-        final ContactRequestRepository dao = new ContactRequestRepositoryImpl();
-        ContactRequestData request = new ContactRequestData(MCRObjectID.getInstance(OBJECT_ID), "", "", "");
-        dao.insert(request);
-        final List<ContactRequestData> requests = List.copyOf(dao.findAll());
+        final ContactRequestRepository repository = new ContactRequestRepositoryImpl();
+        ContactRequestData request = createRequest();
+        repository.insert(request);
+        final List<ContactRequestData> requests = List.copyOf(repository.findAll());
         assertEquals(1, requests.size());
+    }
+
+    private ContactRequestData createRequest() {
+        ContactRequestData request = new ContactRequestData();
+        request.setFrom("");
+        request.setName("");
+        request.setMessage("");
+        request.setObjectId(MCRObjectID.getInstance(OBJECT_ID));
+        return request;
     }
 }

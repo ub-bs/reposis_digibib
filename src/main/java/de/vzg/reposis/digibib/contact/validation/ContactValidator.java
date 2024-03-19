@@ -18,14 +18,14 @@
 
 package de.vzg.reposis.digibib.contact.validation;
 
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import jakarta.validation.ValidatorFactory;
 
 /**
- * This class provies a validator service.
+ * This class provides a validation service.
  */
 public class ContactValidator {
 
@@ -43,20 +43,20 @@ public class ContactValidator {
     /**
      * Validates a recipient against model.
      *
-     * @param recipient the recipient
+     * @param recipient recipient
      * @return true if recipient is valid
      */
-    public boolean validateRecipient(ContactRecipient recipient) {
-        return validator.validate(recipient).size() == 0;
+    public boolean validateContactPerson(ContactPerson contactPerson) {
+        return validator.validate(contactPerson).size() == 0;
     }
 
     /**
      * Validates a request against model.
      *
-     * @param request the request
+     * @param request request
      * @return true if request is valid
      */
-    public boolean validateRequest(ContactRequest request) {
+    public boolean validateRequestBody(ContactRequestBody request) {
         return validator.validate(request).size() == 0;
     }
 

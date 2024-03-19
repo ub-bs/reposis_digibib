@@ -25,14 +25,14 @@ import java.util.UUID;
 import org.mycore.backend.jpa.MCREntityManagerProvider;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-import de.vzg.reposis.digibib.contact.model.ContactRequestState;
+import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.TypedQuery;
 
 /**
- * This class implements a request dao.
+ * Implements {@link ContactRequestRepository}.
  */
 public class ContactRequestRepositoryImpl implements ContactRequestRepository {
 
@@ -42,26 +42,26 @@ public class ContactRequestRepositoryImpl implements ContactRequestRepository {
     }
 
     @Override
-    public Optional<ContactRequestData> findByID(long id) {
+    public Optional<ContactRequestData> findById(long id) {
         return Optional.ofNullable(getEntityManager().find(ContactRequestData.class, id));
     }
 
     @Override
-    public Collection<ContactRequestData> findByObjectID(MCRObjectID objectID) {
-        return getEntityManager().createNamedQuery("ContactRequest.findByObjectID", ContactRequestData.class)
+    public Collection<ContactRequestData> findByObjectId(MCRObjectID objectID) {
+        return getEntityManager().createNamedQuery("ContactRequest.findByObjectId", ContactRequestData.class)
             .setParameter("objectID", objectID).getResultList();
     }
 
     @Override
-    public Collection<ContactRequestData> findByState(ContactRequestState state) {
+    public Collection<ContactRequestData> findByState(ContactRequest.State state) {
         return getEntityManager().createNamedQuery("ContactRequest.findByState", ContactRequestData.class)
             .setParameter("state", state).getResultList();
     }
 
     @Override
-    public Optional<ContactRequestData> findByUUID(UUID uuid) {
+    public Optional<ContactRequestData> findByUuid(UUID uuid) {
         final TypedQuery<ContactRequestData> query = getEntityManager()
-            .createNamedQuery("ContactRequest.findByUUID", ContactRequestData.class).setParameter("uuid", uuid);
+            .createNamedQuery("ContactRequest.findByUuid", ContactRequestData.class).setParameter("uuid", uuid);
         try {
             return Optional.ofNullable(query.getSingleResult());
         } catch (NoResultException e) {
@@ -69,28 +69,25 @@ public class ContactRequestRepositoryImpl implements ContactRequestRepository {
         }
     }
 
-    private EntityManager getEntityManager() {
-        return MCREntityManagerProvider.getCurrentEntityManager();
-    }
-
     @Override
     public void insert(ContactRequestData request) {
         final EntityManager entityManager = getEntityManager();
         entityManager.persist(request);
-        entityManager.flush();
     }
 
     @Override
     public void remove(ContactRequestData request) {
         final EntityManager entityManager = getEntityManager();
         entityManager.remove(entityManager.merge(request));
-        entityManager.flush();
     }
 
     @Override
     public void save(ContactRequestData request) {
         final EntityManager entityManager = getEntityManager();
         entityManager.merge(request);
-        entityManager.flush();
+    }
+
+    private EntityManager getEntityManager() {
+        return MCREntityManagerProvider.getCurrentEntityManager();
     }
 }

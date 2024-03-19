@@ -18,22 +18,23 @@
 
 package de.vzg.reposis.digibib.contact.rsc;
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.jdom2.Attribute;
-import org.jdom2.Element;
 import org.mycore.common.MCRException;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
-import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
-import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -48,9 +49,9 @@ import jakarta.ws.rs.core.Response;
 @Path("/contact")
 public class ContactResource {
 
-    private static final Set<String> ALLOWED_GENRES = MCRConfiguration2
-        .getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
-        .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
+    private static final Set<String> ALLOWED_GENRES
+        = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
+            .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -60,38 +61,40 @@ public class ContactResource {
         @ApiResponse(responseCode = "404", description = "object is not found"), })
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
-    public Response save(ContactRequest request) throws Exception {
-        if (!ContactValidator.getInstance().validateRequest(request)) {
+    public Response save(ContactRequestCreateDto requestBodyDto) throws Exception {
+        final ContactRequestBody requestBody = toRequestBody(requestBodyDto);
+        if (!ContactValidator.getInstance().validateRequestBody(requestBody)) {
             throw new BadRequestException("invalid request");
         }
-        final MCRObjectID objectId = request.getObjectId();
-        if (!MCRMetadataManager.exists(objectId)) {
-            throw new BadRequestException(objectId.toString() + " does not exist");
-        }
+        final MCRObjectID objectId = Optional.ofNullable(requestBodyDto.objectId()).filter(MCRMetadataManager::exists)
+            .orElseThrow(() -> new BadRequestException("object id does not exist"));
         String genre = null;
         try {
             genre = getGenre(objectId);
         } catch (MCRException e) {
             throw new BadRequestException("No genre for: " + objectId.toString());
         }
-        if (genre == null || !ALLOWED_GENRES.contains(genre)) {
+        if (!ALLOWED_GENRES.contains(genre)) {
             throw new BadRequestException("Not activated for genre: " + genre);
         }
-        ContactServiceImpl.getInstance().addRequest(request);
+        ContactServiceImpl.getInstance().createRequest(objectId, requestBody);
         return Response.ok().build();
     }
 
-    private static String getGenre(MCRObjectID objectId) throws MCRException {
-        final MCRObject object = MCRMetadataManager.retrieveMCRObject(objectId);
-        final MCRMODSWrapper wrapper = new MCRMODSWrapper(object);
-        final Element genreElement = wrapper.getElement("mods:genre");
-        if (genreElement != null) {
-            final Attribute valueURIAttribute = genreElement.getAttribute("valueURI");
-            if (valueURIAttribute != null) {
-                final String valueURI = valueURIAttribute.getValue();
-                return valueURI.substring(valueURI.lastIndexOf("#") + 1);
-            }
-        }
-        throw new MCRException("Object has no genre.");
+    private static ContactRequestBody toRequestBody(ContactRequestCreateDto requestBodyDto) {
+        return new ContactRequestBody(requestBodyDto.name(), requestBodyDto.email(), requestBodyDto.orcid(),
+            requestBodyDto.message());
+    }
+
+    private static String getGenre(MCRObjectID objectId) {
+        return Optional.of(MCRMetadataManager.retrieveMCRObject(objectId)).map(o -> new MCRMODSWrapper(o))
+            .map(w -> w.getElement("mods:genre")).map(e -> e.getAttribute("valueURI"))
+            .map(Attribute::getValue).map(v -> v.substring(v.lastIndexOf("#") + 1))
+            .orElseThrow(() -> new MCRException("Object has no genre."));
+    }
+
+    private record ContactRequestCreateDto(@JsonProperty("objectID") MCRObjectID objectId,
+        @JsonProperty("name") String name, @JsonProperty("email") String email, @JsonProperty("orcid") String orcid,
+        @JsonProperty("message") String message) {
     }
 }

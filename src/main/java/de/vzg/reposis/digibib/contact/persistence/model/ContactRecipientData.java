@@ -20,31 +20,18 @@ package de.vzg.reposis.digibib.contact.persistence.model;
 
 import java.util.Date;
 import java.util.Objects;
-import java.util.UUID;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import de.vzg.reposis.digibib.contact.model.ContactRecipientOrigin;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.NamedQueries;
-import jakarta.persistence.NamedQuery;
-import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
-
-@NamedQueries({
-    @NamedQuery(name = "ContactRecipient.findByUUID", query = "SELECT r"
-        + "  FROM ContactRecipientData r"
-        + "  WHERE r.UUID = :uuid"),
-})
 
 /**
  * This class defines a model for a recipient.
@@ -66,7 +53,7 @@ public class ContactRecipientData {
     /**
      * Origin of recipient date.
      */
-    private ContactRecipientOrigin origin;
+    private String origin;
 
     /**
      * Recipient mail.
@@ -94,30 +81,11 @@ public class ContactRecipientData {
     private Date sent;
 
     /**
-     * Date when the recipeint has confirmed.
+     * Date when the recipient has confirmed.
      */
     private Date confirmed;
 
-    /**
-     * Uuid of recipient.
-     */
-    @Column(name = "uuid", unique = true, updatable = false, nullable = false, columnDefinition = "binary(16)")
-    private UUID uuid;
-
     public ContactRecipientData() {
-    }
-
-    public ContactRecipientData(String name, ContactRecipientOrigin origin, String mail) {
-        this.name = name;
-        this.origin = origin;
-        this.mail = mail;
-        enabled = true;
-    }
-
-    public ContactRecipientData(ContactRecipientOrigin origin, String mail) {
-        this.origin = origin;
-        this.mail = mail;
-        enabled = true;
     }
 
     /**
@@ -146,13 +114,12 @@ public class ContactRecipientData {
         this.name = name;
     }
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "type", nullable = false)
-    public ContactRecipientOrigin getOrigin() {
+    public String getOrigin() {
         return origin;
     }
 
-    public void setOrigin(ContactRecipientOrigin origin) {
+    public void setOrigin(String origin) {
         this.origin = origin;
     }
 
@@ -165,7 +132,6 @@ public class ContactRecipientData {
         this.mail = mail;
     }
 
-    @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "requestId")
     public ContactRequestData getRequest() {
@@ -174,21 +140,6 @@ public class ContactRecipientData {
 
     public void setRequest(ContactRequestData request) {
         this.request = request;
-    }
-
-    public UUID getUUID() {
-        return uuid;
-    }
-
-    public void setUUID(UUID uuid) {
-        this.uuid = uuid;
-    }
-
-    @PrePersist
-    protected void prepersistUUIDModel() {
-        if (uuid == null) {
-            uuid = UUID.randomUUID();
-        }
     }
 
     @Column(name = "enabled", nullable = false)
@@ -229,10 +180,7 @@ public class ContactRecipientData {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 31 * hash + mail.hashCode();
-        hash = 31 * hash + request.hashCode();
-        return hash;
+        return Objects.hash(confirmed, enabled, failed, id, mail, name, origin, request, sent);
     }
 
     @Override
@@ -247,11 +195,9 @@ public class ContactRecipientData {
             return false;
         }
         ContactRecipientData other = (ContactRecipientData) obj;
-        return Objects.equals(request, other.getRequest()) && Objects.equals(mail, other.getMail());
-    }
-
-    @Override
-    public String toString() {
-        return String.format("ID: %d, \nEmail: %s", id, mail);
+        return Objects.equals(confirmed, other.confirmed) && enabled == other.enabled
+            && Objects.equals(failed, other.failed) && id == other.id && Objects.equals(mail, other.mail)
+            && Objects.equals(name, other.name) && origin == other.origin && Objects.equals(request, other.request)
+            && Objects.equals(sent, other.sent);
     }
 }

@@ -22,17 +22,20 @@ import java.util.Collection;
 import java.util.UUID;
 
 import org.mycore.common.MCRException;
+import org.mycore.datamodel.metadata.MCRObjectID;
 
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientAlreadyExistsException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientInvalidException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientNotFoundException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientOriginException;
-import de.vzg.reposis.digibib.contact.exception.ContactRecipientStateException;
+import de.vzg.reposis.digibib.contact.exception.ContactException;
+import de.vzg.reposis.digibib.contact.exception.ContactPersonAlreadyExistsException;
+import de.vzg.reposis.digibib.contact.exception.ContactPersonInvalidException;
+import de.vzg.reposis.digibib.contact.exception.ContactPersonNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactPersonOriginException;
+import de.vzg.reposis.digibib.contact.exception.ContactPersonStateException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
-import de.vzg.reposis.digibib.contact.model.ContactRecipient;
+import de.vzg.reposis.digibib.contact.model.ContactPerson;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
+import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 
 public interface ContactService {
 
@@ -55,10 +58,10 @@ public interface ContactService {
     /**
      * Adds a new {@link ContactRequest}.
      *
-     * @param request request
+     * @param requestBody request body
      * @throws ContactRequestInvalidException if the request is invalid
      */
-    void addRequest(ContactRequest request);
+    void createRequest(MCRObjectID objectId, ContactRequestBody requestBody);
 
     /**
      * Updates {@link ContactRequest}.
@@ -71,90 +74,118 @@ public interface ContactService {
     /**
      * Removes {@link ContactRequest} by id.
      *
-     * @param requestId request if
+     * @param requestId request id
      * @throws ContactRequestNotFoundException if request does not exist
-     * @throws ContactRequestStateException    if request is in wrong state
+     * @throws ContactRequestStateException if request is in wrong state
      */
     void deleteRequest(UUID requestId);
 
     /**
-     * Returns {@link ContactRecipient} by given id.
-     *
-     * @param recipientId recipient id
-     * @return recipient
-     * @throws ContactRecipientNotFoundException if recipient does not exist
-     */
-    ContactRecipient getRecipient(UUID recipientId);
-
-    /**
-     * Adds {@link ContactRecipient} to request by id.
-     *
-     * @param requestId request uuid
-     * @param recipient recipient
-     * @throws ContactRecipientInvalidException       if recipient is invalid
-     * @throws ContactRecipientAlreadyExistsException if recipient with given mail
-     *                                                already exists
-     * @throws ContactRequestNotFoundException        if request cannot be found
-     * @throws ContactRequestStateException           if request is in wrong state
-     */
-    void addRecipient(UUID requestId, ContactRecipient recipient);
-
-    /**
-     * Updates {@link ContactRecipient} of request by id.
-     *
-     * @param requestId   request id
-     * @param recipient   recipient
-     * @throws ContactRecipientInvalidException       if recipient is invalid
-     * @throws ContactRecipientAlreadyExistsException if recipient with given mail
-     *                                                already exists
-     * @throws ContactRecipientOriginException if recipeint does not exists
-     * @throws ContactRequestNotFoundException        if request cannot be found
-     * @throws ContactRequestStateException           if request is in wrong state
-     * @throws ContactRecipientOriginException        if request has wrong origin
-     */
-    void updateRecipient(UUID requestId, ContactRecipient recipient);
-
-    /**
-     * Removes recipient of request by given id.
-     *
-     * @param requestId   the request uuid
-     * @param recipientId the recipient uuid
-     * @throws ContactRequestNotFoundException   if request cannot be found
-     * @throws ContactRecipientNotFoundException if recipient cannot be found
-     * @throws ContactRequestStateException      if request is in wrong state
-     * @throws ContactRecipientOriginException   if request has wrong origin
-     */
-    void deleteRecipient(UUID requestId, UUID recipientId);
-
-    /**
-     * Confirms request as confirmed by specified recipient
-     *
-     * @param requestId   the request id
-     * @param recipientId the recipient id
-     * @throws ContactRequestNotFoundException   if request cannot be found
-     * @throws ContactRecipientNotFoundException if recipient cannot be found
-     */
-    void confirmRequest(UUID requestId, UUID recipientId);
-
-    /**
-     * Forwards request to recipients in a separate thread.
+     * Returns {@link ContactPerson} by given id.
      *
      * @param requestId request id
+     * @param mail mail
+     * @return contact person
+     * @throws ContactPersonNotFoundException if contact person does not exist
+     */
+    ContactPerson getContactPerson(UUID requestId, String mail);
+
+    /**
+     * Adds {@link ContactPerson} to request by id.
+     * Only person origin manual is allowed.
+     *
+     * @param requestId request id
+     * @param contactPerson contact person
+     * @return id
+     * @throws ContactPersonInvalidException if contact person is invalid
+     * @throws ContactPersonAlreadyExistsException if contact person with given mail already exists
      * @throws ContactRequestNotFoundException if request cannot be found
-     * @throws ContactRequestStateException    if request is in wrong state
+     * @throws ContactRequestStateException if request is in wrong state
+     * @throws ContactPersonOriginException if contact person has wrong origin
+     */
+    void addContactPerson(UUID requestId, ContactPerson contactPerson);
+
+    /**
+     * Updates {@link ContactPerson} of request by id.
+     *
+     * @param requestId request id
+     * @param contactPerson contact person
+     * @throws ContactPersonInvalidException if contact person is invalid
+     * @throws ContactPersonAlreadyExistsException if person with given mail already exists
+     * @throws ContactPersonOriginException if person does not exists
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
+     * @throws ContactPersonOriginException if request has wrong origin
+     */
+    void updateContactPerson(UUID requestId, ContactPerson contactPerson);
+
+    /**
+     * Removes {@link ContactPerson} of request by given id.
+     *
+     * @param requestId request id
+     * @param mail contact person mail
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactPersonNotFoundException if contact person cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
+     * @throws ContactPersonOriginException if request has wrong origin
+     */
+    void deleteContactPerson(UUID requestId, String mail);
+
+    /**
+     * Collects contact persons for request.
+     *
+     * @param requestId request id
+     * @throws ContactRequestNotFoundException if request does not exist
+     */
+    void collectContactPersons(UUID requestId);
+
+    /**
+     * Forwards request to all {@link ContactPerson}.
+     *
+     * @param requestId request id
+     * @throws ContactPersonNotFoundException if contact person cannot be found
+     * @throws ContactPersonStateException if contact person is in wrong state
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
      */
     void forwardRequest(UUID requestId);
 
     /**
-     * Forwards request to recipient in a separate thread.
+     * Forwards request to all enabled {@link ContactPerson} in a separate thread.
      *
-     * @param requestId  request id
-     * @param recipientId recipient id
-     * @throws ContactRecipientNotFoundException if recipient cannot be found
-     * @throws ContactRecipientStateException    if recipient is in wrong state
-     * @throws ContactRequestNotFoundException   if request cannot be found
-     * @throws ContactRequestStateException      if request is in wrong state
-     * @throws MCRException                      if sending failed
+     * @param requestId request id
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
      */
-    void forwardRequest(UUID requestId, UUID recipientId);
+    void createRequestForwardingJob(UUID requestId);
+
+    /**
+     * Forwards request to specific {@link ContactPerson}.
+     *
+     * @param requestId request id
+     * @param contactPersonId contact person id
+     * @throws ContactPersonNotFoundException if contact person cannot be found
+     * @throws ContactPersonStateException if contact person is in wrong state
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
+     * @throws MCRException if sending failed
+     */
+    void forwardRequest(UUID requestId, String mail);
+
+    /**
+     * Discovers and handles bounce messages.
+     *
+     * @throws ContactException if cannot retrieve bounced message
+     */
+    void handleBouncedMessages();
+
+    /**
+     * Confirms request as confirmed by specified {@link ContactPerson}.
+     *
+     * @param requestId request id
+     * @param contactPersonId contact person id
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactPersonNotFoundException if contact person cannot be found
+     */
+    void confirmForwarding(UUID requestId, String mail);
 }

@@ -22,7 +22,9 @@ import java.util.Collection;
 import java.util.Optional;
 
 /**
- * Generic intefaces which defines dao methods for an entity.
+ * Generic repository interface.
+ *
+ * @param <T> repository entity
  */
 public interface ContactBaseRepository<T> {
 
@@ -34,31 +36,31 @@ public interface ContactBaseRepository<T> {
     Collection<T> findAll();
 
     /**
-     * Returns entity by id.
+     * Returns optional with entity by id.
      *
      * @param id internal id
-     * @return the entity or null
+     * @return optional with entity
      */
-    Optional<T> findByID(long id);
+    Optional<T> findById(long id);
 
     /**
      * Inserts entity.
      *
-     * @param object the entity
+     * @param object entity
      */
     void insert(T object);
 
     /**
-     * Removes an entity.
+     * Removes entity.
      *
-     * @param object the entity
+     * @param object entity
      */
     void remove(T object);
 
     /**
-     * Updates an entity.
+     * Updates entity.
      *
-     * @param object the entity
+     * @param object entity
      */
     void save(T object);
 }

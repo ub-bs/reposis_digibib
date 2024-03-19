@@ -2,8 +2,8 @@
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
   <xsl:param name="email" />
   <xsl:param name="id" />
-  <xsl:param name="recipient" />
-  <xsl:param name="recipientID" />
+  <xsl:param name="recipientName" />
+  <xsl:param name="recipientMail" />
   <xsl:param name="requestID" />
   <xsl:param name="message" />
   <xsl:param name="name" />
@@ -32,7 +32,7 @@
 
   <xsl:template name="body">
     <body>
-      <xsl:value-of select="concat('Hallo ', $recipient, ',', $newline)" />
+      <xsl:value-of select="concat('Hallo ', $recipientName, ',', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('es gibt eine Kontaktanfrage für ', $title, ' [0]:', $newline)" />
       <xsl:value-of select="$newline" />
@@ -66,7 +66,7 @@
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('[0]: ', $WebApplicationBaseURL, 'receive/', $id, $newline)" />
       <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'api/v2/contacts/', $requestID, '/status', $newline)" />
-      <xsl:value-of select="concat('[2]: ', $WebApplicationBaseURL, 'api/v2/contacts/', $requestID, '/confirm?recipient=', $recipientID, $newline)" />
+      <xsl:value-of select="concat('[2]: ', $WebApplicationBaseURL, 'api/v2/contacts/', $requestID, '/confirm?recipient=', $recipientMail, $newline)" />
     </body>
   </xsl:template>
 
