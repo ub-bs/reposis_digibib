@@ -184,7 +184,7 @@ public class ContactMailService {
         properties.put("name", request.getBody().fromName());
         properties.put("recipientName", contactPerson.getName());
         properties.put("recipientMail", contactPerson.getMail());
-        properties.put("requestID", request.getId().toString());
+        properties.put("requestId", request.getId().toString());
         properties.put("title", request.getObjectId().toString());
         Optional.ofNullable(request.getBody().fromOrcid()).ifPresent(o -> properties.put("orcid", o));
         Optional.ofNullable(request.getComment()).ifPresent(c -> properties.put("comment", c));

@@ -4,7 +4,7 @@
   <xsl:param name="id" />
   <xsl:param name="recipientName" />
   <xsl:param name="recipientMail" />
-  <xsl:param name="requestID" />
+  <xsl:param name="requestId" />
   <xsl:param name="message" />
   <xsl:param name="name" />
   <xsl:param name="orcid" select="''" />
@@ -65,8 +65,8 @@
       <xsl:value-of select="concat('FD-Team der TU Braunschweig', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('[0]: ', $WebApplicationBaseURL, 'receive/', $id, $newline)" />
-      <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'api/v2/contacts/', $requestID, '/status', $newline)" />
-      <xsl:value-of select="concat('[2]: ', $WebApplicationBaseURL, 'api/v2/contacts/', $requestID, '/confirm?recipient=', $recipientMail, $newline)" />
+      <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'rsc/contact/request-status', $requestId, $newline)" />
+      <xsl:value-of select="concat('[2]: ', $WebApplicationBaseURL, 'rsc/contact/confirm-request', $requestId, '?recipient=', $recipientMail, $newline)" />
     </body>
   </xsl:template>
 

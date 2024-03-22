@@ -19,7 +19,6 @@
 package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -28,7 +27,6 @@ import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
 import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactRequestDto;
@@ -91,30 +89,6 @@ public class ContactRestResource {
             .map(ContactRestHelper::toDto).get();
     }
 
-    @GET
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}/status")
-    @Operation(summary = "Gets contact request state by id", responses = {
-        @ApiResponse(responseCode = "200",
-            content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRequestData.class))),
-        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
-            @Content(mediaType = MediaType.APPLICATION_JSON) }), })
-    @Produces(MediaType.TEXT_PLAIN)
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
-    public String getRequestStatus(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
-        final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);
-        if (Objects.equals(ContactRequest.State.CONFIRMED, request.getState())) {
-            final List<ContactPerson> contactPersons = request.getContactPersons().stream()
-                .filter(p -> p.getForwarding() != null).filter(p -> p.getForwarding().getConfirmed() != null).toList();
-            String result = "";
-            for (ContactPerson contactPerson : contactPersons) {
-                result += String.format("CONFIRMED by: %s\n", contactPerson.getName());
-            }
-            return result;
-        }
-        return request.getState().toString();
-    }
-
     @PUT
     @Path("/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(summary = "Updates contact request by id", responses = { @ApiResponse(responseCode = "204"),
@@ -148,24 +122,6 @@ public class ContactRestResource {
     public Response removeRequest(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
         ContactServiceImpl.getInstance().deleteRequest(requestId);
         return Response.noContent().build();
-    }
-
-    // TODO may move to API endpoint
-    @GET
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}/confirm")
-    @MCRRestRequiredPermission(MCRRestAPIACLPermission.READ)
-    @Operation(summary = "confirm recipient", responses = {
-        @ApiResponse(responseCode = "200", description = "operation was successful"),
-        @ApiResponse(responseCode = "400", description = "invalid request"),
-        @ApiResponse(responseCode = "404", description = "object is not found"), })
-    @MCRRequireTransaction
-    public Response confirmRequest(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
-        @QueryParam("recipient") String mail) {
-        Optional.ofNullable(mail)
-            .ifPresentOrElse(r -> ContactServiceImpl.getInstance().confirmForwarding(requestId, r), () -> {
-                throw new BadRequestException();
-            });
-        return Response.ok().build();
     }
 
     @POST

@@ -1,5 +1,5 @@
 // https://support.orcid.org/hc/en-us/articles/360006897674-Structure-of-the-ORCID-Identifier
-export default function validateORCID(orcid: string): boolean {
+export default function validatOrcid(orcid: string): boolean {
   if (orcid.length < 16) {
     return false;
   }

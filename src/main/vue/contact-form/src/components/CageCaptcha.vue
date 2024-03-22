@@ -6,7 +6,7 @@
       <div class="d-flex flex-column justify-content-md-center"
           style="width: 20px; margin-left: 5px;">
         <i @click="shuffleCaptcha" class="fas fa-redo" aria-hidden="true"></i>
-        <i class="fas fa-volume-up "></i>
+        <!--<i class="fas fa-volume-up "></i> TODO-->
       </div>
     </div>
     <div class="pt-2">
@@ -25,7 +25,7 @@ const props = defineProps({
   },
 });
 const captchaSecret = ref('');
-const captchaState: boolean = ref(null);
+const captchaState = ref();
 const captchaUrl = ref('');
 const shuffleCaptcha = () => {
   captchaUrl.value = `${props.baseUrl}?${Date.now()}`;
