@@ -16,6 +16,7 @@
     <xed:remove  ref="openAIRE" />
     <xed:include ref="openAIRE"                          after="digibib.class.sponsors" />
     <xed:include ref="research-data-extensions"          after="related.item.search.of.all.items"/>
+    <xed:remove  ref="related.item.other.search.of.all.items" />
   </xed:modify>
 
   <xed:modify ref="genres.book">
