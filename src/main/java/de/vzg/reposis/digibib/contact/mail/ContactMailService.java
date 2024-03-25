@@ -29,8 +29,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -42,8 +40,6 @@ import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
 import org.mycore.common.xsl.MCRParameterCollector;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.xml.sax.SAXException;
-
-import com.sun.mail.dsn.MultipartReport;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
@@ -90,8 +86,6 @@ public class ContactMailService {
 
     private static final String REPORT_MIMETYPE = "multipart/report";
 
-    private static final Logger LOGGER = LogManager.getLogger();
-
     private static final Session mailSession = createSession();
 
     private static final String MAIL_STYLESHEET = MCRConfiguration2
@@ -109,30 +103,20 @@ public class ContactMailService {
     private static final String FALLBACK_MAIL = MCRConfiguration2
         .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
-    public static List<MimeMessage> fetchUnseenDsnMessages(String folderName) throws MessagingException {
+    public static List<Message> fetchUnseenReportMessages(String folderName) throws MessagingException {
         final Store store = mailSession.getStore("imaps");
         store.connect(HOST, USER, PASSWORD);
         final Folder inbox = store.getFolder(folderName);
         inbox.open(Folder.READ_WRITE);
         final List<Message> unreadMessages
             = Arrays.asList(inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false)));
-
-        final List<MimeMessage> dsnMessages = new ArrayList<>();
+        final List<Message> reportMessages = new ArrayList<>();
         for (Message message : unreadMessages) {
             if (message.isMimeType(REPORT_MIMETYPE)) {
-                MultipartReport report = null;
-                try {
-                    report = (MultipartReport) ((MimeMessage) message).getContent();
-                } catch (IOException | MessagingException e) {
-                    LOGGER.error("Error while retrieving report");
-                }
-                final MimeMessage dsnMessage = report.getReturnedMessage();
-                if (dsnMessage != null) {
-                    dsnMessages.add(dsnMessage);
-                }
+                reportMessages.add(message);
             }
         }
-        return dsnMessages;
+        return reportMessages;
     }
 
     /**

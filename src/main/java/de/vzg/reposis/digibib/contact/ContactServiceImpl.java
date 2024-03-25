@@ -18,6 +18,7 @@
 
 package de.vzg.reposis.digibib.contact;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -39,6 +40,8 @@ import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObject;
 import org.mycore.datamodel.metadata.MCRObjectID;
 import org.mycore.services.queuedjob.MCRJobQueue;
+
+import com.sun.mail.dsn.MultipartReport;
 
 import de.vzg.reposis.digibib.contact.collect.ContactPersonCollectorService;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
@@ -425,20 +428,26 @@ public class ContactServiceImpl implements ContactService {
         return contactPerson.isEnabled() && (contactPerson.getSent() == null);
     }
 
+    // TODO buggy
     @Override
     public void handleBouncedMessages() {
         try {
             writeLock.lock();
-            List<MimeMessage> dsnMessages = null;
+            List<Message> reportMessages = null;
             try {
-                dsnMessages = ContactMailService.fetchUnseenDsnMessages("INBOX");
+                reportMessages = ContactMailService.fetchUnseenReportMessages("INBOX");
             } catch (MessagingException e) {
-                throw new ContactException("Error while fetching dsns");
+                throw new ContactException("Error while fetching report messages");
             }
-            dsnMessages.stream().forEach(m -> {
+            reportMessages.stream().forEach(m -> {
                 try {
-                    Optional.ofNullable(m.getHeader(ContactConstants.REQUEST_HEADER_NAME, null)).map(UUID::fromString)
-                        .ifPresent(id -> {
+                    MultipartReport report = (MultipartReport) ((MimeMessage) m).getContent();
+                    final MimeMessage dsnMessage = report.getReturnedMessage();
+                    if (dsnMessage == null) {
+                        return;
+                    }
+                    Optional.ofNullable(dsnMessage.getHeader(ContactConstants.REQUEST_HEADER_NAME, null))
+                        .map(UUID::fromString).ifPresent(id -> {
                             try {
                                 final Stream<String> mails
                                     = Arrays.asList(m.getRecipients(Message.RecipientType.TO)).stream()
@@ -450,8 +459,8 @@ public class ContactServiceImpl implements ContactService {
                                 LOGGER.error("Error while processing dsn message", e);
                             }
                         });
-                } catch (MessagingException e) {
-                    LOGGER.error("Error while proccessing dsn message");
+                } catch (IOException | MessagingException e) {
+                    LOGGER.error("Error while proccessing report message");
                 }
             });
         } finally {
