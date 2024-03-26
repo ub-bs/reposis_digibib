@@ -61,12 +61,12 @@
     <category ID="report">
       <label xml:lang="de" text="Report" />
       <label xml:lang="en" text="Report" />
-      <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
+      <label xml:lang="x-hosts" text="standalone" />
       <label xml:lang="x-mapping" text="marcgt:reporting diniPublType2022:Report schemaOrg:Report" />
       <category ID="research_results">
         <label xml:lang="de" text="Forschungsergebnisse" />
         <label xml:lang="en" text="Research Results" />
-        <label xml:lang="x-hosts" text="standalone" />
+        <label xml:lang="x-hosts" text="series collection festschrift proceedings standalone" />
         <label xml:lang="x-mapping" text="marcgt:reporting diniPublType2022:Report schemaOrg:Report" />
       </category>
       <category ID="declaration">
@@ -162,7 +162,7 @@
     <category ID="audio">
       <label xml:lang="de" text="Tondokument" />
       <label xml:lang="en" text="Audio File" />
-      <label xml:lang="x-hosts" text="standalone lecture" />
+      <label xml:lang="x-hosts" text="standalone lecture series journal collection festschrift proceedings book" />
       <label xml:lang="x-mapping" text="marcgt:sound diniPublType2022:Sound schemaOrg:MediaObject" />
     </category>
     <category ID="video">
