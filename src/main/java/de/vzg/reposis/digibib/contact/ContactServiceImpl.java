@@ -428,7 +428,6 @@ public class ContactServiceImpl implements ContactService {
         return contactPerson.isEnabled() && (contactPerson.getSent() == null);
     }
 
-    // TODO buggy
     @Override
     public void handleBouncedMessages() {
         try {
@@ -450,13 +449,18 @@ public class ContactServiceImpl implements ContactService {
                         .map(UUID::fromString).ifPresent(id -> {
                             try {
                                 final Stream<String> mails
-                                    = Arrays.asList(m.getRecipients(Message.RecipientType.TO)).stream()
+                                    = Arrays.asList(dsnMessage.getRecipients(Message.RecipientType.TO)).stream()
                                         .map(Address::toString);
                                 final Date date = m.getReceivedDate();
                                 processContactDsnMessageContent(mails, date, id);
-                                m.setFlag(Flags.Flag.SEEN, true);
                             } catch (MessagingException | ContactRequestNotFoundException e) {
-                                LOGGER.error("Error while processing dsn message", e);
+                                LOGGER.error("Error while processing dsn message for id: {}", id, e);
+                            } finally {
+                                try {
+                                    m.setFlag(Flags.Flag.SEEN, true);
+                                } catch (MessagingException e) {
+                                    LOGGER.error("Error while flagging message for {} as seen", id, e);
+                                }
                             }
                         });
                 } catch (IOException | MessagingException e) {
