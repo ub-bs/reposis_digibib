@@ -86,6 +86,7 @@ public class ContactResource {
         return Response.ok().build();
     }
 
+    @GET
     @MCRRequireTransaction
     @Path("/confirm-request/{" + PARAM_REQUEST_ID + "}/")
     public Response confirmRequest(@PathParam(PARAM_REQUEST_ID) UUID requestId, @QueryParam("recipient") String mail) {
