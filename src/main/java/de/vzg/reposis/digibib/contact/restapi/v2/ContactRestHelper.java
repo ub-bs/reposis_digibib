@@ -103,7 +103,7 @@ public class ContactRestHelper {
     }
 
     private static ContactForwardingDto toDto(ContactForwarding forwarding) {
-        return new ContactForwardingDto(forwarding.getDate(), forwarding.getFailed(), forwarding.getFailed());
+        return new ContactForwardingDto(forwarding.getDate(), forwarding.getFailed(), forwarding.getConfirmed());
     }
 
     /**

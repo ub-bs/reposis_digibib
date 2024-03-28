@@ -10,5 +10,5 @@ import de.vzg.reposis.digibib.contact.model.ContactForwarding;
  * Dto for {@link ContactForwarding}.
  */
 public record ContactForwardingDto(@JsonProperty("date") Date date, @JsonProperty("failed") Date failed,
-    @JsonProperty("success") Date success) {
+    @JsonProperty("confirmed") Date success) {
 }
