@@ -140,47 +140,47 @@
             </configuration>
           </execution>
           <execution>
-            <id>yarn-install-contact-manager</id>
+            <id>yarn-install-contact-request-manager</id>
             <goals>
               <goal>yarn</goal>
             </goals>
             <phase>generate-resources</phase>
             <configuration>
               <arguments>install</arguments>
-              <workingDirectory>src/main/vue/contact-manager/</workingDirectory>
+              <workingDirectory>src/main/vue/contact-request-manager/</workingDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>yarn-install-contact-form</id>
+            <id>yarn-install-contact-request-form</id>
             <goals>
               <goal>yarn</goal>
             </goals>
             <phase>generate-resources</phase>
             <configuration>
               <arguments>install</arguments>
-              <workingDirectory>src/main/vue/contact-form/</workingDirectory>
+              <workingDirectory>src/main/vue/contact-request-form/</workingDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>yarn-build-contact-manager</id>
+            <id>yarn-build-contact-request-manager</id>
             <goals>
               <goal>yarn</goal>
             </goals>
             <phase>generate-resources</phase>
             <configuration>
               <arguments>build</arguments>
-              <workingDirectory>src/main/vue/contact-manager/</workingDirectory>
+              <workingDirectory>src/main/vue/contact-request-manager/</workingDirectory>
             </configuration>
           </execution>
           <execution>
-            <id>yarn-build-contact-form</id>
+            <id>yarn-build-contact-request-form</id>
             <goals>
               <goal>yarn</goal>
             </goals>
             <phase>generate-resources</phase>
             <configuration>
               <arguments>build</arguments>
-              <workingDirectory>src/main/vue/contact-form/</workingDirectory>
+              <workingDirectory>src/main/vue/contact-request-form/</workingDirectory>
             </configuration>
           </execution>
           <execution>
@@ -191,7 +191,7 @@
             <phase>generate-resources</phase>
             <configuration>
               <arguments>copy</arguments>
-              <workingDirectory>src/main/vue/contact-form/</workingDirectory>
+              <workingDirectory>src/main/vue/contact-request-form/</workingDirectory>
             </configuration>
           </execution>
           <execution>

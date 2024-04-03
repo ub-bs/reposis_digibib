@@ -6,20 +6,20 @@
   <xsl:template match="/">
     <xsl:if test="contains($Digibib.ContactService.Genres.Enabled, $mods-type)">
       <div id="contactModalDiv">
-        <xsl:call-template name="print-contact-modal" />
-        <xsl:call-template name="print-contact-btn" />
+        <xsl:call-template name="print-create-contact-request-modal" />
+        <xsl:call-template name="print-open-create-contact-request-form-btn" />
       </div>
     </xsl:if>
     <xsl:apply-imports />
   </xsl:template>
 
-  <xsl:template name="print-contact-modal">
+  <xsl:template name="print-create-contact-request-modal">
     <script src="{$WebApplicationBaseURL}vue/vue.global.prod.js" />
     <script src="{$WebApplicationBaseURL}vue/vue-i18n.global.prod.js" />
-    <script src="{$WebApplicationBaseURL}vue/contactForm/contactForm.umd.js" />
-    <link rel="stylesheet" href="{$WebApplicationBaseURL}vue/contactForm/contactForm.css" />
+    <script src="{$WebApplicationBaseURL}vue/contactRequestForm/contactRequestForm.umd.js" />
+    <link rel="stylesheet" href="{$WebApplicationBaseURL}vue/contactRequestForm/contactRequestForm.css" />
 
-    <div id="contact-form-mount">
+    <div id="contact-request-form-mount">
       <cf base-url="{$WebApplicationBaseURL}" object-id="{$id}"></cf>
     </div>
     <script>
@@ -32,11 +32,11 @@
       });
       const app = Vue.createApp({
         components: {
-          cf: contactForm
+          cf: contactRequestForm
         },
       });
       app.use(i18n);
-      app.mount('#contact-form-mount');
+      app.mount('#contact-request-form-mount');
     }
     fetch(webApplicationBaseURL + 'rsc/locale/translate/digibib.contact.frontend.*')
       .then(response => response.json())
@@ -45,7 +45,7 @@
     </script>
   </xsl:template>
 
-  <xsl:template name="print-contact-btn">
+  <xsl:template name="print-open-create-contact-request-form-btn">
     <li>
       <div id="btnContact" />
     </li>
