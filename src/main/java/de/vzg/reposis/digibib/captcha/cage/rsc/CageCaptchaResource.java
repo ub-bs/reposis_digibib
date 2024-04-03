@@ -20,8 +20,13 @@ package de.vzg.reposis.digibib.captcha.cage.rsc;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.concurrent.TimeUnit;
 
+import org.mycore.common.MCRException;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.github.cage.Cage;
+
+import de.vzg.reposis.digibib.captcha.cage.CageCaptchaServiceImpl;
 import jakarta.inject.Singleton;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.BadRequestException;
@@ -35,38 +40,21 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.StreamingOutput;
 
-import com.github.cage.Cage;
-import com.github.cage.GCage;
-import com.google.common.cache.Cache;
-import com.google.common.cache.CacheBuilder;
-
-import de.vzg.reposis.digibib.captcha.cage.CaptchaCageServiceImpl;
-
-import org.mycore.common.MCRException;
-
 @Singleton
 @Path("/captchaCage")
-public class CaptchaCageResource {
+public class CageCaptchaResource {
 
-    private final Cache<String, Boolean> generatedSecrets;
-
-    private final Cage cage;
-
-    public CaptchaCageResource() {
-        generatedSecrets = CacheBuilder.newBuilder().maximumSize(32768).expireAfterWrite(60, TimeUnit.MINUTES).build();
-        cage = new GCage();
-    }
+    private static final CageCaptchaServiceImpl CAPTCHA_SERVICE = CageCaptchaServiceImpl.getInstance();
 
     @GET
     @Produces("image/" + Cage.DEFAULT_FORMAT)
     public StreamingOutput getCaptcha(@Context HttpServletResponse resp) {
-        final String secret = cage.getTokenGenerator().next();
-        generatedSecrets.put(secret, Boolean.TRUE);
+        final String challenge = CAPTCHA_SERVICE.createChallenge();
         setResponseHeaders(resp);
         return new StreamingOutput() {
             @Override
             public void write(OutputStream os) throws IOException, WebApplicationException {
-                cage.draw(secret, os);
+                CAPTCHA_SERVICE.getCage().draw(challenge, os);
             }
         };
     }
@@ -75,49 +63,27 @@ public class CaptchaCageResource {
     @Path("/userverify")
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
-    public TokenResponse verifySecret(String secret) throws MCRException {
-        if (generatedSecrets.getIfPresent(secret) == null) {
+    public TokenResponse verifySecret(String secret) {
+        String encryptedTokenString = null;
+        try {
+            encryptedTokenString = CAPTCHA_SERVICE.verifyAndCreateToken(secret);
+        } catch (MCRException e) {
             throw new BadRequestException();
         }
-        generatedSecrets.invalidate(secret);
-        final String token = CaptchaCageServiceImpl.createEncodedToken(secret);
-        return new TokenResponse(token);
+        return new TokenResponse(encryptedTokenString, true);
     }
 
     private void setResponseHeaders(HttpServletResponse resp) {
         resp.setHeader("Cache-Control", "no-cache, no-store");
         resp.setHeader("Pragma", "no-cache");
-        long time = System.currentTimeMillis();
+        final long time = System.currentTimeMillis();
         resp.setDateHeader("Last-Modified", time);
         resp.setDateHeader("Date", time);
         resp.setDateHeader("Expires", time);
     }
 
-    static class TokenResponse {
-
-        private boolean verified;
-
-        private String verifiedToken;
-
-        TokenResponse(String verifiedToken) {
-            this.verified = true;
-            this.verifiedToken = verifiedToken;
-        }
-
-        public boolean isVerified() {
-            return verified;
-        }
-
-        public void setVerified(boolean verified) {
-            this.verified = verified;
-        }
-
-        public String getVerifiedToken() {
-            return verifiedToken;
-        }
-
-        public void setVerifiedToken(String verifiedToken) {
-            this.verifiedToken = verifiedToken;
-        }
+    private static record TokenResponse(@JsonProperty("verifiedToken") String verifiedTokenString,
+        @JsonProperty("verified") boolean verified) {
     }
+
 }

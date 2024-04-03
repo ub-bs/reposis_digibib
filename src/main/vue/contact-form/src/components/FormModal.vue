@@ -167,7 +167,7 @@ const handleSubmit = async () => {
     const token = await captcha.value.verifyCaptcha();
     if (token) {
       try {
-        const response = await fetch(`${props.baseUrl}rsc/contact/new-request/${props.objectId}`, {
+        const response = await fetch(`${props.baseUrl}rsc/contact-request/create/${props.objectId}`, {
           method: 'POST',
           headers: {
             Accept: 'application/json, text/plain, */*',

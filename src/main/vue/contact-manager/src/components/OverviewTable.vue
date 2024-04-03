@@ -45,13 +45,14 @@
             </a>
           </td>
           <td class="align-middle">
-            {{ new Date(item.created).toLocaleString() }}
+            {{ getFormatedDate(item.created) }}
           </td>
           <td class="align-middle">
-            {{ item.forwarded != null ? new Date(item.forwarded).toLocaleString() : '-' }}
+            {{ item.forwarded != null ? getFormatedDate(item.forwarded) : '-' }}
           </td>
           <td class="align-middle">
-            {{ RequestState.toString(item.state) }}
+            {{ $t(`digibib.contact.frontend.manager.state.${RequestState
+              .toString(item.state).toLowerCase()}`) }}
           </td>
           <td class="align-middle">
             {{ item.body.name + ' (' + item.body.email + ')' }}
@@ -85,6 +86,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import moment from 'moment';
 import { useI18n } from 'vue-i18n';
 import ConfirmModal from '@/components/ConfirmModal.vue';
 import RequestModal from '@/components/request_modal/RequestModal.vue';
@@ -121,6 +123,7 @@ const handlePageChange = async (page: number) => {
 const viewRequest = (index: number) => {
   currentRequestIndex.value = index;
 };
+const getFormatedDate = (date: Date) => moment(date).format('DD.MM.YYYY, hh:mm');
 const doRemoveRequest = async (requestId: string) => {
   const ok = await confirmModal.value.show({
     title: t('digibib.contact.frontend.manager.confirm.deleteRequest.title'),

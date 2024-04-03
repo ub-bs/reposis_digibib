@@ -1,4 +1,5 @@
 <template>
+  <h2>{{ $t('digibib.contact.frontend.manager.title') }}</h2>
   <div v-if="loading" class="overlay">
     <div class="d-flex justify-content-center">
       <div class="spinner-grow text-primary" role="status"

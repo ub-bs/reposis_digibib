@@ -22,7 +22,7 @@
 
   <xsl:template name="body">
     <body>
-      <xsl:value-of select="concat('Hallo', $newline)" />
+      <xsl:value-of select="concat('Hallo,', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('es gibt eine neue Kontaktanfrage für: ', $id, '.', $newline)" />
     </body>

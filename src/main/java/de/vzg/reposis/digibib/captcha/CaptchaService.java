@@ -19,16 +19,15 @@
 package de.vzg.reposis.digibib.captcha;
 
 /**
- * This interfaces provides basic methods for a captcha service.
+ * This interfaces provides basic methods for a CAPTCHA service.
  */
 public interface CaptchaService {
 
     /**
-     * This methods validates a captcha token
-     * 
-     * @param token the captcha token
+     * This methods validates a CAPTCHA token
+     *
+     * @param token the CAPTCHA token
      * @return true if token is valid
-     * @throws Exception if token cannot be validated
      */
-    boolean validateToken(String token) throws Exception;
+    boolean checkToken(String token);
 }

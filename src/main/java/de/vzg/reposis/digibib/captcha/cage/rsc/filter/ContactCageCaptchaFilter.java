@@ -16,21 +16,22 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.rsc;
+package de.vzg.reposis.digibib.captcha.cage.rsc.filter;
 
-import de.vzg.reposis.digibib.captcha.cage.CaptchaCageServiceImpl;
+import de.vzg.reposis.digibib.captcha.cage.CageCaptchaServiceImpl;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.ext.Provider;
 
 @Provider
 @ContactCheckCageCaptcha
-public class ContactCageCaptchaFilter implements jakarta.ws.rs.container.ContainerRequestFilter {
+public class ContactCageCaptchaFilter implements ContainerRequestFilter {
 
     @Override
     public void filter(ContainerRequestContext requestContext) {
         final String token = requestContext.getHeaderString("X-Captcha");
-        if (token == null || !CaptchaCageServiceImpl.getInstance().validateToken(token)) {
+        if (token == null || !CageCaptchaServiceImpl.getInstance().checkToken(token)) {
             throw new BadRequestException();
         }
     }

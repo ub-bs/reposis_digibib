@@ -35,6 +35,7 @@ import org.mycore.restapi.annotations.MCRRequireTransaction;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import de.vzg.reposis.digibib.captcha.cage.rsc.filter.ContactCheckCageCaptcha;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
@@ -53,7 +54,7 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/contact")
+@Path("/contact-request")
 public class ContactResource {
 
     private static final String PARAM_OBJECT_ID = "object_id";
@@ -69,7 +70,7 @@ public class ContactResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
-    @Path("/new-request/{" + PARAM_OBJECT_ID + "}/")
+    @Path("/create/{" + PARAM_OBJECT_ID + "}/")
     public Response createRequest(@PathParam(PARAM_OBJECT_ID) String objectIdString,
         ContactRequestCreateDto requestBodyDto) {
         final ContactRequestBody requestBody = toRequestBody(requestBodyDto);
@@ -88,7 +89,7 @@ public class ContactResource {
 
     @GET
     @MCRRequireTransaction
-    @Path("/confirm-request/{" + PARAM_REQUEST_ID + "}/")
+    @Path("/confirm/{" + PARAM_REQUEST_ID + "}/")
     public Response confirmRequest(@PathParam(PARAM_REQUEST_ID) UUID requestId, @QueryParam("recipient") String mail) {
         Optional.ofNullable(mail)
             .ifPresentOrElse(r -> ContactServiceImpl.getInstance().confirmForwarding(requestId, r), () -> {
@@ -98,7 +99,7 @@ public class ContactResource {
     }
 
     @GET
-    @Path("request-status/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}/")
+    @Path("status/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}/")
     @Produces(MediaType.TEXT_PLAIN)
     public String getRequestStatus(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
         final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);

@@ -16,7 +16,7 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.rsc;
+package de.vzg.reposis.digibib.captcha.cage.rsc.filter;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

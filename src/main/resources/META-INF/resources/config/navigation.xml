@@ -276,7 +276,7 @@
                 <label xml:lang="de">Rollen administrieren</label>
                 <label xml:lang="en">Manage roles</label>
             </item>
-            <item href="/contact" type="extern" replaceMenu="false" constrainPopUp="false">
+            <item href="/contact-request-manager" type="extern" replaceMenu="false" constrainPopUp="false">
                 <label xml:lang="de">Kontaktanfragen</label>
                 <label xml:lang="en">Contact Requests</label>
             </item>

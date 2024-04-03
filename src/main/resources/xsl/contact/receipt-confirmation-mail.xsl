@@ -49,8 +49,8 @@
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('FD-Team der TU Braunschweig', $newline)" />
       <xsl:value-of select="$newline" />
-      <xsl:value-of select="concat('[0]: ', $WebApplicationBaseURL, 'receive/', $id)" />
-      <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'receive/TODO')" />
+      <xsl:value-of select="concat('[0]: ', $WebApplicationBaseURL, 'receive/', $id, $newline)" />
+      <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'rsc/contact-request/status/', 'TODO')')" />
     </body>
   </xsl:template>
 

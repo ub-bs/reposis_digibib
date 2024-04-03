@@ -15,7 +15,7 @@
             <i class="fa fa-check"></i>
           </button>
           <button class="btn btn-primary shadow-none" title="Cancel">
-            <i class="fa fa-xmark"></i>
+            <i class="fas fa-times"></i>
           </button>
         </div>
       </div>
