@@ -52,7 +52,7 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
-@Path("/contacts/")
+@Path("/contact-requests/")
 public class ContactRestResource {
 
     @GET

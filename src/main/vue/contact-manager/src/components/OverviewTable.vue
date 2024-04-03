@@ -110,7 +110,11 @@ const fetch = async (page: number) => {
   totalCount.value = Number(response.headers['x-total-count']);
 };
 onMounted(async () => {
-  await fetch(currentPage.value);
+  try {
+    await fetch(currentPage.value);
+  } catch (error) {
+    emit('error', error instanceof Error ? error.message : 'unknown');
+  }
 });
 const handlePageChange = async (page: number) => {
   currentPage.value = page;
