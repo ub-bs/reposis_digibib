@@ -19,9 +19,9 @@
 package de.vzg.reposis.digibib.contact.collect;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 import org.apache.logging.log4j.LogManager;
@@ -35,6 +35,8 @@ import org.mycore.orcid2.v3.client.MCRORCIDClientHelper;
 import org.mycore.orcid2.v3.client.MCRORCIDSectionImpl;
 import org.orcid.jaxb.model.v3.release.record.Email;
 import org.orcid.jaxb.model.v3.release.record.Emails;
+import org.orcid.jaxb.model.v3.release.record.Name;
+import org.orcid.jaxb.model.v3.release.record.Person;
 
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
 
@@ -45,14 +47,16 @@ public class ContactPersonOrcidCollector implements ContactPersonCollector {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
+    // TODO only process corresponding author orcid ids.
     @Override
     public List<ContactPerson> collect(MCRObject object) {
-        final List<ContactPerson> contactPersons = new ArrayList<>();
+        LOGGER.info("Collecting contact person for {} from orcid", object.getId());
         final List<String> orcids = new ArrayList<String>(MCRORCIDUtils.getORCIDs(object));
         for (String orcid : orcids) {
-            final Set<String> mails = new HashSet<String>();
+            final String name = fetchNameFromPublicApi(orcid);
             final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);
             if (orcidUser != null) {
+                final Set<String> mails = new HashSet<String>();
                 // TODO may check all credentials of user
                 final MCRORCIDCredential credential = orcidUser.getCredentialByORCID(orcid);
                 final Set<String> otherOrcids = orcidUser.getORCIDs();
@@ -71,24 +75,17 @@ public class ContactPersonOrcidCollector implements ContactPersonCollector {
                         LOGGER.warn(e);
                     }
                 }
+                return mails.stream().map(m -> new ContactPerson(name, m, "orcid")).toList();
             } else {
                 try {
-                    mails.addAll(fetchMailsFromPublicApi(orcid));
+                    return fetchMailsFromPublicApi(orcid).stream().map(m -> new ContactPerson(name, m, "orcid"))
+                        .toList();
                 } catch (Exception e) {
                     LOGGER.warn(e);
                 }
             }
-            final String name
-                = Optional.ofNullable(orcidUser.getUser().getRealName()).orElse(orcidUser.getUser().getUserName());
-            mails.stream().map(m -> new ContactPerson(name, m, "orcid")).forEach(r -> {
-                contactPersons.add(r);
-            });
         }
-        return contactPersons;
-    }
-
-    private List<String> extractMails(Emails mails) {
-        return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
+        return Collections.emptyList();
     }
 
     private List<String> fetchMailsFromMemberApi(String orcid, MCRORCIDCredential credential) {
@@ -99,6 +96,20 @@ public class ContactPersonOrcidCollector implements ContactPersonCollector {
     private List<String> fetchMailsFromPublicApi(String orcid) {
         return extractMails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid,
             MCRORCIDSectionImpl.EMAIL, Emails.class));
+    }
+
+    private List<String> extractMails(Emails mails) {
+        return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
+    }
+
+    private String fetchNameFromPublicApi(String orcid) {
+        try {
+            final Name name = MCRORCIDClientHelper.getClientFactory().createReadClient()
+                .fetch(orcid, MCRORCIDSectionImpl.PERSON, Person.class).getName();
+            return name.getGivenNames().getContent() + " " + name.getFamilyName().getContent();
+        } catch (Exception e) {
+            return orcid;
+        }
     }
 
 }

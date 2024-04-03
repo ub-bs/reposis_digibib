@@ -2,7 +2,6 @@ package de.vzg.reposis.digibib.contact.collect;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.mycore.common.config.MCRConfiguration2;
@@ -17,11 +16,12 @@ public class ContactPersonCollectorService {
 
     private final static List<ContactPersonCollector> COLLECTORS = new ArrayList<>();
 
-    private static final String COLLECTOR_PROP_PREFIX = "ContactPersonCollector.";
+    private static final String COLLECTOR_PROP_PREFIX = "Digibib.ContactPersonCollector.";
 
     static {
         MCRConfiguration2.getSubPropertiesMap(COLLECTOR_PROP_PREFIX).entrySet().stream()
-            .filter(p -> p.getKey().endsWith(".Class")).map(Map.Entry::getValue)
+            .filter(p -> p.getKey().endsWith(".Class"))
+            .map(p -> COLLECTOR_PROP_PREFIX.concat(p.getKey()))
             .map(p -> MCRConfiguration2.<ContactPersonCollector>getSingleInstanceOf(p).orElseThrow())
             .forEach(COLLECTORS::add);
     }
@@ -29,7 +29,7 @@ public class ContactPersonCollectorService {
     /**
      * Uses configured person collectors to return list over {@link ContactPerson} for an object.
      *
-     * @param object the object
+     * @param object object
      * @return list of contact person elements
      */
     public static List<ContactPerson> collectContactPersons(MCRObject object) {
