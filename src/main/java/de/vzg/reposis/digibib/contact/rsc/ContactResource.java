@@ -18,8 +18,9 @@
 
 package de.vzg.reposis.digibib.contact.rsc;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -27,22 +28,31 @@ import java.util.stream.Collectors;
 
 import org.jdom2.Attribute;
 import org.mycore.common.MCRException;
+import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.config.MCRConfiguration2;
+import org.mycore.common.content.MCRContent;
+import org.mycore.common.content.MCRJAXBContent;
+import org.mycore.common.content.MCRJDOMContent;
+import org.mycore.common.xml.MCRLayoutService;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
+import org.mycore.frontend.jersey.MCRJerseyUtil;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
+import org.mycore.tools.MyCoReWebPageProvider;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import de.vzg.reposis.digibib.captcha.cage.rsc.filter.ContactCheckCageCaptcha;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
-import de.vzg.reposis.digibib.contact.restapi.v2.ContactRestConstants;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -51,20 +61,34 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
+import jakarta.xml.bind.JAXBContext;
+import jakarta.xml.bind.JAXBException;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Path("/contact-request")
 public class ContactResource {
 
     private static final String PARAM_OBJECT_ID = "object_id";
 
-    private static final String PARAM_REQUEST_ID = "request_id";
+    private static final String QUERY_PARAM_REQUEST_ID = "rid";
+
+    private static final String QUERY_PARAM_MAIL = "m";
 
     private static final Set<String> ALLOWED_GENRES
         = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
             .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
 
+    @Context
+    HttpServletRequest req;
+
+    @Context
+    HttpServletResponse res;
+
+    // TODO may move object id to request body
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -85,34 +109,6 @@ public class ContactResource {
         ensureGenreIsEnabled(objectId);
         ContactServiceImpl.getInstance().createRequest(objectId, requestBody);
         return Response.ok().build();
-    }
-
-    @GET
-    @MCRRequireTransaction
-    @Path("/confirm/{" + PARAM_REQUEST_ID + "}/")
-    public Response confirmRequest(@PathParam(PARAM_REQUEST_ID) UUID requestId, @QueryParam("recipient") String mail) {
-        Optional.ofNullable(mail)
-            .ifPresentOrElse(r -> ContactServiceImpl.getInstance().confirmForwarding(requestId, r), () -> {
-                throw new BadRequestException();
-            });
-        return Response.ok().build();
-    }
-
-    @GET
-    @Path("status/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}/")
-    @Produces(MediaType.TEXT_PLAIN)
-    public String getRequestStatus(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
-        final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);
-        if (Objects.equals(ContactRequest.State.CONFIRMED, request.getState())) {
-            final List<ContactPerson> contactPersons = request.getContactPersons().stream()
-                .filter(p -> p.getForwarding() != null).filter(p -> p.getForwarding().getConfirmed() != null).toList();
-            String result = "";
-            for (ContactPerson contactPerson : contactPersons) {
-                result += String.format("CONFIRMED by: %s\n", contactPerson.getName());
-            }
-            return result;
-        }
-        return request.getState().toString();
     }
 
     private static ContactRequestBody toRequestBody(ContactRequestCreateDto requestBodyDto) {
@@ -137,6 +133,88 @@ public class ContactResource {
             .map(w -> w.getElement("mods:genre")).map(e -> e.getAttribute("valueURI"))
             .map(Attribute::getValue).map(v -> v.substring(v.lastIndexOf("#") + 1))
             .orElseThrow(() -> new MCRException("Object has no genre."));
+    }
+
+    // TODO switch to POST
+    @GET
+    @MCRRequireTransaction
+    @Path("/confirm/")
+    public Response confirmRequest(@QueryParam(QUERY_PARAM_REQUEST_ID) UUID requestId,
+        @QueryParam(QUERY_PARAM_MAIL) String mail) {
+        if (requestId == null || mail == null) {
+            throw new BadRequestException();
+        }
+        ContactServiceImpl.getInstance().confirmForwarding(requestId, mail);
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("status/")
+    @Produces(MediaType.TEXT_HTML)
+    public InputStream getRequestStatus(@QueryParam(QUERY_PARAM_REQUEST_ID) UUID requestId) throws IOException {
+        if (requestId == null) {
+            MCRJerseyUtil.throwException(Response.Status.BAD_REQUEST, "request id is required");
+        }
+        ContactRequest request = null;
+        try {
+            request = ContactServiceImpl.getInstance().getRequest(requestId);
+        } catch (ContactRequestNotFoundException e) {
+            MCRJerseyUtil.throwException(Response.Status.NOT_FOUND, "request does not exist");
+        }
+        final ContactStatus status = toContactStatus(request);
+        final MCRContent content = marshalContactStatus(status);
+        try {
+            final MCRContent section = MCRJerseyUtil.transform(content.asXML(), req);
+            final MyCoReWebPageProvider result = new MyCoReWebPageProvider();
+            result.addSection("", section.asXML().detachRootElement(),
+                MCRSessionMgr.getCurrentSession().getCurrentLanguage());
+            return MCRLayoutService.instance().getTransformedContent(req, res, new MCRJDOMContent(result.getXML()))
+                .getInputStream();
+        } catch (Exception e) {
+            throw new IOException(e);
+        }
+    }
+
+    private ContactStatus toContactStatus(ContactRequest request) {
+        final ContactStatus status = new ContactStatus();
+        if (request.getState().getValue() >= ContactRequest.State.FORWARDED.getValue()) {
+            final List<String> emails = request.getContactPersons().stream().map(ContactPerson::getMail)
+                .map(ContactResource::maskMail).toList();
+            status.setEmails(emails);
+        }
+        status.setStatus(request.getState().toString().toLowerCase());
+        return status;
+    }
+
+    private static MCRContent marshalContactStatus(ContactStatus contactStatus) throws IOException {
+        try {
+            return new MCRJAXBContent<>(JAXBContext.newInstance(ContactStatus.class), contactStatus);
+        } catch (JAXBException e) {
+            throw new IOException("Invalid input");
+        }
+    }
+
+    // https://stackoverflow.com/questions/43003138/regular-expression-for-email-masking
+    private static String maskMail(String mail) {
+        return mail.replaceAll("(?<=.)[^@](?=[^@]*[^@]@)|(?:(?<=@.)|(?!^)\\G(?=[^@]*$)).(?!$)", "*");
+    }
+
+    @XmlRootElement(name = "ContactStatus")
+    private static class ContactStatus {
+
+        @XmlElement(name = "status")
+        private String status;
+
+        @XmlElement(name = "emails")
+        private List<String> emails;
+
+        public void setStatus(String status) {
+            this.status = status;
+        }
+
+        public void setEmails(List<String> emails) {
+            this.emails = emails;
+        }
     }
 
     private record ContactRequestCreateDto(@JsonProperty("name") String name, @JsonProperty("email") String email,
