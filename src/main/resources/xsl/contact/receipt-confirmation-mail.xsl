@@ -4,6 +4,7 @@
   <xsl:param name="message" />
   <xsl:param name="name" />
   <xsl:param name="orcid" />
+  <xsl:param name="requestId" />
   <xsl:param name="WebApplicationBaseURL" />
   <!-- TODO language english or german? -->
 
@@ -42,15 +43,15 @@
       <xsl:value-of select="concat($indent, '=====', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('Die Anfrage wird nun geprüft und nach erfolgreicher Prüfung an die Beteiligten weitergeleitet.', $newline)" />
+      <xsl:value-of select="concat('Den Status der Anfrage können Sie unter [1] prüfen.', $newline)" />
       <xsl:value-of select="concat('Sollten Sie in den nächsten 5 Werktagen keine Bestätigung über eine Weiterleitung erhalten haben, kontaktieren Sie bitte unseren Support: forschungsdaten@tu-braunschweig.de.', $newline)" />
-      <xsl:value-of select="'Den Status der Anfrage können Sie unter [1] prüfen.'" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('Beste Grüße', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('FD-Team der TU Braunschweig', $newline)" />
       <xsl:value-of select="$newline" />
       <xsl:value-of select="concat('[0]: ', $WebApplicationBaseURL, 'receive/', $id, $newline)" />
-      <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'rsc/contact-request/status/', 'TODO')" />
+      <xsl:value-of select="concat('[1]: ', $WebApplicationBaseURL, 'rsc/contact-request/status?rid=', $requestId)" />
     </body>
   </xsl:template>
 

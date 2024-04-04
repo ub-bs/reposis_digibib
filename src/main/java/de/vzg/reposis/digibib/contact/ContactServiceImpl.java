@@ -148,6 +148,7 @@ public class ContactServiceImpl implements ContactService {
             requestData.setLastModifiedBy(currentUserId);
             requestData.setState(ContactRequest.State.RECEIVED);
             requestRepository.insert(requestData);
+            request.setId(requestData.getUuid());
             PERSON_COLLECTOR_JOB_QUEUE.add(ContactPersonCollectorJobAction.createJob(requestData.getUuid()));
             ContactMailService.sendConfirmationMail(request);
             try {

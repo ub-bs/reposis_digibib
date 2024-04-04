@@ -138,7 +138,7 @@ public class ContactMailService {
     }
 
     public static void sendConfirmationMail(ContactRequest request) {
-        final EMail mail = createConfirmationMail(request.getObjectId(), request.getBody());
+        final EMail mail = createConfirmationMail(request);
         sendMail(mail, request.getBody().fromMail());
     }
 
@@ -147,13 +147,14 @@ public class ContactMailService {
         sendMail(mail, FALLBACK_MAIL);
     }
 
-    private static EMail createConfirmationMail(MCRObjectID objectId, ContactRequestBody requestBody) {
+    private static EMail createConfirmationMail(ContactRequest request) {
         final EMail baseMail = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();
-        properties.put("id", objectId.toString());
-        properties.put("message", requestBody.message());
-        properties.put("name", requestBody.fromName());
-        Optional.ofNullable(requestBody.fromOrcid()).ifPresent(o -> properties.put("orcid", o));
+        properties.put("id", request.getObjectId().toString());
+        properties.put("message", request.getBody().message());
+        properties.put("name", request.getBody().fromName());
+        properties.put("requestId", request.getId().toString());
+        Optional.ofNullable(request.getBody().fromOrcid()).ifPresent(o -> properties.put("orcid", o));
         final Element mailElement = transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties)
             .getRootElement();
         return EMail.parseXML(mailElement);
