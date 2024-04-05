@@ -58,7 +58,6 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.Context;
@@ -71,8 +70,6 @@ import jakarta.xml.bind.annotation.XmlRootElement;
 
 @Path("/contact-request")
 public class ContactResource {
-
-    private static final String PARAM_OBJECT_ID = "object_id";
 
     private static final String QUERY_PARAM_REQUEST_ID = "rid";
 
@@ -88,21 +85,19 @@ public class ContactResource {
     @Context
     HttpServletResponse res;
 
-    // TODO may move object id to request body
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRequireTransaction
     @ContactCheckCageCaptcha
-    @Path("/create/{" + PARAM_OBJECT_ID + "}/")
-    public Response createRequest(@PathParam(PARAM_OBJECT_ID) String objectIdString,
-        ContactRequestCreateDto requestBodyDto) {
+    @Path("create")
+    public Response createRequest(ContactRequestCreateDto requestBodyDto) {
         final ContactRequestBody requestBody = toRequestBody(requestBodyDto);
         if (!ContactValidator.getInstance().validateRequestBody(requestBody)) {
             throw new BadRequestException("invalid request");
         }
-        final MCRObjectID objectId = Optional.of(objectIdString).filter(MCRObjectID::isValid)
-            .map(MCRObjectID::getInstance).orElseThrow(() -> new BadRequestException("object is invalid"));
+        final MCRObjectID objectId = Optional.ofNullable(requestBodyDto.objectId).filter(MCRObjectID::isValid)
+            .map(MCRObjectID::getInstance).orElseThrow(() -> new BadRequestException("object is missing or invalid"));
         if (!MCRMetadataManager.exists(objectId)) {
             throw new BadRequestException("object does not exist");
         }
@@ -138,7 +133,7 @@ public class ContactResource {
     // TODO switch to POST
     @GET
     @MCRRequireTransaction
-    @Path("/confirm/")
+    @Path("confirm")
     public Response confirmRequest(@QueryParam(QUERY_PARAM_REQUEST_ID) UUID requestId,
         @QueryParam(QUERY_PARAM_MAIL) String mail) {
         if (requestId == null || mail == null) {
@@ -149,7 +144,7 @@ public class ContactResource {
     }
 
     @GET
-    @Path("status/")
+    @Path("status")
     @Produces(MediaType.TEXT_HTML)
     public InputStream getRequestStatus(@QueryParam(QUERY_PARAM_REQUEST_ID) UUID requestId) throws IOException {
         if (requestId == null) {
@@ -179,7 +174,7 @@ public class ContactResource {
         final ContactStatus status = new ContactStatus();
         if (request.getState().getValue() >= ContactRequest.State.FORWARDED.getValue()) {
             final List<String> emails = request.getContactPersons().stream().map(ContactPerson::getMail)
-                .map(ContactResource::maskMail).toList();
+                .map(ContactResource::maskMailAdress).toList();
             status.setEmails(emails);
         }
         status.setStatus(request.getState().toString().toLowerCase());
@@ -195,7 +190,7 @@ public class ContactResource {
     }
 
     // https://stackoverflow.com/questions/43003138/regular-expression-for-email-masking
-    private static String maskMail(String mail) {
+    private static String maskMailAdress(String mail) {
         return mail.replaceAll("(?<=.)[^@](?=[^@]*[^@]@)|(?:(?<=@.)|(?!^)\\G(?=[^@]*$)).(?!$)", "*");
     }
 
@@ -217,12 +212,13 @@ public class ContactResource {
         }
     }
 
-    private record ContactRequestCreateDto(@JsonProperty("name") String name, @JsonProperty("email") String email,
-        @JsonProperty("orcid") String orcid, @JsonProperty("message") String message) {
+    private record ContactRequestCreateDto(@JsonProperty("objectId") String objectId, @JsonProperty("name") String name,
+        @JsonProperty("email") String email, @JsonProperty("orcid") String orcid,
+        @JsonProperty("message") String message) {
 
         @SuppressWarnings("unused")
-        public ContactRequestCreateDto(String name, String email, String message) {
-            this(name, email, null, message);
+        public ContactRequestCreateDto(String objectId, String name, String email, String message) {
+            this(objectId, name, email, null, message);
         }
     }
 }
