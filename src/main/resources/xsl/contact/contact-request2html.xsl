@@ -12,16 +12,14 @@
       <div>
 	    <xsl:value-of select="concat('Die Anfrage ist aktuell: ', status/text(), '.')" />
 	  </div>
-	  <xsl:if test="status/text() = 'forwarded'">
-	    <div>An folgende Entitäten wurde die Anfrage bereits weitergeleitet:</div>
-	    <ul>
-		  <xsl:for-each select="emails">
-		    <li>
-		      <xsl:value-of select="./text()"></xsl:value-of>
-		    </li>
-		  </xsl:for-each>
-        </ul>	    
-	  </xsl:if>
+	  <div>An folgende Entitäten wurde die Anfrage bereits weitergeleitet:</div>
+	  <ul>
+        <xsl:for-each select="emails">
+		  <li>
+		    <xsl:value-of select="./text()"></xsl:value-of>
+		  </li>
+		</xsl:for-each>
+      </ul>
 	</div>
   </xsl:template>
 

@@ -130,11 +130,6 @@ public class ContactRequestData {
     private String lastModifiedBy;
 
     /**
-     * Date of forwarding.
-     */
-    private Date forwarded;
-
-    /**
      * State of request.
      */
     @Enumerated(EnumType.STRING)
@@ -143,7 +138,7 @@ public class ContactRequestData {
     /**
      * List of recipients.
      */
-    private List<ContactRecipientData> recipients = new ArrayList<ContactRecipientData>();
+    private List<ContactPersonData> persons = new ArrayList<ContactPersonData>();
 
     /**
      * Debug field for internal purposes.
@@ -262,14 +257,6 @@ public class ContactRequestData {
         this.lastModifiedBy = lastModifiedBy;
     }
 
-    public Date getForwarded() {
-        return forwarded;
-    }
-
-    public void setForwarded(Date forwarded) {
-        this.forwarded = forwarded;
-    }
-
     public ContactRequest.State getState() {
         return state;
     }
@@ -294,21 +281,21 @@ public class ContactRequestData {
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<ContactRecipientData> getRecipients() {
-        return recipients;
+    public List<ContactPersonData> getPersons() {
+        return persons;
     }
 
-    public void setRecipients(List<ContactRecipientData> recipients) {
-        this.recipients = recipients;
+    public void setPersons(List<ContactPersonData> recipients) {
+        this.persons = recipients;
     }
 
-    public void addRecipient(ContactRecipientData recipient) {
-        recipients.add(recipient);
+    public void addPerson(ContactPersonData recipient) {
+        persons.add(recipient);
         recipient.setRequest(this);
     }
 
-    public void removeRecipient(ContactRecipientData recipient) {
-        recipients.remove(recipient);
+    public void removePerson(ContactPersonData recipient) {
+        persons.remove(recipient);
         recipient.setRequest(null);
     }
 
@@ -330,8 +317,8 @@ public class ContactRequestData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(comment, created, createdBy, debug, forwarded, from, id, lastModified, lastModifiedBy,
-            message, name, objectId, orcid, recipients, state, uuid);
+        return Objects.hash(comment, created, createdBy, debug, from, id, lastModified, lastModifiedBy,
+            message, name, objectId, orcid, persons, state, uuid);
     }
 
     @Override
@@ -348,10 +335,10 @@ public class ContactRequestData {
         ContactRequestData other = (ContactRequestData) obj;
         return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
             && Objects.equals(createdBy, other.createdBy) && Objects.equals(debug, other.debug)
-            && Objects.equals(forwarded, other.forwarded) && Objects.equals(from, other.from) && id == other.id
-            && Objects.equals(lastModified, other.lastModified) && Objects.equals(lastModifiedBy, other.lastModifiedBy)
-            && Objects.equals(message, other.message) && Objects.equals(name, other.name)
-            && Objects.equals(objectId, other.objectId) && Objects.equals(orcid, other.orcid)
-            && Objects.equals(recipients, other.recipients) && state == other.state && Objects.equals(uuid, other.uuid);
+            && Objects.equals(from, other.from) && id == other.id && Objects.equals(lastModified, other.lastModified)
+            && Objects.equals(lastModifiedBy, other.lastModifiedBy) && Objects.equals(message, other.message)
+            && Objects.equals(name, other.name) && Objects.equals(objectId, other.objectId)
+            && Objects.equals(orcid, other.orcid) && Objects.equals(persons, other.persons) && state == other.state
+            && Objects.equals(uuid, other.uuid);
     }
 }

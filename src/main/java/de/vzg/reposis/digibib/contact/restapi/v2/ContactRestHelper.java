@@ -21,13 +21,13 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 import java.util.List;
 import java.util.Optional;
 
-import de.vzg.reposis.digibib.contact.model.ContactForwarding;
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactForwardingDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonCreateDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonDto;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonEventDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonUpdateDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactRequestBodyDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactRequestDto;
@@ -61,7 +61,7 @@ public class ContactRestHelper {
             = request.getContactPersons().stream().map(ContactRestHelper::toDto).toList();
         final ContactRequestBodyDto bodyDto = toDto(request.getBody());
         return new ContactRequestDto(request.getId().toString(), request.getObjectId(), bodyDto, request.getCreated(),
-            request.getForwarded(), request.getState(), request.getComment(), personDtos);
+            request.getState(), request.getComment(), personDtos);
     }
 
     private static ContactRequestBodyDto toDto(ContactRequestBody body) {
@@ -76,17 +76,14 @@ public class ContactRestHelper {
      */
     protected static ContactPerson toDomain(ContactPersonUpdateDto personDto) {
         final ContactPerson person = new ContactPerson(personDto.name(), personDto.email(), personDto.origin());
-        person.setEnabled(personDto.enabled());
-        Optional.ofNullable(personDto.forwarding()).map(ContactRestHelper::toDomain).ifPresent(person::setForwarding);
+        Optional.ofNullable(personDto.events()).ifPresent(e -> {
+            e.stream().map(ContactRestHelper::toDomain).forEach(person::addEvent);
+        });
         return person;
     }
 
-    private static ContactForwarding toDomain(ContactForwardingDto forwardingDto) {
-        final ContactForwarding forwarding = new ContactForwarding();
-        forwarding.setConfirmed(forwardingDto.success());
-        forwarding.setDate(forwardingDto.date());
-        forwarding.setFailed(forwardingDto.failed());
-        return forwarding;
+    private static ContactPersonEvent toDomain(ContactPersonEventDto eventDto) {
+        return new ContactPersonEvent(eventDto.date(), eventDto.type());
     }
 
     /**
@@ -96,14 +93,14 @@ public class ContactRestHelper {
      * @return person dto
      */
     protected static ContactPersonDto toDto(ContactPerson contactPerson) {
-        final ContactForwardingDto forwardingDto
-            = Optional.ofNullable(contactPerson.getForwarding()).map(ContactRestHelper::toDto).orElse(null);
+        final List<ContactPersonEventDto> events
+            = contactPerson.getEvents().stream().map(ContactRestHelper::toDto).toList();
         return new ContactPersonDto(contactPerson.getName(), contactPerson.getMail(), contactPerson.getOrigin(),
-            contactPerson.isEnabled(), forwardingDto);
+            events);
     }
 
-    private static ContactForwardingDto toDto(ContactForwarding forwarding) {
-        return new ContactForwardingDto(forwarding.getDate(), forwarding.getFailed(), forwarding.getConfirmed());
+    private static ContactPersonEventDto toDto(ContactPersonEvent event) {
+        return new ContactPersonEventDto(event.date(), event.type());
     }
 
     /**
@@ -113,9 +110,7 @@ public class ContactRestHelper {
      * @return person
      */
     protected static ContactPerson toDomain(ContactPersonCreateDto personDto) {
-        final ContactPerson person = new ContactPerson(personDto.name(), personDto.email(), personDto.origin());
-        person.setEnabled(personDto.enabled());
-        return person;
+        return new ContactPerson(personDto.name(), personDto.email(), personDto.origin());
     }
 
 }

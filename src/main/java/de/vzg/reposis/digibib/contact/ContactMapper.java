@@ -2,11 +2,12 @@ package de.vzg.reposis.digibib.contact;
 
 import java.util.Optional;
 
-import de.vzg.reposis.digibib.contact.model.ContactForwarding;
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
-import de.vzg.reposis.digibib.contact.persistence.model.ContactRecipientData;
+import de.vzg.reposis.digibib.contact.persistence.model.ContactPersonData;
+import de.vzg.reposis.digibib.contact.persistence.model.ContactPersonEventData;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 
 /**
@@ -15,44 +16,54 @@ import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 public class ContactMapper {
 
     /**
-     * Maps and returns {@link ContactRecipientData} to {@link ContactPerson}.
+     * Maps and returns {@link ContactPersonData} to {@link ContactPerson}.
      *
      * @param recipientData recipient data.
      * @return contact person
      */
-    public static ContactPerson toDomain(ContactRecipientData recipientData) {
+    public static ContactPerson toDomain(ContactPersonData recipientData) {
         final ContactPerson contactPerson
             = new ContactPerson(recipientData.getName(), recipientData.getMail(), recipientData.getOrigin());
-        contactPerson.setEnabled(recipientData.isEnabled());
-        if (recipientData.getSent() != null || recipientData.getFailed() != null
-            || recipientData.getConfirmed() != null) {
-            final ContactForwarding forwarding = new ContactForwarding();
-            forwarding.setConfirmed(recipientData.getConfirmed());
-            forwarding.setFailed(recipientData.getFailed());
-            forwarding.setDate(recipientData.getSent());
-            contactPerson.setForwarding(forwarding);
-        }
+        recipientData.getEvents().stream().map(ContactMapper::toDomain).forEach(contactPerson::addEvent);
         return contactPerson;
     }
 
     /**
-     * Maps and returns {@link ContactPerson} to {@link ContactRecipientData}.
+     * Maps and returns {@link ContactPersonEventData} to {@link ContactPersonEvent}.
+     *
+     * @param data data
+     * @return event
+     */
+    public static ContactPersonEvent toDomain(ContactPersonEventData data) {
+        return new ContactPersonEvent(data.getDate(), data.getType());
+    }
+
+    /**
+     * Maps and returns {@link ContactPerson} to {@link ContactPersonData}.
      *
      * @param contactPerson contact person
      * @return contact recipient data
      */
-    public static ContactRecipientData toData(ContactPerson contactPerson) {
-        final ContactRecipientData recipientData = new ContactRecipientData();
+    public static ContactPersonData toData(ContactPerson contactPerson) {
+        final ContactPersonData recipientData = new ContactPersonData();
         recipientData.setName(contactPerson.getName());
         recipientData.setMail(contactPerson.getMail());
         recipientData.setOrigin(contactPerson.getOrigin());
-        recipientData.setEnabled(contactPerson.isEnabled());
-        if (contactPerson.getForwarding() != null) {
-            recipientData.setConfirmed(contactPerson.getForwarding().getConfirmed());
-            recipientData.setFailed(contactPerson.getForwarding().getFailed());
-            recipientData.setSent(contactPerson.getForwarding().getDate());
-        }
+        contactPerson.getEvents().stream().map(ContactMapper::toData).forEach(recipientData::addEvent);
         return recipientData;
+    }
+
+    /**
+     * Maps and returns {@link ContactPersonEvent} to {@link ContactPersonEventData}.
+     *
+     * @param personEvent event
+     * @return event data
+     */
+    public static ContactPersonEventData toData(ContactPersonEvent personEvent) {
+        final ContactPersonEventData data = new ContactPersonEventData();
+        data.setDate(personEvent.date());
+        data.setType(personEvent.type());
+        return data;
     }
 
     /**
@@ -71,11 +82,10 @@ public class ContactMapper {
         request.setCreated(requestData.getCreated());
         request.setCreatedBy(requestData.getCreatedBy());
         request.setDebugMesssage(requestData.getDebug());
-        request.setForwarded(requestData.getForwarded());
         request.setLastModified(requestData.getLastModified());
         request.setLastModifiedBy(requestData.getLastModifiedBy());
         request.setState(requestData.getState());
-        requestData.getRecipients().stream().map(ContactMapper::toDomain).forEach(request.getContactPersons()::add);
+        requestData.getPersons().stream().map(ContactMapper::toDomain).forEach(request.getContactPersons()::add);
         return request;
     }
 
@@ -91,12 +101,11 @@ public class ContactMapper {
         requestData.setCreated(request.getCreated());
         requestData.setCreatedBy(request.getCreatedBy());
         requestData.setDebug(request.getDebugMessage());
-        requestData.setForwarded(request.getForwarded());
         requestData.setLastModified(request.getLastModified());
         requestData.setLastModifiedBy(request.getLastModifiedBy());
         requestData.setState(request.getState());
         requestData.setObjectId(request.getObjectId());
-        request.getContactPersons().stream().map(ContactMapper::toData).forEach(requestData::addRecipient);
+        request.getContactPersons().stream().map(ContactMapper::toData).forEach(requestData::addPerson);
         final ContactRequestBody requestBody = request.getBody();
         if (requestBody != null) {
             requestData.setFrom(requestBody.fromMail());

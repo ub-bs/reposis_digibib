@@ -131,8 +131,9 @@ public class ContactRestResource {
     public Response forwardRequest(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
         @QueryParam("recipient") String mail) {
         Optional.ofNullable(mail).ifPresentOrElse(
-            r -> ContactServiceImpl.getInstance().forwardRequest(requestId, r),
-            () -> ContactServiceImpl.getInstance().createRequestForwardingJob(requestId));
+            r -> ContactServiceImpl.getInstance().forwardRequest(requestId, r), () -> {
+                throw new BadRequestException("mail is required");
+            });
         return Response.ok().build();
     }
 }

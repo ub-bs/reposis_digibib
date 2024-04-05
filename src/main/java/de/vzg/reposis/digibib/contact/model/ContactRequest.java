@@ -48,8 +48,6 @@ public class ContactRequest {
 
     private String lastModifiedBy;
 
-    private Date forwarded;
-
     private State state;
 
     private List<ContactPerson> contactPersons = new ArrayList<ContactPerson>();
@@ -195,24 +193,6 @@ public class ContactRequest {
     }
 
     /**
-     * Returns date of forwarding.
-     *
-     * @return date of forwarding
-     */
-    public Date getForwarded() {
-        return forwarded;
-    }
-
-    /**
-     * Sets date of forwarding
-     *
-     * @param forwarded date of forwarding
-     */
-    public void setForwarded(Date forwarded) {
-        this.forwarded = forwarded;
-    }
-
-    /**
      * Returns request state.
      *
      * @return state
@@ -286,8 +266,8 @@ public class ContactRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(comment, created, createdBy, debugMessage, forwarded, lastModified, lastModifiedBy,
-            contactPersons, state, id);
+        return Objects.hash(comment, created, createdBy, debugMessage, lastModified, lastModifiedBy, contactPersons,
+            state, id);
     }
 
     @Override
@@ -304,17 +284,16 @@ public class ContactRequest {
         ContactRequest other = (ContactRequest) obj;
         return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
             && Objects.equals(createdBy, other.createdBy) && Objects.equals(debugMessage, other.debugMessage)
-            && Objects.equals(forwarded, other.forwarded) && Objects.equals(lastModified, other.lastModified)
-            && Objects.equals(lastModifiedBy, other.lastModifiedBy)
-            && Objects.equals(contactPersons, other.contactPersons)
-            && state == other.state && Objects.equals(id, other.id);
+            && Objects.equals(lastModified, other.lastModified) && Objects.equals(lastModifiedBy, other.lastModifiedBy)
+            && Objects.equals(contactPersons, other.contactPersons) && state == other.state
+            && Objects.equals(id, other.id);
     }
 
     /**
-     * Describe possible request states.
+     * Describes possible request states.
      */
     public enum State {
-        RECEIVED(0), PROCESSED(10), FORWARDING(20), FORWARDED(30), CONFIRMED(40);
+        RECEIVED(0), PROCESSED(10);
 
         private final int value;
 

@@ -16,18 +16,23 @@ export namespace RequestState {
   }
 }
 
-export type Forwarding = {
+export enum PersonEventType {
+  SENT = 'SENT',
+  SENT_FAILED = 'SENT_FAILED',
+  CONFIRMED = 'CONFIRMED',
+  REFUSED = 'REFUSED',
+}
+
+export type PersonEvent = {
   date: Date;
-  failed: Date;
-  confirmed: Date;
+  type: PersonEventType;
 }
 
 export type ContactPerson = {
   name: string;
   email: string;
   origin: string;
-  enabled: boolean;
-  forwarding?: Forwarding;
+  events: PersonEvent[];
 }
 
 export type RequestBody = {
@@ -42,7 +47,6 @@ export type Request = {
   objectId: string;
   body: RequestBody;
   created: Date;
-  forwarded: Date;
   state: RequestState;
   contactPersons: ContactPerson[];
   comment: string;
@@ -51,3 +55,13 @@ export type Request = {
 export type ErrorResponse = {
   errorCode: string;
 }
+
+export const compareEvents = (a: PersonEvent, b: PersonEvent): number => {
+  if (a.date < b.date) {
+    return -1;
+  }
+  if (a.date > b.date) {
+    return 1;
+  }
+  return 0;
+};

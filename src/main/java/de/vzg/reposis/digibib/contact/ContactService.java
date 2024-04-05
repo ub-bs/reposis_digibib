@@ -140,26 +140,6 @@ public interface ContactService {
     void collectContactPersons(UUID requestId);
 
     /**
-     * Forwards request to all {@link ContactPerson}.
-     *
-     * @param requestId request id
-     * @throws ContactPersonNotFoundException if contact person cannot be found
-     * @throws ContactPersonStateException if contact person is in wrong state
-     * @throws ContactRequestNotFoundException if request cannot be found
-     * @throws ContactRequestStateException if request is in wrong state
-     */
-    void forwardRequest(UUID requestId);
-
-    /**
-     * Forwards request to all enabled {@link ContactPerson} in a separate thread.
-     *
-     * @param requestId request id
-     * @throws ContactRequestNotFoundException if request cannot be found
-     * @throws ContactRequestStateException if request is in wrong state
-     */
-    void createRequestForwardingJob(UUID requestId);
-
-    /**
      * Forwards request to specific {@link ContactPerson}.
      *
      * @param requestId request id

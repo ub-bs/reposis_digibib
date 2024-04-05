@@ -26,9 +26,7 @@ const updateRecipient = (id: string, personId: string, recipient: ContactPerson)
   axios.put(`api/v2/contact-requests/${id}/recipients/${personId}`, {
     name: recipient.name,
     email: recipient.email,
-    enabled: recipient.enabled,
     origin: recipient.origin,
-    forwarding: recipient.forwarding,
   });
 };
 const removeRecipient = (id: string, personId: string) => axios.delete(`api/v2/contact-requests/${id}/recipients/${personId}`);

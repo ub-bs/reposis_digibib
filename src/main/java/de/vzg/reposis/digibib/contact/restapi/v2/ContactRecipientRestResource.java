@@ -29,7 +29,7 @@ import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.persistence.model.ContactRecipientData;
+import de.vzg.reposis.digibib.contact.persistence.model.ContactPersonData;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonCreateDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonUpdateDto;
@@ -64,7 +64,7 @@ public class ContactRecipientRestResource {
     @Operation(summary = "Creates new contact request recipient", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipientData.class))),
+                schema = @Schema(implementation = ContactPersonData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
@@ -85,7 +85,7 @@ public class ContactRecipientRestResource {
     @Operation(summary = "Gets contact request recipients by request id", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipientData.class))),
+                schema = @Schema(implementation = ContactPersonData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
@@ -107,7 +107,7 @@ public class ContactRecipientRestResource {
     @Operation(summary = "Gets contact request recipient by request id", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipientData.class))),
+                schema = @Schema(implementation = ContactPersonData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
@@ -126,7 +126,7 @@ public class ContactRecipientRestResource {
     @Operation(summary = "Updates contact request recipient by id", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipientData.class))),
+                schema = @Schema(implementation = ContactPersonData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
@@ -151,7 +151,7 @@ public class ContactRecipientRestResource {
     @Operation(summary = "Deletes contact request recipient by id", responses = {
         @ApiResponse(responseCode = "201",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactRecipientData.class))),
+                schema = @Schema(implementation = ContactPersonData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),

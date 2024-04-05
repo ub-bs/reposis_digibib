@@ -18,11 +18,13 @@
 
 package de.vzg.reposis.digibib.contact.persistence.model;
 
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,14 +33,15 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
  * This class defines a model for a recipient.
  */
 @Entity
-@Table(name = "contactRecipient")
-public class ContactRecipientData {
+@Table(name = "contactPerson")
+public class ContactPersonData {
 
     /**
      * Internal id.
@@ -46,46 +49,28 @@ public class ContactRecipientData {
     private long id;
 
     /**
-     * Name of the recipient.
+     * Name of the person.
      */
     private String name;
 
     /**
-     * Origin of recipient date.
+     * Origin of person date.
      */
     private String origin;
 
     /**
-     * Recipient mail.
+     * Person mail.
      */
     private String mail;
 
     /**
-     * Parent request of recipient.
+     * Parent request of person.
      */
     private ContactRequestData request;
 
-    /**
-     * If the request is enabled to sending
-     */
-    private boolean enabled;
+    private List<ContactPersonEventData> events = new ArrayList<>();
 
-    /**
-     * Date when the mail was bounced.
-     */
-    private Date failed;
-
-    /**
-     * Date when the mail was sent.
-     */
-    private Date sent;
-
-    /**
-     * Date when the recipient has confirmed.
-     */
-    private Date confirmed;
-
-    public ContactRecipientData() {
+    public ContactPersonData() {
     }
 
     /**
@@ -93,7 +78,7 @@ public class ContactRecipientData {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "recipientId", nullable = false)
+    @Column(name = "personId", nullable = false)
     @JsonIgnore
     public long getId() {
         return id;
@@ -142,45 +127,23 @@ public class ContactRecipientData {
         this.request = request;
     }
 
-    @Column(name = "enabled", nullable = false)
-    public boolean isEnabled() {
-        return enabled;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
+    public List<ContactPersonEventData> getEvents() {
+        return events;
     }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEvents(List<ContactPersonEventData> events) {
+        this.events = events;
     }
 
-    @Column(name = "failed", nullable = true)
-    public Date getFailed() {
-        return failed;
-    }
-
-    public void setFailed(Date failed) {
-        this.failed = failed;
-    }
-
-    @Column(name = "sent", nullable = true)
-    public Date getSent() {
-        return sent;
-    }
-
-    public void setSent(Date sent) {
-        this.sent = sent;
-    }
-
-    @Column(name = "confirmed", nullable = true)
-    public Date getConfirmed() {
-        return confirmed;
-    }
-
-    public void setConfirmed(Date confirmed) {
-        this.confirmed = confirmed;
+    public void addEvent(ContactPersonEventData event) {
+        events.add(event);
+        event.setPerson(this);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(confirmed, enabled, failed, id, mail, name, origin, request, sent);
+        return Objects.hash(id, mail, name, origin, request);
     }
 
     @Override
@@ -194,10 +157,8 @@ public class ContactRecipientData {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ContactRecipientData other = (ContactRecipientData) obj;
-        return Objects.equals(confirmed, other.confirmed) && enabled == other.enabled
-            && Objects.equals(failed, other.failed) && id == other.id && Objects.equals(mail, other.mail)
-            && Objects.equals(name, other.name) && origin == other.origin && Objects.equals(request, other.request)
-            && Objects.equals(sent, other.sent);
+        ContactPersonData other = (ContactPersonData) obj;
+        return id == other.id && Objects.equals(mail, other.mail) && Objects.equals(name, other.name)
+            && origin == other.origin && Objects.equals(request, other.request);
     }
 }

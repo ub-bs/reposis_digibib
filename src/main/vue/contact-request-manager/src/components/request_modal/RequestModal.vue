@@ -1,5 +1,5 @@
 <template>
-  <Modal :title="request.id" size="xl" scrollable @close="emit('close')">
+  <Modal :title="request.id" size="xl" ok-only scrollable @close="emit('close')">
     <div class="container-fluid">
       <div v-if="errorCode" class="alert alert-danger" role="alert">
         {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
@@ -23,17 +23,15 @@
       <table class="table table-striped">
         <colgroup>
           <col style="width: 40%">
-          <col style="width: 5%">
+          <col style="width: 10%">
           <col style="width: 40%">
           <col style="width: 10%">
-          <col style="width: 5%">
         </colgroup>
         <thead>
           <tr>
             <th>{{ $t('digibib.contact.frontend.manager.label.name') }}</th>
             <th>{{ $t('digibib.contact.frontend.manager.label.origin') }}</th>
             <th>{{ $t('digibib.contact.frontend.manager.label.email') }}</th>
-            <th class="text-center">{{ $t('digibib.contact.frontend.manager.label.forward') }}</th>
             <th></th>
           </tr>
         </thead>
@@ -41,7 +39,6 @@
           <template v-for="recipient in request.contactPersons" :key="recipient">
             <RecipientRow :recipient="recipient" :editId="editId"
               :isProcessed="request.state === RequestState.PROCESSED"
-              :isSent="request.state >= RequestState.FORWARDED"
               @delete="doRemoveRecipient" @edit="startEdit" @update="doUpdateRecipient"
               @mail="doForwardRequestToRecipient" @cancel="cancelEdit" />
           </template>
@@ -51,14 +48,6 @@
         </tbody>
       </table>
     </div>
-    <template v-slot:footer>
-      <div class="btn-group">
-        <button type="button" class="btn btn-success" @click="doForwardRequest"
-            :disabled="isForwardDisabled">
-          {{ $t('digibib.contact.frontend.manager.button.forward') }}
-        </button>
-      </div>
-    </template>
   </Modal>
   <ConfirmModal ref="confirmModal" />
 </template>
@@ -102,15 +91,6 @@ const startEdit = (id: string): void => {
 const cancelEdit = (): void => {
   editId.value = undefined;
 };
-const isForwardDisabled = computed((): boolean => {
-  if (props.request.state >= RequestState.FORWARDED) {
-    return true;
-  }
-  if (props.request.state !== RequestState.PROCESSED) {
-    return true;
-  }
-  return (props.request.contactPersons.findIndex((c: ContactPerson) => c.enabled) === -1);
-});
 const resetInfoError = (): void => {
   errorCode.value = null;
   infoCode.value = null;
@@ -139,21 +119,14 @@ const handleCommentSave = async (comment: string) => {
     handleError(error instanceof Error ? error.message : 'unknown');
   }
 };
-const doForwardRequest = async (): Promise<void> => {
-  try {
-    await forwardRequest(props.request.id);
-    const response = await getRequest(props.request.id);
-    emit('request-updated', response.data);
-  } catch (error) {
-    handleError(error instanceof Error ? error.message : 'unknown');
-  }
-};
 const doAddRecipient = async (recipient: ContactPerson): Promise<void> => {
   resetInfoError();
   try {
     await addRecipient(props.request.id, recipient);
     const recipients = props.request.contactPersons;
-    recipients.push(recipient);
+    const newRecipient = recipient; // TODO fetch recipient
+    newRecipient.events = [];
+    recipients.push(newRecipient);
     emit('recipients-updated', props.request.id, recipients);
   } catch (error) {
     handleError((error instanceof Error ? error.message : 'unknown'));
@@ -197,6 +170,7 @@ const doForwardRequestToRecipient = async (recipientId: string): Promise<void> =
   resetInfoError();
   try {
     await forwardRequestToRecipient(props.request.id, recipientId);
+    // TODO fetch and update recipient
     handleInfo('forwardRecipient');
   } catch (error) {
     handleError((error instanceof Error ? error.message : 'unknown'));

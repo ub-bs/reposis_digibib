@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <td class="col-3">
+    <td class="col-4">
       <input class="form-control form-control-sm" type="text" v-model="name"
           :class="v.name.$error? 'is-invalid' : ''" :disabled="disabled"/>
     </td>
@@ -11,10 +11,7 @@
       <input class="form-control form-control-sm" type="text" v-model="mail"
           :class="v.mail.$error ? 'is-invalid' : ''" :disabled="disabled" />
     </td>
-    <td class="col-1 align-middle text-center">
-      <input type="checkbox" v-model="enabled" :disabled="disabled" />
-    </td>
-    <td class="col-1 text-center align-middle">
+    <td class="col-2 text-center align-middle">
       <div class="btn-group">
         <button class="btn shadow-none pr-1 pb-0 pt-0 border-0" @click="addRecipient"
             :disabled="disabled">
@@ -43,7 +40,6 @@ defineProps({
 const name = ref();
 const mail = ref();
 const origin = ref(ORIGIN_MANUAL);
-const enabled = ref(false);
 const emit = defineEmits(['add']);
 const rules = computed(() => ({
   name: {
@@ -62,7 +58,6 @@ const reset = () => {
   v.value.$reset();
   name.value = null;
   mail.value = null;
-  enabled.value = false;
 };
 const addRecipient = async () => {
   v.value.$validate();
@@ -71,7 +66,6 @@ const addRecipient = async () => {
       name: name.value,
       email: mail.value,
       origin: origin.value,
-      enabled: enabled.value,
     } as ContactPerson);
     reset();
   }

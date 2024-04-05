@@ -21,6 +21,7 @@ package de.vzg.reposis.digibib.contact.rsc;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -48,6 +49,7 @@ import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
@@ -172,11 +174,10 @@ public class ContactResource {
 
     private ContactStatus toContactStatus(ContactRequest request) {
         final ContactStatus status = new ContactStatus();
-        if (request.getState().getValue() >= ContactRequest.State.FORWARDED.getValue()) {
-            final List<String> emails = request.getContactPersons().stream().map(ContactPerson::getMail)
-                .map(ContactResource::maskMailAdress).toList();
-            status.setEmails(emails);
-        }
+        final List<String> emails = request.getContactPersons().stream().filter(c -> {
+            return c.getEvents().stream().anyMatch(e -> Objects.equals(ContactPersonEvent.EventType.SENT, e.type()));
+        }).map(ContactPerson::getMail).map(ContactResource::maskMailAdress).toList();
+        status.setEmails(emails);
         status.setStatus(request.getState().toString().toLowerCase());
         return status;
     }

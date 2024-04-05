@@ -48,7 +48,7 @@
             {{ getFormatedDate(item.created) }}
           </td>
           <td class="align-middle">
-            {{ item.forwarded != null ? getFormatedDate(item.forwarded) : '-' }}
+            {{ displayFirstForwaredDate(item.contactPersons) }}
           </td>
           <td class="align-middle">
             {{ $t(`digibib.contact.frontend.manager.state.${RequestState
@@ -63,7 +63,7 @@
                 <i class="fa fa-eye"></i>
               </button>
               <button class="btn shadow-none pt-0 pb-0 pl-1 pr-2" @click="doRemoveRequest(item.id)"
-                :disabled="item.state > RequestState.PROCESSED">
+                :disabled="getSentEvents(item.contactPersons).length > 0">
                 <i class="fa fa-trash"></i>
               </button>
             </div>
@@ -91,7 +91,14 @@ import { useI18n } from 'vue-i18n';
 import ConfirmModal from '@/components/ConfirmModal.vue';
 import RequestModal from '@/components/request_modal/RequestModal.vue';
 import Pagination from '@/components/Pagination.vue';
-import { ContactPerson, Request, RequestState } from '@/utils';
+import {
+  ContactPerson,
+  Request,
+  RequestState,
+  compareEvents,
+  PersonEvent,
+  PersonEventType,
+} from '@/utils';
 import { fetchRequests, removeRequest } from '@/api/service';
 
 const emit = defineEmits(['error']);
@@ -103,6 +110,31 @@ const totalCount = ref(0);
 const currentPage = ref(0);
 const currentRequestIndex = ref(-1);
 
+const getSentEvents = (persons: ContactPerson[]): PersonEvent[] => {
+  let personEvents: PersonEvent[] = [];
+  for (let i = 0; i < persons.length; i += 1) {
+    personEvents = personEvents.concat(persons[i].events);
+  }
+  return personEvents.filter((e) => PersonEventType.SENT === e.type);
+};
+const getFirstForwardDate = (persons: ContactPerson[]): Date | undefined => {
+  const sentEvents = getSentEvents(persons);
+  if (sentEvents.length === 0) {
+    return undefined;
+  }
+  return sentEvents.sort(compareEvents)[0].date;
+};
+const getFormatedDate = (date: Date) => moment(date).format('DD.MM.YYYY, hh:mm');
+const displayFirstForwaredDate = (persons: ContactPerson[]): string => {
+  if (persons.length === 0) {
+    return '-';
+  }
+  const date = getFirstForwardDate(persons);
+  if (date) {
+    return getFormatedDate(date);
+  }
+  return '-';
+};
 const fetch = async (page: number) => {
   const offset = page * perPage;
   const response = await fetchRequests(offset, perPage);
@@ -127,7 +159,6 @@ const handlePageChange = async (page: number) => {
 const viewRequest = (index: number) => {
   currentRequestIndex.value = index;
 };
-const getFormatedDate = (date: Date) => moment(date).format('DD.MM.YYYY, hh:mm');
 const doRemoveRequest = async (requestId: string) => {
   const ok = await confirmModal.value.show({
     title: t('digibib.contact.frontend.manager.confirm.deleteRequest.title'),

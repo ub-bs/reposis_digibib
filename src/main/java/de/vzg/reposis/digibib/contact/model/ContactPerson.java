@@ -18,8 +18,12 @@
 
 package de.vzg.reposis.digibib.contact.model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 /**
- * Define contact person model.
+ * Defines contact person model.
  */
 public class ContactPerson {
 
@@ -29,9 +33,7 @@ public class ContactPerson {
 
     private String origin;
 
-    private boolean enabled;
-
-    private ContactForwarding forwarding;
+    private List<ContactPersonEvent> events = new ArrayList<>();
 
     /**
      * Constructs new recipient with recipient.
@@ -97,38 +99,50 @@ public class ContactPerson {
     }
 
     /**
-     * Returns if recipient is enabled.
+     * Returns list of event elements.
      *
-     * @return true if recipient is enabled
+     * @return list of event elements
      */
-    public boolean isEnabled() {
-        return enabled;
+    public List<ContactPersonEvent> getEvents() {
+        return events;
     }
 
     /**
-     * Sets if recipient is enabled.
+     * Sets list of event elements.
      *
-     * @param enabled true if recipient is enabled
+     * @param events list of event elements
      */
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setEvents(List<ContactPersonEvent> events) {
+        this.events = events;
     }
 
     /**
-     * Returns forwarding.
+     * Adds event to events.
      *
-     * @return forwarding
+     * @param event event
      */
-    public ContactForwarding getForwarding() {
-        return forwarding;
+    public void addEvent(ContactPersonEvent event) {
+        events.add(event);
     }
 
-    /**
-     * Sets forwarding.
-     *
-     * @param forwarding forwarding
-     */
-    public void setForwarding(ContactForwarding forwarding) {
-        this.forwarding = forwarding;
+    @Override
+    public int hashCode() {
+        return Objects.hash(events, mail, name, origin);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ContactPerson other = (ContactPerson) obj;
+        return Objects.equals(events, other.events) && Objects.equals(mail, other.mail)
+            && Objects.equals(name, other.name) && Objects.equals(origin, other.origin);
     }
 }
