@@ -31,6 +31,14 @@
     <xed:remove  ref="abstract.simple" />
   </xed:modify>
 
+  <xed:modify ref="genres.issue">
+    <xed:include ref="digibib.ddc.repeat"                after="sdnb.repeat" />
+    <xed:remove  ref="sdnb.repeat" />
+    <xed:include ref="digibib.access"                    after="subject.simple" />
+    <xed:include ref="digibib.abstract.repeated"         after="abstract.simple" />
+    <xed:remove  ref="abstract.simple" />
+  </xed:modify>
+
   <xed:modify ref="genres.collection">
     <xed:include ref="title.translated"                  after="title.original" />
   </xed:modify>
