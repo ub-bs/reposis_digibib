@@ -21,6 +21,8 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
 import java.util.List;
 import java.util.Optional;
 
+import org.mycore.datamodel.metadata.MCRObjectID;
+
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
 import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
@@ -46,8 +48,17 @@ public class ContactRestHelper {
      */
     protected static ContactRequest toDomain(ContactRequestUpdateDto requestDto) {
         final ContactRequest request = new ContactRequest();
+        requestDto.persons().stream().map(ContactRestHelper::toDomain).forEach(request::addContactPerson);
         request.setComment(requestDto.comment());
+        request.setCreated(requestDto.created());
+        request.setObjectId(MCRObjectID.getInstance(requestDto.objectId()));
+        request.setState(requestDto.status());
+        request.setRequest(toDomain(requestDto.body()));
         return request;
+    }
+
+    private static ContactRequestBody toDomain(ContactRequestBodyDto bodyDto) {
+        return new ContactRequestBody(bodyDto.name(), bodyDto.email(), bodyDto.orcid(), bodyDto.message());
     }
 
     /**

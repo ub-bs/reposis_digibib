@@ -19,6 +19,7 @@
 package de.vzg.reposis.digibib.contact.validation;
 
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
@@ -51,13 +52,13 @@ public class ContactValidator {
     }
 
     /**
-     * Validates a request against model.
+     * Validates a request body against model.
      *
-     * @param request request
+     * @param requestBody request body
      * @return true if request is valid
      */
-    public boolean validateRequestBody(ContactRequestBody request) {
-        return validator.validate(request).size() == 0;
+    public boolean validateRequestBody(ContactRequestBody requestBody) {
+        return validator.validate(requestBody).size() == 0;
     }
 
     /**
@@ -65,5 +66,20 @@ public class ContactValidator {
      */
     private static class Holder {
         private static final ContactValidator INSTANCE = new ContactValidator();
+    }
+
+    /**
+     * Validates a request against model.
+     *
+     * @param request request
+     * @return true if request is valid
+     */
+    public boolean validateRequest(ContactRequest request) {
+        for (ContactPerson contactPerson : request.getContactPersons()) {
+            if (!validateContactPerson(contactPerson)) {
+                return false;
+            }
+        }
+        return validator.validate(request).size() == 0 && validateRequestBody(request.getBody());
     }
 }

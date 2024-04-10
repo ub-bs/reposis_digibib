@@ -22,15 +22,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.validation.constraints.NotNull;
+
 /**
  * Defines contact person model.
  */
 public class ContactPerson {
 
+    @NotNull
     private String name;
 
+    @NotNull
     private String mail;
 
+    @NotNull
     private String origin;
 
     private String reference;

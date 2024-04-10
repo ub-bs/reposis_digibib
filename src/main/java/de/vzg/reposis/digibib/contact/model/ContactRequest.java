@@ -29,6 +29,8 @@ import org.mycore.datamodel.metadata.MCRObjectID;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import jakarta.validation.constraints.NotNull;
+
 /**
  * Defines request model.
  */
@@ -36,14 +38,17 @@ public class ContactRequest {
 
     private UUID id;
 
+    @NotNull
     private MCRObjectID objectId;
 
+    @NotNull
     private ContactRequestBody request;
 
     private Date created;
 
     private String createdBy;
 
+    @NotNull
     private RequestStatus state;
 
     private List<ContactPerson> contactPersons = new ArrayList<ContactPerson>();
@@ -184,6 +189,15 @@ public class ContactRequest {
      */
     public void setContactPersons(List<ContactPerson> contactPersons) {
         this.contactPersons = contactPersons;
+    }
+
+    /**
+     * Adds contact person.
+     *
+     * @param contactPerson contact person
+     */
+    public void addContactPerson(ContactPerson contactPerson) {
+        this.contactPersons.add(contactPerson);
     }
 
     /**

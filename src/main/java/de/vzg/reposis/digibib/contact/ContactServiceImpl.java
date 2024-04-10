@@ -136,12 +136,9 @@ public class ContactServiceImpl implements ContactService {
             }
             final ContactRequest request = new ContactRequest(requestBody);
             request.setObjectId(objectId);
-            request.setContactPersons(new ArrayList<ContactPerson>()); // sanitize recipients
             final ContactRequestData requestData = ContactMapper.toData(request);
-            final Date currentDate = new Date();
-            requestData.setCreated(currentDate);
-            final String currentUserId = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
-            requestData.setCreatedBy(currentUserId);
+            requestData.setCreated(new Date());
+            requestData.setCreatedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
             requestData.setState(ContactRequest.RequestStatus.RECEIVED);
             requestRepository.insert(requestData);
             request.setId(requestData.getUuid());
@@ -162,8 +159,30 @@ public class ContactServiceImpl implements ContactService {
     public void updateRequest(ContactRequest request) {
         try {
             writeLock.lock();
+            if (!ContactValidator.getInstance().validateRequest(request)) {
+                throw new ContactRequestInvalidException();
+            }
             requestRepository.findByUuid(request.getId()).ifPresentOrElse(r -> {
-                Optional.ofNullable(request.getComment()).ifPresent(r::setComment);
+                r.setState(request.getState());
+                r.setComment(request.getComment());
+                r.setFrom(request.getBody().fromMail());
+                r.setName(request.getBody().fromName());
+                r.setMessage(request.getBody().message());
+                r.setObjectId(request.getObjectId());
+                r.setOrcid(request.getBody().fromOrcid());
+                final List<ContactPersonData> newPersons = new ArrayList<>();
+                for (ContactPerson p : request.getContactPersons()) {
+                    final Optional<Long> id
+                        = r.getPersons().stream().filter(pe -> Objects.equals(pe.getMail(), p.getMail()))
+                            .findAny().map(ContactPersonData::getId);
+                    if (id.isPresent()) {
+                        final ContactPersonData personData = ContactMapper.toData(p);
+                        personData.setId(id.get());
+                        newPersons.add(personData);
+                    }
+                }
+                r.getPersons().clear();
+                newPersons.stream().forEach(r::addPerson);
                 requestRepository.save(r);
             }, () -> {
                 throw new ContactRequestNotFoundException();
@@ -268,7 +287,6 @@ public class ContactServiceImpl implements ContactService {
         }
     }
 
-    // TODO update events
     @Override
     public void updateContactPerson(UUID requestId, ContactPerson contactPerson) {
         try {
@@ -284,15 +302,12 @@ public class ContactServiceImpl implements ContactService {
             final ContactPersonData outdated
                 = requestData.getPersons().stream().filter(r -> Objects.equals(contactPerson.getMail(), r.getMail()))
                     .findAny().orElseThrow(() -> new ContactPersonNotFoundException());
-            if (!Objects.equals(ORIGIN_MANUAL, outdated.getOrigin())
-                && (!Objects.equals(outdated.getName(), contactPerson.getName())
-                    || !Objects.equals(outdated.getOrigin(), contactPerson.getOrigin())
-                    || !Objects.equals(outdated.getMail(), contactPerson.getMail()))) {
-                throw new ContactPersonOriginException();
-            }
             outdated.setName(contactPerson.getName());
+            outdated.setMail(contactPerson.getMail());
+            outdated.setReference(contactPerson.getReference());
             outdated.setOrigin(contactPerson.getOrigin());
-
+            outdated.getEvents().clear();
+            contactPerson.getEvents().stream().map(ContactMapper::toData).forEach(outdated::addEvent);
             requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
@@ -342,23 +357,19 @@ public class ContactServiceImpl implements ContactService {
             writeLock.lock();
             final ContactRequestData requestData = requestRepository.findByUuid(requestId)
                 .orElseThrow(() -> new ContactRequestNotFoundException());
-            final ContactPersonData contactPerson
+            final ContactPersonData contactPersonData
                 = requestData.getPersons().stream().filter(r -> Objects.equals(mail, r.getMail()))
                     .findAny().orElseThrow(() -> new ContactPersonNotFoundException());
-            doForwardRequest(requestData, contactPerson);
+            try {
+                contactPersonData.addEvent(new ContactPersonEventData(new Date(), ContactPersonEvent.EventType.SENT));
+                ContactMailService.sendRequestMailToRecipient(ContactMapper.toDomain(requestData),
+                    ContactMapper.toDomain(contactPersonData));
+            } catch (Exception e) {
+                throw new MCRException("Sending failed");
+            }
             requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
-        }
-    }
-
-    private void doForwardRequest(ContactRequestData requestData, ContactPersonData contactRecipientData) {
-        final ContactRequest request = ContactMapper.toDomain(requestData);
-        try {
-            contactRecipientData.addEvent(new ContactPersonEventData(new Date(), ContactPersonEvent.EventType.SENT));
-            ContactMailService.sendRequestMailToRecipient(request, ContactMapper.toDomain(contactRecipientData));
-        } catch (Exception e) {
-            throw new MCRException("Sending failed");
         }
     }
 
