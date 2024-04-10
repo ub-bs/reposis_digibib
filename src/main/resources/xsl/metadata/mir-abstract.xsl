@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xsl:stylesheet version="1.0"
-  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-  xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation"
-  xmlns:xlink="http://www.w3.org/1999/xlink"
-  xmlns:mods="http://www.loc.gov/mods/v3"
-  xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
-  xmlns:xalan="http://xml.apache.org/xalan"
-  xmlns:exslt="http://exslt.org/common"
-  exclude-result-prefixes="i18n mods xlink mcrxsl xalan exslt"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:i18n="xalan://org.mycore.services.i18n.MCRTranslation"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:mods="http://www.loc.gov/mods/v3"
+                xmlns:mcrxsl="xalan://org.mycore.common.xml.MCRXMLFunctions"
+                xmlns:xalan="http://xml.apache.org/xalan"
+                xmlns:exslt="http://exslt.org/common"
+                exclude-result-prefixes="i18n mods xlink mcrxsl xalan exslt"
 >
 
   <xsl:import  href="xslImport:modsmeta:metadata/mir-abstract.xsl" />
@@ -51,7 +51,7 @@
         </xsl:for-each>
       </xsl:variable>
 
-        <!-- TODO: Update badges -->
+      <!-- TODO: Update badges -->
       <div id="badges">
         <xsl:for-each select="$mods/mods:genre[@type='kindof']|$mods/mods:genre[@type='intern']">
           <xsl:call-template name="categorySearchLink">
@@ -63,41 +63,41 @@
 
         <xsl:if test="string-length($dateIssued) > 0">
           <time datetime="{$dateIssued}" data-toggle="tooltip" title="Publication date">
-              <xsl:variable name="dateText">
-                <xsl:variable name="date">
-                  <xsl:call-template name="Tokenizer"><!-- use split function from mycore-base/coreFunctions.xsl -->
-                    <xsl:with-param name="string" select="$dateIssued" />
-                    <xsl:with-param name="delimiter" select="'|'" />
-                  </xsl:call-template>
-                </xsl:variable>
-                <xsl:for-each select="exslt:node-set($date)/token">
-                  <xsl:if test="position()=2">
-                    <xsl:text> - </xsl:text>
-                  </xsl:if>
-                  <xsl:if test="mcrxsl:trim(.) != ''">
-                    <xsl:variable name="format">
-                      <xsl:choose>
-                        <xsl:when test="string-length(normalize-space(.))=4">
-                          <xsl:value-of select="i18n:translate('metaData.dateYear')" />
-                        </xsl:when>
-                        <xsl:when test="string-length(normalize-space(.))=7">
-                          <xsl:value-of select="i18n:translate('metaData.dateYearMonth')" />
-                        </xsl:when>
-                        <xsl:when test="string-length(normalize-space(.))=10">
-                          <xsl:value-of select="i18n:translate('metaData.dateYearMonthDay')" />
-                        </xsl:when>
-                        <xsl:otherwise>
-                          <xsl:value-of select="i18n:translate('metaData.dateTime')" />
-                        </xsl:otherwise>
-                      </xsl:choose>
-                    </xsl:variable>
-                    <xsl:call-template name="formatISODate">
-                      <xsl:with-param name="date" select="." />
-                      <xsl:with-param name="format" select="$format" />
-                    </xsl:call-template>
-                  </xsl:if>
-                </xsl:for-each>
+            <xsl:variable name="dateText">
+              <xsl:variable name="date">
+                <xsl:call-template name="Tokenizer"><!-- use split function from mycore-base/coreFunctions.xsl -->
+                  <xsl:with-param name="string" select="$dateIssued" />
+                  <xsl:with-param name="delimiter" select="'|'" />
+                </xsl:call-template>
               </xsl:variable>
+              <xsl:for-each select="exslt:node-set($date)/token">
+                <xsl:if test="position()=2">
+                  <xsl:text> - </xsl:text>
+                </xsl:if>
+                <xsl:if test="mcrxsl:trim(.) != ''">
+                  <xsl:variable name="format">
+                    <xsl:choose>
+                      <xsl:when test="string-length(normalize-space(.))=4">
+                        <xsl:value-of select="i18n:translate('metaData.dateYear')" />
+                      </xsl:when>
+                      <xsl:when test="string-length(normalize-space(.))=7">
+                        <xsl:value-of select="i18n:translate('metaData.dateYearMonth')" />
+                      </xsl:when>
+                      <xsl:when test="string-length(normalize-space(.))=10">
+                        <xsl:value-of select="i18n:translate('metaData.dateYearMonthDay')" />
+                      </xsl:when>
+                      <xsl:otherwise>
+                        <xsl:value-of select="i18n:translate('metaData.dateTime')" />
+                      </xsl:otherwise>
+                    </xsl:choose>
+                  </xsl:variable>
+                  <xsl:call-template name="formatISODate">
+                    <xsl:with-param name="date" select="." />
+                    <xsl:with-param name="format" select="$format" />
+                  </xsl:call-template>
+                </xsl:if>
+              </xsl:for-each>
+            </xsl:variable>
             <xsl:choose>
               <xsl:when test="$firstDate and $firstDate != ''">
                 <xsl:call-template name="searchLink">
@@ -163,7 +163,7 @@
       </h1>
       <!-- START digibib: TUBS-94 - display mods:partNumber  -->
       <xsl:choose>
-        <xsl:when test="$mods/mods:titleInfo/mods:partNumber or count($mods/mods:titleInfo/mods:partName) &lt; 2">  
+        <xsl:when test="$mods/mods:titleInfo/mods:partNumber or count($mods/mods:titleInfo/mods:partName) &lt; 2">
           <h3>
             <xsl:if test="$mods/mods:titleInfo/mods:partNumber" >
               <xsl:value-of select="$mods/mods:titleInfo/mods:partNumber" />
@@ -186,6 +186,7 @@
       </xsl:choose>
       <!-- END digibib -->
     </div>
+
     <!-- authors, description, children -->
     <div id="mir-abstract-plus">
 
@@ -244,11 +245,11 @@
                     <xsl:choose>
                       <xsl:when test="@xml:lang">
                         <xsl:value-of
-                          select="document(concat('classification:metadata:0:children:rfc5646:',./@xml:lang))//category/label[@xml:lang=$CurrentLang]/@text" />
+                                select="document(concat('classification:metadata:0:children:rfc5646:',./@xml:lang))//category/label[@xml:lang=$CurrentLang]/@text" />
                       </xsl:when>
                       <xsl:otherwise>
                         <xsl:value-of
-                          select="document(concat('classification:metadata:0:children:rfc5646:',$mods/mods:language/mods:languageTerm[@authority='rfc5646'][@type='code']))//category/label[@xml:lang=$CurrentLang]/@text" />
+                                select="document(concat('classification:metadata:0:children:rfc5646:',$mods/mods:language/mods:languageTerm[@authority='rfc5646'][@type='code']))//category/label[@xml:lang=$CurrentLang]/@text" />
                       </xsl:otherwise>
                     </xsl:choose>
                   </xsl:variable>
@@ -366,10 +367,10 @@
     <xsl:variable name="hitsSortList" xmlns:encoder="xalan://java.net.URLEncoder"
                   select="document(concat('solr:q=',encoder:encode($query), '&amp;rows=1000&amp;sort=mods.part.order.', $objectID, '%20desc,mods.dateIssued%20desc,%20mods.dateIssued.host%20desc,',  $modsPart, '%20desc,%20mods.title.main%20desc&amp;group=true&amp;group.limit=1000&amp;group.field=mods.yearIssued'))/response/lst[@name='grouped']/lst[@name='mods.yearIssued']" />
     <xsl:if test="$hitsSortList/int[@name='matches'] &gt; 0">
-        <xsl:call-template name="listRelatedItems">
-          <xsl:with-param name="hits" select="$hitsSortList"/>
-          <xsl:with-param name="label" select="$label"/>
-        </xsl:call-template>
+      <xsl:call-template name="listRelatedItems">
+        <xsl:with-param name="hits" select="$hitsSortList"/>
+        <xsl:with-param name="label" select="$label"/>
+      </xsl:call-template>
     </xsl:if>
   </xsl:template>
 
