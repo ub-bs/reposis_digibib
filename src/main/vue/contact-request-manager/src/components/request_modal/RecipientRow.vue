@@ -75,7 +75,7 @@ const lastEvent = computed((): PersonEvent | null => {
     return null;
   }
   const { events } = props.recipient;
-  return events.sort(compareEvents)[0];
+  return events.sort(compareEvents).reverse()[0];
 });
 const rowStyle = computed(() => {
   if (lastEvent.value?.type === PersonEventType.CONFIRMED) {

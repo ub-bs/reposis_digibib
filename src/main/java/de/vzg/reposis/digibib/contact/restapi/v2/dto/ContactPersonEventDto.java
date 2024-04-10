@@ -10,5 +10,5 @@ import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
  * Dto for {@link ContactPersonEvent}.
  */
 public record ContactPersonEventDto(@JsonProperty("date") Date date,
-    @JsonProperty("type") ContactPersonEvent.EventType type) {
+    @JsonProperty("type") ContactPersonEvent.EventType type, @JsonProperty("comment") String comment) {
 }

@@ -75,10 +75,10 @@ public class ContactPersonOrcidCollector implements ContactPersonCollector {
                         LOGGER.warn(e);
                     }
                 }
-                return mails.stream().map(m -> new ContactPerson(name, m, "orcid")).toList();
+                return mails.stream().map(m -> new ContactPerson(name, m, "orcid", orcid)).toList();
             } else {
                 try {
-                    return fetchMailsFromPublicApi(orcid).stream().map(m -> new ContactPerson(name, m, "orcid"))
+                    return fetchMailsFromPublicApi(orcid).stream().map(m -> new ContactPerson(name, m, "orcid", orcid))
                         .toList();
                 } catch (Exception e) {
                     LOGGER.warn(e);

@@ -140,11 +140,9 @@ public class ContactServiceImpl implements ContactService {
             final ContactRequestData requestData = ContactMapper.toData(request);
             final Date currentDate = new Date();
             requestData.setCreated(currentDate);
-            requestData.setLastModified(currentDate);
             final String currentUserId = MCRSessionMgr.getCurrentSession().getUserInformation().getUserID();
             requestData.setCreatedBy(currentUserId);
-            requestData.setLastModifiedBy(currentUserId);
-            requestData.setState(ContactRequest.State.RECEIVED);
+            requestData.setState(ContactRequest.RequestStatus.RECEIVED);
             requestRepository.insert(requestData);
             request.setId(requestData.getUuid());
             PERSON_COLLECTOR_JOB_QUEUE.add(ContactPersonCollectorJobAction.createJob(requestData.getUuid()));
@@ -166,7 +164,7 @@ public class ContactServiceImpl implements ContactService {
             writeLock.lock();
             requestRepository.findByUuid(request.getId()).ifPresentOrElse(r -> {
                 Optional.ofNullable(request.getComment()).ifPresent(r::setComment);
-                update(r);
+                requestRepository.save(r);
             }, () -> {
                 throw new ContactRequestNotFoundException();
             });
@@ -180,7 +178,7 @@ public class ContactServiceImpl implements ContactService {
         try {
             writeLock.lock();
             requestRepository.findByUuid(requestId).ifPresentOrElse(r -> {
-                if (r.getState().getValue() <= ContactRequest.State.PROCESSED.getValue()) {
+                if (r.getState().getValue() <= ContactRequest.RequestStatus.PROCESSED.getValue()) {
                     requestRepository.remove(r);
                 } else {
                     throw new ContactRequestStateException("A forwarded request cannot be deleted.");
@@ -193,25 +191,17 @@ public class ContactServiceImpl implements ContactService {
         }
     }
 
-    private void update(ContactRequestData request) {
-        request.setLastModified(new Date());
-        request.setLastModifiedBy(MCRSessionMgr.getCurrentSession().getUserInformation().getUserID());
-        requestRepository.save(request);
-    }
-
     @Override
-    public void confirmForwarding(UUID requestId, String mail) {
+    public void addPersonEvent(UUID requestId, String mail, ContactPersonEvent event) {
         try {
             writeLock.lock();
             final ContactRequestData requestData = requestRepository.findByUuid(requestId)
                 .orElseThrow(() -> new ContactRequestNotFoundException());
             requestData.getPersons().stream().filter(r -> Objects.equals(mail, r.getMail())).findAny()
-                .ifPresentOrElse(
-                    r -> r.addEvent(new ContactPersonEventData(new Date(), ContactPersonEvent.EventType.CONFIRMED)),
-                    () -> {
-                        throw new ContactPersonNotFoundException();
-                    });
-            update(requestData);
+                .ifPresentOrElse(r -> r.addEvent(ContactMapper.toData(event)), () -> {
+                    throw new ContactPersonNotFoundException();
+                });
+            requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
         }
@@ -242,7 +232,7 @@ public class ContactServiceImpl implements ContactService {
             }
             final ContactRequestData requestData = requestRepository.findByUuid(requestId)
                 .orElseThrow(() -> new ContactRequestNotFoundException());
-            if (!Objects.equals(ContactRequest.State.PROCESSED, requestData.getState())) {
+            if (!Objects.equals(ContactRequest.RequestStatus.PROCESSED, requestData.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
             if (checkRecipientExists(requestData.getPersons(), contactPerson)) {
@@ -250,7 +240,7 @@ public class ContactServiceImpl implements ContactService {
             }
             final ContactPersonData recipientData = ContactMapper.toData(contactPerson);
             requestData.addPerson(recipientData);
-            update(requestData);
+            requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
         }
@@ -262,7 +252,7 @@ public class ContactServiceImpl implements ContactService {
             writeLock.lock();
             final ContactRequestData requestData = requestRepository.findByUuid(requestId)
                 .orElseThrow(() -> new ContactRequestNotFoundException());
-            if (!Objects.equals(ContactRequest.State.PROCESSED, requestData.getState())) {
+            if (!Objects.equals(ContactRequest.RequestStatus.PROCESSED, requestData.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
             final ContactPersonData recipientData
@@ -272,7 +262,7 @@ public class ContactServiceImpl implements ContactService {
                 throw new ContactPersonOriginException();
             }
             requestData.removePerson(recipientData);
-            update(requestData);
+            requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
         }
@@ -288,7 +278,7 @@ public class ContactServiceImpl implements ContactService {
             }
             final ContactRequestData requestData = requestRepository.findByUuid(requestId)
                 .orElseThrow(() -> new ContactRequestNotFoundException());
-            if (!Objects.equals(ContactRequest.State.PROCESSED, requestData.getState())) {
+            if (!Objects.equals(ContactRequest.RequestStatus.PROCESSED, requestData.getState())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
             final ContactPersonData outdated
@@ -302,7 +292,8 @@ public class ContactServiceImpl implements ContactService {
             }
             outdated.setName(contactPerson.getName());
             outdated.setOrigin(contactPerson.getOrigin());
-            update(requestData);
+
+            requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
         }
@@ -333,15 +324,15 @@ public class ContactServiceImpl implements ContactService {
             }
             requestData.getPersons().clear();
             contactPersons.stream().map(ContactMapper::toData).forEach(requestData::addPerson);
-            requestData.setState(ContactRequest.State.PROCESSED);
-            update(requestData);
+            requestData.setState(ContactRequest.RequestStatus.PROCESSED);
+            requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
         }
     }
 
     private void addFallbackRecipient(List<ContactPerson> recipients) {
-        final ContactPerson fallback = new ContactPerson(FALLBACK_NAME, FALLBACK_MAIL, ORIGIN_FALLBACK);
+        final ContactPerson fallback = new ContactPerson(FALLBACK_NAME, FALLBACK_MAIL, ORIGIN_FALLBACK, null);
         recipients.add(fallback);
     }
 
@@ -355,7 +346,7 @@ public class ContactServiceImpl implements ContactService {
                 = requestData.getPersons().stream().filter(r -> Objects.equals(mail, r.getMail()))
                     .findAny().orElseThrow(() -> new ContactPersonNotFoundException());
             doForwardRequest(requestData, contactPerson);
-            update(requestData);
+            requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
         }
@@ -426,7 +417,7 @@ public class ContactServiceImpl implements ContactService {
                 r.addEvent(event);
             });
         });
-        update(requestData);
+        requestRepository.save(requestData);
     }
 
 }

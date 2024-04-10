@@ -59,7 +59,6 @@ import Modal from '@/components/Modal.vue';
 import { ContactPerson, Request, RequestState } from '@/utils';
 import {
   updateRequest,
-  forwardRequest,
   addRecipient,
   updateRecipient,
   removeRecipient,

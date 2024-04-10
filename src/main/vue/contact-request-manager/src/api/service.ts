@@ -19,7 +19,6 @@ const removeRequest = (id: string) => axios.delete(`api/v2/contact-requests/${id
 const updateRequest = (id: string, request: Request) => axios.put(`api/v2/contact-requests/${id}`, {
   comment: request.comment,
 });
-const forwardRequest = (id: string) => axios.post(`api/v2/contact-requests/${id}/forward`);
 const forwardRequestToRecipient = (id: string, recipientID: string) => axios.post(`api/v2/contact-requests/${id}/forward?recipient=${recipientID}`);
 const addRecipient = (id: string, recipient: ContactPerson) => axios.post(`api/v2/contact-requests/${id}/recipients`, recipient);
 const updateRecipient = (id: string, personId: string, recipient: ContactPerson) => {
@@ -36,7 +35,6 @@ export {
   fetchRequests,
   updateRequest,
   removeRequest,
-  forwardRequest,
   getRequest,
   forwardRequestToRecipient,
   addRecipient,

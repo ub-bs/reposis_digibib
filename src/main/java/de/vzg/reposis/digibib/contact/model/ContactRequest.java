@@ -44,15 +44,9 @@ public class ContactRequest {
 
     private String createdBy;
 
-    private Date lastModified;
-
-    private String lastModifiedBy;
-
-    private State state;
+    private RequestStatus state;
 
     private List<ContactPerson> contactPersons = new ArrayList<ContactPerson>();
-
-    private String debugMessage;
 
     private String comment;
 
@@ -157,47 +151,11 @@ public class ContactRequest {
     }
 
     /**
-     * Returns date of last modification.
-     *
-     * @return date of last modification
-     */
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    /**
-     * Sets date of last modification.
-     *
-     * @param lastModified date of last modification
-     */
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    /**
-     * Returns name of last modifier.
-     *
-     * @return date of last modification
-     */
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    /**
-     * Sets name of last modifier.
-     *
-     * @param lastModifiedBy name of last modifier
-     */
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    /**
      * Returns request state.
      *
      * @return state
      */
-    public State getState() {
+    public RequestStatus getState() {
         return state;
     }
 
@@ -206,7 +164,7 @@ public class ContactRequest {
      *
      * @param state state
      */
-    public void setState(State state) {
+    public void setState(RequestStatus state) {
         this.state = state;
     }
 
@@ -229,24 +187,6 @@ public class ContactRequest {
     }
 
     /**
-     * Returns debug message.
-     *
-     * @return debug message
-     */
-    public String getDebugMessage() {
-        return debugMessage;
-    }
-
-    /**
-     * Sets debug message
-     *
-     * @param debugMessage debug message
-     */
-    public void setDebugMesssage(String debugMessage) {
-        this.debugMessage = debugMessage;
-    }
-
-    /**
      * Returns comment.
      *
      * @return comment
@@ -266,8 +206,7 @@ public class ContactRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(comment, created, createdBy, debugMessage, lastModified, lastModifiedBy, contactPersons,
-            state, id);
+        return Objects.hash(comment, created, createdBy, contactPersons, state, id);
     }
 
     @Override
@@ -283,25 +222,24 @@ public class ContactRequest {
         }
         ContactRequest other = (ContactRequest) obj;
         return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
-            && Objects.equals(createdBy, other.createdBy) && Objects.equals(debugMessage, other.debugMessage)
-            && Objects.equals(lastModified, other.lastModified) && Objects.equals(lastModifiedBy, other.lastModifiedBy)
-            && Objects.equals(contactPersons, other.contactPersons) && state == other.state
-            && Objects.equals(id, other.id);
+            && Objects.equals(createdBy, other.createdBy) && Objects.equals(id, other.id)
+            && Objects.equals(contactPersons, other.contactPersons) && state == other.state;
+
     }
 
     /**
      * Describes possible request states.
      */
-    public enum State {
-        RECEIVED(0), PROCESSED(10);
+    public enum RequestStatus {
+        RECEIVED(0), PROCESSED(10), COMPLETED(20);
 
         private final int value;
 
-        State(int value) {
+        RequestStatus(int value) {
             this.value = value;
         }
 
-        public static State resolve(int value) {
+        public static RequestStatus resolve(int value) {
             return Arrays.stream(values()).filter(o -> o.value == value).findFirst().orElse(null);
         }
 

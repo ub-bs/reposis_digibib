@@ -53,7 +53,7 @@ public class ContactRequestRepositoryImpl implements ContactRequestRepository {
     }
 
     @Override
-    public Collection<ContactRequestData> findByState(ContactRequest.State state) {
+    public Collection<ContactRequestData> findByState(ContactRequest.RequestStatus state) {
         return getEntityManager().createNamedQuery("ContactRequest.findByState", ContactRequestData.class)
             .setParameter("state", state).getResultList();
     }

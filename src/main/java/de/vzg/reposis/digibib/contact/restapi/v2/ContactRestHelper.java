@@ -75,7 +75,8 @@ public class ContactRestHelper {
      * @return person
      */
     protected static ContactPerson toDomain(ContactPersonUpdateDto personDto) {
-        final ContactPerson person = new ContactPerson(personDto.name(), personDto.email(), personDto.origin());
+        final ContactPerson person
+            = new ContactPerson(personDto.name(), personDto.email(), personDto.origin(), personDto.reference());
         Optional.ofNullable(personDto.events()).ifPresent(e -> {
             e.stream().map(ContactRestHelper::toDomain).forEach(person::addEvent);
         });
@@ -83,7 +84,7 @@ public class ContactRestHelper {
     }
 
     private static ContactPersonEvent toDomain(ContactPersonEventDto eventDto) {
-        return new ContactPersonEvent(eventDto.date(), eventDto.type());
+        return new ContactPersonEvent(eventDto.date(), eventDto.type(), eventDto.comment());
     }
 
     /**
@@ -100,7 +101,7 @@ public class ContactRestHelper {
     }
 
     private static ContactPersonEventDto toDto(ContactPersonEvent event) {
-        return new ContactPersonEventDto(event.date(), event.type());
+        return new ContactPersonEventDto(event.date(), event.type(), event.comment());
     }
 
     /**
@@ -110,7 +111,7 @@ public class ContactRestHelper {
      * @return person
      */
     protected static ContactPerson toDomain(ContactPersonCreateDto personDto) {
-        return new ContactPerson(personDto.name(), personDto.email(), personDto.origin());
+        return new ContactPerson(personDto.name(), personDto.email(), personDto.origin(), personDto.reference());
     }
 
 }

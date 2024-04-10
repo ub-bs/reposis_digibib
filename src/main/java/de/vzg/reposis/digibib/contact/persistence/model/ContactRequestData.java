@@ -120,30 +120,15 @@ public class ContactRequestData {
     private String createdBy;
 
     /**
-     * Date of last modification.
-     */
-    private Date lastModified;
-
-    /**
-     * Name of the last modifier.
-     */
-    private String lastModifiedBy;
-
-    /**
      * State of request.
      */
     @Enumerated(EnumType.STRING)
-    private ContactRequest.State state;
+    private ContactRequest.RequestStatus state;
 
     /**
      * List of recipients.
      */
     private List<ContactPersonData> persons = new ArrayList<ContactPersonData>();
-
-    /**
-     * Debug field for internal purposes.
-     */
-    private String debug;
 
     /**
      * Comment field for editors.
@@ -238,30 +223,11 @@ public class ContactRequestData {
         this.createdBy = createdBy;
     }
 
-    @Column(name = "lastModified")
-    public Date getLastModified() {
-        return lastModified;
-    }
-
-    @Column(name = "lastModified")
-    public void setLastModified(Date lastModified) {
-        this.lastModified = lastModified;
-    }
-
-    @Column(name = "lastModifiedBy")
-    public String getLastModifiedBy() {
-        return lastModifiedBy;
-    }
-
-    public void setLastModifiedBy(String lastModifiedBy) {
-        this.lastModifiedBy = lastModifiedBy;
-    }
-
-    public ContactRequest.State getState() {
+    public ContactRequest.RequestStatus getState() {
         return state;
     }
 
-    public void setState(ContactRequest.State state) {
+    public void setState(ContactRequest.RequestStatus state) {
         this.state = state;
     }
 
@@ -299,14 +265,6 @@ public class ContactRequestData {
         recipient.setRequest(null);
     }
 
-    public String getDebug() {
-        return debug;
-    }
-
-    public void setDebug(String debug) {
-        this.debug = debug;
-    }
-
     public String getComment() {
         return comment;
     }
@@ -317,8 +275,8 @@ public class ContactRequestData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(comment, created, createdBy, debug, from, id, lastModified, lastModifiedBy,
-            message, name, objectId, orcid, persons, state, uuid);
+        return Objects.hash(comment, created, createdBy, from, id, message, name, objectId, orcid, persons, state,
+            uuid);
     }
 
     @Override
@@ -334,11 +292,10 @@ public class ContactRequestData {
         }
         ContactRequestData other = (ContactRequestData) obj;
         return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
-            && Objects.equals(createdBy, other.createdBy) && Objects.equals(debug, other.debug)
-            && Objects.equals(from, other.from) && id == other.id && Objects.equals(lastModified, other.lastModified)
-            && Objects.equals(lastModifiedBy, other.lastModifiedBy) && Objects.equals(message, other.message)
-            && Objects.equals(name, other.name) && Objects.equals(objectId, other.objectId)
-            && Objects.equals(orcid, other.orcid) && Objects.equals(persons, other.persons) && state == other.state
+            && Objects.equals(createdBy, other.createdBy) && Objects.equals(from, other.from) && id == other.id
+            && Objects.equals(message, other.message) && Objects.equals(name, other.name)
+            && Objects.equals(objectId, other.objectId) && Objects.equals(orcid, other.orcid)
+            && Objects.equals(persons, other.persons) && state == other.state
             && Objects.equals(uuid, other.uuid);
     }
 }

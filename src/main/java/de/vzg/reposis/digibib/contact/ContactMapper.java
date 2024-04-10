@@ -23,7 +23,8 @@ public class ContactMapper {
      */
     public static ContactPerson toDomain(ContactPersonData recipientData) {
         final ContactPerson contactPerson
-            = new ContactPerson(recipientData.getName(), recipientData.getMail(), recipientData.getOrigin());
+            = new ContactPerson(recipientData.getName(), recipientData.getMail(), recipientData.getOrigin(),
+                recipientData.getReference());
         recipientData.getEvents().stream().map(ContactMapper::toDomain).forEach(contactPerson::addEvent);
         return contactPerson;
     }
@@ -35,7 +36,7 @@ public class ContactMapper {
      * @return event
      */
     public static ContactPersonEvent toDomain(ContactPersonEventData data) {
-        return new ContactPersonEvent(data.getDate(), data.getType());
+        return new ContactPersonEvent(data.getDate(), data.getType(), data.getComment());
     }
 
     /**
@@ -49,6 +50,7 @@ public class ContactMapper {
         recipientData.setName(contactPerson.getName());
         recipientData.setMail(contactPerson.getMail());
         recipientData.setOrigin(contactPerson.getOrigin());
+        recipientData.setReference(contactPerson.getReference());
         contactPerson.getEvents().stream().map(ContactMapper::toData).forEach(recipientData::addEvent);
         return recipientData;
     }
@@ -63,6 +65,7 @@ public class ContactMapper {
         final ContactPersonEventData data = new ContactPersonEventData();
         data.setDate(personEvent.date());
         data.setType(personEvent.type());
+        data.setComment(personEvent.comment());
         return data;
     }
 
@@ -81,9 +84,6 @@ public class ContactMapper {
         request.setComment(requestData.getComment());
         request.setCreated(requestData.getCreated());
         request.setCreatedBy(requestData.getCreatedBy());
-        request.setDebugMesssage(requestData.getDebug());
-        request.setLastModified(requestData.getLastModified());
-        request.setLastModifiedBy(requestData.getLastModifiedBy());
         request.setState(requestData.getState());
         requestData.getPersons().stream().map(ContactMapper::toDomain).forEach(request.getContactPersons()::add);
         return request;
@@ -100,9 +100,6 @@ public class ContactMapper {
         requestData.setComment(request.getComment());
         requestData.setCreated(request.getCreated());
         requestData.setCreatedBy(request.getCreatedBy());
-        requestData.setDebug(request.getDebugMessage());
-        requestData.setLastModified(request.getLastModified());
-        requestData.setLastModifiedBy(request.getLastModifiedBy());
         requestData.setState(request.getState());
         requestData.setObjectId(request.getObjectId());
         request.getContactPersons().stream().map(ContactMapper::toData).forEach(requestData::addPerson);

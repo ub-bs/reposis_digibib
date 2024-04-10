@@ -64,6 +64,11 @@ public class ContactPersonData {
     private String mail;
 
     /**
+     * Origin reference
+     */
+    private String reference;
+
+    /**
      * Parent request of person.
      */
     private ContactRequestData request;
@@ -141,9 +146,17 @@ public class ContactPersonData {
         event.setPerson(this);
     }
 
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
     @Override
     public int hashCode() {
-        return Objects.hash(id, mail, name, origin, request);
+        return Objects.hash(id, mail, name, origin, request, reference);
     }
 
     @Override
@@ -159,6 +172,7 @@ public class ContactPersonData {
         }
         ContactPersonData other = (ContactPersonData) obj;
         return id == other.id && Objects.equals(mail, other.mail) && Objects.equals(name, other.name)
-            && origin == other.origin && Objects.equals(request, other.request);
+            && Objects.equals(reference, other.reference) && origin == other.origin
+            && Objects.equals(request, other.request);
     }
 }

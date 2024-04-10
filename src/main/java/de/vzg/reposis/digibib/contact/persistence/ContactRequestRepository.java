@@ -46,7 +46,7 @@ public interface ContactRequestRepository extends ContactBaseRepository<ContactR
      * @param state state
      * @return collection over contact request data elements
      */
-    Collection<ContactRequestData> findByState(ContactRequest.State state);
+    Collection<ContactRequestData> findByState(ContactRequest.RequestStatus state);
 
     /**
      * Returns optional with request by given uuid.

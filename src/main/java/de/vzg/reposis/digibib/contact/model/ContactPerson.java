@@ -33,15 +33,18 @@ public class ContactPerson {
 
     private String origin;
 
+    private String reference;
+
     private List<ContactPersonEvent> events = new ArrayList<>();
 
     /**
      * Constructs new recipient with recipient.
      */
-    public ContactPerson(String name, String mail, String origin) {
+    public ContactPerson(String name, String mail, String origin, String reference) {
         setName(name);
         setMail(mail);
         setOrigin(origin);
+        setReference(reference);
     }
 
     /**
@@ -98,6 +101,14 @@ public class ContactPerson {
         this.origin = origin;
     }
 
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
     /**
      * Returns list of event elements.
      *
@@ -127,7 +138,7 @@ public class ContactPerson {
 
     @Override
     public int hashCode() {
-        return Objects.hash(events, mail, name, origin);
+        return Objects.hash(events, mail, name, origin, reference);
     }
 
     @Override
@@ -143,6 +154,7 @@ public class ContactPerson {
         }
         ContactPerson other = (ContactPerson) obj;
         return Objects.equals(events, other.events) && Objects.equals(mail, other.mail)
-            && Objects.equals(name, other.name) && Objects.equals(origin, other.origin);
+            && Objects.equals(reference, other.reference) && Objects.equals(name, other.name)
+            && Objects.equals(origin, other.origin);
     }
 }

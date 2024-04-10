@@ -1,6 +1,7 @@
 package de.vzg.reposis.digibib.contact.persistence.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
 import jakarta.persistence.Column;
@@ -28,6 +29,8 @@ public class ContactPersonEventData {
     private Date date;
 
     private ContactPersonEvent.EventType type;
+
+    private String comment;
 
     private ContactPersonData person;
 
@@ -60,6 +63,14 @@ public class ContactPersonEventData {
         this.date = date;
     }
 
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "personId")
     public ContactPersonData getPerson() {
@@ -78,4 +89,26 @@ public class ContactPersonEventData {
     public void setType(ContactPersonEvent.EventType type) {
         this.type = type;
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(comment, date, id, person, type);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        ContactPersonEventData other = (ContactPersonEventData) obj;
+        return Objects.equals(comment, other.comment) && Objects.equals(date, other.date) && id == other.id
+            && Objects.equals(person, other.person) && type == other.type;
+    }
+
 }

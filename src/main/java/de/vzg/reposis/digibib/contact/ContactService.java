@@ -34,6 +34,7 @@ import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
 import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 
@@ -143,7 +144,7 @@ public interface ContactService {
      * Forwards request to specific {@link ContactPerson}.
      *
      * @param requestId request id
-     * @param contactPersonId contact person id
+     * @param mail contact person mail
      * @throws ContactPersonNotFoundException if contact person cannot be found
      * @throws ContactPersonStateException if contact person is in wrong state
      * @throws ContactRequestNotFoundException if request cannot be found
@@ -163,9 +164,10 @@ public interface ContactService {
      * Confirms request as confirmed by specified {@link ContactPerson}.
      *
      * @param requestId request id
-     * @param contactPersonId contact person id
+     * @param mail contact person mail
+     * @param event event
      * @throws ContactRequestNotFoundException if request cannot be found
      * @throws ContactPersonNotFoundException if contact person cannot be found
      */
-    void confirmForwarding(UUID requestId, String mail);
+    void addPersonEvent(UUID requestId, String mail, ContactPersonEvent event);
 }
