@@ -19,16 +19,16 @@
 package de.vzg.reposis.digibib.contact.exception;
 
 /**
- * Exception if the recipient already exists.
+ * Exception if the recipient does not exist.
  */
-public class ContactPersonAlreadyExistsException extends ContactException {
+public class ContactNotFoundException extends ContactException {
 
     /**
-     * 
+     *
      */
     private static final long serialVersionUID = 1L;
 
-    public ContactPersonAlreadyExistsException() {
-        super("recipientAlreadyExists", "recipient already exists.");
+    public ContactNotFoundException() {
+        super("contactNotFound", "contact not found.");
     }
 }

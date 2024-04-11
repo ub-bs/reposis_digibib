@@ -24,7 +24,7 @@ import org.apache.logging.log4j.LogManager;
 import org.mycore.restapi.v2.MCRErrorResponse;
 
 import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.exception.ContactPersonNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.Context;
@@ -42,7 +42,7 @@ public class ContactRestExceptionMapper implements ExceptionMapper<ContactExcept
     @Override
     public Response toResponse(ContactException exception) {
         if (exception instanceof ContactRequestNotFoundException
-            || exception instanceof ContactPersonNotFoundException) {
+            || exception instanceof ContactNotFoundException) {
             return getResponse(exception, Response.Status.NOT_FOUND.getStatusCode(), exception.getErrorCode());
         }
         return getResponse(exception, Response.Status.BAD_REQUEST.getStatusCode(), exception.getErrorCode());

@@ -24,17 +24,15 @@ import java.util.UUID;
 import org.mycore.common.MCRException;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
+import de.vzg.reposis.digibib.contact.exception.ContactAlreadyExistsException;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.exception.ContactPersonAlreadyExistsException;
-import de.vzg.reposis.digibib.contact.exception.ContactPersonInvalidException;
-import de.vzg.reposis.digibib.contact.exception.ContactPersonNotFoundException;
-import de.vzg.reposis.digibib.contact.exception.ContactPersonOriginException;
-import de.vzg.reposis.digibib.contact.exception.ContactPersonStateException;
+import de.vzg.reposis.digibib.contact.exception.ContactInvalidException;
+import de.vzg.reposis.digibib.contact.exception.ContactNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestStateException;
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
-import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
+import de.vzg.reposis.digibib.contact.model.Contact;
+import de.vzg.reposis.digibib.contact.model.ContactEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 
@@ -82,55 +80,51 @@ public interface ContactService {
     void deleteRequest(UUID requestId);
 
     /**
-     * Returns {@link ContactPerson} by given id.
+     * Returns {@link Contact} by given id.
      *
      * @param requestId request id
-     * @param mail mail
+     * @param email email
      * @return contact person
-     * @throws ContactPersonNotFoundException if contact person does not exist
+     * @throws ContactNotFoundException if contact does not exist
      */
-    ContactPerson getContactPerson(UUID requestId, String mail);
+    Contact getContactByEmail(UUID requestId, String email);
 
     /**
-     * Adds {@link ContactPerson} to request by id.
-     * Only person origin manual is allowed.
+     * Adds {@link Contact} to request by id.
      *
      * @param requestId request id
-     * @param contactPerson contact person
+     * @param contact contact
      * @return id
-     * @throws ContactPersonInvalidException if contact person is invalid
-     * @throws ContactPersonAlreadyExistsException if contact person with given mail already exists
+     * @throws ContactInvalidException if contact is invalid
+     * @throws ContactAlreadyExistsException if contact already exists
      * @throws ContactRequestNotFoundException if request cannot be found
      * @throws ContactRequestStateException if request is in wrong state
-     * @throws ContactPersonOriginException if contact person has wrong origin
      */
-    void addContactPerson(UUID requestId, ContactPerson contactPerson);
+    void addContact(UUID requestId, Contact contact);
 
     /**
-     * Updates {@link ContactPerson} of request by id.
+     * Updates {@link Contact} of request by id.
      *
      * @param requestId request id
-     * @param contactPerson contact person
-     * @throws ContactPersonInvalidException if contact person is invalid
-     * @throws ContactPersonAlreadyExistsException if person with given mail already exists
-     * @throws ContactPersonOriginException if person does not exists
+     * @param contact contact
+     * @throws ContactInvalidException if contact is invalid
+     * @throws ContactAlreadyExistsException if contact already exists
      * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactRequestStateException if request is in wrong state
+     */
+    void updateContact(UUID requestId, Contact contact);
+
+    /**
+     * Removes {@link Contact} of request by given id.
+     *
+     * @param requestId request id
+     * @param email email
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactNotFoundException if contact cannot be found
      * @throws ContactRequestStateException if request is in wrong state
      * @throws ContactPersonOriginException if request has wrong origin
      */
-    void updateContactPerson(UUID requestId, ContactPerson contactPerson);
-
-    /**
-     * Removes {@link ContactPerson} of request by given id.
-     *
-     * @param requestId request id
-     * @param mail contact person mail
-     * @throws ContactRequestNotFoundException if request cannot be found
-     * @throws ContactPersonNotFoundException if contact person cannot be found
-     * @throws ContactRequestStateException if request is in wrong state
-     * @throws ContactPersonOriginException if request has wrong origin
-     */
-    void deleteContactPerson(UUID requestId, String mail);
+    void deleteContactByEmail(UUID requestId, String email);
 
     /**
      * Collects contact persons for request.
@@ -138,20 +132,19 @@ public interface ContactService {
      * @param requestId request id
      * @throws ContactRequestNotFoundException if request does not exist
      */
-    void collectContactPersons(UUID requestId);
+    void collectContacts(UUID requestId);
 
     /**
-     * Forwards request to specific {@link ContactPerson}.
+     * Forwards request to specific {@link Contact}.
      *
      * @param requestId request id
-     * @param mail contact person mail
-     * @throws ContactPersonNotFoundException if contact person cannot be found
-     * @throws ContactPersonStateException if contact person is in wrong state
+     * @param email contact mail
+     * @throws ContactNotFoundException if contact cannot be found
      * @throws ContactRequestNotFoundException if request cannot be found
      * @throws ContactRequestStateException if request is in wrong state
      * @throws MCRException if sending failed
      */
-    void forwardRequest(UUID requestId, String mail);
+    void forwardRequest(UUID requestId, String email);
 
     /**
      * Discovers and handles bounce messages.
@@ -161,13 +154,13 @@ public interface ContactService {
     void handleBouncedMessages();
 
     /**
-     * Confirms request as confirmed by specified {@link ContactPerson}.
+     * Confirms request as confirmed by specified {@link Contact}.
      *
      * @param requestId request id
-     * @param mail contact person mail
+     * @param email contact mail
      * @param event event
      * @throws ContactRequestNotFoundException if request cannot be found
-     * @throws ContactPersonNotFoundException if contact person cannot be found
+     * @throws ContactNotFoundException if contact cannot be found
      */
-    void addPersonEvent(UUID requestId, String mail, ContactPersonEvent event);
+    void addContactEvent(UUID requestId, String email, ContactEvent event);
 }

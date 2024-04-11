@@ -10,11 +10,8 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 /**
  * Dto to update {@link ContactRequest}.
  */
-public record ContactRequestUpdateDto(
-    @JsonProperty("comment") String comment,
-    @JsonProperty("contactPersons") List<ContactPersonUpdateDto> persons,
-    @JsonProperty("created") Date created,
-    @JsonProperty("body") ContactRequestBodyDto body,
-    @JsonProperty("objectId") String objectId,
-    @JsonProperty("state") ContactRequest.RequestStatus status) {
+public record ContactRequestUpdateDto(@JsonProperty("objectId") String objectId,
+    @JsonProperty("state") ContactRequest.RequestStatus status, @JsonProperty("created") Date created,
+    @JsonProperty("body") ContactRequestBodyDto body, @JsonProperty("contacts") List<ContactUpdateDto> contacts,
+    @JsonProperty("comment") String comment) {
 }

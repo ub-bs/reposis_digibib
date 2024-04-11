@@ -49,9 +49,9 @@ public class ContactRequest {
     private String createdBy;
 
     @NotNull
-    private RequestStatus state;
+    private RequestStatus status;
 
-    private List<ContactPerson> contactPersons = new ArrayList<ContactPerson>();
+    private List<Contact> contacts = new ArrayList<Contact>();
 
     private String comment;
 
@@ -60,9 +60,6 @@ public class ContactRequest {
      */
     public ContactRequest(ContactRequestBody request) {
         setRequest(request);
-    }
-
-    public ContactRequest() {
     }
 
     /**
@@ -120,18 +117,18 @@ public class ContactRequest {
     }
 
     /**
-     * Return date of request creation.
+     * Return date of creation.
      *
-     * @return date of request creation
+     * @return date of creation
      */
     public Date getCreated() {
         return created;
     }
 
     /**
-     * Sets date of request creation.
+     * Sets date of creation.
      *
-     * @param created date of request creation
+     * @param created date of creation
      */
     public void setCreated(Date created) {
         this.created = created;
@@ -160,35 +157,35 @@ public class ContactRequest {
      *
      * @return state
      */
-    public RequestStatus getState() {
-        return state;
+    public RequestStatus getStatus() {
+        return status;
     }
 
     /**
      * Sets request state.
      *
-     * @param state state
+     * @param status state
      */
-    public void setState(RequestStatus state) {
-        this.state = state;
+    public void setStatus(RequestStatus status) {
+        this.status = status;
     }
 
     /**
-     * Returns list of recipient elements.
+     * Returns list of contact elements.
      *
-     * @return list of recipient elements
+     * @return list of contact elements
      */
-    public List<ContactPerson> getContactPersons() {
-        return contactPersons;
+    public List<Contact> getContacts() {
+        return contacts;
     }
 
     /**
-     * Sets list of recipient elements.
+     * Sets list of contact elements.
      *
-     * @param recipients list of recipient elements
+     * @param recipients list of contact elements
      */
-    public void setContactPersons(List<ContactPerson> contactPersons) {
-        this.contactPersons = contactPersons;
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 
     /**
@@ -196,8 +193,8 @@ public class ContactRequest {
      *
      * @param contactPerson contact person
      */
-    public void addContactPerson(ContactPerson contactPerson) {
-        this.contactPersons.add(contactPerson);
+    public void addContact(Contact contact) {
+        this.contacts.add(contact);
     }
 
     /**
@@ -220,7 +217,7 @@ public class ContactRequest {
 
     @Override
     public int hashCode() {
-        return Objects.hash(comment, created, createdBy, contactPersons, state, id);
+        return Objects.hash(comment, created, createdBy, contacts, status, id);
     }
 
     @Override
@@ -237,8 +234,7 @@ public class ContactRequest {
         ContactRequest other = (ContactRequest) obj;
         return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
             && Objects.equals(createdBy, other.createdBy) && Objects.equals(id, other.id)
-            && Objects.equals(contactPersons, other.contactPersons) && state == other.state;
-
+            && Objects.equals(contacts, other.contacts) && status == other.status;
     }
 
     /**

@@ -18,8 +18,8 @@
       <hr class="my-4" />
       <comment-edit :comment="request.comment" :enabled="isEditable" @save="handleCommentSave" />
       <hr class="my-4" />
-      <h6 class="mb-2">{{ $t('digibib.contact.frontend.manager.label.recipients') }}</h6>
-      <p>{{ $t('digibib.contact.frontend.manager.info.recipients') }}</p>
+      <h6 class="mb-2">{{ $t('digibib.contact.frontend.manager.label.contacts') }}</h6>
+      <p>{{ $t('digibib.contact.frontend.manager.info.contacts') }}</p>
       <table class="table table-striped">
         <colgroup>
           <col style="width: 40%">
@@ -36,15 +36,14 @@
           </tr>
         </thead>
         <tbody>
-          <template v-for="recipient in request.contactPersons" :key="recipient">
-            <RecipientRow :recipient="recipient" :editId="editId"
+          <template v-for="contact in request.contacts" :key="contact">
+            <contact-row :contact="contact" :editId="editId"
               :isProcessed="request.state === RequestState.PROCESSED"
-              @delete="doRemoveRecipient" @edit="startEdit" @update="doUpdateRecipient"
-              @mail="doForwardRequestToRecipient" @cancel="cancelEdit" />
+              @delete="doRemoveContact" @edit="startEdit" @update="doUpdateContact"
+              @mail="doForwardRequest" @cancel="cancelEdit" />
           </template>
-          <AddRecipientRow
-            v-if="request.state === RequestState.PROCESSED"
-            :disabled="editId !== undefined" @add="doAddRecipient" />
+          <add-contact-row v-if="request.state === RequestState.PROCESSED"
+            :disabled="editId !== undefined" @add="doAddContact" />
         </tbody>
       </table>
     </div>
@@ -56,19 +55,19 @@ import { computed, ref, PropType } from 'vue';
 import { useI18n } from 'vue-i18n';
 import ConfirmModal from '@/components/ConfirmModal.vue';
 import Modal from '@/components/Modal.vue';
-import { ContactPerson, Request, RequestState } from '@/utils';
+import { Contact, Request, RequestState } from '@/utils';
 import {
   updateRequest,
-  addRecipient,
-  updateRecipient,
-  removeRecipient,
-  forwardRequestToRecipient,
+  addContact,
+  updateContact,
+  removeContactByEmail,
+  forwardRequest,
   getRequest,
 } from '@/api/service';
-import AddRecipientRow from './AddRecipientRow.vue';
+import AddContactRow from './AddContactRow.vue';
 import RequestBodyView from './RequestBodyView.vue';
 import CommentEdit from './CommentEdit.vue';
-import RecipientRow from './RecipientRow.vue';
+import ContactRow from './ContactRow.vue';
 
 const props = defineProps({
   request: {
@@ -77,7 +76,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['request-updated', 'recipients-updated', 'close']);
+const emit = defineEmits(['request-updated', 'contacts-updated', 'close']);
 const { t } = useI18n();
 const confirmModal = ref();
 const errorCode = ref();
@@ -118,59 +117,58 @@ const handleCommentSave = async (comment: string) => {
     handleError(error instanceof Error ? error.message : 'unknown');
   }
 };
-const doAddRecipient = async (recipient: ContactPerson): Promise<void> => {
+const doAddContact = async (contact: Contact): Promise<void> => {
   resetInfoError();
   try {
-    await addRecipient(props.request.id, recipient);
-    const recipients = props.request.contactPersons;
-    const newRecipient = recipient; // TODO fetch recipient
-    newRecipient.events = [];
-    recipients.push(newRecipient);
-    emit('recipients-updated', props.request.id, recipients);
+    await addContact(props.request.id, contact);
+    const { contacts } = props.request;
+    const newContact = contact; // TODO fetch contact
+    newContact.events = [];
+    contacts.push(newContact);
+    emit('contacts-updated', props.request.id, contacts);
   } catch (error) {
     handleError((error instanceof Error ? error.message : 'unknown'));
   }
 };
-const doUpdateRecipient = async (recipient: ContactPerson): Promise<void> => {
+const doUpdateContact = async (contact: Contact): Promise<void> => {
   resetInfoError();
   try {
-    await updateRecipient(props.request.id, recipient.email, recipient);
-    const recipientIndex = props.request.contactPersons
-      .findIndex((c: ContactPerson) => recipient.email === c.email);
-    const recipients = props.request.contactPersons;
-    recipients[recipientIndex] = recipient;
-    emit('recipients-updated', props.request.id, recipients);
+    await updateContact(props.request.id, contact.email, contact);
+    const contactIndex = props.request.contacts
+      .findIndex((c: Contact) => contact.email === c.email);
+    const { contacts } = props.request;
+    contacts[contactIndex] = contact;
+    emit('contacts-updated', props.request.id, contacts);
   } catch (error) {
     handleError((error instanceof Error ? error.message : 'unknown'));
   } finally {
     editId.value = undefined;
   }
 };
-const doRemoveRecipient = async (mail: string): Promise<void> => {
+const doRemoveContact = async (email: string): Promise<void> => {
   const ok = await confirmModal.value.show({
-    title: t('digibib.contact.frontend.manager.confirm.deleteRecipient.title'),
-    message: t('digibib.contact.frontend.manager.confirm.deleteRecipient.message', {
-      mail,
+    title: t('digibib.contact.frontend.manager.confirm.deleteContact.title'),
+    message: t('digibib.contact.frontend.manager.confirm.deleteContact.message', {
+      email,
     }),
   });
   if (ok) {
     resetInfoError();
     try {
-      await removeRecipient(props.request.id, mail);
-      const recipients = props.request.contactPersons
-        .filter((c: ContactPerson) => mail !== c.email);
-      emit('recipients-updated', props.request.id, recipients);
+      await removeContactByEmail(props.request.id, email);
+      const contacts = props.request.contacts.filter((c: Contact) => email !== c.email);
+      emit('contacts-updated', props.request.id, contacts);
     } catch (error) {
       handleError((error instanceof Error ? error.message : 'unknown'));
     }
   }
 };
-const doForwardRequestToRecipient = async (recipientId: string): Promise<void> => {
+const doForwardRequest = async (email: string): Promise<void> => {
   resetInfoError();
   try {
-    await forwardRequestToRecipient(props.request.id, recipientId);
-    // TODO fetch and update recipient
-    handleInfo('forwardRecipient');
+    await forwardRequest(props.request.id, email);
+    // TODO fetch and update contact
+    handleInfo('forwardContact');
   } catch (error) {
     handleError((error instanceof Error ? error.message : 'unknown'));
   }

@@ -19,7 +19,6 @@
 package de.vzg.reposis.digibib.contact.restapi.v2;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.mycore.restapi.annotations.MCRRequireTransaction;
@@ -27,12 +26,12 @@ import org.mycore.restapi.v2.access.MCRRestAPIACLPermission;
 import org.mycore.restapi.v2.annotation.MCRRestRequiredPermission;
 
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.Contact;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.persistence.model.ContactPersonData;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonCreateDto;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonDto;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonUpdateDto;
+import de.vzg.reposis.digibib.contact.persistence.model.ContactData;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactCreateDto;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactDto;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactUpdateDto;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -54,17 +53,19 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
-@Path("contact-requests/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}/recipients")
+@Path("contact-requests/{" + ContactRestResource.PARAM_CONTACT_REQUEST_ID + "}/recipients")
 public class ContactRecipientRestResource {
+
+    public static final String PARAM_CONTACT_EMAIL = "contact_request_recipient_id";
 
     @Context
     private UriInfo info;
 
     @POST
-    @Operation(summary = "Creates new contact request recipient", responses = {
+    @Operation(summary = "Creates and adds contact to request", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactPersonData.class))),
+                schema = @Schema(implementation = ContactData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
@@ -74,18 +75,18 @@ public class ContactRecipientRestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response createContactPerson(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
-        ContactPersonCreateDto contactPersonDto) {
-        final ContactPerson contactPerson = ContactRestHelper.toDomain(contactPersonDto);
-        ContactServiceImpl.getInstance().addContactPerson(requestId, contactPerson);
+    public Response createContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+        ContactCreateDto contactDto) {
+        final Contact contactPerson = ContactRestHelper.toDomain(contactDto);
+        ContactServiceImpl.getInstance().addContact(requestId, contactPerson);
         return Response.noContent().build();
     }
 
     @GET
-    @Operation(summary = "Gets contact request recipients by request id", responses = {
+    @Operation(summary = "Gets contacts from request", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactPersonData.class))),
+                schema = @Schema(implementation = ContactData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
@@ -93,76 +94,74 @@ public class ContactRecipientRestResource {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public List<ContactPersonDto> getAllRecipients(@DefaultValue("0") @QueryParam("offset") int offset,
+    public List<ContactDto> getContacts(@DefaultValue("0") @QueryParam("offset") int offset,
         @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
-        @QueryParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
+        @QueryParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
         final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);
-        final List<ContactPerson> recipients = request.getContactPersons();
-        response.setHeader(ContactRestConstants.HEADER_TOTAL_COUNT, Integer.toString(recipients.size()));
-        return recipients.stream().skip(offset).limit(limit).map(ContactRestHelper::toDto).toList();
+        final List<Contact> contacts = request.getContacts();
+        response.setHeader(ContactRestConstants.HEADER_TOTAL_COUNT, Integer.toString(contacts.size()));
+        return contacts.stream().skip(offset).limit(limit).map(ContactRestHelper::toDto).toList();
     }
 
     @GET
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_RECIPIENT_MAIL + "}")
-    @Operation(summary = "Gets contact request recipient by request id", responses = {
+    @Path("/{" + PARAM_CONTACT_EMAIL + "}")
+    @Operation(summary = "Gets contact from request by email", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactPersonData.class))),
+                schema = @Schema(implementation = ContactData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+        @ApiResponse(responseCode = "404", description = "Request/contact does not exist", content = {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactPersonDto getRecipient(
-        @PathParam(ContactRestConstants.PARAM_CONTACT_RECIPIENT_MAIL) UUID requestId,
-        @PathParam(ContactRestConstants.PARAM_CONTACT_RECIPIENT_MAIL) String mail) {
-        return ContactRestHelper.toDto(ContactServiceImpl.getInstance().getContactPerson(requestId, mail));
+    public ContactDto getContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+        @PathParam(PARAM_CONTACT_EMAIL) String emailAddress) {
+        return ContactRestHelper.toDto(ContactServiceImpl.getInstance().getContactByEmail(requestId, emailAddress));
     }
 
     @PUT
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_RECIPIENT_MAIL + "}")
-    @Operation(summary = "Updates contact request recipient by id", responses = {
+    @Path("/{" + PARAM_CONTACT_EMAIL + "}")
+    @Operation(summary = "Updates contact from request by email", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactPersonData.class))),
+                schema = @Schema(implementation = ContactData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+        @ApiResponse(responseCode = "404", description = "Request/contact does not exist", content = {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response updateRecipient(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
-        @PathParam(ContactRestConstants.PARAM_CONTACT_RECIPIENT_MAIL) String mail,
-        ContactPersonUpdateDto recipientDto) {
-        Optional.ofNullable(recipientDto).map(ContactRestHelper::toDomain).ifPresentOrElse(r -> {
-            ContactServiceImpl.getInstance().updateContactPerson(requestId, r);
-        }, () -> {
+    public Response updateContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+        @PathParam(PARAM_CONTACT_EMAIL) String mail, ContactUpdateDto contactDto) {
+        if (contactDto == null) {
             throw new BadRequestException();
-        });
+        }
+        final Contact person = ContactRestHelper.toDomain(contactDto);
+        ContactServiceImpl.getInstance().updateContact(requestId, person);
         return Response.noContent().build();
     }
 
     @DELETE
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_RECIPIENT_MAIL + "}")
-    @Operation(summary = "Deletes contact request recipient by id", responses = {
+    @Path("/{" + PARAM_CONTACT_EMAIL + "}")
+    @Operation(summary = "Deletes contact by email from request", responses = {
         @ApiResponse(responseCode = "201",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
-                schema = @Schema(implementation = ContactPersonData.class))),
+                schema = @Schema(implementation = ContactData.class))),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }),
-        @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
+        @ApiResponse(responseCode = "404", description = "Request/contact does not exist", content = {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response removeRecipient(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
-        @PathParam(ContactRestConstants.PARAM_CONTACT_RECIPIENT_MAIL) String mail) {
-        ContactServiceImpl.getInstance().deleteContactPerson(requestId, mail);
+    public Response removeContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+        @PathParam(PARAM_CONTACT_EMAIL) String emailAddress) {
+        ContactServiceImpl.getInstance().deleteContactByEmail(requestId, emailAddress);
         return Response.noContent().build();
     }
 }

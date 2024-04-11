@@ -16,20 +16,24 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.exception;
+package de.vzg.reposis.digibib.contact.collect;
+
+import java.util.List;
+
+import org.mycore.datamodel.metadata.MCRObject;
+
+import de.vzg.reposis.digibib.contact.model.Contact;
 
 /**
- * Exception if the recipient has wrong origin and can therefore not
- * manipulated.
+ * Collects contact persons about objects.
  */
-public class ContactPersonOriginException extends ContactException {
+public interface ContactCollector {
 
     /**
-     * 
+     * Collects and returns list of {@link Contact} elements from {@link MCRObject}.
+     *
+     * @param object object
+     * @return list of contact person elements
      */
-    private static final long serialVersionUID = 1L;
-
-    public ContactPersonOriginException() {
-        super("recipientOriginError", "Origin problem.");
-    }
+    public List<Contact> collect(MCRObject object);
 }

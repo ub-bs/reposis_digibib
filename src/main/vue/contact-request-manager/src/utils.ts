@@ -16,23 +16,23 @@ export namespace RequestState {
   }
 }
 
-export enum PersonEventType {
+export enum ContactEventType {
   SENT = 'SENT',
   SENT_FAILED = 'SENT_FAILED',
   CONFIRMED = 'CONFIRMED',
   REFUSED = 'REFUSED',
 }
 
-export type PersonEvent = {
+export type ContactEvent = {
   date: Date;
-  type: PersonEventType;
+  type: ContactEventType;
 }
 
-export type ContactPerson = {
+export type Contact = {
   name: string;
   email: string;
   origin: string;
-  events: PersonEvent[];
+  events: ContactEvent[];
 }
 
 export type RequestBody = {
@@ -48,7 +48,7 @@ export type Request = {
   body: RequestBody;
   created: Date;
   state: RequestState;
-  contactPersons: ContactPerson[];
+  contacts: Contact[];
   comment: string;
 }
 
@@ -56,7 +56,7 @@ export type ErrorResponse = {
   errorCode: string;
 }
 
-export const compareEvents = (a: PersonEvent, b: PersonEvent): number => {
+export const compareEvents = (a: ContactEvent, b: ContactEvent): number => {
   if (a.date < b.date) {
     return -1;
   }

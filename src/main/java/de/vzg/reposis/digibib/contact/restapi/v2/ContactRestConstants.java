@@ -23,9 +23,5 @@ package de.vzg.reposis.digibib.contact.restapi.v2;
  */
 public class ContactRestConstants {
 
-    public static final String PARAM_CONTACT_REQUEST_ID = "contact_request_id";
-
-    public static final String PARAM_CONTACT_RECIPIENT_MAIL = "contact_request_recipient_id";
-
     public static final String HEADER_TOTAL_COUNT = "X-Total-Count";
 }

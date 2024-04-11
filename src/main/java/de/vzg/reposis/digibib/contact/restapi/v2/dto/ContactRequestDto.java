@@ -14,7 +14,7 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest.RequestStatus;
  * Dto for {@link ContactRequest}.
  */
 public record ContactRequestDto(@JsonProperty("id") String id, @JsonProperty("objectId") MCRObjectID objectId,
-    @JsonProperty("body") ContactRequestBodyDto body, @JsonProperty("created") Date created,
-    @JsonProperty("state") RequestStatus state, @JsonProperty("comment") String comment,
-    @JsonProperty("contactPersons") List<ContactPersonDto> contactPersons) {
+    @JsonProperty("state") RequestStatus state, @JsonProperty("created") Date created,
+    @JsonProperty("body") ContactRequestBodyDto body, @JsonProperty("contacts") List<ContactDto> contacts,
+    @JsonProperty("comment") String comment) {
 }

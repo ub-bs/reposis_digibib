@@ -66,7 +66,7 @@ public class ContactRequestRepositoryImplTest extends MCRJPATestCase {
 
     private ContactRequestData createRequest() {
         ContactRequestData request = new ContactRequestData();
-        request.setFrom("");
+        request.setEmail("");
         request.setName("");
         request.setMessage("");
         request.setObjectId(MCRObjectID.getInstance(OBJECT_ID));

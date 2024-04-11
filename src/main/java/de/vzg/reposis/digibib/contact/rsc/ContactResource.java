@@ -31,7 +31,6 @@ import org.mycore.common.MCRException;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
 import org.mycore.datamodel.metadata.MCRObjectID;
-import org.mycore.frontend.jersey.MCRJerseyUtil;
 import org.mycore.mods.MCRMODSWrapper;
 import org.mycore.restapi.annotations.MCRRequireTransaction;
 
@@ -40,15 +39,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import de.vzg.reposis.digibib.captcha.cage.rsc.filter.ContactCheckCageCaptcha;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
-import de.vzg.reposis.digibib.contact.exception.ContactPersonNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
-import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
+import de.vzg.reposis.digibib.contact.model.Contact;
+import de.vzg.reposis.digibib.contact.model.ContactEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import de.vzg.reposis.digibib.contact.validation.ContactValidator;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -56,7 +53,6 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
-import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -65,17 +61,11 @@ public class ContactResource {
 
     private static final String QUERY_PARAM_REQUEST_ID = "rid";
 
-    private static final String QUERY_PARAM_PERSON_MAIL = "m";
+    private static final String QUERY_PARAM_EMAIL = "m";
 
     private static final Set<String> ALLOWED_GENRES
         = MCRConfiguration2.getString(ContactConstants.CONF_PREFIX + "Genres.Enabled").stream()
             .flatMap(MCRConfiguration2::splitValue).collect(Collectors.toSet());
-
-    @Context
-    HttpServletRequest req;
-
-    @Context
-    HttpServletResponse res;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -124,18 +114,18 @@ public class ContactResource {
 
     @POST
     @MCRRequireTransaction
-    @Path("answer")
+    @Path("confirm")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response answerRequest(@QueryParam(QUERY_PARAM_REQUEST_ID) UUID requestId,
-        @QueryParam(QUERY_PARAM_PERSON_MAIL) String mail, ContactPersonAnswerDto answer) {
-        if (requestId == null || mail == null) {
+    public Response confirmRequest(@QueryParam(QUERY_PARAM_REQUEST_ID) UUID requestId,
+        @QueryParam(QUERY_PARAM_EMAIL) String email, ContactRequestConfirmDto confirmDto) {
+        if (requestId == null || email == null) {
             throw new BadRequestException();
         }
-        final ContactPersonEvent event
-            = new ContactPersonEvent(new Date(), ContactPersonEvent.EventType.CONFIRMED, answer.comment);
+        final ContactEvent event
+            = new ContactEvent(ContactEvent.EventType.CONFIRMED, new Date(), confirmDto.comment);
         try {
-            ContactServiceImpl.getInstance().addPersonEvent(requestId, mail, event);
-        } catch (ContactRequestNotFoundException | ContactPersonNotFoundException e) {
+            ContactServiceImpl.getInstance().addContactEvent(requestId, email, event);
+        } catch (ContactRequestNotFoundException | ContactNotFoundException e) {
             throw new BadRequestException();
         }
         return Response.ok().build();
@@ -146,32 +136,31 @@ public class ContactResource {
     @Produces(MediaType.APPLICATION_JSON)
     public ContactRequestStatusDto getRequestStatus(@QueryParam(QUERY_PARAM_REQUEST_ID) UUID requestId) {
         if (requestId == null) {
-            MCRJerseyUtil.throwException(Response.Status.BAD_REQUEST, "request id is required");
+            throw new BadRequestException();
         }
-        ContactRequest request = null;
         try {
-            request = ContactServiceImpl.getInstance().getRequest(requestId);
+            final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);
+            return toContactStatus(request);
         } catch (ContactRequestNotFoundException e) {
-            MCRJerseyUtil.throwException(Response.Status.NOT_FOUND, "request does not exist");
+            throw new BadRequestException();
         }
-        return toContactStatus(request);
     }
 
     private ContactRequestStatusDto toContactStatus(ContactRequest request) {
-        final List<String> emails = request.getContactPersons().stream().filter(c -> {
-            return c.getEvents().stream().anyMatch(e -> Objects.equals(ContactPersonEvent.EventType.SENT, e.type()));
-        }).map(ContactPerson::getMail).map(ContactResource::maskMailAdress).toList();
-        final String status = request.getState().toString().toLowerCase();
+        final List<String> emails = request.getContacts().stream().filter(c -> {
+            return c.getEvents().stream().anyMatch(e -> Objects.equals(ContactEvent.EventType.SENT, e.type()));
+        }).map(Contact::getEmail).map(ContactResource::maskEmailAddress).toList();
+        final String status = request.getStatus().toString().toLowerCase();
         return new ContactRequestStatusDto(status, emails);
     }
 
     // https://stackoverflow.com/questions/43003138/regular-expression-for-email-masking
-    private static String maskMailAdress(String mail) {
-        return mail.replaceAll("(?<=.)[^@](?=[^@]*[^@]@)|(?:(?<=@.)|(?!^)\\G(?=[^@]*$)).(?!$)", "*");
+    private static String maskEmailAddress(String emailAddress) {
+        return emailAddress.replaceAll("(?<=.)[^@](?=[^@]*[^@]@)|(?:(?<=@.)|(?!^)\\G(?=[^@]*$)).(?!$)", "*");
     }
 
     private record ContactRequestStatusDto(@JsonProperty("status") String status,
-        @JsonProperty("emails") List<String> mails) {
+        @JsonProperty("emails") List<String> emails) {
     }
 
     private record ContactRequestCreateDto(@JsonProperty("objectId") String objectId, @JsonProperty("name") String name,
@@ -184,6 +173,6 @@ public class ContactResource {
         }
     }
 
-    private record ContactPersonAnswerDto(@JsonProperty("comment") String comment) {
+    private record ContactRequestConfirmDto(@JsonProperty("comment") String comment) {
     }
 }

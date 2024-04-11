@@ -25,20 +25,6 @@ import jakarta.validation.constraints.NotNull;
 /**
  * Defines contact request body model.
  */
-public record ContactRequestBody(@NotNull String fromName, @NotNull @Email String fromMail,
-    @ValidOrcid String fromOrcid, String message) {
-
-    @Override
-    public String toString() {
-        String result = "";
-        result += "from: " + fromMail + "\n";
-        result += "name: " + fromName + "\n";
-        if (message != null) {
-            result += "message: " + message + "\n";
-        }
-        if (fromOrcid != null) {
-            result += "orcid: " + fromOrcid + "\n";
-        }
-        return result;
-    }
+public record ContactRequestBody(@NotNull String name, @NotNull @Email String email, @ValidOrcid String orcid,
+    String message) {
 }

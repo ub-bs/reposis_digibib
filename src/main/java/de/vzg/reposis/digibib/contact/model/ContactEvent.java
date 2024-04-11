@@ -3,9 +3,9 @@ package de.vzg.reposis.digibib.contact.model;
 import java.util.Date;
 
 /**
- * Defines contact person event model.
+ * Defines contact event model.
  */
-public record ContactPersonEvent(Date date, EventType type, String comment) {
+public record ContactEvent(EventType type, Date date, String comment) {
 
     /**
      * Defines event types.

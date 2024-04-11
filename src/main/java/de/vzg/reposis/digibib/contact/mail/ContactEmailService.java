@@ -43,7 +43,7 @@ import org.xml.sax.SAXException;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.exception.ContactException;
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.Contact;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import jakarta.mail.Authenticator;
@@ -62,7 +62,7 @@ import jakarta.mail.search.FlagTerm;
 /**
  * This class implements a service to send mails via SMTP.
  */
-public class ContactMailService {
+public class ContactEmailService {
 
     private static final String CONF_PREFIX = ContactConstants.CONF_PREFIX + "Mail.";
 
@@ -88,7 +88,7 @@ public class ContactMailService {
 
     private static final Session mailSession = createSession();
 
-    private static final String MAIL_STYLESHEET = MCRConfiguration2
+    private static final String EMAIL_STYLESHEET = MCRConfiguration2
         .getStringOrThrow(ContactConstants.CONF_PREFIX + "RequestMail.Stylesheet");
 
     private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2
@@ -120,72 +120,71 @@ public class ContactMailService {
     }
 
     /**
-     * Creates Email for recipient and sends it.
+     * Creates Email and sends it to contact.
      *
      * @param request request
-     * @param contactPerson recipient
+     * @param contact recipient
      */
-    public static void sendRequestMailToRecipient(ContactRequest request, ContactPerson contactPerson) {
+    public static void sendRequestEmail(ContactRequest request, Contact contact) {
         final Map<String, String> headers = new HashMap<String, String>();
         headers.put(ContactConstants.REQUEST_HEADER_NAME, request.getId().toString());
-        final EMail mail = createMail(request, contactPerson);
-        sendMail(mail, contactPerson.getMail(), headers);
+        final EMail email = createEmail(request, contact);
+        sendEmail(email, contact.getEmail(), headers);
     }
 
-    public static void sendRequestForwardedMail(ContactRequest request) {
-        final EMail mail = createForwardConfirmationMail(request.getObjectId(), request.getBody());
-        sendMail(mail, request.getBody().fromMail());
+    public static void sendRequestForwardedEmail(ContactRequest request) {
+        final EMail email = createForwardConfirmationEmail(request.getObjectId(), request.getBody());
+        sendMail(email, request.getBody().email());
     }
 
-    public static void sendConfirmationMail(ContactRequest request) {
-        final EMail mail = createConfirmationMail(request);
-        sendMail(mail, request.getBody().fromMail());
+    public static void sendConfirmationEmail(ContactRequest request) {
+        final EMail email = createConfirmationEmail(request);
+        sendMail(email, request.getBody().email());
     }
 
-    public static void sendNewRequestMail(ContactRequest request) {
-        final EMail mail = createNotificationMail(request.getObjectId().toString());
-        sendMail(mail, FALLBACK_MAIL);
+    public static void sendNewRequestEmail(ContactRequest request) {
+        final EMail email = createNotificationEmail(request.getObjectId().toString());
+        sendMail(email, FALLBACK_MAIL);
     }
 
-    private static EMail createConfirmationMail(ContactRequest request) {
-        final EMail baseMail = new EMail();
+    private static EMail createConfirmationEmail(ContactRequest request) {
+        final EMail baseEmail = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", request.getObjectId().toString());
         properties.put("message", request.getBody().message());
-        properties.put("name", request.getBody().fromName());
+        properties.put("name", request.getBody().name());
         properties.put("requestId", request.getId().toString());
-        Optional.ofNullable(request.getBody().fromOrcid()).ifPresent(o -> properties.put("orcid", o));
-        final Element mailElement = transform(baseMail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties)
+        Optional.ofNullable(request.getBody().orcid()).ifPresent(o -> properties.put("orcid", o));
+        final Element emailElement = transform(baseEmail.toXML(), RECEIPT_CONFIRMATION_STYLESHEET, properties)
             .getRootElement();
-        return EMail.parseXML(mailElement);
+        return EMail.parseXML(emailElement);
     }
 
-    private static EMail createMail(ContactRequest request, ContactPerson contactPerson) {
-        final EMail baseMail = new EMail();
+    private static EMail createEmail(ContactRequest request, Contact contactPerson) {
+        final EMail baseEmail = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();
-        properties.put("email", request.getBody().fromMail());
+        properties.put("email", request.getBody().email());
         properties.put("id", request.getObjectId().toString());
         properties.put("message", request.getBody().message());
-        properties.put("name", request.getBody().fromName());
+        properties.put("name", request.getBody().name());
         properties.put("recipientName", contactPerson.getName());
-        properties.put("recipientMail", contactPerson.getMail());
+        properties.put("recipientMail", contactPerson.getEmail());
         properties.put("requestId", request.getId().toString());
         properties.put("title", request.getObjectId().toString());
-        Optional.ofNullable(request.getBody().fromOrcid()).ifPresent(o -> properties.put("orcid", o));
+        Optional.ofNullable(request.getBody().orcid()).ifPresent(o -> properties.put("orcid", o));
         Optional.ofNullable(request.getComment()).ifPresent(c -> properties.put("comment", c));
-
-        final Element mailElement = transform(baseMail.toXML(), MAIL_STYLESHEET, properties).getRootElement();
-        return EMail.parseXML(mailElement);
+        final Element emailElement = transform(baseEmail.toXML(), EMAIL_STYLESHEET, properties).getRootElement();
+        return EMail.parseXML(emailElement);
     }
 
-    private static EMail createForwardConfirmationMail(MCRObjectID objectId, ContactRequestBody request) {
+    private static EMail createForwardConfirmationEmail(MCRObjectID objectId, ContactRequestBody request) {
         final EMail forwardConfirmation = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", objectId.toString());
-        properties.put("name", request.fromName());
-        final Element mailElement = transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET,
+        properties.put("name", request.name());
+        final Element emailElement = transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET,
             properties).getRootElement();
-        return EMail.parseXML(mailElement);
+        return EMail.parseXML(emailElement);
     }
 
     private static Document transform(Document input, String stylesheet, Map<String, String> parameters) {
@@ -200,26 +199,26 @@ public class ContactMailService {
         }
     }
 
-    private static EMail createNotificationMail(String id) {
-        final EMail baseMail = new EMail();
+    private static EMail createNotificationEmail(String id) {
+        final EMail baseEmail = new EMail();
         final Map<String, String> properties = new HashMap<String, String>();
         properties.put("id", id);
-        final Element mailElement = transform(baseMail.toXML(), NEW_REQUEST_STYLESHEET, properties).getRootElement();
-        return EMail.parseXML(mailElement);
+        final Element emailElement = transform(baseEmail.toXML(), NEW_REQUEST_STYLESHEET, properties).getRootElement();
+        return EMail.parseXML(emailElement);
     }
 
-    private static void sendMail(EMail mail, String to) {
-        sendMail(mail, to, Collections.emptyMap());
+    private static void sendMail(EMail email, String to) {
+        sendEmail(email, to, Collections.emptyMap());
     }
 
-    private static void sendMail(EMail mail, String to, Map<String, String> headers) {
+    private static void sendEmail(EMail email, String to, Map<String, String> headers) {
         final MimeMessage msg = new MimeMessage(mailSession);
         try {
             msg.setFrom(new InternetAddress(SENDER_NAME));
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(to));
             msg.setSentDate(new Date());
-            msg.setSubject(mail.subject, ENCODING);
-            final Optional<MessagePart> plainMsg = mail.getTextMessage();
+            msg.setSubject(email.subject, ENCODING);
+            final Optional<MessagePart> plainMsg = email.getTextMessage();
             if (plainMsg.isPresent()) {
                 msg.setText(plainMsg.get().message, ENCODING);
             }

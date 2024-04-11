@@ -47,15 +47,15 @@ public class ContactRequestRepositoryImpl implements ContactRequestRepository {
     }
 
     @Override
-    public Collection<ContactRequestData> findByObjectId(MCRObjectID objectID) {
+    public Collection<ContactRequestData> findByObjectId(MCRObjectID objectId) {
         return getEntityManager().createNamedQuery("ContactRequest.findByObjectId", ContactRequestData.class)
-            .setParameter("objectID", objectID).getResultList();
+            .setParameter("objectId", objectId).getResultList();
     }
 
     @Override
-    public Collection<ContactRequestData> findByState(ContactRequest.RequestStatus state) {
+    public Collection<ContactRequestData> findByState(ContactRequest.RequestStatus status) {
         return getEntityManager().createNamedQuery("ContactRequest.findByState", ContactRequestData.class)
-            .setParameter("state", state).getResultList();
+            .setParameter("status", status).getResultList();
     }
 
     @Override

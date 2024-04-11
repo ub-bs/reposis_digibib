@@ -23,17 +23,17 @@ import java.util.Optional;
 
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
-import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
+import de.vzg.reposis.digibib.contact.model.Contact;
+import de.vzg.reposis.digibib.contact.model.ContactEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonCreateDto;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonDto;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonEventDto;
-import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactPersonUpdateDto;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactCreateDto;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactDto;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactEventDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactRequestBodyDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactRequestDto;
 import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactRequestUpdateDto;
+import de.vzg.reposis.digibib.contact.restapi.v2.dto.ContactUpdateDto;
 
 /**
  * Provides helper methods for rest api.
@@ -47,13 +47,12 @@ public class ContactRestHelper {
      * @return request
      */
     protected static ContactRequest toDomain(ContactRequestUpdateDto requestDto) {
-        final ContactRequest request = new ContactRequest();
-        requestDto.persons().stream().map(ContactRestHelper::toDomain).forEach(request::addContactPerson);
+        final ContactRequest request = new ContactRequest(toDomain(requestDto.body()));
+        requestDto.contacts().stream().map(ContactRestHelper::toDomain).forEach(request::addContact);
         request.setComment(requestDto.comment());
         request.setCreated(requestDto.created());
         request.setObjectId(MCRObjectID.getInstance(requestDto.objectId()));
-        request.setState(requestDto.status());
-        request.setRequest(toDomain(requestDto.body()));
+        request.setStatus(requestDto.status());
         return request;
     }
 
@@ -68,61 +67,58 @@ public class ContactRestHelper {
      * @return request dto
      */
     protected static ContactRequestDto toDto(ContactRequest request) {
-        final List<ContactPersonDto> personDtos
-            = request.getContactPersons().stream().map(ContactRestHelper::toDto).toList();
+        final List<ContactDto> contactsDtos = request.getContacts().stream().map(ContactRestHelper::toDto).toList();
         final ContactRequestBodyDto bodyDto = toDto(request.getBody());
-        return new ContactRequestDto(request.getId().toString(), request.getObjectId(), bodyDto, request.getCreated(),
-            request.getState(), request.getComment(), personDtos);
+        return new ContactRequestDto(request.getId().toString(), request.getObjectId(), request.getStatus(),
+            request.getCreated(), bodyDto, contactsDtos, request.getComment());
     }
 
     private static ContactRequestBodyDto toDto(ContactRequestBody body) {
-        return new ContactRequestBodyDto(body.fromName(), body.fromMail(), body.fromOrcid(), body.message());
+        return new ContactRequestBodyDto(body.name(), body.email(), body.orcid(), body.message());
     }
 
     /**
-     * Maps and returns {@link ContactPersonUpdateDto} to {@link ContactPerson}.
+     * Maps and returns {@link ContactUpdateDto} to {@link Contact}.
      *
-     * @param personDto person dto
-     * @return person
+     * @param contactDto contact dto
+     * @return contact
      */
-    protected static ContactPerson toDomain(ContactPersonUpdateDto personDto) {
-        final ContactPerson person
-            = new ContactPerson(personDto.name(), personDto.email(), personDto.origin(), personDto.reference());
-        Optional.ofNullable(personDto.events()).ifPresent(e -> {
-            e.stream().map(ContactRestHelper::toDomain).forEach(person::addEvent);
+    protected static Contact toDomain(ContactUpdateDto contactDto) {
+        final Contact contact
+            = new Contact(contactDto.name(), contactDto.email(), contactDto.origin(), contactDto.reference());
+        Optional.ofNullable(contactDto.events()).ifPresent(e -> {
+            e.stream().map(ContactRestHelper::toDomain).forEach(contact::addEvent);
         });
-        return person;
+        return contact;
     }
 
-    private static ContactPersonEvent toDomain(ContactPersonEventDto eventDto) {
-        return new ContactPersonEvent(eventDto.date(), eventDto.type(), eventDto.comment());
-    }
-
-    /**
-     * Maps and returns {@link ContactPerson} to {@link ContactPersonDto}.
-     *
-     * @param person person
-     * @return person dto
-     */
-    protected static ContactPersonDto toDto(ContactPerson contactPerson) {
-        final List<ContactPersonEventDto> events
-            = contactPerson.getEvents().stream().map(ContactRestHelper::toDto).toList();
-        return new ContactPersonDto(contactPerson.getName(), contactPerson.getMail(), contactPerson.getOrigin(),
-            events);
-    }
-
-    private static ContactPersonEventDto toDto(ContactPersonEvent event) {
-        return new ContactPersonEventDto(event.date(), event.type(), event.comment());
+    private static ContactEvent toDomain(ContactEventDto eventDto) {
+        return new ContactEvent(eventDto.type(), eventDto.date(), eventDto.comment());
     }
 
     /**
-     * Maps and returns {@link ContactPersonCreateDto} to {@link ContactPerson}.
+     * Maps and returns {@link Contact} to {@link ContactDto}.
      *
-     * @param personDto person dto
-     * @return person
+     * @param contact contact
+     * @return contact dto
      */
-    protected static ContactPerson toDomain(ContactPersonCreateDto personDto) {
-        return new ContactPerson(personDto.name(), personDto.email(), personDto.origin(), personDto.reference());
+    protected static ContactDto toDto(Contact contact) {
+        final List<ContactEventDto> events = contact.getEvents().stream().map(ContactRestHelper::toDto).toList();
+        return new ContactDto(contact.getName(), contact.getEmail(), contact.getOrigin(), events);
+    }
+
+    private static ContactEventDto toDto(ContactEvent event) {
+        return new ContactEventDto(event.date(), event.type(), event.comment());
+    }
+
+    /**
+     * Maps and returns {@link ContactCreateDto} to {@link Contact}.
+     *
+     * @param contactDto contact dto
+     * @return contact
+     */
+    protected static Contact toDomain(ContactCreateDto contactDto) {
+        return new Contact(contactDto.name(), contactDto.email(), contactDto.origin(), contactDto.reference());
     }
 
 }

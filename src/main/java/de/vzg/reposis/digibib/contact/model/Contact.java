@@ -25,29 +25,29 @@ import java.util.Objects;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * Defines contact person model.
+ * Defines contact model.
  */
-public class ContactPerson {
+public class Contact {
 
     @NotNull
     private String name;
 
     @NotNull
-    private String mail;
+    private String email;
 
     @NotNull
     private String origin;
 
     private String reference;
 
-    private List<ContactPersonEvent> events = new ArrayList<>();
+    private List<ContactEvent> events = new ArrayList<>();
 
     /**
-     * Constructs new recipient with recipient.
+     * Constructs new contact with name, email, origin and reference.
      */
-    public ContactPerson(String name, String mail, String origin, String reference) {
+    public Contact(String name, String email, String origin, String reference) {
         setName(name);
-        setMail(mail);
+        setEmail(email);
         setOrigin(origin);
         setReference(reference);
     }
@@ -73,19 +73,19 @@ public class ContactPerson {
     /**
      * Returns mail address.
      *
-     * @return mail address
+     * @return email address
      */
-    public String getMail() {
-        return mail;
+    public String getEmail() {
+        return email;
     }
 
     /**
-     * Sets mail address.
+     * Sets email address.
      *
-     * @param mail mail address
+     * @param email email address
      */
-    public void setMail(String mail) {
-        this.mail = mail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     /**
@@ -106,10 +106,20 @@ public class ContactPerson {
         this.origin = origin;
     }
 
+    /**
+     * Returns origin reference.
+     *
+     * @return reference
+     */
     public String getReference() {
         return reference;
     }
 
+    /**
+     * Sets origin reference.
+     *
+     * @param reference
+     */
     public void setReference(String reference) {
         this.reference = reference;
     }
@@ -119,7 +129,7 @@ public class ContactPerson {
      *
      * @return list of event elements
      */
-    public List<ContactPersonEvent> getEvents() {
+    public List<ContactEvent> getEvents() {
         return events;
     }
 
@@ -128,7 +138,7 @@ public class ContactPerson {
      *
      * @param events list of event elements
      */
-    public void setEvents(List<ContactPersonEvent> events) {
+    public void setEvents(List<ContactEvent> events) {
         this.events = events;
     }
 
@@ -137,13 +147,13 @@ public class ContactPerson {
      *
      * @param event event
      */
-    public void addEvent(ContactPersonEvent event) {
+    public void addEvent(ContactEvent event) {
         events.add(event);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(events, mail, name, origin, reference);
+        return Objects.hash(events, email, name, origin, reference);
     }
 
     @Override
@@ -157,8 +167,8 @@ public class ContactPerson {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        ContactPerson other = (ContactPerson) obj;
-        return Objects.equals(events, other.events) && Objects.equals(mail, other.mail)
+        Contact other = (Contact) obj;
+        return Objects.equals(events, other.events) && Objects.equals(email, other.email)
             && Objects.equals(reference, other.reference) && Objects.equals(name, other.name)
             && Objects.equals(origin, other.origin);
     }

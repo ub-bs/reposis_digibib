@@ -36,38 +36,38 @@ import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 /**
  * Implements a job action that collects mails for contact requests.
  */
-public class ContactPersonCollectorJobAction extends MCRJobAction {
+public class ContactCollectorJobAction extends MCRJobAction {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     private static final String REQUEST_ID = "request_id";
 
     /**
-     * Constructs new {@link ContactPersonCollectorJobAction}.
+     * Constructs new {@link ContactCollectorJobAction}.
      *
      * @param job job
      */
-    public ContactPersonCollectorJobAction() {
+    public ContactCollectorJobAction() {
 
     }
 
     /**
-     * Constructs new {@link ContactPersonCollectorJobAction} from {@link MCRJob}.
+     * Constructs new {@link ContactCollectorJobAction} from {@link MCRJob}.
      *
      * @param job job
      */
-    public ContactPersonCollectorJobAction(MCRJob job) {
+    public ContactCollectorJobAction(MCRJob job) {
         super(job);
     }
 
     /**
-     * Constructs and returns new {@link ContactPersonCollectorJobAction}.
+     * Constructs and returns new {@link ContactCollectorJobAction}.
      *
      * @param requestId request id
      * @return job
      */
     public static MCRJob createJob(UUID requestId) {
-        final MCRJob job = new MCRJob(ContactPersonCollectorJobAction.class);
+        final MCRJob job = new MCRJob(ContactCollectorJobAction.class);
         job.setParameter(REQUEST_ID, requestId.toString());
         return job;
     }
@@ -94,7 +94,7 @@ public class ContactPersonCollectorJobAction extends MCRJobAction {
         final ContactService service = ContactServiceImpl.getInstance();
         try {
             new MCRTransactionableCallable<>(() -> {
-                service.collectContactPersons(requestId);
+                service.collectContacts(requestId);
                 return null;
             }).call();
         } catch (ContactRequestNotFoundException e) {

@@ -18,7 +18,7 @@
 
 package de.vzg.reposis.digibib.contact.validation;
 
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.Contact;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import jakarta.validation.Validation;
@@ -30,10 +30,6 @@ import jakarta.validation.ValidatorFactory;
  */
 public class ContactValidator {
 
-    public static ContactValidator getInstance() {
-        return Holder.INSTANCE;
-    }
-
     private final Validator validator;
 
     private ContactValidator() {
@@ -42,13 +38,12 @@ public class ContactValidator {
     }
 
     /**
-     * Validates a recipient against model.
+     * Returns singleton instance.
      *
-     * @param recipient recipient
-     * @return true if recipient is valid
+     * @return instance
      */
-    public boolean validateContactPerson(ContactPerson contactPerson) {
-        return validator.validate(contactPerson).size() == 0;
+    public static ContactValidator getInstance() {
+        return Holder.INSTANCE;
     }
 
     /**
@@ -62,24 +57,32 @@ public class ContactValidator {
     }
 
     /**
-     * Lazy instance holder.
-     */
-    private static class Holder {
-        private static final ContactValidator INSTANCE = new ContactValidator();
-    }
-
-    /**
      * Validates a request against model.
      *
      * @param request request
      * @return true if request is valid
      */
     public boolean validateRequest(ContactRequest request) {
-        for (ContactPerson contactPerson : request.getContactPersons()) {
-            if (!validateContactPerson(contactPerson)) {
+        for (Contact contactPerson : request.getContacts()) {
+            if (!validateContact(contactPerson)) {
                 return false;
             }
         }
         return validator.validate(request).size() == 0 && validateRequestBody(request.getBody());
     }
+
+    /**
+     * Validates a recipient against model.
+     *
+     * @param recipient recipient
+     * @return true if recipient is valid
+     */
+    public boolean validateContact(Contact contact) {
+        return validator.validate(contact).size() == 0;
+    }
+
+    private static class Holder {
+        private static final ContactValidator INSTANCE = new ContactValidator();
+    }
+
 }

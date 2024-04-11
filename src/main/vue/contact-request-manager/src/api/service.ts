@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { ErrorResponse, ContactPerson, Request } from '../utils';
+import { ErrorResponse, Contact, Request } from '../utils';
 
 axios.interceptors.response.use((response) => response, (error) => {
   if (axios.isAxiosError(error) && error.response) {
@@ -19,17 +19,17 @@ const removeRequest = (id: string) => axios.delete(`api/v2/contact-requests/${id
 const updateRequest = (id: string, request: Request) => axios.put(`api/v2/contact-requests/${id}`, {
   body: request.body,
   comment: request.comment,
-  contactPersons: request.contactPersons,
+  contacts: request.contacts,
   created: request.created,
   objectId: request.objectId,
   state: request.state,
 });
-const forwardRequestToRecipient = (id: string, recipientID: string) => axios.post(`api/v2/contact-requests/${id}/forward?recipient=${recipientID}`);
-const addRecipient = (id: string, recipient: ContactPerson) => axios.post(`api/v2/contact-requests/${id}/recipients`, recipient);
-const updateRecipient = (id: string, personId: string, recipient: ContactPerson) => {
-  axios.put(`api/v2/contact-requests/${id}/recipients/${personId}`, recipient);
+const forwardRequest = (id: string, email: string) => axios.post(`api/v2/contact-requests/${id}/forward?recipient=${email}`);
+const addContact = (id: string, contact: Contact) => axios.post(`api/v2/contact-requests/${id}/recipients`, contact);
+const updateContact = (id: string, personId: string, contact: Contact) => {
+  axios.put(`api/v2/contact-requests/${id}/recipients/${personId}`, contact);
 };
-const removeRecipient = (id: string, personId: string) => axios.delete(`api/v2/contact-requests/${id}/recipients/${personId}`);
+const removeContactByEmail = (id: string, email: string) => axios.delete(`api/v2/contact-requests/${id}/recipients/${email}`);
 const getRequest = (id: string) => axios.get(`api/v2/contact-requests/${id}`);
 
 export {
@@ -37,8 +37,8 @@ export {
   updateRequest,
   removeRequest,
   getRequest,
-  forwardRequestToRecipient,
-  addRecipient,
-  updateRecipient,
-  removeRecipient,
+  forwardRequest,
+  addContact,
+  updateContact,
+  removeContactByEmail,
 };

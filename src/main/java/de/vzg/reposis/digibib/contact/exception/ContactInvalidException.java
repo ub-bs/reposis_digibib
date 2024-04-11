@@ -16,24 +16,23 @@
  * along with MyCoRe.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.vzg.reposis.digibib.contact.collect;
-
-import java.util.List;
-
-import org.mycore.datamodel.metadata.MCRObject;
-
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
+package de.vzg.reposis.digibib.contact.exception;
 
 /**
- * Collects contact persons about objects.
+ * Exception if the recipient is invalid.
  */
-public interface ContactPersonCollector {
+public class ContactInvalidException extends ContactException {
 
     /**
-     * Collects and returns list of {@link ContactPerson} elements from {@link MCRObject}.
      *
-     * @param object object
-     * @return list of contact person elements
      */
-    public List<ContactPerson> collect(MCRObject object);
+    private static final long serialVersionUID = 1L;
+
+    public ContactInvalidException() {
+        this("invalid contact.");
+    }
+
+    public ContactInvalidException(String message) {
+        super("invalidContact", message);
+    }
 }

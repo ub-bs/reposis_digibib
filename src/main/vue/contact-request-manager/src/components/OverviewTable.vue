@@ -48,7 +48,7 @@
             {{ getFormatedDate(item.created) }}
           </td>
           <td class="align-middle">
-            {{ displayFirstForwaredDate(item.contactPersons) }}
+            {{ displayFirstForwaredDate(item.contacts) }}
           </td>
           <td class="align-middle">
             {{ $t(`digibib.contact.frontend.manager.state.${RequestState
@@ -63,7 +63,7 @@
                 <i class="fa fa-eye"></i>
               </button>
               <button class="btn shadow-none pt-0 pb-0 pl-1 pr-2" @click="doRemoveRequest(item.id)"
-                :disabled="getSentEvents(item.contactPersons).length > 0">
+                :disabled="getSentEvents(item.contacts).length > 0">
                 <i class="fa fa-trash"></i>
               </button>
             </div>
@@ -79,7 +79,7 @@
     </div>
   </div>
   <RequestModal v-if="currentRequestIndex >= 0" @request-updated="onRequestUpdated"
-    @close="onModalClosed" @recipients-updated="onRecipientsUpdated"
+    @close="onModalClosed" @contacts-updated="onContactUpdated"
     :request="requests[currentRequestIndex]" />
   <ConfirmModal ref="confirmModal" />
 </template>
@@ -92,12 +92,12 @@ import ConfirmModal from '@/components/ConfirmModal.vue';
 import RequestModal from '@/components/request_modal/RequestModal.vue';
 import Pagination from '@/components/Pagination.vue';
 import {
-  ContactPerson,
+  Contact,
   Request,
   RequestState,
   compareEvents,
-  PersonEvent,
-  PersonEventType,
+  ContactEvent,
+  ContactEventType,
 } from '@/utils';
 import { fetchRequests, removeRequest } from '@/api/service';
 
@@ -110,26 +110,26 @@ const totalCount = ref(0);
 const currentPage = ref(0);
 const currentRequestIndex = ref(-1);
 
-const getSentEvents = (persons: ContactPerson[]): PersonEvent[] => {
-  let personEvents: PersonEvent[] = [];
-  for (let i = 0; i < persons.length; i += 1) {
-    personEvents = personEvents.concat(persons[i].events);
+const getSentEvents = (contacts: Contact[]) => {
+  let contactEvents: ContactEvent[] = [];
+  for (let i = 0; i < contacts.length; i += 1) {
+    contactEvents = contactEvents.concat(contacts[i].events);
   }
-  return personEvents.filter((e) => PersonEventType.SENT === e.type);
+  return contactEvents.filter((e) => ContactEventType.SENT === e.type);
 };
-const getFirstForwardDate = (persons: ContactPerson[]): Date | undefined => {
-  const sentEvents = getSentEvents(persons);
+const getFirstForwardDate = (contacts: Contact[]): Date | undefined => {
+  const sentEvents = getSentEvents(contacts);
   if (sentEvents.length === 0) {
     return undefined;
   }
   return sentEvents.sort(compareEvents)[0].date;
 };
 const getFormatedDate = (date: Date) => moment(date).format('DD.MM.YYYY, hh:mm');
-const displayFirstForwaredDate = (persons: ContactPerson[]): string => {
-  if (persons.length === 0) {
+const displayFirstForwaredDate = (contacts: Contact[]): string => {
+  if (contacts.length === 0) {
     return '-';
   }
-  const date = getFirstForwardDate(persons);
+  const date = getFirstForwardDate(contacts);
   if (date) {
     return getFormatedDate(date);
   }
@@ -179,9 +179,9 @@ const onRequestUpdated = (request: Request): void => {
   const requestIndex = requests.value.findIndex((r) => request.id === r.id);
   Object.assign(requests.value[requestIndex], request);
 };
-const onRecipientsUpdated = (requestId: string, recipients: ContactPerson[]): void => {
+const onContactUpdated = (requestId: string, contacts: Contact[]): void => {
   const requestIndex = requests.value.findIndex((r) => requestId === r.id);
-  requests.value[requestIndex].contactPersons = recipients;
+  requests.value[requestIndex].contacts = contacts;
 };
 const onModalClosed = () => {
   currentRequestIndex.value = -1;

@@ -13,7 +13,7 @@
     </td>
     <td class="col-2 text-center align-middle">
       <div class="btn-group">
-        <button class="btn shadow-none pr-1 pb-0 pt-0 border-0" @click="addRecipient"
+        <button class="btn shadow-none pr-1 pb-0 pt-0 border-0" @click="addContact"
             :disabled="disabled">
           <i class="fas fa-check"></i>
         </button>
@@ -29,7 +29,7 @@
 import { computed, ref } from 'vue';
 import useVuelidate from '@vuelidate/core';
 import { required, email } from '@vuelidate/validators';
-import { ContactPerson, ORIGIN_MANUAL } from '@/utils';
+import { Contact, ORIGIN_MANUAL } from '@/utils';
 
 defineProps({
   disabled: {
@@ -59,14 +59,14 @@ const reset = () => {
   name.value = null;
   mail.value = null;
 };
-const addRecipient = async () => {
+const addContact = async () => {
   v.value.$validate();
   if (!v.value.$error) {
     emit('add', {
       name: name.value,
       email: mail.value,
       origin: origin.value,
-    } as ContactPerson);
+    } as Contact);
     reset();
   }
 };

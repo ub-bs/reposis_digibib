@@ -22,7 +22,7 @@
 
 			const answer = async () => {
         const comment = document.getElementById('commentTextarea').value;
-				const response = await fetch("../rsc/contact-request/answer?rid=" + rid + "&amp;m=" + email, {
+				const response = await fetch("../rsc/contact-request/confirm?rid=" + rid + "&amp;m=" + email, {
 					method: "POST",
           headers: {
             "Content-Type": "application/json",

@@ -2,12 +2,12 @@ package de.vzg.reposis.digibib.contact;
 
 import java.util.Optional;
 
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
-import de.vzg.reposis.digibib.contact.model.ContactPersonEvent;
+import de.vzg.reposis.digibib.contact.model.Contact;
+import de.vzg.reposis.digibib.contact.model.ContactEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
-import de.vzg.reposis.digibib.contact.persistence.model.ContactPersonData;
-import de.vzg.reposis.digibib.contact.persistence.model.ContactPersonEventData;
+import de.vzg.reposis.digibib.contact.persistence.model.ContactData;
+import de.vzg.reposis.digibib.contact.persistence.model.ContactEventData;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 
 /**
@@ -16,57 +16,57 @@ import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 public class ContactMapper {
 
     /**
-     * Maps and returns {@link ContactPersonData} to {@link ContactPerson}.
+     * Maps and returns {@link ContactData} to {@link Contact}.
      *
      * @param recipientData recipient data.
      * @return contact person
      */
-    public static ContactPerson toDomain(ContactPersonData recipientData) {
-        final ContactPerson contactPerson
-            = new ContactPerson(recipientData.getName(), recipientData.getMail(), recipientData.getOrigin(),
+    public static Contact toDomain(ContactData recipientData) {
+        final Contact contactPerson
+            = new Contact(recipientData.getName(), recipientData.getEmail(), recipientData.getOrigin(),
                 recipientData.getReference());
         recipientData.getEvents().stream().map(ContactMapper::toDomain).forEach(contactPerson::addEvent);
         return contactPerson;
     }
 
     /**
-     * Maps and returns {@link ContactPersonEventData} to {@link ContactPersonEvent}.
+     * Maps and returns {@link ContactEventData} to {@link ContactEvent}.
      *
      * @param data data
      * @return event
      */
-    public static ContactPersonEvent toDomain(ContactPersonEventData data) {
-        return new ContactPersonEvent(data.getDate(), data.getType(), data.getComment());
+    public static ContactEvent toDomain(ContactEventData data) {
+        return new ContactEvent(data.getType(), data.getDate(), data.getComment());
     }
 
     /**
-     * Maps and returns {@link ContactPerson} to {@link ContactPersonData}.
+     * Maps and returns {@link Contact} to {@link ContactData}.
      *
-     * @param contactPerson contact person
-     * @return contact recipient data
+     * @param contact contact
+     * @return contact data
      */
-    public static ContactPersonData toData(ContactPerson contactPerson) {
-        final ContactPersonData recipientData = new ContactPersonData();
-        recipientData.setName(contactPerson.getName());
-        recipientData.setMail(contactPerson.getMail());
-        recipientData.setOrigin(contactPerson.getOrigin());
-        recipientData.setReference(contactPerson.getReference());
-        contactPerson.getEvents().stream().map(ContactMapper::toData).forEach(recipientData::addEvent);
-        return recipientData;
+    public static ContactData toData(Contact contact) {
+        final ContactData contactData = new ContactData();
+        contactData.setName(contact.getName());
+        contactData.setEmail(contact.getEmail());
+        contactData.setOrigin(contact.getOrigin());
+        contactData.setReference(contact.getReference());
+        contact.getEvents().stream().map(ContactMapper::toData).forEach(contactData::addEvent);
+        return contactData;
     }
 
     /**
-     * Maps and returns {@link ContactPersonEvent} to {@link ContactPersonEventData}.
+     * Maps and returns {@link ContactEvent} to {@link ContactEventData}.
      *
-     * @param personEvent event
+     * @param contactEvent event
      * @return event data
      */
-    public static ContactPersonEventData toData(ContactPersonEvent personEvent) {
-        final ContactPersonEventData data = new ContactPersonEventData();
-        data.setDate(personEvent.date());
-        data.setType(personEvent.type());
-        data.setComment(personEvent.comment());
-        return data;
+    public static ContactEventData toData(ContactEvent contactEvent) {
+        final ContactEventData contactEventData = new ContactEventData();
+        contactEventData.setDate(contactEvent.date());
+        contactEventData.setType(contactEvent.type());
+        contactEventData.setComment(contactEvent.comment());
+        return contactEventData;
     }
 
     /**
@@ -76,7 +76,7 @@ public class ContactMapper {
      * @return contact request
      */
     public static ContactRequest toDomain(ContactRequestData requestData) {
-        final ContactRequestBody requestBody = new ContactRequestBody(requestData.getName(), requestData.getFrom(),
+        final ContactRequestBody requestBody = new ContactRequestBody(requestData.getName(), requestData.getEmail(),
             requestData.getOrcid(), requestData.getMessage());
         final ContactRequest request = new ContactRequest(requestBody);
         request.setId(requestData.getUuid());
@@ -84,8 +84,8 @@ public class ContactMapper {
         request.setComment(requestData.getComment());
         request.setCreated(requestData.getCreated());
         request.setCreatedBy(requestData.getCreatedBy());
-        request.setState(requestData.getState());
-        requestData.getPersons().stream().map(ContactMapper::toDomain).forEach(request.getContactPersons()::add);
+        request.setStatus(requestData.getStatus());
+        requestData.getContacts().stream().map(ContactMapper::toDomain).forEach(request.getContacts()::add);
         return request;
     }
 
@@ -100,15 +100,15 @@ public class ContactMapper {
         requestData.setComment(request.getComment());
         requestData.setCreated(request.getCreated());
         requestData.setCreatedBy(request.getCreatedBy());
-        requestData.setState(request.getState());
+        requestData.setStatus(request.getStatus());
         requestData.setObjectId(request.getObjectId());
-        request.getContactPersons().stream().map(ContactMapper::toData).forEach(requestData::addPerson);
+        request.getContacts().stream().map(ContactMapper::toData).forEach(requestData::addContact);
         final ContactRequestBody requestBody = request.getBody();
         if (requestBody != null) {
-            requestData.setFrom(requestBody.fromMail());
+            requestData.setEmail(requestBody.email());
             requestData.setMessage(requestBody.message());
-            requestData.setName(requestBody.fromName());
-            Optional.ofNullable(requestBody.fromOrcid()).map(String::trim).ifPresent(requestData::setOrcid);
+            requestData.setName(requestBody.name());
+            Optional.ofNullable(requestBody.orcid()).map(String::trim).ifPresent(requestData::setOrcid);
         }
         return requestData;
     }

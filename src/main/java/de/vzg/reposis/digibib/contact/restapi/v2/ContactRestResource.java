@@ -55,6 +55,8 @@ import jakarta.ws.rs.core.Response;
 @Path("/contact-requests/")
 public class ContactRestResource {
 
+    public static final String PARAM_CONTACT_REQUEST_ID = "contact_request_id";
+
     @GET
     @Operation(summary = "Lists all contact requests", responses = { @ApiResponse(responseCode = "200", content = {
         @Content(mediaType = MediaType.APPLICATION_JSON,
@@ -64,7 +66,7 @@ public class ContactRestResource {
                 @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public List<ContactRequestDto> getAllRequests(@DefaultValue("0") @QueryParam("offset") int offset,
+    public List<ContactRequestDto> getRequests(@DefaultValue("0") @QueryParam("offset") int offset,
         @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response) {
         final List<ContactRequest> requests = ContactServiceImpl.getInstance().listAllRequests();
         response.setHeader(ContactRestConstants.HEADER_TOTAL_COUNT, Integer.toString(requests.size()));
@@ -72,7 +74,7 @@ public class ContactRestResource {
     }
 
     @GET
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}")
+    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(summary = "Gets contact request by id", responses = {
         @ApiResponse(responseCode = "200",
             content = @Content(mediaType = MediaType.APPLICATION_JSON,
@@ -84,13 +86,13 @@ public class ContactRestResource {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactRequestDto getRequest(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
+    public ContactRequestDto getRequest(@PathParam(PARAM_CONTACT_REQUEST_ID) UUID requestId) {
         return Optional.of(ContactServiceImpl.getInstance().getRequest(requestId))
             .map(ContactRestHelper::toDto).get();
     }
 
     @PUT
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}")
+    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(summary = "Updates contact request by id", responses = { @ApiResponse(responseCode = "204"),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
@@ -99,19 +101,19 @@ public class ContactRestResource {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Consumes(MediaType.APPLICATION_JSON)
     @MCRRequireTransaction
-    public Response updateRequest(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+    public Response updateRequest(@PathParam(PARAM_CONTACT_REQUEST_ID) UUID requestId,
         ContactRequestUpdateDto requestDto) {
-        Optional.ofNullable(requestDto).map(ContactRestHelper::toDomain).ifPresentOrElse(r -> {
-            r.setId(requestId);
-            ContactServiceImpl.getInstance().updateRequest(r);
-        }, () -> {
+        if (requestDto == null) {
             throw new BadRequestException();
-        });
+        }
+        final ContactRequest request = ContactRestHelper.toDomain(requestDto);
+        request.setId(requestId);
+        ContactServiceImpl.getInstance().updateRequest(request);
         return Response.noContent().build();
     }
 
     @DELETE
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}")
+    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}")
     @Operation(summary = "Deletes contact request by id", responses = { @ApiResponse(responseCode = "204"),
         @ApiResponse(responseCode = "401",
             description = "You do not have create permission and need to authenticate first", content = {
@@ -119,21 +121,22 @@ public class ContactRestResource {
         @ApiResponse(responseCode = "404", description = "Request does not exist", content = {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @MCRRequireTransaction
-    public Response removeRequest(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
+    public Response removeRequest(@PathParam(PARAM_CONTACT_REQUEST_ID) UUID requestId) {
         ContactServiceImpl.getInstance().deleteRequest(requestId);
         return Response.noContent().build();
     }
 
+    // TODO move to contact resource
     @POST
-    @Path("/{" + ContactRestConstants.PARAM_CONTACT_REQUEST_ID + "}/forward")
+    @Path("/{" + PARAM_CONTACT_REQUEST_ID + "}/forward")
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response forwardRequest(@PathParam(ContactRestConstants.PARAM_CONTACT_REQUEST_ID) UUID requestId,
-        @QueryParam("recipient") String mail) {
-        Optional.ofNullable(mail).ifPresentOrElse(
-            r -> ContactServiceImpl.getInstance().forwardRequest(requestId, r), () -> {
-                throw new BadRequestException("mail is required");
-            });
+    public Response forwardRequest(@PathParam(PARAM_CONTACT_REQUEST_ID) UUID requestId,
+        @QueryParam("recipient") String contact) {
+        if (contact == null) {
+            throw new BadRequestException("target email address is required");
+        }
+        ContactServiceImpl.getInstance().forwardRequest(requestId, contact);
         return Response.ok().build();
     }
 }

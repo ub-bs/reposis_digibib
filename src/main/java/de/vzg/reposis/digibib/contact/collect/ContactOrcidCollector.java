@@ -38,31 +38,31 @@ import org.orcid.jaxb.model.v3.release.record.Emails;
 import org.orcid.jaxb.model.v3.release.record.Name;
 import org.orcid.jaxb.model.v3.release.record.Person;
 
-import de.vzg.reposis.digibib.contact.model.ContactPerson;
+import de.vzg.reposis.digibib.contact.model.Contact;
 
 /**
- * Seeks related contact persons on orcid.
+ * Seeks related contact on orcid.
  */
-public class ContactPersonOrcidCollector implements ContactPersonCollector {
+public class ContactOrcidCollector implements ContactCollector {
 
     private static final Logger LOGGER = LogManager.getLogger();
 
     // TODO only process corresponding author orcid ids.
     @Override
-    public List<ContactPerson> collect(MCRObject object) {
-        LOGGER.info("Collecting contact person for {} from orcid", object.getId());
+    public List<Contact> collect(MCRObject object) {
+        LOGGER.info("Collecting contacts for {} from orcid", object.getId());
         final List<String> orcids = new ArrayList<String>(MCRORCIDUtils.getORCIDs(object));
         for (String orcid : orcids) {
             final String name = fetchNameFromPublicApi(orcid);
             final MCRORCIDUser orcidUser = MCRORCIDUserUtils.getORCIDUserByORCID(orcid);
             if (orcidUser != null) {
-                final Set<String> mails = new HashSet<String>();
+                final Set<String> emails = new HashSet<String>();
                 // TODO may check all credentials of user
                 final MCRORCIDCredential credential = orcidUser.getCredentialByORCID(orcid);
                 final Set<String> otherOrcids = orcidUser.getORCIDs();
                 if (credential != null) {
                     try {
-                        mails.addAll(fetchMailsFromMemberApi(orcid, credential));
+                        emails.addAll(fetchEmailsFromMemberApi(orcid, credential));
                         otherOrcids.remove(orcid);
                     } catch (Exception e) {
                         LOGGER.warn(e);
@@ -70,15 +70,15 @@ public class ContactPersonOrcidCollector implements ContactPersonCollector {
                 }
                 for (String otherOrcid : otherOrcids) {
                     try {
-                        mails.addAll(fetchMailsFromPublicApi(otherOrcid));
+                        emails.addAll(fetchEmailsFromPublicApi(otherOrcid));
                     } catch (Exception e) {
                         LOGGER.warn(e);
                     }
                 }
-                return mails.stream().map(m -> new ContactPerson(name, m, "orcid", orcid)).toList();
+                return emails.stream().map(m -> new Contact(name, m, "orcid", orcid)).toList();
             } else {
                 try {
-                    return fetchMailsFromPublicApi(orcid).stream().map(m -> new ContactPerson(name, m, "orcid", orcid))
+                    return fetchEmailsFromPublicApi(orcid).stream().map(m -> new Contact(name, m, "orcid", orcid))
                         .toList();
                 } catch (Exception e) {
                     LOGGER.warn(e);
@@ -88,18 +88,18 @@ public class ContactPersonOrcidCollector implements ContactPersonCollector {
         return Collections.emptyList();
     }
 
-    private List<String> fetchMailsFromMemberApi(String orcid, MCRORCIDCredential credential) {
-        return extractMails(MCRORCIDClientHelper.getClientFactory().createUserClient(orcid, credential)
+    private List<String> fetchEmailsFromMemberApi(String orcid, MCRORCIDCredential credential) {
+        return extractEmails(MCRORCIDClientHelper.getClientFactory().createUserClient(orcid, credential)
             .fetch(MCRORCIDSectionImpl.EMAIL, Emails.class));
     }
 
-    private List<String> fetchMailsFromPublicApi(String orcid) {
-        return extractMails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid,
+    private List<String> fetchEmailsFromPublicApi(String orcid) {
+        return extractEmails(MCRORCIDClientHelper.getClientFactory().createReadClient().fetch(orcid,
             MCRORCIDSectionImpl.EMAIL, Emails.class));
     }
 
-    private List<String> extractMails(Emails mails) {
-        return mails.getEmails().stream().map(Email::getEmail).distinct().toList();
+    private List<String> extractEmails(Emails emails) {
+        return emails.getEmails().stream().map(Email::getEmail).distinct().toList();
     }
 
     private String fetchNameFromPublicApi(String orcid) {
