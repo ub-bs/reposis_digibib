@@ -127,6 +127,17 @@ public interface ContactService {
     void deleteContactByEmail(UUID requestId, String email);
 
     /**
+     * Confirms request as confirmed by specified {@link Contact}.
+     *
+     * @param requestId request id
+     * @param email contact mail
+     * @param event event
+     * @throws ContactRequestNotFoundException if request cannot be found
+     * @throws ContactNotFoundException if contact cannot be found
+     */
+    void addContactEvent(UUID requestId, String email, ContactEvent event);
+
+    /**
      * Collects contact persons for request.
      *
      * @param requestId request id
@@ -153,14 +164,4 @@ public interface ContactService {
      */
     void handleBouncedMessages();
 
-    /**
-     * Confirms request as confirmed by specified {@link Contact}.
-     *
-     * @param requestId request id
-     * @param email contact mail
-     * @param event event
-     * @throws ContactRequestNotFoundException if request cannot be found
-     * @throws ContactNotFoundException if contact cannot be found
-     */
-    void addContactEvent(UUID requestId, String email, ContactEvent event);
 }

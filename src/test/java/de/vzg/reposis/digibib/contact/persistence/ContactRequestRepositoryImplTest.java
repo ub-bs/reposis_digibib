@@ -30,6 +30,7 @@ import org.junit.Test;
 import org.mycore.common.MCRJPATestCase;
 import org.mycore.datamodel.metadata.MCRObjectID;
 
+import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestBodyData;
 import de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData;
 
 public class ContactRequestRepositoryImplTest extends MCRJPATestCase {
@@ -65,10 +66,9 @@ public class ContactRequestRepositoryImplTest extends MCRJPATestCase {
     }
 
     private ContactRequestData createRequest() {
-        ContactRequestData request = new ContactRequestData();
-        request.setEmail("");
-        request.setName("");
-        request.setMessage("");
+        final ContactRequestData request = new ContactRequestData();
+        final ContactRequestBodyData body = new ContactRequestBodyData("", "", "", "");
+        request.setBody(body);
         request.setObjectId(MCRObjectID.getInstance(OBJECT_ID));
         return request;
     }

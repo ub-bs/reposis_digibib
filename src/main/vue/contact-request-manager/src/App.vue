@@ -8,14 +8,14 @@
       </div>
     </div>
   </div>
-  <div class="container-fluid">
-    <div v-if="errorCode" class="row">
-      <div class="col">
-        <div class="alert alert-danger text-center" role="alert">
-          {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
-        </div>
+  <div v-if="errorCode" class="row">
+    <div class="col">
+      <div class="alert alert-danger text-center" role="alert">
+        {{ $t(`digibib.contact.frontend.manager.error.${errorCode}`) }}
       </div>
     </div>
+  </div>
+  <div class="container-fluid">
     <template v-if="isBooted && errorCode !== 'unauthorizedError'">
       <div class="row">
         <div class="col">

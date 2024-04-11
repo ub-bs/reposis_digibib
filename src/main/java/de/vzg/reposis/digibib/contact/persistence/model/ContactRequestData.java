@@ -31,6 +31,7 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -68,40 +69,43 @@ import jakarta.persistence.Table;
 @Table(name = "contactRequest")
 public class ContactRequestData {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contactId", nullable = false)
+    private Long id;
 
-    private String email;
-
-    private String name;
-
-    private String message;
-
-    private String orcid;
-
+    @Column(name = "objectId", length = MCRObjectID.MAX_LENGTH, nullable = false)
+    @Convert(converter = MCRObjectIDConverter.class)
     private MCRObjectID objectId;
 
+    @Column(name = "created")
     private Date created;
 
+    @Column(name = "createdBy")
     private String createdBy;
 
     @Enumerated(EnumType.STRING)
+    @Column(name = "status")
     private ContactRequest.RequestStatus status;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ContactData> contacts = new ArrayList<>();
 
+    @Column(name = "comment", nullable = true)
     private String comment;
 
+    @Column(name = "uuid", unique = true, updatable = false, nullable = false)
     private UUID uuid;
+
+    @Embedded
+    private ContactRequestBodyData body;
 
     /**
      * Returns internal id.
      *
      * @return id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contactId", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -110,7 +114,7 @@ public class ContactRequestData {
      *
      * @param id id
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -119,8 +123,6 @@ public class ContactRequestData {
      *
      * @return object id
      */
-    @Column(name = "objectId", length = MCRObjectID.MAX_LENGTH, nullable = false)
-    @Convert(converter = MCRObjectIDConverter.class)
     public MCRObjectID getObjectId() {
         return objectId;
     }
@@ -135,87 +137,10 @@ public class ContactRequestData {
     }
 
     /**
-     * Returns from email.
-     *
-     * @return email
-     */
-    @Column(name = "sender", nullable = false)
-    public String getEmail() {
-        return email;
-    }
-
-    /**
-     * Sets from email.
-     *
-     * @param from email
-     */
-    public void setEmail(String from) {
-        this.email = from;
-    }
-
-    /**
-     * Returns from message.
-     *
-     * @return message
-     */
-    @Column(name = "message", nullable = false)
-    public String getMessage() {
-        return message;
-    }
-
-    /**
-     * Sets from message.
-     *
-     * @param message message
-     */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    /**
-     * Returns from name.
-     *
-     * @return name
-     */
-    @Column(name = "name", nullable = false)
-    public String getName() {
-        return name;
-    }
-
-    /**
-     * Sets from name.
-     *
-     * @param name name
-     */
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    /**
-     * Returns from orcid.
-     *
-     * @return orcid
-     */
-    @Column(name = "orcid")
-    public String getOrcid() {
-        return orcid;
-    }
-
-    /**
-     * Sets from orcid.
-     *
-     * @param orcid orcid
-     */
-    public void setOrcid(String orcid) {
-        this.orcid = orcid;
-    }
-
-    /**
      * Returns date of creation.
      *
      * @return date of creation
      */
-    @Column(name = "created")
     public Date getCreated() {
         return created;
     }
@@ -234,7 +159,6 @@ public class ContactRequestData {
      *
      * @return name of created by
      */
-    @Column(name = "createdBy")
     public String getCreatedBy() {
         return createdBy;
     }
@@ -246,6 +170,24 @@ public class ContactRequestData {
      */
     public void setCreatedBy(String createdBy) {
         this.createdBy = createdBy;
+    }
+
+    /**
+     * Returns request body.
+     *
+     * @return body
+     */
+    public ContactRequestBodyData getBody() {
+        return body;
+    }
+
+    /**
+     * Sets request body.
+     *
+     * @param body
+     */
+    public void setBody(ContactRequestBodyData body) {
+        this.body = body;
     }
 
     /**
@@ -278,7 +220,6 @@ public class ContactRequestData {
      *
      * @return uuid
      */
-    @Column(name = "uuid", unique = true, updatable = false, nullable = false)
     public UUID getUuid() {
         return uuid;
     }
@@ -297,7 +238,6 @@ public class ContactRequestData {
      *
      * @return list of contact elements.
      */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "request", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<ContactData> getContacts() {
         return contacts;
     }
@@ -351,8 +291,7 @@ public class ContactRequestData {
 
     @Override
     public int hashCode() {
-        return Objects.hash(comment, created, createdBy, email, id, message, name, objectId, orcid, contacts, status,
-            uuid);
+        return Objects.hash(comment, created, createdBy, body, id, objectId, contacts, status, uuid);
     }
 
     @Override
@@ -368,9 +307,7 @@ public class ContactRequestData {
         }
         ContactRequestData other = (ContactRequestData) obj;
         return Objects.equals(comment, other.comment) && Objects.equals(created, other.created)
-            && Objects.equals(createdBy, other.createdBy) && Objects.equals(email, other.email) && id == other.id
-            && Objects.equals(message, other.message) && Objects.equals(name, other.name)
-            && Objects.equals(objectId, other.objectId) && Objects.equals(orcid, other.orcid)
+            && Objects.equals(createdBy, other.createdBy) && Objects.equals(objectId, other.objectId)
             && Objects.equals(contacts, other.contacts) && status == other.status
             && Objects.equals(uuid, other.uuid);
     }

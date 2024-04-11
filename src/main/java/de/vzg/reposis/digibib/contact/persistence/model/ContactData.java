@@ -22,8 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -31,7 +32,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -41,18 +41,29 @@ import jakarta.persistence.Table;
 @Table(name = "contact")
 public class ContactData {
 
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "contactId", nullable = false)
+    private Long id;
 
+    @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "mail", nullable = false)
     private String email;
 
+    @Column(name = "type", nullable = false)
     private String origin;
 
+    @Column(name = "reference", nullable = true)
     private String reference;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "requestId")
     private ContactRequestData request;
 
+    @ElementCollection
+    @CollectionTable(name = "contactEvent", joinColumns = @JoinColumn(name = "contactId"))
     private List<ContactEventData> events = new ArrayList<>();
 
     /**
@@ -60,10 +71,7 @@ public class ContactData {
      *
      * @return internal id
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "contactId", nullable = false)
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -72,7 +80,7 @@ public class ContactData {
      *
      * @param id internal id
      */
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -99,7 +107,6 @@ public class ContactData {
      *
      * @return email
      */
-    @Column(name = "mail", nullable = false)
     public String getEmail() {
         return email;
     }
@@ -118,7 +125,6 @@ public class ContactData {
      *
      * @return origin.
      */
-    @Column(name = "type", nullable = false)
     public String getOrigin() {
         return origin;
     }
@@ -137,7 +143,6 @@ public class ContactData {
      *
      * @return reference
      */
-    @Column(name = "reference", nullable = true)
     public String getReference() {
         return reference;
     }
@@ -156,8 +161,6 @@ public class ContactData {
      *
      * @return request
      */
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "requestId")
     public ContactRequestData getRequest() {
         return request;
     }
@@ -176,7 +179,6 @@ public class ContactData {
      *
      * @return list of event elements
      */
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
     public List<ContactEventData> getEvents() {
         return events;
     }
@@ -197,7 +199,6 @@ public class ContactData {
      */
     public void addEvent(ContactEventData event) {
         events.add(event);
-        event.setContact(this);
     }
 
     @Override

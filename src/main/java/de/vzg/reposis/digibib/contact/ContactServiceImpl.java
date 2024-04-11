@@ -44,8 +44,8 @@ import org.mycore.services.queuedjob.MCRJobQueue;
 import com.sun.mail.dsn.MultipartReport;
 
 import de.vzg.reposis.digibib.contact.collect.ContactCollectorService;
-import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactAlreadyExistsException;
+import de.vzg.reposis.digibib.contact.exception.ContactException;
 import de.vzg.reposis.digibib.contact.exception.ContactInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactNotFoundException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
@@ -160,21 +160,18 @@ public class ContactServiceImpl implements ContactService {
                 throw new ContactRequestInvalidException();
             }
             requestRepository.findByUuid(request.getId()).ifPresentOrElse(r -> {
-                r.setStatus(request.getStatus());
-                r.setComment(request.getComment());
-                r.setEmail(request.getBody().email());
-                r.setName(request.getBody().name());
-                r.setMessage(request.getBody().message());
-                r.setObjectId(request.getObjectId());
-                r.setOrcid(request.getBody().orcid());
+                doUpdateRequest(r, request);
                 final List<ContactData> newContactDatas = new ArrayList<>();
                 for (Contact p : request.getContacts()) {
-                    final Optional<Long> id
-                        = r.getContacts().stream().filter(pe -> Objects.equals(pe.getEmail(), p.getEmail()))
-                            .findAny().map(ContactData::getId);
-                    if (id.isPresent()) {
-                        final ContactData contactData = ContactMapper.toData(p);
-                        contactData.setId(id.get());
+                    final Optional<ContactData> data
+                        = r.getContacts().stream().filter(pe -> Objects.equals(pe.getEmail(), p.getEmail())).findAny();
+                    final ContactData contactData = ContactMapper.toData(p);
+                    if (data.isPresent()) {
+                        contactData.getEvents().clear();
+                        contactData.setId(data.get().getId());
+                        p.getEvents().stream().map(ContactMapper::toData).forEach(contactData::addEvent);
+                        newContactDatas.add(contactData);
+                    } else {
                         newContactDatas.add(contactData);
                     }
                 }
@@ -187,6 +184,16 @@ public class ContactServiceImpl implements ContactService {
         } finally {
             writeLock.unlock();
         }
+    }
+
+    private void doUpdateRequest(ContactRequestData outdated, ContactRequest request) {
+        outdated.setStatus(request.getStatus());
+        outdated.setComment(request.getComment());
+        outdated.getBody().setEmail(request.getBody().email());
+        outdated.getBody().setName(request.getBody().name());
+        outdated.getBody().setMessage(request.getBody().message());
+        outdated.getBody().setOrcid(request.getBody().orcid());
+        outdated.setObjectId(request.getObjectId());
     }
 
     @Override
@@ -293,16 +300,20 @@ public class ContactServiceImpl implements ContactService {
             final ContactData outdated
                 = requestData.getContacts().stream().filter(r -> Objects.equals(contact.getEmail(), r.getEmail()))
                     .findAny().orElseThrow(() -> new ContactNotFoundException());
-            outdated.setName(contact.getName());
-            outdated.setEmail(contact.getEmail());
-            outdated.setReference(contact.getReference());
-            outdated.setOrigin(contact.getOrigin());
-            outdated.getEvents().clear();
-            contact.getEvents().stream().map(ContactMapper::toData).forEach(outdated::addEvent);
+            doUpdateContact(outdated, contact);
             requestRepository.save(requestData);
         } finally {
             writeLock.unlock();
         }
+    }
+
+    private void doUpdateContact(ContactData outdated, Contact contact) {
+        outdated.setName(contact.getName());
+        outdated.setEmail(contact.getEmail());
+        outdated.setReference(contact.getReference());
+        outdated.setOrigin(contact.getOrigin());
+        outdated.getEvents().clear();
+        contact.getEvents().stream().map(ContactMapper::toData).forEach(outdated::addEvent);
     }
 
     private boolean checkContactExists(List<ContactData> contacts, Contact contact) {
@@ -310,10 +321,6 @@ public class ContactServiceImpl implements ContactService {
             return false;
         }
         return contacts.stream().filter(r -> Objects.equals(r.getEmail(), contact.getEmail())).findAny().isPresent();
-    }
-
-    private static class Holder {
-        static final ContactServiceImpl INSTANCE = new ContactServiceImpl();
     }
 
     @Override
@@ -412,13 +419,14 @@ public class ContactServiceImpl implements ContactService {
             = requestRepository.findByUuid(requestId).orElseThrow(() -> new ContactRequestNotFoundException());
         emails.forEach(m -> {
             requestData.getContacts().stream().filter(r -> Objects.equals(m, r.getEmail())).findAny().ifPresent(r -> {
-                final ContactEventData event = new ContactEventData();
-                event.setDate(date);
-                event.setType(ContactEvent.EventType.SENT_FAILED);
-                r.addEvent(event);
+                r.addEvent(new ContactEventData(ContactEvent.EventType.SENT_FAILED, date));
             });
         });
         requestRepository.save(requestData);
+    }
+
+    private static class Holder {
+        static final ContactServiceImpl INSTANCE = new ContactServiceImpl();
     }
 
 }

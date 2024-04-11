@@ -4,5 +4,4 @@
                  version="2.2">
   <entity class="de.vzg.reposis.digibib.contact.persistence.model.ContactRequestData" />
   <entity class="de.vzg.reposis.digibib.contact.persistence.model.ContactData" />
-  <entity class="de.vzg.reposis.digibib.contact.persistence.model.ContactEventData" />
 </entity-mappings>
