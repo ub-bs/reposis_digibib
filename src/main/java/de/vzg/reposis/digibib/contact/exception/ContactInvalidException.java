@@ -23,16 +23,21 @@ package de.vzg.reposis.digibib.contact.exception;
  */
 public class ContactInvalidException extends ContactException {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructs new exception.
+     */
     public ContactInvalidException() {
-        this("invalid contact.");
+        this("invalid contact");
     }
 
+    /**
+     * Constructs new exception with message.
+     *
+     * @param message message
+     */
     public ContactInvalidException(String message) {
-        super("invalidContact", message);
+        super(message, "invalidContact");
     }
 }

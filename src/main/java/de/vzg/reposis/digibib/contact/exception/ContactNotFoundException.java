@@ -23,12 +23,12 @@ package de.vzg.reposis.digibib.contact.exception;
  */
 public class ContactNotFoundException extends ContactException {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructs new exception.
+     */
     public ContactNotFoundException() {
-        super("contactNotFound", "contact not found.");
+        super("contact not found", "contactNotFound");
     }
 }

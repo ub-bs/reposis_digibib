@@ -23,12 +23,12 @@ package de.vzg.reposis.digibib.contact.exception;
  */
 public class ContactAlreadyExistsException extends ContactException {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructs new exception.
+     */
     public ContactAlreadyExistsException() {
-        super("contactAlreadyExists", "contact already exists.");
+        super("contact already exists", "contactAlreadyExists");
     }
 }

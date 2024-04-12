@@ -25,35 +25,66 @@ import org.mycore.common.MCRException;
  */
 public class ContactException extends MCRException {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
-    /**
-     * The internal errorCode which is also important for frontend.
-     */
+
     private String errorCode;
 
-    public ContactException(String message, Throwable cause) {
+    /**
+     * Constructs new exception with message, errorCode and cause.
+     *
+     * @param message message
+     * @param errorCode error code
+     * @param cause cause
+     */
+    public ContactException(String message, String errorCode, Throwable cause) {
         super(message, cause);
-        errorCode = "contactError";
+        this.errorCode = "contactError";
     }
 
+    /**
+     * Constructs new exception with message and cause.
+     *
+     * @param message message
+     * @param cause cause
+     */
+    public ContactException(String message, Throwable cause) {
+        this(message, "contactError", cause);
+    }
+
+    /**
+     * Constructs new exception with errorCode and message.
+     *
+     * @param errorCode error code
+     * @param message message
+     */
+    public ContactException(String message, String errorCode) {
+        this(message, errorCode, null);
+    }
+
+    /**
+     * Constructs new exception with cause.
+     *
+     * @param cause cause
+     */
+    public ContactException(Throwable cause) {
+        this(null, cause);
+    }
+
+    /**
+     * Constructs new exception with message.
+     *
+     * @param message message
+     */
     public ContactException(String message) {
         super(message);
         errorCode = "contactError";
     }
 
-    public ContactException(Throwable cause) {
-        super(cause);
-        errorCode = "contactError";
-    }
-
-    public ContactException(String errorCode, String message) {
-        super(message);
-        this.errorCode = errorCode;
-    }
-
+    /**
+     * Returns error code.
+     *
+     * @return error code
+     */
     public String getErrorCode() {
         return errorCode;
     }

@@ -33,7 +33,6 @@ import java.util.stream.Stream;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.mycore.common.MCRException;
 import org.mycore.common.MCRSessionMgr;
 import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.datamodel.metadata.MCRMetadataManager;
@@ -357,13 +356,10 @@ public class ContactServiceImpl implements ContactService {
             final ContactData contactData
                 = requestData.getContacts().stream().filter(r -> Objects.equals(email, r.getEmail())).findAny()
                     .orElseThrow(() -> new ContactNotFoundException());
-            try {
-                contactData.addEvent(new ContactEventData(ContactEvent.EventType.SENT, new Date()));
-                ContactEmailService.sendRequestEmail(ContactMapper.toDomain(requestData),
-                    ContactMapper.toDomain(contactData));
-            } catch (Exception e) {
-                throw new MCRException("Sending failed");
-            }
+
+            contactData.addEvent(new ContactEventData(ContactEvent.EventType.SENT, new Date()));
+            ContactEmailService.sendRequestEmail(ContactMapper.toDomain(requestData),
+                ContactMapper.toDomain(contactData));
             requestRepository.save(requestData);
         } finally {
             writeLock.unlock();

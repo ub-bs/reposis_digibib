@@ -38,14 +38,12 @@ import org.mycore.common.config.MCRConfiguration2;
 import org.mycore.common.content.MCRJDOMContent;
 import org.mycore.common.content.transformer.MCRXSL2XMLTransformer;
 import org.mycore.common.xsl.MCRParameterCollector;
-import org.mycore.datamodel.metadata.MCRObjectID;
 import org.xml.sax.SAXException;
 
 import de.vzg.reposis.digibib.contact.ContactConstants;
-import de.vzg.reposis.digibib.contact.exception.ContactException;
+import de.vzg.reposis.digibib.contact.exception.ContactEmailException;
 import de.vzg.reposis.digibib.contact.model.Contact;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
-import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 import jakarta.mail.Authenticator;
 import jakarta.mail.Flags;
 import jakarta.mail.Folder;
@@ -91,9 +89,6 @@ public class ContactEmailService {
     private static final String EMAIL_STYLESHEET = MCRConfiguration2
         .getStringOrThrow(ContactConstants.CONF_PREFIX + "RequestMail.Stylesheet");
 
-    private static final String FORWARDING_CONFIRMATION_STYLESHEET = MCRConfiguration2
-        .getStringOrThrow(ContactConstants.CONF_PREFIX + "ForwardingConfirmationMail.Stylesheet");
-
     private static final String NEW_REQUEST_STYLESHEET = MCRConfiguration2
         .getStringOrThrow(ContactConstants.CONF_PREFIX + "NewRequestMail.Stylesheet");
 
@@ -120,10 +115,11 @@ public class ContactEmailService {
     }
 
     /**
-     * Creates Email and sends it to contact.
+     * Creates email and sends it to contact.
      *
      * @param request request
      * @param contact recipient
+     * @throws ContactEmailException if an email error occurs
      */
     public static void sendRequestEmail(ContactRequest request, Contact contact) {
         final Map<String, String> headers = new HashMap<String, String>();
@@ -132,16 +128,23 @@ public class ContactEmailService {
         sendEmail(email, contact.getEmail(), headers);
     }
 
-    public static void sendRequestForwardedEmail(ContactRequest request) {
-        final EMail email = createForwardConfirmationEmail(request.getObjectId(), request.getBody());
-        sendMail(email, request.getBody().email());
-    }
-
+    /**
+     * Creates confirmation email and sends it to from.
+     *
+     * @param request request
+     * @throws ContactEmailException if an email error occurs
+     */
     public static void sendConfirmationEmail(ContactRequest request) {
         final EMail email = createConfirmationEmail(request);
         sendMail(email, request.getBody().email());
     }
 
+    /**
+     * Creates new request email and sends to stuff.
+     *
+     * @param request request
+     * @throws ContactEmailException if an email error occurs
+     */
     public static void sendNewRequestEmail(ContactRequest request) {
         final EMail email = createNotificationEmail(request.getObjectId().toString());
         sendMail(email, FALLBACK_MAIL);
@@ -177,16 +180,6 @@ public class ContactEmailService {
         return EMail.parseXML(emailElement);
     }
 
-    private static EMail createForwardConfirmationEmail(MCRObjectID objectId, ContactRequestBody request) {
-        final EMail forwardConfirmation = new EMail();
-        final Map<String, String> properties = new HashMap<String, String>();
-        properties.put("id", objectId.toString());
-        properties.put("name", request.name());
-        final Element emailElement = transform(forwardConfirmation.toXML(), FORWARDING_CONFIRMATION_STYLESHEET,
-            properties).getRootElement();
-        return EMail.parseXML(emailElement);
-    }
-
     private static Document transform(Document input, String stylesheet, Map<String, String> parameters) {
         MCRJDOMContent source = new MCRJDOMContent(input);
         MCRXSL2XMLTransformer transformer = MCRXSL2XMLTransformer.getInstance("xsl/" + stylesheet + ".xsl");
@@ -195,7 +188,7 @@ public class ContactEmailService {
         try {
             return transformer.transform(source, parameterCollector).asXML();
         } catch (IOException | JDOMException | SAXException e) {
-            throw new ContactException("Cannot transform document", e);
+            throw new ContactEmailException("Cannot transform document", e);
         }
     }
 
@@ -227,7 +220,7 @@ public class ContactEmailService {
             }
             Transport.send(msg);
         } catch (MessagingException e) {
-            throw new ContactException("Cannot send mail", e);
+            throw new ContactEmailException("Cannot send mail", e);
         }
     }
 

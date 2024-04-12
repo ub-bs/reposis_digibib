@@ -23,12 +23,14 @@ package de.vzg.reposis.digibib.contact.exception;
  */
 public class ContactRequestStateException extends ContactException {
 
-    /**
-     * 
-     */
     private static final long serialVersionUID = 1L;
 
+    /**
+     * Constructs new exception with message.
+     *
+     * @param message message
+     */
     public ContactRequestStateException(String message) {
-        super("invalidContactRequestState", message);
+        super(message, "invalidContactRequestState");
     }
 }
