@@ -49,7 +49,7 @@
         </xsl:choose>
       </div>
       <xsl:if test="exception">
-      <div class="hidden">
+      <div class="d-none">
         <div class="panel panel-warning">
           <div class="panel-heading">
             <xsl:value-of select="concat(i18n:translate('error.stackTrace'),' :')" />
