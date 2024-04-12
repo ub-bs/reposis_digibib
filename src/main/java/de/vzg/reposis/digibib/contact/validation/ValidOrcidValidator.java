@@ -25,6 +25,9 @@ import org.mycore.orcid2.validation.MCRORCIDValidationHelper;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
+/**
+ * Validates ORCiDs.
+ */
 public class ValidOrcidValidator implements ConstraintValidator<ValidOrcid, String> {
 
     @Override

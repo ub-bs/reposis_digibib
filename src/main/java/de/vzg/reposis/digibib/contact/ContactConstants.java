@@ -24,7 +24,7 @@ package de.vzg.reposis.digibib.contact;
 public class ContactConstants {
 
     /**
-     * I18n prefix.
+     * Configuration prefix.
      */
     public static final String CONF_PREFIX = "Digibib.ContactService.";
 

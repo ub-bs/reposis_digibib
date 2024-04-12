@@ -42,7 +42,7 @@ public class ContactRequest {
     private MCRObjectID objectId;
 
     @NotNull
-    private ContactRequestBody request;
+    private ContactRequestBody body;
 
     private Date created;
 
@@ -56,10 +56,12 @@ public class ContactRequest {
     private String comment;
 
     /**
-     * Constructs new request job with request.
+     * Constructs contact request with body.
+     *
+     * @param body body
      */
-    public ContactRequest(ContactRequestBody request) {
-        setRequest(request);
+    public ContactRequest(ContactRequestBody body) {
+        setBody(body);
     }
 
     /**
@@ -99,21 +101,21 @@ public class ContactRequest {
     }
 
     /**
-     * Returns request.
+     * Returns request body.
      *
-     * @return request
+     * @return request body
      */
     public ContactRequestBody getBody() {
-        return request;
+        return body;
     }
 
     /**
-     * Sets request.
+     * Sets request body.
      *
-     * @param request
+     * @param request body
      */
-    public void setRequest(ContactRequestBody request) {
-        this.request = request;
+    public void setBody(ContactRequestBody body) {
+        this.body = body;
     }
 
     /**
@@ -182,16 +184,16 @@ public class ContactRequest {
     /**
      * Sets list of contact elements.
      *
-     * @param recipients list of contact elements
+     * @param contacts list of contact elements
      */
     public void setContacts(List<Contact> contacts) {
         this.contacts = contacts;
     }
 
     /**
-     * Adds contact person.
+     * Adds contact.
      *
-     * @param contactPerson contact person
+     * @param contact contact
      */
     public void addContact(Contact contact) {
         this.contacts.add(contact);

@@ -94,7 +94,6 @@ public interface ContactService {
      *
      * @param requestId request id
      * @param contact contact
-     * @return id
      * @throws ContactInvalidException if contact is invalid
      * @throws ContactAlreadyExistsException if contact already exists
      * @throws ContactRequestNotFoundException if request cannot be found
@@ -122,7 +121,6 @@ public interface ContactService {
      * @throws ContactRequestNotFoundException if request cannot be found
      * @throws ContactNotFoundException if contact cannot be found
      * @throws ContactRequestStateException if request is in wrong state
-     * @throws ContactPersonOriginException if request has wrong origin
      */
     void deleteContactByEmail(UUID requestId, String email);
 
