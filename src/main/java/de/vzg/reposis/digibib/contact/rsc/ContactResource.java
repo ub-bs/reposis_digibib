@@ -40,12 +40,12 @@ import de.vzg.reposis.digibib.captcha.cage.rsc.filter.ContactCheckCageCaptcha;
 import de.vzg.reposis.digibib.contact.ContactConstants;
 import de.vzg.reposis.digibib.contact.ContactServiceImpl;
 import de.vzg.reposis.digibib.contact.exception.ContactNotFoundException;
+import de.vzg.reposis.digibib.contact.exception.ContactRequestInvalidException;
 import de.vzg.reposis.digibib.contact.exception.ContactRequestNotFoundException;
 import de.vzg.reposis.digibib.contact.model.Contact;
 import de.vzg.reposis.digibib.contact.model.ContactEvent;
 import de.vzg.reposis.digibib.contact.model.ContactRequest;
 import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
-import de.vzg.reposis.digibib.contact.validation.ContactValidator;
 import jakarta.ws.rs.BadRequestException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
@@ -75,16 +75,17 @@ public class ContactResource {
     @Path("create")
     public Response createRequest(ContactRequestCreateDto requestBodyDto) {
         final ContactRequestBody requestBody = toRequestBody(requestBodyDto);
-        if (!ContactValidator.getInstance().validateRequestBody(requestBody)) {
-            throw new BadRequestException("invalid request");
-        }
         final MCRObjectID objectId = Optional.ofNullable(requestBodyDto.objectId).filter(MCRObjectID::isValid)
             .map(MCRObjectID::getInstance).orElseThrow(() -> new BadRequestException("object is missing or invalid"));
         if (!MCRMetadataManager.exists(objectId)) {
             throw new BadRequestException("object does not exist");
         }
         ensureGenreIsEnabled(objectId);
-        ContactServiceImpl.getInstance().createRequest(objectId, requestBody);
+        try {
+            ContactServiceImpl.getInstance().createRequest(objectId, requestBody);
+        } catch (ContactRequestInvalidException e) {
+            throw new BadRequestException("invalid request");
+        }
         return Response.ok().build();
     }
 
@@ -155,8 +156,8 @@ public class ContactResource {
     }
 
     // https://stackoverflow.com/questions/43003138/regular-expression-for-email-masking
-    private static String maskEmailAddress(String emailAddress) {
-        return emailAddress.replaceAll("(?<=.)[^@](?=[^@]*[^@]@)|(?:(?<=@.)|(?!^)\\G(?=[^@]*$)).(?!$)", "*");
+    private static String maskEmailAddress(String email) {
+        return email.replaceAll("(?<=.)[^@](?=[^@]*[^@]@)|(?:(?<=@.)|(?!^)\\G(?=[^@]*$)).(?!$)", "*");
     }
 
     private record ContactRequestStatusDto(@JsonProperty("status") String status,

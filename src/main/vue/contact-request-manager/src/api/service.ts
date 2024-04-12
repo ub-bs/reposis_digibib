@@ -25,11 +25,11 @@ const updateRequest = (id: string, request: Request) => axios.put(`api/v2/contac
   state: request.state,
 });
 const forwardRequest = (id: string, email: string) => axios.post(`api/v2/contact-requests/${id}/forward?recipient=${email}`);
-const addContact = (id: string, contact: Contact) => axios.post(`api/v2/contact-requests/${id}/recipients`, contact);
+const addContact = (id: string, contact: Contact) => axios.post(`api/v2/contact-requests/${id}/contacts`, contact);
 const updateContact = (id: string, personId: string, contact: Contact) => {
-  axios.put(`api/v2/contact-requests/${id}/recipients/${personId}`, contact);
+  axios.put(`api/v2/contact-requests/${id}/contacts/${personId}`, contact);
 };
-const removeContactByEmail = (id: string, email: string) => axios.delete(`api/v2/contact-requests/${id}/recipients/${email}`);
+const removeContactByEmail = (id: string, email: string) => axios.delete(`api/v2/contact-requests/${id}/contacts/${email}`);
 const getRequest = (id: string) => axios.get(`api/v2/contact-requests/${id}`);
 
 export {

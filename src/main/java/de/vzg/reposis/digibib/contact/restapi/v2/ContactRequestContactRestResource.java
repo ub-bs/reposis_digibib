@@ -53,10 +53,10 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
-@Path("contact-requests/{" + ContactRestResource.PARAM_CONTACT_REQUEST_ID + "}/recipients")
-public class ContactRecipientRestResource {
+@Path("contact-requests/{" + ContactRequestRestResource.PARAM_CONTACT_REQUEST_ID + "}/contacts")
+public class ContactRequestContactRestResource {
 
-    public static final String PARAM_CONTACT_EMAIL = "contact_request_recipient_id";
+    public static final String PARAM_CONTACT_EMAIL = "contact_request_email";
 
     @Context
     private UriInfo info;
@@ -75,7 +75,7 @@ public class ContactRecipientRestResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response createContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+    public Response createContact(@PathParam(ContactRequestRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
         ContactCreateDto contactDto) {
         final Contact contactPerson = ContactRestHelper.toDomain(contactDto);
         ContactServiceImpl.getInstance().addContact(requestId, contactPerson);
@@ -96,7 +96,7 @@ public class ContactRecipientRestResource {
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     public List<ContactDto> getContacts(@DefaultValue("0") @QueryParam("offset") int offset,
         @DefaultValue("128") @QueryParam("limit") int limit, @Context HttpServletResponse response,
-        @QueryParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
+        @QueryParam(ContactRequestRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId) {
         final ContactRequest request = ContactServiceImpl.getInstance().getRequest(requestId);
         final List<Contact> contacts = request.getContacts();
         response.setHeader(ContactRestConstants.HEADER_TOTAL_COUNT, Integer.toString(contacts.size()));
@@ -116,7 +116,7 @@ public class ContactRecipientRestResource {
             @Content(mediaType = MediaType.APPLICATION_JSON) }), })
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
-    public ContactDto getContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+    public ContactDto getContact(@PathParam(ContactRequestRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
         @PathParam(PARAM_CONTACT_EMAIL) String emailAddress) {
         return ContactRestHelper.toDto(ContactServiceImpl.getInstance().getContactByEmail(requestId, emailAddress));
     }
@@ -135,7 +135,7 @@ public class ContactRecipientRestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response updateContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+    public Response updateContact(@PathParam(ContactRequestRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
         @PathParam(PARAM_CONTACT_EMAIL) String mail, ContactUpdateDto contactDto) {
         if (contactDto == null) {
             throw new BadRequestException();
@@ -159,7 +159,7 @@ public class ContactRecipientRestResource {
     @Produces(MediaType.APPLICATION_JSON)
     @MCRRestRequiredPermission(MCRRestAPIACLPermission.DELETE)
     @MCRRequireTransaction
-    public Response removeContact(@PathParam(ContactRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
+    public Response removeContact(@PathParam(ContactRequestRestResource.PARAM_CONTACT_REQUEST_ID) UUID requestId,
         @PathParam(PARAM_CONTACT_EMAIL) String emailAddress) {
         ContactServiceImpl.getInstance().deleteContactByEmail(requestId, emailAddress);
         return Response.noContent().build();

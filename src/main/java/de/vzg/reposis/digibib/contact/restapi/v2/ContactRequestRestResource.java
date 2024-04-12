@@ -53,7 +53,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("/contact-requests/")
-public class ContactRestResource {
+public class ContactRequestRestResource {
 
     public static final String PARAM_CONTACT_REQUEST_ID = "contact_request_id";
 
