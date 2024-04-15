@@ -4,11 +4,11 @@
     <name>reposis_digibib</name>
 
     <servlet>
-        <servlet-name>MCRVueRootServlet</servlet-name>
+        <servlet-name>HandbuecherRoot</servlet-name>
         <servlet-class>org.mycore.webtools.vue.MCRVueRootServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MCRVueRootServlet</servlet-name>
+        <servlet-name>HandbuecherRoot</servlet-name>
         <url-pattern>/handbuecher/*</url-pattern>
     </servlet-mapping>
 
