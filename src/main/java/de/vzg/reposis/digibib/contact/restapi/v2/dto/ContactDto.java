@@ -26,6 +26,11 @@ import de.vzg.reposis.digibib.contact.model.Contact;
 
 /**
  * Dto for {@link Contact}.
+ *
+ * @param name name
+ * @param email email
+ * @param origin origin
+ * @param events list of event elements
  */
 public record ContactDto(@JsonProperty("name") String name, @JsonProperty("email") String email,
     @JsonProperty("origin") String origin, @JsonProperty("events") List<ContactEventDto> events) {

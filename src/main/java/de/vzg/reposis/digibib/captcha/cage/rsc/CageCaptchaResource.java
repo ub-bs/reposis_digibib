@@ -40,12 +40,21 @@ import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.StreamingOutput;
 
+/**
+ * Cage captcha resource.
+ */
 @Singleton
 @Path("/captchaCage")
 public class CageCaptchaResource {
 
     private static final CageCaptchaServiceImpl CAPTCHA_SERVICE = CageCaptchaServiceImpl.getInstance();
 
+    /**
+     * Creates and returns captcha.
+     *
+     * @param resp resp
+     * @return captcha as streaming output
+     */
     @GET
     @Produces("image/" + Cage.DEFAULT_FORMAT)
     public StreamingOutput getCaptcha(@Context HttpServletResponse resp) {
@@ -59,6 +68,12 @@ public class CageCaptchaResource {
         };
     }
 
+    /**
+     * Verifies secret and returns token response.
+     *
+     * @param secret secret
+     * @return token response
+     */
     @POST
     @Path("/userverify")
     @Consumes(MediaType.TEXT_PLAIN)

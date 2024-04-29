@@ -24,6 +24,11 @@ import de.vzg.reposis.digibib.contact.model.ContactRequestBody;
 
 /**
  * Dto for {@link ContactRequestBody}.
+ *
+ * @param name name
+ * @param email email
+ * @param orcid orcid
+ * @param message message
  */
 public record ContactRequestBodyDto(@JsonProperty("name") String name, @JsonProperty("email") String email,
     @JsonProperty("orcid") String orcid, @JsonProperty("message") String message) {

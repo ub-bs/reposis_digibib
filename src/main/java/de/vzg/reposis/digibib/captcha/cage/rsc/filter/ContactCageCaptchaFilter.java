@@ -24,6 +24,9 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 import jakarta.ws.rs.container.ContainerRequestFilter;
 import jakarta.ws.rs.ext.Provider;
 
+/**
+ * Ensures valid captcha token.
+ */
 @Provider
 @ContactCheckCageCaptcha
 public class ContactCageCaptchaFilter implements ContainerRequestFilter {

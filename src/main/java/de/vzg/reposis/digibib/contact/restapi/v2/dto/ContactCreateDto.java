@@ -24,6 +24,11 @@ import de.vzg.reposis.digibib.contact.model.Contact;
 
 /**
  * Dto for {@link Contact} creation.
+ *
+ * @param name name
+ * @param email email
+ * @param origin orgin
+ * @param reference reference
  */
 public record ContactCreateDto(@JsonProperty("name") String name, @JsonProperty("email") String email,
     @JsonProperty("origin") String origin, @JsonProperty("reference") String reference) {

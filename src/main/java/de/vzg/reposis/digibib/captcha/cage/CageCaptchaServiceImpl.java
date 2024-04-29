@@ -63,16 +63,32 @@ public class CageCaptchaServiceImpl implements CaptchaService {
         return ServiceHolder.INSTANCE;
     }
 
+    /**
+     * Return cage
+     *
+     * @return cage
+     */
     public GCage getCage() {
         return cage;
     }
 
+    /**
+     * Create and returns new challenge.
+     *
+     * @return challenge
+     */
     public String createChallenge() {
         final String secret = cage.getTokenGenerator().next();
         seenSecretsCache.put(secret, Boolean.FALSE);
         return secret;
     }
 
+    /**
+     * Verifies secret and creates token.
+     *
+     * @param secret secret
+     * @return token
+     */
     public String verifyAndCreateToken(String secret) {
         final Token token = new Token(secret);
         return encryptToken(token);

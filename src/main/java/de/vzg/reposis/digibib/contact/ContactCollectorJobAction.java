@@ -45,7 +45,6 @@ public class ContactCollectorJobAction extends MCRJobAction {
     /**
      * Constructs new {@link ContactCollectorJobAction}.
      *
-     * @param job job
      */
     public ContactCollectorJobAction() {
 

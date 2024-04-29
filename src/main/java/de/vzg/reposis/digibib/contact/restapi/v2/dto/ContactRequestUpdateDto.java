@@ -27,6 +27,13 @@ import de.vzg.reposis.digibib.contact.model.ContactRequest;
 
 /**
  * Dto to update {@link ContactRequest}.
+ *
+ * @param objectId object id
+ * @param status request status
+ * @param created date of creation
+ * @param body request body
+ * @param contacts list over contact update dto elements
+ * @param comment comment
  */
 public record ContactRequestUpdateDto(@JsonProperty("objectId") String objectId,
     @JsonProperty("state") ContactRequest.RequestStatus status, @JsonProperty("created") Date created,

@@ -67,7 +67,12 @@ import jakarta.mail.Message;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
+/**
+ * Provides methods to manage contacts and requests.
+ */
 public class ContactServiceImpl implements ContactService {
+
+    private static final Logger LOGGER = LogManager.getLogger();
 
     private static final String FALLBACK_MAIL = MCRConfiguration2
         .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
@@ -75,10 +80,8 @@ public class ContactServiceImpl implements ContactService {
     private static final String FALLBACK_NAME = MCRConfiguration2
         .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Name");
 
-    private static final Logger LOGGER = LogManager.getLogger();
-
-    private static final MCRJobQueue CONTACT_COLLECTOR_JOB_QUEUE
-        = MCRJobQueue.getInstance(ContactCollectorJobAction.class);
+    private static final MCRJobQueue CONTACT_COLLECTOR_JOB_QUEUE = MCRJobQueue
+        .getInstance(ContactCollectorJobAction.class);
 
     private static final String ORIGIN_FALLBACK = "fallback";
 
@@ -95,6 +98,11 @@ public class ContactServiceImpl implements ContactService {
         requestRepository = new ContactRequestRepositoryImpl();
     }
 
+    /**
+     * Returns contact service instance.
+     *
+     * @return service instance
+     */
     public static ContactServiceImpl getInstance() {
         return Holder.INSTANCE;
     }
@@ -162,8 +170,8 @@ public class ContactServiceImpl implements ContactService {
                 doUpdateRequest(r, request);
                 final List<ContactData> newContactDatas = new ArrayList<>();
                 for (Contact p : request.getContacts()) {
-                    final Optional<ContactData> data
-                        = r.getContacts().stream().filter(pe -> Objects.equals(pe.getEmail(), p.getEmail())).findAny();
+                    final Optional<ContactData> data = r.getContacts().stream()
+                        .filter(pe -> Objects.equals(pe.getEmail(), p.getEmail())).findAny();
                     final ContactData contactData = ContactMapper.toData(p);
                     if (data.isPresent()) {
                         contactData.getEvents().clear();
@@ -274,9 +282,9 @@ public class ContactServiceImpl implements ContactService {
             if (!Objects.equals(ContactRequest.RequestStatus.PROCESSED, requestData.getStatus())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            final ContactData contactData
-                = requestData.getContacts().stream().filter(r -> Objects.equals(mail, r.getEmail())).findAny()
-                    .orElseThrow(() -> new ContactNotFoundException());
+            final ContactData contactData = requestData.getContacts().stream()
+                .filter(r -> Objects.equals(mail, r.getEmail())).findAny()
+                .orElseThrow(() -> new ContactNotFoundException());
             requestData.removeContact(contactData);
             requestRepository.save(requestData);
         } finally {
@@ -296,9 +304,9 @@ public class ContactServiceImpl implements ContactService {
             if (!Objects.equals(ContactRequest.RequestStatus.PROCESSED, requestData.getStatus())) {
                 throw new ContactRequestStateException("Not in warm state");
             }
-            final ContactData outdated
-                = requestData.getContacts().stream().filter(r -> Objects.equals(contact.getEmail(), r.getEmail()))
-                    .findAny().orElseThrow(() -> new ContactNotFoundException());
+            final ContactData outdated = requestData.getContacts().stream()
+                .filter(r -> Objects.equals(contact.getEmail(), r.getEmail()))
+                .findAny().orElseThrow(() -> new ContactNotFoundException());
             doUpdateContact(outdated, contact);
             requestRepository.save(requestData);
         } finally {
@@ -326,8 +334,8 @@ public class ContactServiceImpl implements ContactService {
     public void collectContacts(UUID requestId) {
         try {
             writeLock.lock();
-            final ContactRequestData requestData
-                = requestRepository.findByUuid(requestId).orElseThrow(() -> new ContactRequestNotFoundException());
+            final ContactRequestData requestData = requestRepository.findByUuid(requestId)
+                .orElseThrow(() -> new ContactRequestNotFoundException());
             final MCRObject object = MCRMetadataManager.retrieveMCRObject(requestData.getObjectId());
             final List<Contact> contacts = ContactCollectorService.collectContacts(object);
             if (contacts.isEmpty()) {
@@ -353,9 +361,9 @@ public class ContactServiceImpl implements ContactService {
             writeLock.lock();
             final ContactRequestData requestData = requestRepository.findByUuid(requestId)
                 .orElseThrow(() -> new ContactRequestNotFoundException());
-            final ContactData contactData
-                = requestData.getContacts().stream().filter(r -> Objects.equals(email, r.getEmail())).findAny()
-                    .orElseThrow(() -> new ContactNotFoundException());
+            final ContactData contactData = requestData.getContacts().stream()
+                .filter(r -> Objects.equals(email, r.getEmail())).findAny()
+                .orElseThrow(() -> new ContactNotFoundException());
 
             contactData.addEvent(new ContactEventData(ContactEvent.EventType.SENT, new Date()));
             ContactEmailService.sendRequestEmail(ContactMapper.toDomain(requestData),
@@ -386,9 +394,9 @@ public class ContactServiceImpl implements ContactService {
                     Optional.ofNullable(dsnMessage.getHeader(ContactConstants.REQUEST_HEADER_NAME, null))
                         .map(UUID::fromString).ifPresent(id -> {
                             try {
-                                final Stream<String> emails
-                                    = Arrays.asList(dsnMessage.getRecipients(Message.RecipientType.TO)).stream()
-                                        .map(Address::toString);
+                                final Stream<String> emails = Arrays
+                                    .asList(dsnMessage.getRecipients(Message.RecipientType.TO)).stream()
+                                    .map(Address::toString);
                                 final Date date = m.getReceivedDate();
                                 processContactDsnMessageContent(emails, date, id);
                             } catch (MessagingException | ContactRequestNotFoundException e) {
@@ -411,8 +419,8 @@ public class ContactServiceImpl implements ContactService {
     }
 
     private void processContactDsnMessageContent(Stream<String> emails, Date date, UUID requestId) {
-        final ContactRequestData requestData
-            = requestRepository.findByUuid(requestId).orElseThrow(() -> new ContactRequestNotFoundException());
+        final ContactRequestData requestData = requestRepository.findByUuid(requestId)
+            .orElseThrow(() -> new ContactRequestNotFoundException());
         emails.forEach(m -> {
             requestData.getContacts().stream().filter(r -> Objects.equals(m, r.getEmail())).findAny().ifPresent(r -> {
                 r.addEvent(new ContactEventData(ContactEvent.EventType.SENT_FAILED, date));

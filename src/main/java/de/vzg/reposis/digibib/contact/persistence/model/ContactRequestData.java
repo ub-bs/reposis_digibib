@@ -184,7 +184,7 @@ public class ContactRequestData {
     /**
      * Sets request body.
      *
-     * @param body
+     * @param body body
      */
     public void setBody(ContactRequestBodyData body) {
         this.body = body;

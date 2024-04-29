@@ -44,6 +44,11 @@ public class Contact {
 
     /**
      * Constructs new contact with name, email, origin and reference.
+     *
+     * @param name name
+     * @param email email
+     * @param origin orgin
+     * @param reference reference
      */
     public Contact(String name, String email, String origin, String reference) {
         setName(name);
@@ -91,7 +96,7 @@ public class Contact {
     /**
      * Returns origin.
      *
-     * @return
+     * @return origin
      */
     public String getOrigin() {
         return origin;
@@ -118,7 +123,7 @@ public class Contact {
     /**
      * Sets origin reference.
      *
-     * @param reference
+     * @param reference reference
      */
     public void setReference(String reference) {
         this.reference = reference;

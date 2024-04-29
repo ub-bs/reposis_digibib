@@ -72,9 +72,9 @@ public class ContactValidator {
     }
 
     /**
-     * Validates a recipient against model.
+     * Validates a contact against model.
      *
-     * @param recipient recipient
+     * @param contact contact
      * @return true if recipient is valid
      */
     public boolean validateContact(Contact contact) {

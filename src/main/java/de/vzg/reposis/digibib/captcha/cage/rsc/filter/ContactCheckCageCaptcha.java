@@ -23,6 +23,9 @@ import java.lang.annotation.RetentionPolicy;
 
 import jakarta.ws.rs.NameBinding;
 
+/**
+ * Annotation to check captcha.
+ */
 @NameBinding
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ContactCheckCageCaptcha {

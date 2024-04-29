@@ -84,8 +84,8 @@ public class ContactRestHelper {
      * @return contact
      */
     protected static Contact toDomain(ContactUpdateDto contactDto) {
-        final Contact contact
-            = new Contact(contactDto.name(), contactDto.email(), contactDto.origin(), contactDto.reference());
+        final Contact contact = new Contact(contactDto.name(), contactDto.email(), contactDto.origin(),
+            contactDto.reference());
         Optional.ofNullable(contactDto.events()).ifPresent(e -> {
             e.stream().map(ContactRestHelper::toDomain).forEach(contact::addEvent);
         });
@@ -108,7 +108,7 @@ public class ContactRestHelper {
     }
 
     private static ContactEventDto toDto(ContactEvent event) {
-        return new ContactEventDto(event.date(), event.type(), event.comment());
+        return new ContactEventDto(event.type(), event.date(), event.comment());
     }
 
     /**

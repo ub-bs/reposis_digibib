@@ -98,13 +98,20 @@ public class ContactEmailService {
     private static final String FALLBACK_MAIL = MCRConfiguration2
         .getStringOrThrow(ContactConstants.CONF_PREFIX + "FallbackRecipient.Mail");
 
+    /**
+     * Fetches and returns unseen report messages.
+     *
+     * @param folderName folder name
+     * @return list over unssen report messages
+     * @throws MessagingException if cannot fetch mails
+     */
     public static List<Message> fetchUnseenReportMessages(String folderName) throws MessagingException {
         final Store store = mailSession.getStore("imaps");
         store.connect(HOST, USER, PASSWORD);
         final Folder inbox = store.getFolder(folderName);
         inbox.open(Folder.READ_WRITE);
-        final List<Message> unreadMessages
-            = Arrays.asList(inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false)));
+        final List<Message> unreadMessages = Arrays
+            .asList(inbox.search(new FlagTerm(new Flags(Flags.Flag.SEEN), false)));
         final List<Message> reportMessages = new ArrayList<>();
         for (Message message : unreadMessages) {
             if (message.isMimeType(REPORT_MIMETYPE)) {

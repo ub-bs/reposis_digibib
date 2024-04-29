@@ -24,6 +24,11 @@ import jakarta.validation.constraints.NotNull;
 
 /**
  * Defines contact request body model.
+ *
+ * @param name name
+ * @param email email
+ * @param orcid orcid
+ * @param message message
  */
 public record ContactRequestBody(@NotNull String name, @NotNull @Email String email, @ValidOrcid String orcid,
     String message) {

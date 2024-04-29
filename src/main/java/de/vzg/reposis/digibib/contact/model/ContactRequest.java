@@ -27,8 +27,6 @@ import java.util.UUID;
 
 import org.mycore.datamodel.metadata.MCRObjectID;
 
-import com.fasterxml.jackson.annotation.JsonValue;
-
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -112,7 +110,7 @@ public class ContactRequest {
     /**
      * Sets request body.
      *
-     * @param request body
+     * @param body request body
      */
     public void setBody(ContactRequestBody body) {
         this.body = body;
@@ -196,7 +194,7 @@ public class ContactRequest {
      * @param contact contact
      */
     public void addContact(Contact contact) {
-        this.contacts.add(contact);
+        contacts.add(contact);
     }
 
     /**
@@ -243,7 +241,21 @@ public class ContactRequest {
      * Describes possible request states.
      */
     public enum RequestStatus {
-        RECEIVED(0), PROCESSED(10), COMPLETED(20);
+
+        /**
+         * Received.
+         */
+        RECEIVED(0),
+
+        /**
+         * Processed.
+         */
+        PROCESSED(10),
+
+        /**
+         * Completed.
+         */
+        COMPLETED(20);
 
         private final int value;
 
@@ -251,11 +263,21 @@ public class ContactRequest {
             this.value = value;
         }
 
+        /**
+         * Resolves and returns status by value.
+         *
+         * @param value value
+         * @return status
+         */
         public static RequestStatus resolve(int value) {
             return Arrays.stream(values()).filter(o -> o.value == value).findFirst().orElse(null);
         }
 
-        @JsonValue
+        /**
+         * Returns value.
+         *
+         * @return value
+         */
         public int getValue() {
             return value;
         }

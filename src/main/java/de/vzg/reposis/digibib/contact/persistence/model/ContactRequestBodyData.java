@@ -41,10 +41,21 @@ public class ContactRequestBodyData {
     @Column(name = "orcid", nullable = true)
     private String orcid;
 
+    /**
+     * Constructs new request body data.
+     */
     public ContactRequestBodyData() {
 
     }
 
+    /**
+     * Constructs new request body data with name, email, message and orcid.
+     *
+     * @param name name
+     * @param email email
+     * @param message message
+     * @param orcid orcid
+     */
     public ContactRequestBodyData(String name, String email, String message, String orcid) {
         setName(name);
         setEmail(email);
@@ -67,7 +78,7 @@ public class ContactRequestBodyData {
      * @param from email
      */
     public void setEmail(String from) {
-        this.email = from;
+        email = from;
     }
 
     /**

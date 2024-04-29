@@ -22,13 +22,31 @@ import java.util.Date;
 
 /**
  * Defines contact event model.
+ *
+ * @param type event type
+ * @param date date
+ * @param comment comment
  */
-public record ContactEvent(EventType type, Date date, String comment) {
+public record ContactEvent(ContactEvent.EventType type, Date date, String comment) {
 
     /**
      * Defines event types.
      */
     public static enum EventType {
-        SENT, SENT_FAILED, CONFIRMED
+
+        /**
+         * Sent event.
+         */
+        SENT,
+
+        /**
+         * Sent failed event.
+         */
+        SENT_FAILED,
+
+        /**
+         * Confirmed event.
+         */
+        CONFIRMED
     }
 }
