@@ -7,6 +7,7 @@
   <xsl:param name="MIR.ePuSta" select="'hide'" />
   <xsl:param name="MIR.ePuSta.Prefix" />
   <xsl:param name="MIR.ePuSta.GraphProviderURL" />
+  <xsl:param name="MIR.ePuSta.providerURL" />
 
   <xsl:template match="/">
     <xsl:if test="$MIR.ePuSta = 'show'">
@@ -54,7 +55,7 @@
               </div>
               <div
                   data-epustaelementtype="ePuStaInline"
-                  data-epustaproviderurl="{$MIR.ePuSta.GraphProviderURL}"
+                  data-epustaproviderurl="{$MIR.ePuSta.providerURL}"
                   data-epustaidentifier="{$MIR.ePuSta.Prefix}{$objID}"
                   data-epustacounttype="counter"
               />
@@ -65,7 +66,7 @@
               </div>
               <div
                   data-epustaelementtype="ePuStaInline"
-                  data-epustaproviderurl="{$MIR.ePuSta.GraphProviderURL}"
+                  data-epustaproviderurl="{$MIR.ePuSta.providerURL}"
                   data-epustaidentifier="{$MIR.ePuSta.Prefix}{$objID}"
                   data-epustacounttype="counter_abstract"
               />
@@ -81,7 +82,7 @@
               </div>
               <div
                   data-epustaelementtype="ePuStaInline"
-                  data-epustaproviderurl="{$MIR.ePuSta.GraphProviderURL}"
+                  data-epustaproviderurl="{$MIR.ePuSta.providerURL}"
                   data-epustaidentifier="{$MIR.ePuSta.Prefix}{$objID}"
                   data-epustacounttype="counter"
                   data-epustafrom="{$from}" data-epustauntil="{$until}"
@@ -92,7 +93,7 @@
                 <xsl:value-of select="i18n:translate('mir.epusta.counter.abstract')" />
               </div>
               <div data-epustaelementtype="ePuStaInline"
-                   data-epustaproviderurl="{$MIR.ePuSta.GraphProviderURL}"
+                   data-epustaproviderurl="{$MIR.ePuSta.providerURL}"
                    data-epustaidentifier="{$MIR.ePuSta.Prefix}{$objID}"
                    data-epustacounttype="counter_abstract"
                    data-epustafrom="{$from}" data-epustauntil="{$until}"
@@ -125,11 +126,17 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <div id="epustaGraph" class="mir-epusta-graph"
-                        data-epustaelementtype="EPuStaGraph"
-                        data-epustaproviderurl="{$MIR.ePuSta.GraphProviderURL}"
-                        data-epustaidentifier="{$MIR.ePuSta.Prefix}{$objID}"
-                        data-epustafrom="{$from}" data-epustauntil="{$until}">
+                    <div id="epustaGraph" class="mir-epusta-graph"/>
+                    <div class="row mir-epusta-graph-controls">
+                      <div class="col-md-4"></div>
+                      <div class="col-md-4">
+                        <select id="epustaGraphSelect" class="form-select" onchange="changeEpustaGraphSelect();" style="margin-top:10px">
+                          <option value='day'>letzten 30 Tage</option>
+                          <option value='month'>letzten 12 Monate</option>
+                          <option value='year'>letzten 10 Jahre</option>
+                        </select>
+                      </div>
+                      <div class="col-md-4"></div>
                     </div>
                   </div>
                   <div class="modal-footer">
@@ -140,12 +147,32 @@
                 </div>
               </div>
             </div>
-            <script src="{$MIR.ePuSta.GraphProviderURL}includes/raphael-2.1.2/raphael-min.js"></script>
-            <script src="{$MIR.ePuSta.GraphProviderURL}includes/morris.js-0.5.1/morris.js"></script>
-            <script src="{$WebApplicationBaseURL}js/epusta.min.js" ></script>
-            <style type="text/css">
-              @import url("<xsl:value-of select="$MIR.ePuSta.GraphProviderURL" />includes/morris.js-0.5.1/morris.css");
-            </style>
+            <script type="module" src="{$WebApplicationBaseURL}assets/epusta_elements.js/epusta_elements.js" ></script>
+            <script type="module" src="{$WebApplicationBaseURL}assets/chart.js/chart.umd.js" ></script>
+            <script type="module">
+              import {ePuStaGraph} from "<xsl:value-of select="$WebApplicationBaseURL"/>assets/epusta_elements.js/epusta_elements.js";
+              
+              var graph = document.getElementById('epustaGraph');
+              var graphSelect = document.getElementById('epustaGraphSelect');
+              var granularity = 'day' ;
+              var epustaProviderurl='<xsl:value-of select="$MIR.ePuSta.providerURL"/>';
+              var identifier='<xsl:value-of select="$objID"/>';
+              var from='auto';
+              var until='<xsl:value-of select="$until"/>';
+              var tagQuery = "-epusta:filter:httpMethod -epusta:filter:httpStatus -filter:30sek:counter3 -filter:robot oas:content:counter";
+              
+              $('#epustaGraphModal').on('shown.bs.modal', function () {
+                var granularity = graphSelect.value ;
+                var epustaElement = new ePuStaGraph(graph,epustaProviderurl,identifier,from,until,tagQuery,granularity);
+                epustaElement.requestData();
+              })
+              function changeFunc() {
+                var granularity = graphSelect.value ;
+                var epustaElement = new ePuStaGraph(graph,epustaProviderurl,identifier,from,until,tagQuery,granularity);
+                epustaElement.requestData();
+              }
+              window.changeEpustaGraphSelect = changeFunc;
+            </script>
           </div>
         </div>
       </div>
