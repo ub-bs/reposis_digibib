@@ -44,6 +44,9 @@
 
         <xed:include ref="cancel.submit" />
         <xed:include ref="cleanup-rules" />
+        <xed:include ref="javascript" />
+        <!-- frame for modal window -->
+        <xed:include ref="modal.body" />
       </xed:bind>
       <xed:bind xpath="service/servstates[@class='MCRMetaClassification']/servstate[@classid='state']/@categid" initially="submitted" />
     </xed:bind>
