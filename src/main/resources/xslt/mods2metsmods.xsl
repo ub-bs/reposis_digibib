@@ -192,9 +192,37 @@
 
     <xsl:template match="mods:mods">
         <xsl:copy>
-            <xsl:apply-templates select="*|@*" />
+            <xsl:apply-templates select="*|@*"/>
             <mods:recordInfo>
-                <mods:recordIdentifier><xsl:value-of select="$objectID" /></mods:recordIdentifier>
+                <mods:recordIdentifier source="leopard">
+                    <xsl:value-of select="$objectID"/>
+                </mods:recordIdentifier>
+            </mods:recordInfo>
+        </xsl:copy>
+    </xsl:template>
+
+    <xsl:template match="mods:recordInfo">
+        <xsl:comment>removed original recordInfo</xsl:comment>
+    </xsl:template>
+
+    <xsl:template match="mods:relatedItem">
+        <xsl:variable name="relatedItemCount" select="number()"/>
+        <xsl:copy>
+            <xsl:apply-templates select="*[not(mods:recordInfo)]|@*"/>
+            <mods:recordInfo>
+                <xsl:variable name="parentID">
+                    <xsl:choose>
+                        <xsl:when test="@xlink:href">
+                            <xsl:value-of select="@xlink:href"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                            <xsl:value-of select="concat($objectID, '_related_', $relatedItemCount)"/>
+                        </xsl:otherwise>
+                    </xsl:choose>
+                </xsl:variable>
+                <mods:recordIdentifier source="leopard">
+                    <xsl:value-of select="$parentID"/>
+                </mods:recordIdentifier>
             </mods:recordInfo>
         </xsl:copy>
     </xsl:template>
